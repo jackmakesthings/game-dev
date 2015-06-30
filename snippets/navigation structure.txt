@@ -1,0 +1,9 @@
+navigation structure
+
+Navigation2D "navigation" - navigation.gd
+
+	Sprite path (visual of pathfinding area, not really vital)
+
+	NavigationPolygonInstance "navpoly", enabled on
+
+	Sprite "agent"

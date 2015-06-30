@@ -1,0 +1,23 @@
+collision tut structure
+
+Node2D "Node (root)
+
+	KinematicBody2D "Player"
+	attached script: "collider.gd"
+
+		Sprite (textured)
+
+		CollisionShape2D - rect shape, trigger off
+
+
+	StaticBody2D (thing to collide with), pickable off
+
+		Sprite (textured)
+
+		CollisionShape2D - rect shape, trigger off
+
+	Area2D (thing to overlap), monitoring on, monitorable on, pickable on
+
+		Sprite (textured)
+
+		CollisionShape2D - rect shape, trigger off
