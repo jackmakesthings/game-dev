@@ -17,7 +17,7 @@ func _input(ev):
 		var end = ev.pos
 		print(begin,end)
 		
-		player.set_pos(end)
+		player.move_to(end)
 		#save_data()
 		## - get_pos()    # convert our endpoint to be relative from start point
 		#player.update_path(begin, end)
@@ -26,8 +26,9 @@ func _input(ev):
 func setup_player():
 	player = playerBase.instance()
 	player.set_name("Trace")
-	player.set("transform/pos", Vector2(50,100))
+	#player.set("transform/pos", Vector2(50,100))
 	get_node(".").add_child(player)
+	player = player.get_child(0)
 	return player
 
 func setup_computer():
@@ -44,8 +45,8 @@ func setup_computer():
 func _ready():
 	playerBase = ResourceLoader.load("res://scenes/robot.xml")
 	computerBase = ResourceLoader.load("res://scenes/computer.xml")
-	setup_computer()
-	setup_player()
+	computer = setup_computer()
+	player = setup_player()
 	
 	#player.set_pos(Vector2(300,300))
 	set_process_input(true)

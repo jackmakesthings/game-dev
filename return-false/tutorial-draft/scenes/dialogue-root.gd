@@ -19,8 +19,13 @@ func update_labels():
 	var fsm = get_node("basic-diagnostics")
 
 	terminal.set_active_dialog(fsm.terminal.dialog)
+	terminal.set_responses(fsm.terminal.options)
+	
 	cabinet.set_active_dialog(fsm.cabinet.dialog)
+	cabinet.set_responses(fsm.cabinet.options)
+	
 	engineer.set_active_dialog(fsm.engineer.dialog)
+	engineer.set_responses(fsm.engineer.options)
 	
 	
 func make_npc(name, parent, group):

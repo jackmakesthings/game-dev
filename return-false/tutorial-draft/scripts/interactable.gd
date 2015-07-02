@@ -6,26 +6,37 @@ var responses = [ ]
 
 
 func _message(contents):
-	pass
-	#if( get_child(0) ):
-	#	get_child(0).set("text", contents)
+	#pass
+	if( get_child(0) ):
+		get_child(0).set("text", contents)
 
 func get_active_dialog():
 	return self.active_dialog
 
 func set_active_dialog(dialogString):
 	self.active_dialog = dialogString
+	#_message(dialogString)
 	
-func _set_responses(responseArray):
+func set_responses(responseArray):
 	self.responses = responseArray
-	_message("New response set: ", str(responses))
+	make_from_responses()
+	#_message("New response set: ", str(responses))
 
-func _add_response(response):
+func add_response(response):
 	var s = responses.size() + 1
 	responses.resize( s )
 	responses.append( response )
 	_message("Added ", response)
 	_message("New response set: ", str(responses))
+
+func make_from_responses():
+	var i = 0
+	for r in responses:
+		var btn = Button.new()
+		btn.set_name("response-" + self.get_name() + str(i))
+		btn.set_text(r.text)
+		add_child(btn)
+		i = i+1
 
 func _ready():
 	print(self.get_name() + " created!")
