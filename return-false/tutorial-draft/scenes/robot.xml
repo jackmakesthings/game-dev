@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="3" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
+<resource_file type="PackedScene" subresource_count="4" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
+	<ext_resource path="res://scripts/walking-robot.gd" type="Script"></ext_resource>
 	<ext_resource path="res://assets/fpo/trace.png" type="Texture"></ext_resource>
 	<resource type="ConvexPolygonShape2D" path="local://1">
 		<real name="custom_solver_bias"> 0 </real>
@@ -13,41 +14,22 @@
 			<string> "conns" </string>
 			<int_array  len="0"> 				 </int_array>
 			<string> "names" </string>
-			<string_array  len="38">
+			<string_array  len="19">
 				<string> "robot" </string>
 				<string> "Node2D" </string>
-				<string> "_import_path" </string>
-				<string> "visibility/visible" </string>
-				<string> "visibility/opacity" </string>
-				<string> "visibility/self_opacity" </string>
-				<string> "visibility/light_mask" </string>
 				<string> "transform/pos" </string>
-				<string> "transform/rot" </string>
-				<string> "transform/scale" </string>
-				<string> "z/z" </string>
-				<string> "z/relative" </string>
 				<string> "__meta__" </string>
 				<string> "KinematicBody2D" </string>
 				<string> "input/pickable" </string>
-				<string> "shape_count" </string>
 				<string> "shapes/0/shape" </string>
 				<string> "shapes/0/transform" </string>
 				<string> "shapes/0/trigger" </string>
 				<string> "collision/layers" </string>
 				<string> "collision/mask" </string>
 				<string> "collision/margin" </string>
+				<string> "script/script" </string>
 				<string> "Sprite" </string>
 				<string> "texture" </string>
-				<string> "centered" </string>
-				<string> "offset" </string>
-				<string> "flip_h" </string>
-				<string> "flip_v" </string>
-				<string> "vframes" </string>
-				<string> "hframes" </string>
-				<string> "frame" </string>
-				<string> "modulate" </string>
-				<string> "region" </string>
-				<string> "region_rect" </string>
 				<string> "CollisionPolygon2D" </string>
 				<string> "build_mode" </string>
 				<string> "polygon" </string>
@@ -56,26 +38,19 @@
 			<string> "node_count" </string>
 			<int> 4 </int>
 			<string> "nodes" </string>
-			<int_array  len="156"> 				-1, -1, 1, 0, -1, 11, 2, 0, 3, 1, 4, 2, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 11, 1, 12, 8, 0, 0, 0, 13, 13, -1, 19, 2, 0, 3, 1, 4, 2, 5, 2, 6, 3, 7, 9, 8, 5, 9, 6, 10, 7, 11, 1, 14, 10, 15, 3, 16, 11, 17, 12, 18, 10, 19, 3, 20, 3, 21, 13, 12, 14, 0, 1, 0, 22, 22, -1, 21, 2, 0, 3, 1, 4, 2, 5, 2, 6, 3, 7, 9, 8, 5, 9, 6, 10, 7, 11, 1, 23, 15, 24, 1, 25, 9, 26, 10, 27, 10, 28, 3, 29, 3, 30, 7, 31, 16, 32, 10, 33, 17, 0, 1, 0, 34, 34, -1, 13, 2, 0, 3, 1, 4, 2, 5, 2, 6, 3, 7, 18, 8, 5, 9, 19, 10, 7, 11, 1, 35, 7, 36, 20, 37, 10, 0 </int_array>
+			<int_array  len="60"> 				-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 0, 0, 0, 4, 4, -1, 9, 5, 2, 6, 3, 7, 4, 8, 2, 9, 5, 10, 5, 11, 6, 12, 7, 3, 8, 0, 1, 0, 13, 13, -1, 1, 14, 9, 0, 1, 0, 15, 15, -1, 4, 2, 10, 16, 11, 17, 12, 18, 2, 0 </int_array>
 			<string> "variants" </string>
-			<array  len="21" shared="false">
-				<node_path> "" </node_path>
-				<bool> True </bool>
-				<real> 1 </real>
-				<int> 1 </int>
+			<array  len="13" shared="false">
 				<vector2> 406.008, 266.571 </vector2>
-				<real> 0 </real>
-				<vector2> 1, 1 </vector2>
-				<int> 0 </int>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
-					<string> "2D" </string>
+					<string> "Script" </string>
 					<string> "__editor_plugin_states__" </string>
 					<dictionary  shared="false">
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> -349.537, -71.4709 </vector2>
+							<vector2> -349.537, -214.877 </vector2>
 							<string> "snap_grid" </string>
 							<bool> False </bool>
 							<string> "snap_offset" </string>
@@ -200,20 +175,19 @@
 					<string> "_edit_group_" </string>
 					<bool> True </bool>
 				</dictionary>
-				<vector2> 0, 0 </vector2>
 				<bool> False </bool>
 				<resource  resource_type="Shape2D" path="local://1">  </resource>
 				<matrix32> 1, -0, 0, 1, -393.872, -228.313 </matrix32>
+				<int> 1 </int>
 				<real> 0.08 </real>
+				<resource  resource_type="Script" path="res://scripts/walking-robot.gd">  </resource>
 				<dictionary  shared="false">
 					<string> "_edit_group_" </string>
 					<bool> True </bool>
 				</dictionary>
 				<resource  resource_type="Texture" path="res://assets/fpo/trace.png">  </resource>
-				<color> 1, 1, 1, 1 </color>
-				<rect2> 0, 0, 0, 0 </rect2>
 				<vector2> -393.872, -228.313 </vector2>
-				<vector2> 1, 1 </vector2>
+				<int> 0 </int>
 				<vector2_array  len="4"> 					362.668, 270.155, 395.839, 289.394, 416.405, 274.135, 385.887, 255.56 </vector2_array>
 			</array>
 			<string> "version" </string>

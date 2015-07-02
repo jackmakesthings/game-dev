@@ -13,22 +13,23 @@ var savefile = "user://gamedata"
 
 func _input(ev):
 	if (ev.type == InputEvent.MOUSE_BUTTON and ev.pressed and ev.button_index==1):
-		var begin = player.get_pos()
-		var end = ev.pos
-		print(begin,end)
+		#print( player )
+		var begin = player.get_global_pos()
+		var end = ev.global_pos
 		
-		player.move_to(end)
+		player.update_path(begin, end);
 		#save_data()
 		## - get_pos()    # convert our endpoint to be relative from start point
 		#player.update_path(begin, end)
 	pass
 
 func setup_player():
-	player = playerBase.instance()
-	player.set_name("Trace")
+	var playerInst = playerBase.instance()
+	playerInst.set_name("Trace")
 	#player.set("transform/pos", Vector2(50,100))
-	get_node(".").add_child(player)
-	player = player.get_child(0)
+	get_node(".").add_child(playerInst)
+	player = get_node("Trace/KinematicBody2D")
+	#player = playerInst.get_child(0)
 	return player
 
 func setup_computer():

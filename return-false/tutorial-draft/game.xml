@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="2" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
+<resource_file type="PackedScene" subresource_count="3" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
 	<ext_resource path="res://game.gd" type="Script"></ext_resource>
+	<resource type="NavigationPolygon" path="local://1">
+		<vector2_array name="vertices" len="4"> 			-1.07239, 4.61261, 800.245, 4.61261, 796.544, 596.81, 2.62885, 602.362 </vector2_array>
+		<array name="polygons" len="1" shared="false">
+			<int_array  len="4"> 				0, 1, 2, 3 </int_array>
+		</array>
+		<array name="outlines" len="1" shared="false">
+			<vector2_array  len="4"> 				-1.07239, 4.61261, 800.245, 4.61261, 796.544, 596.81, 2.62885, 602.362 </vector2_array>
+		</array>
+
+	</resource>
 	<main_resource>
 		<dictionary name="_bundled" shared="false">
 			<string> "conn_count" </string>
@@ -8,7 +18,7 @@
 			<string> "conns" </string>
 			<int_array  len="0"> 				 </int_array>
 			<string> "names" </string>
-			<string_array  len="13">
+			<string_array  len="17">
 				<string> "game" </string>
 				<string> "Node2D" </string>
 				<string> "script/script" </string>
@@ -22,17 +32,21 @@
 				<string> "60" </string>
 				<string> "80" </string>
 				<string> "100" </string>
+				<string> "Navigation2D" </string>
+				<string> "NavigationPolygonInstance" </string>
+				<string> "navpoly" </string>
+				<string> "enabled" </string>
 			</string_array>
 			<string> "node_count" </string>
-			<int> 8 </int>
+			<int> 10 </int>
 			<string> "nodes" </string>
-			<int_array  len="62"> 				-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 0, 0, 0, 5, 4, -1, 1, 3, 2, 0, 1, 0, 7, 6, -1, 0, 0, 1, 0, 7, 8, -1, 0, 0, 1, 0, 7, 9, -1, 0, 0, 1, 0, 7, 10, -1, 0, 0, 1, 0, 7, 11, -1, 0, 0, 1, 0, 7, 12, -1, 0, 0 </int_array>
+			<int_array  len="80"> 				-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 0, 0, 0, 5, 4, -1, 1, 3, 2, 0, 1, 0, 7, 6, -1, 0, 0, 1, 0, 7, 8, -1, 0, 0, 1, 0, 7, 9, -1, 0, 0, 1, 0, 7, 10, -1, 0, 0, 1, 0, 7, 11, -1, 0, 0, 1, 0, 7, 12, -1, 0, 0, 0, 0, 13, 13, -1, 0, 0, 8, 0, 14, 14, -1, 2, 15, 3, 16, 4, 0 </int_array>
 			<string> "variants" </string>
-			<array  len="3" shared="false">
+			<array  len="5" shared="false">
 				<resource  resource_type="Script" path="res://game.gd">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
-					<string> "2D" </string>
+					<string> "Script" </string>
 					<string> "__editor_plugin_states__" </string>
 					<dictionary  shared="false">
 						<string> "2D" </string>
@@ -165,6 +179,8 @@
 					<string> "_editor_collapsed" </string>
 					<bool> True </bool>
 				</dictionary>
+				<resource  resource_type="NavigationPolygon" path="local://1">  </resource>
+				<bool> True </bool>
 			</array>
 			<string> "version" </string>
 			<int> 1 </int>
