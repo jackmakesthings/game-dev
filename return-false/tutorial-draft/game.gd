@@ -6,6 +6,12 @@ var playerBase
 var computer
 var player
 
+var fsm
+
+var messageNode
+
+var which
+
 var gamedata
 var savefile = "user://gamedata"
 
@@ -13,43 +19,90 @@ var savefile = "user://gamedata"
 
 func _input(ev):
 	if (ev.type == InputEvent.MOUSE_BUTTON and ev.pressed and ev.button_index==1):
-		#print( player )
 		var begin = player.get_global_pos()
 		var end = ev.global_pos
 		
 		player.update_path(begin, end);
-		#save_data()
-		## - get_pos()    # convert our endpoint to be relative from start point
-		#player.update_path(begin, end)
 	pass
 
 func setup_player():
-	var playerInst = playerBase.instance()
-	playerInst.set_name("Trace")
-	#player.set("transform/pos", Vector2(50,100))
-	get_node(".").add_child(playerInst)
-	player = get_node("Trace/KinematicBody2D")
-	#player = playerInst.get_child(0)
+	#var playerInst = playerBase.instance()
+	player = get_node("Navigation2D/YSort/robot")
+	player.set_name("Trace")
 	return player
 
 func setup_computer():
-	computer = computerBase.instance()
+	#computer = computerBase.instance()
+	computer = get_node("Navigation2D/YSort/computer-base")
 	computer.set("name", "Terminal")
 	computer.set("message", "beep boop")
-	computer.set("transform/pos", Vector2(100,200))
-	get_node(".").add_child(computer)
+	#computer = get_node(".").add_child(computer)
 	return computer
 
 #func _init():
 
+func update_labels():
+	var e_dialog = fsm.get("engineer")["dialog"]
+	var c_dialog = fsm.get("cabinet")["dialog"]
+	var t_dialog = fsm.get("terminal")["dialog"]
+	var m = messageNode
+	
+	
+	m.clear()
+	m.add_text("Engineer: " + str(e_dialog))
+	m.newline()
+	m.add_text("Cabinet: " + str(c_dialog))
+	m.newline()
+	m.add_text("Terminal: "+ str(t_dialog))
+
+
+func update_label(which):
+	var dialog = fsm.get(which)["dialog"]
+	var m = messageNode
+	
+	m.clear()
+	m.add_text(str(dialog))
+	
 
 func _ready():
 	playerBase = ResourceLoader.load("res://scenes/robot.xml")
 	computerBase = ResourceLoader.load("res://scenes/computer.xml")
-	computer = setup_computer()
+	
+	fsm = get_node("states")
+	messageNode = get_node("RichTextLabel")
+	
+	# computer = setup_computer()
 	player = setup_player()
 	
 	#player.set_pos(Vector2(300,300))
 	set_process_input(true)
+	
+	get_node("terminal").connect("body_enter", self, "_on_terminal_body_enter")
+	get_node("cabinet").connect("body_enter", self, "_on_cabinet_body_enter")
+	get_node("engineer").connect("body_enter", self, "_on_engineer_body_enter")	
+	
+	get_node("terminal").connect("body_exit", self, "_on_Area2D_body_exit")
+	get_node("cabinet").connect("body_exit", self, "_on_Area2D_body_exit")
+	get_node("engineer").connect("body_exit", self, "_on_Area2D_body_exit")	
+	
 	pass
 	
+func _on_terminal_body_enter(body):
+	if( body.get_name() == "Trace" ):
+		which = "terminal"
+		update_label("terminal")
+
+func _on_cabinet_body_enter(body):
+	if( body.get_name() == "Trace" ):
+		which = "cabinet"
+		update_label("cabinet")
+
+func _on_engineer_body_enter(body):
+	if( body.get_name() == "Trace" ):
+		which = "engineer"
+		update_label("engineer")
+
+
+func _on_Area2D_body_exit( body ):
+	messageNode.clear()
+	pass # replace with function body

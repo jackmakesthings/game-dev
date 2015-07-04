@@ -49,7 +49,7 @@ func _ready():
 	states = get_children()
 	fsm.set_current_state(states[0])
 	fsm.first_enter()
-	set_process_input(true)
+	#set_process_input(true)
 	
 
 	#get_node("40").emit_signal("update_state")

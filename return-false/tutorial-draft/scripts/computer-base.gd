@@ -1,5 +1,5 @@
 
-extends Node2D
+extends StaticBody2D
 
 # member variables here, example:
 # var a=2z

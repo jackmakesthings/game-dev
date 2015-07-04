@@ -27,13 +27,16 @@ func _fixed_process(delta):
 				to_walk=0
 				
 		var atpos = path[path.size()-1]	
-		move_to(atpos);
+		
+		#move_to(atpos);
+		set_pos(atpos)
 		# set_going_to(atpos);
 		
 		if(is_colliding()):
+			#print("!!!")
 			# get_node("/root/base/Area2D/Navigation2D/label").text = "OH HI";
 			var n = get_collision_normal()
-			var motion = n.slide(atpos - get_pos());
+			var motion = n.slide(atpos - get_global_pos());
 			move(motion);
 		
 		else:
@@ -50,8 +53,6 @@ func _fixed_process(delta):
 
 
 func update_path(begin, end):
-
-
 	var p = nav.get_simple_path(begin,end,true) # not documented yet
 	#var p = nav.get_simple_path(begin,end,true);
 	path=Array(p) # Vector2array is overly complex, convert path to a normal array
@@ -61,5 +62,5 @@ func update_path(begin, end):
 
 func _ready():
 	nav = get_tree().get_root().get_node("game/Navigation2D")
-	pass
+	#pass
 	#set_fixed_process()

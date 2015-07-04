@@ -1,9 +1,20 @@
 
-extends "nav-walker.gd"
+extends KinematicBody2D
 
 # member variables here, example:
 # var a=2
 # var b="textvar"
+
+
+var begin=Vector2()
+var end=Vector2()
+var path=[]
+
+var nav
+
+
+const SPEED=150.0
+
 
 func _fixed_process(delta):
 
@@ -26,11 +37,11 @@ func _fixed_process(delta):
 		move_to(atpos);
 		# set_going_to(atpos);
 		
-		if(get_node(".").is_colliding()):
-			print("!!!")
+		if(is_colliding()):
+			#print("!!!")
 			# get_node("/root/base/Area2D/Navigation2D/label").text = "OH HI";
 			var n = get_collision_normal()
-			var motion = n.slide(atpos - get_pos());
+			var motion = n.slide(atpos - get_global_pos());
 			move(motion);
 		
 		else:
@@ -43,3 +54,20 @@ func _fixed_process(delta):
 				
 	else:
 		set_fixed_process(false);
+
+
+
+func update_path(begin, end):
+	var p = nav.get_simple_path(begin,end,true) # not documented yet
+	#var p = nav.get_simple_path(begin,end,true);
+	path=Array(p) # Vector2array is overly complex, convert path to a normal array
+	path.invert() # not documented yet
+
+	set_fixed_process(true) # keep on movin'
+
+func _ready():
+	#nav = get_parent()
+	nav = Navigation2D.new()
+	#pass
+	#set_fixed_process()
+
