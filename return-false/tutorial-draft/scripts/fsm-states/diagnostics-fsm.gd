@@ -58,3 +58,10 @@ func _ready():
 	pass
 
 
+
+
+func _on_Button_pressed():
+	currentState = currentState + 1
+	if( states.size() > currentState ):
+		fsm.change_state(states[currentState])
+	pass # replace with function body

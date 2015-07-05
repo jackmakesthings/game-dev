@@ -66,8 +66,8 @@ func update_path(begin, end):
 	set_fixed_process(true) # keep on movin'
 
 func _ready():
-	#nav = get_parent()
-	nav = Navigation2D.new()
+	nav = get_node("/root/game/Navigation2D")
+	#nav = Navigation2D.new()
 	#pass
 	#set_fixed_process()
 

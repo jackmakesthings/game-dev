@@ -17,7 +17,7 @@ var savefile = "user://gamedata"
 
 #var MessageTrigger = preload("res://scripts/MessageTrigger.gd");
 
-func _input(ev):
+func _unhandled_input(ev):
 	if (ev.type == InputEvent.MOUSE_BUTTON and ev.pressed and ev.button_index==1):
 		var begin = player.get_global_pos()
 		var end = ev.global_pos
@@ -75,7 +75,7 @@ func _ready():
 	player = setup_player()
 	
 	#player.set_pos(Vector2(300,300))
-	set_process_input(true)
+	set_process_unhandled_input(true)
 	
 	get_node("terminal").connect("body_enter", self, "_on_terminal_body_enter")
 	get_node("cabinet").connect("body_enter", self, "_on_cabinet_body_enter")
@@ -91,6 +91,8 @@ func _on_terminal_body_enter(body):
 	if( body.get_name() == "Trace" ):
 		which = "terminal"
 		update_label("terminal")
+		var dialogues = get_node("/root/utils").get_json("res://assets/dialogue-tree-json.txt")
+		printt(dialogues["20"]["dialogue"])
 
 func _on_cabinet_body_enter(body):
 	if( body.get_name() == "Trace" ):
@@ -106,3 +108,5 @@ func _on_engineer_body_enter(body):
 func _on_Area2D_body_exit( body ):
 	messageNode.clear()
 	pass # replace with function body
+
+

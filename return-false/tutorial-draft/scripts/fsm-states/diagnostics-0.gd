@@ -17,7 +17,7 @@ func _ready():
 func state_enter(entity):
 	print("Entering state 0")
 	fsm.set("engineer", {
-		"dialog": "Fix the thing",
+		"dialog": "'Fix the thing.'",
 		"options": [
 			{ 
 			"text": "Close", 
@@ -27,7 +27,7 @@ func state_enter(entity):
 	});
 
 	fsm.set("cabinet", {
-		"dialog": "This cabinet is overflowing with poorly-organized spare parts.",
+		"dialog": "--",
 		"options": [
 			{ 
 			"text": "Close", 
@@ -37,7 +37,7 @@ func state_enter(entity):
 	});
 
 	fsm.set("terminal", {
-		"dialog": "This terminal is inoperable.",
+		"dialog": "--",
 		"options": [{
 			"text": "Leave",
 			"endState": currentState

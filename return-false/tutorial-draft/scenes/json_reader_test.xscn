@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="9" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
-	<ext_resource path="res://scenes/dialogue-root.gd" type="Script"></ext_resource>
-	<ext_resource path="res://scripts/fsm-states/diagnostics-fsm.gd" type="Script"></ext_resource>
-	<ext_resource path="res://scripts/fsm-states/diagnostics-0.gd" type="Script"></ext_resource>
-	<ext_resource path="res://scripts/fsm-states/diagnostics-20.gd" type="Script"></ext_resource>
-	<ext_resource path="res://scripts/fsm-states/diagnostics-40.gd" type="Script"></ext_resource>
-	<ext_resource path="res://scripts/fsm-states/diagnostics-60.gd" type="Script"></ext_resource>
-	<ext_resource path="res://scripts/fsm-states/diagnostics-80.gd" type="Script"></ext_resource>
-	<ext_resource path="res://scripts/fsm-states/diagnostics-100.gd" type="Script"></ext_resource>
+<resource_file type="PackedScene" subresource_count="2" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
+	<ext_resource path="res://scenes/json_reader_test.gd" type="Script"></ext_resource>
 	<main_resource>
 		<dictionary name="_bundled" shared="false">
 			<string> "conn_count" </string>
@@ -15,59 +8,57 @@
 			<string> "conns" </string>
 			<int_array  len="0"> 				 </int_array>
 			<string> "names" </string>
-			<string_array  len="35">
-				<string> "dialogue_root" </string>
-				<string> "Node" </string>
-				<string> "script/script" </string>
-				<string> "__meta__" </string>
-				<string> "basic-diagnostics" </string>
-				<string> "StateMachine" </string>
-				<string> "0" </string>
-				<string> "State" </string>
-				<string> "20" </string>
-				<string> "40" </string>
-				<string> "60" </string>
-				<string> "80" </string>
-				<string> "100" </string>
-				<string> "nodes" </string>
-				<string> "VBoxContainer" </string>
+			<string_array  len="29">
+				<string> "root" </string>
+				<string> "Control" </string>
 				<string> "anchor/right" </string>
 				<string> "anchor/bottom" </string>
-				<string> "margin/left" </string>
-				<string> "margin/top" </string>
-				<string> "margin/right" </string>
-				<string> "margin/bottom" </string>
-				<string> "rect/min_size" </string>
 				<string> "focus/ignore_mouse" </string>
 				<string> "focus/stop_mouse" </string>
 				<string> "size_flags/horizontal" </string>
 				<string> "size_flags/vertical" </string>
-				<string> "Control" </string>
-				<string> "terminalLabel" </string>
+				<string> "script/script" </string>
+				<string> "__meta__" </string>
+				<string> "HBoxContainer" </string>
+				<string> "VBoxContainer" </string>
+				<string> "margin/right" </string>
+				<string> "margin/bottom" </string>
+				<string> "RichTextLabel" </string>
+				<string> "rect/min_size" </string>
+				<string> "size_flags/stretch_ratio" </string>
+				<string> "bbcode/enabled" </string>
+				<string> "bbcode/bbcode" </string>
+				<string> "visible_characters" </string>
+				<string> "ButtonGroup" </string>
+				<string> "margin/top" </string>
+				<string> "VBoxContainer 2" </string>
+				<string> "margin/left" </string>
 				<string> "Button" </string>
+				<string> "visibility/visible" </string>
 				<string> "toggle_mode" </string>
 				<string> "text" </string>
 				<string> "flat" </string>
-				<string> "align" </string>
-				<string> "engineerLabel" </string>
-				<string> "cabinetLabel" </string>
 			</string_array>
 			<string> "node_count" </string>
-			<int> 13 </int>
+			<int> 7 </int>
 			<string> "nodes" </string>
-			<int_array  len="219"> 				-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 0, 0, 0, 5, 4, -1, 1, 2, 2, 0, 1, 0, 7, 6, -1, 1, 2, 3, 0, 1, 0, 7, 8, -1, 1, 2, 4, 0, 1, 0, 7, 9, -1, 1, 2, 5, 0, 1, 0, 7, 10, -1, 1, 2, 6, 0, 1, 0, 7, 11, -1, 1, 2, 7, 0, 1, 0, 7, 12, -1, 1, 2, 8, 0, 0, 0, 14, 13, -1, 11, 15, 9, 16, 9, 17, 10, 18, 11, 19, 12, 20, 13, 21, 14, 22, 15, 23, 15, 24, 16, 25, 16, 0, 0, 0, 14, 26, -1, 11, 15, 9, 16, 9, 17, 17, 18, 18, 19, 19, 20, 18, 21, 14, 22, 15, 23, 15, 24, 16, 25, 16, 0, 9, 0, 28, 27, -1, 11, 18, 20, 19, 17, 20, 21, 22, 22, 23, 22, 24, 23, 25, 9, 29, 15, 30, 24, 31, 15, 32, 25, 0, 9, 0, 28, 33, -1, 11, 18, 12, 19, 17, 20, 26, 22, 22, 23, 22, 24, 23, 25, 9, 29, 15, 30, 27, 31, 15, 32, 25, 0, 9, 0, 28, 34, -1, 11, 18, 28, 19, 17, 20, 29, 22, 22, 23, 22, 24, 23, 25, 9, 29, 15, 30, 30, 31, 15, 32, 25, 0 </int_array>
+			<int_array  len="161"> 				-1, -1, 1, 0, -1, 8, 2, 0, 3, 0, 4, 1, 5, 2, 6, 3, 7, 3, 8, 4, 9, 5, 0, 0, 0, 10, 1, -1, 6, 2, 0, 3, 0, 4, 1, 5, 2, 6, 3, 7, 3, 0, 1, 0, 11, 11, -1, 6, 12, 6, 13, 7, 4, 1, 5, 1, 6, 8, 7, 8, 0, 2, 0, 14, 14, -1, 11, 12, 6, 13, 9, 15, 10, 4, 1, 5, 2, 6, 8, 7, 8, 16, 11, 17, 1, 18, 12, 19, 13, 0, 2, 0, 10, 20, -1, 7, 21, 14, 12, 6, 13, 7, 4, 1, 5, 2, 6, 8, 7, 8, 0, 1, 0, 11, 22, -1, 7, 23, 15, 12, 16, 13, 7, 4, 1, 5, 1, 6, 8, 7, 8, 0, 1, 0, 24, 24, -1, 11, 25, 1, 23, 17, 12, 18, 13, 7, 4, 1, 5, 2, 6, 3, 7, 3, 26, 1, 27, 19, 28, 1, 0 </int_array>
 			<string> "variants" </string>
-			<array  len="31" shared="false">
-				<resource  resource_type="Script" path="res://scenes/dialogue-root.gd">  </resource>
+			<array  len="20" shared="false">
+				<int> 1 </int>
+				<bool> False </bool>
+				<bool> True </bool>
+				<int> 2 </int>
+				<resource  resource_type="Script" path="res://scenes/json_reader_test.gd">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
-					<string> "Script" </string>
+					<string> "2D" </string>
 					<string> "__editor_plugin_states__" </string>
 					<dictionary  shared="false">
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> -323.867, -73.5671 </vector2>
+							<vector2> -430.628, -407.38 </vector2>
 							<string> "snap_grid" </string>
 							<bool> False </bool>
 							<string> "snap_offset" </string>
@@ -87,7 +78,7 @@
 							<string> "snap_step" </string>
 							<vector2> 10, 10 </vector2>
 							<string> "zoom" </string>
-							<real> 0.598737 </real>
+							<real> 0.440126 </real>
 						</dictionary>
 						<string> "3D" </string>
 						<dictionary  shared="false">
@@ -190,35 +181,20 @@
 						<int> 0 </int>
 					</dictionary>
 				</dictionary>
-				<resource  resource_type="Script" path="res://scripts/fsm-states/diagnostics-fsm.gd">  </resource>
-				<resource  resource_type="Script" path="res://scripts/fsm-states/diagnostics-0.gd">  </resource>
-				<resource  resource_type="Script" path="res://scripts/fsm-states/diagnostics-20.gd">  </resource>
-				<resource  resource_type="Script" path="res://scripts/fsm-states/diagnostics-40.gd">  </resource>
-				<resource  resource_type="Script" path="res://scripts/fsm-states/diagnostics-60.gd">  </resource>
-				<resource  resource_type="Script" path="res://scripts/fsm-states/diagnostics-80.gd">  </resource>
-				<resource  resource_type="Script" path="res://scripts/fsm-states/diagnostics-100.gd">  </resource>
-				<int> 1 </int>
-				<real> 250 </real>
-				<real> 123 </real>
-				<real> 188 </real>
-				<real> 77 </real>
-				<vector2> 200, 400 </vector2>
-				<bool> False </bool>
+				<real> 398 </real>
+				<real> 600 </real>
 				<int> 3 </int>
-				<real> 200 </real>
-				<real> 100 </real>
-				<real> 400 </real>
-				<real> 54 </real>
-				<real> 75 </real>
-				<bool> True </bool>
-				<int> 2 </int>
-				<string> "terminal" </string>
-				<int> 0 </int>
-				<real> 209 </real>
-				<string> "engineer" </string>
-				<real> 323 </real>
-				<real> 344 </real>
-				<string> "cabinet" </string>
+				<real> 447 </real>
+				<vector2> 0, 100 </vector2>
+				<real> 3 </real>
+				<string> "" </string>
+				<int> -1 </int>
+				<real> 451 </real>
+				<real> 402 </real>
+				<real> 800 </real>
+				<real> 742 </real>
+				<real> 799 </real>
+				<string> "RESET" </string>
 			</array>
 			<string> "version" </string>
 			<int> 1 </int>

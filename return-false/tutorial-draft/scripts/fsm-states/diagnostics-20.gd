@@ -19,7 +19,7 @@ func _ready():
 func state_enter(entity):
 	print("Entering state 20")
 	fsm.set("engineer", {
-		"dialog": "The diagnostic utilities are all accessible through the terminal. Start with that.",
+		"dialog": "'The diagnostic utilities are all accessible through the terminal.\n Start with that.'",
 		"options": [
 			{ 
 			"text": "Leave", 
@@ -39,7 +39,7 @@ func state_enter(entity):
 	});
 
 	fsm.set("terminal", {
-		"dialog": "This terminal is inoperable.",
+		"dialog": "This terminal is inoperable. (Option to run diagnostic function will go here.)",
 		"options": [{
 			"text": "Run diagnostic function",
 			"endState": currentState + 1
