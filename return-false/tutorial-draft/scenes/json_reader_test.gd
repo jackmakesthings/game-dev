@@ -11,18 +11,18 @@ var textbox
 var buttonbox
 var testbuttonbox
 var reset_button
-var currentState
+var scenes
+# var currentState
 
 func get_data():
 	data = get_node("/root/utils").get_json(file)
 	return data
 	
 func remove_children(node):
-	var nb = node.get_child_count() - 1
+	#var nb = node.get_child_count() - 1
 	var kids = node.get_children()
-	node.remove_child(node.get_child(0))
-	for i in range(nb):
-		node.remove_child(node.get_child(nb))
+	for kid in kids:
+		node.remove_child(kid)
 	
 
 func show_as_line(dataObject):
@@ -73,8 +73,7 @@ func on_response_pressed(action, startState, endState):
 	show_dialogue(str(endState))
 	show_responses(str(endState))
 	if( action == "end_dialog" ):
-		textbox.clear()
-		remove_children(buttonbox)
+		close_all_dialogues()
 
 func highlight_current_state():
 	var allButtons = testbuttonbox.get_children()
@@ -86,13 +85,14 @@ func highlight_current_state():
 		currentButton.set("flat", true)
 	
 
-func test_state(stateID):
+func goto_state(stateID):
 	remove_children(buttonbox)
 	textbox.clear()
 	Globals.currentState = stateID
 	show_dialogue(stateID)
 	show_responses(stateID)
 	highlight_current_state()
+	disable_all_interactions()
 
 func make_test_buttons():
 	var keys = data.keys()
@@ -113,6 +113,37 @@ func _reset_states():
 	show_dialogue("20")
 	show_responses("20")
 	highlight_current_state()
+
+func close_dialogue():
+	textbox.clear()
+	remove_children(buttonbox)
+	enable_all_interactions()
+	
+func disable_interaction():
+	reset_button.set("disabled", true)
+	
+func enable_interaction():
+	reset_button.set("disabled", false)
+	
+func enable_all_interactions():
+	for s in scenes:
+		if( s.has_method("enable_interaction")):
+			s.enable_interaction()
+	
+func disable_all_interactions():
+	for s in scenes:
+		if( s.has_method("disable_interaction")):
+			s.disable_interaction()
+
+func close_all_dialogues():
+	for s in scenes:
+		if( s.has_method("close_dialogue")):
+			s.close_dialogue()
+			
+func init_at_current_state():
+	var stateID = Globals.currentState
+	close_all_dialogues()
+	goto_state(stateID)
 	
 func kickoff():
 	data = get_data()
@@ -127,12 +158,14 @@ func _ready():
 	testbuttonbox = get_node("./Control/VBoxContainer 2")
 	reset_button = get_node("./Control/Button")
 	data = get_data()
+	scenes = get_parent().get_children()
 	
 	Globals.currentState = "20"
 	
 	
-	reset_button.connect("pressed", self, "_reset_states")
 	
+	reset_button.connect("pressed", self, "init_at_current_state")
+	# reset_button.connect("pressed", self, "_reset_states")	
 	# Initialization here
 	pass
 

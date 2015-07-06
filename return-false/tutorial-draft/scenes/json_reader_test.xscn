@@ -8,7 +8,7 @@
 			<string> "conns" </string>
 			<int_array  len="0"> 				 </int_array>
 			<string> "names" </string>
-			<string_array  len="29">
+			<string_array  len="30">
 				<string> "root" </string>
 				<string> "Control" </string>
 				<string> "anchor/right" </string>
@@ -19,7 +19,8 @@
 				<string> "size_flags/vertical" </string>
 				<string> "script/script" </string>
 				<string> "__meta__" </string>
-				<string> "HBoxContainer" </string>
+				<string> "GridContainer" </string>
+				<string> "columns" </string>
 				<string> "VBoxContainer" </string>
 				<string> "margin/right" </string>
 				<string> "margin/bottom" </string>
@@ -30,11 +31,11 @@
 				<string> "bbcode/bbcode" </string>
 				<string> "visible_characters" </string>
 				<string> "ButtonGroup" </string>
+				<string> "HBoxContainer" </string>
 				<string> "margin/top" </string>
 				<string> "VBoxContainer 2" </string>
 				<string> "margin/left" </string>
 				<string> "Button" </string>
-				<string> "visibility/visible" </string>
 				<string> "toggle_mode" </string>
 				<string> "text" </string>
 				<string> "flat" </string>
@@ -42,7 +43,7 @@
 			<string> "node_count" </string>
 			<int> 7 </int>
 			<string> "nodes" </string>
-			<int_array  len="161"> 				-1, -1, 1, 0, -1, 8, 2, 0, 3, 0, 4, 1, 5, 2, 6, 3, 7, 3, 8, 4, 9, 5, 0, 0, 0, 10, 1, -1, 6, 2, 0, 3, 0, 4, 1, 5, 2, 6, 3, 7, 3, 0, 1, 0, 11, 11, -1, 6, 12, 6, 13, 7, 4, 1, 5, 1, 6, 8, 7, 8, 0, 2, 0, 14, 14, -1, 11, 12, 6, 13, 9, 15, 10, 4, 1, 5, 2, 6, 8, 7, 8, 16, 11, 17, 1, 18, 12, 19, 13, 0, 2, 0, 10, 20, -1, 7, 21, 14, 12, 6, 13, 7, 4, 1, 5, 2, 6, 8, 7, 8, 0, 1, 0, 11, 22, -1, 7, 23, 15, 12, 16, 13, 7, 4, 1, 5, 1, 6, 8, 7, 8, 0, 1, 0, 24, 24, -1, 11, 25, 1, 23, 17, 12, 18, 13, 7, 4, 1, 5, 2, 6, 3, 7, 3, 26, 1, 27, 19, 28, 1, 0 </int_array>
+			<int_array  len="161"> 				-1, -1, 1, 0, -1, 8, 2, 0, 3, 0, 4, 1, 5, 2, 6, 3, 7, 3, 8, 4, 9, 5, 0, 0, 0, 10, 1, -1, 7, 2, 0, 3, 0, 4, 1, 5, 2, 6, 3, 7, 3, 11, 3, 0, 1, 0, 12, 12, -1, 6, 13, 6, 14, 7, 4, 1, 5, 1, 6, 8, 7, 8, 0, 2, 0, 15, 15, -1, 11, 13, 6, 14, 9, 16, 10, 4, 1, 5, 2, 6, 8, 7, 8, 17, 11, 18, 1, 19, 12, 20, 13, 0, 2, 0, 22, 21, -1, 7, 23, 14, 13, 6, 14, 7, 4, 1, 5, 2, 6, 8, 7, 8, 0, 1, 0, 12, 24, -1, 7, 25, 15, 13, 16, 14, 7, 4, 1, 5, 1, 6, 8, 7, 8, 0, 1, 0, 26, 26, -1, 10, 23, 17, 13, 6, 14, 18, 4, 1, 5, 2, 6, 3, 7, 3, 27, 1, 28, 19, 29, 1, 0 </int_array>
 			<string> "variants" </string>
 			<array  len="20" shared="false">
 				<int> 1 </int>
@@ -181,19 +182,19 @@
 						<int> 0 </int>
 					</dictionary>
 				</dictionary>
-				<real> 398 </real>
-				<real> 600 </real>
+				<real> 426 </real>
+				<real> 575 </real>
 				<int> 3 </int>
-				<real> 447 </real>
+				<real> 428 </real>
 				<vector2> 0, 100 </vector2>
 				<real> 3 </real>
 				<string> "" </string>
 				<int> -1 </int>
-				<real> 451 </real>
-				<real> 402 </real>
-				<real> 800 </real>
-				<real> 742 </real>
+				<real> 432 </real>
+				<real> 430 </real>
 				<real> 799 </real>
+				<real> 579 </real>
+				<real> 600 </real>
 				<string> "RESET" </string>
 			</array>
 			<string> "version" </string>
