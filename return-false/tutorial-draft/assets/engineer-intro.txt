@@ -1,0 +1,73 @@
+{
+  "1": {
+    "dialogue": "Identify yourself.",
+    "internal": false,
+    "options": [
+      {
+        "text": "I am TrACE, a Troubleshoot and Correct Executable.",
+        "endState": "2",
+        "action": "next_dialog"
+      }
+    ]
+  },
+  "2": {
+    "dialogue": "Mm-hmm.  Let's test mobility.  Raise your hand.",
+    "internal": true,
+    "options": [
+      {
+        "text": "*Raise left hand*",
+        "endState": "3",
+        "action": "next_dialog"
+      },
+      {
+        "text": "*Raise right hand*",
+        "endState": "4",
+        "action": "next_dialog"
+      }
+    ]
+  },
+  "3": {
+    "dialogue": "o) \n\n\n Good. Now walk to that table.",
+    "internal": true,
+    "options": [
+      {
+        "text": "*Walk*",
+        "endState": "5",
+        "action": "next_dialog"
+      }
+    ]
+  },
+  "4": {
+    "dialogue": "(o \n\n\n Good. Now walk to that table.",
+    "internal": true,
+    "options": [
+      {
+        "text": "*Walk*",
+        "endState": "5",
+        "action": "next_dialog"
+      }
+    ]
+  },
+  "5": {
+    "dialogue": "Excellent.  All that's left is maintenance protocols.  This terminal is malfunctioning.  Diagnose and repair it, then talk to me when it's done.",
+    "internal": true,
+    "options": [
+      {
+        "text": "*Leave*",
+        "endState": "20",
+        "action": "end_dialog"
+      }
+    ]
+  },
+  "20": {
+    "dialogue": "--",
+    "internal": false,
+    "options": [
+      {
+        "text": "*Get to work*",
+        "endState": "20",
+        "action": "end_dialog"
+      }
+    ]
+  }
+}
