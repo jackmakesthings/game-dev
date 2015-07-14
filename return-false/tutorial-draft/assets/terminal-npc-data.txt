@@ -2,8 +2,7 @@
   "name": "terminal",
   "label": "Terminal",
   "quests": {
-    "tutorial":
-    {
+    "tutorial": {
       "key": "tutorial",
       "minState": "20",
       "maxState": "80",

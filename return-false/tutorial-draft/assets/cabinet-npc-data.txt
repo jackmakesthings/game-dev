@@ -1,0 +1,67 @@
+{
+  "name": "cabinet",
+  "label": "Cabinet",
+  "quests": {
+    "tutorial": {
+      "key": "tutorial",
+      "minState": "0",
+      "maxState": "80",
+      "states": {
+        "20": {
+          "dialogue": "This cabinet is overflowing with poorly-organized spare parts.",
+          "internal": false,
+          "options": [
+            {
+              "text": "Leave",
+              "endState": "20",
+              "action": "end_dialog"
+            }
+          ]
+        },
+        "40": {
+          "dialogue": "This cabinet is overflowing with poorly-organized spare parts.",
+          "internal": false,
+          "options": [
+            {
+              "text": "Look for a power cable",
+              "endState": "50",
+              "action": "next_dialog"
+            },
+            {
+              "text": "Leave",
+              "endState": "40",
+              "action": "end_dialog"
+            }
+          ]
+        },
+        "50": {
+          "dialogue": "Buried beneath a pile of unsorted wires, you locate a compatible power cable for the terminal.",
+          "internal": true,
+          "options": [
+            {
+              "text": "Take the cable and leave",
+              "endState": "60",
+              "action": "end_dialog"
+            }
+          ]
+        },
+        "60": {
+          "dialogue": "You already have the cable you need.",
+          "internal": false,
+          "options": [
+            {
+              "text": "Leave",
+              "endState": "60",
+              "action": "end_dialog"
+            }
+          ]
+        },
+        "80": {
+          "dialogue": "Your repair was a success. Go tell the engineer!",
+          "internal": false,
+          "options": []
+        }
+      }
+    }
+  }
+}

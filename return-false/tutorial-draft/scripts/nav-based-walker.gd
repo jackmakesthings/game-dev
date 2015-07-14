@@ -70,8 +70,7 @@ func update_path(begin, end):
 	set_fixed_process(true) # keep on movin'
 
 func _ready():
-	#nav = get_tree().get_root().get_node("game/Navigation2D")
 	game = get_node("/root/game")
-	nav = get_node(game.nav)
+	nav = game.get_node("Navigation2D")
 	add_user_signal("done_moving")
-	connect("done_moving", self, "announce_end")
+	#connect("done_moving", self, "announce_end")

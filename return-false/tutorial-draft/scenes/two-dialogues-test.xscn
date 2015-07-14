@@ -17,7 +17,7 @@
 			<string> "conns" </string>
 			<int_array  len="0"> 				 </int_array>
 			<string> "names" </string>
-			<string_array  len="20">
+			<string_array  len="19">
 				<string> "Node2D" </string>
 				<string> "script/script" </string>
 				<string> "__meta__" </string>
@@ -35,14 +35,13 @@
 				<string> "root" </string>
 				<string> "Control" </string>
 				<string> "_import_path" </string>
-				<string> "file" </string>
 				<string> "buttonLabel" </string>
 				<string> "root 2" </string>
 			</string_array>
 			<string> "node_count" </string>
 			<int> 4 </int>
 			<string> "nodes" </string>
-			<int_array  len="90"> 				-1, -1, 0, 0, -1, 2, 1, 0, 2, 1, 0, 0, 0, 3, 3, -1, 10, 4, 2, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 6, 11, 7, 12, 7, 13, 8, 0, 1, 0, 15, 14, 9, 9, 16, 10, 7, 11, 8, 12, 11, 7, 12, 7, 1, 13, 2, 14, 17, 15, 18, 16, 0, 1, 0, 15, 19, 9, 10, 16, 10, 6, 17, 7, 18, 8, 12, 11, 7, 12, 7, 1, 19, 2, 20, 17, 15, 18, 21, 0 </int_array>
+			<int_array  len="94"> 				-1, -1, 0, 0, -1, 2, 1, 0, 2, 1, 0, 0, 0, 3, 3, -1, 10, 4, 2, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 6, 11, 7, 12, 7, 13, 8, 0, 1, 0, 15, 14, 9, 10, 16, 10, 4, 11, 5, 11, 7, 12, 8, 13, 11, 7, 12, 7, 1, 14, 2, 15, 17, 16, 0, 1, 0, 15, 18, 9, 11, 16, 10, 4, 11, 5, 11, 6, 17, 7, 18, 8, 13, 11, 7, 12, 7, 1, 19, 2, 20, 17, 21, 0 </int_array>
 			<string> "variants" </string>
 			<array  len="22" shared="false">
 				<resource  resource_type="Script" path="res://scenes/two-dialogues-test.gd">  </resource>
@@ -54,7 +53,7 @@
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> -594.327, -325.914 </vector2>
+							<vector2> -218.459, -22.1784 </vector2>
 							<string> "snap_grid" </string>
 							<bool> False </bool>
 							<string> "snap_offset" </string>
@@ -74,7 +73,7 @@
 							<string> "snap_step" </string>
 							<vector2> 10, 10 </vector2>
 							<string> "zoom" </string>
-							<real> 0.397214 </real>
+							<real> 0.66342 </real>
 						</dictionary>
 						<string> "3D" </string>
 						<dictionary  shared="false">
@@ -186,6 +185,7 @@
 				<int> 20 </int>
 				<resource  resource_type="PackedScene" path="res://scenes/json_reader_test.xscn">  </resource>
 				<node_path> "" </node_path>
+				<int> 0 </int>
 				<real> 372 </real>
 				<real> 464 </real>
 				<resource  resource_type="Script" path="local://1">  </resource>
@@ -320,7 +320,6 @@
 						<int> 0 </int>
 					</dictionary>
 				</dictionary>
-				<string> "res://assets/dialogue-tree-json.txt" </string>
 				<string> "terminal" </string>
 				<real> 392 </real>
 				<real> 764 </real>
