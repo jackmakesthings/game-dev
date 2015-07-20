@@ -17,7 +17,7 @@ var savefile = "user://gamedata"
 
 #var MessageTrigger = preload("res://scripts/MessageTrigger.gd");
 
-func _unhandled_input(ev):
+func _input(ev):
 	if (ev.type == InputEvent.MOUSE_BUTTON and ev.pressed and ev.button_index==1):
 		var begin = player.get_global_pos()
 		var end = ev.global_pos
@@ -26,7 +26,6 @@ func _unhandled_input(ev):
 	pass
 
 func setup_player():
-	#var playerInst = playerBase.instance()
 	player = get_node("Navigation2D/YSort/robot")
 	player.set_name("Trace")
 	return player
@@ -65,17 +64,12 @@ func update_label(which):
 	
 
 func _ready():
-	playerBase = ResourceLoader.load("res://scenes/robot.xml")
-	computerBase = ResourceLoader.load("res://scenes/computer.xml")
 	
 	fsm = get_node("states")
 	messageNode = get_node("RichTextLabel")
 	
-	# computer = setup_computer()
 	player = setup_player()
-	
-	#player.set_pos(Vector2(300,300))
-	set_process_unhandled_input(true)
+	set_process_input(true)
 	
 	get_node("terminal").connect("body_enter", self, "_on_terminal_body_enter")
 	get_node("cabinet").connect("body_enter", self, "_on_cabinet_body_enter")
