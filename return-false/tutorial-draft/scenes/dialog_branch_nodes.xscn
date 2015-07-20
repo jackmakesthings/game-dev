@@ -7,11 +7,11 @@
 	<main_resource>
 		<dictionary name="_bundled" shared="false">
 			<string> "conn_count" </string>
-			<int> 0 </int>
+			<int> 1 </int>
 			<string> "conns" </string>
-			<int_array  len="0"> 				 </int_array>
+			<int_array  len="6"> 				20, 0, 48, 47, 2, 0 </int_array>
 			<string> "names" </string>
-			<string_array  len="47">
+			<string_array  len="49">
 				<string> "game" </string>
 				<string> "Node" </string>
 				<string> "script/script" </string>
@@ -59,6 +59,8 @@
 				<string> "textures/normal" </string>
 				<string> "branches" </string>
 				<string> "transform/pos" </string>
+				<string> "_on_clickable_pressed" </string>
+				<string> "pressed" </string>
 			</string_array>
 			<string> "node_count" </string>
 			<int> 28 </int>
@@ -69,7 +71,7 @@
 				<resource  resource_type="Script" path="res://quest_node_instances.gd">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
-					<string> "2D" </string>
+					<string> "Script" </string>
 					<string> "__editor_plugin_states__" </string>
 					<dictionary  shared="false">
 						<string> "2D" </string>

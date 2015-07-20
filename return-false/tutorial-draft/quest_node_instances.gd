@@ -48,3 +48,8 @@ func _ready():
 	pass
 
 
+
+
+func _on_clickable_pressed():
+	deactivate_quest("tutorial")
+	#pass # replace with function body
