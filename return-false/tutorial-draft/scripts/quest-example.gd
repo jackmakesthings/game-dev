@@ -2,7 +2,7 @@
 extends "res://scripts/quest.gd"
 
 func _init():
-	key = "tutorial"
+	key = "secondary"
 
 # member variables here, example:
 # var a=2

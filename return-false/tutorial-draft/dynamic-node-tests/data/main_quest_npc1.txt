@@ -1,0 +1,96 @@
+{
+  "20": {
+    "text": "This is state 20 of the main quest",
+    "responses": [
+      {
+        "text": "Go to state 40",
+        "actions": [
+          {
+            "func": "set_branch_state",
+            "params": [
+              "40",
+              "this"
+            ]
+          },
+          {
+            "func": "continue_dialog_at",
+            "params": [
+              "40",
+              "this"
+            ]
+          }
+        ]
+      },
+      {
+        "text": "Advance another quest and close this one",
+        "actions": [
+          {
+            "func": "set_branch_state",
+            "params": [
+              "40",
+              "other"
+            ]
+          },
+          {
+            "func": "close_dialog",
+            "params": []
+          }
+        ]
+      }
+    ]
+  },
+  "40": {
+    "text": "This is state 40 of the main quest",
+    "responses": [
+      {
+        "text": "Revert this quest to state 20",
+        "actions": [
+          {
+            "func": "set_branch_state",
+            "params": [
+              "20",
+              "this"
+            ]
+          },
+          {
+            "func": "continue_dialog_at",
+            "params": [
+              "20",
+              "this"
+            ]
+          }
+        ]
+      },
+      {
+        "text": "Finish this quest and enable a new one",
+        "actions": [
+          {
+            "func": "set_branch_state",
+            "params": [
+              "100",
+              "this"
+            ]
+          },
+          {
+            "func": "complete_branch",
+            "params": [
+              "100",
+              "this"
+            ]
+          },
+          {
+            "func": "init_new_branch",
+            "params": [
+              "new",
+              "20"
+            ]
+          },
+          {
+            "func": "close_dialog",
+            "params": []
+          }
+        ]
+      }
+    ]
+  }
+}

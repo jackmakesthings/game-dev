@@ -5,7 +5,7 @@ extends Node2D
 # var a=2
 # var b="textvar"
 
-export var file = "res://assets/npc-data-example.gd"
+export(String, FILE) var file = "res://assets/npc-data-example.gd"
 var data 
 var textbox
 var buttonbox
@@ -148,7 +148,7 @@ func init_at_current_state(npc):
 	message_ui.set_active_npc(npc)
 	message_ui.goto_state(stateID)
 	
-	
+
 
 
 func _ready():

@@ -15,6 +15,7 @@ var response_array = []
 var is_active = false
 
 var quest
+var active_quest
 
 var npc
 var npcs
@@ -59,6 +60,10 @@ func set_active_npc(npc):
 	if ( npc != active_npc ):
 		emit_signal("npc_activated", npc)
 		active_npc = npc
+
+func set_active_quest(quest):
+	active_quest = quest
+	print("Active quest is now ", quest)
 
 func get_active_npc():
 	emit_signal("npc_checked", active_npc)
@@ -114,12 +119,28 @@ func close():
 	move_player = true
 	emit_signal("closed")
 
+func make_actions_from_data(response):
+	var actions = []
+	for action in response["actions"]:
+		var fref = {}
+		fref.f = action["func"]
+		if( action.params.size() > 0 ):
+			fref.p = action.params
+		else:
+			fref.p = []
+		#print(fref)
+		actions.append(fref)
+	return actions
+
 func make_response_button(r):
 	var rbtn = Button.new()
 	var txt = r["text"]
 	var action = r["action"]
-	var stateID = quest.get_current_state()
-	var endState = r["endState"]
+	#var stateID = quest.get_current_state()
+	#var endState = r["endState"]
+	var actions = []
+	if( r.has("actions") ):
+		actions = make_actions_from_data(r)
 	
 	rbtn.set_name(txt)
 	rbtn.set_text(txt)
@@ -127,7 +148,11 @@ func make_response_button(r):
 	rbtn.set_h_size_flags(3)		# will be refactored out when GUI system is built
 	rbtn.set_v_size_flags(1)		# same
 	rbtn.add_to_group("dialogue_responses")
-	rbtn.connect("pressed", self, "on_response_pressed", [str(action), str(stateID), str(endState)])
+	
+	#rbtn.connect("pressed", self, "on_response_pressed", [str(action), str(stateID), str(endState)])
+	
+	for act in actions:
+		rbtn.connect("pressed", self, act.f, act.p)
 	return rbtn
 
 func show_responses_from_array(option_array):
@@ -166,13 +191,27 @@ func on_response_pressed(action, startState, endState):
 		goto_state(endState)
 		
 
-		
+### newer, more abstract/dynamic function experiments
+
+func set_quest_state(state, branch):
+	quest.set_current_state(state)
+
+func next_dialog(state, branch):
+	accept_event()
+	goto_state(state)
+
+func end_dialog():
+	close()
+	accept_event()
+	enable_interactions()
+								
 						
 func _ready():
 	textbox = get_node("CenterContainer/HBoxContainer/MarginContainer1/ScrollContainer/RichTextLabel")
 	buttonbox = get_node("CenterContainer/HBoxContainer/MarginContainer1/ScrollContainer/VBoxContainer")
 	namebox = get_node("CenterContainer/HBoxContainer/MarginContainer1/ScrollContainer/Label")
 	quest = get_node("/root/game/quest")
+	set_active_quest(quest)
 	npcs = get_tree().get_nodes_in_group("npc_buttons")
 	textbox.set_visible_characters(-1)
 	
