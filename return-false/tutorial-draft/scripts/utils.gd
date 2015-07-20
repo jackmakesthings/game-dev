@@ -4,6 +4,8 @@ extends Node
 
 export(String, FILE) var file = "res://assets/dialogue-tree-json.txt"
 
+var debug = true
+
 func get_json(file):
 	var json = File.new()
 	json.open(file, 1)
@@ -15,3 +17,17 @@ func get_json(file):
 		return {}
 	else:
 		return d
+
+
+
+
+func dprint(whatever):
+	if( debug ):
+		print(whatever)
+
+
+
+
+func dprintt(whatever):
+	if( debug ):
+		printt(whatever)

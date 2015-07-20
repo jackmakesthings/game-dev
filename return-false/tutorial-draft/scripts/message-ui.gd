@@ -29,6 +29,9 @@ var move_player
 signal npc_activated
 signal npc_checked
 
+signal opened
+signal closed
+
 #typewriter effect ################
 #func _fixed_process(delta):
 #	if ( textbox.get_visible_characters() > textbox.get_total_character_count() ):
@@ -102,12 +105,14 @@ func open():
 	namebox.set_text(active_npc.buttonLabel + ":")
 	self.set("visibility/visible", true)
 	move_player = false
+	emit_signal("opened", active_npc)
 
 func close():
 	is_active = false
 	remove_buttons()
 	self.set("visibility/visible", false)
 	move_player = true
+	emit_signal("closed")
 
 func make_response_button(r):
 	var rbtn = Button.new()

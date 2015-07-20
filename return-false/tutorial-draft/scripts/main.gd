@@ -16,7 +16,7 @@ func _input(ev):
 		
 		if( message_ui.move_player ):
 			player.update_path(begin, end);
-			yield(player, "done_moving")
+			#yield(player, "done_moving")
 
 			
 		#if( message_ui.is_active and message_ui.response_array.size() < 1 ):

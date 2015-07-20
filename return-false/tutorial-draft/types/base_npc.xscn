@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resource_file type="PackedScene" subresource_count="2" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
-	<resource type="GDScript" path="local://1">
-		<string name="script/source"> "extends &quot;res://scenes/npc-class-as-control.gd&quot;&#000a;&#000a;&#000a;&#000a;func _enter_tree():&#000a;&#0009;file = &quot;res://assets/cabinet-tree.txt&quot;&#000a;&#0009;buttonLabel = &quot;CABINET&quot;&#000a;&#0009;textbox = get_node(&quot;/root/game/Control/CenterContainer/HBoxContainer/MarginContainer1/ScrollContainer/RichTextLabel&quot;)&#000a;&#0009;buttonbox = get_node(&quot;/root/game/Control/CenterContainer/HBoxContainer/MarginContainer1/ScrollContainer/VBoxContainer&quot;)&#000a;&#000a;&#000a;&#000a;#func show_dialogue(stateID):&#000a;#&#0009;var dialogue = &quot;&quot;&#000a;#&#0009;get_quest_data(quest)&#000a;#&#0009;&#000a;#&#0009;if( quest_data[stateID][&quot;dialogue&quot;].length() &lt; 0 ):&#000a;#&#0009;&#0009;dialogue = quest_data[stateID][&quot;dialogue&quot;]&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;#show_as_line(dialogue)" </string>
-
-	</resource>
+	<ext_resource path="res://types/base_npc.gd" type="Script"></ext_resource>
 	<main_resource>
 		<dictionary name="_bundled" shared="false">
 			<string> "conn_count" </string>
@@ -11,50 +8,22 @@
 			<string> "conns" </string>
 			<int_array  len="0"> 				 </int_array>
 			<string> "names" </string>
-			<string_array  len="31">
-				<string> "root" </string>
-				<string> "Control" </string>
-				<string> "anchor/right" </string>
-				<string> "anchor/bottom" </string>
-				<string> "focus/ignore_mouse" </string>
-				<string> "focus/stop_mouse" </string>
-				<string> "size_flags/horizontal" </string>
-				<string> "size_flags/vertical" </string>
+			<string_array  len="7">
+				<string> "npc" </string>
+				<string> "Node2D" </string>
 				<string> "script/script" </string>
 				<string> "__meta__" </string>
-				<string> "file" </string>
-				<string> "buttonLabel" </string>
-				<string> "GridContainer" </string>
-				<string> "columns" </string>
-				<string> "VBoxContainer" </string>
-				<string> "margin/right" </string>
-				<string> "margin/bottom" </string>
-				<string> "RichTextLabel" </string>
-				<string> "visibility/visible" </string>
-				<string> "rect/min_size" </string>
-				<string> "size_flags/stretch_ratio" </string>
-				<string> "bbcode/enabled" </string>
-				<string> "bbcode/bbcode" </string>
-				<string> "visible_characters" </string>
-				<string> "ButtonGroup" </string>
-				<string> "HBoxContainer" </string>
-				<string> "Button" </string>
-				<string> "margin/top" </string>
-				<string> "toggle_mode" </string>
-				<string> "text" </string>
-				<string> "flat" </string>
+				<string> "label" </string>
+				<string> "data_file" </string>
+				<string> "can_interact" </string>
 			</string_array>
 			<string> "node_count" </string>
-			<int> 6 </int>
+			<int> 1 </int>
 			<string> "nodes" </string>
-			<int_array  len="146"> 				-1, -1, 1, 0, -1, 10, 2, 0, 3, 0, 4, 1, 5, 2, 6, 3, 7, 3, 8, 4, 9, 5, 10, 6, 11, 7, 0, 0, 0, 12, 1, -1, 7, 2, 0, 3, 0, 4, 1, 5, 2, 6, 3, 7, 3, 13, 0, 0, 1, 0, 14, 14, -1, 6, 15, 8, 16, 9, 4, 1, 5, 1, 6, 10, 7, 10, 0, 2, 0, 17, 17, -1, 12, 18, 1, 15, 11, 16, 12, 19, 13, 4, 1, 5, 2, 6, 10, 7, 10, 20, 14, 21, 1, 22, 7, 23, 15, 0, 2, 0, 25, 24, -1, 7, 15, 8, 16, 9, 4, 1, 5, 2, 6, 10, 7, 10, 20, 14, 0, 1, 0, 26, 26, -1, 10, 27, 16, 15, 8, 16, 17, 4, 1, 5, 2, 6, 3, 7, 3, 28, 1, 29, 18, 30, 1, 0 </int_array>
+			<int_array  len="17"> 				-1, -1, 1, 0, -1, 5, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 0 </int_array>
 			<string> "variants" </string>
-			<array  len="19" shared="false">
-				<int> 1 </int>
-				<bool> False </bool>
-				<bool> True </bool>
-				<int> 2 </int>
-				<resource  resource_type="Script" path="local://1">  </resource>
+			<array  len="5" shared="false">
+				<resource  resource_type="Script" path="res://types/base_npc.gd">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
 					<string> "2D" </string>
@@ -63,7 +32,7 @@
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> -697.856, -388.897 </vector2>
+							<vector2> -707.891, -428.891 </vector2>
 							<string> "snap_grid" </string>
 							<bool> False </bool>
 							<string> "snap_offset" </string>
@@ -83,7 +52,7 @@
 							<string> "snap_step" </string>
 							<vector2> 10, 10 </vector2>
 							<string> "zoom" </string>
-							<real> 0.358485 </real>
+							<real> 0.323533 </real>
 						</dictionary>
 						<string> "3D" </string>
 						<dictionary  shared="false">
@@ -186,19 +155,9 @@
 						<int> 0 </int>
 					</dictionary>
 				</dictionary>
-				<string> "res://assets/dialogue-tree-json.txt" </string>
-				<string> "" </string>
-				<real> 800 </real>
-				<real> 575 </real>
-				<int> 3 </int>
-				<real> 426 </real>
-				<real> 285 </real>
-				<vector2> 0, 100 </vector2>
-				<real> 2 </real>
-				<int> -1 </int>
-				<real> 579 </real>
-				<real> 600 </real>
-				<string> "RESET" </string>
+				<string> "NPC" </string>
+				<string> "res://assets/npc-data-example.gd" </string>
+				<bool> True </bool>
 			</array>
 			<string> "version" </string>
 			<int> 1 </int>
