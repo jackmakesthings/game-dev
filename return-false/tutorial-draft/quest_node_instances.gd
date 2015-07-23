@@ -2,7 +2,7 @@
 extends Node
 
 var quests
-var npcs = Node.new()
+var npcs
 
 func attach_branches(q):
 	var a = q.get_node("actors").get_children()
@@ -22,20 +22,32 @@ func detach_branches(q):
 	var branch_group_ref = q.get_name() + "_branches"
 	var branch_group = get_tree().get_nodes_in_group(branch_group_ref)
 	for n in branch_group:
+		#n.remove_from_group(branch_group_ref)
 		n.queue_free()
 	print("Deactivated quest ", q.get_name())
 
 
 func activate_quest(quest_id):
 	var q = quests.get_node(quest_id)
+	if( q.is_in_group("active_quests") ):
+		print("Already active!")
+		return
 	q.add_to_group("active_quests")
 	attach_branches(q)
 	
 func deactivate_quest(quest_id):
 	var q = quests.get_node(quest_id)
+	if( not q.is_in_group("active_quests") ):
+		print("Nothing to deactivate!")
+		return
 	q.remove_from_group("active_quests")
 	detach_branches(q)
 
+func is_active(quest_id):
+	if( quests.get_node(quest_id).is_in_group("active_quests") ):
+		return true
+	else:
+		return false
 
 
 func _ready():
@@ -43,13 +55,16 @@ func _ready():
 	npcs = get_node("scene/npcs")
 	
 	activate_quest("tutorial")
-	activate_quest("sidequest")
+	#activate_quest("sidequest")
 	# Initialization here
 	pass
 
 
 
-
+# just for the sake of testing
 func _on_clickable_pressed():
-	deactivate_quest("tutorial")
+	if( is_active("tutorial") ):
+		deactivate_quest("tutorial")
+	else:
+		activate_quest("tutorial")
 	#pass # replace with function body
