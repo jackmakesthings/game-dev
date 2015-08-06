@@ -1,225 +1,152 @@
 
-extends Control
+extends CanvasLayer
 
 # member variables here, example:
 # var a=2
 # var b="textvar"
 
-var textbox = RichTextLabel.new()
-var buttonbox = VBoxContainer.new()
-var namebox = Label.new()
+var dialog_box
+var portrait_box
+var portrait
+var text_box
+var response_box
+var response_base
 
-var dialogue =""
-var response_array = []
+var is_active
+#var is_in_dialogue
+var has_responses
+var current_actor
+var current_dialogue_branch
+var current_responses
+var current_text
 
-var is_active = false
+signal dialogue_opened
+signal dialogue_closed
+signal text_loaded
+signal responses_loaded
+signal response_chosen
 
-var quest
-var active_quest
+const paths = {
+	dbox = "dialog-box",
+	pbox = "dialog-box/Panel/HBoxContainer/portraitBox",
+	pimg = "dialog-box/Panel/HBoxContainer/portraitBox/portrait",
+	tbox = "dialog-box/Panel/HBoxContainer/textBox/PanelContainer/RichTextLabel",
+	rbox = "dialog-box/Panel/HBoxContainer/textBox/VBoxContainer",
+	rbase = "res://active-partials/message-ui/response-button.xml"
+}
 
-var npc
-var npcs
-var active_npc setget set_active_npc,get_active_npc
+const ResponseBase = preload("res://active-partials/message-ui/response-button.xml")
 
-const pace = 3
-var text_length
-var i = 0
 
-var move_player
-
-signal npc_activated
-signal npc_checked
-
-signal opened
-signal closed
-
-#typewriter effect ################
-#func _fixed_process(delta):
-#	if ( textbox.get_visible_characters() > textbox.get_total_character_count() ):
-#		set_fixed_process(false)
-#		for i in buttonbox.get_children():
-#			i.set_opacity(1.0)
-		
-#	if( i == pace ):
-#		textbox.set_visible_characters( textbox.get_visible_characters() + 1 )
-#		i = 0
-#	else:
-#		i = i+1
-#	pass
-
-func remove_buttons():
-	var responses = get_tree().get_nodes_in_group("dialogue_responses")
-	for response in responses:
-		response.queue_free()
-	response_array = []
-	#var kids = buttonbox.get_children()
-	#for kid in kids:
-	#	buttonbox.remove_child(kid)
-
-func set_active_npc(npc):
-	if ( npc != active_npc ):
-		emit_signal("npc_activated", npc)
-		active_npc = npc
-
-func set_active_quest(quest):
-	active_quest = quest
-	print("Active quest is now ", quest)
-
-func get_active_npc():
-	emit_signal("npc_checked", active_npc)
-	return active_npc
+######## make_response ######### 
+func make_response(text, actions):
+	var new_button = ResponseBase.instance()
+	new_button.set_text(text)
 	
-func announce_npc_active(npc):
-	print("Active NPC:" + npc.buttonLabel)
+	if( actions.size() > 0  ):
+		for i in range(actions.size()):
+			var action = actions[i]
+			new_button.connect('pressed', action["target"], action["fn"], action["args"]);
+			
+	new_button.add_to_group("responses")
+	get_node(paths.rbox).add_child(new_button)
+	new_button.raise()
 
-func show_dialogue(dialogue_string):
-	textbox.clear()
-	textbox.add_text(dialogue_string)
-	move_player = false
 
-func show_dialogue_from_quest(stateID):
-	textbox.clear()
-	dialogue = active_npc.get_dialogue_at_state(stateID)
-	namebox.set_text(active_npc.buttonLabel + ":")
-	is_active = true
-	self.set("visibility/visible", true)
-	show_dialogue(dialogue)
-	
-func show_responses_from_quest(stateID):
-	is_active = true
-	remove_buttons()
-	response_array = active_npc.get_responses_at_state(stateID)
-	show_responses_from_array(response_array)
-	
-func enable_interactions():
-	for n in npcs:
-		if( n.is_type("TextureButton") ):
-			n.set("disabled", false)
+######## make_formatted_response ######### 
+func make_formatted_response(text, actions):
+	var formatted_text = " > " + text;
+	make_response(formatted_text, actions)
 
-func disable_interactions():
-	move_player = false
-	for n in npcs:
-		if( n.get_parent() == active_npc ):
-			continue
-		if( n.is_type("TextureButton") ):
-			n.set("disabled", true)
+
+######## make_responses ######### 
+func make_responses(source_array, format):
+	for response in source_array:
+		if( format == true ):
+			make_formatted_response(response["text"], response["actions"])
+		else:
+			make_response(response["text"], response["actions"])
+
+
+####### open/close ########
 
 func open():
-	is_active = true
-	remove_buttons()
-	namebox.set_text(active_npc.buttonLabel + ":")
-	self.set("visibility/visible", true)
-	move_player = false
-	emit_signal("opened", active_npc)
+	is_active = true;
+	emit_signal("dialogue_opened")
 
 func close():
-	is_active = false
-	remove_buttons()
-	self.set("visibility/visible", false)
-	move_player = true
-	emit_signal("closed")
+	is_active = false;
+	emit_signal("dialogue_closed")
 
-func make_actions_from_data(response):
-	var actions = []
-	for action in response["actions"]:
-		var fref = {}
-		fref.f = action["func"]
-		if( action.params.size() > 0 ):
-			fref.p = action.params
-		else:
-			fref.p = []
-		#print(fref)
-		actions.append(fref)
-	return actions
 
-func make_response_button(r):
-	var rbtn = Button.new()
-	var txt = r["text"]
-	var action = r["action"]
-	#var stateID = quest.get_current_state()
-	#var endState = r["endState"]
-	var actions = []
-	if( r.has("actions") ):
-		actions = make_actions_from_data(r)
-	
-	rbtn.set_name(txt)
-	rbtn.set_text(txt)
-	rbtn.set_text_align(0)
-	rbtn.set_h_size_flags(3)		# will be refactored out when GUI system is built
-	rbtn.set_v_size_flags(1)		# same
-	rbtn.add_to_group("dialogue_responses")
-	
-	#rbtn.connect("pressed", self, "on_response_pressed", [str(action), str(stateID), str(endState)])
-	
-	for act in actions:
-		rbtn.connect("pressed", self, act.f, act.p)
-	return rbtn
+######## path setup ##########
+func init_paths():
+	text_box = get_node(paths.tbox)
 
-func show_responses_from_array(option_array):
-	response_array = []
-	if ( option_array.size() > 0 ):
-		response_array = option_array
-		var i = 0
-		for o in option_array:
-			var rbtn = make_response_button(o)
-			rbtn.set_text(str(i + 1) + ". " + rbtn.get_text())
-			buttonbox.add_child(rbtn)
-			rbtn.raise()
-			i = i+1
 
-func choose_response_by_key(key_choice):
-	var response_buttons = get_tree().get_nodes_in_group("dialogue_responses")
-	if( response_buttons.size() >= int(key_choice) and int(key_choice) > 0):
-		response_buttons[int(key_choice) - 1].emit_signal("pressed")
-
-func goto_state(stateID):
-	is_active = true
-	quest.set_current_state(stateID)
-	show_dialogue_from_quest(stateID)
-	show_responses_from_quest(stateID)
-	disable_interactions()
-
-func on_response_pressed(action, startState, endState):
-	move_player = false
-	quest.set_current_state(endState)
-	if( action == "end_dialog" ):
-		close()
-		accept_event()
-		enable_interactions()
-	elif( action == "next_dialog" ):
-		accept_event()
-		goto_state(endState)
-		
-
-### newer, more abstract/dynamic function experiments
-
-func set_quest_state(state, branch):
-	quest.set_current_state(state)
-
-func next_dialog(state, branch):
-	accept_event()
-	goto_state(state)
-
-func end_dialog():
-	close()
-	accept_event()
-	enable_interactions()
-								
-						
+######## _ready ######### 
 func _ready():
-	textbox = get_node("CenterContainer/HBoxContainer/MarginContainer1/ScrollContainer/RichTextLabel")
-	buttonbox = get_node("CenterContainer/HBoxContainer/MarginContainer1/ScrollContainer/VBoxContainer")
-	namebox = get_node("CenterContainer/HBoxContainer/MarginContainer1/ScrollContainer/Label")
-	quest = get_node("/root/game/quest")
-	set_active_quest(quest)
-	npcs = get_tree().get_nodes_in_group("npc_buttons")
-	textbox.set_visible_characters(-1)
+	init_paths()
+	demo()
 	
-	connect("npc_activated", self, "announce_npc_active", [npc])
+	
+######## demo ######### 	
+func demo():
 
-	text_length = textbox.get_total_character_count()
+	var demoActions = [
+		{
+		fn = "do_the_thing",
+		target = self,
+		args = [20]
+		},
+		{
+		fn = "do_the_other_thing",
+		target = self,
+		args = [30]
+		}
+	]
 	
-	move_player = true
+	var goTo10 = {}
+	var setFlag40 = {}
 	
-	#set_fixed_process(true)
+	goTo10["fn"] = "do_the_thing"
+	goTo10["target"] = self
+	goTo10["args"] = [10]
+	
+	setFlag40["fn"] = "do_the_other_thing"
+	setFlag40["target"] = self
+	setFlag40["args"] = [40]
 
+	var demoResponses = [
+		{
+			text = "I am certain they can.",
+			actions = demoActions
+		},
+		{
+			text = "<OVERRIDE> That is ridiculous. Robots never lie.",
+			actions = [ goTo10, setFlag40 ]
+		},
+		{
+			text = "<OVERRIDE> Maybe, but you can trust me.",
+			actions = []
+		}
+	]
+	
+	text_box.append_bbcode("[color=#ffaa33]~gpowell:>[/color] Hey, Tr4ce, I've been thinking. \n")
+	text_box.append_bbcode("[color=#ffaa33]~gpowell:>[/color] Do you think robots could ever be...dishonest? \n")
+	text_box.append_bbcode("\n [color=#00ccdd]~ztr4ce.1.7.2:>_[/color]")
+	#text_box.set_scroll_active(true)
+	
+	#print("is_scroll_active?", text_box.is_scroll_active())
+	#print("is scroll following? ", text_box.is_scroll_following())
+	#print(text_box.get_v_scroll())
+	make_responses(demoResponses, false)
+	
+	
+######## temp ######### 	
+func do_the_thing(thing):
+	print("Doing thing ", str(thing))
+	
+######## temp ######### 	
+func do_the_other_thing(thing):
+	print("let's also do ", str(thing))

@@ -6,7 +6,7 @@ var quest = game + "/quest"
 var npc_holder = game+ "/Node2D/HBoxContainer"
 #var npcs
 var message_ui = game + "/message_ui"
-var player = nav + "/YSort/robot"
+var player = nav + "/TileMap 2/robot"
 
 #func _init():
 #	game = "/root/game"

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resource_file type="TileSet" subresource_count="9" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
+	<ext_resource path="res://assets/fpo/ground.png" type="Texture"></ext_resource>
+	<ext_resource path="res://assets/fpo/ground.png" type="Texture"></ext_resource>
+	<ext_resource path="res://assets/fpo/ground.png" type="Texture"></ext_resource>
+	<ext_resource path="res://assets/fpo/ground.png" type="Texture"></ext_resource>
+	<resource type="NavigationPolygon" path="local://1">
+		<vector2_array name="vertices" len="4"> 			16, -10, 16, 6, -16, 6, -16, -10 </vector2_array>
+		<array name="polygons" len="1" shared="false">
+			<int_array  len="4"> 				0, 1, 2, 3 </int_array>
+		</array>
+		<array name="outlines" len="1" shared="false">
+			<vector2_array  len="4"> 				-16, -10, -16, 6, 16, 6, 16, -10 </vector2_array>
+		</array>
+
+	</resource>
+	<resource type="NavigationPolygon" path="local://2">
+		<vector2_array name="vertices" len="4"> 			-16, -10, 16, -10, 16, 6, -16, 6 </vector2_array>
+		<array name="polygons" len="1" shared="false">
+			<int_array  len="5"> 				0, 1, 2, 3, 0 </int_array>
+		</array>
+		<array name="outlines" len="1" shared="false">
+			<vector2_array  len="5"> 				-16, -10, 16, -10, 16, 6, -16, 6, -16, -10 </vector2_array>
+		</array>
+
+	</resource>
+	<resource type="NavigationPolygon" path="local://3">
+		<vector2_array name="vertices" len="4"> 			-16, -10, 16, -10, 16, 6, -16, 6 </vector2_array>
+		<array name="polygons" len="1" shared="false">
+			<int_array  len="4"> 				0, 1, 2, 3 </int_array>
+		</array>
+		<array name="outlines" len="1" shared="false">
+			<vector2_array  len="4"> 				-16, -10, 16, -10, 16, 6, -16, 6 </vector2_array>
+		</array>
+
+	</resource>
+	<resource type="NavigationPolygon" path="local://4">
+		<vector2_array name="vertices" len="4"> 			-16, -10, 16, -10, 16, 6, -16, 6 </vector2_array>
+		<array name="polygons" len="1" shared="false">
+			<int_array  len="5"> 				0, 1, 2, 3, 0 </int_array>
+		</array>
+		<array name="outlines" len="1" shared="false">
+			<vector2_array  len="5"> 				-16, -10, 16, -10, 16, 6, -16, 6, -16, -10 </vector2_array>
+		</array>
+
+	</resource>
+	<main_resource>
+		<string name="0/name"> "blue1" </string>
+		<resource name="0/texture" resource_type="Texture" path="res://assets/fpo/ground.png">  </resource>
+		<vector2 name="0/tex_offset"> 0, 0 </vector2>
+		<resource name="0/material"></resource>		<rect2 name="0/region"> 32, 46, 32, 20 </rect2>
+		<vector2 name="0/occluder_offset"> 16, 10 </vector2>
+		<resource name="0/occluder"></resource>		<vector2 name="0/navigation_offset"> 32, 16 </vector2>
+		<resource name="0/navigation" resource_type="NavigationPolygon" path="local://1">  </resource>
+		<vector2 name="0/shape_offset"> 0, 0 </vector2>
+		<array name="0/shapes" len="0" shared="false">
+		</array>
+		<string name="1/name"> "blue2" </string>
+		<resource name="1/texture" resource_type="Texture" path="res://assets/fpo/ground.png">  </resource>
+		<vector2 name="1/tex_offset"> 0, 0 </vector2>
+		<resource name="1/material"></resource>		<rect2 name="1/region"> 96, 46, 32, 20 </rect2>
+		<vector2 name="1/occluder_offset"> 16, 10 </vector2>
+		<resource name="1/occluder"></resource>		<vector2 name="1/navigation_offset"> 32, 16 </vector2>
+		<resource name="1/navigation" resource_type="NavigationPolygon" path="local://2">  </resource>
+		<vector2 name="1/shape_offset"> 0, 0 </vector2>
+		<array name="1/shapes" len="0" shared="false">
+		</array>
+		<string name="2/name"> "green1" </string>
+		<resource name="2/texture" resource_type="Texture" path="res://assets/fpo/ground.png">  </resource>
+		<vector2 name="2/tex_offset"> 0, 0 </vector2>
+		<resource name="2/material"></resource>		<rect2 name="2/region"> 0, 78, 32, 20 </rect2>
+		<vector2 name="2/occluder_offset"> 16, 10 </vector2>
+		<resource name="2/occluder"></resource>		<vector2 name="2/navigation_offset"> 16, 10 </vector2>
+		<resource name="2/navigation" resource_type="NavigationPolygon" path="local://3">  </resource>
+		<vector2 name="2/shape_offset"> 0, 0 </vector2>
+		<array name="2/shapes" len="0" shared="false">
+		</array>
+		<string name="3/name"> "green2" </string>
+		<resource name="3/texture" resource_type="Texture" path="res://assets/fpo/ground.png">  </resource>
+		<vector2 name="3/tex_offset"> 0, 0 </vector2>
+		<resource name="3/material"></resource>		<rect2 name="3/region"> 32, 78, 32, 20 </rect2>
+		<vector2 name="3/occluder_offset"> 16, 10 </vector2>
+		<resource name="3/occluder"></resource>		<vector2 name="3/navigation_offset"> 16, 10 </vector2>
+		<resource name="3/navigation" resource_type="NavigationPolygon" path="local://4">  </resource>
+		<vector2 name="3/shape_offset"> 0, 0 </vector2>
+		<array name="3/shapes" len="0" shared="false">
+		</array>
+
+	</main_resource>
+</resource_file>

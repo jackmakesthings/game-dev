@@ -1,0 +1,30 @@
+| Rix True Type | Pixel Font |
+
+Esta fonte pode ser distribuída e utilizada livremente mas não vendida.
+Se você usá-la de alguma maneira, mande-me um e-mail e diga-me o que você acha.
+
+www.ebl.kit.net
+rico.altas@onda.com.br
+
+
+| Instruções |
+
+Algumas dicas para ter texto sem anti-alias no Flash:
+
+- Alinhamento à esquerda;
+
+- Para usar alinhamento à direita, use 0.25 px na margem direita;
+
+- Tamanho do texto de 8 pontos (ou 16, 32, ...)
+
+- NÃO use negrito ou itálico;
+
+- SOMENTE valores inteiros:
+
+	- Posições (x: 15.0 e y: 15.0 ao invés de x: 15.3 e y: 15.7);
+
+	- Faça o mesmo com espaçamento entre letras e entre linhas;
+
+- Posicione a origem dos seus movieclips no canto esquerdo superior;
+
+- E não esqueça de anexar a fonte em campos de entrada e dinâmicos (Input e Dynamic).
