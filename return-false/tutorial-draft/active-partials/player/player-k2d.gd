@@ -1,10 +1,9 @@
+### standard walking kinematic character
+### needs to be passed a reference to the Nav2D node
+### walks to point of click
+### 8/8/15
 
 extends KinematicBody2D
-
-# member variables here, example:
-# var a=2
-# var b="textvar"
-
 
 var begin=Vector2()
 var end=Vector2()
@@ -12,8 +11,7 @@ var path=[]
 
 var nav
 
-
-const SPEED=150.0
+const SPEED=170.0
 
 
 func _fixed_process(delta):
@@ -35,18 +33,14 @@ func _fixed_process(delta):
 		var atpos = path[path.size()-1]	
 		
 		move_to(atpos);
-		# set_going_to(atpos);
 		
 		if(is_colliding()):
-			#print("!!!")
-			# get_node("/root/base/Area2D/Navigation2D/label").text = "OH HI";
 			var n = get_collision_normal()
 			var motion = n.slide(atpos - get_global_pos());
 			move(motion);
 		
 		else:
 			pass
-			#get_node("label").text = ""
 		
 		if (path.size()<2):
 			path=[]
@@ -57,17 +51,13 @@ func _fixed_process(delta):
 
 
 
-func update_path(begin, end):
+func update_path(begin, end, nav):
 	var p = nav.get_simple_path(begin,end,true) # not documented yet
-	#var p = nav.get_simple_path(begin,end,true);
 	path=Array(p) # Vector2array is overly complex, convert path to a normal array
 	path.invert() # not documented yet
 
 	set_fixed_process(true) # keep on movin'
 
-func _enter_tree():
-	nav = get_node("/root/game/nav")
-	#nav = Navigation2D.new()
-	#pass
+func _ready():
 	set_fixed_process(true)
 

@@ -5,19 +5,21 @@ extends Node
 var entries = []   # an array of what, who knows...
 var entry_box      # descendant node for viewing an entry
 var entry_list_box # descendant node for listing all entries
-var close_button   # node ref, may move to broader ui class
+var journal_button   # node ref, may move to broader ui class
 var latest_entry   # some form of reference to the most recent addition
 var current_entry  # reference to which is/was most recently opened
 var index = 0
 
-	
-func extend(obj, with):
-	for key in obj:
-		if( with.has(key) ):
-			obj.key = with.key
-	return obj
 
 
+######## get_entry_by - query entry by any parameter
+func get_entry_by(param, val):
+	for entry in entries:
+		if( entry[param] == val ):
+			return entry
+
+
+####### entry_exixtx - checkx by id
 func entry_exists(id):
 	for entry in entries:
 		if ( entry.entry_id == id ):
@@ -26,145 +28,110 @@ func entry_exists(id):
 			continue
 	return false
 
+
+####### update_journal - process a new or updated entry
 func update_journal(args):
+
+	args["index"] = self.index
 	entry_box.clear()
-	var new_entry = Entry.new(args)
-	if ( entry_exists(new_entry.entry_id) ):
-		new_entry["summaries"] = get_entry_by('entry_id', new_entry.entry_id).get("summaries")
-		update_entry(new_entry)
-	else:
-		new_entry["summaries"] = []
-		add_entry(new_entry)
-
-func add_entry(new_entry):
-	new_entry.index = index
-	entry_list_box.add_button(new_entry.title)
-	entries.append(new_entry)
-	latest_entry = new_entry.entry_id
-	index = index + 1
-	#new_entry["summaries"] =
-	#new_entry.summaries = []
-
-func update_entry(new_entry):
-	var target = get_entry_by("entry_id", new_entry.entry_id)
-	target.body = new_entry.body
-	target.timestamp = new_entry.timestamp
+	var e = Entry.new(args)
 	
-func update_entry_by_appending(new_entry):
-	var target = get_entry_by("entry_id", new_entry.entry_id)
-	target.summaries.append(target.summary)
-	target.body = new_entry.body
-	target.timestamp = new_entry.timestamp
-#	index = index + 1
+	# if this entry id exists, update it with this data
+	if ( entry_exists(e.entry_id) ):
+		e["history"] = get_entry_by('entry_id', e.entry_id)["history"]
+		update_entry(e)
+	
+	# otherwise, create a new entry
+	else:
+		e["history"] = []
+		add_entry(e)
 
-func get_entry_by(param, val):
-	for entry in entries:
-		if( entry[param] == val ):
-			return entry
 
-func show_entry(button):
-	var entry = get_entry_by('index', button)
+func add_entry(e):
+	e.index = index
+	entry_list_box.add_button(e.title)
+	entries.append(e)
+	latest_entry = e.entry_id
+	index = index + 1
+
+######## update_entry - add a new step to an existing record
+func update_entry(e):
+	var target = get_entry_by("entry_id", e.entry_id)
+	target["history"].append(target.summary)
+	target.body = e.body
+	target.timestamp = e.timestamp
+
+
+######## show_entry - function invoked by journal buttons
+func show_entry(ind):
+	var entry = get_entry_by('index', ind)
 	entry_box.clear()
-	#if( entry.has_property("summaries") or entry.has("summaries")):
-	#	if( entry.get("summaries").size() > 0 ):
-	#		for s in entry.summaries:
-	#			entry_box.add_text(s)
-	#			entry_box.newline()
 	entry_box.add_text(entry.body)
 	current_entry = entry
+	#get_tree().set_input_as_handled()
+	#get_node("Control").accept_event()
 
+
+######## show_journal
+func show_journal():
+	#get_node("Control").set("z/z", 1)
+	get_node("Control/Panel").popup()
+	#get_node("Control").accept_event()
+	#get_tree().set_input_as_handled()
+	
+####### ready
 func _ready():
-	entry_box = get_node("Control/HBoxContainer/Panel/MarginContainer/RichTextLabel")
-	entry_list_box = get_node("Control/HBoxContainer/Panel/VButtonArray")
-	#entry_list_box.connect("button_selected", self, "show_entry")
-
-	var new_entry_args = {
-	title = "Hello World",
-	body = "Beep boop",
-	timestamp = "Now",
-	entry_id = 111
-	}
+	entry_box = get_node("Control/Panel/HBoxContainer/RichTextLabel")
+	entry_list_box = get_node("Control/Panel/HBoxContainer/VButtonArray")
+	journal_button = get_node("Button")
+	get_node("Control/Panel").hide()
+	demo()
 	
-	var new_entry_args2 = {
-	title = "My first day on the job",
-	body = "Meep moop zarp",
-	timestamp = "Later",
-	entry_id = 222
-	}
-	
-	add_entry(new_entry_args)
-	add_entry(new_entry_args2)
 
 
-func fake_quest_action(id):
-	var new_args = {}
-	if( id == 1 ):
-		new_args.title = "task: Do the thing"
-		new_args.body = "I did the thing. Let me tell you about the thing I did."
-		new_args.summary = "> Did thing."
-		new_args.timestamp = "Whenever"
-		new_args.entry_id = 001
+func demo():
+	var mocks = get_node("/root/mocks")
+	var data = mocks.JRNL.new()
+	#update_journal(data.entry1)
+	#update_journal(data.entry2)
 	
-	elif( id == 2 ):
-		new_args.title = "task: Do the other thing"
-		new_args.body = "They want me to do two whole things!"
-		new_args.summary = "> Assigned other thing"
-		new_args.timestamp = "Now"
-		new_args.entry_id = 002
+	var q1 = data.fake_quest_action(1)
+	var q2 = data.fake_quest_action(2)
+	var q3 = data.fake_quest_action(3)
 	
-	elif( id == 3 ):
-		new_args.title = "task: Do the other thing"
-		new_args.body = "I did part of the other thing. I will do the rest of the thing later."
-		new_args.summary = "> Began work on other thing"
-		new_args.timestamp = "Today"
-		new_args.entry_id = 002
+	update_journal(q1)
+	update_journal(q2)
+	update_journal(q3)
 	
-	elif( id == 4 ):
-		new_args.title = "task: Do the other thing"
-		new_args.body = "I finished doing the other thing."
-		new_args.summary = "> Completed other thing"
-		new_args.timestamp = "Forever"
-		new_args.entry_id = 002
+	journal_button.show()
+	journal_button.connect("pressed", self, "show_journal")
 	
-	else:
-		new_args.title = "---"
-		new_args.body = "---"
-		new_args.timestamp = "Never"
-		new_args.entry_id = 666
 
-	update_journal(new_args)
-
-
+####### Entry as a subclass of Journal
 class Entry:
-	var title = ""
-	var body  = ""
-	var summary = ""
-	var timestamp    # store when the entry was added - todo: find out how
-	var entry_id     # should be unique
+
+	extends Node
+
+	var title = "Task title"
+	var body  = "Task status/description"
+	var summary = "> Task summary"
+	var timestamp = "0:00"  # store when the entry was added - todo: find out how
+	var entry_id = 000     # should be unique
 	var index        # keep track of how many entries were before this, basically
-	var summaries = []
-	
-	var defaults = {
-		title = "Task title",
-		body = "Task status/description.",
-		summary = "> Task summary.",
-		timestamp = "0:00",
-		entry_id = 000
-	}
-	
-	func extend(obj, with):
-		for key in obj:
-			if( with.has(key) ):
-				obj[key] = with[key]
-		return obj
-	
+	var history = []
+
 	func _init(args):
-		for arg in defaults:
-			self[arg] = defaults[arg]
-		
 		for arg in args:
 			self[arg] = args[arg]
-		self["summaries"] = []
-		self["index"] = index
+		self["history"] = []
 		print("Initialized entry ", self.title, " at index ", str(self.index))
 	
+
+func _on_Panel_popup_hide():
+	#get_node("Control").set("z/z", -1)
+	pass # replace with function body
+
+
+func _on_Panel_about_to_show():
+	#get_node("Control").set("z/z", 0)
+	pass # replace with function body

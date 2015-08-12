@@ -1,82 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="9" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
+<resource_file type="PackedScene" subresource_count="7" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
 	<ext_resource path="res://types/base_journal.gd" type="Script"></ext_resource>
-	<ext_resource path="res://assets/fonts/droid-mono-14.fnt" type="Font"></ext_resource>
-	<ext_resource path="res://assets/fonts/droid-mono-18.fnt" type="Font"></ext_resource>
-	<resource type="StyleBoxFlat" path="local://1">
-		<real name="content_margin/left"> -1 </real>
-		<real name="content_margin/right"> -1 </real>
-		<real name="content_margin/top"> -1 </real>
-		<real name="content_margin/bottom"> -1 </real>
-		<color name="bg_color"> 0.6, 0.6, 0.6, 1 </color>
-		<color name="light_color"> 0.8, 0.8, 0.8, 1 </color>
-		<color name="dark_color"> 0.8, 0.8, 0.8, 1 </color>
-		<int name="border_size"> 0 </int>
-		<bool name="border_blend"> True </bool>
-		<bool name="draw_bg"> False </bool>
-
-	</resource>
-	<resource type="StyleBoxFlat" path="local://2">
-		<real name="content_margin/left"> -1 </real>
-		<real name="content_margin/right"> -1 </real>
-		<real name="content_margin/top"> -1 </real>
-		<real name="content_margin/bottom"> -1 </real>
-		<color name="bg_color"> 0.6, 0.6, 0.6, 1 </color>
-		<color name="light_color"> 0.8, 0.8, 0.8, 1 </color>
-		<color name="dark_color"> 0.8, 0.8, 0.8, 1 </color>
-		<int name="border_size"> 0 </int>
-		<bool name="border_blend"> True </bool>
-		<bool name="draw_bg"> False </bool>
-
-	</resource>
-	<resource type="StyleBoxFlat" path="local://3">
-		<real name="content_margin/left"> -1 </real>
-		<real name="content_margin/right"> -1 </real>
-		<real name="content_margin/top"> -1 </real>
-		<real name="content_margin/bottom"> -1 </real>
-		<color name="bg_color"> 0.6, 0.6, 0.6, 1 </color>
-		<color name="light_color"> 0.8, 0.8, 0.8, 1 </color>
-		<color name="dark_color"> 0.8, 0.8, 0.8, 1 </color>
-		<int name="border_size"> 0 </int>
-		<bool name="border_blend"> True </bool>
-		<bool name="draw_bg"> False </bool>
-
-	</resource>
-	<resource type="StyleBoxFlat" path="local://4">
-		<real name="content_margin/left"> -1 </real>
-		<real name="content_margin/right"> -1 </real>
-		<real name="content_margin/top"> -1 </real>
-		<real name="content_margin/bottom"> -1 </real>
-		<color name="bg_color"> 0.6, 0.6, 0.6, 1 </color>
-		<color name="light_color"> 0.8, 0.8, 0.8, 1 </color>
-		<color name="dark_color"> 0.8, 0.8, 0.8, 1 </color>
-		<int name="border_size"> 0 </int>
-		<bool name="border_blend"> True </bool>
-		<bool name="draw_bg"> False </bool>
-
-	</resource>
-	<resource type="StyleBoxFlat" path="local://5">
-		<real name="content_margin/left"> -1 </real>
-		<real name="content_margin/right"> -1 </real>
-		<real name="content_margin/top"> -1 </real>
-		<real name="content_margin/bottom"> -1 </real>
-		<color name="bg_color"> 0.451777, 0.477157, 0.526585, 1 </color>
-		<color name="light_color"> 0.8, 0.8, 0.8, 1 </color>
-		<color name="dark_color"> 0.8, 0.8, 0.8, 1 </color>
-		<int name="border_size"> 0 </int>
-		<bool name="border_blend"> True </bool>
-		<bool name="draw_bg"> True </bool>
+	<ext_resource path="res://assets/fonts/imported/free-pixel-16.fnt" type="Font"></ext_resource>
+	<ext_resource path="res://assets/fpo/text171 (1).png" type="Texture"></ext_resource>
+	<ext_resource path="res://assets/fpo/text171 (2).png" type="Texture"></ext_resource>
+	<ext_resource path="res://assets/fpo/text171-h.png" type="Texture"></ext_resource>
+	<resource type="StyleBoxEmpty" path="local://4">
+		<real name="content_margin/left"> 0 </real>
+		<real name="content_margin/right"> 30 </real>
+		<real name="content_margin/top"> 5 </real>
+		<real name="content_margin/bottom"> 5 </real>
 
 	</resource>
 	<main_resource>
 		<dictionary name="_bundled" shared="false">
 			<string> "conn_count" </string>
-			<int> 5 </int>
+			<int> 1 </int>
 			<string> "conns" </string>
-			<int_array  len="34"> 				4, 0, 48, 47, 2, 0, 9, 0, 50, 49, 2, 1, 2, 10, 0, 50, 49, 2, 1, 6, 11, 0, 50, 49, 2, 1, 9, 12, 0, 50, 49, 2, 1, 45 </int_array>
+			<int_array  len="6"> 				4, 0, 54, 53, 2, 0 </int_array>
 			<string> "names" </string>
-			<string_array  len="51">
+			<string_array  len="55">
 				<string> "Node" </string>
+				<string> "Node2D" </string>
 				<string> "script/script" </string>
 				<string> "__meta__" </string>
 				<string> "Control" </string>
@@ -90,10 +35,14 @@
 				<string> "focus/stop_mouse" </string>
 				<string> "size_flags/horizontal" </string>
 				<string> "size_flags/vertical" </string>
-				<string> "HBoxContainer" </string>
 				<string> "Panel" </string>
-				<string> "size_flags/stretch_ratio" </string>
+				<string> "WindowDialog" </string>
+				<string> "popup/exclusive" </string>
+				<string> "window/title" </string>
+				<string> "HBoxContainer" </string>
+				<string> "custom_constants/separation" </string>
 				<string> "VButtonArray" </string>
+				<string> "rect/min_size" </string>
 				<string> "custom_styles/hover" </string>
 				<string> "custom_styles/focus" </string>
 				<string> "custom_styles/selected" </string>
@@ -106,35 +55,34 @@
 				<string> "button/count" </string>
 				<string> "button/min_button_size" </string>
 				<string> "button/align" </string>
-				<string> "MarginContainer" </string>
-				<string> "PanelContainer" </string>
-				<string> "custom_styles/panel" </string>
 				<string> "RichTextLabel" </string>
+				<string> "size_flags/stretch_ratio" </string>
 				<string> "custom_fonts/normal_font" </string>
+				<string> "custom_colors/default_color" </string>
+				<string> "custom_colors/selection_color" </string>
+				<string> "custom_constants/line_separation" </string>
 				<string> "bbcode/enabled" </string>
 				<string> "bbcode/bbcode" </string>
 				<string> "visible_characters" </string>
-				<string> "VBoxContainer" </string>
-				<string> "1" </string>
+				<string> "ReferenceFrame" </string>
 				<string> "Button" </string>
+				<string> "TextureButton" </string>
 				<string> "toggle_mode" </string>
-				<string> "text" </string>
-				<string> "flat" </string>
-				<string> "2" </string>
-				<string> "3" </string>
-				<string> "4" </string>
+				<string> "textures/normal" </string>
+				<string> "textures/pressed" </string>
+				<string> "textures/hover" </string>
+				<string> "textures/disabled" </string>
+				<string> "textures/focused" </string>
 				<string> "show_entry" </string>
 				<string> "button_selected" </string>
-				<string> "fake_quest_action" </string>
-				<string> "pressed" </string>
 			</string_array>
 			<string> "node_count" </string>
-			<int> 13 </int>
+			<int> 8 </int>
 			<string> "nodes" </string>
-			<int_array  len="323"> 				-1, -1, 0, 0, -1, 2, 1, 0, 2, 1, 0, 0, 0, 3, 3, -1, 10, 4, 2, 5, 2, 6, 3, 7, 3, 8, 3, 9, 3, 10, 4, 11, 5, 12, 6, 13, 6, 0, 1, 0, 14, 14, -1, 6, 4, 2, 5, 2, 10, 4, 11, 4, 12, 6, 13, 6, 0, 2, 0, 15, 15, -1, 7, 8, 7, 9, 8, 10, 4, 11, 5, 12, 9, 13, 9, 16, 10, 0, 3, 0, 17, 17, -1, 18, 8, 11, 9, 8, 10, 4, 11, 5, 12, 9, 13, 9, 18, 12, 19, 13, 20, 14, 21, 15, 22, 16, 23, 16, 24, 17, 25, 18, 26, 19, 27, 20, 28, 21, 29, 22, 0, 3, 0, 30, 30, -1, 8, 4, 2, 6, 23, 9, 8, 10, 4, 11, 5, 12, 9, 13, 9, 16, 24, 0, 5, 0, 31, 31, -1, 8, 6, 25, 8, 26, 9, 8, 10, 4, 11, 5, 12, 6, 13, 6, 32, 27, 0, 5, 0, 33, 33, -1, 11, 6, 25, 8, 26, 9, 8, 10, 4, 11, 5, 12, 9, 13, 9, 34, 28, 35, 4, 36, 29, 37, 30, 0, 2, 0, 38, 38, -1, 7, 6, 31, 8, 32, 9, 8, 10, 4, 11, 4, 12, 9, 13, 9, 0, 8, 0, 40, 39, -1, 9, 8, 33, 9, 34, 10, 4, 11, 5, 12, 6, 13, 6, 41, 4, 42, 35, 43, 4, 0, 8, 0, 40, 44, -1, 10, 7, 36, 8, 33, 9, 37, 10, 4, 11, 5, 12, 6, 13, 6, 41, 4, 42, 38, 43, 4, 0, 8, 0, 40, 45, -1, 10, 7, 39, 8, 33, 9, 40, 10, 4, 11, 5, 12, 6, 13, 6, 41, 4, 42, 41, 43, 4, 0, 8, 0, 40, 46, -1, 10, 7, 42, 8, 33, 9, 43, 10, 4, 11, 5, 12, 6, 13, 6, 41, 4, 42, 44, 43, 4, 0 </int_array>
+			<int_array  len="238"> 				-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 0, 0, 0, 4, 4, -1, 10, 5, 2, 6, 2, 7, 3, 8, 3, 9, 3, 10, 3, 11, 4, 12, 5, 13, 6, 14, 6, 0, 1, 0, 16, 15, -1, 12, 5, 2, 6, 2, 7, 7, 8, 8, 9, 9, 10, 10, 11, 4, 12, 5, 13, 11, 14, 11, 17, 5, 18, 12, 0, 2, 0, 19, 19, -1, 11, 5, 2, 6, 2, 7, 3, 8, 3, 9, 3, 10, 3, 11, 4, 12, 4, 13, 11, 14, 11, 20, 13, 0, 3, 0, 21, 21, -1, 18, 9, 14, 10, 15, 22, 16, 11, 4, 12, 5, 14, 11, 23, 17, 24, 17, 25, 17, 26, 17, 27, 18, 28, 18, 29, 19, 30, 20, 31, 21, 32, 22, 33, 23, 34, 22, 0, 3, 0, 35, 35, -1, 16, 7, 24, 9, 25, 10, 15, 11, 4, 12, 5, 13, 11, 14, 11, 36, 26, 37, 18, 38, 20, 39, 27, 29, 28, 40, 29, 41, 5, 42, 30, 43, 31, 0, 0, 0, 15, 44, -1, 8, 7, 32, 8, 33, 9, 34, 10, 35, 11, 4, 12, 5, 13, 6, 14, 6, 0, 0, 0, 46, 45, -1, 14, 7, 33, 8, 36, 9, 37, 10, 38, 11, 4, 12, 5, 13, 6, 14, 6, 47, 4, 48, 39, 49, 40, 50, 41, 51, 40, 52, 39, 0 </int_array>
 			<string> "variants" </string>
-			<array  len="46" shared="false">
-				<resource  resource_type="Script" path="res://types/base_journal.gd">  </resource>
+			<array  len="42" shared="false">
+				<resource  resource_type="Script" path="../../types/base_journal.gd">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
 					<string> "Script" </string>
@@ -143,7 +91,7 @@
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> -789.503, -469.26 </vector2>
+							<vector2> -121.359, 19.5527 </vector2>
 							<string> "snap_grid" </string>
 							<bool> False </bool>
 							<string> "snap_offset" </string>
@@ -163,7 +111,7 @@
 							<string> "snap_step" </string>
 							<vector2> 10, 10 </vector2>
 							<string> "zoom" </string>
-							<real> 0.540359 </real>
+							<real> 0.902498 </real>
 						</dictionary>
 						<string> "3D" </string>
 						<dictionary  shared="false">
@@ -271,45 +219,41 @@
 				<bool> False </bool>
 				<bool> True </bool>
 				<int> 2 </int>
-				<real> 567 </real>
-				<real> 560 </real>
+				<real> 86 </real>
+				<real> 43 </real>
+				<real> 78 </real>
+				<real> 57 </real>
 				<int> 3 </int>
-				<real> 3 </real>
-				<real> 187 </real>
-				<resource  resource_type="StyleBox" path="local://1">  </resource>
-				<resource  resource_type="StyleBox" path="local://2">  </resource>
-				<resource  resource_type="StyleBox" path="local://3">  </resource>
+				<string> "system_log" </string>
+				<int> 10 </int>
+				<real> 50 </real>
+				<real> 460 </real>
+				<vector2> 50, 0 </vector2>
 				<resource  resource_type="StyleBox" path="local://4">  </resource>
-				<resource  resource_type="Font" path="res://assets/fonts/droid-mono-14.fnt">  </resource>
-				<color> 0, 0.593909, 0.59596, 1 </color>
-				<color> 0.659001, 0.649746, 0.641414, 1 </color>
+				<resource  resource_type="Font" path="../../assets/fonts/imported/free-pixel-16.fnt">  </resource>
+				<color> 0.685279, 0.93401, 0.237374, 1 </color>
+				<color> 1, 1, 1, 1 </color>
 				<int> 5 </int>
 				<int> 0 </int>
-				<real> 0 </real>
-				<int> -2106033696 </int>
-				<real> 190 </real>
-				<real> 2 </real>
-				<real> 8 </real>
-				<real> 377 </real>
-				<resource  resource_type="StyleBox" path="local://5">  </resource>
-				<resource  resource_type="Font" path="res://assets/fonts/droid-mono-18.fnt">  </resource>
+				<real> 6 </real>
+				<real> 60 </real>
+				<real> 596 </real>
+				<real> 5 </real>
+				<color> 0.167513, 0.162437, 0.16206, 1 </color>
+				<color> 0.93028, 0.944162, 0.944444, 1 </color>
+				<int> 4 </int>
 				<string> "" </string>
 				<int> -1 </int>
-				<real> 571 </real>
-				<real> 760 </real>
-				<real> 189 </real>
-				<real> 21 </real>
-				<string> "Complete quest 1" </string>
-				<real> 25 </real>
-				<real> 46 </real>
-				<string> "Get quest 2" </string>
-				<real> 50 </real>
-				<real> 71 </real>
-				<string> "Advance quest 2" </string>
-				<real> 75 </real>
-				<real> 96 </real>
-				<string> "Complete quest 2" </string>
-				<int> 4 </int>
+				<real> -16 </real>
+				<real> -9 </real>
+				<real> 63 </real>
+				<real> 69 </real>
+				<real> -2 </real>
+				<real> 98 </real>
+				<real> 70 </real>
+				<resource  resource_type="Texture" path="../../assets/fpo/text171 (1).png">  </resource>
+				<resource  resource_type="Texture" path="../../assets/fpo/text171 (2).png">  </resource>
+				<resource  resource_type="Texture" path="../../assets/fpo/text171-h.png">  </resource>
 			</array>
 			<string> "version" </string>
 			<int> 1 </int>

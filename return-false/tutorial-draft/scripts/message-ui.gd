@@ -36,6 +36,25 @@ const paths = {
 }
 
 const ResponseBase = preload("res://active-partials/message-ui/response-button.xml")
+var M
+
+
+######## make_dialogue #########
+func make_dialogue(dlg_text):
+	var output = ""
+	if( typeof(dlg_text) == 21 ):
+		for i in range(dlg_text.size()):
+			output = output + str(dlg_text[i])
+	else:
+		output = dlg_text
+	text_box.append_bbcode(output)
+	current_text = text_box.get_bbcode()
+	emit_signal("text_loaded", current_text)
+
+####### clear dialogue ########
+func clear_dialogue():
+	text_box.clear()
+	current_text = null
 
 
 ######## make_response ######### 
@@ -52,7 +71,6 @@ func make_response(text, actions):
 	get_node(paths.rbox).add_child(new_button)
 	new_button.raise()
 
-
 ######## make_formatted_response ######### 
 func make_formatted_response(text, actions):
 	var formatted_text = " > " + text;
@@ -66,87 +84,57 @@ func make_responses(source_array, format):
 			make_formatted_response(response["text"], response["actions"])
 		else:
 			make_response(response["text"], response["actions"])
+	has_responses = true
+	current_responses = get_tree().get_nodes_in_group("responses")
+	emit_signal("responses_loaded", current_responses)
 
+####### setup character ########
+
+func make_portrait(npc_texture):
+	portrait.set("texture", npc_texture)
+
+func make_formatted_name(npc_name):
+	return "[color=#ff8833] ~" + str(npc_name).to_lower() + ":> [/color]"
 
 ####### open/close ########
 
 func open():
+	dialog_box.show()
 	is_active = true;
 	emit_signal("dialogue_opened")
 
 func close():
+	dialog_box.hide()
 	is_active = false;
 	emit_signal("dialogue_closed")
 
 
 ######## path setup ##########
 func init_paths():
+	dialog_box = get_node(paths.dbox)
 	text_box = get_node(paths.tbox)
+	portrait = get_node(paths.pimg)
+	M = get_node("/root/mocks").MUI.new()
+
+
+###### other setup
+
+func enter_tree():
+	add_user_signal("text_loaded", ["text"])
+	add_user_signal("responses_loaded", ["responses"])
+	add_user_signal("dialogue_opened")
+	add_user_signal("dialogue_closed")
 
 
 ######## _ready ######### 
 func _ready():
 	init_paths()
-	demo()
+	close()
+	#demo()
 	
 	
 ######## demo ######### 	
 func demo():
-
-	var demoActions = [
-		{
-		fn = "do_the_thing",
-		target = self,
-		args = [20]
-		},
-		{
-		fn = "do_the_other_thing",
-		target = self,
-		args = [30]
-		}
-	]
-	
-	var goTo10 = {}
-	var setFlag40 = {}
-	
-	goTo10["fn"] = "do_the_thing"
-	goTo10["target"] = self
-	goTo10["args"] = [10]
-	
-	setFlag40["fn"] = "do_the_other_thing"
-	setFlag40["target"] = self
-	setFlag40["args"] = [40]
-
-	var demoResponses = [
-		{
-			text = "I am certain they can.",
-			actions = demoActions
-		},
-		{
-			text = "<OVERRIDE> That is ridiculous. Robots never lie.",
-			actions = [ goTo10, setFlag40 ]
-		},
-		{
-			text = "<OVERRIDE> Maybe, but you can trust me.",
-			actions = []
-		}
-	]
-	
-	text_box.append_bbcode("[color=#ffaa33]~gpowell:>[/color] Hey, Tr4ce, I've been thinking. \n")
-	text_box.append_bbcode("[color=#ffaa33]~gpowell:>[/color] Do you think robots could ever be...dishonest? \n")
-	text_box.append_bbcode("\n [color=#00ccdd]~ztr4ce.1.7.2:>_[/color]")
-	#text_box.set_scroll_active(true)
-	
-	#print("is_scroll_active?", text_box.is_scroll_active())
-	#print("is scroll following? ", text_box.is_scroll_following())
-	#print(text_box.get_v_scroll())
-	make_responses(demoResponses, false)
-	
-	
-######## temp ######### 	
-func do_the_thing(thing):
-	print("Doing thing ", str(thing))
-	
-######## temp ######### 	
-func do_the_other_thing(thing):
-	print("let's also do ", str(thing))
+	make_dialogue(make_formatted_name("MPowell"))
+	make_dialogue(M["dialogue_array"])
+	make_responses(M["response_array"], false)
