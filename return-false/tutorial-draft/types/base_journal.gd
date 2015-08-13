@@ -10,6 +10,8 @@ var latest_entry   # some form of reference to the most recent addition
 var current_entry  # reference to which is/was most recently opened
 var index = 0
 
+var player
+
 
 
 ######## get_entry_by - query entry by any parameter
@@ -64,27 +66,39 @@ func update_entry(e):
 
 ######## show_entry - function invoked by journal buttons
 func show_entry(ind):
-	var entry = get_entry_by('index', ind)
-	entry_box.clear()
-	entry_box.add_text(entry.body)
-	current_entry = entry
-	#get_tree().set_input_as_handled()
-	#get_node("Control").accept_event()
+	if( ind == 0 ):
+		entry_box.clear()
+		current_entry = 0
+		return
+	else:
+		var entry = get_entry_by('index', ind - 1)
+		entry_box.clear()
+		entry_box.add_text(entry.body)
+		current_entry = entry
 
 
 ######## show_journal
 func show_journal():
-	#get_node("Control").set("z/z", 1)
+	self.show()
 	get_node("Control/Panel").popup()
-	#get_node("Control").accept_event()
-	#get_tree().set_input_as_handled()
+	
+	#var cur_pos = player.get_global_pos()
+	#player.update_path(cur_pos, cur_pos)
+	player.set_fixed_process(false)
+	
+
+func _on_Panel_popup_hide():
+	self.hide()
+	player.set_fixed_process(true)
 	
 ####### ready
 func _ready():
 	entry_box = get_node("Control/Panel/HBoxContainer/RichTextLabel")
 	entry_list_box = get_node("Control/Panel/HBoxContainer/VButtonArray")
-	journal_button = get_node("Button")
-	get_node("Control/Panel").hide()
+	journal_button = get_node("/root/scene/interface/Node2D/Panel/buttons/journal")
+	player = get_node("/root/scene/robot")
+	
+	self.hide()
 	demo()
 	
 
@@ -127,9 +141,8 @@ class Entry:
 		print("Initialized entry ", self.title, " at index ", str(self.index))
 	
 
-func _on_Panel_popup_hide():
 	#get_node("Control").set("z/z", -1)
-	pass # replace with function body
+	# replace with function body
 
 
 func _on_Panel_about_to_show():
