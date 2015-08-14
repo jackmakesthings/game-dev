@@ -57,6 +57,16 @@ func clear_dialogue():
 	current_text = null
 
 
+func clear():
+	text_box.clear()
+	var i
+	
+	for child in get_node(paths.rbox).get_children():
+		get_node(paths.rbox).remove_child(child)
+	current_text = null
+	current_responses = null
+
+
 ######## make_response ######### 
 func make_response(text, actions):
 	var new_button = ResponseBase.instance()
@@ -65,7 +75,7 @@ func make_response(text, actions):
 	if( actions.size() > 0  ):
 		for i in range(actions.size()):
 			var action = actions[i]
-			new_button.connect('pressed', action["target"], action["fn"], action["args"]);
+			new_button.connect('pressed', get_node(action["target"]), action["fn"], action["args"]);
 			
 	new_button.add_to_group("responses")
 	get_node(paths.rbox).add_child(new_button)
