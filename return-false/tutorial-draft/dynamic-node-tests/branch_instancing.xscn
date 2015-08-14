@@ -44,13 +44,13 @@
 				<int> 2 </int>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
-					<string> "Script" </string>
+					<string> "2D" </string>
 					<string> "__editor_plugin_states__" </string>
 					<dictionary  shared="false">
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> -742.558, -491.139 </vector2>
+							<vector2> -772.78, -636.544 </vector2>
 							<string> "snap_grid" </string>
 							<bool> False </bool>
 							<string> "snap_offset" </string>
@@ -70,7 +70,7 @@
 							<string> "snap_step" </string>
 							<vector2> 10, 10 </vector2>
 							<string> "zoom" </string>
-							<real> 0.214638 </real>
+							<real> 0.157779 </real>
 						</dictionary>
 						<string> "3D" </string>
 						<dictionary  shared="false">
@@ -173,7 +173,7 @@
 						<int> 0 </int>
 					</dictionary>
 				</dictionary>
-				<resource  resource_type="PackedScene" path="res://dynamic-node-tests/dialog_branch_base.xscn">  </resource>
+				<resource  resource_type="PackedScene" path="./dialog_branch_base.xscn">  </resource>
 				<node_path> "" </node_path>
 				<real> 304 </real>
 				<int> 3 </int>

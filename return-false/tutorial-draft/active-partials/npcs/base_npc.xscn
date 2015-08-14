@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resource_file type="PackedScene" subresource_count="2" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
-	<ext_resource path="res://types/base_npc.gd" type="Script"></ext_resource>
+	<ext_resource path="res://active-partials/npcs/base_npc.gd" type="Script"></ext_resource>
 	<main_resource>
 		<dictionary name="_bundled" shared="false">
 			<string> "conn_count" </string>
@@ -23,7 +23,7 @@
 			<int_array  len="17"> 				-1, -1, 1, 0, -1, 5, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 0 </int_array>
 			<string> "variants" </string>
 			<array  len="5" shared="false">
-				<resource  resource_type="Script" path="res://types/base_npc.gd">  </resource>
+				<resource  resource_type="Script" path="./base_npc.gd">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
 					<string> "2D" </string>
@@ -32,7 +32,7 @@
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> -707.891, -428.891 </vector2>
+							<vector2> -758.337, -428.891 </vector2>
 							<string> "snap_grid" </string>
 							<bool> False </bool>
 							<string> "snap_offset" </string>

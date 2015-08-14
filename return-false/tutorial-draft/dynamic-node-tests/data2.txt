@@ -1,0 +1,82 @@
+{
+  "20": {
+    "text": "This is state 20 of the main quest",
+    "responses": [
+      {
+        "text": "Go to state 40",
+        "actions": [
+          {
+            "fn": "test1",
+            "target": ".",
+            "args": ["40"]
+          },
+          {
+            "fn": "test2",
+            "target": ".",
+            "args": ["40"]
+          }
+        ]
+      },
+      {
+        "text": "Close this for now",
+        "actions": [
+          {
+            "fn": "close",
+            "target": "/root/game/scene/message-ui",
+            "args": []
+          }
+        ]
+      }
+    ]
+  },
+  "40": {
+    "text": "This is state 40 of the main quest",
+    "responses": [
+      {
+        "text": "Revert this quest to state 20",
+        "actions": [
+          {
+            "fn": "set_branch_state",
+            "target": "MUI",
+            "args": ["20"]
+          },
+          {
+            "fn": "continue_dialog_at",
+            "target": "self",
+            "args": ["20"]
+          }
+        ]
+      },
+      {
+        "text": "Finish this quest and enable a new one",
+        "actions": [
+          {
+            "func": "set_branch_state",
+            "params": [
+              "100",
+              "this"
+            ]
+          },
+          {
+            "func": "complete_branch",
+            "params": [
+              "100",
+              "this"
+            ]
+          },
+          {
+            "func": "init_new_branch",
+            "params": [
+              "new",
+              "20"
+            ]
+          },
+          {
+            "func": "close_dialog",
+            "params": []
+          }
+        ]
+      }
+    ]
+  }
+}

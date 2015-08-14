@@ -32,7 +32,7 @@ var current_responses
 var fallback_data
 var fallback_dialogue = ""
 
-const message_ui_class = preload("res://scenes/message-ui.scn")
+const message_ui_class = preload("res://active-partials/message-ui/message-ui.xml")
 var message_ui = message_ui_class.instance()
 var game
 var utils
@@ -196,7 +196,7 @@ func _init():
 	#add_user_signal("activated_quest", ["quest_param", "node"])
 
 func _ready():
-	game = get_node("/root/game")
+	game = get_node("/root/scene")
 	utils = get_node("/root/utils")
 	load_data(self.data_file)
 	

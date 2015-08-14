@@ -89,7 +89,7 @@ func show_journal():
 
 func _on_Panel_popup_hide():
 	self.hide()
-	player.set_fixed_process(true)
+	
 	
 ####### ready
 func _ready():
