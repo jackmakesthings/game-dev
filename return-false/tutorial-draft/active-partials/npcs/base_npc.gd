@@ -32,7 +32,7 @@ var current_responses
 var fallback_data
 var fallback_dialogue = ""
 
-const message_ui_class = preload("res://scenes/message-ui.scn")
+const message_ui_class = preload("res://active-partials/message-ui/message-ui.xml")
 var message_ui = message_ui_class.instance()
 var game
 var utils
