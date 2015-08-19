@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="4" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
+<resource_file type="PackedScene" subresource_count="5" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
 	<ext_resource path="res://active-partials/player/player-k2d.gd" type="Script"></ext_resource>
+	<ext_resource path="res://assets/fpo/temp-trace-back.png" type="Texture"></ext_resource>
 	<ext_resource path="res://assets/fpo/trace.png" type="Texture"></ext_resource>
 	<resource type="CircleShape2D" path="local://1">
 		<real name="custom_solver_bias"> 0 </real>
@@ -57,7 +58,7 @@
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> -400.468, -119.068 </vector2>
+							<vector2> -194.146, -69.9365 </vector2>
 							<string> "snap_grid" </string>
 							<bool> False </bool>
 							<string> "snap_offset" </string>
@@ -77,7 +78,7 @@
 							<string> "snap_step" </string>
 							<vector2> 10, 10 </vector2>
 							<string> "zoom" </string>
-							<real> 0.999999 </real>
+							<real> 2.789507 </real>
 						</dictionary>
 						<string> "3D" </string>
 						<dictionary  shared="false">
@@ -180,7 +181,7 @@
 						<int> 0 </int>
 					</dictionary>
 				</dictionary>
-				<nil>  </nil>
+				<resource  resource_type="Texture" path="../../assets/fpo/temp-trace-back.png">  </resource>
 				<vector2> -26, -102.913 </vector2>
 				<resource  resource_type="Texture" path="../../assets/fpo/trace.png">  </resource>
 				<vector2> 2.60364, 2.79479 </vector2>

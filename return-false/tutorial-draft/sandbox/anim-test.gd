@@ -132,5 +132,6 @@ func _ready():
 	
 	last_pos = get_pos()
 
+	#set_fixed_process(true)
 	set_fixed_process(true)
 

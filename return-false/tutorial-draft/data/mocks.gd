@@ -2,6 +2,7 @@
 
 extends Node
 
+
 class MUI:
 
 	#### dialogue data
@@ -110,3 +111,23 @@ class JRNL:
 	
 		return new_args
 		#update_journal(new_args)
+
+
+
+class NPC_0:
+		
+	var label = "Engineer"
+	var portrait_path = "res://assets/fpo/portrait-dude-mohawk.png"
+	
+	var dlg_no_branches = {
+		text = "Can this wait? I'm in the middle of some calibrations.",
+		responses = [{
+			text = "<Leave>",
+			actions = [ {
+				fn = "close",
+				target = get_node("/root/scene/message-ui"),
+				args = []
+			} ]
+		} ]
+	}
+

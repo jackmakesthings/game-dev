@@ -3,11 +3,44 @@
 
 extends Node2D
 
+var scene
 var player
+
+var body_layer
 var nav
 var tiles
 var outline
 var movement_allowed = true
+
+const TILE_ATTRACT = 1
+
+# shortcut for checking which tile type is at (x,y)
+func tile_at(point):
+	var map_point = tiles.world_to_map(point)
+	var tile_id = tiles.get_cell(map_point.x, map_point.y)
+	return tile_id
+
+# helper for checking all tiles adjacent to the one at a given point
+func get_surrounding_tiles(point):
+	var map_pos = tiles.world_to_map(point)
+	var NW = tiles.get_cell(map_pos.x-1, map_pos.y)
+	var NE = tiles.get_cell(map_pos.x, map_pos.y-1)
+	var SE = tiles.get_cell(map_pos.x+1, map_pos.y)
+	var SW = tiles.get_cell(map_pos.x, map_pos.y+1)
+	return Array([NW, NE, SE, SW])
+
+func check_for_attractor(point):
+	var borders = get_surrounding_tiles(point)
+	if( borders[0] == TILE_ATTRACT ):
+		return "NW"
+	elif( borders[1] == TILE_ATTRACT ):
+		return "NE"
+	elif( borders[2] == TILE_ATTRACT ):
+		return "SE"
+	elif( borders[3] == TILE_ATTRACT ):
+		return "SW"
+	else:
+		return null
 
 func _unhandled_input(ev):
 
@@ -51,23 +84,22 @@ func _unhandled_input(ev):
 				
 			yield(player, "done_moving")
 			outline.hide()
+			get_surrounding_tiles(player.get_global_pos())
+			
+			var orient = check_for_attractor(player.get_global_pos())
+			if( not orient == null ):
+				player.orient(orient)
 	
 func _ready():
 	# Setup the vars and conditions for this instance
+	scene = get_node("/root/scene")
+	player = scene.get("player")
 	
-	#Input.set_mouse_mode(0)
-	player = get_node("/root/scene/robot")
+	body_layer = get_node("nav/floor/bodies")
 	nav = get_node("nav")
 	tiles = get_node("nav/floor")
-	outline = get_node("Polygon2D")
+	outline = get_node("destination_sprite")
 	
-	
-	# reparent the player character to this tile instance
-	# note - if we're using the player path anywhere else,
-	# it should probably be updated here and stored globally
-	
-	get_node("/root/scene").remove_child(player)
-	nav.get_node("floor").add_child(player)
 	
 	outline.hide()
 	set_process_unhandled_input(true)

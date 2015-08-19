@@ -96,7 +96,7 @@ func _ready():
 	entry_box = get_node("Control/Panel/HBoxContainer/RichTextLabel")
 	entry_list_box = get_node("Control/Panel/HBoxContainer/VButtonArray")
 	journal_button = get_node("/root/scene/interface/Node2D/Panel/buttons/journal")
-	player = get_node("/root/scene/robot")
+	player = get_node("/root/scene").get("player")
 	
 	self.hide()
 	demo()

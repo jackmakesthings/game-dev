@@ -2,7 +2,7 @@
 ### needs to be passed a reference to the Nav2D node
 ### walks to point of click
 ### includes rudimentary sprite flipping and camera follow, now working!
-### 8/8/15
+### 8/17/15
 
 extends KinematicBody2D
 
@@ -14,7 +14,7 @@ var is_moving
 
 var spr
 var nav
-var front_texture
+export(Texture) var front_texture
 export(Texture) var back_texture
 
 const SPEED=170.0
@@ -22,6 +22,7 @@ const SPEED=170.0
 
 signal start_moving(from, to, path)
 signal done_moving(at)
+signal oriented(dir, at)
 
 ##### align_sprite
 # temporary utility for flipping/swapping trace based on direction
@@ -42,7 +43,22 @@ func align_sprite(spr, direction):
 		elif direction.x > 0:
 			spr.set_flip_h(false)
 
-
+func orient(towards):
+	var spr = get_node("Sprite")
+	if( towards == "NW" or towards == "N" or towards == "W"):
+		spr.set_texture(self["back_texture"])
+		spr.set_flip_h(true)
+	elif( towards == "NE" or towards == "E" ):
+		spr.set_texture(self["back_texture"])
+		spr.set_flip_h(false)
+	elif( towards == "SE" or towards == "S" ):
+		spr.set_texture(self["front_texture"])
+		spr.set_flip_h(true)
+	else:
+		spr.set_texture(self["front_texture"])
+		spr.set_flip_h(false)
+	emit_signal("oriented", towards, get_global_pos())
+	
 
 func _fixed_process(delta):
 
@@ -72,7 +88,7 @@ func _fixed_process(delta):
 		move_to(atpos);
 		
 		# handle collisions
-		while(is_colliding()):
+		if(is_colliding()):
 			var n = get_collision_normal()
 			var motion = n.slide(atpos - get_global_pos())
 			move(motion)
@@ -81,6 +97,13 @@ func _fixed_process(delta):
 		if (path.size()<2):
 			path=[]
 			set_fixed_process(false)
+			
+			var t = Timer.new()
+			t.set_wait_time(0.6)
+			t.set_one_shot(true)
+			add_child(t)
+			t.start()
+			yield(t, "timeout")
 			emit_signal("done_moving", get_global_pos())
 				
 	else:
@@ -112,5 +135,6 @@ func _ready():
 		
 	add_user_signal("start_moving", ["from", "to", "path"])
 	add_user_signal("done_moving", ["at"])
+	add_user_signal("oriented", ["dir", "at"])
 	
 	set_fixed_process(true)
