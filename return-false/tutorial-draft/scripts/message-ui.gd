@@ -75,11 +75,12 @@ func make_response(text, actions):
 	if( actions.size() > 0  ):
 		for i in range(actions.size()):
 			var action = actions[i]
-			new_button.connect('pressed', get_node(action["target"]), action["fn"], action["args"]);
+			new_button.connect('pressed', action['target'], action["fn"], action["args"]);
 			
 	new_button.add_to_group("responses")
 	get_node(paths.rbox).add_child(new_button)
 	new_button.raise()
+	has_responses = true
 
 ######## make_formatted_response ######### 
 func make_formatted_response(text, actions):
@@ -98,6 +99,19 @@ func make_responses(source_array, format):
 	current_responses = get_tree().get_nodes_in_group("responses")
 	emit_signal("responses_loaded", current_responses)
 
+
+
+####### shortcut setup of the default "leave" option
+func make_close_button():
+	var _text = "<Leave.>"
+	var	_actions = [{
+			fn = "close",
+			target = self,
+			args = []
+		}]
+	make_response(_text, _actions)
+
+
 ####### setup character ########
 
 func make_portrait(npc_texture):
@@ -109,7 +123,7 @@ func make_formatted_name(npc_name):
 ####### open/close ########
 
 func open():
-	dialog_box.show()
+	dialog_box.popup()
 	is_active = true;
 	emit_signal("dialogue_opened")
 

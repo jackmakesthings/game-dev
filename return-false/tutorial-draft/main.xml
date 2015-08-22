@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="17" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
+<resource_file type="PackedScene" subresource_count="22" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
 	<ext_resource path="res://main.gd" type="Script"></ext_resource>
-	<ext_resource path="res://active-partials/message-ui/message-ui.xml" type="PackedScene"></ext_resource>
+	<ext_resource path="res://active-partials/message-ui/message-ui2.xml" type="PackedScene"></ext_resource>
 	<ext_resource path="res://active-partials/environment/walkable-area.gd" type="Script"></ext_resource>
 	<ext_resource path="res://assets/tiles/iso-floors-walkable.xml" type="TileSet"></ext_resource>
-	<ext_resource path="res://active-partials/npcs/npc_Terminal.gd" type="Script"></ext_resource>
-	<ext_resource path="res://assets/fpo/computer_by_hydroksyde.png" type="Texture"></ext_resource>
+	<ext_resource path="res://active-partials/npcs/npc.gd" type="Script"></ext_resource>
+	<ext_resource path="res://assets/computer_by_hydroksyde.tex" type="Texture"></ext_resource>
 	<ext_resource path="res://assets/fpo/basic_block128.tex" type="Texture"></ext_resource>
 	<ext_resource path="res://active-partials/player/player-k2d.xml" type="PackedScene"></ext_resource>
+	<ext_resource path="res://assets/fpo/garrus-port.png" type="Texture"></ext_resource>
+	<ext_resource path="res://assets/garrus-sprite.tex" type="Texture"></ext_resource>
 	<ext_resource path="res://assets/tiles/green-outline-glow.png" type="Texture"></ext_resource>
 	<ext_resource path="res://active-partials/interface/interface.gd" type="Script"></ext_resource>
 	<ext_resource path="res://assets/fpo/text171 (1).png" type="Texture"></ext_resource>
 	<ext_resource path="res://active-partials/journal/base_journal.xscn" type="PackedScene"></ext_resource>
-	<resource type="ConvexPolygonShape2D" path="local://1">
+	<resource type="ConvexPolygonShape2D" path="local://10">
 		<real name="custom_solver_bias"> 0 </real>
 		<vector2_array name="points" len="4"> 			-99.6559, 38.5346, 32.99, -21.759, 97.8056, 12.9098, -29.1583, 84.7012 </vector2_array>
 
 	</resource>
-	<resource type="ConvexPolygonShape2D" path="local://2">
+	<resource type="ConvexPolygonShape2D" path="local://11">
 		<real name="custom_solver_bias"> 0 </real>
-		<vector2_array name="points" len="4"> 			93.2941, 50.0513, 25.7041, 88.8325, -1.99669, 69.9959, 62.2692, 32.3228 </vector2_array>
+		<vector2_array name="points" len="4"> 			113.416, 60.3699, 41.4161, 96.3699, -1.99669, 69.9959, 62.2692, 32.3228 </vector2_array>
 
 	</resource>
-	<resource type="GDScript" path="local://6">
-		<string name="script/source"> "extends TextureButton&#000a;&#000a;var hexTexture = preload(&quot;res://assets/fpo/computer_by_hydroksyde.png&quot;)&#000a;&#000a;&#000a;func _ready():&#000a;&#000a;   #set texture&#000a;   self.set_normal_texture(hexTexture)&#000a;   #self.get_normal_texture().size = Vector2(_tile_size, _tile_size)&#000a;&#000a;   #create the image for the bitmap&#000a;   var image = Image()&#000a;   image.load(&quot;res://assets/fpo/computer_by_hydroksyde.png&quot;)&#000a;&#000a;   #make sure the mask is the same size as the texture&#000a;   #image = image.resized(_tile_size, _tile_size)&#000a;   &#000a;   #create a new bitmap from the alpha channel of the resized image&#000a;   var bitMap = BitMap.new()&#000a;   bitMap.create_from_image_alpha(image)&#000a;  &#000a;   #assign the bitmap to the click mask&#000a;   set_click_mask(bitMap)&#000a;  &#000a;&#0009;&#000a;&#000a;func _on_Sprite_pressed():&#000a;&#0009;print(&quot;boop&quot;)&#000a;&#0009;pass # replace with function body&#000a;" </string>
+	<resource type="GDScript" path="local://13">
+		<string name="script/source"> "extends TextureButton&#000a;&#000a;var hexTexture = preload(&quot;res://assets/computer_by_hydroksyde.tex&quot;)&#000a;&#000a;&#000a;func _ready():&#000a;&#000a;   #set texture&#000a;   self.set_normal_texture(hexTexture)&#000a;   #self.get_normal_texture().size = Vector2(_tile_size, _tile_size)&#000a;&#000a;   #create the image for the bitmap&#000a;   var image = Image()&#000a;   image.load(&quot;res://assets/fpo/computer_by_hydroksyde.png&quot;)&#000a;   &#000a;   image = image.resized(hexTexture.get_width(), hexTexture.get_height())&#000a;&#000a;   #make sure the mask is the same size as the texture&#000a;   #image = image.resized(_tile_size, _tile_size)&#000a;   &#000a;   #create a new bitmap from the alpha channel of the resized image&#000a;   var bitMap = BitMap.new()&#000a;   bitMap.create_from_image_alpha(image)&#000a;  &#000a;   #assign the bitmap to the click mask&#000a;   set_click_mask(bitMap)&#000a;  " </string>
 
 	</resource>
 	<resource type="ConcavePolygonShape2D" path="local://5">
@@ -31,14 +33,27 @@
 		<vector2_array name="segments" len="18"> 			-14.634, 12.574, -41.634, 30.574, -41.634, 30.574, -14.634, 48.574, -14.634, 48.574, 12.366, 30.574, 12.366, 30.574, 48.366, 48.574, 48.366, 48.574, 120.366, 12.574, 120.366, 12.574, 84.366, -5.42599, 84.366, -5.42599, 102.366, -14.426, 102.366, -14.426, 66.366, -32.426, 66.366, -32.426, -14.634, 12.574 </vector2_array>
 
 	</resource>
+	<resource type="GDScript" path="local://7">
+		<string name="script/source"> "extends &quot;res://active-partials/npcs/npc.gd&quot;&#000a;&#000a;&#000a;func _init():&#000a;&#0009;id = 002&#000a;&#0009;trigger_mode = 0&#000a;&#0009;label = &quot;Garrus&quot;&#000a;&#0009;&#000a;func set_branches():&#000a;&#0009;dialog_branches = Array()&#000a;&#0009;&#000a;&#000a;&#000a;func _ready():&#000a;&#0009;utils = get_node(&quot;/root/utils&quot;)&#000a;&#0009;data = ResourceLoader.load(&quot;res://data/mocks.gd&quot;)&#000a;&#0009;player = get_node(&quot;/root/scene&quot;).get(&quot;player&quot;)&#000a;&#0009;body_node = get_node(&quot;body&quot;)&#000a;&#0009;x = get_node(&quot;X&quot;)&#000a;&#0009;&#000a;&#0009;add_child(data)&#000a;&#0009;set_branches()&#000a;&#0009;MUI = get_node(&quot;/root/scene/message-ui&quot;)&#000a;&#0009;if( trigger_mode == TRIGGER_DIRECT ):&#000a;&#0009;&#0009;get_node(&quot;body/Sprite&quot;).connect(&quot;pressed&quot;, self, &quot;on_click&quot;, [player])&#000a;" </string>
+
+	</resource>
+	<resource type="ConvexPolygonShape2D" path="local://12">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2_array name="points" len="4"> 			-76.5, 18, -4.5, -9, 76.5, 36, 22.5, 63 </vector2_array>
+
+	</resource>
+	<resource type="GDScript" path="local://9">
+		<string name="script/source"> "extends TextureButton&#000a;&#000a;var hexTexture = preload(&quot;res://assets/garrus-sprite.tex&quot;)&#000a;&#000a;&#000a;func _ready():&#000a;&#000a;   #set texture&#000a;   self.set_normal_texture(hexTexture)&#000a;   #self.get_normal_texture().size = Vector2(_tile_size, _tile_size)&#000a;&#000a;   #create the image for the bitmap&#000a;   var image = Image()&#000a;   image.load(&quot;res://assets/fpo/garrus-sprite.png&quot;)&#000a;   &#000a;   image = image.resized(hexTexture.get_width(), hexTexture.get_height())&#000a;&#000a;   #make sure the mask is the same size as the texture&#000a;   #image = image.resized(_tile_size, _tile_size)&#000a;   &#000a;   #create a new bitmap from the alpha channel of the resized image&#000a;   var bitMap = BitMap.new()&#000a;   bitMap.create_from_image_alpha(image)&#000a;  &#000a;   #assign the bitmap to the click mask&#000a;  # set_click_mask(bitMap)&#000a;  " </string>
+
+	</resource>
 	<main_resource>
 		<dictionary name="_bundled" shared="false">
 			<string> "conn_count" </string>
-			<int> 2 </int>
+			<int> 1 </int>
 			<string> "conns" </string>
-			<int_array  len="12"> 				9, 9, 114, 113, 2, 0, 22, 19, 114, 115, 2, 0 </int_array>
+			<int_array  len="6"> 				28, 25, 122, 121, 2, 0 </int_array>
 			<string> "names" </string>
-			<string_array  len="116">
+			<string_array  len="123">
 				<string> "scene" </string>
 				<string> "Node2D" </string>
 				<string> "script/script" </string>
@@ -77,6 +92,8 @@
 				<string> "portrait" </string>
 				<string> "npc_type" </string>
 				<string> "trigger_mode" </string>
+				<string> "dialog_branches" </string>
+				<string> "has_branches" </string>
 				<string> "body" </string>
 				<string> "Area2D" </string>
 				<string> "z/z" </string>
@@ -112,6 +129,8 @@
 				<string> "build_mode" </string>
 				<string> "polygon" </string>
 				<string> "trigger" </string>
+				<string> "X" </string>
+				<string> "Position2D" </string>
 				<string> "test-cube" </string>
 				<string> "StaticBody2D" </string>
 				<string> "constant_linear_velocity" </string>
@@ -137,6 +156,10 @@
 				<string> "drag_margin/top" </string>
 				<string> "drag_margin/right" </string>
 				<string> "drag_margin/bottom" </string>
+				<string> "garrus" </string>
+				<string> "click_on_press" </string>
+				<string> "params/scale" </string>
+				<string> "transform/scale" </string>
 				<string> "destination_sprite" </string>
 				<string> "visibility/visible" </string>
 				<string> "interface" </string>
@@ -152,26 +175,25 @@
 				<string> "VBoxContainer" </string>
 				<string> "journal" </string>
 				<string> "journal_ui" </string>
-				<string> "_on_Sprite_pressed" </string>
-				<string> "pressed" </string>
 				<string> "_on_journal_pressed" </string>
+				<string> "pressed" </string>
 			</string_array>
 			<string> "node_count" </string>
-			<int> 24 </int>
+			<int> 30 </int>
 			<string> "nodes" </string>
-			<int_array  len="450"> 				-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 0, 0, 0, 5, 4, -1, 0, 0, 0, 0, 7, 6, 2, 2, 8, 3, 3, 4, 0, 0, 0, 1, 9, -1, 2, 2, 5, 3, 6, 0, 3, 0, 11, 10, -1, 0, 0, 4, 0, 13, 12, -1, 14, 14, 7, 15, 8, 16, 9, 17, 10, 18, 11, 19, 12, 20, 7, 21, 13, 22, 14, 23, 15, 24, 16, 25, 7, 26, 7, 27, 17, 0, 5, 0, 29, 28, -1, 1, 30, 13, 0, 6, 0, 1, 31, -1, 8, 32, 18, 2, 19, 3, 20, 33, 7, 34, 21, 35, 22, 36, 23, 37, 7, 0, 7, 0, 39, 38, -1, 12, 40, 7, 41, 14, 42, 24, 43, 25, 44, 14, 45, 26, 46, 27, 47, 13, 48, 28, 49, 29, 50, 30, 51, 15, 0, 8, 0, 53, 52, -1, 15, 54, 31, 55, 32, 56, 33, 57, 34, 58, 14, 59, 13, 60, 12, 61, 12, 62, 14, 63, 35, 64, 35, 65, 35, 66, 35, 67, 35, 2, 36, 0, 8, 0, 69, 68, -1, 4, 32, 37, 70, 23, 71, 38, 72, 14, 0, 8, 0, 69, 72, -1, 4, 32, 39, 70, 23, 71, 40, 72, 13, 0, 6, 0, 74, 73, -1, 12, 32, 41, 40, 7, 41, 14, 42, 42, 43, 43, 44, 13, 25, 7, 26, 7, 75, 44, 76, 16, 77, 15, 78, 16, 0, 12, 0, 52, 52, -1, 2, 32, 45, 79, 46, 0, 12, 0, 69, 72, -1, 3, 70, 7, 71, 47, 72, 13, 0, 6, 0, 81, 80, 48, 3, 8, 3, 40, 7, 3, 49, 0, 15, 0, 82, 82, -1, 15, 83, 7, 84, 14, 85, 13, 86, 16, 87, 50, 88, 51, 89, 51, 90, 52, 91, 52, 92, 13, 93, 13, 94, 53, 95, 53, 96, 53, 97, 53, 0, 3, 0, 52, 98, -1, 2, 99, 14, 79, 54, 0, 0, 0, 7, 100, -1, 5, 101, 7, 102, 44, 103, 16, 104, 55, 3, 56, 0, 18, 0, 105, 1, -1, 5, 58, 14, 59, 13, 60, 12, 61, 12, 2, 57, 0, 19, 0, 106, 106, -1, 10, 107, 7, 108, 7, 54, 58, 55, 59, 56, 60, 57, 61, 58, 14, 59, 13, 60, 12, 61, 12, 0, 20, 0, 110, 109, -1, 6, 107, 7, 108, 7, 58, 14, 59, 14, 60, 12, 61, 12, 0, 21, 0, 53, 111, -1, 12, 56, 62, 57, 63, 58, 14, 59, 13, 60, 12, 61, 12, 62, 14, 63, 64, 64, 64, 65, 64, 66, 64, 67, 64, 0, 0, 0, 1, 112, 65, 2, 8, 3, 3, 66, 0 </int_array>
+			<int_array  len="584"> 				-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 0, 0, 0, 5, 4, -1, 0, 0, 0, 0, 7, 6, 2, 2, 8, 3, 3, 4, 0, 0, 0, 1, 9, -1, 2, 2, 5, 3, 6, 0, 3, 0, 11, 10, -1, 0, 0, 4, 0, 13, 12, -1, 14, 14, 7, 15, 8, 16, 9, 17, 10, 18, 11, 19, 12, 20, 7, 21, 13, 22, 14, 23, 15, 24, 16, 25, 7, 26, 7, 27, 17, 0, 5, 0, 29, 28, -1, 1, 30, 13, 0, 6, 0, 1, 31, -1, 9, 32, 18, 2, 19, 33, 7, 34, 20, 35, 21, 36, 22, 37, 22, 38, 23, 39, 13, 0, 7, 0, 41, 40, -1, 12, 42, 7, 43, 14, 44, 24, 45, 25, 46, 14, 47, 26, 48, 27, 49, 13, 50, 28, 51, 29, 52, 30, 53, 15, 0, 8, 0, 55, 54, -1, 15, 56, 31, 57, 32, 58, 33, 59, 34, 60, 14, 61, 13, 62, 12, 63, 12, 64, 14, 65, 35, 66, 35, 67, 35, 68, 35, 69, 35, 2, 36, 0, 8, 0, 71, 70, -1, 4, 32, 37, 72, 22, 73, 38, 74, 14, 0, 8, 0, 71, 74, -1, 4, 32, 39, 72, 22, 73, 40, 74, 13, 0, 7, 0, 76, 75, -1, 1, 32, 41, 0, 6, 0, 78, 77, -1, 12, 32, 42, 43, 14, 44, 43, 45, 44, 46, 13, 25, 7, 26, 7, 79, 45, 80, 16, 81, 15, 82, 16, 3, 46, 0, 13, 0, 54, 54, -1, 2, 32, 47, 83, 48, 0, 13, 0, 71, 74, -1, 3, 72, 7, 73, 49, 74, 13, 0, 6, 0, 85, 84, 50, 5, 8, 3, 32, 51, 42, 7, 25, 52, 3, 53, 0, 16, 0, 86, 86, -1, 15, 87, 7, 88, 14, 89, 13, 90, 16, 91, 54, 92, 55, 93, 55, 94, 56, 95, 56, 96, 13, 97, 13, 98, 57, 99, 57, 100, 57, 101, 57, 0, 6, 0, 1, 102, -1, 10, 32, 58, 42, 7, 2, 59, 33, 12, 34, 60, 35, 61, 36, 22, 37, 22, 38, 23, 39, 14, 0, 18, 0, 41, 40, -1, 10, 42, 7, 43, 13, 44, 62, 45, 63, 46, 13, 50, 28, 51, 29, 52, 30, 53, 15, 25, 64, 0, 19, 0, 55, 54, -1, 16, 56, 65, 57, 66, 58, 67, 59, 68, 60, 14, 61, 13, 62, 12, 63, 12, 64, 14, 103, 13, 65, 69, 66, 69, 68, 69, 69, 69, 104, 70, 2, 71, 0, 19, 0, 71, 74, -1, 5, 105, 72, 42, 7, 72, 22, 73, 73, 74, 13, 0, 18, 0, 76, 75, -1, 1, 32, 74, 0, 3, 0, 54, 106, -1, 2, 107, 14, 83, 75, 0, 0, 0, 7, 108, -1, 5, 109, 7, 110, 45, 111, 16, 112, 76, 3, 77, 0, 24, 0, 113, 1, -1, 5, 60, 14, 61, 13, 62, 12, 63, 12, 2, 78, 0, 25, 0, 114, 114, -1, 10, 115, 7, 116, 7, 56, 79, 57, 80, 58, 81, 59, 82, 60, 14, 61, 13, 62, 12, 63, 12, 0, 26, 0, 118, 117, -1, 6, 115, 7, 116, 7, 60, 14, 61, 14, 62, 12, 63, 12, 0, 27, 0, 55, 119, -1, 12, 58, 83, 59, 84, 60, 14, 61, 13, 62, 12, 63, 12, 64, 14, 65, 85, 66, 85, 67, 85, 68, 85, 69, 85, 0, 0, 0, 1, 120, 86, 2, 8, 3, 3, 87, 0 </int_array>
 			<string> "variants" </string>
-			<array  len="67" shared="false">
+			<array  len="88" shared="false">
 				<resource  resource_type="Script" path="./main.gd">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
-					<string> "Script" </string>
+					<string> "2D" </string>
 					<string> "__editor_plugin_states__" </string>
 					<dictionary  shared="false">
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> -216.225, 38.3316 </vector2>
+							<vector2> -923.714, -370.692 </vector2>
 							<string> "snap_grid" </string>
 							<bool> True </bool>
 							<string> "snap_offset" </string>
@@ -187,11 +209,11 @@
 							<string> "snap_rotation_step" </string>
 							<real> 0.523599 </real>
 							<string> "snap_show_grid" </string>
-							<bool> True </bool>
+							<bool> False </bool>
 							<string> "snap_step" </string>
 							<vector2> 9, 9 </vector2>
 							<string> "zoom" </string>
-							<real> 0.999999 </real>
+							<real> 0.440126 </real>
 						</dictionary>
 						<string> "3D" </string>
 						<dictionary  shared="false">
@@ -294,7 +316,7 @@
 						<int> 0 </int>
 					</dictionary>
 				</dictionary>
-				<resource  resource_type="PackedScene" path="../active-partials/message-ui/message-ui.xml">  </resource>
+				<resource  resource_type="PackedScene" path="../active-partials/message-ui/message-ui2.xml">  </resource>
 				<node_path> "" </node_path>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
@@ -304,7 +326,7 @@
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> 168.054, 294.854 </vector2>
+							<vector2> -800, -335.295 </vector2>
 							<string> "snap_grid" </string>
 							<bool> False </bool>
 							<string> "snap_offset" </string>
@@ -324,7 +346,7 @@
 							<string> "snap_step" </string>
 							<vector2> 10, 10 </vector2>
 							<string> "zoom" </string>
-							<real> 0.999999 </real>
+							<real> 0.237827 </real>
 						</dictionary>
 						<string> "3D" </string>
 						<dictionary  shared="false">
@@ -426,10 +448,6 @@
 						<string> "run_mode" </string>
 						<int> 0 </int>
 					</dictionary>
-					<string> "__editor_show_subtree" </string>
-					<bool> True </bool>
-					<string> "_editor_collapsed" </string>
-					<bool> True </bool>
 				</dictionary>
 				<resource  resource_type="Script" path="../active-partials/environment/walkable-area.gd">  </resource>
 				<dictionary  shared="false">
@@ -573,19 +591,17 @@
 				<bool> False </bool>
 				<real> 1 </real>
 				<real> 0 </real>
-				<int_array  len="654"> 					-851957, 1, -786421, 1, -786420, 1, -786419, 1, -720884, 1, -720883, 1, -655347, 1, -655346, 1, -589810, 1, -524273, 1, -458743, 0, -458742, 0, -458741, 0, -458740, 0, -458736, 1, -458735, 1, -393207, 0, -393206, 3, -393205, 3, -393204, 0, -393199, 1, -393198, 1, -393197, 1, -393196, 1, -393195, 1, -327671, 0, -327670, 3, -327669, 3, -327668, 0, -327662, 1, -327661, 1, -327659, 1, -327657, 1, -262139, 1, -262138, 1, -262135, 0, -262134, 3, -262133, 3, -262132, 0, -262126, 1, -262125, 1, -262124, 1, -262123, 1, -262122, 1, -262121, 1, -262120, 0, -262119, 0, -262118, 0, -196608, 0, -196607, 0, -196606, 0, -196605, 0, -196604, 0, -196603, 0, -196602, 0, -196601, 0, -196600, 0, -196599, 0, -196598, 3, -196597, 3, -196596, 0, -196592, 0, -196591, 0, -196590, 0, -196589, 0, -196588, 0, -196587, 1, -196586, 1, -196585, 1, -196584, 0, -196583, 0, -196582, 0, -131072, 0, -131071, 0, -131070, 0, -131069, 0, -131063, 0, -131062, 3, -131061, 3, -131060, 0, -131059, 1, -131058, 1, -131057, 1, -131056, 0, -131052, 0, -131051, 1, -131050, 1, -131049, 1, -131048, 1, -131047, 0, -131046, 0, -65536, 0, -65535, 0, -65534, 0, -65533, 0, -65528, 1, -65527, 0, -65526, 3, -65525, 3, -65524, 0, -65523, 1, -65522, 1, -65521, 1, -65520, 0, -65516, 0, -65515, 1, -65514, 1, -65513, 1, -65512, 1, -65511, 1, -65510, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 8, 1, 9, 0, 10, 3, 11, 3, 12, 0, 13, 0, 14, 0, 15, 0, 16, 0, 20, 0, 21, 1, 22, 1, 23, 1, 24, 1, 25, 1, 26, 0, 65541, 0, 65545, 0, 65546, 3, 65547, 3, 65548, 0, 65552, 0, 65556, 0, 65557, 1, 65558, 1, 65559, 1, 65560, 1, 65561, 1, 65562, 0, 131077, 0, 131081, 0, 131082, 3, 131083, 3, 131084, 0, 131088, 0, 131089, 1, 131091, 1, 131092, 0, 131093, 1, 131094, 1, 131095, 0, 131096, 0, 131097, 0, 131098, 1, 196613, 0, 196614, 0, 196615, 0, 196616, 0, 196617, 0, 196618, 3, 196619, 3, 196620, 0, 196624, 0, 196625, 1, 196627, 1, 196628, 0, 196629, 1, 196630, 1, 196631, 1, 196632, 1, 196633, 1, 196634, 1, 262149, 0, 262150, 0, 262151, 0, 262152, 0, 262153, 0, 262154, 0, 262155, 0, 262156, 0, 262157, 0, 262158, 0, 262159, 0, 262160, 0, 262164, 0, 262165, 1, 262166, 1, 262167, 1, 262168, 1, 262169, 1, 262170, 1, 262171, 1, 327685, 0, 327686, 0, 327687, 0, 327688, 6, 327689, 0, 327690, 0, 327691, 0, 327692, 0, 327693, 0, 327694, 0, 327695, 0, 327696, 0, 327697, 0, 327698, 0, 327699, 0, 327700, 0, 327701, 0, 327702, 0, 327703, 0, 327704, 0, 327705, 0, 327706, 0, 393220, 1, 393221, 0, 393222, 0, 393223, 0, 393224, 6, 393225, 0, 393226, 0, 393227, 0, 393228, 3, 393229, 1, 393230, 0, 393231, 0, 393232, 0, 393235, 0, 393236, 0, 393237, 0, 393238, 1, 393239, 1, 393240, 1, 393241, 1, 393242, 0, 458756, 1, 458757, 0, 458758, 0, 458759, 0, 458760, 6, 458761, 0, 458762, 0, 458763, 0, 458764, 3, 458765, 1, 458766, 0, 458767, 0, 458768, 0, 458771, 0, 458772, 0, 458773, 0, 458774, 1, 458775, 1, 458776, 1, 458777, 1, 458778, 0, 524293, 0, 524294, 0, 524295, 0, 524296, 0, 524297, 0, 524298, 0, 524299, 0, 524300, 0, 524301, 0, 524302, 0, 524303, 0, 524304, 0, 524307, 1, 524308, 1, 524309, 1, 524310, 1, 524311, 1, 589829, 0, 589830, 0, 589831, 0, 589832, 0, 589833, 0, 589834, 0, 589835, 0, 589836, 0, 589837, 0, 589838, 0, 589839, 0, 589840, 0, 589843, 1, 589844, 1, 589845, 1, 589847, 1, 655365, 0, 655366, 0, 655367, 0, 655368, 0, 655369, 0, 655372, 1, 655373, 1, 655378, 1, 655379, 1, 655380, 1, 720903, 1, 720904, 1, 720912, 1, 720913, 1, 720914, 1, 720915, 1, 720917, 1, 786445, 1, 786447, 1, 786448, 1, 786449, 1, 786450, 1, 786451, 1, 851981, 1, 851982, 1, 851983, 1, 851984, 1, 851985, 1, 851988, 1, 851989, 1, 917519, 1, 917520, 1 </int_array>
+				<int_array  len="668"> 					-851957, 1, -786421, 1, -786420, 1, -786419, 1, -720884, 1, -720883, 1, -655347, 1, -655346, 1, -589810, 1, -524273, 1, -458743, 0, -458742, 0, -458741, 0, -458740, 0, -458736, 1, -458735, 1, -393207, 0, -393206, 3, -393205, 3, -393204, 0, -393199, 1, -393198, 1, -393197, 1, -393196, 1, -393195, 1, -327671, 0, -327670, 3, -327669, 3, -327668, 0, -327662, 1, -327661, 1, -327659, 1, -327657, 1, -262139, 1, -262138, 1, -262135, 0, -262134, 3, -262133, 3, -262132, 0, -262126, 1, -262125, 1, -262124, 1, -262123, 1, -262122, 1, -262121, 1, -262120, 0, -262119, 0, -262118, 0, -196608, 0, -196607, 0, -196606, 0, -196605, 0, -196604, 0, -196603, 0, -196602, 0, -196601, 0, -196600, 0, -196599, 0, -196598, 3, -196597, 3, -196596, 0, -196592, 0, -196591, 0, -196590, 0, -196589, 0, -196588, 0, -196587, 1, -196586, 1, -196585, 1, -196584, 0, -196583, 0, -196582, 0, -131072, 0, -131071, 0, -131070, 0, -131069, 0, -131063, 0, -131062, 3, -131061, 3, -131060, 0, -131059, 1, -131058, 1, -131057, 1, -131056, 0, -131052, 0, -131051, 1, -131050, 1, -131049, 1, -131048, 1, -131047, 0, -131046, 0, -65536, 0, -65535, 0, -65534, 0, -65533, 0, -65528, 1, -65527, 0, -65526, 3, -65525, 3, -65524, 0, -65523, 1, -65522, 1, -65521, 1, -65520, 0, -65516, 0, -65515, 1, -65514, 1, -65513, 1, -65512, 1, -65511, 1, -65510, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 8, 1, 9, 0, 10, 3, 11, 3, 12, 0, 13, 0, 14, 0, 15, 0, 16, 0, 20, 0, 21, 1, 22, 1, 23, 1, 24, 1, 25, 1, 26, 0, 65541, 0, 65545, 0, 65546, 3, 65547, 3, 65548, 0, 65549, 0, 65550, 0, 65551, 0, 65552, 0, 65556, 0, 65557, 1, 65558, 1, 65559, 1, 65560, 1, 65561, 1, 65562, 0, 131077, 0, 131081, 0, 131082, 3, 131083, 3, 131084, 0, 131085, 0, 131086, 0, 131087, 0, 131088, 0, 131089, 1, 131091, 1, 131092, 0, 131093, 1, 131094, 1, 131095, 0, 131096, 0, 131097, 0, 131098, 1, 196613, 0, 196614, 0, 196615, 0, 196616, 0, 196617, 0, 196618, 3, 196619, 3, 196620, 0, 196621, 0, 196624, 0, 196625, 1, 196627, 1, 196628, 0, 196629, 1, 196630, 1, 196631, 1, 196632, 1, 196633, 1, 196634, 1, 262149, 0, 262150, 0, 262151, 0, 262152, 0, 262153, 0, 262154, 0, 262155, 0, 262156, 0, 262157, 0, 262158, 0, 262159, 0, 262160, 0, 262164, 0, 262165, 1, 262166, 1, 262167, 1, 262168, 1, 262169, 1, 262170, 1, 262171, 1, 327685, 0, 327686, 0, 327687, 0, 327688, 6, 327689, 0, 327690, 0, 327691, 0, 327692, 0, 327693, 0, 327694, 0, 327695, 0, 327696, 0, 327697, 0, 327698, 0, 327699, 0, 327700, 0, 327701, 0, 327702, 0, 327703, 0, 327704, 0, 327705, 0, 327706, 0, 393220, 1, 393221, 0, 393222, 0, 393223, 0, 393224, 6, 393225, 0, 393226, 0, 393227, 0, 393228, 3, 393229, 1, 393230, 0, 393231, 0, 393232, 0, 393235, 0, 393236, 0, 393237, 0, 393238, 1, 393239, 1, 393240, 1, 393241, 1, 393242, 0, 458756, 1, 458757, 0, 458758, 0, 458759, 0, 458760, 6, 458761, 0, 458762, 0, 458763, 0, 458764, 3, 458765, 1, 458766, 0, 458767, 0, 458768, 0, 458771, 0, 458772, 0, 458773, 0, 458774, 1, 458775, 1, 458776, 1, 458777, 1, 458778, 0, 524293, 0, 524294, 0, 524295, 0, 524296, 0, 524297, 0, 524298, 0, 524299, 0, 524300, 0, 524301, 0, 524302, 0, 524303, 0, 524304, 0, 524307, 1, 524308, 1, 524309, 1, 524310, 1, 524311, 1, 589829, 0, 589830, 0, 589831, 0, 589832, 0, 589833, 0, 589834, 0, 589835, 0, 589836, 0, 589837, 0, 589838, 0, 589839, 0, 589840, 0, 589843, 1, 589844, 1, 589845, 1, 589847, 1, 655365, 0, 655366, 0, 655367, 0, 655368, 0, 655369, 0, 655372, 1, 655373, 1, 655378, 1, 655379, 1, 655380, 1, 720903, 1, 720904, 1, 720912, 1, 720913, 1, 720914, 1, 720915, 1, 720917, 1, 786445, 1, 786447, 1, 786448, 1, 786449, 1, 786450, 1, 786451, 1, 851981, 1, 851982, 1, 851983, 1, 851984, 1, 851985, 1, 851988, 1, 851989, 1, 917519, 1, 917520, 1 </int_array>
 				<vector2> -125.877, 183.78 </vector2>
-				<resource  resource_type="Script" path="../active-partials/npcs/npc_Terminal.gd">  </resource>
-				<dictionary  shared="false">
-					<string> "_editor_collapsed" </string>
-					<bool> True </bool>
-				</dictionary>
+				<resource  resource_type="Script" path="../active-partials/npcs/npc.gd">  </resource>
 				<string> "Terminal" </string>
 				<nil>  </nil>
 				<int> 0 </int>
-				<resource  resource_type="Shape2D" path="local://1">  </resource>
+				<array  len="0" shared="false">
+				</array>
+				<resource  resource_type="Shape2D" path="local://10">  </resource>
 				<matrix32> 1, -0, 0, 1, 5.77136, -13.0829 </matrix32>
-				<resource  resource_type="Shape2D" path="local://2">  </resource>
+				<resource  resource_type="Shape2D" path="local://11">  </resource>
 				<matrix32> 1, -0, 0, 1, 12.4609, -19.1499 </matrix32>
 				<vector2> 0, 1 </vector2>
 				<real> 98 </real>
@@ -594,20 +610,27 @@
 				<real> -175 </real>
 				<real> 144 </real>
 				<real> 124 </real>
-				<resource  resource_type="Texture" path="../assets/fpo/computer_by_hydroksyde.png">  </resource>
-				<resource  resource_type="Script" path="local://6">  </resource>
+				<resource  resource_type="Texture" path="../assets/computer_by_hydroksyde.tex">  </resource>
+				<resource  resource_type="Script" path="local://13">  </resource>
 				<vector2> 5.77136, -13.0829 </vector2>
 				<vector2_array  len="4"> 					-99.6559, 38.5346, -29.1583, 84.7012, 97.8056, 12.9098, 32.99, -21.759 </vector2_array>
 				<vector2> 12.4609, -19.1499 </vector2>
-				<vector2_array  len="4"> 					-1.99669, 69.9959, 25.7041, 88.8325, 93.2941, 50.0513, 62.2692, 32.3228 </vector2_array>
+				<vector2_array  len="4"> 					-1.99669, 69.9959, 41.4161, 96.3699, 113.416, 60.3699, 62.2692, 32.3228 </vector2_array>
+				<vector2> 72.877, 42.22 </vector2>
 				<vector2> 203.634, 365.426 </vector2>
 				<resource  resource_type="Shape2D" path="local://5">  </resource>
 				<matrix32> 1, -0, 0, 1, 0, 0 </matrix32>
 				<vector2> 0, 0 </vector2>
+				<dictionary  shared="false">
+					<string> "_editor_collapsed" </string>
+					<bool> True </bool>
+				</dictionary>
 				<vector2> 9.97232, -34.349 </vector2>
 				<resource  resource_type="Texture" path="../assets/fpo/basic_block128.tex">  </resource>
 				<vector2_array  len="9"> 					-14.634, 12.574, -41.634, 30.574, -14.634, 48.574, 12.366, 30.574, 48.366, 48.574, 120.366, 12.574, 84.366, -5.42599, 102.366, -14.426, 66.366, -32.426 </vector2_array>
 				<resource  resource_type="PackedScene" path="../active-partials/player/player-k2d.xml">  </resource>
+				<vector2> 302, 320 </vector2>
+				<int> 15 </int>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
 					<string> "2D" </string>
@@ -747,6 +770,23 @@
 				<int> -10000000 </int>
 				<int> 10000000 </int>
 				<real> 0.5 </real>
+				<vector2> 553.5, 216 </vector2>
+				<resource  resource_type="Script" path="local://7">  </resource>
+				<string> "Garrus" </string>
+				<resource  resource_type="Texture" path="../assets/fpo/garrus-port.png">  </resource>
+				<resource  resource_type="Shape2D" path="local://12">  </resource>
+				<matrix32> 1, -0, 0, 1, 0, 0 </matrix32>
+				<int> 16 </int>
+				<real> -58 </real>
+				<real> -81 </real>
+				<real> 61 </real>
+				<real> 60.300003 </real>
+				<resource  resource_type="Texture" path="../assets/garrus-sprite.tex">  </resource>
+				<vector2> 0.3, 0.3 </vector2>
+				<resource  resource_type="Script" path="local://9">  </resource>
+				<vector2> 1, 1 </vector2>
+				<vector2_array  len="4"> 					-76.5, 18, -4.5, -9, 76.5, 36, 22.5, 63 </vector2_array>
+				<vector2> -66.5, 55 </vector2>
 				<resource  resource_type="Texture" path="../assets/tiles/green-outline-glow.png">  </resource>
 				<vector2> 1, 1 </vector2>
 				<dictionary  shared="false">

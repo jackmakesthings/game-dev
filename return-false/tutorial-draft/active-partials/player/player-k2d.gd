@@ -67,6 +67,7 @@ func _fixed_process(delta):
 		var to_walk = delta*SPEED
 		
 		while(to_walk>0 and path.size()>=2):
+			is_moving = true
 		
 			# prepare path segments
 			var pfrom = path[path.size()-1]
@@ -98,16 +99,12 @@ func _fixed_process(delta):
 			path=[]
 			set_fixed_process(false)
 			
-			var t = Timer.new()
-			t.set_wait_time(0.6)
-			t.set_one_shot(true)
-			add_child(t)
-			t.start()
-			yield(t, "timeout")
 			emit_signal("done_moving", get_global_pos())
+			is_moving = false
 				
 	else:
 		set_fixed_process(false)
+		is_moving = false
 
 
 
@@ -126,8 +123,10 @@ func update_path(start, end, nav):
 
 
 func _ready():
+	nav = get_node("/root/scene/stage/nav")
 	spr = get_node("Sprite")
 	front_texture = spr.get_texture()
+	is_moving = false
 	
 	# don't break if there is no back texture set
 	if( back_texture == null):

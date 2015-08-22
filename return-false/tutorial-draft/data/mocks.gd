@@ -5,6 +5,8 @@ extends Node
 
 class MUI:
 
+	extends Node
+
 	#### dialogue data
 	
 	var dialogue_text_str = "This is a string of dialogue. "
@@ -55,6 +57,10 @@ class MUI:
 #### Journal data
 
 class JRNL:
+
+	extends Node
+
+	var mocks = self
 
 	var entry1 = {
 		entry_id = 001,
@@ -115,19 +121,27 @@ class JRNL:
 
 
 class NPC_0:
+
+	extends Node
+
+	var mocks = self
+	var MUI = get_node("/root/scene/message-ui")
 		
-	var label = "Engineer"
-	var portrait_path = "res://assets/fpo/portrait-dude-mohawk.png"
-	
+	export var label = "Engineer"
+	export var portrait_path = "res://assets/fpo/generic-dude.png"
+		
 	var dlg_no_branches = {
 		text = "Can this wait? I'm in the middle of some calibrations.",
 		responses = [{
 			text = "<Leave>",
 			actions = [ {
 				fn = "close",
-				target = get_node("/root/scene/message-ui"),
+				target = self,
 				args = []
 			} ]
-		} ]
+		}]
 	}
-
+	
+	func close():
+		MUI = get_tree().get_root().get_node("/root/scene/message-ui")
+		MUI.close()
