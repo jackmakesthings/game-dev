@@ -12,7 +12,7 @@ var tiles
 var outline
 var movement_allowed = true
 
-const TILE_ATTRACT = 1
+const TILE_ATTRACT = 7
 
 # shortcut for checking which tile type is at (x,y)
 func tile_at(point):
@@ -46,6 +46,8 @@ func _unhandled_input(ev):
 
 	# Move character around on click
 	if (ev.type == InputEvent.MOUSE_BUTTON and ev.pressed and ev.button_index==1):
+		
+		
 		
 		var begin = player.get_global_pos()
 		
@@ -82,6 +84,9 @@ func _unhandled_input(ev):
 			else:
 				outline.set_global_pos(end)
 				
+			if( ev.meta == 1 ):
+				outline.hide()
+		
 			yield(player, "done_moving")
 			outline.hide()
 			get_surrounding_tiles(player.get_global_pos())

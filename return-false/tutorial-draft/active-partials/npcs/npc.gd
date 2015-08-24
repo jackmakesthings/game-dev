@@ -31,36 +31,40 @@ const TRIGGER_UNIQUE = 3
 export var dialog_branches = Array()
 export(bool) var has_branches = false
 
+var player_nearby = false
+
 var utils
 var data = ResourceLoader.load("res://data/mocks.gd")
 var MUI
 var body_node
 var player
 var x
+var n
 
+signal player_redirected(successful, expected, actual)
 
-func start_interaction():
-	print("boop")
-	pass
 
 
 func setup_MUI(portrait_path, label):
 	var pic = ImageTexture.new()
 	pic.load(portrait_path)
 	
-	if not (portrait == null):
-		pic = portrait
+	if not (self.portrait == null):
+		pic = self.portrait
 	
 	if not (self.label == ""):
 		label = self.label
-		
+	
+	MUI.make_portrait(null)
 	MUI.make_portrait(pic)
-	MUI.make_formatted_name(label)
+	MUI.make_dialogue(n)
 
 
-func i_should_go(dlg):
-	var d0 = dlg["dlg_no_branches"]
+
+func i_should_go(src):
+	var d0 = src["dlg_no_branches"]
 	MUI.clear()
+	MUI.make_dialogue(n)
 	MUI.make_dialogue(d0["text"])
 	MUI.make_responses(d0["responses"], false)
 	
@@ -79,22 +83,18 @@ func present_conversations(dialog_branches):
 	#### this should get refactored into a proper init_branch method
 	# either on NPC or MUI (or on Quest/Branch, maybe)
 		response["actions"] = [
-			{
-			fn = "clear",
+			{ fn = "clear",
 			target = MUI,
-			args = []
-			},
-			{
-		#	fn = "make_dialogue",
-		#	target = MUI,
-		#	args = [branch["key"]]
-			fn = "init_branch",
+			args = []},
+			{ fn = "init_branch",
 			target = self,
-			args = [branch["key"]]
-		}]
+			args = [branch["key"]]}
+		]
+
 		options.append(response)
 	
 	MUI.clear()
+	MUI.make_dialogue(n)
 	MUI.make_dialogue(branch_root_text)
 	MUI.make_responses(options, false);
 	MUI.open()
@@ -103,115 +103,80 @@ func present_conversations(dialog_branches):
 # stub until branches are set up
 func init_branch(key):
 	MUI.clear()
+	MUI.make_dialogue(n)
 	MUI.make_dialogue(key)
 	MUI.make_close_button()
-	
 
-func bring_to(obj, x):
-	var offset = x.get_global_pos()
+
+func redirect_player(player, destination):
+
+	player.set_fixed_process(false)
+
+	var offset = destination.get_global_pos()
 	offset = get_canvas_transform().xform(offset)
-	#player.update_path(player.get_global_pos(), offset, player["nav"])
-	
-	
-	var ev = InputEvent()
-	ev.type = InputEvent.MOUSE_BUTTON
-	# button_index is only available for the above type
-	ev.button_index=BUTTON_LEFT
-	ev.pressed = true
-	ev.global_pos = offset
-	get_tree().input_event(ev)
-	
-func hold(t, time):
-	t.set_wait_time(time)
-	t.set_one_shot(true)
-	add_child(t)
-	t.start()
+	utils.fake_click(offset, 1)
 
-### this is probably going away now that we can do it with tiles
-func prepare_to_interact(obj):
-	var o
-	# check if the player is overlapping our trigger area
-	if( obj["is_moving"] == true ):
-		yield(obj, "done_moving")
-		o = body_node.get_overlapping_bodies()
-	
-	else:
-		o = body_node.get_overlapping_bodies()
-	
-	# if the player kept moving, never mind
-	if( o.empty() ):
-		if( trigger_mode == TRIGGER_DIRECT ):
-		
-			bring_to(obj, x)
-					
-					
-			yield(obj, "done_moving")
-			
-			var t = Timer.new()
-			hold(t, 0.2)
-			yield(t, "timeout")	
-			
-			if(npc_type == T_CHAR):
-			
-				var dlg = data.NPC_0.new()
-				add_child(dlg)
-				setup_MUI(dlg["portrait_path"], dlg["label"])
-				
-				
-				if( dialog_branches.empty() ):
-					i_should_go(dlg)
-				else:
-					present_conversations(dialog_branches)
+	yield(player, "oriented")
 
+	emit_signal("player_redirected", player_is_nearby(), destination, player.get_global_pos())
+
+func _on_body_enter(body_id, body_obj, body_shape_id, area_shape_id):
+	if( body_obj == player ):
+		player_nearby = true
+
+
+func _on_body_exit(body_id, body_obj, body_shape_id, area_shape_id):
+	if( body_obj == player ):
+		player_nearby = false;
+
+
+func player_is_nearby():
+	return player_nearby
+
+
+func _on_click():
+	player.set("path", Array())
+	if( player_is_nearby() == false):
+		redirect_player(player, x)
+		#yield(self, "player_redirected")
+		yield(player, "done_moving")
 		
-		elif( trigger_mode == TRIGGER_PROX ):
+		if( player_is_nearby() == true ):
+			get_tree().set_input_as_handled()
+			var src = data.NPC_0.new()
+			start_interaction(src)
+		else:
 			return
-
-		
-	# but if they stopped here...
-	elif( o[0] == obj ):
-	
-		
-		if(npc_type == T_CHAR):
-		
-			var dlg = data.NPC_0.new()
-			add_child(dlg)
-			setup_MUI(dlg["portrait_path"], dlg["label"])
 			
-			
-			if( dialog_branches.empty() ):
-				i_should_go(dlg)
-			else:
-				present_conversations(dialog_branches)
-			
-			
-#		var obj_pos = obj.get_pos()
-#		var self_pos = get_pos()
-#		var angle = rad2deg(obj_pos.angle_to_point(self_pos)) 
-#		var dir_to_face = utils.angle_to_compass(angle)
-#		reorient(obj, dir_to_face)
-
-
-func reorient(node, towards):
-	node.orient(towards)
-
-
-func on_approach(body_id, body_obj, body_shape_id, area_shape_id):
-	# triggered by the player?
-	if( not body_obj extends KinematicBody2D ):
-		return
-	prepare_to_interact(body_obj)
-	#print("Body id: ", body_id)
-	#print("Body object: ", body_obj)
-	#print("Body shape: ", body_shape_id)
-	#print("Area shape: ", area_shape_id)
-
-
-func on_click(player_obj):
-	var o = body_node.get_overlapping_bodies()
-	if( o.find(player_obj) ):
+	else:
 		get_tree().set_input_as_handled()
-		prepare_to_interact(player_obj)
+		var src = data.NPC_0.new()
+		start_interaction(src)
+
+
+
+func wait(time):
+	var t = Timer.new()
+	t.set_one_shot(true)
+	t.set_wait_time(time)
+	return t
+	
+
+
+func start_interaction(src):
+	add_child(src)
+	setup_MUI("", src["label"])
+	
+	var pause = wait(0.5)
+	add_child(pause)
+	pause.start()
+	yield(pause, "timeout")
+	
+	if( dialog_branches.empty() ):
+		i_should_go(src)
+	else:
+		present_conversations(dialog_branches)
+
 
 
 # this exists just to be easily overridden
@@ -219,18 +184,27 @@ func set_branches():
 	dialog_branches.append({ "label" : "My hardware", "key": "hw", "txt": "Your hardware is awesome." })
 	dialog_branches.append({ "label" : "My software", "key": "sw", "txt": "Your software needs upgrades." })
 
+
+
 func _ready():
+
+	add_user_signal("player_redirected", ["successful", "expected", "actual"])
+
 	utils = get_node("/root/utils")
 	data = ResourceLoader.load("res://data/mocks.gd")
 	player = get_node("/root/scene").get("player")
+	MUI = get_node("/root/scene/message-ui")
 	body_node = get_node("body")
 	x = get_node("X")
 	
+	n = MUI.make_formatted_name(label)
+	
 	add_child(data)
 	set_branches()
-	MUI = get_node("/root/scene/message-ui")
-	if( trigger_mode == TRIGGER_DIRECT ):
-		get_node("body/Sprite").connect("pressed", self, "on_click", [player])
-	#elif( trigger_mode == TRIGGER_PROX ):
-	#	get_node("body/Sprite").connect("pressed", self, "on_click", [player])
-	#	get_node("body").connect("body_enter_shape", self, "on_approach")
+
+
+	body_node.connect("body_enter_shape", self, "_on_body_enter")
+	body_node.connect("body_exit_shape", self, "_on_body_exit")
+
+	#if( trigger_mode == TRIGGER_DIRECT ):
+	get_node("body/Sprite").connect("pressed", self, "_on_click")

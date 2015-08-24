@@ -86,6 +86,9 @@ func show_journal():
 	#player.update_path(cur_pos, cur_pos)
 	player.set_fixed_process(false)
 	
+func hide_journal():
+	_on_Panel_popup_hide()
+	
 
 func _on_Panel_popup_hide():
 	self.hide()

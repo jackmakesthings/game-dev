@@ -118,7 +118,7 @@ func make_portrait(npc_texture):
 	portrait.set("texture", npc_texture)
 
 func make_formatted_name(npc_name):
-	return "[color=#ff8833] ~" + str(npc_name).to_lower() + ":> [/color]"
+	return "[color=#ff8833][b]" + str(npc_name).to_lower() + ">[/b] [/color]"
 
 ####### open/close ########
 

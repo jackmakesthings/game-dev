@@ -6,6 +6,8 @@ export(String, FILE) var file = "res://assets/dialogue-tree-json.txt"
 
 var debug = true
 
+# get_json(file)
+# Load and parse data from a json file (by path)
 func get_json(file):
 	var json = File.new()
 	json.open(file, 1)
@@ -19,9 +21,33 @@ func get_json(file):
 		return d
 
 
+func save_game(dest):
+	pass
+
+func load_game(src):
+	pass
+
+func exit_game():
+	pass
 
 
 
+# fake_click(position, flags)
+# Simulate a click somewhere on the map - used by NPCs
+# to "attract" the player character over to them
+# Use "flags" if extra options are needed
+func fake_click(position, flags=0):
+	var ev = InputEvent()	
+	ev.type = InputEvent.MOUSE_BUTTON
+	ev.button_index=BUTTON_LEFT
+	ev.pressed = true
+	ev.global_pos = position
+	ev.meta = flags
+	get_tree().input_event(ev)
+
+
+# angle_to_compass(angle)
+# needs revision, but this is for mapping positions and directions
 static func angle_to_compass(angle):
 
 	var compass_dir
@@ -45,6 +71,14 @@ static func angle_to_compass(angle):
 		compass_dir = "S"
 		
 	return compass_dir
+
+
+
+
+
+
+
+
 
 
 func dprint(whatever):

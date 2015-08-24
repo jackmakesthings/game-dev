@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="22" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
+<resource_file type="PackedScene" subresource_count="31" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
 	<ext_resource path="res://main.gd" type="Script"></ext_resource>
 	<ext_resource path="res://active-partials/message-ui/message-ui2.xml" type="PackedScene"></ext_resource>
 	<ext_resource path="res://active-partials/environment/walkable-area.gd" type="Script"></ext_resource>
@@ -7,19 +7,21 @@
 	<ext_resource path="res://active-partials/npcs/npc.gd" type="Script"></ext_resource>
 	<ext_resource path="res://assets/computer_by_hydroksyde.tex" type="Texture"></ext_resource>
 	<ext_resource path="res://assets/fpo/basic_block128.tex" type="Texture"></ext_resource>
+	<ext_resource path="res://assets/fpo/white-block-lighter.png" type="Texture"></ext_resource>
 	<ext_resource path="res://active-partials/player/player-k2d.xml" type="PackedScene"></ext_resource>
 	<ext_resource path="res://assets/fpo/garrus-port.png" type="Texture"></ext_resource>
 	<ext_resource path="res://assets/garrus-sprite.tex" type="Texture"></ext_resource>
+	<ext_resource path="res://assets/fpo/garrus-sprite-light.png" type="Texture"></ext_resource>
+	<ext_resource path="res://assets/fpo/tall-white-block.png" type="Texture"></ext_resource>
+	<ext_resource path="res://assets/fpo/tall-white-block-hover.png" type="Texture"></ext_resource>
 	<ext_resource path="res://assets/tiles/green-outline-glow.png" type="Texture"></ext_resource>
 	<ext_resource path="res://active-partials/interface/interface.gd" type="Script"></ext_resource>
-	<ext_resource path="res://assets/fpo/text171 (1).png" type="Texture"></ext_resource>
+	<ext_resource path="res://assets/ui/list31 (1).tex" type="Texture"></ext_resource>
+	<ext_resource path="res://assets/ui/list31.tex" type="Texture"></ext_resource>
+	<ext_resource path="res://assets/ui/code39 (2).tex" type="Texture"></ext_resource>
+	<ext_resource path="res://assets/ui/code39 (1).tex" type="Texture"></ext_resource>
 	<ext_resource path="res://active-partials/journal/base_journal.xscn" type="PackedScene"></ext_resource>
-	<resource type="ConvexPolygonShape2D" path="local://10">
-		<real name="custom_solver_bias"> 0 </real>
-		<vector2_array name="points" len="4"> 			-99.6559, 38.5346, 32.99, -21.759, 97.8056, 12.9098, -29.1583, 84.7012 </vector2_array>
-
-	</resource>
-	<resource type="ConvexPolygonShape2D" path="local://11">
+	<resource type="ConvexPolygonShape2D" path="local://14">
 		<real name="custom_solver_bias"> 0 </real>
 		<vector2_array name="points" len="4"> 			113.416, 60.3699, 41.4161, 96.3699, -1.99669, 69.9959, 62.2692, 32.3228 </vector2_array>
 
@@ -28,22 +30,38 @@
 		<string name="script/source"> "extends TextureButton&#000a;&#000a;var hexTexture = preload(&quot;res://assets/computer_by_hydroksyde.tex&quot;)&#000a;&#000a;&#000a;func _ready():&#000a;&#000a;   #set texture&#000a;   self.set_normal_texture(hexTexture)&#000a;   #self.get_normal_texture().size = Vector2(_tile_size, _tile_size)&#000a;&#000a;   #create the image for the bitmap&#000a;   var image = Image()&#000a;   image.load(&quot;res://assets/fpo/computer_by_hydroksyde.png&quot;)&#000a;   &#000a;   image = image.resized(hexTexture.get_width(), hexTexture.get_height())&#000a;&#000a;   #make sure the mask is the same size as the texture&#000a;   #image = image.resized(_tile_size, _tile_size)&#000a;   &#000a;   #create a new bitmap from the alpha channel of the resized image&#000a;   var bitMap = BitMap.new()&#000a;   bitMap.create_from_image_alpha(image)&#000a;  &#000a;   #assign the bitmap to the click mask&#000a;   set_click_mask(bitMap)&#000a;  " </string>
 
 	</resource>
-	<resource type="ConcavePolygonShape2D" path="local://5">
+	<resource type="GDScript" path="local://16">
+		<string name="script/source"> "extends &quot;res://active-partials/npcs/npc.gd&quot;&#000a;&#000a;&#000a;func _init():&#000a;&#0009;id = 003&#000a;&#0009;trigger_mode = 0&#000a;&#0009;label = &quot;test-cube&quot;&#000a;&#0009;&#000a;func set_branches():&#000a;&#0009;dialog_branches = Array()&#000a;&#0009;&#000a;" </string>
+
+	</resource>
+	<resource type="ConvexPolygonShape2D" path="local://20">
 		<real name="custom_solver_bias"> 0 </real>
-		<vector2_array name="segments" len="18"> 			-14.634, 12.574, -41.634, 30.574, -41.634, 30.574, -14.634, 48.574, -14.634, 48.574, 12.366, 30.574, 12.366, 30.574, 48.366, 48.574, 48.366, 48.574, 120.366, 12.574, 120.366, 12.574, 84.366, -5.42599, 84.366, -5.42599, 102.366, -14.426, 102.366, -14.426, 66.366, -32.426, 66.366, -32.426, -14.634, 12.574 </vector2_array>
+		<vector2_array name="points" len="4"> 			12.366, 30.574, 84.366, -5.42599, 120.366, 12.574, 48.366, 48.574 </vector2_array>
 
 	</resource>
 	<resource type="GDScript" path="local://7">
 		<string name="script/source"> "extends &quot;res://active-partials/npcs/npc.gd&quot;&#000a;&#000a;&#000a;func _init():&#000a;&#0009;id = 002&#000a;&#0009;trigger_mode = 0&#000a;&#0009;label = &quot;Garrus&quot;&#000a;&#0009;&#000a;func set_branches():&#000a;&#0009;dialog_branches = Array()&#000a;&#0009;&#000a;&#000a;&#000a;func _ready():&#000a;&#0009;utils = get_node(&quot;/root/utils&quot;)&#000a;&#0009;data = ResourceLoader.load(&quot;res://data/mocks.gd&quot;)&#000a;&#0009;player = get_node(&quot;/root/scene&quot;).get(&quot;player&quot;)&#000a;&#0009;body_node = get_node(&quot;body&quot;)&#000a;&#0009;x = get_node(&quot;X&quot;)&#000a;&#0009;&#000a;&#0009;add_child(data)&#000a;&#0009;set_branches()&#000a;&#0009;MUI = get_node(&quot;/root/scene/message-ui&quot;)&#000a;&#0009;if( trigger_mode == TRIGGER_DIRECT ):&#000a;&#0009;&#0009;get_node(&quot;body/Sprite&quot;).connect(&quot;pressed&quot;, self, &quot;on_click&quot;, [player])&#000a;" </string>
 
 	</resource>
-	<resource type="ConvexPolygonShape2D" path="local://12">
+	<resource type="ConvexPolygonShape2D" path="local://23">
 		<real name="custom_solver_bias"> 0 </real>
-		<vector2_array name="points" len="4"> 			-76.5, 18, -4.5, -9, 76.5, 36, 22.5, 63 </vector2_array>
+		<vector2_array name="points" len="4"> 			94.5, 36, -13.5, 90, -121.5, 36, -13.5, -18 </vector2_array>
 
 	</resource>
-	<resource type="GDScript" path="local://9">
-		<string name="script/source"> "extends TextureButton&#000a;&#000a;var hexTexture = preload(&quot;res://assets/garrus-sprite.tex&quot;)&#000a;&#000a;&#000a;func _ready():&#000a;&#000a;   #set texture&#000a;   self.set_normal_texture(hexTexture)&#000a;   #self.get_normal_texture().size = Vector2(_tile_size, _tile_size)&#000a;&#000a;   #create the image for the bitmap&#000a;   var image = Image()&#000a;   image.load(&quot;res://assets/fpo/garrus-sprite.png&quot;)&#000a;   &#000a;   image = image.resized(hexTexture.get_width(), hexTexture.get_height())&#000a;&#000a;   #make sure the mask is the same size as the texture&#000a;   #image = image.resized(_tile_size, _tile_size)&#000a;   &#000a;   #create a new bitmap from the alpha channel of the resized image&#000a;   var bitMap = BitMap.new()&#000a;   bitMap.create_from_image_alpha(image)&#000a;  &#000a;   #assign the bitmap to the click mask&#000a;  # set_click_mask(bitMap)&#000a;  " </string>
+	<resource type="GDScript" path="local://19">
+		<string name="script/source"> "extends &quot;res://active-partials/npcs/npc.gd&quot;&#000a;&#000a;&#000a;func _init():&#000a;&#0009;id = 003&#000a;&#0009;trigger_mode = 0&#000a;&#0009;label = &quot;test-cube&quot;&#000a;&#0009;&#000a;func set_branches():&#000a;&#0009;dialog_branches = Array()&#000a;&#0009;&#000a;" </string>
+
+	</resource>
+	<resource type="ConvexPolygonShape2D" path="local://22">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2_array name="points" len="4"> 			-50, 13, 31, -23, 139, -5, -5, 67 </vector2_array>
+
+	</resource>
+	<resource type="StyleBoxEmpty" path="local://24">
+		<real name="content_margin/left"> -1 </real>
+		<real name="content_margin/right"> -1 </real>
+		<real name="content_margin/top"> -1 </real>
+		<real name="content_margin/bottom"> -1 </real>
 
 	</resource>
 	<main_resource>
@@ -51,9 +69,9 @@
 			<string> "conn_count" </string>
 			<int> 1 </int>
 			<string> "conns" </string>
-			<int_array  len="6"> 				28, 25, 122, 121, 2, 0 </int_array>
+			<int_array  len="6"> 				34, 31, 116, 115, 2, 0 </int_array>
 			<string> "names" </string>
-			<string_array  len="123">
+			<string_array  len="117">
 				<string> "scene" </string>
 				<string> "Node2D" </string>
 				<string> "script/script" </string>
@@ -63,6 +81,7 @@
 				<string> "message-ui" </string>
 				<string> "CanvasLayer" </string>
 				<string> "_import_path" </string>
+				<string> "layer" </string>
 				<string> "stage" </string>
 				<string> "nav" </string>
 				<string> "Navigation2D" </string>
@@ -84,6 +103,7 @@
 				<string> "tile_data" </string>
 				<string> "bodies" </string>
 				<string> "YSort" </string>
+				<string> "z/z" </string>
 				<string> "sort/enabled" </string>
 				<string> "terminal" </string>
 				<string> "transform/pos" </string>
@@ -96,14 +116,10 @@
 				<string> "has_branches" </string>
 				<string> "body" </string>
 				<string> "Area2D" </string>
-				<string> "z/z" </string>
 				<string> "input/pickable" </string>
 				<string> "shapes/0/shape" </string>
 				<string> "shapes/0/transform" </string>
 				<string> "shapes/0/trigger" </string>
-				<string> "shapes/1/shape" </string>
-				<string> "shapes/1/transform" </string>
-				<string> "shapes/1/trigger" </string>
 				<string> "gravity_vec" </string>
 				<string> "gravity" </string>
 				<string> "linear_damp" </string>
@@ -119,25 +135,20 @@
 				<string> "size_flags/horizontal" </string>
 				<string> "size_flags/vertical" </string>
 				<string> "toggle_mode" </string>
+				<string> "click_on_press" </string>
 				<string> "textures/normal" </string>
 				<string> "textures/pressed" </string>
 				<string> "textures/hover" </string>
 				<string> "textures/disabled" </string>
 				<string> "textures/focused" </string>
-				<string> "collision" </string>
+				<string> "trigger" </string>
 				<string> "CollisionPolygon2D" </string>
 				<string> "build_mode" </string>
 				<string> "polygon" </string>
-				<string> "trigger" </string>
 				<string> "X" </string>
 				<string> "Position2D" </string>
 				<string> "test-cube" </string>
-				<string> "StaticBody2D" </string>
-				<string> "constant_linear_velocity" </string>
-				<string> "constant_angular_velocity" </string>
-				<string> "friction" </string>
-				<string> "bounce" </string>
-				<string> "texture" </string>
+				<string> "visibility/opacity" </string>
 				<string> "robot" </string>
 				<string> "KinematicBody2D" </string>
 				<string> "Camera2D" </string>
@@ -157,13 +168,12 @@
 				<string> "drag_margin/right" </string>
 				<string> "drag_margin/bottom" </string>
 				<string> "garrus" </string>
-				<string> "click_on_press" </string>
 				<string> "params/scale" </string>
-				<string> "transform/scale" </string>
+				<string> "test-cube1" </string>
 				<string> "destination_sprite" </string>
 				<string> "visibility/visible" </string>
+				<string> "texture" </string>
 				<string> "interface" </string>
-				<string> "layer" </string>
 				<string> "offset" </string>
 				<string> "rotation" </string>
 				<string> "scale" </string>
@@ -171,19 +181,21 @@
 				<string> "Panel" </string>
 				<string> "anchor/right" </string>
 				<string> "anchor/bottom" </string>
+				<string> "custom_styles/panel" </string>
 				<string> "buttons" </string>
 				<string> "VBoxContainer" </string>
 				<string> "journal" </string>
+				<string> "menu" </string>
 				<string> "journal_ui" </string>
 				<string> "_on_journal_pressed" </string>
 				<string> "pressed" </string>
 			</string_array>
 			<string> "node_count" </string>
-			<int> 30 </int>
+			<int> 37 </int>
 			<string> "nodes" </string>
-			<int_array  len="584"> 				-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 0, 0, 0, 5, 4, -1, 0, 0, 0, 0, 7, 6, 2, 2, 8, 3, 3, 4, 0, 0, 0, 1, 9, -1, 2, 2, 5, 3, 6, 0, 3, 0, 11, 10, -1, 0, 0, 4, 0, 13, 12, -1, 14, 14, 7, 15, 8, 16, 9, 17, 10, 18, 11, 19, 12, 20, 7, 21, 13, 22, 14, 23, 15, 24, 16, 25, 7, 26, 7, 27, 17, 0, 5, 0, 29, 28, -1, 1, 30, 13, 0, 6, 0, 1, 31, -1, 9, 32, 18, 2, 19, 33, 7, 34, 20, 35, 21, 36, 22, 37, 22, 38, 23, 39, 13, 0, 7, 0, 41, 40, -1, 12, 42, 7, 43, 14, 44, 24, 45, 25, 46, 14, 47, 26, 48, 27, 49, 13, 50, 28, 51, 29, 52, 30, 53, 15, 0, 8, 0, 55, 54, -1, 15, 56, 31, 57, 32, 58, 33, 59, 34, 60, 14, 61, 13, 62, 12, 63, 12, 64, 14, 65, 35, 66, 35, 67, 35, 68, 35, 69, 35, 2, 36, 0, 8, 0, 71, 70, -1, 4, 32, 37, 72, 22, 73, 38, 74, 14, 0, 8, 0, 71, 74, -1, 4, 32, 39, 72, 22, 73, 40, 74, 13, 0, 7, 0, 76, 75, -1, 1, 32, 41, 0, 6, 0, 78, 77, -1, 12, 32, 42, 43, 14, 44, 43, 45, 44, 46, 13, 25, 7, 26, 7, 79, 45, 80, 16, 81, 15, 82, 16, 3, 46, 0, 13, 0, 54, 54, -1, 2, 32, 47, 83, 48, 0, 13, 0, 71, 74, -1, 3, 72, 7, 73, 49, 74, 13, 0, 6, 0, 85, 84, 50, 5, 8, 3, 32, 51, 42, 7, 25, 52, 3, 53, 0, 16, 0, 86, 86, -1, 15, 87, 7, 88, 14, 89, 13, 90, 16, 91, 54, 92, 55, 93, 55, 94, 56, 95, 56, 96, 13, 97, 13, 98, 57, 99, 57, 100, 57, 101, 57, 0, 6, 0, 1, 102, -1, 10, 32, 58, 42, 7, 2, 59, 33, 12, 34, 60, 35, 61, 36, 22, 37, 22, 38, 23, 39, 14, 0, 18, 0, 41, 40, -1, 10, 42, 7, 43, 13, 44, 62, 45, 63, 46, 13, 50, 28, 51, 29, 52, 30, 53, 15, 25, 64, 0, 19, 0, 55, 54, -1, 16, 56, 65, 57, 66, 58, 67, 59, 68, 60, 14, 61, 13, 62, 12, 63, 12, 64, 14, 103, 13, 65, 69, 66, 69, 68, 69, 69, 69, 104, 70, 2, 71, 0, 19, 0, 71, 74, -1, 5, 105, 72, 42, 7, 72, 22, 73, 73, 74, 13, 0, 18, 0, 76, 75, -1, 1, 32, 74, 0, 3, 0, 54, 106, -1, 2, 107, 14, 83, 75, 0, 0, 0, 7, 108, -1, 5, 109, 7, 110, 45, 111, 16, 112, 76, 3, 77, 0, 24, 0, 113, 1, -1, 5, 60, 14, 61, 13, 62, 12, 63, 12, 2, 78, 0, 25, 0, 114, 114, -1, 10, 115, 7, 116, 7, 56, 79, 57, 80, 58, 81, 59, 82, 60, 14, 61, 13, 62, 12, 63, 12, 0, 26, 0, 118, 117, -1, 6, 115, 7, 116, 7, 60, 14, 61, 14, 62, 12, 63, 12, 0, 27, 0, 55, 119, -1, 12, 58, 83, 59, 84, 60, 14, 61, 13, 62, 12, 63, 12, 64, 14, 65, 85, 66, 85, 67, 85, 68, 85, 69, 85, 0, 0, 0, 1, 120, 86, 2, 8, 3, 3, 87, 0 </int_array>
+			<int_array  len="779"> 				-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 0, 0, 0, 5, 4, -1, 0, 0, 0, 0, 7, 6, 2, 3, 8, 3, 9, 4, 3, 5, 0, 0, 0, 1, 10, -1, 2, 2, 6, 3, 7, 0, 3, 0, 12, 11, -1, 1, 3, 8, 0, 4, 0, 14, 13, -1, 15, 15, 9, 16, 10, 17, 11, 18, 12, 19, 13, 20, 4, 21, 9, 22, 14, 23, 15, 24, 16, 25, 17, 26, 9, 27, 9, 28, 18, 3, 19, 0, 5, 0, 30, 29, -1, 2, 31, 9, 32, 14, 0, 6, 0, 1, 33, -1, 10, 34, 20, 31, 9, 2, 21, 35, 9, 36, 22, 37, 23, 38, 24, 39, 24, 40, 25, 41, 14, 0, 7, 0, 43, 42, -1, 8, 44, 15, 45, 26, 46, 27, 47, 14, 48, 28, 49, 29, 50, 30, 51, 16, 0, 8, 0, 53, 52, -1, 16, 54, 31, 55, 32, 56, 33, 57, 34, 58, 15, 59, 15, 60, 4, 61, 4, 62, 15, 63, 14, 64, 35, 65, 35, 66, 35, 67, 35, 68, 35, 2, 36, 0, 8, 0, 70, 69, -1, 4, 34, 37, 71, 24, 72, 38, 69, 14, 0, 7, 0, 74, 73, -1, 1, 34, 39, 0, 6, 0, 1, 75, -1, 10, 34, 40, 31, 9, 2, 41, 35, 42, 36, 43, 37, 23, 38, 24, 39, 24, 40, 25, 41, 15, 0, 12, 0, 43, 42, -1, 8, 44, 15, 45, 44, 46, 45, 47, 14, 48, 28, 49, 29, 50, 30, 51, 16, 0, 13, 0, 53, 52, -1, 14, 54, 46, 55, 47, 56, 48, 57, 49, 58, 15, 59, 15, 60, 4, 61, 4, 62, 15, 64, 50, 65, 51, 66, 51, 67, 50, 68, 50, 0, 13, 0, 70, 69, -1, 4, 76, 52, 71, 24, 72, 53, 69, 14, 0, 12, 0, 74, 73, -1, 1, 34, 54, 0, 6, 0, 78, 77, 55, 5, 8, 3, 34, 56, 31, 9, 26, 57, 3, 58, 0, 17, 0, 79, 79, -1, 15, 80, 9, 81, 15, 82, 14, 83, 17, 84, 59, 85, 60, 86, 60, 87, 61, 88, 61, 89, 14, 90, 14, 91, 52, 92, 52, 93, 52, 94, 52, 0, 6, 0, 1, 95, -1, 10, 34, 62, 31, 9, 2, 63, 35, 4, 36, 64, 37, 65, 38, 24, 39, 24, 40, 25, 41, 15, 0, 19, 0, 43, 42, -1, 9, 44, 14, 45, 66, 46, 45, 47, 14, 48, 28, 49, 29, 50, 30, 51, 16, 26, 67, 0, 20, 0, 53, 52, -1, 16, 54, 68, 55, 69, 56, 70, 57, 71, 58, 15, 59, 15, 60, 4, 61, 4, 62, 15, 63, 14, 64, 72, 65, 72, 66, 73, 67, 72, 68, 73, 96, 74, 0, 20, 0, 70, 69, -1, 4, 76, 52, 71, 24, 72, 75, 69, 14, 0, 19, 0, 74, 73, -1, 1, 34, 76, 0, 6, 0, 1, 97, -1, 10, 34, 77, 31, 9, 2, 78, 35, 79, 36, 80, 37, 23, 38, 24, 39, 24, 40, 25, 41, 15, 0, 24, 0, 43, 42, -1, 8, 44, 15, 45, 81, 46, 45, 47, 14, 48, 28, 49, 29, 50, 30, 51, 16, 0, 25, 0, 53, 52, -1, 14, 54, 82, 55, 83, 56, 84, 57, 85, 58, 15, 59, 15, 60, 4, 61, 4, 62, 15, 64, 86, 65, 87, 66, 87, 67, 86, 68, 86, 0, 25, 0, 70, 69, -1, 4, 76, 52, 71, 24, 72, 88, 69, 14, 0, 24, 0, 74, 73, -1, 1, 34, 89, 0, 3, 0, 52, 98, -1, 2, 99, 15, 100, 90, 0, 0, 0, 7, 101, -1, 5, 9, 9, 102, 91, 103, 17, 104, 92, 3, 93, 0, 30, 0, 105, 1, -1, 9, 54, 94, 55, 95, 56, 94, 57, 95, 58, 15, 59, 14, 60, 4, 61, 4, 2, 96, 0, 31, 0, 106, 106, -1, 11, 107, 9, 108, 9, 54, 97, 55, 98, 56, 99, 57, 100, 58, 15, 59, 14, 60, 4, 61, 4, 109, 101, 0, 32, 0, 111, 110, -1, 10, 107, 9, 108, 9, 54, 102, 55, 103, 56, 104, 57, 104, 58, 15, 59, 15, 60, 4, 61, 42, 0, 33, 0, 53, 112, -1, 11, 56, 105, 57, 106, 58, 15, 59, 14, 60, 4, 61, 42, 62, 15, 64, 107, 65, 107, 66, 108, 68, 108, 0, 33, 0, 53, 113, -1, 12, 54, 109, 55, 110, 56, 111, 57, 112, 58, 15, 59, 14, 61, 42, 62, 15, 64, 113, 65, 113, 66, 114, 68, 114, 0, 0, 0, 1, 114, 115, 2, 8, 3, 3, 116, 0 </int_array>
 			<string> "variants" </string>
-			<array  len="88" shared="false">
+			<array  len="117" shared="false">
 				<resource  resource_type="Script" path="./main.gd">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
@@ -193,7 +205,7 @@
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> -923.714, -370.692 </vector2>
+							<vector2> -1156.4, -376.1 </vector2>
 							<string> "snap_grid" </string>
 							<bool> True </bool>
 							<string> "snap_offset" </string>
@@ -213,7 +225,7 @@
 							<string> "snap_step" </string>
 							<vector2> 9, 9 </vector2>
 							<string> "zoom" </string>
-							<real> 0.440126 </real>
+							<real> 0.397214 </real>
 						</dictionary>
 						<string> "3D" </string>
 						<dictionary  shared="false">
@@ -318,6 +330,7 @@
 				</dictionary>
 				<resource  resource_type="PackedScene" path="../active-partials/message-ui/message-ui2.xml">  </resource>
 				<node_path> "" </node_path>
+				<int> 2 </int>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
 					<string> "Script" </string>
@@ -581,17 +594,24 @@
 						<int> 0 </int>
 					</dictionary>
 				</dictionary>
+				<dictionary  shared="false">
+					<string> "_edit_lock_" </string>
+					<bool> True </bool>
+				</dictionary>
 				<int> 1 </int>
 				<resource  resource_type="TileSet" path="../assets/tiles/iso-floors-walkable.xml">  </resource>
 				<vector2> 72, 36 </vector2>
 				<int> 8 </int>
 				<matrix32> 1, 0, 0, 1, 0, 0 </matrix32>
-				<int> 2 </int>
 				<bool> True </bool>
 				<bool> False </bool>
 				<real> 1 </real>
 				<real> 0 </real>
-				<int_array  len="668"> 					-851957, 1, -786421, 1, -786420, 1, -786419, 1, -720884, 1, -720883, 1, -655347, 1, -655346, 1, -589810, 1, -524273, 1, -458743, 0, -458742, 0, -458741, 0, -458740, 0, -458736, 1, -458735, 1, -393207, 0, -393206, 3, -393205, 3, -393204, 0, -393199, 1, -393198, 1, -393197, 1, -393196, 1, -393195, 1, -327671, 0, -327670, 3, -327669, 3, -327668, 0, -327662, 1, -327661, 1, -327659, 1, -327657, 1, -262139, 1, -262138, 1, -262135, 0, -262134, 3, -262133, 3, -262132, 0, -262126, 1, -262125, 1, -262124, 1, -262123, 1, -262122, 1, -262121, 1, -262120, 0, -262119, 0, -262118, 0, -196608, 0, -196607, 0, -196606, 0, -196605, 0, -196604, 0, -196603, 0, -196602, 0, -196601, 0, -196600, 0, -196599, 0, -196598, 3, -196597, 3, -196596, 0, -196592, 0, -196591, 0, -196590, 0, -196589, 0, -196588, 0, -196587, 1, -196586, 1, -196585, 1, -196584, 0, -196583, 0, -196582, 0, -131072, 0, -131071, 0, -131070, 0, -131069, 0, -131063, 0, -131062, 3, -131061, 3, -131060, 0, -131059, 1, -131058, 1, -131057, 1, -131056, 0, -131052, 0, -131051, 1, -131050, 1, -131049, 1, -131048, 1, -131047, 0, -131046, 0, -65536, 0, -65535, 0, -65534, 0, -65533, 0, -65528, 1, -65527, 0, -65526, 3, -65525, 3, -65524, 0, -65523, 1, -65522, 1, -65521, 1, -65520, 0, -65516, 0, -65515, 1, -65514, 1, -65513, 1, -65512, 1, -65511, 1, -65510, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 8, 1, 9, 0, 10, 3, 11, 3, 12, 0, 13, 0, 14, 0, 15, 0, 16, 0, 20, 0, 21, 1, 22, 1, 23, 1, 24, 1, 25, 1, 26, 0, 65541, 0, 65545, 0, 65546, 3, 65547, 3, 65548, 0, 65549, 0, 65550, 0, 65551, 0, 65552, 0, 65556, 0, 65557, 1, 65558, 1, 65559, 1, 65560, 1, 65561, 1, 65562, 0, 131077, 0, 131081, 0, 131082, 3, 131083, 3, 131084, 0, 131085, 0, 131086, 0, 131087, 0, 131088, 0, 131089, 1, 131091, 1, 131092, 0, 131093, 1, 131094, 1, 131095, 0, 131096, 0, 131097, 0, 131098, 1, 196613, 0, 196614, 0, 196615, 0, 196616, 0, 196617, 0, 196618, 3, 196619, 3, 196620, 0, 196621, 0, 196624, 0, 196625, 1, 196627, 1, 196628, 0, 196629, 1, 196630, 1, 196631, 1, 196632, 1, 196633, 1, 196634, 1, 262149, 0, 262150, 0, 262151, 0, 262152, 0, 262153, 0, 262154, 0, 262155, 0, 262156, 0, 262157, 0, 262158, 0, 262159, 0, 262160, 0, 262164, 0, 262165, 1, 262166, 1, 262167, 1, 262168, 1, 262169, 1, 262170, 1, 262171, 1, 327685, 0, 327686, 0, 327687, 0, 327688, 6, 327689, 0, 327690, 0, 327691, 0, 327692, 0, 327693, 0, 327694, 0, 327695, 0, 327696, 0, 327697, 0, 327698, 0, 327699, 0, 327700, 0, 327701, 0, 327702, 0, 327703, 0, 327704, 0, 327705, 0, 327706, 0, 393220, 1, 393221, 0, 393222, 0, 393223, 0, 393224, 6, 393225, 0, 393226, 0, 393227, 0, 393228, 3, 393229, 1, 393230, 0, 393231, 0, 393232, 0, 393235, 0, 393236, 0, 393237, 0, 393238, 1, 393239, 1, 393240, 1, 393241, 1, 393242, 0, 458756, 1, 458757, 0, 458758, 0, 458759, 0, 458760, 6, 458761, 0, 458762, 0, 458763, 0, 458764, 3, 458765, 1, 458766, 0, 458767, 0, 458768, 0, 458771, 0, 458772, 0, 458773, 0, 458774, 1, 458775, 1, 458776, 1, 458777, 1, 458778, 0, 524293, 0, 524294, 0, 524295, 0, 524296, 0, 524297, 0, 524298, 0, 524299, 0, 524300, 0, 524301, 0, 524302, 0, 524303, 0, 524304, 0, 524307, 1, 524308, 1, 524309, 1, 524310, 1, 524311, 1, 589829, 0, 589830, 0, 589831, 0, 589832, 0, 589833, 0, 589834, 0, 589835, 0, 589836, 0, 589837, 0, 589838, 0, 589839, 0, 589840, 0, 589843, 1, 589844, 1, 589845, 1, 589847, 1, 655365, 0, 655366, 0, 655367, 0, 655368, 0, 655369, 0, 655372, 1, 655373, 1, 655378, 1, 655379, 1, 655380, 1, 720903, 1, 720904, 1, 720912, 1, 720913, 1, 720914, 1, 720915, 1, 720917, 1, 786445, 1, 786447, 1, 786448, 1, 786449, 1, 786450, 1, 786451, 1, 851981, 1, 851982, 1, 851983, 1, 851984, 1, 851985, 1, 851988, 1, 851989, 1, 917519, 1, 917520, 1 </int_array>
+				<int_array  len="1106"> 					-851958, 2, -851957, 2, -786422, 2, -786421, 2, -786420, 2, -786419, 2, -720887, 2, -720886, 2, -720885, 2, -720884, 2, -720883, 2, -720882, 2, -655352, 2, -655351, 2, -655350, 2, -655349, 2, -655348, 2, -655347, 2, -655346, 2, -655345, 2, -589818, 2, -589817, 2, -589816, 2, -589815, 2, -589814, 2, -589813, 2, -589812, 2, -589811, 2, -589810, 2, -589809, 2, -589808, 2, -524282, 2, -524281, 2, -524280, 2, -524279, 2, -524278, 2, -524277, 2, -524276, 2, -524275, 2, -524274, 2, -524273, 2, -524272, 2, -524271, 2, -458749, 2, -458748, 2, -458747, 2, -458746, 2, -458745, 2, -458744, 2, -458743, 2, -458742, 2, -458741, 2, -458740, 2, -458739, 2, -458738, 2, -458737, 2, -458736, 2, -458735, 2, -458734, 2, -393212, 2, -393211, 2, -393210, 2, -393209, 2, -393208, 2, -393207, 2, -393206, 2, -393205, 2, -393204, 2, -393203, 2, -393202, 2, -393201, 2, -393200, 2, -393199, 2, -393198, 2, -393197, 2, -393196, 2, -393195, 2, -327678, 2, -327677, 2, -327676, 2, -327675, 2, -327674, 2, -327673, 2, -327672, 2, -327671, 2, -327670, 2, -327669, 2, -327668, 2, -327667, 2, -327666, 2, -327665, 2, -327664, 2, -327663, 2, -327662, 2, -327661, 2, -327660, 2, -327659, 2, -327658, 2, -327657, 2, -327656, 2, -327655, 2, -196609, 2, -262142, 2, -262141, 2, -262139, 2, -262138, 2, -262137, 2, -262136, 2, -262135, 2, -262134, 2, -262133, 2, -262132, 2, -262131, 2, -262130, 2, -262129, 2, -262128, 2, -262127, 2, -262126, 2, -262125, 2, -262124, 2, -262123, 2, -262122, 2, -262121, 2, -262120, 2, -262119, 2, -262118, 2, -131073, 2, -196608, 2, -196607, 2, -196606, 2, -196605, 2, -196604, 2, -196603, 2, -196602, 2, -196601, 2, -196600, 2, -196599, 2, -196598, 2, -196597, 2, -196596, 2, -196595, 2, -196594, 2, -196593, 2, -196592, 2, -196591, 2, -196590, 2, -196589, 2, -196588, 2, -196587, 2, -196586, 2, -196585, 2, -196584, 2, -196583, 2, -196582, 2, -131072, 2, -131071, 2, -131070, 2, -131069, 2, -131068, 2, -131067, 2, -131066, 2, -131065, 2, -131064, 2, -131063, 2, -131062, 2, -131061, 2, -131060, 2, -131059, 2, -131058, 2, -131057, 2, -131056, 2, -131055, 2, -131054, 2, -131053, 2, -131052, 2, -131051, 2, -131050, 2, -131049, 2, -131048, 2, -131047, 2, -131046, 2, -65536, 2, -65535, 2, -65534, 2, -65533, 2, -65532, 2, -65531, 2, -65530, 2, -65528, 1, -65527, 2, -65526, 2, -65525, 2, -65524, 2, -65523, 2, -65522, 7, -65521, 2, -65520, 2, -65519, 2, -65518, 2, -65517, 2, -65516, 2, -65515, 2, -65514, 2, -65513, 2, -65512, 2, -65511, 2, -65510, 2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 2, 5, 2, 6, 2, 7, 2, 8, 1, 9, 2, 10, 2, 11, 2, 12, 2, 13, 2, 14, 2, 15, 2, 16, 2, 17, 2, 18, 2, 19, 2, 20, 2, 21, 2, 22, 2, 23, 2, 24, 2, 25, 2, 26, 2, 65536, 2, 65537, 2, 65538, 2, 65539, 2, 65540, 2, 65541, 2, 65542, 2, 65543, 2, 65544, 2, 65545, 2, 65546, 2, 65547, 2, 65548, 2, 65549, 2, 65550, 2, 65551, 2, 65552, 2, 65553, 2, 65554, 2, 65555, 2, 65556, 2, 65557, 2, 65558, 2, 65559, 2, 65560, 2, 65561, 2, 65562, 2, 131072, 2, 131073, 2, 131074, 2, 131075, 2, 131076, 2, 131077, 2, 131078, 2, 131079, 2, 131080, 2, 131081, 2, 131082, 2, 131083, 2, 131084, 2, 131085, 2, 131086, 2, 131087, 2, 131088, 2, 131089, 2, 131090, 2, 131091, 2, 131092, 2, 131093, 2, 131094, 2, 131095, 2, 131096, 2, 131097, 2, 131098, 2, 196609, 2, 196610, 2, 196611, 2, 196612, 2, 196613, 2, 196614, 2, 196615, 2, 196616, 2, 196617, 2, 196618, 2, 196619, 2, 196620, 2, 196621, 2, 196622, 2, 196623, 2, 196624, 2, 196625, 2, 196626, 2, 196627, 2, 196628, 2, 196629, 2, 196630, 2, 196631, 2, 196632, 2, 196633, 2, 196634, 2, 262144, 2, 262145, 7, 262146, 2, 262147, 2, 262148, 2, 262149, 2, 262150, 2, 262151, 2, 262152, 2, 262153, 2, 262154, 2, 262155, 2, 262156, 2, 262157, 2, 262158, 2, 262159, 2, 262160, 2, 262161, 2, 262162, 2, 262163, 2, 262164, 2, 262165, 2, 262166, 2, 262167, 2, 262168, 2, 262169, 2, 262170, 2, 262171, 2, 327680, 7, 327681, 7, 327682, 7, 327683, 7, 327684, 7, 327685, 2, 327686, 2, 327687, 2, 327688, 2, 327689, 2, 327690, 2, 327691, 2, 327692, 2, 327693, 2, 327694, 2, 327695, 2, 327696, 2, 327697, 2, 327698, 2, 327699, 2, 327700, 2, 327701, 2, 327702, 2, 327703, 2, 327704, 2, 327705, 2, 327706, 2, 327707, 2, 393216, 7, 393217, 7, 393218, 7, 393219, 7, 393220, 7, 393221, 2, 393222, 2, 393223, 2, 393224, 2, 393225, 2, 393226, 2, 393227, 2, 393228, 1, 393229, 7, 393230, 2, 393231, 2, 393232, 2, 393233, 2, 393234, 2, 393235, 2, 393236, 2, 393237, 2, 393238, 2, 393239, 2, 393240, 2, 393241, 2, 393242, 2, 393243, 2, 458753, 7, 458754, 7, 458755, 7, 458756, 7, 458757, 2, 458758, 2, 458759, 2, 458760, 2, 458761, 2, 458762, 2, 458763, 2, 458764, 1, 458765, 7, 458766, 2, 458767, 2, 458768, 2, 458769, 2, 458770, 2, 458771, 2, 458772, 2, 458773, 2, 458774, 2, 458775, 2, 458776, 2, 458777, 2, 458778, 2, 458779, 2, 524289, 7, 524290, 7, 524291, 7, 524292, 7, 524293, 2, 524294, 2, 524295, 2, 524296, 2, 524297, 2, 524298, 2, 524299, 2, 524300, 2, 524301, 2, 524302, 2, 524303, 2, 524304, 2, 524305, 2, 524306, 2, 524307, 2, 524308, 2, 524309, 2, 524310, 2, 524311, 2, 524312, 2, 524315, 2, 524316, 2, 589825, 7, 589826, 7, 589827, 7, 589828, 7, 589829, 2, 589830, 2, 589831, 2, 589832, 2, 589833, 2, 589834, 2, 589835, 2, 589836, 2, 589837, 2, 589838, 2, 589839, 2, 589840, 2, 589841, 2, 589842, 2, 589843, 2, 589844, 2, 589845, 2, 589846, 2, 589847, 2, 655361, 7, 655362, 7, 655363, 7, 655364, 7, 655365, 2, 655366, 2, 655367, 2, 655368, 2, 655369, 2, 655370, 2, 655371, 2, 655372, 2, 655373, 2, 655374, 2, 655375, 2, 655376, 2, 655377, 2, 655378, 2, 655379, 2, 655380, 2, 655381, 2, 655382, 2, 720897, 7, 720898, 2, 720899, 2, 720900, 2, 720901, 2, 720902, 2, 720903, 2, 720904, 2, 720905, 2, 720906, 2, 720907, 2, 720908, 2, 720909, 2, 720910, 2, 720911, 2, 720912, 2, 720913, 2, 720914, 2, 720915, 2, 720916, 2, 720917, 2, 720918, 2, 786444, 2, 786445, 2, 786446, 2, 786447, 2, 786448, 2, 786449, 2, 786450, 2, 786451, 2, 786452, 2, 786453, 2, 851981, 2, 851982, 2, 851983, 2, 851984, 2, 851985, 2, 851986, 2, 851987, 2, 851988, 2, 851989, 2, 917517, 2, 917518, 2, 917519, 2, 917520, 2, 917521, 2, 917522, 2, 917523, 2, 917524, 2, 917525, 2, 983054, 2, 983055, 2, 983056, 2, 983057, 2, 983058, 2, 1048591, 2, 1048592, 2 </int_array>
+				<dictionary  shared="false">
+					<string> "_edit_lock_" </string>
+					<bool> True </bool>
+				</dictionary>
 				<vector2> -125.877, 183.78 </vector2>
 				<resource  resource_type="Script" path="../active-partials/npcs/npc.gd">  </resource>
 				<string> "Terminal" </string>
@@ -599,9 +619,7 @@
 				<int> 0 </int>
 				<array  len="0" shared="false">
 				</array>
-				<resource  resource_type="Shape2D" path="local://10">  </resource>
-				<matrix32> 1, -0, 0, 1, 5.77136, -13.0829 </matrix32>
-				<resource  resource_type="Shape2D" path="local://11">  </resource>
+				<resource  resource_type="Shape2D" path="local://14">  </resource>
 				<matrix32> 1, -0, 0, 1, 12.4609, -19.1499 </matrix32>
 				<vector2> 0, 1 </vector2>
 				<real> 98 </real>
@@ -612,22 +630,24 @@
 				<real> 124 </real>
 				<resource  resource_type="Texture" path="../assets/computer_by_hydroksyde.tex">  </resource>
 				<resource  resource_type="Script" path="local://13">  </resource>
-				<vector2> 5.77136, -13.0829 </vector2>
-				<vector2_array  len="4"> 					-99.6559, 38.5346, -29.1583, 84.7012, 97.8056, 12.9098, 32.99, -21.759 </vector2_array>
 				<vector2> 12.4609, -19.1499 </vector2>
 				<vector2_array  len="4"> 					-1.99669, 69.9959, 41.4161, 96.3699, 113.416, 60.3699, 62.2692, 32.3228 </vector2_array>
 				<vector2> 72.877, 42.22 </vector2>
 				<vector2> 203.634, 365.426 </vector2>
-				<resource  resource_type="Shape2D" path="local://5">  </resource>
+				<resource  resource_type="Script" path="local://16">  </resource>
+				<int> 3 </int>
+				<string> "Cube" </string>
+				<resource  resource_type="Shape2D" path="local://20">  </resource>
 				<matrix32> 1, -0, 0, 1, 0, 0 </matrix32>
-				<vector2> 0, 0 </vector2>
-				<dictionary  shared="false">
-					<string> "_editor_collapsed" </string>
-					<bool> True </bool>
-				</dictionary>
-				<vector2> 9.97232, -34.349 </vector2>
+				<real> -50 </real>
+				<real> -99 </real>
+				<real> 78 </real>
+				<real> 29 </real>
 				<resource  resource_type="Texture" path="../assets/fpo/basic_block128.tex">  </resource>
-				<vector2_array  len="9"> 					-14.634, 12.574, -41.634, 30.574, -14.634, 48.574, 12.366, 30.574, 48.366, 48.574, 120.366, 12.574, 84.366, -5.42599, 102.366, -14.426, 66.366, -32.426 </vector2_array>
+				<resource  resource_type="Texture" path="../assets/fpo/white-block-lighter.png">  </resource>
+				<real> 0.5 </real>
+				<vector2_array  len="4"> 					12.366, 30.574, 48.366, 48.574, 120.366, 12.574, 84.366, -5.42599 </vector2_array>
+				<vector2> 67.366, 22.574 </vector2>
 				<resource  resource_type="PackedScene" path="../active-partials/player/player-k2d.xml">  </resource>
 				<vector2> 302, 320 </vector2>
 				<int> 15 </int>
@@ -763,44 +783,66 @@
 					</dictionary>
 					<string> "__editor_show_subtree" </string>
 					<bool> True </bool>
-					<string> "_editor_collapsed" </string>
-					<bool> True </bool>
 				</dictionary>
 				<vector2> 0.9, 0.9 </vector2>
 				<int> -10000000 </int>
 				<int> 10000000 </int>
-				<real> 0.5 </real>
 				<vector2> 553.5, 216 </vector2>
 				<resource  resource_type="Script" path="local://7">  </resource>
 				<string> "Garrus" </string>
 				<resource  resource_type="Texture" path="../assets/fpo/garrus-port.png">  </resource>
-				<resource  resource_type="Shape2D" path="local://12">  </resource>
-				<matrix32> 1, -0, 0, 1, 0, 0 </matrix32>
+				<resource  resource_type="Shape2D" path="local://23">  </resource>
 				<int> 16 </int>
 				<real> -58 </real>
 				<real> -81 </real>
 				<real> 61 </real>
 				<real> 60.300003 </real>
 				<resource  resource_type="Texture" path="../assets/garrus-sprite.tex">  </resource>
+				<resource  resource_type="Texture" path="../assets/fpo/garrus-sprite-light.png">  </resource>
 				<vector2> 0.3, 0.3 </vector2>
-				<resource  resource_type="Script" path="local://9">  </resource>
-				<vector2> 1, 1 </vector2>
-				<vector2_array  len="4"> 					-76.5, 18, -4.5, -9, 76.5, 36, 22.5, 63 </vector2_array>
-				<vector2> -66.5, 55 </vector2>
+				<vector2_array  len="4"> 					-121.5, 36, -13.5, -18, 94.5, 36, -13.5, 90 </vector2_array>
+				<vector2> -48.5, 55 </vector2>
+				<vector2> 293, 149 </vector2>
+				<resource  resource_type="Script" path="local://19">  </resource>
+				<int> 4 </int>
+				<string> "Cabinet" </string>
+				<resource  resource_type="Shape2D" path="local://22">  </resource>
+				<real> -41 </real>
+				<real> -149 </real>
+				<real> 87 </real>
+				<real> 32 </real>
+				<resource  resource_type="Texture" path="../assets/fpo/tall-white-block.png">  </resource>
+				<resource  resource_type="Texture" path="../assets/fpo/tall-white-block-hover.png">  </resource>
+				<vector2_array  len="4"> 					-50, 13, -5, 67, 139, -5, 31, -23 </vector2_array>
+				<vector2> 53.366, 20.574 </vector2>
 				<resource  resource_type="Texture" path="../assets/tiles/green-outline-glow.png">  </resource>
+				<vector2> 0, 0 </vector2>
 				<vector2> 1, 1 </vector2>
 				<dictionary  shared="false">
 					<string> "_editor_collapsed" </string>
 					<bool> True </bool>
 				</dictionary>
+				<real> -9 </real>
+				<real> 180 </real>
 				<resource  resource_type="Script" path="../active-partials/interface/interface.gd">  </resource>
-				<real> 706 </real>
-				<real> 314 </real>
+				<real> 693 </real>
+				<real> 306 </real>
 				<real> -775 </real>
-				<real> -378 </real>
-				<real> 69 </real>
-				<real> 64 </real>
-				<resource  resource_type="Texture" path="../assets/fpo/text171 (1).png">  </resource>
+				<real> -387 </real>
+				<resource  resource_type="StyleBox" path="local://24">  </resource>
+				<real> 36 </real>
+				<real> -27 </real>
+				<real> 9 </real>
+				<real> 37 </real>
+				<real> 47 </real>
+				<resource  resource_type="Texture" path="../assets/ui/list31 (1).tex">  </resource>
+				<resource  resource_type="Texture" path="../assets/ui/list31.tex">  </resource>
+				<real> 2 </real>
+				<real> 51 </real>
+				<real> 34 </real>
+				<real> 99 </real>
+				<resource  resource_type="Texture" path="../assets/ui/code39 (2).tex">  </resource>
+				<resource  resource_type="Texture" path="../assets/ui/code39 (1).tex">  </resource>
 				<resource  resource_type="PackedScene" path="../active-partials/journal/base_journal.xscn">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
@@ -932,6 +974,8 @@
 						<string> "run_mode" </string>
 						<int> 0 </int>
 					</dictionary>
+					<string> "__editor_show_subtree" </string>
+					<bool> True </bool>
 				</dictionary>
 			</array>
 			<string> "version" </string>

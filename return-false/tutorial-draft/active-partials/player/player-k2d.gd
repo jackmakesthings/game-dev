@@ -58,7 +58,12 @@ func orient(towards):
 		spr.set_texture(self["front_texture"])
 		spr.set_flip_h(false)
 	emit_signal("oriented", towards, get_global_pos())
+
 	
+func halt():
+	set_fixed_process(false)
+	path.clear()
+	set_fixed_process(true)
 
 func _fixed_process(delta):
 

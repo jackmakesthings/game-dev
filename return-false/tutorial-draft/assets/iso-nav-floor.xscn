@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resource_file type="PackedScene" subresource_count="10" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
 	<ext_resource path="res://assets/blue-iso-tile-flat-2.png" type="Texture"></ext_resource>
-	<ext_resource path="res://assets/tiles/black-iso-tile-flat.png" type="Texture"></ext_resource>
+	<ext_resource path="res://assets/tiles/dotted-white-tile.png" type="Texture"></ext_resource>
 	<ext_resource path="res://assets/tiles/white-iso-tile-flat.png" type="Texture"></ext_resource>
 	<ext_resource path="res://assets/tiles/red-iso-tile-flat.png" type="Texture"></ext_resource>
 	<ext_resource path="res://assets/grate-iso-tile-1.png" type="Texture"></ext_resource>
@@ -43,7 +43,7 @@
 				<string> "NavigationPolygonInstance" </string>
 				<string> "navpoly" </string>
 				<string> "enabled" </string>
-				<string> "black unwalkable" </string>
+				<string> "attractor" </string>
 				<string> "white walkable" </string>
 				<string> "red unwalkable" </string>
 				<string> "grate unwalkable" </string>
@@ -85,7 +85,7 @@
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> -126.893, -25.4971 </vector2>
+							<vector2> -39.8312, -1.64985 </vector2>
 							<string> "snap_grid" </string>
 							<bool> True </bool>
 							<string> "snap_offset" </string>
@@ -105,7 +105,7 @@
 							<string> "snap_step" </string>
 							<vector2> 18, 18 </vector2>
 							<string> "zoom" </string>
-							<real> 0.902499 </real>
+							<real> 1.108032 </real>
 						</dictionary>
 						<string> "3D" </string>
 						<dictionary  shared="false">
@@ -217,7 +217,7 @@
 				<resource  resource_type="NavigationPolygon" path="local://1">  </resource>
 				<bool> True </bool>
 				<vector2> 360, 36 </vector2>
-				<resource  resource_type="Texture" path="tiles/black-iso-tile-flat.png">  </resource>
+				<resource  resource_type="Texture" path="tiles/dotted-white-tile.png">  </resource>
 				<vector2> 468, 36 </vector2>
 				<resource  resource_type="Texture" path="tiles/white-iso-tile-flat.png">  </resource>
 				<dictionary  shared="false">
