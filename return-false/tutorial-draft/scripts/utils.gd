@@ -21,8 +21,28 @@ func get_json(file):
 		return d
 
 
-func save_game(dest):
-	pass
+func save_game(data, dest):
+	if( data == null ):
+		return false
+	if not (dest.begins_with('res://') or dest.begins_with('user://')):
+		return false
+	
+	
+	var filex = File.new()
+	var error
+	
+	error = filex.open(dest, File.WRITE)
+	#now write
+	if (filex.is_open()):
+	
+		for key in data:
+			filex.store_string(data.to_json())
+			
+		filex.close()
+		return true
+	else:
+		return error
+	
 
 func load_game(src):
 	pass

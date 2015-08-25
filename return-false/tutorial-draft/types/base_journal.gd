@@ -9,6 +9,7 @@ var journal_button   # node ref, may move to broader ui class
 var latest_entry   # some form of reference to the most recent addition
 var current_entry  # reference to which is/was most recently opened
 var index = 0
+var journal_visible = false
 
 var player
 
@@ -80,19 +81,27 @@ func show_entry(ind):
 ######## show_journal
 func show_journal():
 	self.show()
+	get_node("Control").set_layer(1)
 	get_node("Control/Panel").popup()
 	
 	#var cur_pos = player.get_global_pos()
 	#player.update_path(cur_pos, cur_pos)
 	player.set_fixed_process(false)
+	journal_visible = true
 	
 func hide_journal():
-	_on_Panel_popup_hide()
-	
-
-func _on_Panel_popup_hide():
 	self.hide()
+	get_node("Control").set_layer(-1)
+	get_node("Control/Panel").hide()
 	player.set_fixed_process(true)
+	journal_visible = false
+	
+	
+func toggle_journal():
+	if( journal_visible ):
+		hide_journal()
+	else:
+		show_journal()
 	
 ####### ready
 func _ready():
@@ -101,7 +110,7 @@ func _ready():
 	journal_button = get_node("/root/scene/interface/Node2D/Panel/buttons/journal")
 	player = get_node("/root/scene").get("player")
 	
-	self.hide()
+	hide_journal()
 	demo()
 	
 
@@ -121,7 +130,7 @@ func demo():
 	update_journal(q3)
 	
 	journal_button.show()
-	journal_button.connect("pressed", self, "show_journal")
+	journal_button.connect("pressed", self, "toggle_journal")
 	
 
 ####### Entry as a subclass of Journal

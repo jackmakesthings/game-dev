@@ -9,18 +9,20 @@ extends Control
 # var b="textvar"
 
 var journal
-var menu_screen
+var menu
 
 func _ready():
 	journal = get_node("/root/scene/journal_ui")
-	menu_screen = get_node("/root/scene/journal_ui")
+	menu = get_node("/root/scene/menu")
 	pass
 
 func _on_journal_pressed():
-	journal.show_journal()
+	menu.hide_menu()
+	journal.toggle_journal()
 
 
 # work in progress
 func _on_menu_pressed():
 	journal.hide_journal()
+	menu.toggle_menu()
 	pass
