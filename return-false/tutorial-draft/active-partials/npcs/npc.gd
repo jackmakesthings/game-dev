@@ -33,6 +33,7 @@ export(bool) var has_branches = false
 
 var player_nearby = false
 
+var game
 var utils
 var data = ResourceLoader.load("res://data/mocks.gd")
 var MUI
@@ -88,7 +89,11 @@ func present_conversations(dialog_branches):
 			args = []},
 			{ fn = "init_branch",
 			target = self,
-			args = [branch["key"]]}
+			args = [branch["key"]]},
+			{ fn = "update_quest",
+			target = game,
+			args = [1, 20]
+			}
 		]
 
 		options.append(response)
@@ -106,6 +111,7 @@ func init_branch(key):
 	MUI.make_dialogue(n)
 	MUI.make_dialogue(key)
 	MUI.make_close_button()
+	
 
 
 func redirect_player(player, destination):
@@ -191,6 +197,7 @@ func _ready():
 	add_user_signal("player_redirected", ["successful", "expected", "actual"])
 
 	utils = get_node("/root/utils")
+	game = get_node("/root/game")
 	data = ResourceLoader.load("res://data/mocks.gd")
 	player = get_node("/root/scene").get("player")
 	MUI = get_node("/root/scene/message-ui")
