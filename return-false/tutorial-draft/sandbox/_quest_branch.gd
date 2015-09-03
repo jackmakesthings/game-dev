@@ -127,5 +127,6 @@ func _ready():
 	
 	MUI = get_node("/root/scene/message-ui")
 	owned_by = get_owner()
+	print("attached branch ", Q_ID, " to actor ", actor)
 
 		

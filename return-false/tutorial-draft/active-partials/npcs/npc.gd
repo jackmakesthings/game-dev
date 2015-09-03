@@ -28,7 +28,7 @@ const TRIGGER_LOS = 2
 const TRIGGER_UNIQUE = 3
 
 
-export(Array) var dialog_branches
+export(Array) var dialog_branches = []
 export(bool) var has_branches = false
 
 var player_nearby = false
@@ -172,7 +172,7 @@ func wait(time):
 
 
 func start_interaction(src):
-	set_branches()
+	#set_branches()
 	print(dialog_branches)
 	add_child(src)
 	setup_MUI("", src["label"])
@@ -196,9 +196,9 @@ func set_branches():
 	#	print(n.get_name())
 	#	if( n extends Node ):
 	#		dialog_branches.append(n)
-	#pass
-	dialog_branches = Array()
-	dialog_branches.append({ "label" : "My hardware", "key": "hw", "txt": "Your hardware is awesome." })
+	pass
+	#dialog_branches = Array()
+	#dialog_branches.append({ "label" : "My hardware", "key": "hw", "txt": "Your hardware is awesome." })
 	#dialog_branches.append({ "label" : "My software", "key": "sw", "txt": "Your software needs upgrades." })
 
 
@@ -217,8 +217,8 @@ func _ready():
 	
 	n = MUI.make_formatted_name(label)
 	
-	add_child(data)
-	set_branches()
+	#add_child(data)
+	#set_branches()
 
 
 	body_node.connect("body_enter_shape", self, "_on_body_enter")

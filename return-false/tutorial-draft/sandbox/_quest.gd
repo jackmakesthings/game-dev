@@ -4,7 +4,7 @@
 
 extends Node
 
-var Q_ID = "tutorial"
+export var Q_ID = "tutorial"
 
 var game
 
@@ -15,7 +15,7 @@ var branch_group
 var branches = {}
 var actors = []
 
-export(String, FILE) var data_source
+var data_source
 var data = {}
 var is_ready = false
 var is_active = false
@@ -49,8 +49,9 @@ func load_data(data_source):
 
 
 func create_branches_from_data(data):
-	if is_ready() == false:
-		load_data(data_source)
+	#get_children().clear()
+	#if is_ready() == false:
+	#	load_data(data_source)
 	for branch in branches:
 		var branch_node = Branch.new()
 		for key in branch:
@@ -64,26 +65,27 @@ func create_branches_from_data(data):
 func attach_branches():
 	var branch_nodes = get_children()
 	for branch in branch_nodes:
-		if not ( branch.get("Q_ID") ):
-			return
-			#branch_nodes.erase(branch)
-			#continue
-		var actor_ref = branch.get("actor")
-		if not npc_root.has_node(actor_ref):
-			print("Error; no NPC found called ", actor_ref)
-			return
-		else:	
-			var actor = npc_root.get_node(actor_ref)
-			branch = branch.duplicate()
-			#remove_child(branch)
-			branch.set("Q_ID", Q_ID)
-			branch.set_name(Q_ID)
-			actor.add_child(branch)
-			if not ( actors.find(actor.get_name()) > -1 ):
-				actors.append(actor.get_name())
-			print(actor.get_children())
-	emit_signal("branches_added", Q_ID, actors)
 	
+		remove_child(branch)
+		if branch.has_method("_at_state"):
+			var actor_ref = branch.get("actor")
+			if not npc_root.has_node(actor_ref):
+				print("Error; no NPC found called ", actor_ref)
+				return
+			else:	
+				var actor = npc_root.get_node(actor_ref)
+				#branch = branch.duplicate()
+				#remove_child(branch)
+				branch.set("Q_ID", Q_ID)
+				branch.set_name(Q_ID)
+				actor.add_child(branch)
+				if ( actors.find(actor.get_name()) == -1 ):
+					actors.append(actor_ref)
+		else:
+			return
+	
+	
+		
 
 
 func detach_branches():
@@ -107,10 +109,12 @@ func activate(start_state="20"):
 		return
 	else:
 		self.add_to_group("active_quests")
+		create_branches_from_data(data)
 		attach_branches()
+		emit_signal("branches_added", Q_ID, actors)
 		is_active = true
 		set_current_state(start_state)
-		print("Activated quest ", Q_ID , " at state ", start_state, " with actors ", str(actors) )
+		print("Activated quest ", Q_ID , " at state ", start_state, " with actors ", actors)
 
 
 func deactivate():
@@ -168,7 +172,6 @@ func _setup():
 		return
 	else:
 		load_data(data_source)
-		create_branches_from_data(data)
 
 
 
@@ -182,4 +185,5 @@ func _ready():
 
 
 func _test():
-	activate()
+	pass
+	#activate()
