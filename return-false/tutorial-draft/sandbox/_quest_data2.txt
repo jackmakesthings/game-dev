@@ -1,8 +1,8 @@
 {
-  "id": "test",
-  "Q_ID": "test",
-  "name": "test",
-  "label": "test",
+  "id": "something-else",
+  "Q_ID": "something-else",
+  "name": "something-else",
+  "label": "something-else",
   "branches": [
     {
       "actor": "ada",
@@ -73,7 +73,7 @@
       "actor": "garrus",
       "states": {
         "20": {
-          "dialogue": "Hi I'm Garrus and this is state 20 of the test.",
+          "dialogue": "Hi I'm Garrus and this is state 20 of a different quest.",
           "responses": [
             {
               "conditional": "true",

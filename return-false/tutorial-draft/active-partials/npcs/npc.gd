@@ -84,7 +84,7 @@ func present_conversations(dialog_branches):
 		elif branch.get("Q_ID"):
 			response["text"] = branch["Q_ID"]
 		else:
-			continue
+			return
 		
 	#### this should get refactored into a proper init_branch method
 	# either on NPC or MUI (or on Quest/Branch, maybe)
@@ -94,11 +94,11 @@ func present_conversations(dialog_branches):
 			args = []},
 			{ fn = "init_branch",
 			target = self,
-			args = [branch["Q_ID"]]}
+			args = [branch]}
 		]
 
 		options.append(response)
-		print(dialog_branches)
+		#print(branch)
 	
 	MUI.clear()
 	MUI.make_dialogue(n)
@@ -108,24 +108,20 @@ func present_conversations(dialog_branches):
 
 
 # stub until branches are set up
-func init_branch(key):
+func init_branch(branch):
 	MUI.clear()
 	MUI.make_dialogue(n)
-	MUI.make_dialogue(key)
+	MUI.make_dialogue(branch["states"]["20"]["dialogue"])
 	MUI.make_close_button()
 	
 
 
 func redirect_player(player, destination):
-
 	player.set_fixed_process(false)
-
 	var offset = destination.get_global_pos()
 	offset = get_canvas_transform().xform(offset)
 	utils.fake_click(offset, 1)
-
 	yield(player, "oriented")
-
 	emit_signal("player_redirected", player_is_nearby(), destination, player.get_global_pos())
 
 func _on_body_enter(body_id, body_obj, body_shape_id, area_shape_id):
@@ -146,7 +142,6 @@ func _on_click():
 	player.set("path", Array())
 	if( player_is_nearby() == false):
 		redirect_player(player, x)
-		#yield(self, "player_redirected")
 		yield(player, "done_moving")
 		
 		if( player_is_nearby() == true ):
@@ -172,7 +167,6 @@ func wait(time):
 
 
 func start_interaction(src):
-	#set_branches()
 	print(dialog_branches)
 	add_child(src)
 	setup_MUI("", src["label"])
@@ -189,17 +183,6 @@ func start_interaction(src):
 
 
 
-# this exists just to be easily overridden
-func set_branches():
-	#var nodes = get_children()
-	#for n in nodes:
-	#	print(n.get_name())
-	#	if( n extends Node ):
-	#		dialog_branches.append(n)
-	pass
-	#dialog_branches = Array()
-	#dialog_branches.append({ "label" : "My hardware", "key": "hw", "txt": "Your hardware is awesome." })
-	#dialog_branches.append({ "label" : "My software", "key": "sw", "txt": "Your software needs upgrades." })
 
 
 
