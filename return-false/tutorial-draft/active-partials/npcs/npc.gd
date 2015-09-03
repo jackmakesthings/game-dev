@@ -28,7 +28,7 @@ const TRIGGER_LOS = 2
 const TRIGGER_UNIQUE = 3
 
 
-export var dialog_branches = Array()
+export(Array) var dialog_branches
 export(bool) var has_branches = false
 
 var player_nearby = false
@@ -79,7 +79,12 @@ func present_conversations(dialog_branches):
 	
 	for branch in dialog_branches:
 		var response = {}
-		response["text"] = branch["label"]
+		if branch.get("label"):
+			response["text"] = branch["label"]
+		elif branch.get("Q_ID"):
+			response["text"] = branch["Q_ID"]
+		else:
+			continue
 		
 	#### this should get refactored into a proper init_branch method
 	# either on NPC or MUI (or on Quest/Branch, maybe)
@@ -89,14 +94,11 @@ func present_conversations(dialog_branches):
 			args = []},
 			{ fn = "init_branch",
 			target = self,
-			args = [branch["key"]]},
-			{ fn = "update_quest",
-			target = game,
-			args = [1, 20]
-			}
+			args = [branch["Q_ID"]]}
 		]
 
 		options.append(response)
+		print(dialog_branches)
 	
 	MUI.clear()
 	MUI.make_dialogue(n)
@@ -170,6 +172,8 @@ func wait(time):
 
 
 func start_interaction(src):
+	set_branches()
+	print(dialog_branches)
 	add_child(src)
 	setup_MUI("", src["label"])
 	
@@ -187,8 +191,15 @@ func start_interaction(src):
 
 # this exists just to be easily overridden
 func set_branches():
+	#var nodes = get_children()
+	#for n in nodes:
+	#	print(n.get_name())
+	#	if( n extends Node ):
+	#		dialog_branches.append(n)
+	#pass
+	dialog_branches = Array()
 	dialog_branches.append({ "label" : "My hardware", "key": "hw", "txt": "Your hardware is awesome." })
-	dialog_branches.append({ "label" : "My software", "key": "sw", "txt": "Your software needs upgrades." })
+	#dialog_branches.append({ "label" : "My software", "key": "sw", "txt": "Your software needs upgrades." })
 
 
 
@@ -198,7 +209,7 @@ func _ready():
 
 	utils = get_node("/root/utils")
 	game = get_node("/root/game")
-	data = ResourceLoader.load("res://data/mocks.gd")
+	data = load("res://data/mocks.gd").new()
 	player = get_node("/root/scene").get("player")
 	MUI = get_node("/root/scene/message-ui")
 	body_node = get_node("body")

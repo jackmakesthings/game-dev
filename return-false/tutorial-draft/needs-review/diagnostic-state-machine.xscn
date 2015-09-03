@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resource_file type="PackedScene" subresource_count="9" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
-	<ext_resource path="res://scenes/dialogue-root.gd" type="Script"></ext_resource>
-	<ext_resource path="res://scripts/fsm-states/diagnostics-fsm.gd" type="Script"></ext_resource>
-	<ext_resource path="res://scripts/fsm-states/diagnostics-0.gd" type="Script"></ext_resource>
-	<ext_resource path="res://scripts/fsm-states/diagnostics-20.gd" type="Script"></ext_resource>
-	<ext_resource path="res://scripts/fsm-states/diagnostics-40.gd" type="Script"></ext_resource>
-	<ext_resource path="res://scripts/fsm-states/diagnostics-60.gd" type="Script"></ext_resource>
-	<ext_resource path="res://scripts/fsm-states/diagnostics-80.gd" type="Script"></ext_resource>
-	<ext_resource path="res://scripts/fsm-states/diagnostics-100.gd" type="Script"></ext_resource>
+	<ext_resource path="res://needs-review/dialogue-root.gd" type="Script"></ext_resource>
+	<ext_resource path="res://needs-review/scripts/fsm-states/diagnostics-fsm.gd" type="Script"></ext_resource>
+	<ext_resource path="res://needs-review/scripts/fsm-states/diagnostics-0.gd" type="Script"></ext_resource>
+	<ext_resource path="res://needs-review/scripts/fsm-states/diagnostics-20.gd" type="Script"></ext_resource>
+	<ext_resource path="res://needs-review/scripts/fsm-states/diagnostics-40.gd" type="Script"></ext_resource>
+	<ext_resource path="res://needs-review/scripts/fsm-states/diagnostics-60.gd" type="Script"></ext_resource>
+	<ext_resource path="res://needs-review/scripts/fsm-states/diagnostics-80.gd" type="Script"></ext_resource>
+	<ext_resource path="res://needs-review/scripts/fsm-states/diagnostics-100.gd" type="Script"></ext_resource>
 	<main_resource>
 		<dictionary name="_bundled" shared="false">
 			<string> "conn_count" </string>
@@ -58,7 +58,7 @@
 			<int_array  len="219"> 				-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 0, 0, 0, 5, 4, -1, 1, 2, 2, 0, 1, 0, 7, 6, -1, 1, 2, 3, 0, 1, 0, 7, 8, -1, 1, 2, 4, 0, 1, 0, 7, 9, -1, 1, 2, 5, 0, 1, 0, 7, 10, -1, 1, 2, 6, 0, 1, 0, 7, 11, -1, 1, 2, 7, 0, 1, 0, 7, 12, -1, 1, 2, 8, 0, 0, 0, 14, 13, -1, 11, 15, 9, 16, 9, 17, 10, 18, 11, 19, 12, 20, 13, 21, 14, 22, 15, 23, 15, 24, 16, 25, 16, 0, 0, 0, 14, 26, -1, 11, 15, 9, 16, 9, 17, 17, 18, 18, 19, 19, 20, 18, 21, 14, 22, 15, 23, 15, 24, 16, 25, 16, 0, 9, 0, 28, 27, -1, 11, 18, 20, 19, 17, 20, 21, 22, 22, 23, 22, 24, 23, 25, 9, 29, 15, 30, 24, 31, 15, 32, 25, 0, 9, 0, 28, 33, -1, 11, 18, 12, 19, 17, 20, 26, 22, 22, 23, 22, 24, 23, 25, 9, 29, 15, 30, 27, 31, 15, 32, 25, 0, 9, 0, 28, 34, -1, 11, 18, 28, 19, 17, 20, 29, 22, 22, 23, 22, 24, 23, 25, 9, 29, 15, 30, 30, 31, 15, 32, 25, 0 </int_array>
 			<string> "variants" </string>
 			<array  len="31" shared="false">
-				<resource  resource_type="Script" path="res://scenes/dialogue-root.gd">  </resource>
+				<resource  resource_type="Script" path="res://needs-review/dialogue-root.gd">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
 					<string> "2D" </string>
@@ -190,13 +190,13 @@
 						<int> 0 </int>
 					</dictionary>
 				</dictionary>
-				<resource  resource_type="Script" path="res://scripts/fsm-states/diagnostics-fsm.gd">  </resource>
-				<resource  resource_type="Script" path="res://scripts/fsm-states/diagnostics-0.gd">  </resource>
-				<resource  resource_type="Script" path="res://scripts/fsm-states/diagnostics-20.gd">  </resource>
-				<resource  resource_type="Script" path="res://scripts/fsm-states/diagnostics-40.gd">  </resource>
-				<resource  resource_type="Script" path="res://scripts/fsm-states/diagnostics-60.gd">  </resource>
-				<resource  resource_type="Script" path="res://scripts/fsm-states/diagnostics-80.gd">  </resource>
-				<resource  resource_type="Script" path="res://scripts/fsm-states/diagnostics-100.gd">  </resource>
+				<resource  resource_type="Script" path="res://needs-review/scripts/fsm-states/diagnostics-fsm.gd">  </resource>
+				<resource  resource_type="Script" path="res://needs-review/scripts/fsm-states/diagnostics-0.gd">  </resource>
+				<resource  resource_type="Script" path="res://needs-review/scripts/fsm-states/diagnostics-20.gd">  </resource>
+				<resource  resource_type="Script" path="res://needs-review/scripts/fsm-states/diagnostics-40.gd">  </resource>
+				<resource  resource_type="Script" path="res://needs-review/scripts/fsm-states/diagnostics-60.gd">  </resource>
+				<resource  resource_type="Script" path="res://needs-review/scripts/fsm-states/diagnostics-80.gd">  </resource>
+				<resource  resource_type="Script" path="res://needs-review/scripts/fsm-states/diagnostics-100.gd">  </resource>
 				<int> 1 </int>
 				<real> 250 </real>
 				<real> 123 </real>

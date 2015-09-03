@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="44" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
-	<ext_resource path="res://main.gd" type="Script"></ext_resource>
-	<ext_resource path="res://active-partials/message-ui/message-ui2.xml" type="PackedScene"></ext_resource>
-	<ext_resource path="res://sandbox/menu.gd" type="Script"></ext_resource>
-	<ext_resource path="res://assets/new_theme.thm" type="Theme"></ext_resource>
-	<ext_resource path="res://active-partials/interface/buttons.gd" type="Script"></ext_resource>
-	<ext_resource path="res://types/base_journal.gd" type="Script"></ext_resource>
-	<ext_resource path="res://assets/fonts/imported/8bit-operator-16.fnt" type="Font"></ext_resource>
-	<ext_resource path="res://active-partials/environment/walkable-area.gd" type="Script"></ext_resource>
-	<ext_resource path="res://assets/tiles/iso-floors-walkable.xml" type="TileSet"></ext_resource>
-	<ext_resource path="res://active-partials/npcs/npc.gd" type="Script"></ext_resource>
-	<ext_resource path="res://assets/computer_by_hydroksyde.tex" type="Texture"></ext_resource>
-	<ext_resource path="res://assets/fpo/basic_block128.tex" type="Texture"></ext_resource>
-	<ext_resource path="res://assets/fpo/white-block-lighter.png" type="Texture"></ext_resource>
-	<ext_resource path="res://active-partials/player/player-k2d.xml" type="PackedScene"></ext_resource>
-	<ext_resource path="res://assets/fpo/garrus-port.png" type="Texture"></ext_resource>
-	<ext_resource path="res://assets/garrus-sprite.tex" type="Texture"></ext_resource>
-	<ext_resource path="res://assets/fpo/garrus-sprite-light.png" type="Texture"></ext_resource>
-	<ext_resource path="res://assets/fpo/tall-white-block.png" type="Texture"></ext_resource>
-	<ext_resource path="res://assets/fpo/tall-white-block-hover.png" type="Texture"></ext_resource>
-	<ext_resource path="res://assets/tiles/green-outline-glow.png" type="Texture"></ext_resource>
-	<ext_resource path="res://active-partials/interface/interface.gd" type="Script"></ext_resource>
-	<ext_resource path="res://assets/ui/list31 (1).tex" type="Texture"></ext_resource>
-	<ext_resource path="res://assets/ui/list31.tex" type="Texture"></ext_resource>
-	<ext_resource path="res://assets/ui/code39 (2).tex" type="Texture"></ext_resource>
-	<ext_resource path="res://assets/ui/code39 (1).tex" type="Texture"></ext_resource>
+<resource_file type="PackedScene" subresource_count="45" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
+	<ext_resource path="res://active-partials/message-ui/message-ui2.xml" type="PackedScene" index="1"></ext_resource>
+	<ext_resource path="res://assets/fpo/garrus-port.png" type="Texture" index="14"></ext_resource>
+	<ext_resource path="res://assets/fpo/garrus-sprite-light.png" type="Texture" index="16"></ext_resource>
+	<ext_resource path="res://assets/computer_by_hydroksyde.tex" type="Texture" index="10"></ext_resource>
+	<ext_resource path="res://main.gd" type="Script" index="0"></ext_resource>
+	<ext_resource path="res://active-partials/interface/interface.gd" type="Script" index="20"></ext_resource>
+	<ext_resource path="res://types/base_journal.gd" type="Script" index="5"></ext_resource>
+	<ext_resource path="res://active-partials/environment/walkable-area.gd" type="Script" index="7"></ext_resource>
+	<ext_resource path="res://active-partials/npcs/npc.gd" type="Script" index="9"></ext_resource>
+	<ext_resource path="res://sandbox/menu.gd" type="Script" index="2"></ext_resource>
+	<ext_resource path="res://active-partials/interface/buttons.gd" type="Script" index="4"></ext_resource>
+	<ext_resource path="res://sandbox/_quest_data.res" type="Script" index="25"></ext_resource>
+	<ext_resource path="res://assets/new_theme.thm" type="Theme" index="3"></ext_resource>
+	<ext_resource path="res://assets/fpo/tall-white-block.png" type="Texture" index="17"></ext_resource>
+	<ext_resource path="res://assets/garrus-sprite.tex" type="Texture" index="15"></ext_resource>
+	<ext_resource path="res://assets/fpo/tall-white-block-hover.png" type="Texture" index="18"></ext_resource>
+	<ext_resource path="res://assets/fpo/white-block-lighter.png" type="Texture" index="12"></ext_resource>
+	<ext_resource path="res://assets/ui/code39 (1).tex" type="Texture" index="24"></ext_resource>
+	<ext_resource path="res://assets/ui/code39 (2).tex" type="Texture" index="23"></ext_resource>
+	<ext_resource path="res://assets/ui/list31.tex" type="Texture" index="22"></ext_resource>
+	<ext_resource path="res://assets/fonts/imported/8bit-operator-16.fnt" type="Font" index="6"></ext_resource>
+	<ext_resource path="res://assets/tiles/iso-floors-walkable.xml" type="TileSet" index="8"></ext_resource>
+	<ext_resource path="res://assets/tiles/green-outline-glow.png" type="Texture" index="19"></ext_resource>
+	<ext_resource path="res://assets/ui/list31 (1).tex" type="Texture" index="21"></ext_resource>
+	<ext_resource path="res://assets/fpo/basic_block128.tex" type="Texture" index="11"></ext_resource>
+	<ext_resource path="res://active-partials/player/player-k2d.xml" type="PackedScene" index="13"></ext_resource>
 	<resource type="StyleBoxFlat" path="local://1">
 		<real name="content_margin/left"> -1 </real>
 		<real name="content_margin/right"> -1 </real>
@@ -136,7 +137,7 @@
 
 	</resource>
 	<resource type="GDScript" path="local://7">
-		<string name="script/source"> "extends &quot;res://active-partials/npcs/npc.gd&quot;&#000a;&#000a;&#000a;func _init():&#000a;&#0009;id = 002&#000a;&#0009;trigger_mode = 0&#000a;&#0009;label = &quot;Garrus&quot;&#000a;&#0009;&#000a;func set_branches():&#000a;&#0009;dialog_branches = Array()&#000a;&#0009;&#000a;&#000a;&#000a;func _ready():&#000a;&#0009;utils = get_node(&quot;/root/utils&quot;)&#000a;&#0009;data = ResourceLoader.load(&quot;res://data/mocks.gd&quot;)&#000a;&#0009;player = get_node(&quot;/root/scene&quot;).get(&quot;player&quot;)&#000a;&#0009;body_node = get_node(&quot;body&quot;)&#000a;&#0009;x = get_node(&quot;X&quot;)&#000a;&#0009;&#000a;&#0009;add_child(data)&#000a;&#0009;set_branches()&#000a;&#0009;MUI = get_node(&quot;/root/scene/message-ui&quot;)&#000a;&#0009;if( trigger_mode == TRIGGER_DIRECT ):&#000a;&#0009;&#0009;get_node(&quot;body/Sprite&quot;).connect(&quot;pressed&quot;, self, &quot;on_click&quot;, [player])&#000a;" </string>
+		<string name="script/source"> "extends &quot;res://active-partials/npcs/npc.gd&quot;&#000a;&#000a;&#000a;func _init():&#000a;&#0009;id = 002&#000a;&#0009;trigger_mode = 0&#000a;&#0009;label = &quot;Garrus&quot;&#000a;&#0009;&#000a;&#0009;&#000a;func set_branches():&#000a;&#0009;dialog_branches = Array()&#000a;&#0009;var quest_loader = get_node(&quot;/root/scene/quests/test&quot;)&#000a;&#0009;&#000a;&#0009;yield(quest_loader, &quot;branches_added&quot;)&#000a;&#0009;var nodes = get_node(&quot;.&quot;).get_children()&#000a;&#0009;for n in nodes:&#000a;&#0009;&#0009;if ( n extends Node ):&#000a;&#0009;&#0009;&#0009;dialog_branches.append(n)&#000a;&#000a;&#000a;func _ready():&#000a;&#0009;utils = get_node(&quot;/root/utils&quot;)&#000a;&#0009;data = load(&quot;res://data/mocks.gd&quot;).new()&#000a;&#0009;player = get_node(&quot;/root/scene&quot;).get(&quot;player&quot;)&#000a;&#0009;body_node = get_node(&quot;body&quot;)&#000a;&#0009;x = get_node(&quot;X&quot;)&#000a;&#0009;&#000a;&#0009;&#000a;&#0009;&#000a;&#0009;add_child(data)&#000a;&#0009;&#000a;&#0009;#var quest_loader = get_node(&quot;/root/scene/quests/test&quot;)&#000a;&#0009;#yield(get_node(&quot;/root/scene&quot;), &quot;ready&quot;)&#000a;&#0009;&#000a;&#0009;MUI = get_node(&quot;/root/scene/message-ui&quot;)&#000a;&#0009;#yield(get_node(&quot;/root/scene/quests/test&quot;), &quot;branches_added&quot;)&#000a;&#0009;set_branches()&#000a;&#0009;if( trigger_mode == TRIGGER_DIRECT ):&#000a;&#0009;&#0009;get_node(&quot;body/Sprite&quot;).connect(&quot;pressed&quot;, self, &quot;on_click&quot;, [player])&#000a;" </string>
 
 	</resource>
 	<resource type="ConvexPolygonShape2D" path="local://23">
@@ -165,17 +166,15 @@
 			<string> "conn_count" </string>
 			<int> 4 </int>
 			<string> "conns" </string>
-			<int_array  len="24"> 				6, 3, 166, 165, 2, 0, 16, 14, 166, 167, 2, 0, 18, 14, 169, 168, 2, 0, 52, 48, 171, 170, 2, 0 </int_array>
+			<int_array  len="24"> 				5, 2, 169, 168, 2, 0, 15, 13, 169, 170, 2, 0, 17, 13, 172, 171, 2, 0, 52, 48, 174, 173, 2, 0 </int_array>
 			<string> "names" </string>
-			<string_array  len="172">
+			<string_array  len="175">
 				<string> "scene" </string>
 				<string> "Node2D" </string>
 				<string> "z/z" </string>
 				<string> "z/relative" </string>
 				<string> "script/script" </string>
 				<string> "__meta__" </string>
-				<string> "quests" </string>
-				<string> "Node" </string>
 				<string> "message-ui" </string>
 				<string> "CanvasLayer" </string>
 				<string> "_import_path" </string>
@@ -328,11 +327,16 @@
 				<string> "garrus" </string>
 				<string> "params/scale" </string>
 				<string> "test-cube1" </string>
+				<string> "ada" </string>
 				<string> "destination_sprite" </string>
 				<string> "texture" </string>
 				<string> "interface" </string>
 				<string> "custom_styles/panel" </string>
 				<string> "journal" </string>
+				<string> "quests" </string>
+				<string> "Node" </string>
+				<string> "test" </string>
+				<string> "data_source" </string>
 				<string> "hide_menu" </string>
 				<string> "popup_hide" </string>
 				<string> "_on_Panel_popup_hide" </string>
@@ -342,14 +346,14 @@
 				<string> "pressed" </string>
 			</string_array>
 			<string> "node_count" </string>
-			<int> 53 </int>
+			<int> 55 </int>
 			<string> "nodes" </string>
-			<int_array  len="1291"> 				-1, -1, 1, 0, -1, 4, 2, 0, 3, 1, 4, 2, 5, 3, 0, 0, 0, 7, 6, -1, 0, 0, 0, 0, 9, 8, 4, 3, 10, 5, 11, 6, 5, 7, 0, 0, 0, 1, 12, -1, 5, 13, 1, 2, 8, 3, 1, 4, 9, 5, 10, 0, 3, 0, 9, 14, -1, 4, 11, 8, 15, 11, 16, 12, 17, 13, 0, 4, 0, 18, 18, -1, 8, 13, 1, 19, 14, 20, 15, 21, 1, 22, 16, 23, 17, 24, 17, 25, 18, 0, 4, 0, 27, 26, -1, 14, 13, 1, 28, 19, 29, 19, 30, 20, 31, 21, 19, 22, 20, 23, 21, 1, 22, 16, 23, 17, 24, 17, 25, 18, 32, 16, 33, 24, 0, 6, 0, 35, 34, -1, 11, 29, 0, 36, 0, 30, 25, 31, 26, 19, 25, 20, 27, 21, 1, 22, 1, 23, 17, 24, 17, 4, 28, 0, 7, 0, 38, 37, -1, 14, 19, 29, 20, 30, 21, 1, 22, 16, 23, 17, 24, 19, 25, 18, 39, 31, 40, 31, 41, 1, 42, 16, 43, 32, 44, 1, 45, 6, 0, 7, 0, 38, 46, -1, 14, 31, 33, 19, 29, 20, 34, 21, 1, 22, 16, 23, 17, 24, 19, 39, 31, 40, 31, 41, 1, 42, 16, 43, 35, 44, 16, 45, 6, 0, 7, 0, 38, 47, -1, 15, 31, 36, 19, 29, 20, 37, 48, 38, 21, 1, 22, 16, 23, 17, 24, 19, 39, 31, 40, 31, 41, 1, 42, 16, 43, 39, 44, 16, 45, 6, 0, 7, 0, 49, 49, -1, 10, 50, 40, 31, 41, 19, 29, 20, 42, 21, 1, 22, 1, 23, 17, 24, 19, 51, 43, 52, 17, 0, 7, 0, 38, 53, -1, 15, 31, 44, 19, 29, 20, 45, 54, 46, 21, 1, 22, 16, 23, 17, 24, 19, 39, 31, 40, 31, 41, 1, 42, 16, 43, 47, 44, 16, 45, 6, 0, 7, 0, 38, 55, -1, 14, 31, 48, 19, 29, 20, 49, 21, 1, 22, 16, 23, 17, 24, 19, 39, 31, 40, 31, 41, 1, 42, 16, 43, 50, 44, 16, 45, 6, 0, 0, 0, 1, 56, -1, 4, 13, 1, 3, 1, 4, 51, 5, 52, 0, 14, 0, 9, 18, -1, 5, 11, 8, 15, 11, 16, 12, 17, 13, 5, 53, 0, 15, 0, 27, 57, -1, 17, 13, 1, 28, 19, 58, 19, 29, 19, 36, 19, 30, 54, 31, 55, 19, 56, 20, 57, 21, 1, 22, 16, 23, 17, 24, 19, 25, 58, 59, 59, 32, 16, 33, 60, 0, 16, 0, 60, 60, -1, 11, 29, 0, 36, 0, 30, 61, 31, 61, 19, 61, 20, 61, 21, 1, 22, 1, 23, 19, 24, 19, 52, 62, 0, 17, 0, 61, 61, -1, 22, 19, 63, 20, 64, 62, 65, 21, 1, 22, 16, 23, 17, 24, 19, 39, 66, 40, 66, 63, 66, 64, 66, 65, 67, 66, 67, 67, 68, 68, 69, 69, 70, 70, 0, 71, 71, 72, 6, 73, 72, 74, 73, 75, 6, 0, 17, 0, 76, 76, -1, 16, 30, 21, 19, 74, 20, 64, 21, 1, 22, 16, 23, 19, 24, 19, 51, 75, 77, 67, 78, 69, 79, 76, 67, 77, 80, 78, 81, 16, 82, 79, 83, 8, 0, 0, 0, 1, 84, -1, 4, 2, 0, 3, 1, 4, 80, 5, 81, 0, 20, 0, 86, 85, -1, 0, 0, 21, 0, 88, 87, -1, 14, 89, 0, 90, 82, 91, 83, 92, 84, 93, 85, 94, 17, 95, 0, 96, 16, 97, 1, 98, 86, 99, 12, 100, 0, 101, 0, 102, 87, 0, 22, 0, 104, 103, -1, 2, 2, 0, 105, 16, 0, 23, 0, 1, 106, -1, 11, 107, 88, 2, 0, 4, 89, 5, 90, 108, 0, 109, 91, 110, 92, 111, 6, 112, 6, 113, 93, 114, 16, 0, 24, 0, 116, 115, -1, 8, 117, 1, 118, 94, 119, 95, 120, 16, 121, 96, 122, 97, 123, 98, 124, 86, 0, 25, 0, 126, 125, -1, 16, 30, 99, 31, 100, 19, 101, 20, 102, 21, 1, 22, 1, 23, 17, 24, 17, 41, 1, 42, 16, 127, 103, 128, 103, 129, 103, 130, 103, 131, 103, 4, 104, 0, 25, 0, 133, 132, -1, 4, 107, 105, 134, 6, 135, 106, 132, 16, 0, 24, 0, 137, 136, -1, 1, 107, 107, 0, 23, 0, 1, 138, -1, 11, 107, 108, 2, 0, 4, 109, 5, 110, 108, 19, 109, 111, 110, 92, 111, 6, 112, 6, 113, 93, 114, 1, 0, 29, 0, 116, 115, -1, 8, 117, 1, 118, 112, 119, 113, 120, 16, 121, 96, 122, 97, 123, 98, 124, 86, 0, 30, 0, 126, 125, -1, 14, 30, 114, 31, 115, 19, 116, 20, 117, 21, 1, 22, 1, 23, 17, 24, 17, 41, 1, 127, 118, 128, 119, 129, 119, 130, 118, 131, 118, 0, 30, 0, 133, 132, -1, 4, 50, 40, 134, 6, 135, 120, 132, 16, 0, 29, 0, 137, 136, -1, 1, 107, 121, 0, 23, 0, 140, 139, 122, 5, 10, 5, 107, 123, 2, 0, 100, 124, 5, 125, 0, 34, 0, 141, 141, -1, 15, 142, 0, 143, 1, 144, 16, 145, 12, 146, 126, 147, 127, 148, 127, 149, 128, 150, 128, 151, 16, 152, 16, 153, 40, 154, 40, 155, 40, 156, 40, 0, 23, 0, 1, 157, -1, 10, 107, 129, 2, 0, 4, 130, 108, 17, 109, 131, 110, 132, 111, 6, 112, 6, 113, 93, 114, 1, 0, 36, 0, 116, 115, -1, 9, 117, 16, 118, 133, 119, 113, 120, 16, 121, 96, 122, 97, 123, 98, 124, 86, 100, 134, 0, 37, 0, 126, 125, -1, 16, 30, 135, 31, 136, 19, 137, 20, 138, 21, 1, 22, 1, 23, 17, 24, 17, 41, 1, 42, 16, 127, 139, 128, 139, 129, 140, 130, 139, 131, 140, 158, 141, 0, 37, 0, 133, 132, -1, 4, 50, 40, 134, 6, 135, 142, 132, 16, 0, 36, 0, 137, 136, -1, 1, 107, 143, 0, 23, 0, 1, 159, -1, 10, 107, 144, 2, 0, 4, 145, 108, 78, 109, 146, 110, 92, 111, 6, 112, 6, 113, 93, 114, 1, 0, 41, 0, 116, 115, -1, 8, 117, 1, 118, 147, 119, 113, 120, 16, 121, 96, 122, 97, 123, 98, 124, 86, 0, 42, 0, 126, 125, -1, 14, 30, 148, 31, 149, 19, 150, 20, 151, 21, 1, 22, 1, 23, 17, 24, 17, 41, 1, 127, 152, 128, 153, 129, 153, 130, 152, 131, 152, 0, 42, 0, 133, 132, -1, 4, 50, 40, 134, 6, 135, 154, 132, 16, 0, 41, 0, 137, 136, -1, 1, 107, 155, 0, 20, 0, 125, 160, -1, 2, 13, 1, 161, 156, 0, 0, 0, 9, 162, -1, 4, 11, 6, 15, 11, 16, 12, 17, 13, 0, 47, 0, 18, 1, -1, 9, 30, 157, 31, 158, 19, 157, 20, 158, 21, 1, 22, 16, 23, 17, 24, 17, 4, 159, 0, 48, 0, 57, 57, -1, 11, 29, 0, 36, 0, 30, 160, 31, 161, 19, 162, 20, 163, 21, 1, 22, 16, 23, 17, 24, 17, 163, 164, 0, 49, 0, 35, 34, -1, 10, 29, 0, 36, 0, 30, 165, 31, 166, 19, 167, 20, 167, 21, 1, 22, 1, 23, 17, 24, 19, 0, 50, 0, 126, 164, -1, 11, 19, 168, 20, 169, 21, 1, 22, 16, 23, 17, 24, 19, 41, 1, 127, 170, 128, 170, 129, 171, 131, 171, 0, 50, 0, 126, 12, -1, 12, 31, 172, 19, 168, 20, 173, 21, 1, 22, 16, 23, 17, 24, 19, 41, 1, 127, 174, 128, 174, 129, 175, 131, 175, 0 </int_array>
+			<int_array  len="1313"> 				-1, -1, 1, 0, -1, 4, 2, 0, 3, 1, 4, 2, 5, 3, 0, 0, 0, 7, 6, 4, 3, 8, 5, 9, 6, 5, 7, 0, 0, 0, 1, 10, -1, 5, 11, 1, 2, 8, 3, 1, 4, 9, 5, 10, 0, 2, 0, 7, 12, -1, 4, 9, 8, 13, 11, 14, 12, 15, 13, 0, 3, 0, 16, 16, -1, 8, 11, 1, 17, 14, 18, 15, 19, 1, 20, 16, 21, 17, 22, 17, 23, 18, 0, 3, 0, 25, 24, -1, 14, 11, 1, 26, 19, 27, 19, 28, 20, 29, 21, 17, 22, 18, 23, 19, 1, 20, 16, 21, 17, 22, 17, 23, 18, 30, 16, 31, 24, 0, 5, 0, 33, 32, -1, 11, 27, 0, 34, 0, 28, 25, 29, 26, 17, 25, 18, 27, 19, 1, 20, 1, 21, 17, 22, 17, 4, 28, 0, 6, 0, 36, 35, -1, 14, 17, 29, 18, 30, 19, 1, 20, 16, 21, 17, 22, 19, 23, 18, 37, 31, 38, 31, 39, 1, 40, 16, 41, 32, 42, 1, 43, 6, 0, 6, 0, 36, 44, -1, 14, 29, 33, 17, 29, 18, 34, 19, 1, 20, 16, 21, 17, 22, 19, 37, 31, 38, 31, 39, 1, 40, 16, 41, 35, 42, 16, 43, 6, 0, 6, 0, 36, 45, -1, 15, 29, 36, 17, 29, 18, 37, 46, 38, 19, 1, 20, 16, 21, 17, 22, 19, 37, 31, 38, 31, 39, 1, 40, 16, 41, 39, 42, 16, 43, 6, 0, 6, 0, 47, 47, -1, 10, 48, 40, 29, 41, 17, 29, 18, 42, 19, 1, 20, 1, 21, 17, 22, 19, 49, 43, 50, 17, 0, 6, 0, 36, 51, -1, 15, 29, 44, 17, 29, 18, 45, 52, 46, 19, 1, 20, 16, 21, 17, 22, 19, 37, 31, 38, 31, 39, 1, 40, 16, 41, 47, 42, 16, 43, 6, 0, 6, 0, 36, 53, -1, 14, 29, 48, 17, 29, 18, 49, 19, 1, 20, 16, 21, 17, 22, 19, 37, 31, 38, 31, 39, 1, 40, 16, 41, 50, 42, 16, 43, 6, 0, 0, 0, 1, 54, -1, 4, 11, 1, 3, 1, 4, 51, 5, 52, 0, 13, 0, 7, 16, -1, 5, 9, 8, 13, 11, 14, 12, 15, 13, 5, 53, 0, 14, 0, 25, 55, -1, 17, 11, 1, 26, 19, 56, 19, 27, 19, 34, 19, 28, 54, 29, 55, 17, 56, 18, 57, 19, 1, 20, 16, 21, 17, 22, 19, 23, 58, 57, 59, 30, 16, 31, 60, 0, 15, 0, 58, 58, -1, 11, 27, 0, 34, 0, 28, 61, 29, 61, 17, 61, 18, 61, 19, 1, 20, 1, 21, 19, 22, 19, 50, 62, 0, 16, 0, 59, 59, -1, 22, 17, 63, 18, 64, 60, 65, 19, 1, 20, 16, 21, 17, 22, 19, 37, 66, 38, 66, 61, 66, 62, 66, 63, 67, 64, 67, 65, 68, 66, 69, 67, 70, 68, 0, 69, 71, 70, 6, 71, 72, 72, 73, 73, 6, 0, 16, 0, 74, 74, -1, 16, 28, 21, 17, 74, 18, 64, 19, 1, 20, 16, 21, 19, 22, 19, 49, 75, 75, 67, 76, 69, 77, 76, 65, 77, 78, 78, 79, 16, 80, 79, 81, 8, 0, 0, 0, 1, 82, -1, 4, 2, 0, 3, 1, 4, 80, 5, 81, 0, 19, 0, 84, 83, -1, 0, 0, 20, 0, 86, 85, -1, 14, 87, 0, 88, 82, 89, 83, 90, 84, 91, 85, 92, 17, 93, 0, 94, 16, 95, 1, 96, 86, 97, 12, 98, 0, 99, 0, 100, 87, 0, 21, 0, 102, 101, -1, 2, 2, 0, 103, 16, 0, 22, 0, 1, 104, -1, 11, 105, 88, 2, 0, 4, 89, 5, 90, 106, 0, 107, 91, 108, 92, 109, 6, 110, 6, 111, 93, 112, 16, 0, 23, 0, 114, 113, -1, 8, 115, 1, 116, 94, 117, 95, 118, 16, 119, 96, 120, 97, 121, 98, 122, 86, 0, 24, 0, 124, 123, -1, 16, 28, 99, 29, 100, 17, 101, 18, 102, 19, 1, 20, 1, 21, 17, 22, 17, 39, 1, 40, 16, 125, 103, 126, 103, 127, 103, 128, 103, 129, 103, 4, 104, 0, 24, 0, 131, 130, -1, 4, 105, 105, 132, 6, 133, 106, 130, 16, 0, 23, 0, 135, 134, -1, 1, 105, 107, 0, 22, 0, 1, 136, -1, 11, 105, 108, 2, 0, 4, 109, 5, 110, 106, 19, 107, 111, 108, 92, 109, 6, 110, 6, 111, 93, 112, 1, 0, 28, 0, 114, 113, -1, 8, 115, 1, 116, 112, 117, 113, 118, 16, 119, 96, 120, 97, 121, 98, 122, 86, 0, 29, 0, 124, 123, -1, 14, 28, 114, 29, 115, 17, 116, 18, 117, 19, 1, 20, 1, 21, 17, 22, 17, 39, 1, 125, 118, 126, 119, 127, 119, 128, 118, 129, 118, 0, 29, 0, 131, 130, -1, 4, 48, 40, 132, 6, 133, 120, 130, 16, 0, 28, 0, 135, 134, -1, 1, 105, 121, 0, 22, 0, 138, 137, 122, 5, 8, 5, 105, 123, 2, 0, 98, 124, 5, 125, 0, 33, 0, 139, 139, -1, 15, 140, 0, 141, 1, 142, 16, 143, 12, 144, 126, 145, 127, 146, 127, 147, 128, 148, 128, 149, 16, 150, 16, 151, 40, 152, 40, 153, 40, 154, 40, 0, 22, 0, 1, 155, -1, 10, 105, 129, 2, 0, 4, 130, 106, 17, 107, 131, 108, 132, 109, 6, 110, 6, 111, 93, 112, 1, 0, 35, 0, 114, 113, -1, 9, 115, 16, 116, 133, 117, 113, 118, 16, 119, 96, 120, 97, 121, 98, 122, 86, 98, 134, 0, 36, 0, 124, 123, -1, 16, 28, 135, 29, 136, 17, 137, 18, 138, 19, 1, 20, 1, 21, 17, 22, 17, 39, 1, 40, 16, 125, 139, 126, 139, 127, 140, 128, 139, 129, 140, 156, 141, 0, 36, 0, 131, 130, -1, 4, 48, 40, 132, 6, 133, 142, 130, 16, 0, 35, 0, 135, 134, -1, 1, 105, 143, 0, 22, 0, 1, 157, -1, 10, 105, 144, 2, 0, 4, 145, 106, 78, 107, 146, 108, 92, 109, 6, 110, 6, 111, 93, 112, 1, 0, 40, 0, 114, 113, -1, 8, 115, 1, 116, 147, 117, 113, 118, 16, 119, 96, 120, 97, 121, 98, 122, 86, 0, 41, 0, 124, 123, -1, 14, 28, 148, 29, 149, 17, 150, 18, 151, 19, 1, 20, 1, 21, 17, 22, 17, 39, 1, 125, 152, 126, 153, 127, 153, 128, 152, 129, 152, 0, 41, 0, 131, 130, -1, 4, 48, 40, 132, 6, 133, 154, 130, 16, 0, 40, 0, 135, 134, -1, 1, 105, 155, 0, 22, 0, 1, 158, -1, 1, 105, 156, 0, 19, 0, 123, 159, -1, 2, 11, 1, 160, 157, 0, 0, 0, 7, 161, -1, 5, 9, 6, 13, 11, 14, 12, 15, 13, 5, 158, 0, 47, 0, 16, 1, -1, 9, 28, 159, 29, 160, 17, 159, 18, 160, 19, 1, 20, 16, 21, 17, 22, 17, 4, 161, 0, 48, 0, 55, 55, -1, 11, 27, 0, 34, 0, 28, 162, 29, 163, 17, 164, 18, 165, 19, 1, 20, 16, 21, 17, 22, 17, 162, 166, 0, 49, 0, 33, 32, -1, 10, 27, 0, 34, 0, 28, 167, 29, 168, 17, 169, 18, 169, 19, 1, 20, 1, 21, 17, 22, 19, 0, 50, 0, 124, 163, -1, 11, 17, 170, 18, 171, 19, 1, 20, 16, 21, 17, 22, 19, 39, 1, 125, 172, 126, 172, 127, 173, 129, 173, 0, 50, 0, 124, 10, -1, 12, 29, 174, 17, 170, 18, 175, 19, 1, 20, 16, 21, 17, 22, 19, 39, 1, 125, 176, 126, 176, 127, 177, 129, 177, 0, 0, 0, 165, 164, -1, 0, 0, 53, 0, 165, 166, -1, 2, 4, 178, 167, 179, 0 </int_array>
 			<string> "variants" </string>
-			<array  len="176" shared="false">
+			<array  len="180" shared="false">
 				<int> 1 </int>
 				<bool> False </bool>
-				<resource  resource_type="Script" path="./main.gd">  </resource>
+				<resource  external="0">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
 					<string> "Script" </string>
@@ -358,7 +362,7 @@
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> -366.527, -301.139 </vector2>
+							<vector2> -94.7001, -28.8396 </vector2>
 							<string> "snap_grid" </string>
 							<bool> True </bool>
 							<string> "snap_offset" </string>
@@ -378,7 +382,7 @@
 							<string> "snap_step" </string>
 							<vector2> 9, 9 </vector2>
 							<string> "zoom" </string>
-							<real> 0.54036 </real>
+							<real> 0.66342 </real>
 						</dictionary>
 						<string> "3D" </string>
 						<dictionary  shared="false">
@@ -472,6 +476,11 @@
 							<string> "znear" </string>
 							<real> 0.1 </real>
 						</dictionary>
+						<string> "Anim" </string>
+						<dictionary  shared="false">
+							<string> "visible" </string>
+							<bool> False </bool>
+						</dictionary>
 					</dictionary>
 					<string> "__editor_run_settings__" </string>
 					<dictionary  shared="false">
@@ -481,7 +490,7 @@
 						<int> 0 </int>
 					</dictionary>
 				</dictionary>
-				<resource  resource_type="PackedScene" path="../active-partials/message-ui/message-ui2.xml">  </resource>
+				<resource  external="1">  </resource>
 				<node_path> "" </node_path>
 				<int> 0 </int>
 				<dictionary  shared="false">
@@ -616,7 +625,7 @@
 					</dictionary>
 				</dictionary>
 				<int> -1 </int>
-				<resource  resource_type="Script" path="../sandbox/menu.gd">  </resource>
+				<resource  external="2">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
 					<string> "2D" </string>
@@ -747,6 +756,8 @@
 						<string> "run_mode" </string>
 						<int> 0 </int>
 					</dictionary>
+					<string> "_editor_collapsed" </string>
+					<bool> True </bool>
 				</dictionary>
 				<vector2> 0, 0 </vector2>
 				<real> 0 </real>
@@ -755,7 +766,7 @@
 				<real> 597 </real>
 				<bool> True </bool>
 				<int> 2 </int>
-				<resource  resource_type="Theme" path="../assets/new_theme.thm">  </resource>
+				<resource  external="3">  </resource>
 				<int> 3 </int>
 				<real> 350 </real>
 				<real> 100 </real>
@@ -765,7 +776,7 @@
 				<real> 10 </real>
 				<real> 16 </real>
 				<real> 12 </real>
-				<resource  resource_type="Script" path="../active-partials/interface/buttons.gd">  </resource>
+				<resource  external="4">  </resource>
 				<real> 680 </real>
 				<real> 21 </real>
 				<resource  resource_type="StyleBox" path="local://1">  </resource>
@@ -788,7 +799,7 @@
 				<real> 147 </real>
 				<real> 172 </real>
 				<string> "&lt; start over" </string>
-				<resource  resource_type="Script" path="../types/base_journal.gd">  </resource>
+				<resource  external="5">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
 					<string> "Script" </string>
@@ -939,7 +950,7 @@
 				<real> 460 </real>
 				<vector2> 50, 0 </vector2>
 				<resource  resource_type="StyleBox" path="local://4">  </resource>
-				<resource  resource_type="Font" path="../assets/fonts/imported/8bit-operator-16.fnt">  </resource>
+				<resource  external="6">  </resource>
 				<color> 0.685279, 0.93401, 0.237374, 1 </color>
 				<color> 1, 1, 1, 1 </color>
 				<int> 5 </int>
@@ -951,7 +962,7 @@
 				<color> 0.93028, 0.944162, 0.944444, 1 </color>
 				<int> 4 </int>
 				<string> "" </string>
-				<resource  resource_type="Script" path="../active-partials/environment/walkable-area.gd">  </resource>
+				<resource  external="7">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
 					<string> "2D" </string>
@@ -1083,14 +1094,14 @@
 						<int> 0 </int>
 					</dictionary>
 				</dictionary>
-				<resource  resource_type="TileSet" path="../assets/tiles/iso-floors-walkable.xml">  </resource>
+				<resource  external="8">  </resource>
 				<vector2> 72, 36 </vector2>
 				<int> 8 </int>
 				<matrix32> 1, 0, 0, 1, 0, 0 </matrix32>
 				<real> 1 </real>
 				<int_array  len="1106"> 					-851958, 2, -851957, 2, -786422, 2, -786421, 2, -786420, 2, -786419, 2, -720887, 2, -720886, 2, -720885, 2, -720884, 2, -720883, 2, -720882, 2, -655352, 2, -655351, 2, -655350, 2, -655349, 2, -655348, 2, -655347, 2, -655346, 2, -655345, 2, -589818, 2, -589817, 2, -589816, 2, -589815, 2, -589814, 2, -589813, 2, -589812, 2, -589811, 2, -589810, 2, -589809, 2, -589808, 2, -524282, 2, -524281, 2, -524280, 2, -524279, 2, -524278, 2, -524277, 2, -524276, 2, -524275, 2, -524274, 2, -524273, 2, -524272, 2, -524271, 2, -458749, 2, -458748, 2, -458747, 2, -458746, 2, -458745, 2, -458744, 2, -458743, 2, -458742, 2, -458741, 2, -458740, 2, -458739, 2, -458738, 2, -458737, 2, -458736, 2, -458735, 2, -458734, 2, -393212, 2, -393211, 2, -393210, 2, -393209, 2, -393208, 2, -393207, 2, -393206, 2, -393205, 2, -393204, 2, -393203, 2, -393202, 2, -393201, 2, -393200, 2, -393199, 2, -393198, 2, -393197, 2, -393196, 2, -393195, 2, -327678, 2, -327677, 2, -327676, 2, -327675, 2, -327674, 2, -327673, 2, -327672, 2, -327671, 2, -327670, 2, -327669, 2, -327668, 2, -327667, 2, -327666, 2, -327665, 2, -327664, 2, -327663, 2, -327662, 2, -327661, 2, -327660, 2, -327659, 2, -327658, 2, -327657, 2, -327656, 2, -327655, 2, -196609, 2, -262142, 2, -262141, 2, -262139, 2, -262138, 2, -262137, 2, -262136, 2, -262135, 2, -262134, 2, -262133, 2, -262132, 2, -262131, 2, -262130, 2, -262129, 2, -262128, 2, -262127, 2, -262126, 2, -262125, 2, -262124, 2, -262123, 2, -262122, 2, -262121, 2, -262120, 2, -262119, 2, -262118, 2, -131073, 2, -196608, 2, -196607, 2, -196606, 2, -196605, 2, -196604, 2, -196603, 2, -196602, 2, -196601, 2, -196600, 2, -196599, 2, -196598, 2, -196597, 2, -196596, 2, -196595, 2, -196594, 2, -196593, 2, -196592, 2, -196591, 2, -196590, 2, -196589, 2, -196588, 2, -196587, 2, -196586, 2, -196585, 2, -196584, 2, -196583, 2, -196582, 2, -131072, 2, -131071, 2, -131070, 2, -131069, 2, -131068, 2, -131067, 2, -131066, 2, -131065, 2, -131064, 2, -131063, 2, -131062, 2, -131061, 2, -131060, 2, -131059, 2, -131058, 2, -131057, 2, -131056, 2, -131055, 2, -131054, 2, -131053, 2, -131052, 2, -131051, 2, -131050, 2, -131049, 2, -131048, 2, -131047, 2, -131046, 2, -65536, 2, -65535, 2, -65534, 2, -65533, 2, -65532, 2, -65531, 2, -65530, 2, -65528, 1, -65527, 2, -65526, 2, -65525, 2, -65524, 2, -65523, 2, -65522, 7, -65521, 2, -65520, 2, -65519, 2, -65518, 2, -65517, 2, -65516, 2, -65515, 2, -65514, 2, -65513, 2, -65512, 2, -65511, 2, -65510, 2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 2, 5, 2, 6, 2, 7, 2, 8, 1, 9, 2, 10, 2, 11, 2, 12, 2, 13, 2, 14, 2, 15, 2, 16, 2, 17, 2, 18, 2, 19, 2, 20, 2, 21, 2, 22, 2, 23, 2, 24, 2, 25, 2, 26, 2, 65536, 2, 65537, 2, 65538, 2, 65539, 2, 65540, 2, 65541, 2, 65542, 2, 65543, 2, 65544, 2, 65545, 2, 65546, 2, 65547, 2, 65548, 2, 65549, 2, 65550, 2, 65551, 2, 65552, 2, 65553, 2, 65554, 2, 65555, 2, 65556, 2, 65557, 2, 65558, 2, 65559, 2, 65560, 2, 65561, 2, 65562, 2, 131072, 2, 131073, 2, 131074, 2, 131075, 2, 131076, 2, 131077, 2, 131078, 2, 131079, 2, 131080, 2, 131081, 2, 131082, 2, 131083, 2, 131084, 2, 131085, 2, 131086, 2, 131087, 2, 131088, 2, 131089, 2, 131090, 2, 131091, 2, 131092, 2, 131093, 2, 131094, 2, 131095, 2, 131096, 2, 131097, 2, 131098, 2, 196609, 2, 196610, 2, 196611, 2, 196612, 2, 196613, 2, 196614, 2, 196615, 2, 196616, 2, 196617, 2, 196618, 2, 196619, 2, 196620, 2, 196621, 2, 196622, 2, 196623, 2, 196624, 2, 196625, 2, 196626, 2, 196627, 2, 196628, 2, 196629, 2, 196630, 2, 196631, 2, 196632, 2, 196633, 2, 196634, 2, 262144, 2, 262145, 7, 262146, 2, 262147, 2, 262148, 2, 262149, 2, 262150, 2, 262151, 2, 262152, 2, 262153, 2, 262154, 2, 262155, 2, 262156, 2, 262157, 2, 262158, 2, 262159, 2, 262160, 2, 262161, 2, 262162, 2, 262163, 2, 262164, 2, 262165, 2, 262166, 2, 262167, 2, 262168, 2, 262169, 2, 262170, 2, 262171, 2, 327680, 7, 327681, 7, 327682, 7, 327683, 7, 327684, 7, 327685, 2, 327686, 2, 327687, 2, 327688, 2, 327689, 2, 327690, 2, 327691, 2, 327692, 2, 327693, 2, 327694, 2, 327695, 2, 327696, 2, 327697, 2, 327698, 2, 327699, 2, 327700, 2, 327701, 2, 327702, 2, 327703, 2, 327704, 2, 327705, 2, 327706, 2, 327707, 2, 393216, 7, 393217, 7, 393218, 7, 393219, 7, 393220, 7, 393221, 2, 393222, 2, 393223, 2, 393224, 2, 393225, 2, 393226, 2, 393227, 2, 393228, 1, 393229, 7, 393230, 2, 393231, 2, 393232, 2, 393233, 2, 393234, 2, 393235, 2, 393236, 2, 393237, 2, 393238, 2, 393239, 2, 393240, 2, 393241, 2, 393242, 2, 393243, 2, 458753, 7, 458754, 7, 458755, 7, 458756, 7, 458757, 2, 458758, 2, 458759, 2, 458760, 2, 458761, 2, 458762, 2, 458763, 2, 458764, 1, 458765, 7, 458766, 2, 458767, 2, 458768, 2, 458769, 2, 458770, 2, 458771, 2, 458772, 2, 458773, 2, 458774, 2, 458775, 2, 458776, 2, 458777, 2, 458778, 2, 458779, 2, 524289, 7, 524290, 7, 524291, 7, 524292, 7, 524293, 2, 524294, 2, 524295, 2, 524296, 2, 524297, 2, 524298, 2, 524299, 2, 524300, 2, 524301, 2, 524302, 2, 524303, 2, 524304, 2, 524305, 2, 524306, 2, 524307, 2, 524308, 2, 524309, 2, 524310, 2, 524311, 2, 524312, 2, 524315, 2, 524316, 2, 589825, 7, 589826, 7, 589827, 7, 589828, 7, 589829, 2, 589830, 2, 589831, 2, 589832, 2, 589833, 2, 589834, 2, 589835, 2, 589836, 2, 589837, 2, 589838, 2, 589839, 2, 589840, 2, 589841, 2, 589842, 2, 589843, 2, 589844, 2, 589845, 2, 589846, 2, 589847, 2, 655361, 7, 655362, 7, 655363, 7, 655364, 7, 655365, 2, 655366, 2, 655367, 2, 655368, 2, 655369, 2, 655370, 2, 655371, 2, 655372, 2, 655373, 2, 655374, 2, 655375, 2, 655376, 2, 655377, 2, 655378, 2, 655379, 2, 655380, 2, 655381, 2, 655382, 2, 720897, 7, 720898, 2, 720899, 2, 720900, 2, 720901, 2, 720902, 2, 720903, 2, 720904, 2, 720905, 2, 720906, 2, 720907, 2, 720908, 2, 720909, 2, 720910, 2, 720911, 2, 720912, 2, 720913, 2, 720914, 2, 720915, 2, 720916, 2, 720917, 2, 720918, 2, 786444, 2, 786445, 2, 786446, 2, 786447, 2, 786448, 2, 786449, 2, 786450, 2, 786451, 2, 786452, 2, 786453, 2, 851981, 2, 851982, 2, 851983, 2, 851984, 2, 851985, 2, 851986, 2, 851987, 2, 851988, 2, 851989, 2, 917517, 2, 917518, 2, 917519, 2, 917520, 2, 917521, 2, 917522, 2, 917523, 2, 917524, 2, 917525, 2, 983054, 2, 983055, 2, 983056, 2, 983057, 2, 983058, 2, 1048591, 2, 1048592, 2 </int_array>
 				<vector2> -125.877, 183.78 </vector2>
-				<resource  resource_type="Script" path="../active-partials/npcs/npc.gd">  </resource>
+				<resource  external="9">  </resource>
 				<dictionary  shared="false">
 					<string> "_editor_collapsed" </string>
 					<bool> True </bool>
@@ -1108,7 +1119,7 @@
 				<real> -175 </real>
 				<real> 144 </real>
 				<real> 124 </real>
-				<resource  resource_type="Texture" path="../assets/computer_by_hydroksyde.tex">  </resource>
+				<resource  external="10">  </resource>
 				<resource  resource_type="Script" path="local://13">  </resource>
 				<vector2> 12.4609, -19.1499 </vector2>
 				<vector2_array  len="4"> 					-1.99669, 69.9959, 41.4161, 96.3699, 113.416, 60.3699, 62.2692, 32.3228 </vector2_array>
@@ -1126,11 +1137,11 @@
 				<real> -99 </real>
 				<real> 78 </real>
 				<real> 29 </real>
-				<resource  resource_type="Texture" path="../assets/fpo/basic_block128.tex">  </resource>
-				<resource  resource_type="Texture" path="../assets/fpo/white-block-lighter.png">  </resource>
+				<resource  external="11">  </resource>
+				<resource  external="12">  </resource>
 				<vector2_array  len="4"> 					12.366, 30.574, 48.366, 48.574, 120.366, 12.574, 84.366, -5.42599 </vector2_array>
 				<vector2> 67.366, 22.574 </vector2>
-				<resource  resource_type="PackedScene" path="../active-partials/player/player-k2d.xml">  </resource>
+				<resource  external="13">  </resource>
 				<vector2> 302, 320 </vector2>
 				<int> 15 </int>
 				<dictionary  shared="false">
@@ -1272,15 +1283,15 @@
 				<vector2> 553.5, 216 </vector2>
 				<resource  resource_type="Script" path="local://7">  </resource>
 				<string> "Garrus" </string>
-				<resource  resource_type="Texture" path="../assets/fpo/garrus-port.png">  </resource>
+				<resource  external="14">  </resource>
 				<resource  resource_type="Shape2D" path="local://23">  </resource>
 				<int> 16 </int>
 				<real> -58 </real>
 				<real> -81 </real>
 				<real> 61 </real>
 				<real> 60.300003 </real>
-				<resource  resource_type="Texture" path="../assets/garrus-sprite.tex">  </resource>
-				<resource  resource_type="Texture" path="../assets/fpo/garrus-sprite-light.png">  </resource>
+				<resource  external="15">  </resource>
+				<resource  external="16">  </resource>
 				<vector2> 0.3, 0.3 </vector2>
 				<vector2_array  len="4"> 					-121.5, 36, -13.5, -18, 94.5, 36, -13.5, 90 </vector2_array>
 				<vector2> -48.5, 55 </vector2>
@@ -1292,14 +1303,19 @@
 				<real> -149 </real>
 				<real> 87 </real>
 				<real> 32 </real>
-				<resource  resource_type="Texture" path="../assets/fpo/tall-white-block.png">  </resource>
-				<resource  resource_type="Texture" path="../assets/fpo/tall-white-block-hover.png">  </resource>
+				<resource  external="17">  </resource>
+				<resource  external="18">  </resource>
 				<vector2_array  len="4"> 					-50, 13, -5, 67, 139, -5, 31, -23 </vector2_array>
 				<vector2> 53.366, 20.574 </vector2>
-				<resource  resource_type="Texture" path="../assets/tiles/green-outline-glow.png">  </resource>
+				<vector2> 95, 68 </vector2>
+				<resource  external="19">  </resource>
+				<dictionary  shared="false">
+					<string> "_editor_collapsed" </string>
+					<bool> True </bool>
+				</dictionary>
 				<real> -9 </real>
 				<real> 180 </real>
-				<resource  resource_type="Script" path="../active-partials/interface/interface.gd">  </resource>
+				<resource  external="20">  </resource>
 				<real> 693 </real>
 				<real> 306 </real>
 				<real> -775 </real>
@@ -1310,12 +1326,14 @@
 				<real> 9 </real>
 				<real> 37 </real>
 				<real> 47 </real>
-				<resource  resource_type="Texture" path="../assets/ui/list31 (1).tex">  </resource>
-				<resource  resource_type="Texture" path="../assets/ui/list31.tex">  </resource>
+				<resource  external="21">  </resource>
+				<resource  external="22">  </resource>
 				<real> 51 </real>
 				<real> 99 </real>
-				<resource  resource_type="Texture" path="../assets/ui/code39 (2).tex">  </resource>
-				<resource  resource_type="Texture" path="../assets/ui/code39 (1).tex">  </resource>
+				<resource  external="23">  </resource>
+				<resource  external="24">  </resource>
+				<resource  external="25">  </resource>
+				<string> "res://sandbox/_quest_data.txt" </string>
 			</array>
 			<string> "version" </string>
 			<int> 1 </int>

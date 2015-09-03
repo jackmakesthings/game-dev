@@ -7,7 +7,7 @@ extends Node
 
 var data
 var utils
-export(String, FILE) var file = "res://dynamic-node-tests/data.txt"
+export(String, FILE) var file = "res://needs-review/dynamic-node-tests/data.txt"
 var states = {}
 var currentState
 var qNode

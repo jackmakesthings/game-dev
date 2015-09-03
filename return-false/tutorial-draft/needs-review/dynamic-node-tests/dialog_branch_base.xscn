@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resource_file type="PackedScene" subresource_count="3" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
-	<ext_resource path="res://dynamic-node-tests/dialog_branch_base.gd" type="Script"></ext_resource>
+	<ext_resource path="res://needs-review/dynamic-node-tests/dialog_branch_base.gd" type="Script"></ext_resource>
 	<ext_resource path="res://assets/fonts/droid-mono-18.fnt" type="Font"></ext_resource>
 	<main_resource>
 		<dictionary name="_bundled" shared="false">
@@ -40,16 +40,16 @@
 				<bool> False </bool>
 				<bool> True </bool>
 				<int> 2 </int>
-				<resource  resource_type="Script" path="res://dynamic-node-tests/dialog_branch_base.gd">  </resource>
+				<resource  resource_type="Script" path="./dialog_branch_base.gd">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
-					<string> "Script" </string>
+					<string> "2D" </string>
 					<string> "__editor_plugin_states__" </string>
 					<dictionary  shared="false">
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> -707.891, -428.891 </vector2>
+							<vector2> -733.611, -428.891 </vector2>
 							<string> "snap_grid" </string>
 							<bool> False </bool>
 							<string> "snap_offset" </string>
@@ -178,7 +178,7 @@
 				<real> 28 </real>
 				<real> 797 </real>
 				<real> 412 </real>
-				<resource  resource_type="Font" path="res://assets/fonts/droid-mono-18.fnt">  </resource>
+				<resource  resource_type="Font" path="../../assets/fonts/droid-mono-18.fnt">  </resource>
 				<string> "" </string>
 				<int> -1 </int>
 			</array>

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resource_file type="PackedScene" subresource_count="13" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
-	<ext_resource path="res://scripts/main.gd" type="Script"></ext_resource>
-	<ext_resource path="res://scripts/quest-example.gd" type="Script"></ext_resource>
-	<ext_resource path="res://scenes/json_reader_test.xscn" type="PackedScene"></ext_resource>
-	<ext_resource path="res://scenes/cabinet_npc.xscn" type="PackedScene"></ext_resource>
-	<ext_resource path="res://scenes/computer_npc.xscn" type="PackedScene"></ext_resource>
-	<ext_resource path="res://scenes/robot-kinematic.xml" type="PackedScene"></ext_resource>
-	<ext_resource path="res://scenes/message-ui.scn" type="PackedScene"></ext_resource>
+	<ext_resource path="res://needs-review/scripts/main.gd" type="Script"></ext_resource>
+	<ext_resource path="res://needs-review/scripts/quest-example.gd" type="Script"></ext_resource>
+	<ext_resource path="res://needs-review/json_reader_test.xscn" type="PackedScene"></ext_resource>
+	<ext_resource path="res://needs-review/cabinet_npc.xscn" type="PackedScene"></ext_resource>
+	<ext_resource path="res://needs-review/computer_npc.xscn" type="PackedScene"></ext_resource>
+	<ext_resource path="res://needs-review/robot-kinematic.xml" type="PackedScene"></ext_resource>
+	<ext_resource path="res://needs-review/message-ui.scn" type="PackedScene"></ext_resource>
 	<resource type="GDScript" path="local://1">
-		<string name="script/source"> "extends &quot;res://scenes/json_reader_test.gd&quot;&#000a;&#000a;func _init():&#000a;&#0009;buttonLabel = &quot;TERMINAL&quot;" </string>
+		<string name="script/source"> "extends &quot;res://needs-review/json_reader_test.gd&quot;&#000a;&#000a;func _init():&#000a;&#0009;buttonLabel = &quot;TERMINAL&quot;" </string>
 
 	</resource>
 	<resource type="GDScript" path="local://2">
-		<string name="script/source"> "extends &quot;res://scenes/json_reader_test.gd&quot;&#000a;&#000a;func _init():&#000a;&#0009;buttonLabel = &quot;CABINET&quot;" </string>
+		<string name="script/source"> "extends &quot;res://needs-review/json_reader_test.gd&quot;&#000a;&#000a;func _init():&#000a;&#0009;buttonLabel = &quot;CABINET&quot;" </string>
 
 	</resource>
 	<resource type="NavigationPolygon" path="local://3">
@@ -26,11 +26,11 @@
 
 	</resource>
 	<resource type="GDScript" path="local://4">
-		<string name="script/source"> "extends &quot;res://scripts/nav-based-walker.gd&quot;" </string>
+		<string name="script/source"> "extends &quot;res://needs-review/scripts/nav-based-walker.gd&quot;" </string>
 
 	</resource>
 	<resource type="GDScript" path="local://5">
-		<string name="script/source"> "extends &quot;res://scripts/message-ui.gd&quot;" </string>
+		<string name="script/source"> "extends &quot;res://needs-review/scripts/message-ui.gd&quot;" </string>
 
 	</resource>
 	<main_resource>
@@ -86,7 +86,7 @@
 			<int_array  len="215"> 				-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 0, 0, 0, 1, 4, -1, 4, 2, 2, 5, 3, 6, 4, 7, 5, 0, 0, 0, 1, 1, -1, 1, 3, 6, 0, 2, 0, 8, 8, -1, 10, 9, 7, 10, 7, 11, 8, 12, 9, 13, 10, 14, 11, 15, 11, 16, 12, 17, 12, 18, 13, 0, 3, 0, 20, 19, 14, 12, 21, 15, 22, 11, 9, 4, 10, 4, 12, 16, 13, 17, 16, 12, 17, 12, 2, 18, 3, 19, 23, 20, 24, 21, 0, 3, 0, 20, 25, 14, 12, 21, 15, 22, 11, 9, 4, 10, 4, 12, 22, 13, 17, 16, 12, 17, 12, 2, 23, 3, 24, 23, 20, 24, 25, 0, 3, 0, 1, 26, 26, 3, 21, 15, 27, 27, 3, 28, 0, 3, 0, 1, 28, 29, 3, 21, 15, 27, 30, 3, 31, 0, 0, 0, 29, 29, -1, 0, 0, 8, 0, 30, 30, -1, 2, 31, 32, 32, 5, 0, 8, 0, 33, 33, -1, 1, 34, 5, 0, 10, 0, 36, 35, 33, 4, 21, 15, 27, 34, 2, 35, 3, 36, 0, 0, 0, 20, 20, 37, 8, 21, 15, 22, 11, 11, 38, 37, 39, 12, 40, 13, 41, 2, 42, 3, 43, 0 </int_array>
 			<string> "variants" </string>
 			<array  len="44" shared="false">
-				<resource  resource_type="Script" path="res://scripts/main.gd">  </resource>
+				<resource  resource_type="Script" path="res://needs-review/scripts/main.gd">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
 					<string> "2D" </string>
@@ -218,7 +218,7 @@
 						<int> 0 </int>
 					</dictionary>
 				</dictionary>
-				<resource  resource_type="Script" path="res://scripts/quest-example.gd">  </resource>
+				<resource  resource_type="Script" path="res://needs-review/scripts/quest-example.gd">  </resource>
 				<string> "tutorial" </string>
 				<int> 0 </int>
 				<bool> True </bool>
@@ -360,7 +360,7 @@
 				<bool> False </bool>
 				<int> 3 </int>
 				<int> 20 </int>
-				<resource  resource_type="PackedScene" path="res://scenes/json_reader_test.xscn">  </resource>
+				<resource  resource_type="PackedScene" path="res://needs-review/json_reader_test.xscn">  </resource>
 				<node_path> "" </node_path>
 				<real> 372 </real>
 				<real> 574 </real>
@@ -632,7 +632,7 @@
 					</dictionary>
 				</dictionary>
 				<string> "cabinet" </string>
-				<resource  resource_type="PackedScene" path="res://scenes/cabinet_npc.xscn">  </resource>
+				<resource  resource_type="PackedScene" path="res://needs-review/cabinet_npc.xscn">  </resource>
 				<vector2> 494.182, 168.145 </vector2>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
@@ -765,7 +765,7 @@
 						<int> 0 </int>
 					</dictionary>
 				</dictionary>
-				<resource  resource_type="PackedScene" path="res://scenes/computer_npc.xscn">  </resource>
+				<resource  resource_type="PackedScene" path="res://needs-review/computer_npc.xscn">  </resource>
 				<vector2> -10.2528, 155.842 </vector2>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
@@ -899,7 +899,7 @@
 					</dictionary>
 				</dictionary>
 				<resource  resource_type="NavigationPolygon" path="local://3">  </resource>
-				<resource  resource_type="PackedScene" path="res://scenes/robot-kinematic.xml">  </resource>
+				<resource  resource_type="PackedScene" path="res://needs-review/robot-kinematic.xml">  </resource>
 				<vector2> 382.639, 491.569 </vector2>
 				<resource  resource_type="Script" path="local://4">  </resource>
 				<dictionary  shared="false">
@@ -1039,7 +1039,7 @@
 					<string> "_editor_collapsed" </string>
 					<bool> True </bool>
 				</dictionary>
-				<resource  resource_type="PackedScene" path="res://scenes/message-ui.scn">  </resource>
+				<resource  resource_type="PackedScene" path="res://needs-review/message-ui.scn">  </resource>
 				<real> 14 </real>
 				<real> 340 </real>
 				<real> -724 </real>

@@ -1,13 +1,14 @@
 extends Node
 
 var game = "/root/game"
-var nav = game + "/nav"
+var nav = game + "/stage/nav"
 var quest = game + "/quest"
 var npc_holder = game+ "/Node2D/HBoxContainer"
 #var npcs
 var message_ui = game + "/message_ui"
 #var player = nav + "/TileMap 2/robot"
-var player = nav + "/TileMap/robot"
+var player = nav + "/floor/bodies/robot"
+var npc_root = nav + "/floor/bodies"
 
 #func _init():
 #	game = "/root/game"

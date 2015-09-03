@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resource_file type="PackedScene" subresource_count="4" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
-	<ext_resource path="res://dynamic-node-tests/dialog_branch_base.xscn" type="PackedScene"></ext_resource>
+	<ext_resource path="res://needs-review/dynamic-node-tests/dialog_branch_base.xscn" type="PackedScene"></ext_resource>
 	<resource type="GDScript" path="local://1">
-		<string name="script/source"> "extends &quot;dialog_branch_base.gd&quot;&#000a;&#000a;func _init():&#000a;&#0009;key = &quot;main&quot;&#000a;&#0009;branch_data_file = &quot;res://dynamic-node-tests/data/main_quest_npc1.txt&quot;" </string>
+		<string name="script/source"> "extends &quot;res://needs-review/dynamic-node-tests/dialog_branch_base.gd&quot;&#000a;&#000a;func _init():&#000a;&#0009;key = &quot;main&quot;&#000a;&#0009;branch_data_file = &quot;res://needs-review/dynamic-node-tests/data/main_quest_npc1.txt&quot;" </string>
 
 	</resource>
 	<resource type="GDScript" path="local://2">
-		<string name="script/source"> "extends &quot;dialog_branch_base.gd&quot;&#000a;&#000a;func _init():&#000a;&#0009;key = &quot;other&quot;&#000a;&#0009;branch_data_file = &quot;res://dynamic-node-tests/data/main_quest_npc1.txt&quot;" </string>
+		<string name="script/source"> "extends &quot;res://needs-review/dynamic-node-tests/dialog_branch_base.gd&quot;&#000a;&#000a;func _init():&#000a;&#0009;key = &quot;other&quot;&#000a;&#0009;branch_data_file = &quot;res://needs-review/dynamic-node-tests/data/main_quest_npc1.txt&quot;" </string>
 
 	</resource>
 	<main_resource>
@@ -44,7 +44,7 @@
 				<int> 2 </int>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
-					<string> "Script" </string>
+					<string> "2D" </string>
 					<string> "__editor_plugin_states__" </string>
 					<dictionary  shared="false">
 						<string> "2D" </string>
@@ -173,7 +173,7 @@
 						<int> 0 </int>
 					</dictionary>
 				</dictionary>
-				<resource  resource_type="PackedScene" path="res://dynamic-node-tests/dialog_branch_base.xscn">  </resource>
+				<resource  resource_type="PackedScene" path="./dialog_branch_base.xscn">  </resource>
 				<node_path> "" </node_path>
 				<real> 304 </real>
 				<int> 3 </int>

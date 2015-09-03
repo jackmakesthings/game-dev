@@ -1,9 +1,9 @@
-sandbox/Tanks-of-Freedom-master
-sandbox/screen_capture
-sandbox/rich_text_bbcode
+/sandbox/Tanks-of-Freedom-master
+/sandbox/screen_capture
+/sandbox/rich_text_bbcode
 *.ini
 bootstrap-test
 *.gd.txt
 *.ttf
 *.otf
-sandbox
+/sandbox
