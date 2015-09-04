@@ -109,10 +109,16 @@ func present_conversations(dialog_branches):
 
 # stub until branches are set up
 func init_branch(branch):
+	var quest = branch.owned_by
+	var s = quest.get("current_state")
 	MUI.clear()
 	MUI.make_dialogue(n)
-	MUI.make_dialogue(branch["states"]["20"]["dialogue"])
-	MUI.make_close_button()
+	
+	MUI.make_dialogue(branch.text_at_state(s))
+	for response in branch.responses_at_state(s):
+		branch.build_response(response)
+
+	#MUI.make_close_button()
 	
 
 

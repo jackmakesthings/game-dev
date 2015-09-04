@@ -29,46 +29,57 @@ func responses_at_state(state):
 
 # expects a json-based condition object
 # with owner, param, compare, and val
-func validate(c, context=self):
+func validate(c):
 	#if( not c["owner"].is_inside_tree() ):
 	#	return
+	print(c["owner"])
 	var method = c["compare"]
 	var node = c["owner"]
 
 	if( c["owner"] == "self" ):
-		node = context
-	else:
-		node = get_tree().get_root().get_node(c["owner"])
-
+		node = get_parent()
+	elif c["owner"] == "player":
+		node = get_tree().get_root().node( get_node("/root/paths").get("player") )
+	
+	
+	print(node.get_name())
 	var param = node.get(c["param"])
 	var val = c["val"]
+	var inv = ""
 
-	if( method == "equals" ):
-		if( param == val ):
-			return true
-		return false
+	if( method == "exists" ):
+		if (param == null):
+			inv = "You must have " + c["param"] + " for this option."
+	elif( method == "equals" ):
+		if not( param == val ):
+			inv = c["param"] + " must be equal to " + str(val)
 	elif( method  == "gt" ):
-		if( param > val ):
-			return true
-		return false
+		if not ( param > val ):
+			inv = c["param"] + " must be greater than " + str(val)
 	elif( method == "lt" ):
-		if( param < val ):
-			return true
-		return false
+		if not ( param < val ):
+			inv = c["param"] + " must be less than " + str(val)
 	elif( method == "bool" ):
-		return param
+		if param == false:
+			inv = c["param"] + " must be true"
+	else:
+		inv = ""
+		
+	print(inv)
+	
+	if( inv == "" ):
+		return true
 	else:
 		return false
-	return false
 
 
 func build_response(response_data):
 	var r = response_data
 	var btn = MUI.make_response( r["text"], [])
 	var fn = ""
-	var arg = null
+	var arg
 
-	if( r["new_state"] ):
+	if r.has("new_state"):
 		if( r["dialog_action"] == 0 ):
 			fn = "update_and_close"
 			arg = r["new_state"]
@@ -84,23 +95,27 @@ func build_response(response_data):
 			arg = null
 
 	if not ( fn == "" ):
-		btn.connect("pressed", self, fn, arg)
+		btn.connect("pressed", self, fn, [arg])
 
 	if( r.has("conditions") ):
 		for condition in r["conditions"]:
-			if( validate(condition, self) == false ):
+			print( condition )
+			if( validate(condition) == false ):
+				print("invalid!")
 				btn.disconnect("pressed", self, fn)
-				continue
-			else:
-				continue
+				btn.set("disabled", true)
+
+	return btn
 
 
 func update_and_close(new_state):
+	print("Updating and closing")
 	owned_by.set_current_state(new_state)
 	MUI.close()
 
 
 func update_and_continue(new_state):
+	print("Moving on...")
 	MUI.clear()
 	owned_by.set_current_state(new_state)
 	MUI.make_dialogue(text_at_state(new_state))
@@ -108,9 +123,11 @@ func update_and_continue(new_state):
 		build_response(r)
 
 func end_dialog(params=null):
+	print("Ending dialog")
 	MUI.close()
 
 func continue_dialog(params=null):
+	print("Continuing dialog")
 	pass
 
 
@@ -126,7 +143,5 @@ func _ready():
 	scene_root = get_node("/root/scene")
 	
 	MUI = get_node("/root/scene/message-ui")
-	owned_by = get_owner()
-	print("attached branch ", Q_ID, " to actor ", actor)
-
-		
+	
+	# print("attached branch ", Q_ID, " to actor ", actor)

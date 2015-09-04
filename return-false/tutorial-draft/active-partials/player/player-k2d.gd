@@ -19,6 +19,7 @@ export(Texture) var back_texture
 
 const SPEED=170.0
 
+var stat = "awesome"
 
 signal start_moving(from, to, path)
 signal done_moving(at)

@@ -15,7 +15,7 @@
               "conditions": [
                 {
                   "owner": "self",
-                  "param": "condition_param",
+                  "param": "stat",
                   "compare": "gt",
                   "val": 3
                 }
@@ -42,13 +42,13 @@
               "conditional": true,
               "conditions": [
                 {
-                  "owner": "self",
-                  "param": "condition_param",
+                  "owner": "player",
+                  "param": "stat",
                   "compare": "equals",
-                  "val": 4
+                  "val": "awesome"
                 }
               ],
-              "text": "Make it 60.",
+              "text": "Make it 60. (Requires awesomeness)",
               "new_state": "60",
               "dialog_action": 1
             },
@@ -80,12 +80,12 @@
               "conditions": [
                 {
                   "owner": "self",
-                  "param": "condition_param",
+                  "param": "stat",
                   "compare": "gt",
                   "val": 3
                 }
               ],
-              "text": "Let's skip right to 60.",
+              "text": "Let's skip right to 60. (Requires Garrus' stat > 3)",
               "new_state": "60",
               "dialog_action": 1
             },
@@ -107,13 +107,13 @@
               "conditional": true,
               "conditions": [
                 {
-                  "owner": "self",
-                  "param": "condition_param",
+                  "owner": "player",
+                  "param": "stat",
                   "compare": "equals",
-                  "val": 4
+                  "val": "awesome"
                 }
               ],
-              "text": "Make it 60.",
+              "text": "Make it 60. (Requires awesomeness.)",
               "new_state": "60",
               "dialog_action": 1
             },

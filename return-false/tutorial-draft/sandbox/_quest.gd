@@ -78,6 +78,7 @@ func attach_branches():
 				#remove_child(branch)
 				branch.set("Q_ID", Q_ID)
 				branch.set_name(Q_ID)
+				branch.set("owned_by", self)
 				actor.add_child(branch)
 				if ( actors.find(actor.get_name()) == -1 ):
 					actors.append(actor_ref)

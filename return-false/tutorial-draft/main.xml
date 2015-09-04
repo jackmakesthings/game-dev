@@ -18,13 +18,13 @@
 	<ext_resource path="res://assets/fpo/tall-white-block-hover.png" type="Texture" index="18"></ext_resource>
 	<ext_resource path="res://assets/fpo/basic_block128.tex" type="Texture" index="11"></ext_resource>
 	<ext_resource path="res://assets/ui/code39 (1).tex" type="Texture" index="24"></ext_resource>
-	<ext_resource path="res://active-partials/message-ui/message-ui2.xml" type="PackedScene" index="1"></ext_resource>
-	<ext_resource path="res://active-partials/player/player-k2d.xml" type="PackedScene" index="13"></ext_resource>
 	<ext_resource path="res://assets/fpo/garrus-port.png" type="Texture" index="14"></ext_resource>
 	<ext_resource path="res://assets/ui/list31.tex" type="Texture" index="22"></ext_resource>
 	<ext_resource path="res://assets/garrus-sprite.tex" type="Texture" index="15"></ext_resource>
 	<ext_resource path="res://assets/tiles/iso-floors-walkable.xml" type="TileSet" index="8"></ext_resource>
 	<ext_resource path="res://assets/ui/list31 (1).tex" type="Texture" index="21"></ext_resource>
+	<ext_resource path="res://active-partials/player/player-k2d.xml" type="PackedScene" index="13"></ext_resource>
+	<ext_resource path="res://active-partials/message-ui/message-ui2.xml" type="PackedScene" index="1"></ext_resource>
 	<resource type="StyleBoxFlat" path="local://1">
 		<real name="content_margin/left"> -1 </real>
 		<real name="content_margin/right"> -1 </real>
@@ -136,7 +136,7 @@
 
 	</resource>
 	<resource type="GDScript" path="local://7">
-		<string name="script/source"> "extends &quot;res://active-partials/npcs/npc.gd&quot;&#000a;&#000a;&#000a;func _init():&#000a;&#0009;id = 002&#000a;&#0009;trigger_mode = 0&#000a;&#0009;label = &quot;Garrus&quot;&#000a;&#0009;&#000a;&#0009;&#000a;func set_branches():&#000a;&#0009;&#000a;&#0009;var quest_loader = get_node(&quot;/root/scene/quests/something-else&quot;)&#000a;&#0009;&#000a;&#0009;yield(quest_loader, &quot;branches_added&quot;)&#000a;&#0009;&#000a;&#0009;var nodes = get_node(&quot;.&quot;).get_children()&#000a;&#0009;for n in nodes:&#000a;&#0009;&#0009;if ( n.has_method( &quot;_at_state&quot; )):&#000a;&#0009;&#0009;&#0009;dialog_branches.append(n)&#000a;&#000a;&#000a;func _ready():&#000a;&#0009;utils = get_node(&quot;/root/utils&quot;)&#000a;&#0009;data = load(&quot;res://data/mocks.gd&quot;).new()&#000a;&#0009;player = get_node(&quot;/root/scene&quot;).get(&quot;player&quot;)&#000a;&#0009;body_node = get_node(&quot;body&quot;)&#000a;&#0009;x = get_node(&quot;X&quot;)&#000a;&#0009;&#000a;&#0009;&#000a;&#0009;&#000a;&#0009;#add_child(data)&#000a;&#0009;&#000a;&#0009;#var quest_loader = get_node(&quot;/root/scene/quests/test&quot;)&#000a;&#0009;#yield(get_node(&quot;/root/scene&quot;), &quot;ready&quot;)&#000a;&#0009;&#000a;&#0009;MUI = get_node(&quot;/root/scene/message-ui&quot;)&#000a;&#0009;#yield(get_node(&quot;/root/scene/quests/test&quot;), &quot;branches_added&quot;)&#000a;&#0009;set_branches()&#000a;&#0009;if( trigger_mode == TRIGGER_DIRECT ):&#000a;&#0009;&#0009;get_node(&quot;body/Sprite&quot;).connect(&quot;pressed&quot;, self, &quot;on_click&quot;, [player])&#000a;" </string>
+		<string name="script/source"> "extends &quot;res://active-partials/npcs/npc.gd&quot;&#000a;&#000a;var stat = 4&#000a;&#000a;func _init():&#000a;&#0009;id = 002&#000a;&#0009;trigger_mode = 0&#000a;&#0009;label = &quot;Garrus&quot;&#000a;&#0009;&#000a;&#0009;&#000a;func set_branches():&#000a;&#0009;&#000a;&#0009;var quest_loader = get_node(&quot;/root/scene/quests/something-else&quot;)&#000a;&#0009;&#000a;&#0009;yield(quest_loader, &quot;branches_added&quot;)&#000a;&#0009;&#000a;&#0009;var nodes = get_node(&quot;.&quot;).get_children()&#000a;&#0009;for n in nodes:&#000a;&#0009;&#0009;if ( n.has_method( &quot;_at_state&quot; )):&#000a;&#0009;&#0009;&#0009;dialog_branches.append(n)&#000a;&#000a;&#000a;func _ready():&#000a;&#0009;utils = get_node(&quot;/root/utils&quot;)&#000a;&#0009;data = load(&quot;res://data/mocks.gd&quot;).new()&#000a;&#0009;player = get_node(&quot;/root/scene&quot;).get(&quot;player&quot;)&#000a;&#0009;body_node = get_node(&quot;body&quot;)&#000a;&#0009;x = get_node(&quot;X&quot;)&#000a;&#0009;&#000a;&#0009;&#000a;&#0009;&#000a;&#0009;#add_child(data)&#000a;&#0009;&#000a;&#0009;#var quest_loader = get_node(&quot;/root/scene/quests/test&quot;)&#000a;&#0009;#yield(get_node(&quot;/root/scene&quot;), &quot;ready&quot;)&#000a;&#0009;&#000a;&#0009;MUI = get_node(&quot;/root/scene/message-ui&quot;)&#000a;&#0009;#yield(get_node(&quot;/root/scene/quests/test&quot;), &quot;branches_added&quot;)&#000a;&#0009;set_branches()&#000a;&#0009;if( trigger_mode == TRIGGER_DIRECT ):&#000a;&#0009;&#0009;get_node(&quot;body/Sprite&quot;).connect(&quot;pressed&quot;, self, &quot;on_click&quot;, [player])&#000a;" </string>
 
 	</resource>
 	<resource type="ConvexPolygonShape2D" path="local://23">
@@ -165,7 +165,7 @@
 
 	</resource>
 	<resource type="GDScript" path="local://26">
-		<string name="script/source"> "extends &quot;res://sandbox/_quest.gd&quot;&#000a;&#000a;func _init():&#000a;&#000a;&#0009;Q_ID = &quot;Something else&quot;&#000a;&#0009;data_source = &quot;res://sandbox/_quest_data2.txt&quot;&#000a;&#000a;#func _ready():&#000a;&#000a;&#000a;&#0009;&#000a;&#0009;#_test()" </string>
+		<string name="script/source"> "extends &quot;res://sandbox/_quest.gd&quot;&#000a;&#000a;func _init():&#000a;&#000a;&#0009;Q_ID = &quot;Something else&quot;&#000a;&#0009;data_source = &quot;res://sandbox/_quest_data2.txt&quot;&#000a;&#000a;#func _ready():&#000a; &#000a;&#0009;&#000a;&#0009;#_test()" </string>
 
 	</resource>
 	<main_resource>
