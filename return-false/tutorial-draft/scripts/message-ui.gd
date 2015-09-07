@@ -1,6 +1,6 @@
 
-extends CanvasLayer
-
+#extends CanvasLayer
+extends Node
 # member variables here, example:
 # var a=2
 # var b="textvar"
@@ -119,7 +119,7 @@ func make_portrait(npc_texture):
 	portrait.set("texture", npc_texture)
 
 func make_formatted_name(npc_name):
-	return "[color=#ff8833][b]" + str(npc_name).to_lower() + ">[/b] [/color]"
+	return "[b]" + str(npc_name).to_lower() + "> [/b]"
 
 ####### open/close ########
 

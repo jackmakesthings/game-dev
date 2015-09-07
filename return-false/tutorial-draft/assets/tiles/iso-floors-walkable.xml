@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="TileSet" subresource_count="11" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
-	<ext_resource path="res://assets/blue-iso-tile-flat-2.png" type="Texture"></ext_resource>
-	<ext_resource path="res://assets/tiles/black-iso-tile-flat.png" type="Texture"></ext_resource>
-	<ext_resource path="res://assets/tiles/white-iso-tile-flat.png" type="Texture"></ext_resource>
-	<ext_resource path="res://assets/tiles/red-iso-tile-flat.png" type="Texture"></ext_resource>
-	<ext_resource path="res://assets/grate-iso-tile-1.png" type="Texture"></ext_resource>
-	<ext_resource path="res://assets/blue-iso-tile-1.png" type="Texture"></ext_resource>
-	<ext_resource path="res://assets/grate-iso-tile-1.png" type="Texture"></ext_resource>
-	<ext_resource path="res://assets/tiles/dotted-white-tile.png" type="Texture"></ext_resource>
+<resource_file type="TileSet" subresource_count="10" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
+	<ext_resource path="res://assets/blue-iso-tile-1.png" type="Texture" index="5"></ext_resource>
+	<ext_resource path="res://assets/tiles/white-iso-tile-flat.png" type="Texture" index="2"></ext_resource>
+	<ext_resource path="res://assets/blue-iso-tile-flat-2.png" type="Texture" index="0"></ext_resource>
+	<ext_resource path="res://assets/tiles/dotted-white-tile.png" type="Texture" index="6"></ext_resource>
+	<ext_resource path="res://assets/tiles/black-iso-tile-flat.png" type="Texture" index="1"></ext_resource>
+	<ext_resource path="res://assets/grate-iso-tile-1.png" type="Texture" index="4"></ext_resource>
+	<ext_resource path="res://assets/tiles/red-iso-tile-flat.png" type="Texture" index="3"></ext_resource>
 	<resource type="NavigationPolygon" path="local://1">
 		<vector2_array name="vertices" len="4"> 			0, -19, 36, -1, 0, 17, -36, -1 </vector2_array>
 		<array name="polygons" len="1" shared="false">
@@ -25,7 +24,7 @@
 	</resource>
 	<main_resource>
 		<string name="0/name"> "blue walkable" </string>
-		<resource name="0/texture" resource_type="Texture" path="res://assets/blue-iso-tile-flat-2.png">  </resource>
+		<resource name="0/texture" external="0">  </resource>
 		<vector2 name="0/tex_offset"> 0, 0 </vector2>
 		<resource name="0/material"></resource>		<rect2 name="0/region"> 0, 0, 0, 0 </rect2>
 		<vector2 name="0/occluder_offset"> 36, 18 </vector2>
@@ -35,7 +34,7 @@
 		<array name="0/shapes" len="0" shared="false">
 		</array>
 		<string name="1/name"> "black unwalkable" </string>
-		<resource name="1/texture" resource_type="Texture" path="res://assets/tiles/black-iso-tile-flat.png">  </resource>
+		<resource name="1/texture" external="1">  </resource>
 		<vector2 name="1/tex_offset"> 0, 0 </vector2>
 		<resource name="1/material"></resource>		<rect2 name="1/region"> 0, 0, 0, 0 </rect2>
 		<vector2 name="1/occluder_offset"> 36, 18 </vector2>
@@ -44,7 +43,7 @@
 		<array name="1/shapes" len="0" shared="false">
 		</array>
 		<string name="2/name"> "white walkable" </string>
-		<resource name="2/texture" resource_type="Texture" path="res://assets/tiles/white-iso-tile-flat.png">  </resource>
+		<resource name="2/texture" external="2">  </resource>
 		<vector2 name="2/tex_offset"> 0, 0 </vector2>
 		<resource name="2/material"></resource>		<rect2 name="2/region"> 0, 0, 0, 0 </rect2>
 		<vector2 name="2/occluder_offset"> 36, 18 </vector2>
@@ -54,7 +53,7 @@
 		<array name="2/shapes" len="0" shared="false">
 		</array>
 		<string name="3/name"> "red unwalkable" </string>
-		<resource name="3/texture" resource_type="Texture" path="res://assets/tiles/red-iso-tile-flat.png">  </resource>
+		<resource name="3/texture" external="3">  </resource>
 		<vector2 name="3/tex_offset"> 0, 0 </vector2>
 		<resource name="3/material"></resource>		<rect2 name="3/region"> 0, 0, 0, 0 </rect2>
 		<vector2 name="3/occluder_offset"> 36, 18 </vector2>
@@ -63,7 +62,7 @@
 		<array name="3/shapes" len="0" shared="false">
 		</array>
 		<string name="4/name"> "grate unwalkable" </string>
-		<resource name="4/texture" resource_type="Texture" path="res://assets/grate-iso-tile-1.png">  </resource>
+		<resource name="4/texture" external="4">  </resource>
 		<vector2 name="4/tex_offset"> 0, -1 </vector2>
 		<resource name="4/material"></resource>		<rect2 name="4/region"> 0, 0, 0, 0 </rect2>
 		<vector2 name="4/occluder_offset"> 36, 18 </vector2>
@@ -72,7 +71,7 @@
 		<array name="4/shapes" len="0" shared="false">
 		</array>
 		<string name="5/name"> "blue walkable area2d" </string>
-		<resource name="5/texture" resource_type="Texture" path="res://assets/blue-iso-tile-1.png">  </resource>
+		<resource name="5/texture" external="5">  </resource>
 		<vector2 name="5/tex_offset"> 0, 0 </vector2>
 		<resource name="5/material"></resource>		<rect2 name="5/region"> 0, 0, 0, 0 </rect2>
 		<vector2 name="5/occluder_offset"> 36, 18 </vector2>
@@ -82,7 +81,7 @@
 		<array name="5/shapes" len="0" shared="false">
 		</array>
 		<string name="6/name"> "grate collider" </string>
-		<resource name="6/texture" resource_type="Texture" path="res://assets/grate-iso-tile-1.png">  </resource>
+		<resource name="6/texture" external="4">  </resource>
 		<vector2 name="6/tex_offset"> 0, 0 </vector2>
 		<resource name="6/material"></resource>		<rect2 name="6/region"> 0, 0, 0, 0 </rect2>
 		<vector2 name="6/occluder_offset"> 36, 18 </vector2>
@@ -92,7 +91,7 @@
 			<resource  resource_type="Shape2D" path="local://7">  </resource>
 		</array>
 		<string name="7/name"> "attractor" </string>
-		<resource name="7/texture" resource_type="Texture" path="res://assets/tiles/dotted-white-tile.png">  </resource>
+		<resource name="7/texture" external="6">  </resource>
 		<vector2 name="7/tex_offset"> 0, 0 </vector2>
 		<resource name="7/material"></resource>		<rect2 name="7/region"> 0, 0, 0, 0 </rect2>
 		<vector2 name="7/occluder_offset"> 36, 18 </vector2>

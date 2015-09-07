@@ -6,7 +6,14 @@ var savepath = "res://savegame.txt"
 var utils = preload("res://scripts/utils.gd").new()
 
 var player
-var quit
+var quit_btn
+var cancel_btn
+var load_btn
+var save_btn
+var reset_btn
+var main_menu_btn
+
+var menu
 
 ###### savefiles
 
@@ -16,11 +23,17 @@ func new_file(path):
 	
 	
 #### new
-func _on_new_pressed():
+func _on_reset_pressed():
+	_cancel_quit()
+	var qs = get_node("/root/scene/quests").get_children()
+	for q in qs:
+		q.set_current_state("20")
 	pass
 	
 #### save
 func _on_save_pressed():
+	_cancel_quit()
+	
 	var data = {}
 	data["player_x"] = player.get_pos().x
 	data["player_y"] = player.get_pos().y
@@ -29,30 +42,64 @@ func _on_save_pressed():
 	data["quest_states"] = get_node("/root/game").get_quest_states()
 	
 	utils.save_game(data, savepath)
-	print("saved player position as ", data.player_x, ", ", data.player_y, " to ", savepath);
+	#print("saved player position as ", data.player_x, ", ", data.player_y, " to ", savepath);
+	
+
 
 #### load
 func _on_load_pressed():
+	_cancel_quit()
+	
 	var loaded = utils.get_json(savepath)
 	
-	if( loaded["player_x"] and loaded["player_y"]):
+	if( loaded.has("player_x") and loaded.has("player_y")):
 		player.set_pos(Vector2(loaded["player_x"], loaded["player_y"]))
 	
+	if( loaded.has("quest_states") ):
+		for q in loaded["quest_states"]:
+			get_node("/root/game").update_quest(q, loaded["quest_states"][q])
+	
 	print("Loaded!")
+	menu.hide_menu()
+	
 	#print(loaded_data)
+
+
+#### back to main menu
+func _on_mm_pressed():
+	print("Back to menu")
+	menu.hide_menu()
 
 #### quit
 func _on_quit_pressed():
 	var red = Color("#ec1300")
-	var quit = get_node("quit")
 
-	print("clicked quit!")
+	quit_btn.set_text("> confirm")
+	#quit_btn.set("custom_colors/font_color", red)
+	quit_btn.set("custom_colors/font_color_hover", red)
+	
+	quit_btn.disconnect("pressed", self, "_on_quit_pressed")
+	quit_btn.connect("pressed", self, "_quit_game")
+	
+	main_menu_btn.hide()
+	cancel_btn.show()
 
-	quit.set_text("> confirm")
-	quit.set("custom_colors/font_color", red)
-	quit.set("custom_colors/font_color_hover", red)
-	quit.disconnect("pressed", self, "_on_quit_pressed")
-	quit.connect("pressed", self, "_quit_game")
+
+func _cancel_quit():
+
+	cancel_btn.hide()
+	main_menu_btn.show()
+	
+	#quit_btn.set("custom_colors/font_color", null)
+	quit_btn.set("custom_colors/font_color_hover", null)
+	
+	quit_btn.set_text("> quit")
+	
+	quit_btn.disconnect("pressed", self, "_quit_game")
+	quit_btn.connect("pressed", self, "_on_quit_pressed")
+	
+
+
 
 func _quit_game():
 	print("bye")
@@ -65,11 +112,21 @@ func _enter_tree():
 
 
 func _ready():
-	print("hi!")
-	quit = get_node("quit")
+	
+	quit_btn = get_node("quit")
+	save_btn = get_node("save")
+	load_btn = get_node("load")
+	reset_btn = get_node("start over")
+	cancel_btn = get_node("cancel")
+	main_menu_btn = get_node("main menu")
+	
+	menu = get_node("/root/scene/menu")
 	player = get_node("/root/scene").get("player")
 	
-	get_node("save").connect("released", self, "_on_save_pressed")
-	get_node("load").connect("released", self, "_on_load_pressed")
-	get_node("quit").connect("released", self, "_on_quit_pressed")
-	get_node("start over").connect("released", self, "_on_new_pressed")
+	cancel_btn.hide()
+	save_btn.connect("released", self, "_on_save_pressed")
+	load_btn.connect("released", self, "_on_load_pressed")
+	quit_btn.connect("released", self, "_on_quit_pressed")
+	reset_btn.connect("released", self, "_on_reset_pressed")
+	cancel_btn.connect("released", self, "_cancel_quit")
+	main_menu_btn.connect("released", self, "_on_mm_pressed")

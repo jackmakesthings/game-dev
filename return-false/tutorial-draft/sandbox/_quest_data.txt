@@ -15,7 +15,7 @@
               "conditions": [
                 {
                   "owner": "self",
-                  "param": "condition_param",
+                  "param": "stat",
                   "compare": "gt",
                   "val": 3
                 }
@@ -43,7 +43,7 @@
               "conditions": [
                 {
                   "owner": "self",
-                  "param": "condition_param",
+                  "param": "stat",
                   "compare": "equals",
                   "val": 4
                 }
@@ -80,7 +80,7 @@
               "conditions": [
                 {
                   "owner": "self",
-                  "param": "condition_param",
+                  "param": "stat",
                   "compare": "gt",
                   "val": 3
                 }
@@ -108,7 +108,7 @@
               "conditions": [
                 {
                   "owner": "self",
-                  "param": "condition_param",
+                  "param": "stat",
                   "compare": "equals",
                   "val": 4
                 }

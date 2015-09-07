@@ -1,0 +1,131 @@
+{
+  "Q_ID": "0_diagnostic",
+  "id": "0_diagnostic",
+  "label": "Diagnostics",
+  "name": "Diagnostics",
+  "branches": [
+    {
+      "actor": "terminal",
+      "states": {
+        "20": {
+          "dialogue": "This terminal is inoperable",
+          "responses": [
+            {
+              "text": "<Run diagnostics>",
+              "new_state": "30",
+              "dialog_action": 1
+            },
+            {
+              "text": "<Leave>",
+              "dialog_action": 0
+            }
+          ]
+        },
+        "30": {
+          "dialogue": "Scanning... \nDiagnostics complete.  \nThe power cable is damaged; a replacement must be located.",
+          "responses": [
+            {
+              "text": "<Leave>",
+              "new_state": "40",
+              "dialog_action": 0
+            }
+          ]
+        },
+        "40": {
+          "dialogue": "The power cable is damaged; a replacement must be located.",
+          "responses": [
+            {
+              "text": "<Leave>",
+              "dialog_action": 0
+            }
+          ]
+        },
+        "60": {
+          "dialogue": "The power cable is damaged. Do you have a replacement?",
+          "responses": [
+            {
+              "text": "<Replace power cable>",
+              "new_state": "70",
+              "dialog_action": 1
+            },
+            {
+              "text": "<Leave>",
+              "dialog_action": 0
+            }
+          ]
+        },
+        "70": {
+          "dialogue": "Repair complete! \n[i]The terminal flickers to life with a satisfying hum.[/i]",
+          "responses": [
+            {
+              "text": "<Close terminal>",
+              "new_state": "80",
+              "dialog_action": 0
+            }
+          ]
+        },
+        "80": {
+          "dialogue": "Repair complete!\nInform the supervising technician.",
+          "responses": [
+            {
+              "text": "<Leave>",
+              "dialog_action": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "actor": "cabinet",
+      "states": {
+        "20": {
+          "dialogue": "[i]This cabinet is overflowing with poorly-organized spare parts.[/i]",
+          "responses": [
+            {
+              "text": "<Leave>",
+              "dialog_action": 0
+            }
+          ]
+        },
+        "40": {
+          "dialogue": "[i]This cabinet is overflowing with poorly-organized spare parts.[/i]",
+          "responses": [
+            {
+              "text": "<Look for a power cable.>",
+              "new_state": "50",
+              "dialog_action": 1
+            }
+          ]
+        },
+        "50": {
+          "dialogue": "[i]Buried beneath a pile of unsorted wires, you locate a compatible power cable for the terminal.[/i]",
+          "responses": [
+            {
+              "text": "<Take the cable and leave.>",
+              "new_state": "60",
+              "dialog_action": 0
+            }
+          ]
+        },
+        "60": {
+          "dialogue": "[i]You already have the cable you need.[/i]",
+          "responses": [
+            {
+              "text": "<Leave>",
+              "dialog_action": 0
+            }
+          ]
+        },
+        "80": {
+          "dialogue": "Repair complete! Inform the supervising technician.",
+          "responses": [
+            {
+              "text": "<Leave>",
+              "dialog_action": 0
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -11,8 +11,6 @@ var game_root
 var scene_root
 var MUI
 
-var player
-
 # the npc to tie this branch to
 var actor
 
@@ -47,7 +45,7 @@ func validate(c):
 	if( c["owner"] == "self" ):
 		node = get_parent()
 	elif c["owner"] == "player":
-		node = player
+		node = get_node("/root/scene").get("player")
 	
 	
 	#print(node.get_name())
@@ -126,6 +124,7 @@ func update_and_continue(new_state):
 	owned_by.set_current_state(new_state)
 	MUI.clear()
 	# load up the interaction for the new state
+	#MUI.make_dialogue(actor["label"])
 	MUI.make_dialogue(text_at_state(new_state))
 	for r in responses_at_state(new_state):
 		build_response(r)
@@ -143,6 +142,5 @@ func _ready():
 	# todo: standardize path management
 	paths = get_node("/root/paths")
 	game_root = get_node("/root")
-	scene_root = get_node("/root/scene")
-	MUI = get_node("/root/scene/message-ui")
-	player = get_node("/root/scene").get("player")
+	scene_root = game_root.get_node("scene")
+	MUI = scene_root.get_node("message-ui")

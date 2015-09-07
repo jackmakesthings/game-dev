@@ -10,14 +10,8 @@ var utils = preload("res://scripts/utils.gd").new()
 
 var q
 
-export var quests = Array()
-export var quest_states = {
-	1 : 0,
-	2 : 0, 
-	3 : 0,
-	4 : 0,
-	5 : 0
-}
+var quests = []
+var quest_states = {}
 
 func get_quests():
 	return quest_states.keys()
@@ -32,6 +26,9 @@ func get_state(quest):
 		print("ERROR: Quest ", quest, " does not exist.")
 		return -1
 
+func set_all_states(to="20"):
+	for quest in quests:
+		quest_states[quest] = to
 
 func quest_exists(key):
 	if( quest_states.has(key) ):
@@ -60,16 +57,16 @@ func is_quest_completed(key):
 		return false
 
 
-func add_quest(key, start=0):
-	q = get_quests()
-	if( q.find(key) > -1 ):
-		print("ERROR: Quest key ", key, " is already in use!")
-		return false
-	else:
-		quest_states[key] = start
-		print("Added quest ", key, " at state ", start)
-		emit_signal("quest_added", key, start)
-		return true
+#func add_quest(key, start=0):
+#	q = get_quests()
+#	if( q.find(key) > -1 ):
+#		print("ERROR: Quest key ", key, " is already in use!")
+#		return false
+#	else:
+#		quest_states[key] = start
+#		print("Added quest ", key, " at state ", start)
+#		emit_signal("quest_added", key, start)
+#		return true
 
 
 func update_quest(key, state):
@@ -78,6 +75,7 @@ func update_quest(key, state):
 		return false
 	else:
 		quest_states[key] == state
+		get_node("/root/scene/quests").set_state(key, state)
 		print("Quest ", key, " is now at state ", state)
 		return true
 
@@ -95,4 +93,12 @@ func remove_quest(key, end=null):
 		emit_signal("quest_removed", key)
 		print("Removed quest ", key)
 		return true
+
+func _ready():
+	var quest_holder = get_node("/root/scene/quests")
+	yield(quest_holder, "quests_loaded")
+	for child in quest_holder.get_children():
+		quest_states[child.get_name()] = child.get_current_state()
+	
+	#print(quest_states)
 		

@@ -6,7 +6,7 @@ extends Node2D
 
 # instance-specific vars
 export var id = 001
-export var label = "Terminal"
+var label = "Terminal"
 export(Texture) var portrait
 
 # npc_type: Is this a person, an object, 
@@ -28,14 +28,15 @@ const TRIGGER_LOS = 2
 const TRIGGER_UNIQUE = 3
 
 
-export(Array) var dialog_branches = []
-export(bool) var has_branches = false
-
+var dialog_branches = []
+var has_branches
+var branch_root_text = "Hey, Tr4ce. Anything to report?"
+	
 var player_nearby = false
 
 var game
 var utils
-var data = ResourceLoader.load("res://data/mocks.gd")
+var data = load("res://data/mocks.gd")
 var MUI
 var body_node
 var player
@@ -74,37 +75,44 @@ func i_should_go(src):
 
 func present_conversations(dialog_branches):	
 
-	var branch_root_text = "Hey, Tr4ce. Anything to report?"
+
 	var options = []
 	
-	for branch in dialog_branches:
-		var response = {}
-		if branch.get("label"):
-			response["text"] = branch["label"]
-		elif branch.get("Q_ID"):
-			response["text"] = branch["Q_ID"]
-		else:
-			return
-		
-	#### this should get refactored into a proper init_branch method
-	# either on NPC or MUI (or on Quest/Branch, maybe)
-		response["actions"] = [
-			{ fn = "clear",
-			target = MUI,
-			args = []},
-			{ fn = "init_branch",
-			target = self,
-			args = [branch]}
-		]
-
-		options.append(response)
-		#print(branch)
+	if( dialog_branches.size() == 1 ):
+		var branch = dialog_branches[0]
+		init_branch(branch)
+		MUI.open()
 	
-	MUI.clear()
-	MUI.make_dialogue(n)
-	MUI.make_dialogue(branch_root_text)
-	MUI.make_responses(options, false);
-	MUI.open()
+	elif( dialog_branches.size() > 1 ):
+		for branch in dialog_branches:
+			var response = {}
+			if branch.get("label"):
+				response["text"] = branch["label"]
+			elif branch.get("Q_ID"):
+				response["text"] = branch["Q_ID"]
+			else:
+				return
+			
+		#### this should get refactored into a proper init_branch method
+		# either on NPC or MUI (or on Quest/Branch, maybe)
+			response["actions"] = [
+				{ fn = "clear",
+				target = MUI,
+				args = []},
+				{ fn = "init_branch",
+				target = self,
+				args = [branch]}
+			]
+	
+			options.append(response)
+			#print(branch)
+		
+		MUI.clear()
+		MUI.make_dialogue(n)
+		MUI.make_dialogue(branch_root_text)
+		MUI.make_responses(options, false);
+		MUI.open()
+
 
 
 # stub until branches are set up
@@ -200,13 +208,13 @@ func _ready():
 	game = get_node("/root/game")
 	data = load("res://data/mocks.gd").new()
 	player = get_node("/root/scene").get("player")
-	MUI = get_node("/root/scene/message-ui")
+	MUI = get_tree().get_root().get_node("/root/scene/message-ui")
 	body_node = get_node("body")
 	x = get_node("X")
 	
 	n = MUI.make_formatted_name(label)
 	
-	#add_child(data)
+	add_child(data)
 	#set_branches()
 
 
