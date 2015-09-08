@@ -1,8 +1,29 @@
 {
   "Q_ID": "0_diagnostic",
-  "id": "0_diagnostic",
   "label": "Diagnostics",
-  "name": "Diagnostics",
+   "logs": {
+     "20": {
+       "title": "Diagnostics: 20",
+       "body": "Today the diagnostics quest was at 20.",
+       "summary": "Today the diagnostics quest was at 20.",
+       "first": true
+     },
+     "40": {
+       "title": "Diagnostics: 40",
+       "body": "Reached state 40",
+       "summary": "Today the diagnostics quest was at 40."
+     },
+     "60": {
+       "title": "Diagnostics: 60",
+       "body": "Reached state 60",
+       "summary": "Today the diagnostics quest was at 60."
+     },
+     "80": {
+       "title": "Diagnostics: 80",
+       "body": "Reached state 80",
+       "summary": "Today the diagnostics quest was at 80."
+     }
+  },
   "branches": [
     {
       "actor": "terminal",

@@ -2,122 +2,201 @@
 
 extends Node
 
-var entries = []   # an array of what, who knows...
+var entries = []  
+
+var layer_node     # the direct child of this, used as a canvaslayer
+var panel_node     # below that, the control root
 var entry_box      # descendant node for viewing an entry
 var entry_list_box # descendant node for listing all entries
-var close_button   # node ref, may move to broader ui class
+
+var journal_button   # node ref, may move to broader ui class
+
 var latest_entry   # some form of reference to the most recent addition
 var current_entry  # reference to which is/was most recently opened
 var index = 0
+var journal_visible = false
 
-	
-func extend(obj, with):
-	for key in obj:
-		if( with.has(key) ):
-			obj.key = with.key
-	return obj
+var player
 
 
+
+######## get_entry_by - query entry by any parameter
+func get_entry_by(param, val):
+	for entry in entries:
+		if( str(entry[param]) == str(val) ):
+			return entry
+
+
+####### entry_exists - checks by id
 func entry_exists(id):
 	for entry in entries:
-		if ( entry.entry_id == id ):
+		if ( str(entry.entry_id) == str(id) ):
 			return true
 		else:
 			continue
 	return false
 
+
+####### update_journal - process a new or updated entry
 func update_journal(args):
+
+	args["index"] = self.index
 	entry_box.clear()
-	var new_entry = Entry.new(args)
-	if ( entry_exists(new_entry.entry_id) ):
-		new_entry["summaries"] = get_entry_by('entry_id', new_entry.entry_id).get("summaries")
-		update_entry(new_entry)
+	
+	# Create a new "Entry" object based on args
+	var e = Entry.new(args)
+	
+	# if this entry id exists, update it with this data
+	if ( entry_exists(e.entry_id) ):
+		e["history"] = get_entry_by('entry_id', e.entry_id)["history"]
+		update_entry(e)
+	
+	# otherwise, create a new entry
 	else:
-		new_entry["summaries"] = []
-		add_entry(new_entry)
+		e["history"] = ""
+		add_entry(e)
 
-func add_entry(new_entry):
-	new_entry.index = index
-	entry_list_box.add_button(new_entry.title)
-	entries.append(new_entry)
-	latest_entry = new_entry.entry_id
+####### add_entry - called once per quest, when the first state change happens
+func add_entry(e):
+	e.index = index
+	entry_list_box.add_button(e.title)
+	entries.append(e)
+	latest_entry = e.entry_id
 	index = index + 1
-	#new_entry["summaries"] =
-	#new_entry.summaries = []
 
-func update_entry(new_entry):
-	var target = get_entry_by("entry_id", new_entry.entry_id)
-	target.body = new_entry.body
-	target.timestamp = new_entry.timestamp
-	target["history"].append(new_entry.summary)
+######## update_entry - add a new step to an existing record
+func update_entry(e):
+	var target = get_entry_by("entry_id", e.entry_id)
+	
+	# save the current state of this entry to its history
+	# this creates a cumulative log, showing all updates in order
+	
+	# uncomment to use timestamps - not currently implemented
+	# target.history += "[i]" + target.title + " -- " + target.timestamp + "[/i]\n"
+
+	target.history += "[i]" + target.title + "[/i]\n"
+	target.history += "" + target.summary + "\n"
+	
+	# once that's stored, overwrite the entry with the new data
+	target.title = e.title
+	target.body = e.body
+	target.summary = e.summary
+	
+	target.timestamp = e.timestamp
+
+
+######## show_entry - function invoked by journal buttons
+func show_entry(ind):
+	get_tree().set_input_as_handled()
+	if( ind == 0 ):
+		entry_box.clear()
+		current_entry = 0
+		return
+	else:
+		var entry = get_entry_by('index', ind - 1)
 		
+		entry_box.clear()
+		
+		entry_box.append_bbcode(entry.history)
+		entry_box.newline()
+		entry_box.newline()
+		entry_box.append_bbcode("[b]" + entry.title + "[/b]")
+		entry_box.newline()
+		entry_box.append_bbcode(entry.body)
+		
+		current_entry = entry
 
-func get_entry_by(param, val):
-	for entry in entries:
-		if( entry[param] == val ):
-			return entry
 
-func show_entry(button):
-	var entry = get_entry_by('index', button)
-	entry_box.clear()
-	#if( entry.has_property("summaries") or entry.has("summaries")):
-	#	if( entry.get("summaries").size() > 0 ):
-	#		for s in entry.summaries:
-	#			entry_box.add_text(s)
-	#			entry_box.newline()
-	entry_box.add_text(entry.body)
-	current_entry = entry
-
+######## show_journal
+func show_journal():
+	self.show()
+	layer_node.set_layer(2)
+	panel_node.popup()
+	
+	#var cur_pos = player.get_global_pos()
+	#player.update_path(cur_pos, cur_pos)
+	player.set_fixed_process(false)
+	journal_visible = true
+	
+func hide_journal():
+	self.hide()
+	layer_node.set_layer(-1)
+	panel_node.hide()
+	player.set_fixed_process(true)
+	journal_visible = false
+	
+	
+func toggle_journal():
+	if( journal_visible ):
+		hide_journal()
+	else:
+		show_journal()
+	
+####### ready
 func _ready():
-	entry_box = get_node("Control/HBoxContainer/Panel/MarginContainer/RichTextLabel")
-	entry_list_box = get_node("Control/HBoxContainer/Panel/VButtonArray")
-	#entry_list_box.connect("button_selected", self, "show_entry")
-
-	var new_entry_args = {
-	title = "Hello World",
-	body = "Beep boop",
-	timestamp = "Now",
-	entry_id = 111
-	}
 	
-	var new_entry_args2 = {
-	title = "My first day on the job",
-	body = "Meep moop zarp",
-	timestamp = "Later",
-	entry_id = 222
-	}
+	# store all our relevant node paths
+	layer_node = get_child(0)
+	panel_node = layer_node.get_child(0)
+	entry_box = panel_node.get_node("HBoxContainer/RichTextLabel")
+	entry_list_box = panel_node.get_node("HBoxContainer/VButtonArray")
+	journal_button = get_node("/root/scene/interface/Node2D/Panel/buttons/journal")
+
+	player = get_node("/root/scene").get("player")
 	
-	add_entry(new_entry_args)
-	add_entry(new_entry_args2)
+	hide_journal()
+	demo()
+	
+	journal_button.show()
+	journal_button.connect("pressed", self, "toggle_journal")
+	
 
+#### demo - for testing purposes, uses mock data
+func demo():
+	var mocks = get_node("/root/mocks")
+	var data = mocks.JRNL.new()
+	
+	var q1 = data.fake_quest_action(1)
+	var q2 = data.fake_quest_action(2)
+	var q3 = data.fake_quest_action(3)
+	
+	update_journal(q1)
+	update_journal(q2)
+	update_journal(q3)
+	
+	
 
-
-
+####### Entry as a subclass of Journal
 class Entry:
-	var title = ""
-	var body  = ""
-	var summary = ""
-	var timestamp    # store when the entry was added - todo: find out how
-	var entry_id     # should be unique
+
+	extends Node
+
+	var title = "Task title"
+	var body  = "Task status/description"
+	var summary = "> Task summary"
+	var first
+	var timestamp = "0:00"  # store when the entry was added - todo: find out how
+	var entry_id = "000"     # should be unique
 	var index        # keep track of how many entries were before this, basically
-	var history = []
-	
-	var defaults = {
-		title = "Task title",
-		body = "Task status/description.",
-		summary = "> Task summary.",
-		timestamp = "0:00",
-		entry_id = 000
-	}
-	
-	
+	var history = ""
+
 	func _init(args):
-		for arg in defaults:
-			self[arg] = defaults[arg]
 		
+		# use the init call ( Entry.new(args) ) to overwrite 
+		# the defaults above with whatever gets passed in
 		for arg in args:
 			self[arg] = args[arg]
-			
-		self["index"] = index
+		
+		# let summary be optional - if not filled out,
+		# just use the full entry body	
+		if not ( args.has("summary") ):
+			self["summary"] = args["body"]
+
+		# for debugging	
 		print("Initialized entry ", self.title, " at index ", str(self.index))
 	
+
+# this is an automatic signal, i should disconnect it eventually
+# and remove this
+func _on_Panel_about_to_show():
+	pass

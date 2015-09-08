@@ -17,7 +17,7 @@ var nav
 export(Texture) var front_texture
 export(Texture) var back_texture
 
-const SPEED=170.0
+const SPEED=150.0
 
 var stat = "awesome"
 
@@ -81,7 +81,7 @@ func _fixed_process(delta):
 			var d = pfrom.distance_to(pto)
 			
 			# turn trace towards his destination
-			var direction = (pto - pfrom).normalized()
+			var direction = ( pto - pfrom).normalized()
 			align_sprite(spr, direction)
 		
 			if (d<=to_walk):

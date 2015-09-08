@@ -18,14 +18,14 @@ var player
 ######## get_entry_by - query entry by any parameter
 func get_entry_by(param, val):
 	for entry in entries:
-		if( entry[param] == val ):
+		if( str(entry[param]) == str(val) ):
 			return entry
 
 
-####### entry_exixtx - checkx by id
+####### entry_exists - checks by id
 func entry_exists(id):
 	for entry in entries:
-		if ( entry.entry_id == id ):
+		if ( str(entry.entry_id) == str(id) ):
 			return true
 		else:
 			continue
@@ -46,7 +46,7 @@ func update_journal(args):
 	
 	# otherwise, create a new entry
 	else:
-		e["history"] = []
+		e["history"] = ""
 		add_entry(e)
 
 
@@ -60,28 +60,43 @@ func add_entry(e):
 ######## update_entry - add a new step to an existing record
 func update_entry(e):
 	var target = get_entry_by("entry_id", e.entry_id)
-	target["history"].append(target.summary)
+	target.history += "[i]" + target.title + "[/i]\n"
+	target.history += "" + target.summary + "\n"
+	
+	target.title = e.title
 	target.body = e.body
+	target.summary = e.summary
+	
+	#target.body = target["history"] + e["body"]
 	target.timestamp = e.timestamp
 
 
 ######## show_entry - function invoked by journal buttons
 func show_entry(ind):
+	get_tree().set_input_as_handled()
 	if( ind == 0 ):
 		entry_box.clear()
 		current_entry = 0
 		return
 	else:
 		var entry = get_entry_by('index', ind - 1)
+		
 		entry_box.clear()
-		entry_box.add_text(entry.body)
+		
+		entry_box.append_bbcode(entry.history)
+		entry_box.newline()
+		entry_box.newline()
+		entry_box.append_bbcode("[b]" + entry.title + "[/b]")
+		entry_box.newline()
+		entry_box.append_bbcode(entry.body)
+		
 		current_entry = entry
 
 
 ######## show_journal
 func show_journal():
 	self.show()
-	get_node("Control").set_layer(1)
+	get_node("Control").set_layer(2)
 	get_node("Control/Panel").popup()
 	
 	#var cur_pos = player.get_global_pos()
@@ -111,6 +126,11 @@ func _ready():
 	player = get_node("/root/scene").get("player")
 	
 	hide_journal()
+	
+	
+	#journal_button.show()
+	#journal_button.connect("pressed", self, "toggle_journal")
+	
 	demo()
 	
 
@@ -141,15 +161,20 @@ class Entry:
 	var title = "Task title"
 	var body  = "Task status/description"
 	var summary = "> Task summary"
+	var first
 	var timestamp = "0:00"  # store when the entry was added - todo: find out how
-	var entry_id = 000     # should be unique
+	var entry_id = "000"     # should be unique
 	var index        # keep track of how many entries were before this, basically
-	var history = []
+	var history = ""
 
 	func _init(args):
 		for arg in args:
 			self[arg] = args[arg]
-		self["history"] = []
+			
+		if not ( args.has("summary") ):
+			self["summary"] = args["body"]
+			
+		#self["history"] = ""
 		print("Initialized entry ", self.title, " at index ", str(self.index))
 	
 
