@@ -32,35 +32,41 @@ func _on_reset_pressed():
 	
 #### save
 func _on_save_pressed():
-	_cancel_quit()
+	
 	
 	var data = {}
 	data["player_x"] = player.get_pos().x
 	data["player_y"] = player.get_pos().y
 	data["time"] = OS.get_time()
 	data["date"] = OS.get_date()
-	data["quest_states"] = get_node("/root/game").get_quest_states()
+	data["quest_states"] = get_node("/root/game")["quest_states"]
 	
 	utils.save_game(data, savepath)
+	print(data)
+	
+	_cancel_quit()
 	#print("saved player position as ", data.player_x, ", ", data.player_y, " to ", savepath);
 	
 
 
 #### load
 func _on_load_pressed():
-	_cancel_quit()
+	
 	
 	var loaded = utils.get_json(savepath)
+	print("loaded data is", loaded)
 	
 	if( loaded.has("player_x") and loaded.has("player_y")):
 		player.set_pos(Vector2(loaded["player_x"], loaded["player_y"]))
 	
 	if( loaded.has("quest_states") ):
 		for q in loaded["quest_states"]:
+			print("savefile has quest ", q, " at state ", loaded["quest_states"][q])
 			get_node("/root/game").update_quest(q, loaded["quest_states"][q])
 	
 	print("Loaded!")
 	menu.hide_menu()
+	_cancel_quit()
 	
 	#print(loaded_data)
 
@@ -74,7 +80,7 @@ func _on_mm_pressed():
 func _on_quit_pressed():
 	var red = Color("#ec1300")
 
-	quit_btn.set_text("> confirm")
+	quit_btn.set_text("confirm")
 	#quit_btn.set("custom_colors/font_color", red)
 	quit_btn.set("custom_colors/font_color_hover", red)
 	
@@ -124,9 +130,9 @@ func _ready():
 	player = get_node("/root/scene").get("player")
 	
 	cancel_btn.hide()
-	save_btn.connect("released", self, "_on_save_pressed")
-	load_btn.connect("released", self, "_on_load_pressed")
-	quit_btn.connect("released", self, "_on_quit_pressed")
-	reset_btn.connect("released", self, "_on_reset_pressed")
-	cancel_btn.connect("released", self, "_cancel_quit")
-	main_menu_btn.connect("released", self, "_on_mm_pressed")
+#	save_btn.connect("released", self, "_on_save_pressed")
+#	load_btn.connect("released", self, "_on_load_pressed")
+	quit_btn.connect("pressed", self, "_on_quit_pressed")
+#	reset_btn.connect("released", self, "_on_reset_pressed")
+#	cancel_btn.connect("released", self, "_cancel_quit")
+#	main_menu_btn.connect("released", self, "_on_mm_pressed")

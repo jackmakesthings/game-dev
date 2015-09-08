@@ -147,7 +147,7 @@ func deactivate():
 func set_current_state(state):
 	prev_state = self.current_state
 	current_state = state
-	#game.quest_states[Q_ID] = state
+	game.quest_states[Q_ID] = state
 	
 	if( logs.has(state) ):
 		var _log = logs[state]

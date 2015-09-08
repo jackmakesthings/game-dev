@@ -34,7 +34,6 @@ func save_game(data, dest):
 	error = filex.open(dest, File.WRITE)
 	#now write
 	if (filex.is_open()):
-	
 		for key in data:
 			filex.store_string(data.to_json())
 			
