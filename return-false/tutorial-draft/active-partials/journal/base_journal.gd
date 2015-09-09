@@ -9,8 +9,6 @@ var panel_node     # below that, the control root
 var entry_box      # descendant node for viewing an entry
 var entry_list_box # descendant node for listing all entries
 
-var journal_button   # node ref, may move to broader ui class
-
 var latest_entry   # some form of reference to the most recent addition
 var current_entry  # reference to which is/was most recently opened
 var index = 0
@@ -59,7 +57,13 @@ func update_journal(args):
 ####### add_entry - called once per quest, when the first state change happens
 func add_entry(e):
 	e.index = index
-	entry_list_box.add_button(e.title)
+	var new_btn = Button.new()
+	new_btn.set_text(e.title)
+	new_btn.set_text_align(0)
+	new_btn.set_meta("ind", index)
+	entry_list_box.add_child(new_btn)
+	new_btn.connect("pressed", self, "show_entry", [e.index+1])
+	#entry_list_box.add_button(e.title)
 	entries.append(e)
 	latest_entry = e.entry_id
 	index = index + 1
@@ -97,13 +101,14 @@ func show_entry(ind):
 		
 		entry_box.clear()
 		
-		entry_box.append_bbcode(entry.history)
-		entry_box.newline()
 		entry_box.newline()
 		entry_box.append_bbcode("[b]" + entry.title + "[/b]")
 		entry_box.newline()
 		entry_box.append_bbcode(entry.body)
-		
+		entry_box.newline()
+		entry_box.newline()
+		entry_box.append_bbcode(entry.history)
+
 		current_entry = entry
 
 
@@ -139,17 +144,13 @@ func _ready():
 	layer_node = get_child(0)
 	panel_node = layer_node.get_child(0)
 	entry_box = panel_node.get_node("HBoxContainer/RichTextLabel")
-	entry_list_box = panel_node.get_node("HBoxContainer/VButtonArray")
-	journal_button = get_node("/root/scene/interface/Node2D/Panel/buttons/journal")
+	entry_list_box = panel_node.get_node("HBoxContainer/ButtonGroup/VBoxContainer")
 
 	player = get_node("/root/scene").get("player")
 	
 	hide_journal()
-	demo()
-	
-	journal_button.show()
-	journal_button.connect("pressed", self, "toggle_journal")
-	
+#	demo()
+
 
 #### demo - for testing purposes, uses mock data
 func demo():
@@ -195,8 +196,3 @@ class Entry:
 		# for debugging	
 		print("Initialized entry ", self.title, " at index ", str(self.index))
 	
-
-# this is an automatic signal, i should disconnect it eventually
-# and remove this
-func _on_Panel_about_to_show():
-	pass
