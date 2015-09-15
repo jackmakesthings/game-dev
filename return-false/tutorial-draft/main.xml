@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resource_file type="PackedScene" subresource_count="43" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
-	<ext_resource path="res://scripts/message-ui.gd" type="Script" index="1"></ext_resource>
 	<ext_resource path="res://active-partials/interface/buttons.gd" type="Script" index="7"></ext_resource>
-	<ext_resource path="res://active-partials/message-ui/response-button.gd" type="Script" index="8"></ext_resource>
-	<ext_resource path="res://active-partials/player/player-k2d.gd" type="Script" index="12"></ext_resource>
-	<ext_resource path="res://active-partials/environment/walkable-area.gd" type="Script" index="9"></ext_resource>
-	<ext_resource path="res://assets/ui/list31 (1).tex" type="Texture" index="20"></ext_resource>
+	<ext_resource path="res://assets/tiles/green-outline-glow.png" type="Texture" index="17"></ext_resource>
+	<ext_resource path="res://assets/ui/code39 (2).tex" type="Texture" index="22"></ext_resource>
+	<ext_resource path="res://active-partials/interface/interface.gd" type="Script" index="19"></ext_resource>
+	<ext_resource path="res://assets/styleboxes/nobg-thin-border.sbx" type="StyleBox" index="3"></ext_resource>
+	<ext_resource path="res://assets/fpo/tall-white-block.png" type="Texture" index="15"></ext_resource>
+	<ext_resource path="res://assets/fpo/temp-trace-back.png" type="Texture" index="14"></ext_resource>
+	<ext_resource path="res://scripts/message-ui.gd" type="Script" index="1"></ext_resource>
+	<ext_resource path="res://assets/ui/list31.tex" type="Texture" index="21"></ext_resource>
+	<ext_resource path="res://assets/fpo/computer_by_hydroksyde-smaller.png" type="Texture" index="11"></ext_resource>
 	<ext_resource path="res://assets/ui/code39 (1).tex" type="Texture" index="23"></ext_resource>
 	<ext_resource path="res://assets/fpo/tall-white-block-hover.png" type="Texture" index="16"></ext_resource>
-	<ext_resource path="res://active-partials/journal/base_journal.gd" type="Script" index="18"></ext_resource>
-	<ext_resource path="res://assets/fpo/computer_by_hydroksyde-smaller.png" type="Texture" index="11"></ext_resource>
-	<ext_resource path="res://assets/ui.xthm" type="Theme" index="2"></ext_resource>
-	<ext_resource path="res://assets/ui/list31.tex" type="Texture" index="21"></ext_resource>
-	<ext_resource path="res://assets/fpo/tall-white-block.png" type="Texture" index="15"></ext_resource>
-	<ext_resource path="res://active-partials/interface/interface.gd" type="Script" index="19"></ext_resource>
-	<ext_resource path="res://main.gd" type="Script" index="0"></ext_resource>
-	<ext_resource path="res://sandbox/menu.gd" type="Script" index="6"></ext_resource>
-	<ext_resource path="res://assets/fpo/trace.png" type="Texture" index="13"></ext_resource>
 	<ext_resource path="res://assets/fpo/portrait-dude-mohawk.png" type="Texture" index="4"></ext_resource>
-	<ext_resource path="res://assets/styleboxes/nobg-thin-border.sbx" type="StyleBox" index="3"></ext_resource>
-	<ext_resource path="res://assets/fonts/imported/amiga-forever-12.fnt" type="Font" index="5"></ext_resource>
-	<ext_resource path="res://assets/fpo/temp-trace-back.png" type="Texture" index="14"></ext_resource>
+	<ext_resource path="res://assets/fpo/trace.png" type="Texture" index="13"></ext_resource>
 	<ext_resource path="res://assets/tiles/iso-floors-walkable.xml" type="TileSet" index="10"></ext_resource>
-	<ext_resource path="res://assets/ui/code39 (2).tex" type="Texture" index="22"></ext_resource>
-	<ext_resource path="res://assets/tiles/green-outline-glow.png" type="Texture" index="17"></ext_resource>
+	<ext_resource path="res://sandbox/menu.gd" type="Script" index="6"></ext_resource>
+	<ext_resource path="res://assets/fonts/imported/amiga-forever-12.fnt" type="Font" index="5"></ext_resource>
+	<ext_resource path="res://main.gd" type="Script" index="0"></ext_resource>
+	<ext_resource path="res://assets/ui.xthm" type="Theme" index="2"></ext_resource>
+	<ext_resource path="res://active-partials/journal/base_journal.gd" type="Script" index="18"></ext_resource>
+	<ext_resource path="res://active-partials/player/player-k2d.gd" type="Script" index="12"></ext_resource>
+	<ext_resource path="res://assets/ui/list31 (1).tex" type="Texture" index="20"></ext_resource>
+	<ext_resource path="res://active-partials/environment/walkable-area.gd" type="Script" index="9"></ext_resource>
+	<ext_resource path="res://active-partials/message-ui/response-button.gd" type="Script" index="8"></ext_resource>
 	<resource type="StyleBoxEmpty" path="local://41">
 		<real name="content_margin/left"> -1 </real>
 		<real name="content_margin/right"> -1 </real>
@@ -389,13 +389,13 @@
 				<resource  external="0">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
-					<string> "Script" </string>
+					<string> "2D" </string>
 					<string> "__editor_plugin_states__" </string>
 					<dictionary  shared="false">
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> -114.764, 27.5695 </vector2>
+							<vector2> -51.6657, -91.995 </vector2>
 							<string> "snap_grid" </string>
 							<bool> True </bool>
 							<string> "snap_offset" </string>
@@ -415,7 +415,7 @@
 							<string> "snap_step" </string>
 							<vector2> 9, 9 </vector2>
 							<string> "zoom" </string>
-							<real> 0.9025 </real>
+							<real> 0.598737 </real>
 						</dictionary>
 						<string> "3D" </string>
 						<dictionary  shared="false">
