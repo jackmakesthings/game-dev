@@ -3,7 +3,7 @@
   "label": "Diagnostics",
    "logs": {
      "20": {
-       "title": "Diagnostics: 20",
+       "title": "Diagnostics",
        "body": "Today the diagnostics quest was at 20.",
        "summary": "Today the diagnostics quest was at 20.",
        "first": true

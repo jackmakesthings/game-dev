@@ -125,7 +125,7 @@ class NPC_0:
 	extends Node
 
 	var mocks = self
-	var MUI = get_node("/root/scene/message-ui")
+	#var MUI = get_node("/root/scene/message-ui")
 		
 	export var label = "Engineer"
 	export var portrait_path = "res://assets/fpo/generic-dude.png"

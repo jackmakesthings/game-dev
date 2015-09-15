@@ -47,9 +47,10 @@ signal player_redirected(successful, expected, actual)
 
 
 
-func setup_MUI(portrait_path, label):
+func setup_MUI(portrait_path=null, label=""):
 	var pic = ImageTexture.new()
-	pic.load(portrait_path)
+	if( portrait_path != null ):
+		pic.load(portrait_path)
 	
 	if not (self.portrait == null):
 		pic = self.portrait
@@ -119,6 +120,7 @@ func present_conversations(dialog_branches):
 func init_branch(branch):
 	var quest = branch.owned_by
 	var s = quest.get("current_state")
+
 	MUI.clear()
 	MUI.make_dialogue(n)
 	
@@ -183,7 +185,7 @@ func wait(time):
 func start_interaction(src):
 	print(dialog_branches)
 	add_child(src)
-	setup_MUI("", src["label"])
+	setup_MUI(null, src["label"])
 	
 	var pause = wait(0.5)
 	add_child(pause)
@@ -208,9 +210,11 @@ func _ready():
 	game = get_node("/root/game")
 	data = load("res://data/mocks.gd").new()
 	player = get_node("/root/scene").get("player")
-	MUI = get_tree().get_root().get_node("/root/scene/message-ui")
 	body_node = get_node("body")
 	x = get_node("X")
+	MUI = preload("res://scripts/message-ui.gd")
+	if( is_inside_tree() ):
+		MUI = get_node("/root/scene").get_child(0)
 	
 	n = MUI.make_formatted_name(label)
 	

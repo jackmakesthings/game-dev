@@ -5,6 +5,12 @@ extends Node
 export(String, FILE) var file = "res://assets/dialogue-tree-json.txt"
 
 var debug = true
+var current_scene
+
+func _ready():
+	var root = get_tree().get_root()
+	current_scene = root.get_child( root.get_child_count() -1 )
+
 
 # get_json(file)
 # Load and parse data from a json file (by path)
@@ -93,11 +99,29 @@ static func angle_to_compass(angle):
 
 
 
+func goto_scene(path, data):
+	var current_scene = get_tree().get_current_scene()
+	call_deferred("def_goto_scene",path, data)
 
-
-
-
-
+func def_goto_scene(path, loaded):   
+	current_scene.free()
+	var s = ResourceLoader.load(path)
+	current_scene = s.instance()
+	get_tree().get_root().add_child(current_scene)
+	get_tree().set_current_scene( current_scene )
+	
+	if( loaded == null ):
+		return
+		
+	if( loaded.has("player_x") and loaded.has("player_y")):
+		if( get_tree().get_current_scene().get("player")):
+			var player = get_tree().get_current_scene().get("player")
+			player.set_pos(Vector2(loaded["player_x"], loaded["player_y"]))
+	
+	if( loaded.has("quest_states") ):
+		for q in loaded["quest_states"]:
+			print("savefile has quest ", q, " at state ", loaded["quest_states"][q])
+			get_node("/root/game").update_quest(q, loaded["quest_states"][q])
 
 
 func dprint(whatever):

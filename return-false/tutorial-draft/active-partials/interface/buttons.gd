@@ -3,7 +3,7 @@ extends VBoxContainer
 
 
 var savepath = "res://savegame.txt"
-var utils = preload("res://scripts/utils.gd").new()
+var utils = get_node("/root/utils")
 
 var player
 var quit_btn
@@ -51,22 +51,25 @@ func _on_save_pressed():
 
 #### load
 func _on_load_pressed():
-	
+
 	
 	var loaded = utils.get_json(savepath)
-	print("loaded data is", loaded)
+	print("loaded data is", loaded)	
+	utils.goto_scene("res://main.xml", loaded)
 	
-	if( loaded.has("player_x") and loaded.has("player_y")):
-		player.set_pos(Vector2(loaded["player_x"], loaded["player_y"]))
 	
-	if( loaded.has("quest_states") ):
-		for q in loaded["quest_states"]:
-			print("savefile has quest ", q, " at state ", loaded["quest_states"][q])
-			get_node("/root/game").update_quest(q, loaded["quest_states"][q])
-	
-	print("Loaded!")
-	menu.hide_menu()
-	_cancel_quit()
+#	
+#	if( loaded.has("player_x") and loaded.has("player_y")):
+#		player.set_pos(Vector2(loaded["player_x"], loaded["player_y"]))
+#	
+#	if( loaded.has("quest_states") ):
+#		for q in loaded["quest_states"]:
+#			print("savefile has quest ", q, " at state ", loaded["quest_states"][q])
+#			get_node("/root/game").update_quest(q, loaded["quest_states"][q])
+#	
+#	print("Loaded!")
+#	menu.hide_menu()
+#	_cancel_quit()
 	
 	#print(loaded_data)
 
@@ -74,7 +77,8 @@ func _on_load_pressed():
 #### back to main menu
 func _on_mm_pressed():
 	print("Back to menu")
-	menu.hide_menu()
+	#menu.hide_menu()
+	utils.goto_scene("res://sandbox/main-menu.xscn", null)
 
 #### quit
 func _on_quit_pressed():
@@ -99,7 +103,7 @@ func _cancel_quit():
 	#quit_btn.set("custom_colors/font_color", null)
 	quit_btn.set("custom_colors/font_color_hover", null)
 	
-	quit_btn.set_text("> quit")
+	quit_btn.set_text("quit")
 	
 	quit_btn.disconnect("pressed", self, "_quit_game")
 	quit_btn.connect("pressed", self, "_on_quit_pressed")
@@ -136,3 +140,5 @@ func _ready():
 #	reset_btn.connect("released", self, "_on_reset_pressed")
 #	cancel_btn.connect("released", self, "_cancel_quit")
 #	main_menu_btn.connect("released", self, "_on_mm_pressed")
+
+

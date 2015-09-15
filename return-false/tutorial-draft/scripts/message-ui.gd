@@ -153,6 +153,9 @@ func enter_tree():
 
 ######## _ready ######### 
 func _ready():
+	get_node("/root/scene").set("MUI", get_node("."))
+	get_node("/root/game").set("MUI", get_node("."))
+	get_node("/root/paths").set("MUI", get_path())
 	init_paths()
 	close()
 	#demo()

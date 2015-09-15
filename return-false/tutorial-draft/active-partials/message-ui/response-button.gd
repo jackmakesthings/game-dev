@@ -15,6 +15,7 @@ func mouse_exit():
 	#get_node("Label").set_opacity(0.0)
 	get_node("Label").set_text("-")
 
+
 func mouse_enter():
 	#get_node("Label").set_opacity(1.0)
 	get_node("Label").set_text(">")

@@ -52,5 +52,8 @@ func _ready():
 	
 	add_user_signal("menu_opened", [])
 	add_user_signal("menu_closed", [])
+	
+	
+	get_node("/root/paths").set("menu", get_path())
 
 	

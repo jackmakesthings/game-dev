@@ -96,9 +96,10 @@ func remove_quest(key, end=null):
 
 func _ready():
 	var quest_holder = get_node("/root/scene/quests")
-	yield(quest_holder, "quests_loaded")
-	for child in quest_holder.get_children():
-		quest_states[child.get_name()] = child.get_current_state()
+	if( quest_holder != null ):
+		yield(quest_holder, "quests_loaded")
+		for child in quest_holder.get_children():
+			quest_states[child.get_name()] = child.get_current_state()
 	
 	#print(quest_states)
 		
