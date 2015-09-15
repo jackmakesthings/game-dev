@@ -41,7 +41,10 @@ func _on_save_pressed():
 	data["date"] = OS.get_date()
 	data["quest_states"] = get_node("/root/game")["quest_states"]
 	
-	utils.save_game(data, savepath)
+	#utils.save_game(data, savepath)
+	
+	get_parent().get_parent().get_node("Node/Control/PopupPanel").popup()
+	get_parent().get_parent().get_node("Node").raise()
 	print(data)
 	
 	_cancel_quit()
