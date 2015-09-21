@@ -45,6 +45,7 @@ func _on_save_pressed():
 	
 	get_parent().get_parent().get_node("Node/Control/PopupPanel").popup()
 	get_parent().get_parent().get_node("Node").raise()
+	get_parent().get_parent().get_node("Node/Control").show()
 	
 	#print(data)
 	
