@@ -110,6 +110,8 @@ func def_goto_scene(path, loaded):
 	get_tree().get_root().add_child(current_scene)
 	get_tree().set_current_scene( current_scene )
 	
+	#yield(current_scene, "")
+	
 	if( loaded == null ):
 		return
 		
@@ -117,6 +119,7 @@ func def_goto_scene(path, loaded):
 		if( get_tree().get_current_scene().get("player")):
 			var player = get_tree().get_current_scene().get("player")
 			player.set_pos(Vector2(loaded["player_x"], loaded["player_y"]))
+			print(loaded)
 	
 	if( loaded.has("quest_states") ):
 		for q in loaded["quest_states"]:

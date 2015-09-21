@@ -11,8 +11,10 @@ var nav
 var tiles
 var outline
 var movement_allowed = true
+var utils = preload("res://scripts/utils.gd").new()
 
 const TILE_ATTRACT = 7
+const TILE_TRANSITION = 0
 
 # shortcut for checking which tile type is at (x,y)
 func tile_at(point):
@@ -41,6 +43,10 @@ func check_for_attractor(point):
 		return "SW"
 	else:
 		return null
+		
+
+func check_for_transition(point):
+	return ( tile_at(point) == TILE_TRANSITION )
 
 func _unhandled_input(ev):
 
@@ -94,6 +100,12 @@ func _unhandled_input(ev):
 			var orient = check_for_attractor(player.get_global_pos())
 			if( not orient == null ):
 				player.orient(orient)
+			
+			
+			var transitioning = check_for_transition(player.get_global_pos())
+			if( transitioning == true ):
+				utils.goto_scene("res://adjacent-scene.xml", {})
+				
 	
 func _ready():
 	# Setup the vars and conditions for this instance
@@ -104,7 +116,7 @@ func _ready():
 	nav = get_node("nav")
 	tiles = get_node("nav/floor")
 	outline = get_node("destination_sprite")
-	
+	utils = get_node("/root/utils")
 	
 	outline.hide()
 	set_process_unhandled_input(true)

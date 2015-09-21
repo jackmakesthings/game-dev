@@ -3,7 +3,7 @@ extends VBoxContainer
 
 
 var savepath = "res://savegame.txt"
-var utils = get_node("/root/utils")
+var utils = preload("res://scripts/utils.gd")
 
 var player
 var quit_btn
@@ -45,20 +45,26 @@ func _on_save_pressed():
 	
 	get_parent().get_parent().get_node("Node/Control/PopupPanel").popup()
 	get_parent().get_parent().get_node("Node").raise()
-	print(data)
+	
+	#print(data)
 	
 	_cancel_quit()
 	#print("saved player position as ", data.player_x, ", ", data.player_y, " to ", savepath);
 	
-
+func _on_save_menu_closed():
+	get_parent().get_parent().get_node("menu_window").raise()
 
 #### load
 func _on_load_pressed():
 
-	
-	var loaded = utils.get_json(savepath)
-	print("loaded data is", loaded)	
-	utils.goto_scene("res://main.xml", loaded)
+	print("Pressed load button")
+	print(get_tree().get_current_scene().get_filename())
+	#var loaded = utils.get_json(savepath)
+	#print("loaded data is", loaded)	
+#	var data = {}
+#	data["player_x"] = 300
+#	data["player_y"] = 500
+	utils.goto_scene("res://adjacent-scene.xml", {})
 	
 	
 #	

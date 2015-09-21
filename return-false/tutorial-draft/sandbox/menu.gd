@@ -48,7 +48,7 @@ func _ready():
 	menu_popup = menu_layer.get_node("menu_window")
 	hide_menu()
 	
-	menu_layer.set_layer(-1)
+	#menu_layer.set_layer(-1)
 	
 	add_user_signal("menu_opened", [])
 	add_user_signal("menu_closed", [])
