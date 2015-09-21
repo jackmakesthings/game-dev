@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="8" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
-	<ext_resource path="res://assets/fonts/imported/8bit-operator-sc-20.fnt" type="Font" index="1"></ext_resource>
+<resource_file type="PackedScene" subresource_count="7" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
 	<ext_resource path="res://assets/ui.xthm" type="Theme" index="0"></ext_resource>
-	<resource type="GDScript" path="local://50">
-		<string name="script/source"> "&#000a;extends Node&#000a;&#000a;# member variables here, example:&#000a;# var a=2&#000a;# var b=&quot;textvar&quot;&#000a;&#000a;var utils&#000a;var entries&#000a;var btn&#000a;var panel&#000a;var input&#000a;var file_cache = []&#000a;&#000a;func _ready():&#000a;&#0009;utils = get_node(&quot;/root/utils&quot;)&#000a;&#0009;btn = get_node(&quot;Control/PopupPanel/HBoxContainer/VBoxContainer/HBoxContainer/Button&quot;)&#000a;&#0009;panel = get_node(&quot;Control/PopupPanel&quot;)&#000a;&#0009;entries = get_node(&quot;Control/PopupPanel/HBoxContainer/VButtonArray&quot;)&#000a;&#0009;input = get_node(&quot;Control/PopupPanel/HBoxContainer/VBoxContainer/HBoxContainer/LineEdit&quot;)&#000a;&#0009;btn.connect(&quot;pressed&quot;, self, &quot;_on_savebtn_pressed&quot;)&#000a;&#0009;entries.connect(&quot;button_selected&quot;, self, &quot;fill_from_btn&quot;)&#000a;&#0009;#panel.popup()&#000a;&#0009;show_file_list()&#000a;&#0009;&#000a;&#000a;func fn(text):&#000a;&#0009;#return &quot;res://save--&quot; + text + &quot;.txt&quot;&#000a;&#0009;#return text + &quot;.txt&quot;&#000a;&#0009;return text&#000a;&#0009;&#000a;&#000a;func fill_from_btn(i):&#000a;&#0009;var i_text = entries.get_button_text(i)&#000a;&#0009;input.set_text(i_text)&#000a;&#0009;#btn.emit_signal(&quot;pressed&quot;)&#000a;&#0009;&#000a;&#000a;&#000a;func show_file_list():&#000a;&#000a;&#0009;var entry&#000a;&#0009;var dir = Directory.new()&#000a;&#0009;dir.change_dir(&quot;res&quot;)&#000a;&#0009;dir.change_dir(&quot;savegames&quot;)&#000a;&#0009;dir.list_dir_begin()&#000a;&#0009;&#000a;&#0009;entries.set(&quot;button/count&quot;, 0)&#000a;&#0009;entry  = dir.get_next()&#000a;&#0009;while entry != &quot;&quot;:&#000a;&#0009;&#0009;if( entry != &quot;.&quot; and entry != &quot;..&quot; and entry != &quot;.DS_Store&quot;):&#000a;&#0009;&#0009;&#0009;entry = entry.replace((&quot;.&quot; + entry.extension()), &quot;&quot;)&#000a;&#0009;&#0009;&#0009;file_cache.append(entry)&#000a;&#0009;&#0009;&#0009;entries.add_button(entry)&#000a;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;entry = dir.get_next()&#000a;&#0009;&#0009;&#000a;&#0009;dir.list_dir_end()&#000a;&#000a;&#000a;func _on_savebtn_pressed():&#000a;&#0009;var overwrite = false&#000a;&#0009;var field = input.get_text()&#000a;&#0009;if( field != null and field != &quot;&quot; ):&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;var dest = fn(field)&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;if( file_cache.find(dest) &lt; -1 ):&#000a;&#0009;&#0009;&#0009;try_to_overwrite(field)&#000a;&#0009;&#0009;else:&#000a;&#0009;&#0009;&#0009;_on_save_confirmed(field)&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;&#000a;&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;&#000a;func try_to_overwrite(filename):&#000a;&#0009;btn.set_text(&quot;confirm&quot;)&#000a;&#0009;btn.set(&quot;custom_colors/font_color&quot;, Color(&quot;#ff0000&quot;))&#000a;&#0009;btn.disconnect(&quot;pressed&quot;, self, &quot;_on_savebtn_pressed&quot;)&#000a;&#0009;btn.connect(&quot;pressed&quot;, self, &quot;_on_save_confirmed&quot;, [filename])&#000a;&#000a;&#000a;func _on_save_confirmed(dest):&#000a;&#000a;&#0009;var data = {}&#000a;&#0009;data[&quot;player_x&quot;] = 100&#000a;&#0009;data[&quot;player_y&quot;] = 200 &#000a;&#0009;data[&quot;timestamp&quot;] = OS.get_time()&#000a;&#0009;&#000a;&#0009;&#000a;&#0009;utils.save_game(data, &quot;res://savegames/&quot; + dest + &quot;.txt&quot;)&#000a;&#0009;print(&quot;Saved to &quot;, dest)&#000a;&#0009;btn.set_text(&quot;save&quot;)&#000a;&#0009;btn.set(&quot;custom_colors/font_color&quot;, Color(&quot;#ffffff&quot;))&#000a;&#0009;btn.disconnect(&quot;pressed&quot;, self, &quot;_on_save_confirmed&quot;)&#000a;&#0009;btn.connect(&quot;pressed&quot;, self, &quot;_on_savebtn_pressed&quot;)&#000a;&#0009;show_file_list()&#000a;" </string>
+	<resource type="GDScript" path="local://53">
+		<string name="script/source"> "&#000a;extends Node&#000a;&#000a;# member variables here, example:&#000a;# var a=2&#000a;# var b=&quot;textvar&quot;&#000a;&#000a;var utils&#000a;var entries&#000a;var btn&#000a;var panel&#000a;var input&#000a;var file_cache = []&#000a;&#000a;func _ready():&#000a;&#0009;utils = get_node(&quot;/root/utils&quot;)&#000a;&#0009;btn = get_node(&quot;Control/PopupPanel/HBoxContainer/VBoxContainer/HBoxContainer/Button&quot;)&#000a;&#0009;panel = get_node(&quot;Control/PopupPanel&quot;)&#000a;&#0009;entries = get_node(&quot;Control/PopupPanel/HBoxContainer/VButtonArray&quot;)&#000a;&#0009;input = get_node(&quot;Control/PopupPanel/HBoxContainer/VBoxContainer/HBoxContainer/LineEdit&quot;)&#000a;&#0009;#btn.connect(&quot;pressed&quot;, self, &quot;_on_savebtn_pressed&quot;)&#000a;&#0009;btn.connect(&quot;pressed&quot;, self, &quot;_on_loadbtn_pressed&quot;)&#000a;&#0009;entries.connect(&quot;button_selected&quot;, self, &quot;fill_from_btn&quot;)&#000a;&#0009;panel.popup()&#000a;&#0009;show_file_list()&#000a;&#0009;&#000a;&#000a;func fn(text):&#000a;&#0009;#return &quot;res://save--&quot; + text + &quot;.txt&quot;&#000a;&#0009;#return text + &quot;.txt&quot;&#000a;&#0009;return text&#000a;&#0009;&#000a;&#000a;func fill_from_btn(i):&#000a;&#0009;var i_text = entries.get_button_text(i)&#000a;&#0009;input.set_text(i_text)&#000a;&#0009;#btn.emit_signal(&quot;pressed&quot;)&#000a;&#0009;&#000a;&#000a;&#000a;func show_file_list():&#000a;&#000a;&#0009;var entry&#000a;&#0009;var dir = Directory.new()&#000a;&#0009;dir.change_dir(&quot;res&quot;)&#000a;&#0009;dir.change_dir(&quot;savegames&quot;)&#000a;&#0009;dir.list_dir_begin()&#000a;&#0009;&#000a;&#0009;entries.set(&quot;button/count&quot;, 0)&#000a;&#0009;entry  = dir.get_next()&#000a;&#0009;while entry != &quot;&quot;:&#000a;&#0009;&#0009;if( entry != &quot;.&quot; and entry != &quot;..&quot; and entry != &quot;.DS_Store&quot;):&#000a;&#0009;&#0009;&#0009;entry = entry.replace((&quot;.&quot; + entry.extension()), &quot;&quot;)&#000a;&#0009;&#0009;&#0009;file_cache.append(entry)&#000a;&#0009;&#0009;&#0009;entries.add_button(entry)&#000a;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;entry = dir.get_next()&#000a;&#0009;&#0009;&#000a;&#0009;dir.list_dir_end()&#000a;&#000a;&#000a;func _on_savebtn_pressed():&#000a;&#0009;var overwrite = false&#000a;&#0009;var field = input.get_text()&#000a;&#0009;if( field != null and field != &quot;&quot; ):&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;var dest = fn(field)&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;if( file_cache.find(dest) &lt; -1 ):&#000a;&#0009;&#0009;&#0009;try_to_overwrite(field)&#000a;&#0009;&#0009;else:&#000a;&#0009;&#0009;&#0009;_on_save_confirmed(field)&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;&#000a;func _on_loadbtn_pressed():&#000a;&#0009;var field = input.get_text()&#000a;&#0009;if( field != null and field != &quot;&quot; ):&#000a;&#0009;&#000a;&#0009;&#0009;var data_file = &quot;res://savegames/&quot; + field + &quot;.txt&quot;&#000a;&#0009;&#0009;print(data_file)&#000a;&#0009;&#0009;var data_loaded = utils.get_json(data_file)&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;if( data_loaded != null ):&#000a;&#0009;&#0009;&#0009;print(data_loaded)&#000a;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;if( data_loaded.has(&quot;scene&quot;) ):&#000a;&#0009;&#0009;&#0009;utils.goto_scene(data_loaded[&quot;scene&quot;], data_loaded)&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;&#000a;func try_to_overwrite(filename):&#000a;&#0009;btn.set_text(&quot;confirm&quot;)&#000a;&#0009;btn.set(&quot;custom_colors/font_color&quot;, Color(&quot;#ff0000&quot;))&#000a;&#0009;btn.disconnect(&quot;pressed&quot;, self, &quot;_on_savebtn_pressed&quot;)&#000a;&#0009;btn.connect(&quot;pressed&quot;, self, &quot;_on_save_confirmed&quot;, [filename])&#000a;&#000a;&#000a;func _on_save_confirmed(dest):&#000a;&#000a;&#0009;var data = {}&#000a;&#0009;data[&quot;player_x&quot;] = 100&#000a;&#0009;data[&quot;player_y&quot;] = 200 &#000a;&#0009;data[&quot;timestamp&quot;] = OS.get_time()&#000a;&#0009;&#000a;&#0009;&#000a;&#0009;utils.save_game(data, &quot;res://savegames/&quot; + dest + &quot;.txt&quot;)&#000a;&#0009;print(&quot;Saved to &quot;, dest)&#000a;&#0009;btn.set_text(&quot;save&quot;)&#000a;&#0009;btn.set(&quot;custom_colors/font_color&quot;, Color(&quot;#ffffff&quot;))&#000a;&#0009;btn.disconnect(&quot;pressed&quot;, self, &quot;_on_save_confirmed&quot;)&#000a;&#0009;btn.connect(&quot;pressed&quot;, self, &quot;_on_savebtn_pressed&quot;)&#000a;&#0009;show_file_list()&#000a;" </string>
 
 	</resource>
 	<resource type="StyleBoxEmpty" path="local://51">
@@ -41,7 +40,7 @@
 			<string> "conns" </string>
 			<int_array  len="0"> 				 </int_array>
 			<string> "names" </string>
-			<string_array  len="39">
+			<string_array  len="38">
 				<string> "Node" </string>
 				<string> "script/script" </string>
 				<string> "__meta__" </string>
@@ -73,7 +72,6 @@
 				<string> "VBoxContainer" </string>
 				<string> "size_flags/stretch_ratio" </string>
 				<string> "LineEdit" </string>
-				<string> "custom_fonts/font" </string>
 				<string> "text" </string>
 				<string> "max_length" </string>
 				<string> "editable" </string>
@@ -85,13 +83,13 @@
 			<string> "node_count" </string>
 			<int> 9 </int>
 			<string> "nodes" </string>
-			<int_array  len="227"> 				-1, -1, 0, 0, -1, 2, 1, 0, 2, 1, 0, 0, 0, 3, 3, -1, 9, 4, 2, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 11, 7, 12, 8, 0, 1, 0, 13, 13, -1, 11, 14, 9, 4, 2, 5, 9, 15, 10, 6, 11, 7, 12, 8, 5, 9, 6, 10, 7, 11, 7, 16, 5, 0, 2, 0, 17, 17, -1, 11, 4, 2, 5, 2, 18, 13, 15, 14, 6, 15, 7, 14, 8, 5, 9, 5, 10, 9, 11, 9, 19, 16, 0, 3, 0, 20, 20, -1, 13, 6, 17, 7, 18, 8, 5, 9, 6, 10, 9, 11, 9, 21, 19, 22, 20, 23, 21, 24, 22, 25, 23, 26, 11, 27, 23, 0, 3, 0, 28, 28, -1, 8, 18, 24, 6, 25, 7, 18, 8, 5, 9, 5, 10, 9, 11, 9, 29, 26, 0, 5, 0, 17, 17, -1, 6, 6, 27, 7, 28, 8, 5, 9, 5, 10, 7, 11, 7, 0, 6, 0, 30, 30, -1, 12, 6, 29, 7, 28, 8, 5, 9, 6, 10, 9, 11, 7, 29, 30, 31, 31, 32, 32, 33, 23, 34, 6, 35, 5, 0, 6, 0, 36, 36, -1, 10, 18, 33, 6, 27, 7, 28, 8, 5, 9, 6, 10, 9, 11, 7, 37, 5, 32, 34, 38, 5, 0 </int_array>
+			<int_array  len="225"> 				-1, -1, 0, 0, -1, 2, 1, 0, 2, 1, 0, 0, 0, 3, 3, -1, 9, 4, 2, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 11, 7, 12, 8, 0, 1, 0, 13, 13, -1, 11, 14, 9, 4, 2, 5, 9, 15, 10, 6, 11, 7, 12, 8, 5, 9, 6, 10, 7, 11, 7, 16, 5, 0, 2, 0, 17, 17, -1, 11, 4, 2, 5, 2, 18, 13, 15, 14, 6, 15, 7, 14, 8, 5, 9, 5, 10, 9, 11, 9, 19, 16, 0, 3, 0, 20, 20, -1, 13, 6, 17, 7, 18, 8, 5, 9, 6, 10, 9, 11, 9, 21, 19, 22, 20, 23, 21, 24, 22, 25, 23, 26, 11, 27, 23, 0, 3, 0, 28, 28, -1, 8, 18, 24, 6, 25, 7, 18, 8, 5, 9, 5, 10, 9, 11, 9, 29, 26, 0, 5, 0, 17, 17, -1, 6, 6, 27, 7, 28, 8, 5, 9, 5, 10, 7, 11, 7, 0, 6, 0, 30, 30, -1, 11, 6, 29, 7, 28, 8, 5, 9, 6, 10, 9, 11, 7, 29, 30, 31, 31, 32, 23, 33, 6, 34, 5, 0, 6, 0, 35, 35, -1, 10, 18, 32, 6, 27, 7, 28, 8, 5, 9, 6, 10, 9, 11, 7, 36, 5, 31, 33, 37, 5, 0 </int_array>
 			<string> "variants" </string>
-			<array  len="35" shared="false">
-				<resource  resource_type="Script" path="local://50">  </resource>
+			<array  len="34" shared="false">
+				<resource  resource_type="Script" path="local://53">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
-					<string> "2D" </string>
+					<string> "Script" </string>
 					<string> "__editor_plugin_states__" </string>
 					<dictionary  shared="false">
 						<string> "2D" </string>
@@ -251,13 +249,12 @@
 				<real> 720 </real>
 				<real> 2 </real>
 				<real> 474 </real>
-				<real> 33 </real>
+				<real> 25 </real>
 				<real> 376 </real>
 				<real> 4 </real>
-				<resource  external="1">  </resource>
 				<string> "" </string>
 				<real> 380 </real>
-				<string> "save" </string>
+				<string> "load" </string>
 			</array>
 			<string> "version" </string>
 			<int> 1 </int>

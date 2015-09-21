@@ -35,6 +35,7 @@ func _on_save_pressed():
 	
 	
 	var data = {}
+	data["scene"] = get_tree().get_current_scene().get_filename()
 	data["player_x"] = player.get_pos().x
 	data["player_y"] = player.get_pos().y
 	data["time"] = OS.get_time()
@@ -45,6 +46,7 @@ func _on_save_pressed():
 	
 	get_parent().get_parent().get_node("Node/Control/PopupPanel").popup()
 	get_parent().get_parent().get_node("Node").raise()
+	get_parent().get_parent().get_node("Node").set("data", data)
 	get_parent().get_parent().get_node("Node/Control").show()
 	
 	#print(data)
@@ -59,7 +61,7 @@ func _on_save_menu_closed():
 func _on_load_pressed():
 
 	print("Pressed load button")
-	print(get_tree().get_current_scene().get_filename())
+	#print(get_tree().get_current_scene().get_filename())
 	#var loaded = utils.get_json(savepath)
 	#print("loaded data is", loaded)	
 #	var data = {}
@@ -88,7 +90,7 @@ func _on_load_pressed():
 func _on_mm_pressed():
 	print("Back to menu")
 	#menu.hide_menu()
-	utils.goto_scene("res://sandbox/main-menu.xscn", null)
+	utils.goto_scene("res://sandbox/main-menu.xscn", {})
 
 #### quit
 func _on_quit_pressed():
