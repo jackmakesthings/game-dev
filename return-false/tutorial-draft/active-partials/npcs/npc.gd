@@ -124,9 +124,16 @@ func init_branch(branch):
 	MUI.clear()
 	MUI.make_dialogue(n)
 	
+	if( branch.text_at_state(s) == null or branch.responses_at_state(s) == null ):
+		MUI.close()
+		return
+	
 	MUI.make_dialogue(branch.text_at_state(s))
 	for response in branch.responses_at_state(s):
 		branch.build_response(response)
+	
+	
+	quest.connect("quest_completed", self, "flash_popup")
 
 	#MUI.make_close_button()
 	
@@ -195,6 +202,12 @@ func start_interaction(src):
 	if( dialog_branches.empty() ):
 		i_should_go(src)
 	else:
+		var branch_1 = dialog_branches[0]
+		var branch_1_quest = branch_1.get("owned_by")
+		var branch_1_state = branch_1_quest.get("current_state")
+		if( branch_1._at_state(branch_1_state) == null ):
+			return
+		
 		present_conversations(dialog_branches)
 
 

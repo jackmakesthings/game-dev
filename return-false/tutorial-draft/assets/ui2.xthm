@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resource_file type="Theme" subresource_count="7" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
+	<ext_resource path="res://assets/fonts/imported/rix-11.fnt" type="Font" index="0"></ext_resource>
+	<resource type="StyleBoxEmpty" path="local://4">
+		<real name="content_margin/left"> 5 </real>
+		<real name="content_margin/right"> 5 </real>
+		<real name="content_margin/top"> 5 </real>
+		<real name="content_margin/bottom"> 5 </real>
+
+	</resource>
+	<resource type="StyleBoxFlat" path="local://10">
+		<real name="content_margin/left"> 5 </real>
+		<real name="content_margin/right"> 5 </real>
+		<real name="content_margin/top"> 5 </real>
+		<real name="content_margin/bottom"> 5 </real>
+		<color name="bg_color"> 0, 1, 1, 1 </color>
+		<color name="light_color"> 0.8, 0.8, 0.8, 1 </color>
+		<color name="dark_color"> 0.8, 0.8, 0.8, 1 </color>
+		<int name="border_size"> 0 </int>
+		<bool name="border_blend"> True </bool>
+		<bool name="draw_bg"> True </bool>
+
+	</resource>
+	<resource type="StyleBoxEmpty" path="local://7">
+		<real name="content_margin/left"> 5 </real>
+		<real name="content_margin/right"> 5 </real>
+		<real name="content_margin/top"> 5 </real>
+		<real name="content_margin/bottom"> 5 </real>
+
+	</resource>
+	<resource type="StyleBoxEmpty" path="local://8">
+		<real name="content_margin/left"> -1 </real>
+		<real name="content_margin/right"> -1 </real>
+		<real name="content_margin/top"> -1 </real>
+		<real name="content_margin/bottom"> -1 </real>
+
+	</resource>
+	<resource type="StyleBoxFlat" path="local://9">
+		<real name="content_margin/left"> 5 </real>
+		<real name="content_margin/right"> 5 </real>
+		<real name="content_margin/top"> 5 </real>
+		<real name="content_margin/bottom"> 5 </real>
+		<color name="bg_color"> 0, 0.13198, 0.144245, 1 </color>
+		<color name="light_color"> 0.8, 0.8, 0.8, 1 </color>
+		<color name="dark_color"> 0.8, 0.8, 0.8, 1 </color>
+		<int name="border_size"> 0 </int>
+		<bool name="border_blend"> True </bool>
+		<bool name="draw_bg"> True </bool>
+
+	</resource>
+	<main_resource>
+		<resource name="default_font" external="0">  </resource>
+		<color name="Button/colors/font_color"> 0.878431, 0.878431, 0.878431, 1 </color>
+		<color name="Button/colors/font_color_disabled"> 0.9, 0.9, 0.9, 0.646465 </color>
+		<color name="Button/colors/font_color_hover"> 0, 1, 1, 1 </color>
+		<color name="Button/colors/font_color_pressed"> 0, 0.129412, 0.141176, 1 </color>
+		<int name="Button/constants/hseparation"> 2 </int>
+		<resource name="Button/fonts/font" external="0">  </resource>
+		<resource name="Button/styles/disabled" resource_type="StyleBox" path="local://4">  </resource>
+		<resource name="Button/styles/focus" resource_type="StyleBox" path="local://4">  </resource>
+		<resource name="Button/styles/hover" resource_type="StyleBox" path="local://4">  </resource>
+		<resource name="Button/styles/normal" resource_type="StyleBox" path="local://4">  </resource>
+		<resource name="Button/styles/pressed" resource_type="StyleBox" path="local://10">  </resource>
+		<color name="Label/colors/font_color"> 1, 1, 1, 1 </color>
+		<color name="Label/colors/font_color_shadow"> 0, 0, 0, 0 </color>
+		<int name="Label/constants/shadow_as_outline"> 0 </int>
+		<int name="Label/constants/shadow_offset_x"> 1 </int>
+		<int name="Label/constants/shadow_offset_y"> 1 </int>
+		<resource name="Label/fonts/font" external="0">  </resource>
+		<color name="LineEdit/colors/cursor_color"> 0.187649, 0.941176, 0.941176, 1 </color>
+		<color name="LineEdit/colors/font_color"> 1, 1, 1, 1 </color>
+		<color name="LineEdit/colors/font_color_selected"> 0, 0, 0, 1 </color>
+		<color name="LineEdit/colors/selection_color"> 0, 1, 1, 1 </color>
+		<int name="LineEdit/constants/minimum_spaces"> 12 </int>
+		<resource name="LineEdit/fonts/font" external="0">  </resource>
+		<resource name="LineEdit/styles/focus" resource_type="StyleBox" path="local://7">  </resource>
+		<resource name="LineEdit/styles/normal" resource_type="StyleBox" path="local://7">  </resource>
+		<resource name="LineEdit/styles/read_only" resource_type="StyleBox" path="local://8">  </resource>
+		<resource name="Panel/styles/panel" resource_type="StyleBox" path="local://9">  </resource>
+		<resource name="Panel/styles/panelf" resource_type="StyleBox" path="local://9">  </resource>
+		<resource name="Panel/styles/panelnc" resource_type="StyleBox" path="local://9">  </resource>
+
+	</main_resource>
+</resource_file>

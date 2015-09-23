@@ -31,7 +31,7 @@ var actors = []
 var states
 var prev_state = null
 var current_state = 0 setget set_current_state,get_current_state
-var init_at = "20"
+var init_at = "0"
 var end_at = "100"
 
 # logs/journals also come from the data file
@@ -39,6 +39,8 @@ var end_at = "100"
 var logs
 var log_base
 var Branch = preload("res://active-partials/quest-mgmt/quest_branch.gd")
+
+var MUI
 
 # various boolean conditions this quest can be checked for
 var branches_ready = false
@@ -96,6 +98,7 @@ func attach_branches():
 				branch.set("Q_ID", Q_ID)
 				branch.set_name(Q_ID)
 				branch.set("owned_by", self)
+				
 				actor.add_child(branch)
 				if ( actors.find(actor.get_name()) == -1 ):
 					actors.append(actor_ref)
@@ -121,7 +124,7 @@ func is_ready():
 func is_attached():
 	return branches_ready
 
-func activate(start_state="20"):
+func activate(start_state=init_at):
 	if( is_active() == true ):
 		print("Quest ", Q_ID, " is already active.")
 		return
@@ -155,6 +158,13 @@ func set_current_state(state):
 		log_base.update_journal(_log)
 		
 	emit_signal("state_changed", Q_ID, prev_state, state)
+	
+	#yield(self, "state_changed")
+	
+	if( state == end_at ):
+		print("Complete!")
+		MUI.flash_popup()
+		complete(end_at)
 
 
 func get_current_state():
@@ -162,8 +172,6 @@ func get_current_state():
 
 
 func complete(end_at="100"):
-	set_current_state(end_at)
-	yield(self, "state_changed")
 	deactivate()
 	add_to_group("completed_quests")
 	is_complete = true
@@ -203,6 +211,7 @@ func _setup():
 func _ready():
 	game = get_node("/root/game")
 	log_base = get_node("/root/scene/journal_ui")
+	MUI = get_node("/root/scene/message-ui")
 	quest_root = get_parent()
 	_setup()
 	activate()

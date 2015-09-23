@@ -56,6 +56,16 @@ func exit_game():
 	pass
 
 
+func new_game(filename):
+	var data = {}
+	data["scene"] = "res://main.xml"
+	data["timestamp"] = OS.get_time()
+	
+	var dest = "res://savegames/" + filename + ".txt"
+	save_game(data, dest)
+	goto_scene(data["scene"], data)
+
+
 
 # fake_click(position, flags)
 # Simulate a click somewhere on the map - used by NPCs

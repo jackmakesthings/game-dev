@@ -55,19 +55,24 @@ func _on_save_pressed():
 	#print("saved player position as ", data.player_x, ", ", data.player_y, " to ", savepath);
 	
 func _on_save_menu_closed():
+	get_parent().get_parent().get_node("Node/Control").hide()
+	get_parent().get_parent().get_node("Node 2/Control").hide()
 	get_parent().get_parent().get_node("menu_window").raise()
 
 #### load
 func _on_load_pressed():
 
 	print("Pressed load button")
+	get_parent().get_parent().get_node("Node 2/Control/PopupPanel").popup()
+	get_parent().get_parent().get_node("Node 2").raise()
+	get_parent().get_parent().get_node("Node 2/Control").show()
 	#print(get_tree().get_current_scene().get_filename())
 	#var loaded = utils.get_json(savepath)
 	#print("loaded data is", loaded)	
 #	var data = {}
 #	data["player_x"] = 300
 #	data["player_y"] = 500
-	utils.goto_scene("res://adjacent-scene.xml", {})
+	#utils.goto_scene("res://adjacent-scene.xml", {})
 	
 	
 #	
@@ -146,11 +151,13 @@ func _ready():
 	player = get_node("/root/scene").get("player")
 	
 	cancel_btn.hide()
-#	save_btn.connect("released", self, "_on_save_pressed")
-#	load_btn.connect("released", self, "_on_load_pressed")
+	save_btn.connect("pressed", self, "_on_save_pressed")
+	load_btn.connect("pressed", self, "_on_load_pressed")
 	quit_btn.connect("pressed", self, "_on_quit_pressed")
 #	reset_btn.connect("released", self, "_on_reset_pressed")
 #	cancel_btn.connect("released", self, "_cancel_quit")
 #	main_menu_btn.connect("released", self, "_on_mm_pressed")
+
+
 
 

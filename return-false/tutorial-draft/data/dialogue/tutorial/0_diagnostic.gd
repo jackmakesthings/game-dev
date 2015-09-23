@@ -1,6 +1,7 @@
 {
   "Q_ID": "0_diagnostic",
   "label": "Diagnostics",
+  "init_at": "0",
    "logs": {
      "20": {
        "title": "Diagnostics",
@@ -22,6 +23,11 @@
        "title": "Diagnostics: 80",
        "body": "Reached state 80",
        "summary": "Today the diagnostics quest was at 80."
+     },
+     "100": {
+        "title": "Diagnostics complete!",
+        "body": "Completed the diagnostic task.",
+        "summary": ""
      }
   },
   "branches": [
@@ -90,6 +96,40 @@
           "responses": [
             {
               "text": "<Leave>",
+              "dialog_action": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "actor": "engineer",
+      "states": {
+        "0": {
+          "dialogue": "I need you to fix that terminal. Start by running a diagnostic on it.",
+          "responses": [
+          {
+            "text": "<NEW TASK: Diagnose and repair terminal.>",
+            "new_state": "20",
+            "dialog_action": 0
+            }
+          ]
+        },
+        "20": {
+          "dialogue": "The terminal has built-in diagnostics; run those to find out what's wrong.",
+          "responses": [
+            {
+              "text": "<Leave>",
+              "dialog_action": 0
+            }
+          ]
+        },
+        "80": {
+          "dialogue": "You've fixed it? Good work.",
+          "responses": [
+            {
+              "text": "<Mark task completed>",
+              "new_state": "100",
               "dialog_action": 0
             }
           ]

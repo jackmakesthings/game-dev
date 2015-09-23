@@ -41,6 +41,8 @@ var M
 
 ######## make_dialogue #########
 func make_dialogue(dlg_text):
+	if( dlg_text == null ):
+		return
 	var output = ""
 	if( typeof(dlg_text) == 21 ):
 		for i in range(dlg_text.size()):
@@ -132,6 +134,19 @@ func close():
 	dialog_box.hide()
 	is_active = false;
 	emit_signal("dialogue_closed")
+
+
+
+func flash_popup():
+	get_node("popup").show_modal(false)
+	var t = Timer.new()
+	t.set_wait_time(2)
+	t.set_one_shot(true)
+	add_child(t)
+	t.start()
+	yield(t, "timeout")
+	get_node("popup").hide()
+
 
 
 ######## path setup ##########

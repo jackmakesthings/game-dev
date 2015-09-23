@@ -16,17 +16,23 @@ var actor
 
 # return all data for a given state
 func _at_state(state):
-	var state_obj = states[state]
+	var state_obj = null
+	if( states.has(state) ):
+		state_obj = states[state]
 	return state_obj
 
 # return just the dialogue
 func text_at_state(state):
+	if _at_state(state) == null:
+		return null
 	if _at_state(state).has("dialogue"):
 		return _at_state(state)["dialogue"]
 	return null
 
 # return just the response options
 func responses_at_state(state):
+	if _at_state(state) == null:
+		return null
 	if _at_state(state).has("responses"):
 		return _at_state(state)["responses"]
 
@@ -144,3 +150,4 @@ func _ready():
 	game_root = get_node("/root")
 	scene_root = game_root.get_node("scene")
 	MUI = scene_root.get_node("message-ui")
+	
