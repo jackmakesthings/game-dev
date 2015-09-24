@@ -6,7 +6,7 @@ extends Node2D
 
 # instance-specific vars
 export var id = 001
-var label = "Terminal"
+export(String) var label
 export(Texture) var portrait
 
 # npc_type: Is this a person, an object, 

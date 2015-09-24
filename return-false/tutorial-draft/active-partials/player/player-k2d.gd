@@ -3,6 +3,7 @@
 ### walks to point of click
 ### includes rudimentary sprite flipping and camera follow, now working!
 ### 8/17/15
+# TODO: should the player maybe just be an instance of this?
 
 extends KinematicBody2D
 

@@ -1,8 +1,12 @@
-extends VBoxContainer
+# buttons.gd - current manager for the in-game main menu
+# TODO: better name, possibly better location
 
+extends Node
 
+const RED = Color("#ec1300")
+const SAVEFILE_DIR = "res://savegames"
+const MAIN_MENU_SCENE = "res://assets/ui/main_menu_2.xscn"
 
-var savepath = "res://savegame.txt"
 var utils = preload("res://scripts/utils.gd")
 
 var player
@@ -14,26 +18,42 @@ var reset_btn
 var main_menu_btn
 
 var menu
+var menu_layer
+var default_menu
+var save_menu
+var load_menu
 
-###### savefiles
+###### menu management and stuff
 
+
+#### new_file(path)
+# just saves a blank file with the given destination filename
+# TODO: methods like this should be somewhere like utils.gd
+# it might actually be already, need to check
 func new_file(path):
 	utils.save_game({}, path)
 	print("Created new file at ", path)
-	
-	
-#### new
+
+
+
+#### reset function - will probably go away, but it's here for now,
+# in case it becomes useful during testing/building
 func _on_reset_pressed():
 	_cancel_quit()
 	var qs = get_node("/root/scene/quests").get_children()
 	for q in qs:
-		q.set_current_state("20")
-	pass
-	
+		q.set_current_state("0")
+
+
+
+
 #### save
+# the actual save actions are managed by the submenu;
+# this function just triggers that submenu to appear
 func _on_save_pressed():
 	
-	
+	# TODO: this should probably be located somewhere central
+	# like utils.gd, as a generic savedata-assembling function
 	var data = {}
 	data["scene"] = get_tree().get_current_scene().get_filename()
 	data["player_x"] = player.get_pos().x
@@ -42,122 +62,133 @@ func _on_save_pressed():
 	data["date"] = OS.get_date()
 	data["quest_states"] = get_node("/root/game")["quest_states"]
 	
-	#utils.save_game(data, savepath)
+	# show the submenu
+	save_menu.raise()
+	save_menu.get_node("Control").show()
+	save_menu.get_node("Control/PopupPanel").popup()
 	
-	get_parent().get_parent().get_node("Node/Control/PopupPanel").popup()
-	get_parent().get_parent().get_node("Node").raise()
-	get_parent().get_parent().get_node("Node").set("data", data)
-	get_parent().get_parent().get_node("Node/Control").show()
+	# re-cache our list of saved files
+	save_menu.show_file_list()
 	
-	#print(data)
+	# attach the data object to the submenu for later retrieval
+	save_menu.set("data", data)
 	
+	# reset the quit button to its initial state, if needed
 	_cancel_quit()
-	#print("saved player position as ", data.player_x, ", ", data.player_y, " to ", savepath);
-	
-func _on_save_menu_closed():
-	get_parent().get_parent().get_node("Node/Control").hide()
-	get_parent().get_parent().get_node("Node 2/Control").hide()
-	get_parent().get_parent().get_node("menu_window").raise()
+
+
+
 
 #### load
+# works very similarly to save - the load submenu does all the work
+# this function just displays that submenu
 func _on_load_pressed():
-
-	print("Pressed load button")
-	get_parent().get_parent().get_node("Node 2/Control/PopupPanel").popup()
-	get_parent().get_parent().get_node("Node 2").raise()
-	get_parent().get_parent().get_node("Node 2/Control").show()
-	#print(get_tree().get_current_scene().get_filename())
-	#var loaded = utils.get_json(savepath)
-	#print("loaded data is", loaded)	
-#	var data = {}
-#	data["player_x"] = 300
-#	data["player_y"] = 500
-	#utils.goto_scene("res://adjacent-scene.xml", {})
 	
+	# show the submenu
+	#print("Pressed load button")   # uncomment if debugging
+	load_menu.raise()
+	load_menu.get_node("Control").show()
+	load_menu.get_node("Control/PopupPanel").popup()
 	
-#	
-#	if( loaded.has("player_x") and loaded.has("player_y")):
-#		player.set_pos(Vector2(loaded["player_x"], loaded["player_y"]))
-#	
-#	if( loaded.has("quest_states") ):
-#		for q in loaded["quest_states"]:
-#			print("savefile has quest ", q, " at state ", loaded["quest_states"][q])
-#			get_node("/root/game").update_quest(q, loaded["quest_states"][q])
-#	
-#	print("Loaded!")
-#	menu.hide_menu()
-#	_cancel_quit()
+	# re-cache our list of saved files
+	load_menu.show_file_list()
 	
-	#print(loaded_data)
+	# reset the quit button to its initial state, if needed
+	_cancel_quit()
 
 
-#### back to main menu
+
+#### _on_sub_menu_closed	
+# this gets called when either of the submenu popups is hidden
+# it may seem redundant, and maybe it can be fixed up later,
+# but both the popups and their parent controls need to be hidden
+# or they block interactions aimed at the other controls	
+# TODO: don't the submenus have close functions? tie into that?
+func _on_sub_menu_closed():
+	load_menu.get_node("Control").hide()
+	save_menu.get_node("Control").hide()
+	default_menu.raise()
+
+
+
+#### go to main menu
 func _on_mm_pressed():
-	print("Back to menu")
-	#menu.hide_menu()
-	utils.goto_scene("res://sandbox/main-menu.xscn", {})
+	utils.goto_scene(MAIN_MENU_SCENE, {})
+
 
 #### quit
-func _on_quit_pressed():
-	var red = Color("#ec1300")
 
-	quit_btn.set_text("confirm")
-	#quit_btn.set("custom_colors/font_color", red)
-	quit_btn.set("custom_colors/font_color_hover", red)
+# this is called the first time you click quit
+# it changes the 'quit' button to a 'confirm' button
+# and shows a 'cancel' one in place of the one below it
+func _on_quit_pressed():
 	
+	# change the look and text of the button
+	quit_btn.set("text", "confirm")
+	quit_btn.set("custom_colors/font_color_hover", RED)
+	
+	# also change what it does when clicked
 	quit_btn.disconnect("pressed", self, "_on_quit_pressed")
 	quit_btn.connect("pressed", self, "_quit_game")
 	
+	# visually replace 'main menu' with 'cancel'
 	main_menu_btn.hide()
 	cancel_btn.show()
 
 
+
+# this gets called if you have hit quit once
+# and then click anything other than 'confirm'
+# it resets the quit button to its original state
 func _cancel_quit():
 
+	# put the main menu button back where it was, hide cancel button
 	cancel_btn.hide()
 	main_menu_btn.show()
 	
-	#quit_btn.set("custom_colors/font_color", null)
+	# set the quit button back to its old text and appearance
 	quit_btn.set("custom_colors/font_color_hover", null)
-	
-	quit_btn.set_text("quit")
-	
+	quit_btn.set("text", "quit")
+	# and hook it back up to its original functions
 	quit_btn.disconnect("pressed", self, "_quit_game")
 	quit_btn.connect("pressed", self, "_on_quit_pressed")
 	
-
-
-
+	
+# however, if you hit 'confirm', this gets called
+# and the game really does quit.
 func _quit_game():
-	print("bye")
+	print("Bye!")
 	get_tree().quit()
-#####
 
 
+# make utils available ASAP
 func _enter_tree():
 	utils = get_node("/root/utils")
 
 
 func _ready():
+	# cache nodes and paths
 	
-	quit_btn = get_node("quit")
-	save_btn = get_node("save")
-	load_btn = get_node("load")
-	reset_btn = get_node("start over")
-	cancel_btn = get_node("cancel")
+	# buttons
+	quit_btn      = get_node("quit")
+	save_btn      = get_node("save")
+	load_btn      = get_node("load")
+	reset_btn     = get_node("start over")
+	cancel_btn    = get_node("cancel")
 	main_menu_btn = get_node("main menu")
 	
-	menu = get_node("/root/scene/menu")
-	player = get_node("/root/scene").get("player")
+	# menus and submenus
+	menu          = get_node("/root/scene/menu")
+	menu_layer    = menu.get_child(0)
+	default_menu  = menu_layer.get_node("menu_window")
+	save_menu     = menu_layer.get_node("submenu_save")
+	load_menu     = menu_layer.get_node("submenu_load")
 	
-	cancel_btn.hide()
+	# other nodes
+	player        = get_node("/root/scene").get("player")
+	
+	# hook up signals where needed
+	# todo - either connect all via scene or all via code
 	save_btn.connect("pressed", self, "_on_save_pressed")
 	load_btn.connect("pressed", self, "_on_load_pressed")
 	quit_btn.connect("pressed", self, "_on_quit_pressed")
-#	reset_btn.connect("released", self, "_on_reset_pressed")
-#	cancel_btn.connect("released", self, "_cancel_quit")
-#	main_menu_btn.connect("released", self, "_on_mm_pressed")
-
-
-
-

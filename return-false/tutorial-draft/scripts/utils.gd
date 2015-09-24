@@ -1,18 +1,26 @@
 # utils & helpers
-
+# used as an autoload at /root/utils
 extends Node
 
+# TODO: is this still being used?
 export(String, FILE) var file = "res://assets/dialogue-tree-json.txt"
+
+# not currently in use here, but implemented elsewhere, 
+# should probably be here though
+const SAVEFILE_DIR = "res://savegames"
+
 
 var debug = true
 var current_scene
+
+
 
 func _ready():
 	var root = get_tree().get_root()
 	current_scene = root.get_child( root.get_child_count() -1 )
 
 
-# get_json(file)
+###### get_json(file)
 # Load and parse data from a json file (by path)
 func get_json(file):
 	var json = File.new()
@@ -27,30 +35,39 @@ func get_json(file):
 		return d
 
 
+
+####### save_game(data, dest)
+# data = object containing data to save to file
+# dest = file path (should be like res://savegames/file.txt)
 func save_game(data, dest):
 	if( data == null ):
 		return false
 	if not (dest.begins_with('res://') or dest.begins_with('user://')):
 		return false
 	
-	
 	var filex = File.new()
 	var error
 	
 	error = filex.open(dest, File.WRITE)
-	#now write
+
 	if (filex.is_open()):
-		for key in data:
-			filex.store_string(data.to_json())
+		#for key in data:
+		filex.store_string(data.to_json())
 			
 		filex.close()
 		return true
 	else:
 		return error
-	
 
-func load_game(src):
-	pass
+
+
+###### load_game(path)
+# pass in the path to a savefile, this will load and instantiate it
+# (path should be something like "res://savegames/savefile.txt")
+func load_game(path):
+	var data = get_json(path)
+	goto_scene(path, data)
+
 
 func exit_game():
 	pass
@@ -62,6 +79,7 @@ func new_game(filename):
 	data["timestamp"] = OS.get_time()
 	
 	var dest = "res://savegames/" + filename + ".txt"
+	# TODO: should have a file.exists? check here
 	save_game(data, dest)
 	goto_scene(data["scene"], data)
 
@@ -112,6 +130,7 @@ static func angle_to_compass(angle):
 func goto_scene(path, data):
 	var current_scene = get_tree().get_current_scene()
 	call_deferred("def_goto_scene",path, data)
+
 
 func def_goto_scene(path, loaded):   
 	current_scene.free()
