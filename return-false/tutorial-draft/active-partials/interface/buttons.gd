@@ -10,6 +10,7 @@ const MAIN_MENU_SCENE = "res://assets/ui/main_menu_2.xscn"
 var utils = preload("res://scripts/utils.gd")
 
 var player
+
 var quit_btn
 var cancel_btn
 var load_btn
@@ -26,15 +27,6 @@ var load_menu
 ###### menu management and stuff
 
 
-#### new_file(path)
-# just saves a blank file with the given destination filename
-# TODO: methods like this should be somewhere like utils.gd
-# it might actually be already, need to check
-func new_file(path):
-	utils.save_game({}, path)
-	print("Created new file at ", path)
-
-
 
 #### reset function - will probably go away, but it's here for now,
 # in case it becomes useful during testing/building
@@ -43,7 +35,6 @@ func _on_reset_pressed():
 	var qs = get_node("/root/scene/quests").get_children()
 	for q in qs:
 		q.set_current_state("0")
-
 
 
 
@@ -63,19 +54,13 @@ func _on_save_pressed():
 	data["quest_states"] = get_node("/root/game")["quest_states"]
 	
 	# show the submenu
-	save_menu.raise()
-	save_menu.get_node("Control").show()
-	save_menu.get_node("Control/PopupPanel").popup()
-	
+	save_menu.open()
 	# re-cache our list of saved files
 	save_menu.show_file_list()
-	
 	# attach the data object to the submenu for later retrieval
 	save_menu.set("data", data)
-	
 	# reset the quit button to its initial state, if needed
 	_cancel_quit()
-
 
 
 
@@ -83,16 +68,10 @@ func _on_save_pressed():
 # works very similarly to save - the load submenu does all the work
 # this function just displays that submenu
 func _on_load_pressed():
-	
 	# show the submenu
-	#print("Pressed load button")   # uncomment if debugging
-	load_menu.raise()
-	load_menu.get_node("Control").show()
-	load_menu.get_node("Control/PopupPanel").popup()
-	
+	load_menu.open()
 	# re-cache our list of saved files
 	load_menu.show_file_list()
-	
 	# reset the quit button to its initial state, if needed
 	_cancel_quit()
 
@@ -102,11 +81,10 @@ func _on_load_pressed():
 # this gets called when either of the submenu popups is hidden
 # it may seem redundant, and maybe it can be fixed up later,
 # but both the popups and their parent controls need to be hidden
-# or they block interactions aimed at the other controls	
-# TODO: don't the submenus have close functions? tie into that?
+# or they block interactions aimed at the other controls
 func _on_sub_menu_closed():
-	load_menu.get_node("Control").hide()
-	save_menu.get_node("Control").hide()
+	load_menu.close()
+	save_menu.close()
 	default_menu.raise()
 
 
@@ -116,8 +94,8 @@ func _on_mm_pressed():
 	utils.goto_scene(MAIN_MENU_SCENE, {})
 
 
-#### quit
 
+#### quit
 # this is called the first time you click quit
 # it changes the 'quit' button to a 'confirm' button
 # and shows a 'cancel' one in place of the one below it
@@ -129,7 +107,7 @@ func _on_quit_pressed():
 	
 	# also change what it does when clicked
 	quit_btn.disconnect("pressed", self, "_on_quit_pressed")
-	quit_btn.connect("pressed", self, "_quit_game")
+	quit_btn.connect("pressed", utils, "quit_game")
 	
 	# visually replace 'main menu' with 'cancel'
 	main_menu_btn.hide()
@@ -140,30 +118,25 @@ func _on_quit_pressed():
 # this gets called if you have hit quit once
 # and then click anything other than 'confirm'
 # it resets the quit button to its original state
+# (if you click 'confirm', utils.quit_game() is called instead)
 func _cancel_quit():
-
+	
 	# put the main menu button back where it was, hide cancel button
 	cancel_btn.hide()
 	main_menu_btn.show()
-	
 	# set the quit button back to its old text and appearance
 	quit_btn.set("custom_colors/font_color_hover", null)
 	quit_btn.set("text", "quit")
 	# and hook it back up to its original functions
-	quit_btn.disconnect("pressed", self, "_quit_game")
+	quit_btn.disconnect("pressed", utils, "quit_game")
 	quit_btn.connect("pressed", self, "_on_quit_pressed")
-	
-	
-# however, if you hit 'confirm', this gets called
-# and the game really does quit.
-func _quit_game():
-	print("Bye!")
-	get_tree().quit()
+
 
 
 # make utils available ASAP
 func _enter_tree():
 	utils = get_node("/root/utils")
+
 
 
 func _ready():

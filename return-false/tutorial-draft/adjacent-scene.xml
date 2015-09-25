@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resource_file type="PackedScene" subresource_count="30" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
+	<ext_resource path="res://active-partials/interface/in-game-menu.xscn" type="PackedScene" index="12"></ext_resource>
 	<ext_resource path="res://main.gd" type="Script" index="0"></ext_resource>
 	<ext_resource path="res://active-partials/player/player-k2d.gd" type="Script" index="8"></ext_resource>
 	<ext_resource path="res://active-partials/interface/interface.gd" type="Script" index="13"></ext_resource>
@@ -17,7 +18,6 @@
 	<ext_resource path="res://scripts/message-ui.gd" type="Script" index="1"></ext_resource>
 	<ext_resource path="res://assets/fpo/portrait-dude-mohawk.png" type="Texture" index="4"></ext_resource>
 	<ext_resource path="res://assets/ui.xthm" type="Theme" index="2"></ext_resource>
-	<ext_resource path="res://active-partials/interface/in-game-menu.xscn" type="PackedScene" index="12"></ext_resource>
 	<resource type="StyleBoxEmpty" path="local://41">
 		<real name="content_margin/left"> -1 </real>
 		<real name="content_margin/right"> -1 </real>

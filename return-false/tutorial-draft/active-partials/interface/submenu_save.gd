@@ -40,10 +40,19 @@ func _ready():
 
 
 
-# fn() - simple string transformer
-# builds a path/filename string from arbitrary text
-func fn(text):
-	return "" + SAVEFILE_DIR + "/" + text + ".txt"
+###### open and close actions
+# TODO: see if we can cut out some of these steps/nodes
+func open():
+	raise()
+	get_node("Control").show()
+	panel.popup()
+
+
+
+func close():
+	get_node("Control").hide()
+	panel.hide()
+	get_parent().get_node("menu_window").raise()
 
 
 
@@ -104,7 +113,7 @@ func _on_btn_pressed():
 	# if our filename field is filled out, we can proceed
 	if( field != null and field != "" ):
 		
-		dest = fn(field)
+		dest = utils.fn(field)
 		# make sure we have all the latest files in our cache
 		show_file_list()
 		
@@ -139,7 +148,7 @@ func _on_save_confirmed(dest):
 	# at this point, we should have a data object set on this node
 	# (currently buttons.gd does this)
 	# which we now access and save to our chosen file path
-	utils.save_game(data, fn(dest))
+	utils.save_game(data, utils.fn(dest))
 	
 	#print("Saved to ", dest)   # for debugging
 	
