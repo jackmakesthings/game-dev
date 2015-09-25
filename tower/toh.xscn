@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resource_file type="PackedScene" subresource_count="19" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
+	<ext_resource path="res://joystix-caps-16.fnt" type="Font" index="2"></ext_resource>
+	<ext_resource path="res://red-alert-inet-19.fnt" type="Font" index="1"></ext_resource>
+	<ext_resource path="res://toh.gd" type="Script" index="0"></ext_resource>
+	<resource type="StyleBoxFlat" path="local://1">
+		<real name="content_margin/left"> 20 </real>
+		<real name="content_margin/right"> 20 </real>
+		<real name="content_margin/top"> 20 </real>
+		<real name="content_margin/bottom"> 20 </real>
+		<color name="bg_color"> 0.172549, 0.768627, 0.796078, 1 </color>
+		<color name="light_color"> 0.8, 0.8, 0.8, 1 </color>
+		<color name="dark_color"> 0.8, 0.8, 0.8, 1 </color>
+		<int name="border_size"> 0 </int>
+		<bool name="border_blend"> True </bool>
+		<bool name="draw_bg"> True </bool>
+
+	</resource>
+	<resource type="GDScript" path="local://10">
+		<string name="script/source"> "&#000a;extends Panel&#000a;&#000a;# member variables here, example:&#000a;# var a=2&#000a;# var b=&quot;textvar&quot;&#000a;&#000a;func _ready():&#000a;&#0009;# Initialization here&#000a;&#0009;pass&#000a;&#000a;func un_deny_siblings():&#000a;&#0009;if( get_name() == &quot;stack_1&quot;):&#000a;&#0009;&#0009;get_parent().get_node(&quot;stack_2/peg 2&quot;).un_deny()&#000a;&#0009;&#0009;get_parent().get_node(&quot;stack_3/peg 3&quot;).un_deny()&#000a;&#0009;elif( get_name() == &quot;stack_2&quot;):&#000a;&#0009;&#0009;get_parent().get_node(&quot;stack_1/peg 1&quot;).un_deny()&#000a;&#0009;&#0009;get_parent().get_node(&quot;stack_3/peg 3&quot;).un_deny()&#000a;&#0009;else:&#000a;&#0009;&#0009;get_parent().get_node(&quot;stack_1/peg 1&quot;).un_deny()&#000a;&#0009;&#0009;get_parent().get_node(&quot;stack_2/peg 2&quot;).un_deny()" </string>
+
+	</resource>
+	<resource type="GDScript" path="local://21">
+		<string name="script/source"> "extends &quot;res://toh_peg.gd&quot;" </string>
+
+	</resource>
+	<resource type="StyleBoxFlat" path="local://11">
+		<real name="content_margin/left"> 2 </real>
+		<real name="content_margin/right"> 2 </real>
+		<real name="content_margin/top"> 2 </real>
+		<real name="content_margin/bottom"> 2 </real>
+		<color name="bg_color"> 1, 1, 1, 1 </color>
+		<color name="light_color"> 0.8, 0.8, 0.8, 1 </color>
+		<color name="dark_color"> 0.8, 0.8, 0.8, 1 </color>
+		<int name="border_size"> 0 </int>
+		<bool name="border_blend"> False </bool>
+		<bool name="draw_bg"> False </bool>
+
+	</resource>
+	<resource type="StyleBoxFlat" path="local://19">
+		<real name="content_margin/left"> 2 </real>
+		<real name="content_margin/right"> 2 </real>
+		<real name="content_margin/top"> 2 </real>
+		<real name="content_margin/bottom"> 2 </real>
+		<color name="bg_color"> 1, 1, 1, 1 </color>
+		<color name="light_color"> 0.8, 0.8, 0.8, 1 </color>
+		<color name="dark_color"> 0.8, 0.8, 0.8, 1 </color>
+		<int name="border_size"> 0 </int>
+		<bool name="border_blend"> False </bool>
+		<bool name="draw_bg"> False </bool>
+
+	</resource>
+	<resource type="GDScript" path="local://12">
+		<string name="script/source"> "extends &quot;res://draggable_toh_button.gd&quot;&#000a;&#000a;func _init():&#000a;&#0009;disc_id = 5" </string>
+
+	</resource>
+	<resource type="GDScript" path="local://13">
+		<string name="script/source"> "extends &quot;res://draggable_toh_button.gd&quot;&#000a;&#000a;func _init():&#000a;&#0009;disc_id = 4" </string>
+
+	</resource>
+	<resource type="GDScript" path="local://17">
+		<string name="script/source"> "extends &quot;res://draggable_toh_button.gd&quot;&#000a;&#000a;func _init():&#000a;&#0009;disc_id = 3" </string>
+
+	</resource>
+	<resource type="GDScript" path="local://15">
+		<string name="script/source"> "extends &quot;res://draggable_toh_button.gd&quot;&#000a;&#000a;func _init():&#000a;&#0009;disc_id = 2" </string>
+
+	</resource>
+	<resource type="GDScript" path="local://16">
+		<string name="script/source"> "extends &quot;res://draggable_toh_button.gd&quot;&#000a;&#000a;func _init():&#000a;&#0009;disc_id = 1" </string>
+
+	</resource>
+	<resource type="StyleBoxFlat" path="local://2">
+		<real name="content_margin/left"> 20 </real>
+		<real name="content_margin/right"> 20 </real>
+		<real name="content_margin/top"> 20 </real>
+		<real name="content_margin/bottom"> 20 </real>
+		<color name="bg_color"> 0.0980392, 0.447059, 0.643137, 1 </color>
+		<color name="light_color"> 0.8, 0.8, 0.8, 1 </color>
+		<color name="dark_color"> 0.8, 0.8, 0.8, 1 </color>
+		<int name="border_size"> 0 </int>
+		<bool name="border_blend"> True </bool>
+		<bool name="draw_bg"> True </bool>
+
+	</resource>
+	<resource type="GDScript" path="local://22">
+		<string name="script/source"> "extends &quot;res://toh_peg.gd&quot;" </string>
+
+	</resource>
+	<resource type="StyleBoxFlat" path="local://3">
+		<real name="content_margin/left"> 20 </real>
+		<real name="content_margin/right"> 20 </real>
+		<real name="content_margin/top"> 20 </real>
+		<real name="content_margin/bottom"> 20 </real>
+		<color name="bg_color"> 0.180392, 0.227451, 0.529412, 1 </color>
+		<color name="light_color"> 0.8, 0.8, 0.8, 1 </color>
+		<color name="dark_color"> 0.8, 0.8, 0.8, 1 </color>
+		<int name="border_size"> 0 </int>
+		<bool name="border_blend"> True </bool>
+		<bool name="draw_bg"> True </bool>
+
+	</resource>
+	<resource type="GDScript" path="local://23">
+		<string name="script/source"> "extends &quot;res://toh_peg.gd&quot;" </string>
+
+	</resource>
+	<resource type="GDScript" path="local://20">
+		<string name="script/source"> "&#000a;extends PopupPanel&#000a;&#000a;# member variables here, example:&#000a;# var a=2&#000a;# var b=&quot;textvar&quot;&#000a;&#000a;func _ready():&#000a;&#0009;popup()&#000a;&#0009;&#000a;&#0009;var t = Timer.new()&#000a;&#0009;t.set_one_shot(true)&#000a;&#0009;t.set_wait_time(2)&#000a;&#0009;add_child(t)&#000a;&#0009;t.start()&#000a;&#0009;yield(t, &quot;timeout&quot;)&#000a;&#0009;hide()&#000a;&#0009;&#000a;&#0009;# Initialization here&#000a;&#0009;pass&#000a;&#000a;&#000a;" </string>
+
+	</resource>
+	<main_resource>
+		<dictionary name="_bundled" shared="false">
+			<string> "conn_count" </string>
+			<int> 7 </int>
+			<string> "conns" </string>
+			<int_array  len="42"> 				4, 4, 81, 80, 2, 0, 4, 5, 83, 82, 2, 0, 7, 7, 85, 84, 2, 0, 12, 4, 81, 80, 2, 0, 12, 5, 83, 82, 2, 0, 15, 4, 81, 80, 2, 0, 15, 16, 83, 82, 2, 0 </int_array>
+			<string> "names" </string>
+			<string_array  len="86">
+				<string> "Node2D" </string>
+				<string> "script/script" </string>
+				<string> "__meta__" </string>
+				<string> "move_count" </string>
+				<string> "wrong_piece_warned" </string>
+				<string> "wrong_stack_warned" </string>
+				<string> "wrong_piece_warning" </string>
+				<string> "wrong_stack_warning" </string>
+				<string> "Control" </string>
+				<string> "margin/right" </string>
+				<string> "margin/bottom" </string>
+				<string> "focus/ignore_mouse" </string>
+				<string> "focus/stop_mouse" </string>
+				<string> "size_flags/horizontal" </string>
+				<string> "size_flags/vertical" </string>
+				<string> "Panel" </string>
+				<string> "anchor/right" </string>
+				<string> "anchor/bottom" </string>
+				<string> "HBoxContainer" </string>
+				<string> "custom_constants/separation" </string>
+				<string> "stack_1" </string>
+				<string> "custom_styles/panelf" </string>
+				<string> "custom_styles/panel" </string>
+				<string> "custom_styles/panelnc" </string>
+				<string> "peg 1" </string>
+				<string> "VBoxContainer" </string>
+				<string> "margin/left" </string>
+				<string> "margin/top" </string>
+				<string> "HSeparator" </string>
+				<string> "visibility/opacity" </string>
+				<string> "visibility/behind_parent" </string>
+				<string> "ColorPickerButton" </string>
+				<string> "rect/min_size" </string>
+				<string> "custom_styles/hover" </string>
+				<string> "custom_styles/pressed" </string>
+				<string> "custom_styles/focus" </string>
+				<string> "custom_styles/disabled" </string>
+				<string> "custom_styles/normal" </string>
+				<string> "custom_fonts/font" </string>
+				<string> "disabled" </string>
+				<string> "toggle_mode" </string>
+				<string> "text" </string>
+				<string> "flat" </string>
+				<string> "color" </string>
+				<string> "edit_alpha" </string>
+				<string> "ColorPickerButton1" </string>
+				<string> "ColorPickerButton2" </string>
+				<string> "ColorPickerButton3" </string>
+				<string> "ColorPickerButton4" </string>
+				<string> "visibility/visible" </string>
+				<string> "custom_colors/font_color_disabled" </string>
+				<string> "custom_colors/font_color" </string>
+				<string> "custom_colors/font_color_hover" </string>
+				<string> "custom_colors/font_color_pressed" </string>
+				<string> "stack_2" </string>
+				<string> "peg 2" </string>
+				<string> "HSeparator1" </string>
+				<string> "stack_3" </string>
+				<string> "peg 3" </string>
+				<string> "HSeparator2" </string>
+				<string> "PopupPanel" </string>
+				<string> "popup/exclusive" </string>
+				<string> "Label" </string>
+				<string> "range/min" </string>
+				<string> "range/max" </string>
+				<string> "range/step" </string>
+				<string> "range/page" </string>
+				<string> "range/value" </string>
+				<string> "range/exp_edit" </string>
+				<string> "rounded_values" </string>
+				<string> "align" </string>
+				<string> "valign" </string>
+				<string> "percent_visible" </string>
+				<string> "cant_let_u_do_that_starfox" </string>
+				<string> "anchor/left" </string>
+				<string> "anchor/top" </string>
+				<string> "not_there_there" </string>
+				<string> "move_counter" </string>
+				<string> "instructions" </string>
+				<string> "Label1" </string>
+				<string> "un_deny_siblings" </string>
+				<string> "mouse_enter" </string>
+				<string> "_on_mouse_exit" </string>
+				<string> "mouse_exit" </string>
+				<string> "_on_ColorPickerButton_toggled" </string>
+				<string> "toggled" </string>
+			</string_array>
+			<string> "node_count" </string>
+			<int> 29 </int>
+			<string> "nodes" </string>
+			<int_array  len="993"> 				-1, -1, 0, 0, -1, 7, 1, 0, 2, 1, 3, 2, 4, 2, 5, 2, 6, 3, 7, 4, 0, 0, 0, 8, 8, -1, 6, 9, 5, 10, 6, 11, 7, 12, 8, 13, 9, 14, 9, 0, 1, 0, 15, 15, -1, 6, 16, 10, 17, 10, 11, 7, 12, 8, 13, 9, 14, 9, 0, 2, 0, 18, 18, -1, 7, 9, 5, 10, 6, 11, 7, 12, 7, 13, 9, 14, 9, 19, 11, 0, 3, 0, 15, 20, -1, 10, 9, 12, 10, 6, 11, 7, 12, 8, 13, 11, 14, 11, 21, 13, 22, 13, 23, 13, 1, 14, 0, 4, 0, 25, 24, -1, 12, 16, 10, 17, 10, 26, 15, 27, 16, 9, 15, 10, 17, 11, 7, 12, 7, 13, 9, 14, 11, 19, 10, 1, 18, 0, 5, 0, 28, 28, -1, 8, 29, 19, 30, 8, 9, 20, 10, 21, 11, 8, 12, 7, 13, 9, 14, 11, 0, 5, 0, 31, 31, -1, 22, 26, 22, 27, 23, 9, 24, 10, 25, 32, 26, 11, 7, 12, 7, 13, 10, 14, 9, 33, 27, 34, 27, 35, 27, 36, 27, 37, 28, 38, 29, 39, 8, 40, 7, 41, 30, 42, 7, 43, 31, 44, 8, 1, 32, 0, 5, 0, 31, 45, -1, 22, 26, 33, 27, 34, 9, 35, 10, 36, 32, 37, 11, 7, 12, 7, 13, 10, 14, 9, 33, 27, 34, 27, 35, 27, 36, 27, 37, 27, 38, 29, 39, 8, 40, 7, 41, 38, 42, 7, 43, 39, 44, 8, 1, 40, 0, 5, 0, 31, 46, -1, 22, 26, 41, 27, 42, 9, 43, 10, 44, 32, 45, 11, 7, 12, 7, 13, 10, 14, 9, 33, 27, 34, 27, 35, 27, 36, 27, 37, 27, 38, 29, 39, 8, 40, 7, 41, 46, 42, 7, 43, 47, 44, 8, 1, 48, 0, 5, 0, 31, 47, -1, 21, 26, 49, 27, 50, 9, 51, 10, 52, 32, 53, 11, 7, 12, 7, 13, 10, 14, 9, 33, 27, 34, 27, 35, 27, 36, 27, 37, 27, 39, 8, 40, 7, 41, 54, 42, 7, 43, 55, 44, 8, 1, 56, 0, 5, 0, 31, 48, -1, 26, 49, 7, 26, 57, 27, 58, 9, 59, 10, 60, 32, 61, 11, 7, 12, 7, 13, 10, 14, 10, 33, 27, 34, 27, 35, 27, 36, 27, 37, 27, 50, 62, 51, 63, 52, 63, 53, 63, 39, 8, 40, 7, 41, 64, 42, 7, 43, 65, 44, 8, 1, 66, 0, 3, 0, 15, 54, -1, 10, 26, 67, 9, 68, 10, 6, 11, 7, 12, 8, 13, 11, 14, 11, 21, 13, 22, 69, 23, 13, 0, 12, 0, 25, 55, -1, 11, 16, 10, 17, 10, 26, 15, 27, 70, 9, 15, 10, 70, 11, 7, 12, 7, 13, 9, 14, 11, 1, 71, 0, 13, 0, 28, 56, -1, 7, 29, 19, 9, 20, 10, 52, 11, 8, 12, 7, 13, 9, 14, 11, 0, 3, 0, 15, 57, -1, 8, 26, 72, 9, 5, 10, 6, 11, 7, 12, 8, 13, 11, 14, 11, 22, 73, 0, 15, 0, 25, 58, -1, 11, 16, 10, 17, 10, 26, 15, 27, 16, 9, 15, 10, 16, 11, 7, 12, 7, 13, 9, 14, 11, 1, 74, 0, 16, 0, 28, 59, -1, 7, 29, 19, 9, 20, 10, 75, 11, 8, 12, 7, 13, 9, 14, 11, 0, 2, 0, 60, 60, -1, 11, 49, 7, 26, 76, 27, 77, 9, 78, 10, 79, 11, 7, 12, 8, 13, 9, 14, 9, 61, 7, 2, 80, 0, 18, 0, 62, 62, -1, 17, 9, 81, 10, 82, 11, 8, 12, 8, 13, 9, 38, 83, 63, 19, 64, 84, 65, 84, 66, 84, 67, 19, 68, 7, 69, 7, 41, 85, 70, 10, 71, 10, 72, 86, 0, 2, 0, 60, 73, -1, 13, 74, 11, 75, 11, 16, 11, 17, 11, 26, 87, 27, 88, 9, 89, 10, 90, 11, 7, 12, 8, 13, 9, 14, 9, 61, 7, 0, 20, 0, 62, 62, -1, 17, 9, 91, 10, 92, 11, 8, 12, 8, 13, 9, 38, 83, 63, 19, 64, 84, 65, 84, 66, 84, 67, 19, 68, 7, 69, 7, 41, 93, 70, 10, 71, 10, 72, 86, 0, 2, 0, 60, 76, -1, 14, 49, 7, 74, 11, 75, 11, 16, 11, 17, 11, 26, 94, 27, 88, 9, 95, 10, 90, 11, 7, 12, 8, 13, 9, 14, 9, 61, 7, 0, 22, 0, 62, 62, -1, 17, 9, 96, 10, 92, 11, 8, 12, 8, 13, 9, 38, 83, 63, 19, 64, 84, 65, 84, 66, 84, 67, 19, 68, 7, 69, 7, 41, 97, 70, 10, 71, 10, 72, 86, 0, 1, 0, 62, 77, -1, 18, 74, 10, 16, 10, 26, 98, 9, 17, 10, 99, 11, 8, 12, 8, 13, 9, 38, 83, 63, 19, 64, 84, 65, 84, 66, 84, 67, 19, 68, 7, 69, 7, 41, 100, 72, 86, 0, 1, 0, 62, 78, -1, 20, 49, 7, 74, 10, 16, 10, 26, 101, 27, 17, 9, 102, 10, 103, 11, 8, 12, 8, 13, 9, 38, 83, 63, 19, 64, 84, 65, 84, 66, 84, 67, 19, 68, 7, 69, 7, 41, 104, 72, 86, 0, 0, 0, 60, 60, -1, 9, 49, 7, 9, 5, 10, 6, 11, 7, 12, 8, 13, 9, 14, 9, 61, 7, 1, 105, 0, 26, 0, 62, 62, -1, 18, 27, 106, 9, 5, 10, 81, 11, 8, 12, 8, 13, 9, 38, 83, 63, 19, 64, 84, 65, 84, 66, 84, 67, 19, 68, 7, 69, 7, 41, 107, 70, 10, 71, 10, 72, 86, 0, 26, 0, 62, 79, -1, 18, 27, 108, 9, 5, 10, 109, 11, 8, 12, 8, 13, 9, 38, 83, 63, 19, 64, 84, 65, 84, 66, 84, 67, 19, 68, 7, 69, 7, 41, 110, 70, 10, 71, 10, 72, 86, 0 </int_array>
+			<string> "variants" </string>
+			<array  len="111" shared="false">
+				<resource  external="0">  </resource>
+				<dictionary  shared="false">
+					<string> "__editor_plugin_screen__" </string>
+					<string> "Script" </string>
+					<string> "__editor_plugin_states__" </string>
+					<dictionary  shared="false">
+						<string> "2D" </string>
+						<dictionary  shared="false">
+							<string> "ofs" </string>
+							<vector2> -25.2629, -86.784 </vector2>
+							<string> "snap_grid" </string>
+							<bool> True </bool>
+							<string> "snap_offset" </string>
+							<vector2> 0, 0 </vector2>
+							<string> "snap_pixel" </string>
+							<bool> False </bool>
+							<string> "snap_relative" </string>
+							<bool> False </bool>
+							<string> "snap_rotation" </string>
+							<bool> True </bool>
+							<string> "snap_rotation_offset" </string>
+							<real> 0 </real>
+							<string> "snap_rotation_step" </string>
+							<real> 0.523599 </real>
+							<string> "snap_show_grid" </string>
+							<bool> False </bool>
+							<string> "snap_step" </string>
+							<vector2> 9, 9 </vector2>
+							<string> "zoom" </string>
+							<real> 0.814505 </real>
+						</dictionary>
+						<string> "3D" </string>
+						<dictionary  shared="false">
+							<string> "ambient_light_color" </string>
+							<color> 0.15, 0.15, 0.15, 1 </color>
+							<string> "default_light" </string>
+							<bool> True </bool>
+							<string> "default_srgb" </string>
+							<bool> False </bool>
+							<string> "deflight_rot_x" </string>
+							<real> 0.942478 </real>
+							<string> "deflight_rot_y" </string>
+							<real> 0.628319 </real>
+							<string> "fov" </string>
+							<real> 45 </real>
+							<string> "show_grid" </string>
+							<bool> True </bool>
+							<string> "show_origin" </string>
+							<bool> True </bool>
+							<string> "viewport_mode" </string>
+							<int> 1 </int>
+							<string> "viewports" </string>
+							<array  len="4" shared="false">
+								<dictionary  shared="false">
+									<string> "distance" </string>
+									<real> 4 </real>
+									<string> "listener" </string>
+									<bool> True </bool>
+									<string> "pos" </string>
+									<vector3> 0, 0, 0 </vector3>
+									<string> "use_environment" </string>
+									<bool> False </bool>
+									<string> "use_orthogonal" </string>
+									<bool> False </bool>
+									<string> "x_rot" </string>
+									<real> 0 </real>
+									<string> "y_rot" </string>
+									<real> 0 </real>
+								</dictionary>
+								<dictionary  shared="false">
+									<string> "distance" </string>
+									<real> 4 </real>
+									<string> "listener" </string>
+									<bool> False </bool>
+									<string> "pos" </string>
+									<vector3> 0, 0, 0 </vector3>
+									<string> "use_environment" </string>
+									<bool> False </bool>
+									<string> "use_orthogonal" </string>
+									<bool> False </bool>
+									<string> "x_rot" </string>
+									<real> 0 </real>
+									<string> "y_rot" </string>
+									<real> 0 </real>
+								</dictionary>
+								<dictionary  shared="false">
+									<string> "distance" </string>
+									<real> 4 </real>
+									<string> "listener" </string>
+									<bool> False </bool>
+									<string> "pos" </string>
+									<vector3> 0, 0, 0 </vector3>
+									<string> "use_environment" </string>
+									<bool> False </bool>
+									<string> "use_orthogonal" </string>
+									<bool> False </bool>
+									<string> "x_rot" </string>
+									<real> 0 </real>
+									<string> "y_rot" </string>
+									<real> 0 </real>
+								</dictionary>
+								<dictionary  shared="false">
+									<string> "distance" </string>
+									<real> 4 </real>
+									<string> "listener" </string>
+									<bool> False </bool>
+									<string> "pos" </string>
+									<vector3> 0, 0, 0 </vector3>
+									<string> "use_environment" </string>
+									<bool> False </bool>
+									<string> "use_orthogonal" </string>
+									<bool> False </bool>
+									<string> "x_rot" </string>
+									<real> 0 </real>
+									<string> "y_rot" </string>
+									<real> 0 </real>
+								</dictionary>
+							</array>
+							<string> "zfar" </string>
+							<real> 500 </real>
+							<string> "znear" </string>
+							<real> 0.1 </real>
+						</dictionary>
+						<string> "Anim" </string>
+						<dictionary  shared="false">
+							<string> "visible" </string>
+							<bool> False </bool>
+						</dictionary>
+					</dictionary>
+					<string> "__editor_run_settings__" </string>
+					<dictionary  shared="false">
+						<string> "custom_args" </string>
+						<string> "-l $scene" </string>
+						<string> "run_mode" </string>
+						<int> 0 </int>
+					</dictionary>
+				</dictionary>
+				<nil>  </nil>
+				<node_path> "Control/Panel/cant_let_u_do_that_starfox" </node_path>
+				<node_path> "Control/Panel/not_there_there" </node_path>
+				<real> 801 </real>
+				<real> 594 </real>
+				<bool> False </bool>
+				<bool> True </bool>
+				<int> 2 </int>
+				<int> 1 </int>
+				<int> 3 </int>
+				<real> 265 </real>
+				<resource  resource_type="StyleBox" path="local://1">  </resource>
+				<resource  resource_type="Script" path="local://10">  </resource>
+				<real> 20 </real>
+				<real> 27 </real>
+				<real> 9 </real>
+				<resource  resource_type="Script" path="local://21">  </resource>
+				<real> 0 </real>
+				<real> 225 </real>
+				<real> 394 </real>
+				<real> 62 </real>
+				<real> 395 </real>
+				<real> 162 </real>
+				<real> 435 </real>
+				<vector2> 100, 40 </vector2>
+				<resource  resource_type="StyleBox" path="local://11">  </resource>
+				<resource  resource_type="StyleBox" path="local://19">  </resource>
+				<resource  external="1">  </resource>
+				<string> "1" </string>
+				<color> 1, 0, 0, 1 </color>
+				<resource  resource_type="Script" path="local://12">  </resource>
+				<real> 52 </real>
+				<real> 436 </real>
+				<real> 172 </real>
+				<real> 476 </real>
+				<vector2> 120, 40 </vector2>
+				<string> "2" </string>
+				<color> 1, 0.472081, 0, 1 </color>
+				<resource  resource_type="Script" path="local://13">  </resource>
+				<real> 42 </real>
+				<real> 477 </real>
+				<real> 182 </real>
+				<real> 517 </real>
+				<vector2> 140, 40 </vector2>
+				<string> "3" </string>
+				<color> 1, 0.690355, 0, 1 </color>
+				<resource  resource_type="Script" path="local://17">  </resource>
+				<real> 32 </real>
+				<real> 518 </real>
+				<real> 192 </real>
+				<real> 558 </real>
+				<vector2> 160, 40 </vector2>
+				<string> "4" </string>
+				<color> 0.573604, 1, 0, 1 </color>
+				<resource  resource_type="Script" path="local://15">  </resource>
+				<real> 22 </real>
+				<real> 480 </real>
+				<real> 202 </real>
+				<real> 520 </real>
+				<vector2> 180, 40 </vector2>
+				<color> 1, 1, 1, 1 </color>
+				<color> 0, 0, 0, 1 </color>
+				<string> "5" </string>
+				<color> 0, 0.852792, 0.358586, 1 </color>
+				<resource  resource_type="Script" path="local://16">  </resource>
+				<real> 268 </real>
+				<real> 533 </real>
+				<resource  resource_type="StyleBox" path="local://2">  </resource>
+				<real> 18 </real>
+				<resource  resource_type="Script" path="local://22">  </resource>
+				<real> 536 </real>
+				<resource  resource_type="StyleBox" path="local://3">  </resource>
+				<resource  resource_type="Script" path="local://23">  </resource>
+				<real> 540 </real>
+				<real> 207 </real>
+				<real> 189 </real>
+				<real> 576 </real>
+				<real> 270 </real>
+				<dictionary  shared="false">
+					<string> "_editor_collapsed" </string>
+					<bool> True </bool>
+				</dictionary>
+				<real> 369 </real>
+				<real> 81 </real>
+				<resource  external="2">  </resource>
+				<real> 1 </real>
+				<string> "AW YEAH SON" </string>
+				<real> -1 </real>
+				<real> 283 </real>
+				<real> 75 </real>
+				<real> -329 </real>
+				<real> 30 </real>
+				<real> 612 </real>
+				<real> 45 </real>
+				<string> "only the top item in a stack can move." </string>
+				<real> 337 </real>
+				<real> -356 </real>
+				<real> 693 </real>
+				<string> "can&apos;t stack larger pieces on top of smaller ones" </string>
+				<real> 139 </real>
+				<real> 36 </real>
+				<string> "moves: 0" </string>
+				<real> 792 </real>
+				<real> 234 </real>
+				<real> 63 </real>
+				<string> "click/drag to move pieces over" </string>
+				<resource  resource_type="Script" path="local://20">  </resource>
+				<real> 279 </real>
+				<string> "hacking simulator 2015" </string>
+				<real> 342 </real>
+				<real> 432 </real>
+				<string> "jack made this" </string>
+			</array>
+			<string> "version" </string>
+			<int> 1 </int>
+		</dictionary>
+
+	</main_resource>
+</resource_file>
