@@ -1,0 +1,1 @@
+{"job":"Web dev", "age":27, "@path":"res://sandbox/class_Person.gd", "has_pets":true, "@subpath":"", "weight":140, "interests":["Code", "drugs", "puns", "fonts"], "city":"New York", "height":62, "name":"jack"}
