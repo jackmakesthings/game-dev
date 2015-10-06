@@ -44,8 +44,8 @@ var MUI
 
 # various boolean conditions this quest can be checked for
 var branches_ready = false
-var is_ready       = false
-var is_active      = false
+var is_ready       = false setget ,is_ready
+var is_active      = false setget ,is_active
 var is_complete    = false
 
 # event-based signals we can hook into later
@@ -78,6 +78,22 @@ func create_branches_from_data(data):
 		add_child(branch_node)
 		branch_node.add_to_group(branch_group)
 
+				
+func attach_branch(branch):
+	var actor_ref = branch.get("actor")
+	if not npc_root.has_node(actor_ref):
+		print("Error; no NPC found called ", actor_ref)
+		return
+	else:
+		var actor = npc_root.get_node(actor_ref)
+		branch.set("Q_ID", Q_ID)
+		branch.set_name(Q_ID)
+		branch.set("owned_by", self)
+		
+		actor.add_child(branch)
+		if ( actors.find(actor.get_name()) == -1 ):
+			actors.append(actor_ref)
+
 # this will generally come right after the function above
 # it takes the child branches of this quest node and moves them
 # so they're children of their associated NPCs instead
@@ -88,20 +104,7 @@ func attach_branches():
 		remove_child(branch)
 		# this is how we selectively ignore nodes that aren't branches
 		if branch.has_method("_at_state"):
-			var actor_ref = branch.get("actor")
-			
-			if not npc_root.has_node(actor_ref):
-				print("Error; no NPC found called ", actor_ref)
-				return
-			else:
-				var actor = npc_root.get_node(actor_ref)
-				branch.set("Q_ID", Q_ID)
-				branch.set_name(Q_ID)
-				branch.set("owned_by", self)
-				
-				actor.add_child(branch)
-				if ( actors.find(actor.get_name()) == -1 ):
-					actors.append(actor_ref)
+			attach_branch(branch)
 		else:
 			return
 			
@@ -109,10 +112,28 @@ func attach_branches():
 	emit_signal("branches_added", Q_ID, actors)
 
 
+# detaching branches will generally happen when a quest is done
+# and possibly even when a quest ceases to involve a given npc
+# this involves updating the npc associated with the branch.
+func detach_branch(branch):
+	var actor_ref = branch.get("actor")
+	if not npc_root.has_node(actor_ref):
+		print("Error; no NPC found called ", actor_ref)
+		return
+	else:
+		var actor = npc_root.get_node(actor_ref)
+		if( actor["dialog_branches"].find(Q_ID) ):
+			actor["dialog_branches"].remove(Q_ID)
+			actor["has_branches"] = (actor["dialog_branches"].size() > 0)
+	branch.queue_free()
+
+# detach all branches for a given quest
+# this is probably going to get used much more than detach_branch alone
+# and will be one of the typical callbacks of a quest upon completion
 func detach_branches():
 	var branch_nodes = get_tree().get_nodes_in_group(branch_group)
 	for branch in branch_nodes:
-		branch.queue_free()
+		detach_branch(branch)
 	emit_signal("branches_removed", Q_ID, actors)
 
 func is_active():

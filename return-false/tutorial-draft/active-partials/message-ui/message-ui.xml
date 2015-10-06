@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="9" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
-	<ext_resource path="res://scripts/message-ui.gd" type="Script"></ext_resource>
-	<ext_resource path="res://assets/fonts/imported/free-pixel-16.fnt" type="Font"></ext_resource>
-	<ext_resource path="res://assets/styleboxes/nobg-thin-border.sbx" type="StyleBox"></ext_resource>
-	<ext_resource path="res://assets/fpo/portrait-dude-mohawk.png" type="Texture"></ext_resource>
-	<ext_resource path="res://assets/fonts/imported/amiga-forever-12.fnt" type="Font"></ext_resource>
+<resource_file type="PackedScene" subresource_count="9" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
+	<ext_resource path="res://assets/styleboxes/nobg-thin-border.sbx" type="StyleBox" index="2"></ext_resource>
+	<ext_resource path="res://assets/fonts/imported/free-pixel-16.fnt" type="Font" index="1"></ext_resource>
+	<ext_resource path="res://scripts/message-ui.gd" type="Script" index="0"></ext_resource>
+	<ext_resource path="res://assets/fonts/imported/amiga-forever-12.fnt" type="Font" index="4"></ext_resource>
+	<ext_resource path="res://assets/fpo/portrait-dude-mohawk.png" type="Texture" index="3"></ext_resource>
 	<resource type="Theme" path="local://1">
-		<resource name="default_font" resource_type="Font" path="../../assets/fonts/imported/free-pixel-16.fnt">  </resource>
+		<resource name="default_font" external="1">  </resource>
 
 	</resource>
 	<resource type="StyleBoxEmpty" path="local://2">
@@ -36,7 +36,7 @@
 			<string> "conns" </string>
 			<int_array  len="0"> 				 </int_array>
 			<string> "names" </string>
-			<string_array  len="56">
+			<string_array  len="57">
 				<string> "message-ui" </string>
 				<string> "CanvasLayer" </string>
 				<string> "layer" </string>
@@ -47,7 +47,6 @@
 				<string> "__meta__" </string>
 				<string> "dialog-box" </string>
 				<string> "Control" </string>
-				<string> "visibility/visible" </string>
 				<string> "anchor/top" </string>
 				<string> "anchor/right" </string>
 				<string> "anchor/bottom" </string>
@@ -64,6 +63,7 @@
 				<string> "margin/bottom" </string>
 				<string> "HBoxContainer" </string>
 				<string> "custom_constants/separation" </string>
+				<string> "alignment" </string>
 				<string> "portraitBox" </string>
 				<string> "ReferenceFrame" </string>
 				<string> "custom_styles/border" </string>
@@ -78,6 +78,7 @@
 				<string> "size_flags/stretch_ratio" </string>
 				<string> "characterNameBox" </string>
 				<string> "Button" </string>
+				<string> "visibility/visible" </string>
 				<string> "custom_styles/disabled" </string>
 				<string> "custom_fonts/font" </string>
 				<string> "custom_colors/font_color_disabled" </string>
@@ -97,14 +98,14 @@
 			<string> "node_count" </string>
 			<int> 11 </int>
 			<string> "nodes" </string>
-			<int_array  len="309"> 				-1, -1, 1, 0, -1, 6, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 0, 0, 0, 9, 8, -1, 13, 10, 6, 11, 0, 12, 0, 13, 0, 14, 7, 15, 8, 16, 7, 17, 9, 18, 6, 19, 10, 20, 11, 21, 11, 22, 12, 0, 1, 0, 23, 23, -1, 10, 12, 0, 13, 0, 14, 7, 15, 13, 16, 7, 24, 14, 18, 6, 19, 10, 20, 11, 21, 11, 0, 2, 0, 25, 25, -1, 12, 12, 0, 13, 0, 14, 15, 15, 15, 16, 15, 24, 15, 17, 16, 18, 6, 19, 6, 20, 11, 21, 11, 26, 0, 0, 3, 0, 28, 27, -1, 8, 16, 17, 24, 18, 17, 19, 18, 6, 19, 10, 20, 11, 21, 11, 29, 20, 0, 4, 0, 31, 30, -1, 13, 32, 10, 33, 11, 12, 11, 14, 21, 15, 7, 16, 22, 24, 23, 18, 10, 19, 10, 20, 24, 21, 24, 34, 25, 35, 10, 0, 3, 0, 37, 36, -1, 10, 14, 26, 16, 27, 24, 18, 17, 28, 18, 6, 19, 10, 20, 11, 21, 11, 38, 29, 26, 30, 0, 6, 0, 40, 39, -1, 15, 10, 6, 16, 31, 24, 32, 18, 6, 19, 10, 20, 11, 21, 11, 41, 33, 42, 34, 43, 35, 44, 10, 45, 6, 46, 36, 47, 6, 48, 37, 0, 6, 0, 49, 49, -1, 8, 16, 31, 24, 38, 18, 6, 19, 10, 20, 11, 21, 11, 38, 39, 50, 40, 0, 8, 0, 51, 51, -1, 13, 14, 15, 15, 15, 16, 41, 24, 42, 18, 6, 19, 10, 20, 11, 21, 11, 38, 39, 52, 0, 53, 10, 54, 43, 55, 44, 0, 6, 0, 37, 37, -1, 8, 15, 45, 16, 31, 24, 18, 18, 6, 19, 6, 20, 11, 21, 11, 26, 30, 0 </int_array>
+			<int_array  len="313"> 				-1, -1, 1, 0, -1, 6, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 0, 0, 0, 9, 8, -1, 12, 10, 0, 11, 0, 12, 0, 13, 6, 14, 7, 15, 6, 16, 8, 17, 9, 18, 10, 19, 11, 20, 11, 21, 12, 0, 1, 0, 22, 22, -1, 10, 11, 0, 12, 0, 13, 6, 14, 13, 15, 6, 23, 14, 17, 9, 18, 10, 19, 11, 20, 11, 0, 2, 0, 24, 24, -1, 13, 11, 0, 12, 0, 13, 15, 14, 15, 15, 15, 23, 15, 16, 16, 17, 9, 18, 9, 19, 11, 20, 11, 25, 0, 26, 17, 0, 3, 0, 28, 27, -1, 8, 15, 18, 23, 19, 16, 20, 17, 9, 18, 10, 19, 11, 20, 11, 29, 21, 0, 4, 0, 31, 30, -1, 13, 32, 10, 33, 11, 11, 11, 13, 22, 14, 6, 15, 23, 23, 24, 17, 10, 18, 10, 19, 25, 20, 25, 34, 26, 35, 10, 0, 3, 0, 37, 36, -1, 11, 13, 27, 15, 28, 23, 19, 16, 29, 17, 9, 18, 10, 19, 11, 20, 11, 38, 30, 25, 31, 26, 17, 0, 6, 0, 40, 39, -1, 15, 41, 9, 15, 32, 23, 33, 17, 9, 18, 10, 19, 11, 20, 11, 42, 34, 43, 35, 44, 36, 45, 10, 46, 9, 47, 37, 48, 9, 49, 17, 0, 6, 0, 50, 50, -1, 8, 15, 32, 23, 38, 17, 9, 18, 10, 19, 11, 20, 11, 38, 39, 51, 40, 0, 8, 0, 52, 52, -1, 13, 13, 15, 14, 15, 15, 41, 23, 42, 17, 9, 18, 10, 19, 11, 20, 11, 38, 39, 53, 0, 54, 10, 55, 43, 56, 44, 0, 6, 0, 37, 37, -1, 9, 14, 45, 15, 32, 23, 19, 17, 9, 18, 9, 19, 11, 20, 11, 25, 31, 26, 17, 0 </int_array>
 			<string> "variants" </string>
 			<array  len="46" shared="false">
 				<int> 1 </int>
 				<vector2> 0, 0 </vector2>
 				<real> 0 </real>
 				<vector2> 1, 1 </vector2>
-				<resource  resource_type="Script" path="../../scripts/message-ui.gd">  </resource>
+				<resource  external="0">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
 					<string> "Script" </string>
@@ -113,7 +114,7 @@
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> -125.639, -155.686 </vector2>
+							<vector2> -184.024, -184.58 </vector2>
 							<string> "snap_grid" </string>
 							<bool> False </bool>
 							<string> "snap_offset" </string>
@@ -133,7 +134,7 @@
 							<string> "snap_step" </string>
 							<vector2> 10, 10 </vector2>
 							<string> "zoom" </string>
-							<real> 0.902499 </real>
+							<real> 0.66342 </real>
 						</dictionary>
 						<string> "3D" </string>
 						<dictionary  shared="false">
@@ -227,6 +228,11 @@
 							<string> "znear" </string>
 							<real> 0.1 </real>
 						</dictionary>
+						<string> "Anim" </string>
+						<dictionary  shared="false">
+							<string> "visible" </string>
+							<bool> False </bool>
+						</dictionary>
 					</dictionary>
 					<string> "__editor_run_settings__" </string>
 					<dictionary  shared="false">
@@ -236,10 +242,10 @@
 						<int> 0 </int>
 					</dictionary>
 				</dictionary>
-				<bool> False </bool>
 				<real> 20 </real>
 				<real> 236 </real>
 				<vector2> 0, 228 </vector2>
+				<bool> False </bool>
 				<bool> True </bool>
 				<int> 3 </int>
 				<resource  resource_type="Theme" path="local://1">  </resource>
@@ -247,15 +253,16 @@
 				<real> 28 </real>
 				<real> 10 </real>
 				<vector2> 160, 160 </vector2>
+				<int> 0 </int>
 				<real> 174 </real>
 				<real> 166 </real>
 				<vector2> 150, 150 </vector2>
-				<resource  resource_type="StyleBox" path="../../assets/styleboxes/nobg-thin-border.sbx">  </resource>
+				<resource  external="2">  </resource>
 				<real> 65 </real>
 				<real> -65 </real>
 				<real> 150 </real>
 				<int> 2 </int>
-				<resource  resource_type="Texture" path="../../assets/fpo/portrait-dude-mohawk.png">  </resource>
+				<resource  external="3">  </resource>
 				<real> 175 </real>
 				<real> 700 </real>
 				<vector2> 0, 160 </vector2>
@@ -264,10 +271,9 @@
 				<real> 525 </real>
 				<real> 42 </real>
 				<resource  resource_type="StyleBox" path="local://2">  </resource>
-				<resource  resource_type="Font" path="../../assets/fonts/imported/amiga-forever-12.fnt">  </resource>
+				<resource  external="4">  </resource>
 				<color> 1, 0.473427, 0.130869, 1 </color>
 				<string> "ENGINEER DANIELS:" </string>
-				<int> 0 </int>
 				<real> 112 </real>
 				<real> 2 </real>
 				<resource  resource_type="StyleBox" path="local://3">  </resource>

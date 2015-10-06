@@ -140,6 +140,14 @@ func fn(text):
 
 
 
+##### generic shorthand for timeouts
+
+func wait(time):
+	var t = Timer.new()
+	t.set_one_shot(true)
+	t.set_wait_time(time)
+	return t
+
 
 ###### goto_scene - a function in two parts
 # using call_deferred ensures we won't close a scene

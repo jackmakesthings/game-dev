@@ -81,6 +81,7 @@ func make_response(text, actions):
 	get_node(paths.rbox).add_child(new_button)
 	new_button.raise()
 	has_responses = true
+	return new_button
 
 ######## make_formatted_response ######### 
 func make_formatted_response(text, actions):
