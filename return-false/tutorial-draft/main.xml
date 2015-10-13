@@ -1,29 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="48" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
+<resource_file type="PackedScene" subresource_count="33" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
 	<ext_resource path="res://assets/styleboxes/nobg-thin-border.sbx" type="StyleBox" index="4"></ext_resource>
 	<ext_resource path="res://scripts/message-ui.gd" type="Script" index="1"></ext_resource>
 	<ext_resource path="res://assets/fonts/imported/amiga-forever-12.fnt" type="Font" index="6"></ext_resource>
 	<ext_resource path="res://assets/fpo/portrait-dude-mohawk.png" type="Texture" index="5"></ext_resource>
-	<ext_resource path="res://assets/fpo/computer_by_hydroksyde-smaller.png" type="Texture" index="9"></ext_resource>
-	<ext_resource path="res://assets/ui/code39 (1).tex" type="Texture" index="23"></ext_resource>
+	<ext_resource path="res://assets/ui/code39 (1).tex" type="Texture" index="16"></ext_resource>
 	<ext_resource path="res://main.gd" type="Script" index="0"></ext_resource>
-	<ext_resource path="res://active-partials/interface/interface.gd" type="Script" index="19"></ext_resource>
-	<ext_resource path="res://assets/tiles/iso-floors-walkable.xml" type="TileSet" index="8"></ext_resource>
-	<ext_resource path="res://active-partials/interface/buttons.gd" type="Script" index="17"></ext_resource>
-	<ext_resource path="res://active-partials/journal/base_journal.gd" type="Script" index="18"></ext_resource>
-	<ext_resource path="res://assets/ui/list31.tex" type="Texture" index="21"></ext_resource>
-	<ext_resource path="res://assets/tiles/green-outline-glow.png" type="Texture" index="13"></ext_resource>
+	<ext_resource path="res://active-partials/interface/interface.gd" type="Script" index="12"></ext_resource>
+	<ext_resource path="res://active-partials/interface/buttons.gd" type="Script" index="10"></ext_resource>
+	<ext_resource path="res://active-partials/journal/base_journal.gd" type="Script" index="11"></ext_resource>
+	<ext_resource path="res://assets/ui/list31.tex" type="Texture" index="14"></ext_resource>
 	<ext_resource path="res://assets/ui.xthm" type="Theme" index="3"></ext_resource>
-	<ext_resource path="res://assets/ui/code39 (2).tex" type="Texture" index="22"></ext_resource>
+	<ext_resource path="res://assets/ui/code39 (2).tex" type="Texture" index="15"></ext_resource>
 	<ext_resource path="res://assets/ui2.xthm" type="Theme" index="2"></ext_resource>
-	<ext_resource path="res://assets/fpo/tall-white-block.png" type="Texture" index="10"></ext_resource>
-	<ext_resource path="res://active-partials/interface/submenu_load.gd" type="Script" index="16"></ext_resource>
-	<ext_resource path="res://assets/fpo/tall-white-block-hover.png" type="Texture" index="11"></ext_resource>
-	<ext_resource path="res://active-partials/interface/submenu_save.gd" type="Script" index="15"></ext_resource>
-	<ext_resource path="res://assets/fpo/temp-trace-back.png" type="Texture" index="12"></ext_resource>
-	<ext_resource path="res://sandbox/menu.gd" type="Script" index="14"></ext_resource>
-	<ext_resource path="res://assets/ui/list31 (1).tex" type="Texture" index="20"></ext_resource>
-	<ext_resource path="res://active-partials/environment/walkable-area.gd" type="Script" index="7"></ext_resource>
+	<ext_resource path="res://active-partials/interface/submenu_load.gd" type="Script" index="9"></ext_resource>
+	<ext_resource path="res://active-partials/interface/submenu_save.gd" type="Script" index="8"></ext_resource>
+	<ext_resource path="res://sandbox/menu.gd" type="Script" index="7"></ext_resource>
+	<ext_resource path="res://assets/ui/list31 (1).tex" type="Texture" index="13"></ext_resource>
 	<resource type="StyleBoxEmpty" path="local://41">
 		<real name="content_margin/left"> -1 </real>
 		<real name="content_margin/right"> -1 </real>
@@ -42,41 +35,6 @@
 		<int name="border_size"> 0 </int>
 		<bool name="border_blend"> False </bool>
 		<bool name="draw_bg"> True </bool>
-
-	</resource>
-	<resource type="GDScript" path="local://48">
-		<string name="script/source"> "# gdscript 14518, main.xml&#000a;# attached to stage/nav/floor/bodies (ysort node containing npcs)&#000a;extends YSort&#000a;&#000a;func _ready():&#000a;&#0009;add_user_signal(&quot;player_redirected&quot;, [&quot;successful&quot;, &quot;expected&quot;, &quot;actual&quot;])" </string>
-
-	</resource>
-	<resource type="GDScript" path="local://29">
-		<string name="script/source"> "# gdscript 14519 - main.xml&#000a;# attached to bodies/terminal (terminal npc node)&#000a;extends &quot;res://active-partials/npcs/npc.gd&quot;&#000a;&#000a;&#000a;&#000a;#&#000a;&#000a;func _ready():&#000a;&#000a;&#0009;quest_loader = get_node(&quot;/root/scene/quests&quot;)&#000a;&#0009;utils = get_node(&quot;/root/utils&quot;)&#000a;&#0009;game = get_node(&quot;/root/game&quot;)&#000a;&#0009;player = get_node(&quot;/root/scene&quot;).get(&quot;player&quot;)&#000a;&#0009;MUI = get_node(&quot;/root/scene/message-ui&quot;)&#000a;&#0009;body_node = get_node(&quot;body&quot;)&#000a;&#0009;x = get_node(&quot;X&quot;)&#000a;&#0009;n = MUI.make_formatted_name(label)&#000a;&#0009;&#000a;&#0009;set_branches()&#000a;" </string>
-
-	</resource>
-	<resource type="ConvexPolygonShape2D" path="local://47">
-		<real name="custom_solver_bias"> 0 </real>
-		<vector2_array name="points" len="4"> 			54.5391, 68.1499, -53.4609, 113.15, -80.4609, 86.1499, 0.539093, 50.1499 </vector2_array>
-
-	</resource>
-	<resource type="GDScript" path="local://13">
-		<string name="script/source"> "extends TextureButton&#000a;&#000a;var hexTexture = preload(&quot;res://assets/computer_by_hydroksyde.tex&quot;)&#000a;&#000a;&#000a;func _ready():&#000a;&#000a;   #set texture&#000a;   #self.set_normal_texture(hexTexture)&#000a;   #self.get_normal_texture().size = Vector2(_tile_size, _tile_size)&#000a;&#000a;   #create the image for the bitmap&#000a;   var image = Image()&#000a;   image.load(&quot;res://assets/fpo/computer_by_hydroksyde-smaller.png&quot;)&#000a;   &#000a;  # image = image.resized(hexTexture.get_width(), hexTexture.get_height())&#000a;&#000a;   #make sure the mask is the same size as the texture&#000a;   #image = image.resized(_tile_size, _tile_size)&#000a;   &#000a;   #create a new bitmap from the alpha channel of the resized image&#000a;   var bitMap = BitMap.new()&#000a;   bitMap.create_from_image_alpha(image)&#000a;  &#000a;   #assign the bitmap to the click mask&#000a;   set_click_mask(bitMap)&#000a;  " </string>
-
-	</resource>
-	<resource type="GDScript" path="local://19">
-		<string name="script/source"> "# main.xml, attached to cabinet npc&#000a;extends &quot;res://active-partials/npcs/npc.gd&quot;&#000a;&#000a;# TODO: safe to remove?&#000a;var stat = 2&#000a;&#000a;&#000a;&#000a;func _ready():&#000a;&#000a;&#0009;quest_loader = get_node(&quot;/root/scene/quests&quot;)&#000a;&#0009;utils = get_node(&quot;/root/utils&quot;)&#000a;&#0009;game = get_node(&quot;/root/game&quot;)&#000a;&#0009;player = get_node(&quot;/root/scene&quot;).get(&quot;player&quot;)&#000a;&#0009;body_node = get_node(&quot;body&quot;)&#000a;&#0009;x = get_node(&quot;X&quot;)&#000a;&#0009;n = MUI.make_formatted_name(label)&#000a;&#0009;&#000a;&#0009;set_branches()&#000a;" </string>
-
-	</resource>
-	<resource type="ConvexPolygonShape2D" path="local://46">
-		<real name="custom_solver_bias"> 0 </real>
-		<vector2_array name="points" len="4"> 			-67, 22, 32, -41, 113, 31, 41, 67 </vector2_array>
-
-	</resource>
-	<resource type="GDScript" path="local://59">
-		<string name="script/source"> "# main.xml - attached to engineer npc&#000a;extends &quot;res://active-partials/npcs/npc.gd&quot;&#000a;&#000a;# TODO: safe to remove now?&#000a;var stat = 2&#000a;&#000a;func _ready():&#000a;&#0009;&#000a;&#0009;quest_loader = get_node(&quot;/root/scene/quests&quot;)&#000a;&#0009;utils = get_node(&quot;/root/utils&quot;)&#000a;&#0009;game = get_node(&quot;/root/game&quot;)&#000a;&#0009;player = get_node(&quot;/root/scene&quot;).get(&quot;player&quot;)&#000a;&#0009;body_node = get_node(&quot;body&quot;)&#000a;&#0009;x = get_node(&quot;X&quot;)&#000a;&#0009;n = MUI.make_formatted_name(label)&#000a;&#0009;&#000a;&#0009;set_branches()&#000a;" </string>
-
-	</resource>
-	<resource type="ConvexPolygonShape2D" path="local://60">
-		<real name="custom_solver_bias"> 0 </real>
-		<vector2_array name="points" len="5"> 			13, 67, 31, 40, 121, 76, 76, 103, 31, 94 </vector2_array>
 
 	</resource>
 	<resource type="StyleBoxFlat" path="local://53">
@@ -203,11 +161,11 @@
 	<main_resource>
 		<dictionary name="_bundled" shared="false">
 			<string> "conn_count" </string>
-			<int> 21 </int>
+			<int> 20 </int>
 			<string> "conns" </string>
-			<int_array  len="127"> 				20, 18, 188, 187, 2, 0, 38, 55, 190, 189, 2, 0, 47, 55, 190, 189, 2, 0, 54, 34, 190, 191, 2, 0, 56, 55, 188, 192, 2, 0, 56, 56, 193, 193, 2, 0, 56, 56, 194, 194, 2, 0, 58, 55, 188, 195, 2, 0, 58, 58, 193, 193, 2, 0, 58, 58, 194, 194, 2, 0, 60, 60, 193, 193, 2, 0, 60, 60, 194, 194, 2, 0, 62, 62, 193, 193, 2, 0, 62, 62, 194, 194, 2, 0, 67, 55, 188, 196, 2, 0, 69, 55, 188, 197, 2, 0, 73, 71, 190, 198, 2, 0, 75, 71, 200, 199, 2, 0, 79, 71, 188, 199, 2, 1, 3, 86, 83, 188, 201, 2, 0, 87, 83, 188, 202, 2, 0 </int_array>
+			<int_array  len="121"> 				18, 35, 135, 134, 2, 0, 27, 35, 135, 134, 2, 0, 34, 14, 135, 136, 2, 0, 36, 35, 138, 137, 2, 0, 36, 36, 139, 139, 2, 0, 36, 36, 140, 140, 2, 0, 38, 35, 138, 141, 2, 0, 38, 38, 139, 139, 2, 0, 38, 38, 140, 140, 2, 0, 40, 40, 139, 139, 2, 0, 40, 40, 140, 140, 2, 0, 42, 42, 139, 139, 2, 0, 42, 42, 140, 140, 2, 0, 47, 35, 138, 142, 2, 0, 49, 35, 138, 143, 2, 0, 53, 51, 135, 144, 2, 0, 55, 51, 146, 145, 2, 0, 59, 51, 138, 145, 2, 1, 3, 66, 63, 138, 147, 2, 0, 67, 63, 138, 148, 2, 0 </int_array>
 			<string> "names" </string>
-			<string_array  len="203">
+			<string_array  len="149">
 				<string> "scene" </string>
 				<string> "Node2D" </string>
 				<string> "z/z" </string>
@@ -275,67 +233,6 @@
 				<string> "bbcode/enabled" </string>
 				<string> "bbcode/bbcode" </string>
 				<string> "visible_characters" </string>
-				<string> "stage" </string>
-				<string> "nav" </string>
-				<string> "Navigation2D" </string>
-				<string> "floor" </string>
-				<string> "TileMap" </string>
-				<string> "mode" </string>
-				<string> "tile_set" </string>
-				<string> "cell/size" </string>
-				<string> "cell/quadrant_size" </string>
-				<string> "cell/custom_transform" </string>
-				<string> "cell/half_offset" </string>
-				<string> "cell/tile_origin" </string>
-				<string> "cell/y_sort" </string>
-				<string> "collision/use_kinematic" </string>
-				<string> "collision/friction" </string>
-				<string> "collision/bounce" </string>
-				<string> "collision/layers" </string>
-				<string> "collision/mask" </string>
-				<string> "tile_data" </string>
-				<string> "bodies" </string>
-				<string> "YSort" </string>
-				<string> "sort/enabled" </string>
-				<string> "terminal" </string>
-				<string> "transform/pos" </string>
-				<string> "id" </string>
-				<string> "label" </string>
-				<string> "npc_type" </string>
-				<string> "trigger_mode" </string>
-				<string> "greeting" </string>
-				<string> "fallback_dialogue" </string>
-				<string> "body" </string>
-				<string> "Area2D" </string>
-				<string> "input/pickable" </string>
-				<string> "shapes/0/shape" </string>
-				<string> "shapes/0/transform" </string>
-				<string> "shapes/0/trigger" </string>
-				<string> "gravity_vec" </string>
-				<string> "gravity" </string>
-				<string> "linear_damp" </string>
-				<string> "angular_damp" </string>
-				<string> "Sprite" </string>
-				<string> "TextureButton" </string>
-				<string> "click_on_press" </string>
-				<string> "textures/normal" </string>
-				<string> "textures/pressed" </string>
-				<string> "textures/hover" </string>
-				<string> "textures/disabled" </string>
-				<string> "textures/focused" </string>
-				<string> "trigger" </string>
-				<string> "CollisionPolygon2D" </string>
-				<string> "z/relative" </string>
-				<string> "build_mode" </string>
-				<string> "polygon" </string>
-				<string> "shape_range" </string>
-				<string> "X" </string>
-				<string> "Position2D" </string>
-				<string> "cabinet" </string>
-				<string> "transform/scale" </string>
-				<string> "visibility/opacity" </string>
-				<string> "engineer" </string>
-				<string> "destination_sprite" </string>
 				<string> "menu" </string>
 				<string> "menu_layer" </string>
 				<string> "submenu_save" </string>
@@ -375,10 +272,12 @@
 				<string> "start over" </string>
 				<string> "HSeparator1" </string>
 				<string> "HSeparator" </string>
+				<string> "visibility/opacity" </string>
 				<string> "quit" </string>
 				<string> "cancel" </string>
 				<string> "main menu" </string>
 				<string> "journal_ui" </string>
+				<string> "z/relative" </string>
 				<string> "custom_colors/font_color_selected" </string>
 				<string> "button/0/text" </string>
 				<string> "button/0/icon" </string>
@@ -387,20 +286,25 @@
 				<string> "custom_styles/separator" </string>
 				<string> "ButtonGroup" </string>
 				<string> "log_home" </string>
+				<string> "click_on_press" </string>
 				<string> "custom_colors/default_color" </string>
 				<string> "custom_colors/selection_color" </string>
 				<string> "interface" </string>
 				<string> "journal" </string>
+				<string> "TextureButton" </string>
+				<string> "textures/normal" </string>
+				<string> "textures/pressed" </string>
+				<string> "textures/hover" </string>
+				<string> "textures/focused" </string>
 				<string> "quests" </string>
 				<string> "0_diagnostic" </string>
 				<string> "Q_ID" </string>
 				<string> "data_source" </string>
-				<string> "_on_click" </string>
-				<string> "pressed" </string>
 				<string> "_on_sub_menu_closed" </string>
 				<string> "popup_hide" </string>
 				<string> "hide_menu" </string>
 				<string> "_on_save_pressed" </string>
+				<string> "pressed" </string>
 				<string> "mouse_enter" </string>
 				<string> "mouse_exit" </string>
 				<string> "_on_load_pressed" </string>
@@ -413,11 +317,11 @@
 				<string> "_on_menu_pressed" </string>
 			</string_array>
 			<string> "node_count" </string>
-			<int> 90 </int>
+			<int> 70 </int>
 			<string> "nodes" </string>
-			<int_array  len="2478"> 				-1, -1, 1, 0, -1, 3, 2, 0, 3, 1, 4, 2, 0, 0, 0, 6, 5, -1, 6, 7, 3, 8, 4, 9, 5, 10, 6, 3, 7, 4, 8, 0, 1, 0, 12, 11, -1, 12, 13, 9, 14, 10, 15, 11, 16, 12, 17, 13, 18, 9, 19, 14, 20, 15, 21, 15, 22, 16, 23, 9, 4, 17, 0, 2, 0, 24, 24, -1, 12, 14, 18, 16, 19, 17, 20, 18, 14, 19, 14, 20, 15, 25, 21, 26, 0, 27, 0, 28, 22, 29, 3, 30, 23, 0, 1, 0, 12, 31, -1, 16, 13, 9, 32, 24, 33, 0, 34, 24, 35, 0, 14, 25, 15, 26, 16, 27, 17, 28, 18, 9, 19, 14, 20, 24, 21, 24, 22, 29, 23, 14, 4, 30, 0, 4, 0, 36, 36, -1, 6, 34, 0, 35, 0, 18, 9, 19, 14, 20, 24, 21, 24, 0, 5, 0, 37, 37, -1, 13, 34, 0, 35, 0, 14, 31, 15, 31, 16, 31, 17, 31, 38, 32, 18, 9, 19, 9, 20, 24, 21, 24, 39, 0, 40, 3, 0, 6, 0, 42, 41, -1, 9, 13, 9, 16, 33, 17, 34, 38, 35, 18, 9, 19, 14, 20, 24, 21, 24, 43, 36, 0, 7, 0, 45, 44, -1, 13, 46, 14, 32, 24, 34, 24, 14, 37, 15, 28, 16, 38, 17, 39, 18, 14, 19, 14, 20, 15, 21, 15, 47, 40, 48, 14, 0, 6, 0, 50, 49, -1, 10, 16, 41, 17, 34, 38, 42, 18, 9, 19, 14, 20, 24, 21, 24, 51, 43, 39, 44, 40, 3, 0, 9, 0, 53, 52, -1, 15, 13, 9, 16, 45, 17, 46, 18, 9, 19, 14, 20, 24, 21, 24, 54, 47, 55, 48, 56, 49, 57, 14, 58, 9, 25, 50, 59, 9, 26, 3, 0, 9, 0, 60, 60, -1, 8, 16, 41, 17, 51, 18, 9, 19, 14, 20, 24, 21, 24, 51, 52, 61, 53, 0, 11, 0, 62, 62, -1, 11, 16, 41, 17, 51, 18, 9, 19, 14, 20, 24, 21, 24, 51, 52, 63, 0, 64, 14, 65, 54, 66, 23, 0, 9, 0, 50, 50, -1, 9, 15, 55, 16, 41, 17, 34, 18, 9, 19, 9, 20, 24, 21, 24, 39, 44, 40, 3, 0, 0, 0, 1, 67, -1, 3, 2, 15, 3, 56, 4, 57, 0, 14, 0, 69, 68, -1, 0, 0, 15, 0, 71, 70, -1, 14, 72, 0, 73, 58, 74, 59, 75, 60, 76, 61, 77, 15, 78, 0, 79, 14, 80, 9, 81, 22, 82, 5, 83, 0, 84, 0, 85, 62, 0, 16, 0, 87, 86, -1, 3, 2, 0, 88, 14, 3, 63, 0, 17, 0, 1, 89, -1, 10, 90, 64, 3, 65, 4, 66, 91, 67, 92, 68, 44, 69, 93, 3, 94, 3, 95, 70, 96, 71, 0, 18, 0, 98, 97, -1, 9, 2, 0, 99, 9, 100, 72, 101, 73, 102, 14, 103, 74, 104, 75, 105, 76, 106, 22, 0, 19, 0, 108, 107, -1, 16, 14, 77, 15, 78, 16, 46, 17, 79, 18, 9, 19, 9, 20, 15, 21, 15, 58, 9, 109, 14, 110, 80, 111, 80, 112, 80, 113, 80, 114, 80, 3, 81, 0, 19, 0, 116, 115, -1, 7, 13, 9, 90, 82, 117, 9, 118, 3, 119, 83, 120, 84, 115, 14, 0, 18, 0, 122, 121, -1, 2, 13, 9, 90, 85, 0, 17, 0, 1, 123, -1, 12, 90, 86, 124, 87, 2, 0, 3, 88, 4, 89, 91, 67, 92, 90, 44, 69, 93, 3, 94, 3, 95, 70, 96, 71, 0, 23, 0, 98, 97, -1, 9, 99, 9, 100, 91, 101, 92, 102, 14, 103, 74, 104, 75, 105, 76, 106, 22, 4, 93, 0, 24, 0, 108, 107, -1, 14, 14, 94, 15, 95, 16, 96, 17, 97, 18, 9, 19, 9, 20, 15, 21, 15, 58, 9, 110, 98, 111, 99, 112, 99, 113, 98, 114, 98, 0, 24, 0, 116, 115, -1, 7, 13, 9, 125, 100, 117, 9, 118, 3, 119, 101, 120, 84, 115, 14, 0, 23, 0, 122, 121, -1, 3, 13, 9, 90, 102, 124, 103, 0, 17, 0, 1, 126, -1, 11, 90, 104, 2, 0, 3, 105, 4, 106, 91, 67, 92, 107, 44, 69, 93, 3, 94, 3, 95, 70, 96, 71, 0, 28, 0, 98, 97, -1, 8, 99, 14, 100, 108, 101, 61, 102, 14, 103, 74, 104, 75, 105, 76, 106, 22, 0, 29, 0, 108, 107, -1, 12, 16, 109, 17, 110, 18, 9, 19, 14, 20, 15, 21, 15, 58, 9, 110, 111, 111, 111, 112, 111, 113, 111, 114, 111, 0, 29, 0, 116, 115, -1, 5, 13, 9, 118, 3, 119, 112, 120, 4, 115, 14, 0, 28, 0, 122, 121, -1, 2, 13, 9, 90, 113, 0, 14, 0, 107, 127, -1, 2, 13, 9, 47, 114, 0, 0, 0, 1, 128, -1, 3, 2, 0, 3, 115, 4, 116, 0, 34, 0, 6, 129, -1, 5, 7, 0, 8, 4, 9, 5, 10, 6, 4, 117, 0, 35, 0, 131, 130, -1, 2, 3, 118, 4, 119, 0, 36, 0, 132, 132, -1, 10, 13, 9, 34, 0, 35, 0, 16, 120, 17, 121, 18, 9, 19, 14, 20, 15, 21, 15, 22, 29, 0, 37, 0, 133, 12, -1, 16, 13, 9, 33, 24, 34, 0, 35, 24, 14, 122, 15, 123, 16, 124, 17, 125, 18, 9, 19, 14, 20, 15, 21, 15, 61, 126, 23, 9, 134, 54, 4, 127, 0, 38, 0, 37, 135, -1, 12, 34, 0, 35, 0, 14, 20, 15, 128, 16, 129, 17, 128, 18, 9, 19, 9, 20, 24, 21, 24, 39, 130, 40, 3, 0, 39, 0, 137, 136, -1, 14, 16, 131, 17, 132, 18, 9, 19, 14, 20, 24, 21, 24, 138, 133, 139, 134, 140, 135, 141, 136, 142, 130, 143, 3, 144, 137, 145, 3, 0, 39, 0, 50, 146, -1, 9, 14, 138, 16, 139, 17, 132, 18, 9, 19, 9, 20, 24, 21, 24, 51, 52, 40, 3, 0, 41, 0, 37, 135, -1, 7, 16, 140, 17, 141, 18, 9, 19, 9, 20, 15, 21, 15, 40, 3, 0, 42, 0, 148, 147, -1, 11, 16, 33, 17, 141, 18, 9, 19, 14, 20, 24, 21, 15, 51, 142, 25, 54, 149, 3, 150, 14, 151, 9, 0, 42, 0, 53, 152, -1, 10, 14, 143, 16, 140, 17, 141, 18, 9, 19, 14, 20, 24, 21, 15, 58, 9, 25, 144, 59, 9, 0, 35, 0, 131, 153, -1, 2, 3, 145, 4, 146, 0, 45, 0, 132, 132, -1, 10, 13, 9, 34, 0, 35, 0, 16, 120, 17, 121, 18, 9, 19, 14, 20, 15, 21, 15, 22, 29, 0, 46, 0, 133, 12, -1, 15, 13, 9, 33, 24, 34, 0, 35, 24, 14, 122, 15, 123, 16, 124, 17, 125, 18, 9, 19, 14, 20, 15, 21, 15, 61, 126, 23, 9, 134, 54, 0, 47, 0, 37, 135, -1, 13, 34, 0, 35, 0, 14, 20, 15, 128, 16, 129, 17, 128, 18, 9, 19, 9, 20, 24, 21, 24, 39, 130, 40, 3, 4, 147, 0, 48, 0, 137, 136, -1, 14, 16, 131, 17, 132, 18, 9, 19, 14, 20, 24, 21, 24, 138, 133, 139, 134, 140, 135, 141, 136, 142, 130, 143, 3, 144, 137, 145, 3, 0, 48, 0, 50, 146, -1, 10, 14, 148, 16, 149, 17, 150, 18, 9, 19, 9, 20, 24, 21, 24, 51, 52, 40, 3, 4, 151, 0, 50, 0, 37, 135, -1, 7, 16, 152, 17, 141, 18, 9, 19, 9, 20, 15, 21, 15, 40, 3, 0, 51, 0, 148, 147, -1, 11, 16, 153, 17, 141, 18, 9, 19, 14, 20, 24, 21, 15, 51, 142, 25, 54, 149, 3, 150, 14, 151, 9, 0, 51, 0, 53, 154, -1, 10, 14, 25, 16, 152, 17, 141, 18, 9, 19, 14, 20, 24, 21, 15, 58, 9, 25, 154, 59, 9, 0, 35, 0, 133, 155, -1, 14, 13, 9, 32, 24, 34, 24, 14, 155, 15, 156, 16, 157, 17, 158, 18, 9, 19, 14, 20, 15, 21, 15, 22, 29, 23, 9, 134, 159, 0, 54, 0, 50, 156, -1, 12, 34, 0, 35, 0, 14, 31, 15, 160, 16, 31, 17, 161, 18, 9, 19, 9, 20, 15, 21, 15, 40, 3, 3, 162, 0, 55, 0, 53, 157, -1, 18, 16, 163, 17, 141, 18, 9, 19, 14, 20, 24, 21, 15, 138, 164, 158, 165, 139, 164, 54, 166, 141, 165, 159, 167, 160, 168, 58, 9, 25, 144, 59, 14, 26, 3, 4, 169, 0, 56, 0, 24, 24, -1, 13, 35, 0, 14, 170, 15, 142, 16, 171, 18, 14, 19, 9, 20, 15, 161, 172, 25, 173, 27, 0, 28, 22, 29, 3, 30, 23, 0, 55, 0, 53, 162, -1, 19, 15, 174, 16, 163, 17, 171, 18, 9, 19, 14, 20, 24, 21, 15, 138, 164, 158, 165, 139, 164, 54, 166, 141, 165, 159, 167, 160, 168, 58, 9, 25, 154, 59, 14, 26, 3, 4, 175, 0, 58, 0, 24, 24, -1, 13, 35, 0, 14, 170, 15, 142, 16, 171, 18, 14, 19, 9, 20, 15, 161, 172, 25, 173, 27, 0, 28, 22, 29, 3, 30, 23, 0, 55, 0, 53, 163, -1, 19, 15, 176, 16, 163, 17, 177, 18, 9, 19, 14, 20, 24, 21, 15, 138, 164, 158, 165, 139, 164, 54, 166, 141, 165, 159, 167, 160, 168, 58, 9, 25, 178, 59, 14, 26, 3, 4, 179, 0, 60, 0, 24, 24, -1, 13, 35, 0, 14, 170, 15, 142, 16, 171, 18, 14, 19, 9, 20, 15, 161, 172, 25, 173, 27, 0, 28, 22, 29, 3, 30, 23, 0, 55, 0, 53, 164, -1, 19, 15, 96, 16, 163, 17, 180, 18, 9, 19, 14, 20, 24, 21, 15, 138, 164, 158, 165, 139, 164, 54, 166, 141, 165, 159, 167, 160, 168, 58, 9, 25, 181, 59, 14, 26, 3, 4, 182, 0, 62, 0, 24, 24, -1, 13, 35, 0, 14, 170, 15, 142, 16, 171, 18, 14, 19, 9, 20, 15, 161, 172, 25, 173, 27, 0, 28, 22, 29, 3, 30, 23, 0, 55, 0, 166, 165, -1, 10, 125, 100, 15, 131, 16, 163, 17, 183, 18, 9, 19, 9, 20, 15, 21, 24, 51, 52, 39, 15, 0, 55, 0, 53, 167, -1, 19, 15, 184, 16, 163, 17, 185, 18, 9, 19, 14, 20, 24, 21, 15, 138, 164, 158, 165, 139, 164, 54, 166, 141, 165, 159, 167, 160, 168, 58, 9, 25, 186, 59, 14, 26, 3, 4, 182, 0, 65, 0, 24, 24, -1, 13, 35, 0, 14, 170, 15, 142, 16, 171, 18, 14, 19, 9, 20, 15, 161, 172, 25, 173, 27, 0, 28, 22, 29, 3, 30, 23, 0, 55, 0, 53, 168, -1, 20, 13, 9, 15, 184, 16, 163, 17, 185, 18, 9, 19, 14, 20, 24, 21, 15, 138, 164, 158, 165, 139, 164, 54, 166, 141, 165, 159, 167, 160, 168, 58, 9, 25, 187, 59, 14, 26, 3, 4, 182, 0, 67, 0, 24, 24, -1, 13, 35, 0, 14, 170, 15, 142, 16, 171, 18, 14, 19, 9, 20, 15, 161, 172, 25, 173, 27, 0, 28, 22, 29, 3, 30, 23, 0, 55, 0, 53, 169, -1, 19, 15, 132, 16, 163, 17, 188, 18, 9, 19, 14, 20, 24, 21, 15, 138, 164, 158, 165, 139, 164, 54, 166, 141, 165, 159, 167, 160, 168, 58, 9, 25, 189, 59, 14, 26, 3, 4, 182, 0, 69, 0, 24, 24, -1, 13, 35, 0, 14, 170, 15, 142, 16, 171, 18, 14, 19, 9, 20, 15, 161, 172, 25, 173, 27, 0, 28, 22, 29, 3, 30, 23, 0, 0, 0, 1, 170, -1, 4, 13, 9, 117, 9, 3, 190, 4, 191, 0, 71, 0, 6, 6, -1, 4, 7, 0, 8, 4, 9, 5, 10, 6, 0, 72, 0, 133, 133, -1, 16, 13, 9, 32, 24, 33, 24, 34, 24, 35, 24, 14, 155, 15, 192, 16, 157, 17, 193, 18, 9, 19, 14, 20, 15, 21, 24, 22, 29, 23, 14, 134, 194, 0, 73, 0, 37, 37, -1, 12, 34, 0, 35, 0, 14, 28, 15, 28, 16, 28, 17, 28, 18, 9, 19, 9, 20, 24, 21, 24, 39, 195, 40, 3, 0, 74, 0, 137, 137, -1, 22, 13, 9, 15, 196, 16, 197, 17, 198, 38, 199, 18, 9, 19, 14, 20, 15, 21, 0, 22, 29, 138, 200, 139, 200, 140, 200, 141, 200, 171, 201, 142, 130, 143, 0, 144, 202, 145, 3, 172, 203, 173, 204, 174, 3, 0, 74, 0, 175, 175, -1, 10, 13, 9, 14, 55, 16, 205, 17, 206, 18, 9, 19, 14, 20, 15, 21, 15, 176, 207, 39, 23, 0, 74, 0, 177, 177, -1, 7, 16, 208, 17, 206, 18, 9, 19, 14, 20, 24, 21, 24, 51, 52, 0, 77, 0, 50, 50, -1, 8, 16, 26, 17, 209, 18, 9, 19, 9, 20, 24, 21, 24, 39, 130, 40, 3, 0, 78, 0, 53, 178, -1, 11, 16, 26, 17, 210, 18, 9, 19, 14, 20, 15, 21, 15, 58, 14, 109, 14, 25, 203, 59, 14, 26, 3, 0, 78, 0, 166, 166, -1, 7, 15, 141, 16, 26, 17, 211, 18, 9, 19, 14, 20, 15, 21, 15, 0, 74, 0, 62, 62, -1, 16, 14, 212, 15, 213, 16, 214, 17, 213, 18, 9, 19, 14, 20, 24, 21, 15, 51, 215, 179, 216, 180, 217, 171, 218, 63, 130, 64, 14, 65, 54, 66, 23, 0, 0, 0, 6, 181, -1, 5, 7, 3, 8, 4, 9, 5, 10, 6, 4, 219, 0, 82, 0, 132, 132, -1, 12, 32, 0, 33, 0, 34, 0, 35, 0, 14, 156, 15, 26, 18, 9, 19, 14, 20, 15, 21, 15, 22, 29, 3, 220, 0, 83, 0, 36, 36, -1, 10, 33, 0, 34, 0, 35, 0, 15, 39, 16, 28, 18, 9, 19, 14, 20, 15, 21, 15, 61, 221, 0, 84, 0, 50, 156, -1, 10, 34, 0, 35, 0, 14, 31, 15, 28, 17, 28, 18, 9, 19, 9, 20, 15, 21, 24, 40, 3, 0, 85, 0, 108, 182, -1, 11, 16, 222, 17, 223, 18, 9, 19, 14, 20, 15, 21, 24, 58, 9, 110, 224, 111, 224, 112, 225, 114, 225, 0, 85, 0, 108, 128, -1, 12, 15, 226, 16, 222, 17, 227, 18, 9, 19, 14, 20, 15, 21, 24, 58, 9, 110, 228, 111, 228, 112, 229, 114, 229, 0, 0, 0, 131, 183, -1, 1, 3, 230, 0, 88, 0, 131, 184, -1, 3, 3, 231, 185, 232, 186, 233, 0 </int_array>
+			<int_array  len="2040"> 				-1, -1, 1, 0, -1, 3, 2, 0, 3, 1, 4, 2, 0, 0, 0, 6, 5, -1, 6, 7, 3, 8, 4, 9, 5, 10, 6, 3, 7, 4, 8, 0, 1, 0, 12, 11, -1, 12, 13, 9, 14, 10, 15, 11, 16, 12, 17, 13, 18, 9, 19, 14, 20, 15, 21, 15, 22, 16, 23, 9, 4, 17, 0, 2, 0, 24, 24, -1, 12, 14, 18, 16, 19, 17, 20, 18, 14, 19, 14, 20, 15, 25, 21, 26, 0, 27, 0, 28, 22, 29, 3, 30, 23, 0, 1, 0, 12, 31, -1, 16, 13, 9, 32, 24, 33, 0, 34, 24, 35, 0, 14, 25, 15, 26, 16, 27, 17, 28, 18, 9, 19, 14, 20, 24, 21, 24, 22, 29, 23, 14, 4, 30, 0, 4, 0, 36, 36, -1, 6, 34, 0, 35, 0, 18, 9, 19, 14, 20, 24, 21, 24, 0, 5, 0, 37, 37, -1, 13, 34, 0, 35, 0, 14, 31, 15, 31, 16, 31, 17, 31, 38, 32, 18, 9, 19, 9, 20, 24, 21, 24, 39, 0, 40, 3, 0, 6, 0, 42, 41, -1, 9, 13, 9, 16, 33, 17, 34, 38, 35, 18, 9, 19, 14, 20, 24, 21, 24, 43, 36, 0, 7, 0, 45, 44, -1, 13, 46, 14, 32, 24, 34, 24, 14, 37, 15, 28, 16, 38, 17, 39, 18, 14, 19, 14, 20, 15, 21, 15, 47, 40, 48, 14, 0, 6, 0, 50, 49, -1, 10, 16, 41, 17, 34, 38, 42, 18, 9, 19, 14, 20, 24, 21, 24, 51, 43, 39, 44, 40, 3, 0, 9, 0, 53, 52, -1, 15, 13, 9, 16, 45, 17, 46, 18, 9, 19, 14, 20, 24, 21, 24, 54, 47, 55, 48, 56, 49, 57, 14, 58, 9, 25, 50, 59, 9, 26, 3, 0, 9, 0, 60, 60, -1, 8, 16, 41, 17, 51, 18, 9, 19, 14, 20, 24, 21, 24, 51, 52, 61, 53, 0, 11, 0, 62, 62, -1, 11, 16, 41, 17, 51, 18, 9, 19, 14, 20, 24, 21, 24, 51, 52, 63, 0, 64, 14, 65, 54, 66, 23, 0, 9, 0, 50, 50, -1, 9, 15, 55, 16, 41, 17, 34, 18, 9, 19, 9, 20, 24, 21, 24, 39, 44, 40, 3, 0, 0, 0, 1, 67, -1, 3, 2, 0, 3, 56, 4, 57, 0, 14, 0, 6, 68, -1, 5, 7, 0, 8, 4, 9, 5, 10, 6, 4, 58, 0, 15, 0, 70, 69, -1, 2, 3, 59, 4, 60, 0, 16, 0, 71, 71, -1, 10, 13, 9, 34, 0, 35, 0, 16, 61, 17, 62, 18, 9, 19, 14, 20, 15, 21, 15, 22, 29, 0, 17, 0, 72, 12, -1, 16, 13, 9, 33, 24, 34, 0, 35, 24, 14, 63, 15, 64, 16, 65, 17, 66, 18, 9, 19, 14, 20, 15, 21, 15, 61, 67, 23, 9, 73, 54, 4, 68, 0, 18, 0, 37, 74, -1, 12, 34, 0, 35, 0, 14, 20, 15, 69, 16, 70, 17, 69, 18, 9, 19, 9, 20, 24, 21, 24, 39, 71, 40, 3, 0, 19, 0, 76, 75, -1, 14, 16, 72, 17, 73, 18, 9, 19, 14, 20, 24, 21, 24, 77, 74, 78, 75, 79, 76, 80, 77, 81, 71, 82, 3, 83, 78, 84, 3, 0, 19, 0, 50, 85, -1, 9, 14, 79, 16, 80, 17, 73, 18, 9, 19, 9, 20, 24, 21, 24, 51, 52, 40, 3, 0, 21, 0, 37, 74, -1, 7, 16, 81, 17, 82, 18, 9, 19, 9, 20, 15, 21, 15, 40, 3, 0, 22, 0, 87, 86, -1, 11, 16, 33, 17, 82, 18, 9, 19, 14, 20, 24, 21, 15, 51, 83, 25, 54, 88, 3, 89, 14, 90, 9, 0, 22, 0, 53, 91, -1, 10, 14, 84, 16, 81, 17, 82, 18, 9, 19, 14, 20, 24, 21, 15, 58, 9, 25, 85, 59, 9, 0, 15, 0, 70, 92, -1, 2, 3, 86, 4, 87, 0, 25, 0, 71, 71, -1, 10, 13, 9, 34, 0, 35, 0, 16, 61, 17, 62, 18, 9, 19, 14, 20, 15, 21, 15, 22, 29, 0, 26, 0, 72, 12, -1, 15, 13, 9, 33, 24, 34, 0, 35, 24, 14, 63, 15, 64, 16, 65, 17, 66, 18, 9, 19, 14, 20, 15, 21, 15, 61, 67, 23, 9, 73, 54, 0, 27, 0, 37, 74, -1, 13, 34, 0, 35, 0, 14, 20, 15, 69, 16, 70, 17, 69, 18, 9, 19, 9, 20, 24, 21, 24, 39, 71, 40, 3, 4, 88, 0, 28, 0, 76, 75, -1, 14, 16, 72, 17, 73, 18, 9, 19, 14, 20, 24, 21, 24, 77, 74, 78, 75, 79, 76, 80, 77, 81, 71, 82, 3, 83, 78, 84, 3, 0, 28, 0, 50, 85, -1, 10, 14, 89, 16, 90, 17, 91, 18, 9, 19, 9, 20, 24, 21, 24, 51, 52, 40, 3, 4, 92, 0, 30, 0, 37, 74, -1, 7, 16, 93, 17, 82, 18, 9, 19, 9, 20, 15, 21, 15, 40, 3, 0, 31, 0, 87, 86, -1, 11, 16, 94, 17, 82, 18, 9, 19, 14, 20, 24, 21, 15, 51, 83, 25, 54, 88, 3, 89, 14, 90, 9, 0, 31, 0, 53, 93, -1, 10, 14, 25, 16, 93, 17, 82, 18, 9, 19, 14, 20, 24, 21, 15, 58, 9, 25, 95, 59, 9, 0, 15, 0, 72, 94, -1, 14, 13, 9, 32, 24, 34, 24, 14, 96, 15, 97, 16, 98, 17, 99, 18, 9, 19, 14, 20, 15, 21, 15, 22, 29, 23, 9, 73, 100, 0, 34, 0, 50, 95, -1, 12, 34, 0, 35, 0, 14, 31, 15, 101, 16, 31, 17, 102, 18, 9, 19, 9, 20, 15, 21, 15, 40, 3, 3, 103, 0, 35, 0, 53, 96, -1, 18, 16, 104, 17, 82, 18, 9, 19, 14, 20, 24, 21, 15, 77, 105, 97, 106, 78, 105, 54, 107, 80, 106, 98, 108, 99, 109, 58, 9, 25, 85, 59, 14, 26, 3, 4, 110, 0, 36, 0, 24, 24, -1, 13, 35, 0, 14, 111, 15, 83, 16, 112, 18, 14, 19, 9, 20, 15, 100, 113, 25, 114, 27, 0, 28, 22, 29, 3, 30, 23, 0, 35, 0, 53, 101, -1, 19, 15, 115, 16, 104, 17, 112, 18, 9, 19, 14, 20, 24, 21, 15, 77, 105, 97, 106, 78, 105, 54, 107, 80, 106, 98, 108, 99, 109, 58, 9, 25, 95, 59, 14, 26, 3, 4, 116, 0, 38, 0, 24, 24, -1, 13, 35, 0, 14, 111, 15, 83, 16, 112, 18, 14, 19, 9, 20, 15, 100, 113, 25, 114, 27, 0, 28, 22, 29, 3, 30, 23, 0, 35, 0, 53, 102, -1, 19, 15, 117, 16, 104, 17, 118, 18, 9, 19, 14, 20, 24, 21, 15, 77, 105, 97, 106, 78, 105, 54, 107, 80, 106, 98, 108, 99, 109, 58, 9, 25, 119, 59, 14, 26, 3, 4, 120, 0, 40, 0, 24, 24, -1, 13, 35, 0, 14, 111, 15, 83, 16, 112, 18, 14, 19, 9, 20, 15, 100, 113, 25, 114, 27, 0, 28, 22, 29, 3, 30, 23, 0, 35, 0, 53, 103, -1, 19, 15, 121, 16, 104, 17, 122, 18, 9, 19, 14, 20, 24, 21, 15, 77, 105, 97, 106, 78, 105, 54, 107, 80, 106, 98, 108, 99, 109, 58, 9, 25, 123, 59, 14, 26, 3, 4, 124, 0, 42, 0, 24, 24, -1, 13, 35, 0, 14, 111, 15, 83, 16, 112, 18, 14, 19, 9, 20, 15, 100, 113, 25, 114, 27, 0, 28, 22, 29, 3, 30, 23, 0, 35, 0, 105, 104, -1, 10, 106, 125, 15, 72, 16, 104, 17, 126, 18, 9, 19, 9, 20, 15, 21, 24, 51, 52, 39, 15, 0, 35, 0, 53, 107, -1, 19, 15, 127, 16, 104, 17, 128, 18, 9, 19, 14, 20, 24, 21, 15, 77, 105, 97, 106, 78, 105, 54, 107, 80, 106, 98, 108, 99, 109, 58, 9, 25, 129, 59, 14, 26, 3, 4, 124, 0, 45, 0, 24, 24, -1, 13, 35, 0, 14, 111, 15, 83, 16, 112, 18, 14, 19, 9, 20, 15, 100, 113, 25, 114, 27, 0, 28, 22, 29, 3, 30, 23, 0, 35, 0, 53, 108, -1, 20, 13, 9, 15, 127, 16, 104, 17, 128, 18, 9, 19, 14, 20, 24, 21, 15, 77, 105, 97, 106, 78, 105, 54, 107, 80, 106, 98, 108, 99, 109, 58, 9, 25, 130, 59, 14, 26, 3, 4, 124, 0, 47, 0, 24, 24, -1, 13, 35, 0, 14, 111, 15, 83, 16, 112, 18, 14, 19, 9, 20, 15, 100, 113, 25, 114, 27, 0, 28, 22, 29, 3, 30, 23, 0, 35, 0, 53, 109, -1, 19, 15, 73, 16, 104, 17, 131, 18, 9, 19, 14, 20, 24, 21, 15, 77, 105, 97, 106, 78, 105, 54, 107, 80, 106, 98, 108, 99, 109, 58, 9, 25, 132, 59, 14, 26, 3, 4, 124, 0, 49, 0, 24, 24, -1, 13, 35, 0, 14, 111, 15, 83, 16, 112, 18, 14, 19, 9, 20, 15, 100, 113, 25, 114, 27, 0, 28, 22, 29, 3, 30, 23, 0, 0, 0, 1, 110, -1, 4, 13, 9, 111, 9, 3, 133, 4, 134, 0, 51, 0, 6, 6, -1, 4, 7, 0, 8, 4, 9, 5, 10, 6, 0, 52, 0, 72, 72, -1, 16, 13, 9, 32, 24, 33, 24, 34, 24, 35, 24, 14, 96, 15, 135, 16, 98, 17, 136, 18, 9, 19, 14, 20, 15, 21, 24, 22, 29, 23, 14, 73, 137, 0, 53, 0, 37, 37, -1, 12, 34, 0, 35, 0, 14, 28, 15, 28, 16, 28, 17, 28, 18, 9, 19, 9, 20, 24, 21, 24, 39, 138, 40, 3, 0, 54, 0, 76, 76, -1, 22, 13, 9, 15, 139, 16, 140, 17, 141, 38, 142, 18, 9, 19, 14, 20, 15, 21, 0, 22, 29, 77, 143, 78, 143, 79, 143, 80, 143, 112, 144, 81, 71, 82, 0, 83, 145, 84, 3, 113, 146, 114, 147, 115, 3, 0, 54, 0, 116, 116, -1, 10, 13, 9, 14, 55, 16, 148, 17, 149, 18, 9, 19, 14, 20, 15, 21, 15, 117, 150, 39, 23, 0, 54, 0, 118, 118, -1, 7, 16, 151, 17, 149, 18, 9, 19, 14, 20, 24, 21, 24, 51, 52, 0, 57, 0, 50, 50, -1, 8, 16, 26, 17, 152, 18, 9, 19, 9, 20, 24, 21, 24, 39, 71, 40, 3, 0, 58, 0, 53, 119, -1, 11, 16, 26, 17, 153, 18, 9, 19, 14, 20, 15, 21, 15, 58, 14, 120, 14, 25, 146, 59, 14, 26, 3, 0, 58, 0, 105, 105, -1, 7, 15, 82, 16, 26, 17, 154, 18, 9, 19, 14, 20, 15, 21, 15, 0, 54, 0, 62, 62, -1, 16, 14, 155, 15, 156, 16, 157, 17, 156, 18, 9, 19, 14, 20, 24, 21, 15, 51, 158, 121, 159, 122, 160, 112, 161, 63, 71, 64, 14, 65, 54, 66, 23, 0, 0, 0, 6, 123, -1, 5, 7, 3, 8, 4, 9, 5, 10, 6, 4, 162, 0, 62, 0, 71, 71, -1, 12, 32, 0, 33, 0, 34, 0, 35, 0, 14, 97, 15, 26, 18, 9, 19, 14, 20, 15, 21, 15, 22, 29, 3, 163, 0, 63, 0, 36, 36, -1, 10, 33, 0, 34, 0, 35, 0, 15, 39, 16, 28, 18, 9, 19, 14, 20, 15, 21, 15, 61, 164, 0, 64, 0, 50, 95, -1, 10, 34, 0, 35, 0, 14, 31, 15, 28, 17, 28, 18, 9, 19, 9, 20, 15, 21, 24, 40, 3, 0, 65, 0, 125, 124, -1, 11, 16, 165, 17, 166, 18, 9, 19, 14, 20, 15, 21, 24, 58, 9, 126, 167, 127, 167, 128, 168, 129, 168, 0, 65, 0, 125, 67, -1, 12, 15, 169, 16, 165, 17, 170, 18, 9, 19, 14, 20, 15, 21, 24, 58, 9, 126, 171, 127, 171, 128, 172, 129, 172, 0, 0, 0, 70, 130, -1, 1, 3, 173, 0, 68, 0, 70, 131, -1, 3, 3, 174, 132, 175, 133, 176, 0 </int_array>
 			<string> "variants" </string>
-			<array  len="234" shared="false">
+			<array  len="177" shared="false">
 				<int> 1 </int>
 				<resource  external="0">  </resource>
 				<dictionary  shared="false">
@@ -756,209 +660,6 @@
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> -284.454, -36.6439 </vector2>
-							<string> "snap_grid" </string>
-							<bool> False </bool>
-							<string> "snap_offset" </string>
-							<vector2> 0, 0 </vector2>
-							<string> "snap_pixel" </string>
-							<bool> False </bool>
-							<string> "snap_relative" </string>
-							<bool> False </bool>
-							<string> "snap_rotation" </string>
-							<bool> False </bool>
-							<string> "snap_rotation_offset" </string>
-							<real> 0 </real>
-							<string> "snap_rotation_step" </string>
-							<real> 0.261799 </real>
-							<string> "snap_show_grid" </string>
-							<bool> False </bool>
-							<string> "snap_step" </string>
-							<vector2> 10, 10 </vector2>
-							<string> "zoom" </string>
-							<real> 0.54036 </real>
-						</dictionary>
-						<string> "3D" </string>
-						<dictionary  shared="false">
-							<string> "ambient_light_color" </string>
-							<color> 0.15, 0.15, 0.15, 1 </color>
-							<string> "default_light" </string>
-							<bool> True </bool>
-							<string> "default_srgb" </string>
-							<bool> False </bool>
-							<string> "deflight_rot_x" </string>
-							<real> 0.942478 </real>
-							<string> "deflight_rot_y" </string>
-							<real> 0.628319 </real>
-							<string> "fov" </string>
-							<real> 45 </real>
-							<string> "show_grid" </string>
-							<bool> True </bool>
-							<string> "show_origin" </string>
-							<bool> True </bool>
-							<string> "viewport_mode" </string>
-							<int> 1 </int>
-							<string> "viewports" </string>
-							<array  len="4" shared="false">
-								<dictionary  shared="false">
-									<string> "distance" </string>
-									<real> 4 </real>
-									<string> "listener" </string>
-									<bool> True </bool>
-									<string> "pos" </string>
-									<vector3> 0, 0, 0 </vector3>
-									<string> "use_environment" </string>
-									<bool> False </bool>
-									<string> "use_orthogonal" </string>
-									<bool> False </bool>
-									<string> "x_rot" </string>
-									<real> 0 </real>
-									<string> "y_rot" </string>
-									<real> 0 </real>
-								</dictionary>
-								<dictionary  shared="false">
-									<string> "distance" </string>
-									<real> 4 </real>
-									<string> "listener" </string>
-									<bool> False </bool>
-									<string> "pos" </string>
-									<vector3> 0, 0, 0 </vector3>
-									<string> "use_environment" </string>
-									<bool> False </bool>
-									<string> "use_orthogonal" </string>
-									<bool> False </bool>
-									<string> "x_rot" </string>
-									<real> 0 </real>
-									<string> "y_rot" </string>
-									<real> 0 </real>
-								</dictionary>
-								<dictionary  shared="false">
-									<string> "distance" </string>
-									<real> 4 </real>
-									<string> "listener" </string>
-									<bool> False </bool>
-									<string> "pos" </string>
-									<vector3> 0, 0, 0 </vector3>
-									<string> "use_environment" </string>
-									<bool> False </bool>
-									<string> "use_orthogonal" </string>
-									<bool> False </bool>
-									<string> "x_rot" </string>
-									<real> 0 </real>
-									<string> "y_rot" </string>
-									<real> 0 </real>
-								</dictionary>
-								<dictionary  shared="false">
-									<string> "distance" </string>
-									<real> 4 </real>
-									<string> "listener" </string>
-									<bool> False </bool>
-									<string> "pos" </string>
-									<vector3> 0, 0, 0 </vector3>
-									<string> "use_environment" </string>
-									<bool> False </bool>
-									<string> "use_orthogonal" </string>
-									<bool> False </bool>
-									<string> "x_rot" </string>
-									<real> 0 </real>
-									<string> "y_rot" </string>
-									<real> 0 </real>
-								</dictionary>
-							</array>
-							<string> "zfar" </string>
-							<real> 500 </real>
-							<string> "znear" </string>
-							<real> 0.1 </real>
-						</dictionary>
-					</dictionary>
-					<string> "__editor_run_settings__" </string>
-					<dictionary  shared="false">
-						<string> "custom_args" </string>
-						<string> "-l $scene" </string>
-						<string> "run_mode" </string>
-						<int> 0 </int>
-					</dictionary>
-					<string> "_editor_collapsed" </string>
-					<bool> True </bool>
-				</dictionary>
-				<resource  external="8">  </resource>
-				<vector2> 72, 36 </vector2>
-				<int> 8 </int>
-				<matrix32> 1, 0, 0, 1, 0, 0 </matrix32>
-				<int_array  len="806"> 					-786422, 2, -720887, 2, -720886, 2, -720885, 2, -655352, 2, -655351, 2, -655350, 2, -655349, 2, -655348, 2, -589817, 2, -589816, 2, -589815, 2, -589814, 2, -589813, 2, -589812, 2, -589811, 2, -524282, 2, -524281, 2, -524280, 2, -524279, 2, -524278, 2, -524277, 2, -524276, 2, -524275, 2, -524274, 2, -458747, 2, -458746, 2, -458745, 2, -458744, 2, -458743, 2, -458742, 2, -458741, 2, -458740, 2, -458739, 2, -458738, 2, -458737, 2, -393212, 2, -393211, 2, -393210, 2, -393209, 2, -393208, 2, -393207, 2, -393206, 2, -393205, 2, -393204, 2, -393203, 2, -393202, 2, -393201, 2, -393200, 2, -327677, 2, -327676, 2, -327675, 2, -327674, 2, -327673, 2, -327672, 2, -327671, 2, -327670, 2, -327669, 2, -327668, 2, -327667, 2, -327666, 2, -327665, 2, -327664, 2, -327663, 2, -262142, 2, -262141, 2, -262140, 2, -262139, 2, -262138, 2, -262137, 2, -262136, 2, -262135, 2, -262134, 2, -262133, 2, -262132, 2, -262131, 2, -262130, 2, -262129, 2, -262128, 2, -262127, 2, -262126, 2, -196607, 2, -196606, 2, -196605, 2, -196604, 2, -196603, 2, -196602, 2, -196601, 2, -196600, 2, -196599, 2, -196598, 2, -196597, 2, -196596, 2, -196595, 2, -196594, 2, -196593, 2, -196592, 2, -196591, 2, -196590, 2, -196589, 2, -131072, 2, -131071, 2, -131070, 2, -131069, 2, -131068, 2, -131067, 2, -131066, 2, -131065, 2, -131064, 2, -131063, 2, -131062, 2, -131061, 2, -131060, 2, -131059, 2, -131058, 2, -131057, 2, -131056, 2, -131055, 2, -131054, 2, -131053, 2, -131052, 2, -1, 2, -65536, 2, -65535, 2, -65534, 2, -65533, 2, -65532, 2, -65531, 3, -65530, 3, -65529, 3, -65528, 3, -65527, 3, -65526, 3, -65525, 3, -65524, 3, -65523, 3, -65522, 3, -65521, 3, -65520, 3, -65519, 0, -65518, 0, -65517, 2, -65516, 2, -65515, 2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 2, 5, 3, 6, 3, 7, 3, 8, 3, 9, 3, 10, 3, 11, 3, 12, 7, 13, 7, 14, 3, 15, 3, 16, 3, 17, 0, 18, 0, 19, 2, 20, 2, 21, 2, 22, 2, 65537, 2, 65538, 2, 65539, 2, 65540, 2, 65541, 3, 65542, 3, 65543, 2, 65544, 2, 65545, 2, 65546, 2, 65547, 2, 65548, 2, 65549, 2, 65550, 2, 65551, 2, 65552, 2, 65553, 2, 65554, 2, 65555, 2, 65556, 2, 65557, 2, 65558, 2, 65559, 2, 131074, 2, 131075, 2, 131076, 2, 131077, 3, 131078, 3, 131079, 2, 131080, 2, 131081, 2, 131082, 2, 131083, 2, 131084, 2, 131085, 2, 131086, 2, 131087, 2, 131088, 2, 131089, 2, 131090, 2, 131091, 2, 131092, 2, 131093, 2, 131094, 2, 131095, 2, 131096, 2, 196611, 2, 196612, 2, 196613, 3, 196614, 3, 196615, 7, 196616, 7, 196617, 2, 196618, 2, 196619, 3, 196620, 3, 196621, 3, 196622, 2, 196623, 2, 196624, 2, 196625, 2, 196626, 2, 196627, 2, 196628, 2, 196629, 2, 196630, 2, 196631, 2, 196632, 2, 196633, 2, 262148, 2, 262149, 3, 262150, 3, 262151, 7, 262152, 7, 262153, 2, 262154, 2, 262155, 3, 262156, 3, 262157, 3, 262158, 2, 262159, 2, 262160, 2, 262161, 2, 262162, 2, 262163, 2, 262164, 2, 262165, 2, 262166, 2, 262167, 2, 262168, 2, 262169, 2, 262170, 2, 327685, 3, 327686, 3, 327687, 7, 327688, 7, 327689, 2, 327690, 2, 327691, 3, 327692, 3, 327693, 3, 327694, 2, 327695, 2, 327696, 2, 327697, 2, 327698, 2, 327699, 2, 327700, 2, 327701, 2, 327702, 2, 327703, 2, 327704, 2, 327705, 2, 327706, 2, 327707, 2, 393222, 3, 393223, 7, 393224, 7, 393225, 2, 393226, 2, 393227, 3, 393228, 3, 393229, 3, 393230, 2, 393231, 2, 393232, 2, 393233, 2, 393234, 2, 393235, 2, 393236, 2, 393237, 2, 393238, 2, 393239, 2, 393240, 2, 393241, 2, 393242, 2, 458759, 2, 458760, 2, 458761, 2, 458762, 2, 458763, 3, 458764, 3, 458765, 3, 458766, 2, 458767, 2, 458768, 2, 458769, 2, 458770, 2, 458771, 2, 458772, 2, 458773, 2, 458774, 2, 458775, 2, 458776, 2, 458777, 2, 524296, 2, 524297, 2, 524298, 2, 524299, 3, 524300, 3, 524301, 3, 524302, 2, 524303, 2, 524304, 2, 524305, 2, 524306, 2, 524307, 2, 524308, 2, 524309, 2, 524310, 2, 524311, 2, 524312, 2, 589833, 2, 589834, 2, 589835, 2, 589836, 2, 589837, 2, 589838, 2, 589839, 2, 589840, 2, 589841, 2, 589842, 2, 589843, 2, 589844, 2, 589845, 2, 589846, 2, 589847, 2, 655370, 2, 655371, 2, 655372, 2, 655373, 2, 655374, 2, 655375, 2, 655376, 2, 655377, 2, 655378, 2, 655379, 2, 655380, 2, 655381, 2, 655382, 2, 720907, 2, 720908, 2, 720909, 2, 720910, 7, 720911, 2, 720912, 2, 720913, 2, 720914, 2, 720915, 2, 720916, 2, 720917, 2, 786444, 2, 786445, 2, 786446, 2, 786447, 2, 786448, 2, 786449, 2, 786450, 2, 786451, 2, 786452, 2, 851981, 2, 851982, 2, 851983, 2, 851984, 2, 851985, 2, 851986, 2, 851987, 2, 917518, 2, 917519, 2, 917520, 2, 917521, 2, 917522, 2, 983055, 2, 983056, 2, 983057, 2, 1048592, 2 </int_array>
-				<resource  resource_type="Script" path="local://48">  </resource>
-				<vector2> 167, 203 </vector2>
-				<resource  resource_type="Script" path="local://29">  </resource>
-				<dictionary  shared="false">
-					<string> "_editor_collapsed" </string>
-					<bool> True </bool>
-				</dictionary>
-				<string> "character_1" </string>
-				<string> "Terminal" </string>
-				<nil>  </nil>
-				<string> "Hey, Tr4ce. Anything to report?" </string>
-				<string> "Can this wait? I&apos;m in the middle of some calibrations." </string>
-				<resource  resource_type="Shape2D" path="local://47">  </resource>
-				<matrix32> 1, -0, 0, 1, 12.4609, -19.1499 </matrix32>
-				<vector2> 0, 1 </vector2>
-				<real> 98 </real>
-				<real> 0.1 </real>
-				<real> -158 </real>
-				<real> -77 </real>
-				<real> 81 </real>
-				<resource  external="9">  </resource>
-				<resource  resource_type="Script" path="local://13">  </resource>
-				<vector2> 12.4609, -19.1499 </vector2>
-				<vector2_array  len="4"> 					-80.4609, 86.1499, -53.4609, 113.15, 54.5391, 68.1499, 0.539093, 50.1499 </vector2_array>
-				<vector2> -1, -1 </vector2>
-				<vector2> -13, 68 </vector2>
-				<vector2> 455, 230 </vector2>
-				<vector2> -1, 1 </vector2>
-				<resource  resource_type="Script" path="local://19">  </resource>
-				<dictionary  shared="false">
-					<string> "_editor_collapsed" </string>
-					<bool> True </bool>
-				</dictionary>
-				<string> "Cabinet" </string>
-				<resource  resource_type="Shape2D" path="local://46">  </resource>
-				<matrix32> 1, -0, 0, 1, 0, 0 </matrix32>
-				<dictionary  shared="false">
-					<string> "_editor_collapsed" </string>
-					<bool> True </bool>
-				</dictionary>
-				<real> -41 </real>
-				<real> -149 </real>
-				<real> 87 </real>
-				<real> 32 </real>
-				<resource  external="10">  </resource>
-				<resource  external="11">  </resource>
-				<real> 0.5 </real>
-				<vector2_array  len="4"> 					-67, 22, 41, 67, 113, 31, 32, -41 </vector2_array>
-				<vector2> 60, 32 </vector2>
-				<vector2> -0.8, 1 </vector2>
-				<vector2> 77, 365 </vector2>
-				<resource  resource_type="Script" path="local://59">  </resource>
-				<dictionary  shared="false">
-					<string> "_editor_collapsed" </string>
-					<bool> True </bool>
-				</dictionary>
-				<string> "Engineer" </string>
-				<resource  resource_type="Shape2D" path="local://60">  </resource>
-				<real> 67 </real>
-				<real> 121 </real>
-				<resource  external="12">  </resource>
-				<vector2_array  len="5"> 					13, 67, 31, 94, 76, 103, 121, 76, 31, 40 </vector2_array>
-				<vector2> 59, 77 </vector2>
-				<resource  external="13">  </resource>
-				<resource  external="14">  </resource>
-				<dictionary  shared="false">
-					<string> "__editor_plugin_screen__" </string>
-					<string> "2D" </string>
-					<string> "__editor_plugin_states__" </string>
-					<dictionary  shared="false">
-						<string> "2D" </string>
-						<dictionary  shared="false">
-							<string> "ofs" </string>
 							<vector2> 19.1065, -26.1976 </vector2>
 							<string> "snap_grid" </string>
 							<bool> False </bool>
@@ -1088,7 +789,7 @@
 					<string> "_editor_collapsed" </string>
 					<bool> True </bool>
 				</dictionary>
-				<resource  external="15">  </resource>
+				<resource  external="8">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
 					<string> "2D" </string>
@@ -1253,7 +954,7 @@
 				<real> 4 </real>
 				<real> 188 </real>
 				<string> "save" </string>
-				<resource  external="16">  </resource>
+				<resource  external="9">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
 					<string> "Script" </string>
@@ -1413,7 +1114,7 @@
 				<string> "./menu" </string>
 				<real> 16 </real>
 				<real> 12 </real>
-				<resource  external="17">  </resource>
+				<resource  external="10">  </resource>
 				<real> 680 </real>
 				<resource  resource_type="StyleBox" path="local://2">  </resource>
 				<resource  resource_type="StyleBox" path="local://3">  </resource>
@@ -1825,6 +1526,7 @@
 					<string> "_editor_collapsed" </string>
 					<bool> True </bool>
 				</dictionary>
+				<real> 87 </real>
 				<real> 112 </real>
 				<string> "start over" </string>
 				<dictionary  shared="false">
@@ -1958,6 +1660,7 @@
 						<int> 0 </int>
 					</dictionary>
 				</dictionary>
+				<real> 0.5 </real>
 				<real> 192 </real>
 				<real> 196 </real>
 				<real> 221 </real>
@@ -1965,7 +1668,7 @@
 				<string> "cancel" </string>
 				<real> 250 </real>
 				<string> "main menu" </string>
-				<resource  external="18">  </resource>
+				<resource  external="11">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
 					<string> "Script" </string>
@@ -2129,16 +1832,16 @@
 					<string> "_editor_collapsed" </string>
 					<bool> True </bool>
 				</dictionary>
-				<resource  external="19">  </resource>
+				<resource  external="12">  </resource>
 				<resource  resource_type="StyleBox" path="local://24">  </resource>
 				<real> 70 </real>
 				<real> 53 </real>
-				<resource  external="20">  </resource>
-				<resource  external="21">  </resource>
+				<resource  external="13">  </resource>
+				<resource  external="14">  </resource>
 				<real> 57 </real>
 				<real> 110 </real>
-				<resource  external="22">  </resource>
-				<resource  external="23">  </resource>
+				<resource  external="15">  </resource>
+				<resource  external="16">  </resource>
 				<resource  resource_type="Script" path="local://38">  </resource>
 				<resource  resource_type="Script" path="local://28">  </resource>
 				<string> "0_diagnostic" </string>

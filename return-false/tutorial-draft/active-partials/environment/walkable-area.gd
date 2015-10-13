@@ -124,4 +124,5 @@ func _ready():
 	utils = get_node("/root/utils")
 	
 	outline.hide()
-	set_process_unhandled_input(true)
+	#set_process_unhandled_input(true)
+	
