@@ -143,4 +143,4 @@ func _ready():
 	add_user_signal("done_moving", ["at"])
 	add_user_signal("oriented", ["dir", "at"])
 	
-	set_fixed_process(true)
+	set_fixed_process(false)
