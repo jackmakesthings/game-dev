@@ -10,8 +10,8 @@ var utils = preload("res://scripts/utils.gd").new()
 
 var q
 
-var quests = []
-var quest_states = {}
+var quests = [] setget ,get_quests
+var quest_states = {} setget ,get_quest_states
 
 func get_quests():
 	return quest_states.keys()
@@ -95,7 +95,12 @@ func remove_quest(key, end=null):
 		return true
 
 func _ready():
-	var quest_holder = get_node("/root/scene/quests")
+	var quest_holder
+	if( get_tree().get_root().has_node("/root/scene/quests")):
+		quest_holder = get_tree().get_root().get_node("/root/scene/quests")
+	else:
+		quest_holder = null
+		
 	if( quest_holder != null ):
 		yield(quest_holder, "quests_loaded")
 		for child in quest_holder.get_children():

@@ -11,7 +11,7 @@ var nav
 var tiles
 var outline
 var movement_allowed = true
-var utils = preload("res://scripts/utils.gd").new()
+var utils
 
 const TILE_ATTRACT = 7
 const TILE_TRANSITION = 0
@@ -53,6 +53,8 @@ func _unhandled_input(ev):
 	# Move character around on click
 	if (ev.type == InputEvent.MOUSE_BUTTON and ev.pressed and ev.button_index==1):
 		
+		if( player == null ) :
+			return
 		
 		
 		var begin = player.get_global_pos()
@@ -109,12 +111,15 @@ func _unhandled_input(ev):
 	
 func _ready():
 	# Setup the vars and conditions for this instance
-	scene = get_node("/root/scene")
-	player = scene.get("player")
+	scene = get_parent()
+	if( scene.get("player") != null ):
+		player = scene.get("player")
+	else:
+		player = null
 	
-	body_layer = get_node("nav/floor/bodies")
 	nav = get_node("nav")
-	tiles = get_node("nav/floor")
+	tiles = nav.get_child(0)
+	body_layer = tiles.get_child(0)
 	outline = get_node("destination_sprite")
 	utils = get_node("/root/utils")
 	

@@ -19,10 +19,6 @@ func _setup():
 	rtl.set_size(Vector2(600,400))
 	add_child(rtl)
 	
-	#if( name != "" ):
-	#	rtl.add_text(name)
-	#	rtl.newline()
-	
 	if( age > 0 ):
 		rtl.add_text(str(age))
 		rtl.newline()

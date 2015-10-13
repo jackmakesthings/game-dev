@@ -36,6 +36,7 @@ const TRIGGER_UNIQUE = 3
 var dialog_branches = []
 var has_branches = false
 var branch_root_text = greeting
+var active_branch
 	
 var player_nearby = false
 var can_interact = true
@@ -49,6 +50,7 @@ var MUI = preload("res://active-partials/message-ui/message-ui.xml").instance()
 
 var body_node
 var player
+var quest_loader
 
 var x
 var n
@@ -56,30 +58,42 @@ var n
 signal player_redirected(successful, expected, actual)
 
 
-func setup_MUI(portrait_path=null, labeltext=""):
-	
+
+func set_MUI_portrait(portrait_path):
 	var pic = ImageTexture.new()
-	
-	if portrait_path != null:
-		pic.load(portrait_path)
-		pic = portrait
-	
-	if labeltext != "":
-		label = labeltext
-	
-	MUI.make_portrait(null)
+	pic.load(portrait_path)
+	pic = portrait
 	MUI.make_portrait(pic)
-	MUI.make_dialogue(n)
+
+
+
+func setup_MUI(portrait_path=null, labeltext=""):
+	if portrait_path != null:
+		set_MUI_portrait(portrait_path)
+	
+	
+
+# TODO: fix this --------------
+#	if labeltext != "":
+#		label = labeltext
+#		
+#	MUI.make_dialogue(n)
+#	
+#	MUI.make_portrait(null)
+
 
 
 
 func i_should_go():
-	#var d0 = src["dlg_no_branches"]
 	MUI.clear()
 	MUI.make_dialogue(n)
 	MUI.make_dialogue(fallback_dialogue)
 	MUI.make_close_button()
 	MUI.open()
+	
+# alias for in-joke name
+func decline_conversation():
+	i_should_go()
 
 
 func present_conversations(dialog_branches):	
@@ -91,6 +105,7 @@ func present_conversations(dialog_branches):
 		var branch = dialog_branches[0]
 		init_branch(branch)
 		MUI.open()
+		return true
 	
 	elif( dialog_branches.size() > 1 ):
 		for branch in dialog_branches:
@@ -98,9 +113,8 @@ func present_conversations(dialog_branches):
 			if branch.get("label"):
 				response["text"] = branch["label"]
 			elif branch.get("Q_ID"):
-				response["text"] = branch["Q_ID"]
-			else:
-				return
+				response["text"] = branch["Q_ID"]   # just in case
+				
 			
 		#### this should get refactored into a proper init_branch method
 		# either on NPC or MUI (or on Quest/Branch, maybe)
@@ -130,21 +144,23 @@ func init_branch(branch):
 	var s = quest.get("current_state")
 
 	MUI.clear()
-	MUI.make_dialogue(n)
+	#MUI.make_dialogue(n)
+	
+
 	
 	if( branch.text_at_state(s) == null or branch.responses_at_state(s) == null ):
+		print("No responses. Awkward.")
 		MUI.close()
 		return
+		
 	
 	MUI.make_dialogue(branch.text_at_state(s))
+	
 	for response in branch.responses_at_state(s):
 		branch.build_response(response)
-	
-	
-	quest.connect("quest_completed", self, "flash_popup")
 
-	#MUI.make_close_button()
-	
+		
+	quest.connect("quest_completed", self, "flash_popup")
 
 
 func redirect_player(player, destination):
@@ -156,7 +172,6 @@ func redirect_player(player, destination):
 	utils.fake_click(offset, 1)
 	
 	yield(player, "oriented")
-	
 	emit_signal("player_redirected", player_is_nearby(), destination, player.get_global_pos())
 
 
@@ -207,6 +222,8 @@ func start_interaction():
 		i_should_go()
 	else:
 		var branch_1 = dialog_branches[0]
+		if( branch_1 == null ):
+			MUI.close()
 		if( branch_1 != null ):
 			var branch_1_quest = branch_1.get("owned_by")
 			var branch_1_state = branch_1_quest.get("current_state")
@@ -216,7 +233,13 @@ func start_interaction():
 		present_conversations(dialog_branches)
 
 
+func set_branches():
 
+	yield(quest_loader, "quests_loaded")
+	var nodes = get_node(".").get_children()
+	for n in nodes:
+		if ( n.has_method( "_at_state" )):
+			dialog_branches.append(n)
 
 
 
