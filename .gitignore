@@ -9,3 +9,4 @@ bootstrap-test
 /sandbox
 return-false/tutorial-draft/old-partials
 return-false/tutorial-draft/savegames
+*.scn

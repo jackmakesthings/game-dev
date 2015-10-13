@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resource_file type="PackedScene" subresource_count="8" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
+	<ext_resource path="res://assets/ui/list31 (1).tex" type="Texture" index="2"></ext_resource>
+	<ext_resource path="res://assets/ui/code39 (2).tex" type="Texture" index="4"></ext_resource>
+	<ext_resource path="res://assets/ui/list31.tex" type="Texture" index="3"></ext_resource>
+	<ext_resource path="res://assets/ui.xthm" type="Theme" index="0"></ext_resource>
+	<ext_resource path="res://active-partials/interface/interface.gd" type="Script" index="1"></ext_resource>
+	<ext_resource path="res://assets/ui/code39 (1).tex" type="Texture" index="5"></ext_resource>
+	<resource type="StyleBoxEmpty" path="local://24">
+		<real name="content_margin/left"> -1 </real>
+		<real name="content_margin/right"> -1 </real>
+		<real name="content_margin/top"> -1 </real>
+		<real name="content_margin/bottom"> -1 </real>
+
+	</resource>
+	<main_resource>
+		<dictionary name="_bundled" shared="false">
+			<string> "conn_count" </string>
+			<int> 0 </int>
+			<string> "conns" </string>
+			<int_array  len="0"> 				 </int_array>
+			<string> "names" </string>
+			<string_array  len="34">
+				<string> "interface" </string>
+				<string> "CanvasLayer" </string>
+				<string> "layer" </string>
+				<string> "offset" </string>
+				<string> "rotation" </string>
+				<string> "scale" </string>
+				<string> "Control" </string>
+				<string> "anchor/left" </string>
+				<string> "anchor/top" </string>
+				<string> "anchor/right" </string>
+				<string> "anchor/bottom" </string>
+				<string> "margin/left" </string>
+				<string> "margin/top" </string>
+				<string> "focus/ignore_mouse" </string>
+				<string> "focus/stop_mouse" </string>
+				<string> "size_flags/horizontal" </string>
+				<string> "size_flags/vertical" </string>
+				<string> "theme/theme" </string>
+				<string> "script/script" </string>
+				<string> "Panel" </string>
+				<string> "margin/right" </string>
+				<string> "custom_styles/panel" </string>
+				<string> "buttons" </string>
+				<string> "VBoxContainer" </string>
+				<string> "margin/bottom" </string>
+				<string> "alignment" </string>
+				<string> "journal" </string>
+				<string> "TextureButton" </string>
+				<string> "toggle_mode" </string>
+				<string> "textures/normal" </string>
+				<string> "textures/pressed" </string>
+				<string> "textures/hover" </string>
+				<string> "textures/focused" </string>
+				<string> "menu" </string>
+			</string_array>
+			<string> "node_count" </string>
+			<int> 6 </int>
+			<string> "nodes" </string>
+			<int_array  len="160"> 				-1, -1, 1, 0, -1, 4, 2, 0, 3, 1, 4, 2, 5, 3, 0, 0, 0, 6, 6, -1, 12, 7, 4, 8, 4, 9, 4, 10, 4, 11, 5, 12, 6, 13, 7, 14, 8, 15, 9, 16, 9, 17, 10, 18, 11, 0, 1, 0, 19, 19, -1, 10, 8, 4, 9, 4, 10, 4, 12, 12, 20, 13, 13, 7, 14, 8, 15, 9, 16, 9, 21, 14, 0, 2, 0, 23, 22, -1, 10, 9, 4, 10, 4, 11, 15, 12, 13, 24, 13, 13, 7, 14, 7, 15, 9, 16, 16, 25, 0, 0, 3, 0, 27, 26, -1, 11, 20, 17, 24, 18, 13, 7, 14, 8, 15, 9, 16, 16, 28, 7, 29, 19, 30, 19, 31, 20, 32, 20, 0, 3, 0, 27, 33, -1, 12, 12, 21, 20, 17, 24, 22, 13, 7, 14, 8, 15, 9, 16, 16, 28, 7, 29, 23, 30, 23, 31, 24, 32, 24, 0 </int_array>
+			<string> "variants" </string>
+			<array  len="25" shared="false">
+				<int> 0 </int>
+				<vector2> 0, 0 </vector2>
+				<real> 0 </real>
+				<vector2> 1, 1 </vector2>
+				<int> 1 </int>
+				<real> 100 </real>
+				<real> 200 </real>
+				<bool> False </bool>
+				<bool> True </bool>
+				<int> 2 </int>
+				<resource  external="0">  </resource>
+				<resource  external="1">  </resource>
+				<real> 150 </real>
+				<real> 20 </real>
+				<resource  resource_type="StyleBox" path="local://24">  </resource>
+				<real> 10 </real>
+				<int> 3 </int>
+				<real> 70 </real>
+				<real> 53 </real>
+				<resource  external="2">  </resource>
+				<resource  external="3">  </resource>
+				<real> 57 </real>
+				<real> 110 </real>
+				<resource  external="4">  </resource>
+				<resource  external="5">  </resource>
+			</array>
+			<string> "version" </string>
+			<int> 1 </int>
+		</dictionary>
+
+	</main_resource>
+</resource_file>

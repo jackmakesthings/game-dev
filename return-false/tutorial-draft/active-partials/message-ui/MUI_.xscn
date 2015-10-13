@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resource_file type="PackedScene" subresource_count="9" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
+	<ext_resource path="res://scripts/message-ui.gd" type="Script" index="0"></ext_resource>
+	<ext_resource path="res://assets/fpo/portrait-dude-mohawk.png" type="Texture" index="4"></ext_resource>
+	<ext_resource path="res://assets/fonts/imported/amiga-forever-12.fnt" type="Font" index="5"></ext_resource>
+	<ext_resource path="res://assets/styleboxes/nobg-thin-border.sbx" type="StyleBox" index="3"></ext_resource>
+	<ext_resource path="res://assets/ui.xthm" type="Theme" index="2"></ext_resource>
+	<ext_resource path="res://assets/ui2.xthm" type="Theme" index="1"></ext_resource>
+	<resource type="StyleBoxEmpty" path="local://41">
+		<real name="content_margin/left"> -1 </real>
+		<real name="content_margin/right"> -1 </real>
+		<real name="content_margin/top"> -1 </real>
+		<real name="content_margin/bottom"> -1 </real>
+
+	</resource>
+	<resource type="StyleBoxFlat" path="local://35">
+		<real name="content_margin/left"> -1 </real>
+		<real name="content_margin/right"> -1 </real>
+		<real name="content_margin/top"> -1 </real>
+		<real name="content_margin/bottom"> -1 </real>
+		<color name="bg_color"> 0.121569, 0.121569, 0.121569, 1 </color>
+		<color name="light_color"> 0.8, 0.8, 0.8, 1 </color>
+		<color name="dark_color"> 0.8, 0.8, 0.8, 1 </color>
+		<int name="border_size"> 0 </int>
+		<bool name="border_blend"> False </bool>
+		<bool name="draw_bg"> True </bool>
+
+	</resource>
+	<main_resource>
+		<dictionary name="_bundled" shared="false">
+			<string> "conn_count" </string>
+			<int> 0 </int>
+			<string> "conns" </string>
+			<int_array  len="0"> 				 </int_array>
+			<string> "names" </string>
+			<string_array  len="64">
+				<string> "message-ui" </string>
+				<string> "CanvasLayer" </string>
+				<string> "layer" </string>
+				<string> "offset" </string>
+				<string> "rotation" </string>
+				<string> "scale" </string>
+				<string> "script/script" </string>
+				<string> "__meta__" </string>
+				<string> "popup" </string>
+				<string> "PopupPanel" </string>
+				<string> "visibility/visible" </string>
+				<string> "margin/left" </string>
+				<string> "margin/top" </string>
+				<string> "margin/right" </string>
+				<string> "margin/bottom" </string>
+				<string> "focus/ignore_mouse" </string>
+				<string> "focus/stop_mouse" </string>
+				<string> "size_flags/horizontal" </string>
+				<string> "size_flags/vertical" </string>
+				<string> "theme/theme" </string>
+				<string> "popup/exclusive" </string>
+				<string> "Label" </string>
+				<string> "text" </string>
+				<string> "align" </string>
+				<string> "valign" </string>
+				<string> "percent_visible" </string>
+				<string> "lines_skipped" </string>
+				<string> "max_lines_visible" </string>
+				<string> "dialog-box" </string>
+				<string> "anchor/left" </string>
+				<string> "anchor/top" </string>
+				<string> "anchor/right" </string>
+				<string> "anchor/bottom" </string>
+				<string> "Panel" </string>
+				<string> "HBoxContainer" </string>
+				<string> "rect/min_size" </string>
+				<string> "custom_constants/separation" </string>
+				<string> "alignment" </string>
+				<string> "portraitBox" </string>
+				<string> "ReferenceFrame" </string>
+				<string> "custom_styles/border" </string>
+				<string> "portrait" </string>
+				<string> "TextureFrame" </string>
+				<string> "visibility/behind_parent" </string>
+				<string> "texture" </string>
+				<string> "expand" </string>
+				<string> "textBox" </string>
+				<string> "VBoxContainer" </string>
+				<string> "size_flags/stretch_ratio" </string>
+				<string> "characterNameBox" </string>
+				<string> "Button" </string>
+				<string> "custom_styles/disabled" </string>
+				<string> "custom_fonts/font" </string>
+				<string> "custom_colors/font_color_disabled" </string>
+				<string> "disabled" </string>
+				<string> "toggle_mode" </string>
+				<string> "flat" </string>
+				<string> "PanelContainer" </string>
+				<string> "custom_styles/panel" </string>
+				<string> "RichTextLabel" </string>
+				<string> "custom_constants/line_separation" </string>
+				<string> "bbcode/enabled" </string>
+				<string> "bbcode/bbcode" </string>
+				<string> "visible_characters" </string>
+			</string_array>
+			<string> "node_count" </string>
+			<int> 13 </int>
+			<string> "nodes" </string>
+			<int_array  len="369"> 				-1, -1, 1, 0, -1, 6, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 0, 0, 0, 9, 8, -1, 12, 10, 6, 11, 7, 12, 8, 13, 9, 14, 10, 15, 6, 16, 11, 17, 12, 18, 12, 19, 13, 20, 6, 7, 14, 0, 1, 0, 21, 21, -1, 12, 11, 15, 13, 16, 14, 17, 15, 11, 16, 11, 17, 12, 22, 18, 23, 19, 24, 19, 25, 20, 26, 0, 27, 21, 0, 0, 0, 9, 28, -1, 15, 10, 6, 29, 22, 30, 19, 31, 22, 32, 19, 11, 23, 12, 24, 13, 25, 14, 26, 15, 6, 16, 11, 17, 22, 18, 22, 19, 27, 20, 11, 0, 3, 0, 33, 33, -1, 6, 31, 19, 32, 19, 15, 6, 16, 11, 17, 22, 18, 22, 0, 4, 0, 34, 34, -1, 13, 31, 19, 32, 19, 11, 28, 12, 28, 13, 28, 14, 28, 35, 29, 15, 6, 16, 6, 17, 22, 18, 22, 36, 19, 37, 0, 0, 5, 0, 39, 38, -1, 9, 10, 6, 13, 30, 14, 31, 35, 32, 15, 6, 16, 11, 17, 22, 18, 22, 40, 33, 0, 6, 0, 42, 41, -1, 13, 43, 11, 29, 22, 31, 22, 11, 34, 12, 26, 13, 35, 14, 36, 15, 11, 16, 11, 17, 12, 18, 12, 44, 37, 45, 11, 0, 5, 0, 47, 46, -1, 10, 13, 38, 14, 31, 35, 39, 15, 6, 16, 11, 17, 22, 18, 22, 48, 40, 36, 41, 37, 0, 0, 8, 0, 50, 49, -1, 15, 10, 6, 13, 42, 14, 43, 15, 6, 16, 11, 17, 22, 18, 22, 51, 44, 52, 45, 53, 46, 54, 11, 55, 6, 22, 47, 56, 6, 23, 0, 0, 8, 0, 57, 57, -1, 8, 13, 38, 14, 48, 15, 6, 16, 11, 17, 22, 18, 22, 48, 49, 58, 50, 0, 10, 0, 59, 59, -1, 11, 13, 38, 14, 48, 15, 6, 16, 11, 17, 22, 18, 22, 48, 49, 60, 19, 61, 11, 62, 51, 63, 21, 0, 8, 0, 47, 47, -1, 9, 12, 52, 13, 38, 14, 31, 15, 6, 16, 6, 17, 22, 18, 22, 36, 41, 37, 0, 0 </int_array>
+			<string> "variants" </string>
+			<array  len="53" shared="false">
+				<int> 0 </int>
+				<vector2> 0, 0 </vector2>
+				<real> 0 </real>
+				<vector2> 1, 1 </vector2>
+				<resource  external="0">  </resource>
+				<dictionary  shared="false">
+					<string> "__editor_plugin_screen__" </string>
+					<string> "Script" </string>
+					<string> "__editor_plugin_states__" </string>
+					<dictionary  shared="false">
+						<string> "2D" </string>
+						<dictionary  shared="false">
+							<string> "ofs" </string>
+							<vector2> -237.685, 306.565 </vector2>
+							<string> "snap_grid" </string>
+							<bool> False </bool>
+							<string> "snap_offset" </string>
+							<vector2> 0, 0 </vector2>
+							<string> "snap_pixel" </string>
+							<bool> False </bool>
+							<string> "snap_relative" </string>
+							<bool> False </bool>
+							<string> "snap_rotation" </string>
+							<bool> False </bool>
+							<string> "snap_rotation_offset" </string>
+							<real> 0 </real>
+							<string> "snap_rotation_step" </string>
+							<real> 0.261799 </real>
+							<string> "snap_show_grid" </string>
+							<bool> False </bool>
+							<string> "snap_step" </string>
+							<vector2> 10, 10 </vector2>
+							<string> "zoom" </string>
+							<real> 0.814505 </real>
+						</dictionary>
+						<string> "3D" </string>
+						<dictionary  shared="false">
+							<string> "ambient_light_color" </string>
+							<color> 0.15, 0.15, 0.15, 1 </color>
+							<string> "default_light" </string>
+							<bool> True </bool>
+							<string> "default_srgb" </string>
+							<bool> False </bool>
+							<string> "deflight_rot_x" </string>
+							<real> 0.942478 </real>
+							<string> "deflight_rot_y" </string>
+							<real> 0.628319 </real>
+							<string> "fov" </string>
+							<real> 45 </real>
+							<string> "show_grid" </string>
+							<bool> True </bool>
+							<string> "show_origin" </string>
+							<bool> True </bool>
+							<string> "viewport_mode" </string>
+							<int> 1 </int>
+							<string> "viewports" </string>
+							<array  len="4" shared="false">
+								<dictionary  shared="false">
+									<string> "distance" </string>
+									<real> 4 </real>
+									<string> "listener" </string>
+									<bool> True </bool>
+									<string> "pos" </string>
+									<vector3> 0, 0, 0 </vector3>
+									<string> "use_environment" </string>
+									<bool> False </bool>
+									<string> "use_orthogonal" </string>
+									<bool> False </bool>
+									<string> "x_rot" </string>
+									<real> 0 </real>
+									<string> "y_rot" </string>
+									<real> 0 </real>
+								</dictionary>
+								<dictionary  shared="false">
+									<string> "distance" </string>
+									<real> 4 </real>
+									<string> "listener" </string>
+									<bool> False </bool>
+									<string> "pos" </string>
+									<vector3> 0, 0, 0 </vector3>
+									<string> "use_environment" </string>
+									<bool> False </bool>
+									<string> "use_orthogonal" </string>
+									<bool> False </bool>
+									<string> "x_rot" </string>
+									<real> 0 </real>
+									<string> "y_rot" </string>
+									<real> 0 </real>
+								</dictionary>
+								<dictionary  shared="false">
+									<string> "distance" </string>
+									<real> 4 </real>
+									<string> "listener" </string>
+									<bool> False </bool>
+									<string> "pos" </string>
+									<vector3> 0, 0, 0 </vector3>
+									<string> "use_environment" </string>
+									<bool> False </bool>
+									<string> "use_orthogonal" </string>
+									<bool> False </bool>
+									<string> "x_rot" </string>
+									<real> 0 </real>
+									<string> "y_rot" </string>
+									<real> 0 </real>
+								</dictionary>
+								<dictionary  shared="false">
+									<string> "distance" </string>
+									<real> 4 </real>
+									<string> "listener" </string>
+									<bool> False </bool>
+									<string> "pos" </string>
+									<vector3> 0, 0, 0 </vector3>
+									<string> "use_environment" </string>
+									<bool> False </bool>
+									<string> "use_orthogonal" </string>
+									<bool> False </bool>
+									<string> "x_rot" </string>
+									<real> 0 </real>
+									<string> "y_rot" </string>
+									<real> 0 </real>
+								</dictionary>
+							</array>
+							<string> "zfar" </string>
+							<real> 500 </real>
+							<string> "znear" </string>
+							<real> 0.1 </real>
+						</dictionary>
+					</dictionary>
+					<string> "__editor_run_settings__" </string>
+					<dictionary  shared="false">
+						<string> "custom_args" </string>
+						<string> "-l $scene" </string>
+						<string> "run_mode" </string>
+						<int> 0 </int>
+					</dictionary>
+				</dictionary>
+				<bool> False </bool>
+				<real> 279 </real>
+				<real> 153 </real>
+				<real> 495 </real>
+				<real> 198 </real>
+				<bool> True </bool>
+				<int> 2 </int>
+				<resource  external="1">  </resource>
+				<dictionary  shared="false">
+					<string> "_editor_collapsed" </string>
+					<bool> True </bool>
+				</dictionary>
+				<real> -45 </real>
+				<real> 261 </real>
+				<real> 45 </real>
+				<string> "TASK COMPLETE" </string>
+				<int> 1 </int>
+				<real> 1 </real>
+				<int> -1 </int>
+				<int> 3 </int>
+				<real> 380 </real>
+				<real> 200 </real>
+				<real> -380 </real>
+				<real> 20 </real>
+				<resource  external="2">  </resource>
+				<real> 10 </real>
+				<vector2> 160, 160 </vector2>
+				<real> 184 </real>
+				<real> 160 </real>
+				<vector2> 150, 150 </vector2>
+				<resource  external="3">  </resource>
+				<real> 65 </real>
+				<real> -65 </real>
+				<real> 150 </real>
+				<resource  external="4">  </resource>
+				<real> 740 </real>
+				<vector2> 0, 160 </vector2>
+				<real> 3 </real>
+				<int> -2 </int>
+				<real> 525 </real>
+				<real> 42 </real>
+				<resource  resource_type="StyleBox" path="local://41">  </resource>
+				<resource  external="5">  </resource>
+				<color> 1, 0.473427, 0.130869, 1 </color>
+				<string> "ENGINEER DANIELS:" </string>
+				<real> 108 </real>
+				<real> 2 </real>
+				<resource  resource_type="StyleBox" path="local://35">  </resource>
+				<string> "" </string>
+				<real> 106 </real>
+			</array>
+			<string> "version" </string>
+			<int> 1 </int>
+		</dictionary>
+
+	</main_resource>
+</resource_file>
