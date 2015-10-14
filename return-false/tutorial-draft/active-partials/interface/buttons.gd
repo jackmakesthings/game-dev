@@ -134,12 +134,13 @@ func _cancel_quit():
 
 
 # make utils available ASAP
+#func _enter_tree():
+	
+
+
+
 func _enter_tree():
 	utils = get_node("/root/utils")
-
-
-
-func _ready():
 	# cache nodes and paths
 	
 	# buttons
@@ -162,6 +163,6 @@ func _ready():
 	
 	# hook up signals where needed
 	# todo - either connect all via scene or all via code
-	save_btn.connect("pressed", self, "_on_save_pressed")
-	load_btn.connect("pressed", self, "_on_load_pressed")
+#	save_btn.connect("pressed", self, "_on_save_pressed")
+#	load_btn.connect("pressed", self, "_on_load_pressed")
 	quit_btn.connect("pressed", self, "_on_quit_pressed")

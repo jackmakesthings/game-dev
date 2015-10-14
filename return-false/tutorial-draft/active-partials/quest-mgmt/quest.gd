@@ -85,12 +85,15 @@ func attach_branch(branch):
 		print("Error; no NPC found called ", actor_ref)
 		return
 	else:
+		remove_child(branch)
 		var actor = npc_root.get_node(actor_ref)
 		branch.set("Q_ID", Q_ID)
 		branch.set_name(Q_ID)
 		branch.set("owned_by", self)
 		
 		actor.add_child(branch)
+		actor["dialog_branches"].append(branch)
+		actor["has_branches"] = true
 		if ( actors.find(actor.get_name()) == -1 ):
 			actors.append(actor_ref)
 
@@ -98,10 +101,11 @@ func attach_branch(branch):
 # it takes the child branches of this quest node and moves them
 # so they're children of their associated NPCs instead
 func attach_branches():
+
+	npc_root = get_tree().get_root().get_node("/root/scene").get("npc_root")
 	var branch_nodes = get_children()
 	for branch in branch_nodes:
 	
-		remove_child(branch)
 		# this is how we selectively ignore nodes that aren't branches
 		if branch.has_method("_at_state"):
 			attach_branch(branch)
@@ -148,7 +152,7 @@ func is_attached():
 func activate(start_state=init_at):
 	if( is_active() == true ):
 		print("Quest ", Q_ID, " is already active.")
-		return
+	#	return
 	else:
 		self.add_to_group("active_quests")
 		create_branches_from_data(data)
@@ -202,7 +206,17 @@ func complete(end_at="100"):
 #func _init(data_source_path):
 #	self.data_source = data_source_path
 
+func refresh():
+	var start_at = get_current_state()
+	_init()
+#	_enter_tree()
+#	_ready()
 
+#	is_active = false
+#	#deactivate()
+#	create_branches_from_data(data)
+#	_setup()
+#	activate(start_at)
 
 
 func _enter_tree():
@@ -210,7 +224,13 @@ func _enter_tree():
 	utils = get_node("/root/utils")
 	paths = get_node("/root/paths")
 	
-	npc_root = get_node("/root/scene/stage/nav/floor/bodies")
+	#npc_root = get_node("/root/scene/stage/nav/floor/bodies")
+	var sceneroot = get_tree().get_root().get_node("/root/scene")
+	if( sceneroot.get("stage") ):
+		var stage = sceneroot["stage"]
+		if ( stage.get("body_layer") ):
+			npc_root = stage["body_layer"]
+			
 	quest_root = get_parent()
 
 	add_user_signal("branches_added", [Q_ID, actors])
@@ -236,6 +256,7 @@ func _ready():
 	quest_root = get_parent()
 	_setup()
 	activate()
+	#set_current_state("20")
 
 
 func _test():

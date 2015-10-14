@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resource_file type="PackedScene" subresource_count="6" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
 	<ext_resource path="res://active-partials/player/player-k2d.gd" type="Script" index="0"></ext_resource>
-	<ext_resource path="res://assets/fpo/trace.png" type="Texture" index="1"></ext_resource>
 	<ext_resource path="res://assets/fpo/temp-trace-back.png" type="Texture" index="2"></ext_resource>
+	<ext_resource path="res://assets/fpo/trace.png" type="Texture" index="1"></ext_resource>
 	<resource type="CircleShape2D" path="local://42">
 		<real name="custom_solver_bias"> 0 </real>
 		<real name="radius"> 16.5 </real>
 
 	</resource>
 	<resource type="GDScript" path="local://49">
-		<string name="script/source"> "extends Camera2D&#000a;const REF_HEIGHT = 600 #basis&#000a;var zoom = 1 # lower = zoomed in&#000a;&#000a;func _ready():&#000a;&#0009;get_viewport().connect(&quot;size_changed&quot;, self, &quot;adjust_zoom&quot;)&#000a;&#0009;adjust_zoom()&#000a;&#000a;func adjust_zoom():&#000a;    var screen = get_tree().get_root().get_rect().size&#000a;    var width = screen.x&#000a;    var height = screen.y&#000a;    var ratio = width / height&#000a;    var zoom = (REF_HEIGHT * ratio / width) * self.zoom&#000a;    set_zoom( Vector2(zoom, zoom) )&#000a;&#000a;" </string>
+		<string name="script/source"> "extends Camera2D&#000a;const REF_HEIGHT = 600 #basis&#000a;var zoom = 1 # lower = zoomed in&#000a;&#000a;func _ready():&#000a;&#0009;#var vp = get_viewport()&#000a;&#0009;#if not vp.is_connected(&quot;size_changed&quot;, self, &quot;adjust_zoom&quot;):&#000a;&#0009;#&#0009;get_viewport().connect(&quot;size_changed&quot;, self, &quot;adjust_zoom&quot;)&#000a;&#0009;adjust_zoom()&#000a;&#000a;func adjust_zoom():&#000a;    var screen = get_tree().get_root().get_rect().size&#000a;    var width = screen.x&#000a;    var height = screen.y&#000a;    var ratio = width / height&#000a;    var zoom = (REF_HEIGHT * ratio / width) * self.zoom&#000a;    set_zoom( Vector2(zoom, zoom) )&#000a;&#000a;" </string>
 
 	</resource>
 	<main_resource>
@@ -78,7 +78,7 @@
 				<resource  external="0">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
-					<string> "2D" </string>
+					<string> "Script" </string>
 					<string> "__editor_plugin_states__" </string>
 					<dictionary  shared="false">
 						<string> "2D" </string>
@@ -197,6 +197,11 @@
 							<real> 500 </real>
 							<string> "znear" </string>
 							<real> 0.1 </real>
+						</dictionary>
+						<string> "Anim" </string>
+						<dictionary  shared="false">
+							<string> "visible" </string>
+							<bool> False </bool>
 						</dictionary>
 					</dictionary>
 					<string> "__editor_run_settings__" </string>

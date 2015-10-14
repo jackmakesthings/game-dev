@@ -5,7 +5,7 @@
 extends Node2D
 
 # instance-specific vars
-export var id = "character_1"
+export(String) var id
 export(String) var label
 export(Texture) var portrait
 
@@ -17,8 +17,8 @@ export(int, "Character", "Complex", "Simple", "Overheard") var npc_type = 0
 export(int, "Direct", "Proximity", "Line of sight", "Unique") var trigger_mode = 0
 
 # conversation roots
-export(String) var greeting = "Hey, Tr4ce. Anything to report?" 
-export(String) var fallback_dialogue = "Can this wait? I'm in the middle of some calibrations."
+var greeting = "Hey, Tr4ce. Anything to report?" 
+var fallback_dialogue = "Can this wait? I'm in the middle of some calibrations."
 
 
 const T_CHAR = 0
@@ -33,8 +33,8 @@ const TRIGGER_LOS = 2
 const TRIGGER_UNIQUE = 3
 
 
-var dialog_branches = []
-var has_branches = false
+var dialog_branches
+var has_branches
 var branch_root_text = greeting
 var active_branch
 	
@@ -58,6 +58,8 @@ var n
 signal player_redirected(successful, expected, actual)
 
 
+func _init():
+	dialog_branches = Array()
 
 func set_MUI_portrait(portrait_path):
 	var pic = ImageTexture.new()
@@ -190,6 +192,7 @@ func player_is_nearby():
 
 
 func _on_click():
+	
 	player.set("path", Array())
 	if( player_is_nearby() == false):
 		redirect_player(player, x)
@@ -205,20 +208,18 @@ func _on_click():
 		get_tree().set_input_as_handled()
 		start_interaction()
 
-
-
-
-
 func start_interaction():
 	setup_MUI(null, label)
+
 	
 	var pause = utils.wait(0.5)
 	add_child(pause)
 	pause.start()
 	yield(pause, "timeout")
+	check_branches()
 	
-	print(dialog_branches)
 	if( dialog_branches.empty() ):
+		print("no dialogs!")
 		i_should_go()
 	else:
 		var branch_1 = dialog_branches[0]
@@ -234,32 +235,48 @@ func start_interaction():
 
 
 func set_branches():
+	if( quest_loader == null ):
+		return
+	else:
+		yield(quest_loader, "quests_loaded")
+		check_branches()
 
-	yield(quest_loader, "quests_loaded")
-	var nodes = get_node(".").get_children()
-	for n in nodes:
-		if ( n.has_method( "_at_state" )):
-			dialog_branches.append(n)
+func check_branches():
+	dialog_branches = Array()
+	var nodes = get_child_count()
+	for n in range(0, nodes-1):
+		if ( get_child(n).has_method( "_at_state" )):
+			dialog_branches.append(get_child(n))
+			has_branches = true
+			continue
 
-
+func _process(delta):
+	if ( get_tree().get_root().has_node("/root/scene") ):
+		if( get_tree().get_root().get_node("/root/scene").get("player") != null ):
+			player = get_tree().get_root().get_node("scene").get("player")
+		if get_tree().get_root().get_node("/root/scene").get("MUI") != null:
+			MUI = get_tree().get_root().get_node("/root/scene").get("MUI")
 
 func _ready():
-
-	add_user_signal("player_redirected", ["successful", "expected", "actual"])
-
+	set_process(true)
 	utils = get_node("/root/utils")
 	game = get_node("/root/game")
-	player = get_node("/root/scene").get("player")
 	body_node = get_node("body")
 	x = get_node("X")
-
-	if( is_inside_tree() ):
-		MUI = get_node("/root/scene").get_child(0)
-	
 	n = MUI.make_formatted_name(label)
-	
 	body_node.connect("body_enter_shape", self, "_on_body_enter")
 	body_node.connect("body_exit_shape", self, "_on_body_exit")
+	set_branches()
 
-	#if( trigger_mode == TRIGGER_DIRECT ):
-	get_node("body/Sprite").connect("pressed", self, "_on_click")
+
+func _enter_tree():
+	var sceneroot = get_tree().get_root()
+
+	if( sceneroot.has_node("stage") ):
+		if( sceneroot.get_node("stage").get("player") != null ):
+			var scene = sceneroot.get_node("stage")
+			player = scene.get("player")
+			MUI = scene.get("MUI")
+			get_node("body/Sprite").connect("pressed", self, "_on_click")
+
+	check_branches()

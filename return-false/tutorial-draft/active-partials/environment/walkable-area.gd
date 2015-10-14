@@ -95,6 +95,7 @@ func _unhandled_input(ev):
 			if( ev.meta == 1 ):
 				outline.hide()
 		
+			print("before yield in walkable-area.gd")
 			yield(player, "done_moving")
 			outline.hide()
 			get_surrounding_tiles(player.get_global_pos())
@@ -104,11 +105,16 @@ func _unhandled_input(ev):
 				player.orient(orient)
 			
 			
-			var transitioning = check_for_transition(player.get_global_pos())
-			if( transitioning == true ):
-				utils.goto_scene("res://adjacent-scene.xml", {})
+		#	var transitioning = check_for_transition(player.get_global_pos())
+		#	if( transitioning == true ):
+		#		utils.goto_scene("res://adjacent-scene.xml", {})
 				
-	
+
+func _enter_tree():
+	scene = get_parent()
+	if( scene.get("player") != null ):
+		player = scene.get("player")	
+			
 func _ready():
 	# Setup the vars and conditions for this instance
 	scene = get_parent()
@@ -118,11 +124,11 @@ func _ready():
 		player = null
 	
 	nav = get_node("nav")
-	tiles = nav.get_child(0)
-	body_layer = tiles.get_child(0)
+	tiles = get_node("nav/floor")
+	body_layer = get_node("nav/floor/bodies")
 	outline = get_node("destination_sprite")
 	utils = get_node("/root/utils")
 	
 	outline.hide()
-	#set_process_unhandled_input(true)
+	set_process_unhandled_input(true)
 	
