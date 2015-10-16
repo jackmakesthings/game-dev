@@ -124,7 +124,7 @@ func update_path(start, end, nav):
 	path.invert() # not sure why it's done this way but it works
 	
 	destination = end
-	emit_signal("start_moving", start, end, path)
+	#emit_signal("start_moving", start, end, path)
 	set_fixed_process(true) # start walkin'
 
 
@@ -132,18 +132,23 @@ func update_path(start, end, nav):
 func _ready():
 	nav = get_node("/root/scene/stage/nav")
 	spr = get_node("Sprite")
-	if( front_texture == null ):
-		front_texture = spr.get_texture()
+	
 	is_moving = false
 	
-	add_user_signal("done_moving", [])
-	
+	if( front_texture == null ):
+		front_texture = spr.get_texture()
+		
 	# don't break if there is no back texture set
 	if( back_texture == null):
 		back_texture = front_texture
-		
-	#add_user_signal("start_moving", ["from", "to", "path"])
-	#add_user_signal("done_moving", ["at"])
-	#add_user_signal("oriented", ["dir", "at"])
 	
+	if( ! get_tree().has_user_signal("start_moving") ):
+		get_tree().add_user_signal("start_moving", ["from", "to", "path"])
+	
+	if( ! get_tree().has_user_signal("done_moving") ):
+		get_tree().add_user_signal("done_moving", ["at"])
+		
+	#if( ! get_tree().has_user_signal("oriented") ):
+	get_tree().add_user_signal("oriented", ["dir", "at"])
+		
 	set_fixed_process(false)

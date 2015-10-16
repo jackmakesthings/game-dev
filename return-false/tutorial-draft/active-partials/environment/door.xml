@@ -7,7 +7,7 @@
 
 	</resource>
 	<resource type="GDScript" path="local://66">
-		<string name="script/source"> "extends &quot;res://active-partials/environment/door.gd&quot;" </string>
+		<string name="script/source"> "extends &quot;res://active-partials/environment/door.gd&quot;&#000a;&#000a;func _init():&#000a;&#0009;new_stage_path = &quot;res://active-partials/environment/FPO_stage_a.xml&quot;&#000a;&#0009;new_stage = load(new_stage_path)" </string>
 
 	</resource>
 	<main_resource>
@@ -15,9 +15,9 @@
 			<string> "conn_count" </string>
 			<int> 2 </int>
 			<string> "conns" </string>
-			<int_array  len="12"> 				0, 0, 20, 19, 2, 0, 0, 0, 22, 21, 2, 0 </int_array>
+			<int_array  len="12"> 				0, 0, 22, 21, 2, 0, 0, 0, 24, 23, 2, 0 </int_array>
 			<string> "names" </string>
-			<string_array  len="23">
+			<string_array  len="25">
 				<string> "door" </string>
 				<string> "Area2D" </string>
 				<string> "transform/pos" </string>
@@ -31,6 +31,8 @@
 				<string> "angular_damp" </string>
 				<string> "script/script" </string>
 				<string> "__meta__" </string>
+				<string> "new_stage_path" </string>
+				<string> "door_id" </string>
 				<string> "CollisionShape2D" </string>
 				<string> "shape" </string>
 				<string> "trigger" </string>
@@ -45,9 +47,9 @@
 			<string> "node_count" </string>
 			<int> 3 </int>
 			<string> "nodes" </string>
-			<int_array  len="51"> 				-1, -1, 1, 0, -1, 11, 2, 0, 3, 1, 4, 2, 5, 3, 6, 1, 7, 4, 8, 5, 9, 6, 10, 7, 11, 8, 12, 9, 0, 0, 0, 13, 13, -1, 3, 14, 2, 15, 1, 16, 10, 0, 1, 0, 17, 17, -1, 1, 18, 11, 0 </int_array>
+			<int_array  len="55"> 				-1, -1, 1, 0, -1, 13, 2, 0, 3, 1, 4, 2, 5, 3, 6, 1, 7, 4, 8, 5, 9, 6, 10, 7, 11, 8, 12, 9, 13, 10, 14, 10, 0, 0, 0, 15, 15, -1, 3, 16, 2, 17, 1, 18, 11, 0, 1, 0, 19, 19, -1, 1, 20, 12, 0 </int_array>
 			<string> "variants" </string>
-			<array  len="12" shared="false">
+			<array  len="13" shared="false">
 				<vector2> 305.352, 333.111 </vector2>
 				<bool> True </bool>
 				<resource  resource_type="Shape2D" path="local://65">  </resource>
@@ -193,6 +195,7 @@
 						<int> 0 </int>
 					</dictionary>
 				</dictionary>
+				<nil>  </nil>
 				<int> 0 </int>
 				<resource  external="0">  </resource>
 			</array>

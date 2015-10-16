@@ -5,7 +5,7 @@
 extends Node
 
 # Q_ID = quest id, i.e. "tutorial" or "0_diagnostic"
-export(String) var Q_ID
+var Q_ID
 
 # important nodes we'll need to reference, once we're in the scene
 var game
@@ -16,7 +16,7 @@ var quest_root
 var npc_root
 
 # todo: see if this can be removed now
-var branch_group = str(Q_ID) + "-branches"
+var branch_group
 
 # each quest gets its own file, which gets set as data_source
 # this is then parsed to create a data object
@@ -55,6 +55,10 @@ signal state_changed(quest_id, old_state, new_state)
 signal quest_completed(quest_id, end_at)
 
 
+
+func _init():
+	branch_group = "" + str(Q_ID) + "-branches"
+
 func load_data(data_source):
 	data = utils.get_json(data_source)
 	branches = data["branches"]
@@ -69,7 +73,7 @@ func load_data(data_source):
 
 # apply data from our parsed json to the Branch template
 # and add the resulting branch node to the scene as children
-func create_branches_from_data(data):
+func create_branches_from_data(data=data):
 	for branch in branches:
 		var branch_node = Branch.new()
 		for key in branch:
@@ -82,7 +86,6 @@ func create_branches_from_data(data):
 func attach_branch(branch):
 	var actor_ref = branch.get("actor")
 	if not npc_root.has_node(actor_ref):
-		print("Error; no NPC found called ", actor_ref)
 		return
 	else:
 		remove_child(branch)
@@ -90,6 +93,14 @@ func attach_branch(branch):
 		branch.set("Q_ID", Q_ID)
 		branch.set_name(Q_ID)
 		branch.set("owned_by", self)
+		
+		
+		var actor_owned = actor.get_children()
+		for child in actor_owned:
+			if( child.get_name() == branch.get_name() ):
+				return
+			else:
+				continue
 		
 		actor.add_child(branch)
 		actor["dialog_branches"].append(branch)
@@ -112,7 +123,7 @@ func attach_branches():
 		else:
 			return
 			
-	branches_ready = true	
+	branches_ready = true
 	emit_signal("branches_added", Q_ID, actors)
 
 
@@ -122,11 +133,10 @@ func attach_branches():
 func detach_branch(branch):
 	var actor_ref = branch.get("actor")
 	if not npc_root.has_node(actor_ref):
-		print("Error; no NPC found called ", actor_ref)
 		return
 	else:
 		var actor = npc_root.get_node(actor_ref)
-		if( actor["dialog_branches"].find(Q_ID) ):
+		if( actor["dialog_branches"].find(Q_ID) > -1 ):
 			actor["dialog_branches"].remove(Q_ID)
 			actor["has_branches"] = (actor["dialog_branches"].size() > 0)
 	branch.queue_free()
@@ -152,7 +162,6 @@ func is_attached():
 func activate(start_state=init_at):
 	if( is_active() == true ):
 		print("Quest ", Q_ID, " is already active.")
-	#	return
 	else:
 		self.add_to_group("active_quests")
 		create_branches_from_data(data)
@@ -184,8 +193,6 @@ func set_current_state(state):
 		
 	emit_signal("state_changed", Q_ID, prev_state, state)
 	
-	#yield(self, "state_changed")
-	
 	if( state == end_at ):
 		print("Complete!")
 		MUI.flash_popup()
@@ -203,20 +210,11 @@ func complete(end_at="100"):
 	emit_signal("quest_completed", Q_ID, end_at)
 
 
-#func _init(data_source_path):
-#	self.data_source = data_source_path
-
 func refresh():
+	# cache the state just in case
 	var start_at = get_current_state()
-	_init()
-#	_enter_tree()
-#	_ready()
-
-#	is_active = false
-#	#deactivate()
-#	create_branches_from_data(data)
-#	_setup()
-#	activate(start_at)
+	create_branches_from_data(data)
+	attach_branches()
 
 
 func _enter_tree():
@@ -224,7 +222,6 @@ func _enter_tree():
 	utils = get_node("/root/utils")
 	paths = get_node("/root/paths")
 	
-	#npc_root = get_node("/root/scene/stage/nav/floor/bodies")
 	var sceneroot = get_tree().get_root().get_node("/root/scene")
 	if( sceneroot.get("stage") ):
 		var stage = sceneroot["stage"]
@@ -256,7 +253,6 @@ func _ready():
 	quest_root = get_parent()
 	_setup()
 	activate()
-	#set_current_state("20")
 
 
 func _test():

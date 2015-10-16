@@ -3,7 +3,8 @@
 extends Area2D
 
 var new_stage
-var new_stage_path
+export(String, FILE) var new_stage_path
+export(int) var door_id
 var scene
 var player
 
@@ -29,18 +30,18 @@ func _ready():
 #		connect("body_exit", self, "_on_body_exit")
 #
 func _on_body_enter(body):
-	print("someone is here")
 	if body extends PLAYER_CLASS:
-		print("player entered!")
 		player = body
-		yield(player, "done_moving")
-		print("player stopped moving")
+		yield(body, "done_moving")
 		
 		var bodies = get_overlapping_bodies()
 		if( bodies.find( body ) > -1 ):
-		#if( get_overlapping_bodies().find(player) ):
+			#if( pre_enter()):
 			use_door()
 
+
+func pre_enter():
+	return true
 
 func _on_body_exit(body):
 	pass
@@ -59,5 +60,6 @@ func use_door():
 	yield(p, "timeout")
 	
 	scene = get_tree().get_root().get_node("/root/scene")
+	#if( has_user_signal("body_enter") and is_connected("body_enter", self, "_on_body_enter") ):
 	disconnect("body_enter", self, "_on_body_enter")
-	scene.call("swap_stage", new_stage)
+	scene.call_deferred("swap_stage", new_stage)

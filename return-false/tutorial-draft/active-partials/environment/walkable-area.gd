@@ -95,7 +95,6 @@ func _unhandled_input(ev):
 			if( ev.meta == 1 ):
 				outline.hide()
 		
-			print("before yield in walkable-area.gd")
 			yield(player, "done_moving")
 			outline.hide()
 			get_surrounding_tiles(player.get_global_pos())
@@ -104,11 +103,7 @@ func _unhandled_input(ev):
 			if( not orient == null ):
 				player.orient(orient)
 			
-			
-		#	var transitioning = check_for_transition(player.get_global_pos())
-		#	if( transitioning == true ):
-		#		utils.goto_scene("res://adjacent-scene.xml", {})
-				
+
 
 func _enter_tree():
 	scene = get_parent()

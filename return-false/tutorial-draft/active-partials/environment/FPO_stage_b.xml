@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="17" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
+<resource_file type="PackedScene" subresource_count="18" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
 	<ext_resource path="res://assets/tiles/white-iso-tile-flat.png" type="Texture" index="2"></ext_resource>
 	<ext_resource path="res://assets/blue-iso-tile-1.png" type="Texture" index="5"></ext_resource>
 	<ext_resource path="res://assets/grate-iso-tile-1.png" type="Texture" index="4"></ext_resource>
-	<ext_resource path="res://assets/indigo-iso-tile-1.png" type="Texture" index="8"></ext_resource>
 	<ext_resource path="res://assets/tiles/dotted-white-tile.png" type="Texture" index="6"></ext_resource>
-	<ext_resource path="res://assets/tiles/green-outline-glow.png" type="Texture" index="9"></ext_resource>
+	<ext_resource path="res://assets/tiles/green-outline-glow.png" type="Texture" index="7"></ext_resource>
 	<ext_resource path="res://assets/tiles/black-iso-tile-flat.png" type="Texture" index="1"></ext_resource>
 	<ext_resource path="res://assets/blue-iso-tile-flat-2.png" type="Texture" index="0"></ext_resource>
 	<ext_resource path="res://assets/tiles/red-iso-tile-flat.png" type="Texture" index="3"></ext_resource>
-	<ext_resource path="res://active-partials/environment/door.gd" type="Script" index="7"></ext_resource>
+	<ext_resource path="res://active-partials/environment/stairs.xml" type="PackedScene" index="9"></ext_resource>
+	<ext_resource path="res://active-partials/environment/door.xml" type="PackedScene" index="8"></ext_resource>
 	<resource type="GDScript" path="local://61">
 		<string name="script/source"> "#####&#000a;# walkable stage, with floor tilemap and input handling for clicks&#000a;&#000a;extends Node2D&#000a;&#000a;var scene&#000a;var player&#000a;&#000a;var body_layer&#000a;var nav&#000a;var tiles&#000a;var outline&#000a;var movement_allowed = true&#000a;var utils&#000a;&#000a;const TILE_ATTRACT = 7&#000a;const TILE_TRANSITION = 0&#000a;&#000a;# shortcut for checking which tile type is at (x,y)&#000a;func tile_at(point):&#000a;&#0009;var map_point = tiles.world_to_map(point)&#000a;&#0009;var tile_id = tiles.get_cell(map_point.x, map_point.y)&#000a;&#0009;return tile_id&#000a;&#000a;# helper for checking all tiles adjacent to the one at a given point&#000a;func get_surrounding_tiles(point):&#000a;&#0009;var map_pos = tiles.world_to_map(point)&#000a;&#0009;var NW = tiles.get_cell(map_pos.x-1, map_pos.y)&#000a;&#0009;var NE = tiles.get_cell(map_pos.x, map_pos.y-1)&#000a;&#0009;var SE = tiles.get_cell(map_pos.x+1, map_pos.y)&#000a;&#0009;var SW = tiles.get_cell(map_pos.x, map_pos.y+1)&#000a;&#0009;return Array([NW, NE, SE, SW])&#000a;&#000a;func check_for_attractor(point):&#000a;&#0009;var borders = get_surrounding_tiles(point)&#000a;&#0009;if( borders[0] == TILE_ATTRACT ):&#000a;&#0009;&#0009;return &quot;NW&quot;&#000a;&#0009;elif( borders[1] == TILE_ATTRACT ):&#000a;&#0009;&#0009;return &quot;NE&quot;&#000a;&#0009;elif( borders[2] == TILE_ATTRACT ):&#000a;&#0009;&#0009;return &quot;SE&quot;&#000a;&#0009;elif( borders[3] == TILE_ATTRACT ):&#000a;&#0009;&#0009;return &quot;SW&quot;&#000a;&#0009;else:&#000a;&#0009;&#0009;return null&#000a;&#0009;&#0009;&#000a;&#000a;func check_for_transition(point):&#000a;&#0009;return ( tile_at(point) == TILE_TRANSITION )&#000a;&#000a;func _unhandled_input(ev):&#000a;&#000a;&#0009;# Move character around on click&#000a;&#0009;if (ev.type == InputEvent.MOUSE_BUTTON and ev.pressed and ev.button_index==1):&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;if( player == null ) :&#000a;&#0009;&#0009;&#0009;return&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;var begin = player.get_global_pos()&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;# This massive chunk of code cancels out the effects of the camera&#000a;&#0009;&#0009;# on our positioning calculations&#000a;&#0009;&#0009;var end = get_viewport_transform().affine_inverse().xform( ev.global_pos )&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;# Flag used mostly for placement of the outline&#000a;&#0009;&#0009;var adjust_path = false&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;# Find the closest tile center to where we clicked&#000a;&#0009;&#0009;var tilepos = tiles.world_to_map(end)&#000a;&#0009;&#0009;var mappos = tiles.map_to_world(tilepos)&#000a;&#0009;&#0009;end = mappos + Vector2(0, 18) &#000a;&#0009;&#0009;&#000a;&#0009;&#0009;# Store which type of tile is at that point&#000a;&#0009;&#0009;var tile_at = tiles.get_cell(tilepos.x, tilepos.y)&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;# if the player clicked an un-walkable tile,&#000a;&#0009;&#0009;# we&apos;ll remove the end point from the calculated path&#000a;&#0009;&#0009;# so the targeting outline shows where it will really end up&#000a;&#0009;&#0009;if ( tiles.get_tileset().tile_get_navigation_polygon(tile_at) == null ):&#000a;&#0009;&#0009;&#0009;adjust_path = true&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;if( movement_allowed ):&#000a;&#0009;&#0009;&#0009;player.update_path(begin, end, nav);&#000a;&#0009;&#0009;&#0009;outline.show()&#000a;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;&#0009;if( adjust_path ):&#000a;&#0009;&#0009;&#0009;&#0009;outline.set_global_pos(player.path[1])&#000a;&#0009;&#0009;&#0009;&#0009;player.path[0] = player.path[1]&#000a;&#0009;&#0009;&#0009;else:&#000a;&#0009;&#0009;&#0009;&#0009;outline.set_global_pos(end)&#000a;&#0009;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;&#0009;if( ev.meta == 1 ):&#000a;&#0009;&#0009;&#0009;&#0009;outline.hide()&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;&#0009;yield(player, &quot;done_moving&quot;)&#000a;&#0009;&#0009;&#0009;outline.hide()&#000a;&#0009;&#0009;&#0009;get_surrounding_tiles(player.get_global_pos())&#000a;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;&#0009;var orient = check_for_attractor(player.get_global_pos())&#000a;&#0009;&#0009;&#0009;if( not orient == null ):&#000a;&#0009;&#0009;&#0009;&#0009;player.orient(orient)&#000a;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;&#0009;var transitioning = check_for_transition(player.get_global_pos())&#000a;&#0009;&#0009;&#0009;if( transitioning == true ):&#000a;&#0009;&#0009;&#0009;&#0009;utils.goto_scene(&quot;res://adjacent-scene.xml&quot;, {})&#000a;&#0009;&#0009;&#0009;&#0009;&#000a;&#0009;&#000a;func _ready():&#000a;&#0009;# Setup the vars and conditions for this instance&#000a;&#0009;scene = get_parent()&#000a;&#0009;if( scene.get(&quot;player&quot;) != null ):&#000a;&#0009;&#0009;player = scene.get(&quot;player&quot;)&#000a;&#0009;else:&#000a;&#0009;&#0009;player = null&#000a;&#0009;&#000a;&#0009;nav = get_node(&quot;nav&quot;)&#000a;&#0009;tiles = get_node(&quot;nav/floor&quot;)&#000a;&#0009;body_layer = get_node(&quot;nav/floor/bodies&quot;)&#000a;&#0009;outline = get_node(&quot;destination_sprite&quot;)&#000a;&#0009;utils = get_node(&quot;/root/utils&quot;)&#000a;&#0009;&#000a;&#0009;outline.hide()&#000a;&#0009;#set_process_unhandled_input(true)&#000a;&#0009;&#000a;&#000a;&#000a;func _on_Area2D_body_enter( body ):&#000a;&#000a;&#0009;yield(player, &quot;done_moving&quot;)&#000a;&#0009;player[&quot;path&quot;] = Array()&#000a;&#0009;&#000a;&#0009;var p = Timer.new()&#000a;&#0009;p.set_wait_time(1)&#000a;&#0009;p.set_one_shot(true)&#000a;&#0009;add_child(p)&#000a;&#0009;p.start()&#000a;&#0009;&#000a;&#0009;yield(p, &quot;timeout&quot;)&#000a;&#0009;&#000a;&#0009;&#000a;&#0009;scene = get_parent()&#000a;&#0009;scene = get_tree().get_root().get_node(&quot;/root/scene&quot;)&#000a;&#0009;print(get_tree().get_current_scene())&#000a;&#0009;var new_stage = preload(&quot;res://active-partials/environment/FPO_stage_a.xml&quot;)&#000a;&#000a;&#0009;#scene.call(&quot;swap_scenes&quot;, [&quot;stage&quot;, new_stage] )&#000a;&#0009;#pass # replace with function body&#000a;&#0009;get_node(&quot;nav/floor/bodies/Area2D&quot;).disconnect(&quot;body_enter&quot;, get_node(&quot;.&quot;), &quot;_on_Area2D_body_enter&quot;)&#000a;&#0009;#scene.swap_stage(new_stage)&#000a;&#0009;scene.call(&quot;swap_stage&quot;, new_stage)&#000a;&#000a;func _on_Area2D_body_exit( body ):&#000a;&#0009;pass" </string>
 
@@ -112,22 +112,24 @@
 		<string name="script/source"> "# gdscript 14518, main.xml&#000a;# attached to stage/nav/floor/bodies (ysort node containing npcs)&#000a;extends YSort&#000a;&#000a;#func _ready():&#000a;#&#0009;add_user_signal(&quot;player_redirected&quot;, [&quot;successful&quot;, &quot;expected&quot;, &quot;actual&quot;])" </string>
 
 	</resource>
-	<resource type="CircleShape2D" path="local://65">
-		<real name="custom_solver_bias"> 0 </real>
-		<real name="radius"> 40 </real>
+	<resource type="GDScript" path="local://64">
+		<string name="script/source"> "extends &quot;res://active-partials/environment/door.gd&quot;&#000a;&#000a;func _init():&#000a;&#0009;new_stage_path = &quot;res://active-partials/environment/FPO_stage_a.xml&quot;&#000a;&#0009;new_stage = load(new_stage_path)" </string>
+
+	</resource>
+	<resource type="GDScript" path="local://65">
+		<string name="script/source"> "extends &quot;res://active-partials/environment/door.gd&quot;&#000a;&#000a;func _init():&#000a;&#0009;new_stage_path = &quot;res://active-partials/environment/FPO_stage_a.xml&quot;&#000a;&#0009;new_stage = load(new_stage_path)&#000a;&#000a;func _on_door_mouse_enter():&#000a;&#0009;get_node(&quot;CollisionShape2D/icon&quot;).show()&#000a;#pass # replace with function body&#000a;&#000a;&#000a;func _on_door_mouse_exit():&#000a;&#0009;get_node(&quot;CollisionShape2D/icon&quot;).hide()&#000a;&#0009;#pass # replace with function body&#000a;" </string>
 
 	</resource>
 	<main_resource>
 		<dictionary name="_bundled" shared="false">
 			<string> "conn_count" </string>
-			<int> 2 </int>
+			<int> 0 </int>
 			<string> "conns" </string>
-			<int_array  len="12"> 				4, 4, 46, 45, 2, 0, 4, 4, 48, 47, 2, 0 </int_array>
+			<int_array  len="0"> 				 </int_array>
 			<string> "names" </string>
-			<string_array  len="49">
+			<string_array  len="38">
 				<string> "stage" </string>
 				<string> "Node2D" </string>
-				<string> "z/z" </string>
 				<string> "script/script" </string>
 				<string> "__meta__" </string>
 				<string> "nav" </string>
@@ -150,42 +152,188 @@
 				<string> "tile_data" </string>
 				<string> "bodies" </string>
 				<string> "YSort" </string>
+				<string> "z/z" </string>
 				<string> "sort/enabled" </string>
+				<string> "destination_sprite" </string>
+				<string> "Sprite" </string>
+				<string> "visibility/visible" </string>
+				<string> "texture" </string>
 				<string> "door" </string>
 				<string> "Area2D" </string>
+				<string> "_import_path" </string>
 				<string> "transform/pos" </string>
-				<string> "input/pickable" </string>
-				<string> "shapes/0/shape" </string>
-				<string> "shapes/0/transform" </string>
-				<string> "shapes/0/trigger" </string>
-				<string> "gravity_vec" </string>
-				<string> "gravity" </string>
-				<string> "linear_damp" </string>
-				<string> "angular_damp" </string>
-				<string> "CollisionShape2D" </string>
-				<string> "shape" </string>
-				<string> "trigger" </string>
-				<string> "_update_shape_index" </string>
-				<string> "Sprite" </string>
-				<string> "texture" </string>
-				<string> "destination_sprite" </string>
-				<string> "visibility/visible" </string>
-				<string> "_on_body_enter" </string>
-				<string> "body_enter" </string>
-				<string> "_on_body_exit" </string>
-				<string> "body_exit" </string>
+				<string> "new_stage_path" </string>
+				<string> "door_id" </string>
+				<string> "doors" </string>
+				<string> "stairs" </string>
 			</string_array>
 			<string> "node_count" </string>
-			<int> 8 </int>
+			<int> 7 </int>
 			<string> "nodes" </string>
-			<int_array  len="128"> 				-1, -1, 1, 0, -1, 3, 2, 0, 3, 1, 4, 2, 0, 0, 0, 6, 5, -1, 0, 0, 1, 0, 8, 7, -1, 14, 9, 3, 10, 4, 11, 5, 12, 6, 13, 7, 14, 0, 15, 3, 16, 8, 17, 9, 18, 10, 19, 11, 20, 3, 21, 3, 22, 12, 0, 2, 0, 24, 23, -1, 3, 2, 3, 25, 8, 3, 13, 0, 3, 0, 27, 26, -1, 10, 28, 14, 29, 8, 30, 15, 31, 16, 32, 8, 33, 17, 34, 18, 35, 19, 36, 10, 3, 20, 0, 4, 0, 37, 37, -1, 3, 38, 15, 39, 8, 40, 21, 0, 5, 0, 41, 41, -1, 1, 42, 22, 0, 0, 0, 41, 43, -1, 2, 44, 9, 42, 23, 0 </int_array>
+			<int_array  len="121"> 				-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 0, 0, 0, 5, 4, -1, 0, 0, 1, 0, 7, 6, -1, 15, 8, 2, 9, 3, 10, 4, 11, 5, 12, 6, 13, 7, 14, 2, 15, 8, 16, 9, 17, 10, 18, 11, 19, 2, 20, 2, 21, 12, 3, 13, 0, 2, 0, 23, 22, -1, 3, 24, 2, 25, 8, 2, 14, 0, 0, 0, 27, 26, -1, 2, 28, 9, 29, 15, 0, 0, 0, 31, 30, 16, 7, 32, 17, 28, 9, 33, 18, 2, 19, 3, 20, 34, 21, 35, 22, 1, 36, 0, 0, 31, 37, 23, 6, 32, 17, 33, 24, 2, 25, 3, 26, 34, 21, 35, 7, 1, 36 </int_array>
 			<string> "variants" </string>
-			<array  len="24" shared="false">
-				<int> 2 </int>
+			<array  len="27" shared="false">
 				<resource  resource_type="Script" path="local://61">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
 					<string> "2D" </string>
+					<string> "__editor_plugin_states__" </string>
+					<dictionary  shared="false">
+						<string> "2D" </string>
+						<dictionary  shared="false">
+							<string> "ofs" </string>
+							<vector2> -477.671, -201.4 </vector2>
+							<string> "snap_grid" </string>
+							<bool> False </bool>
+							<string> "snap_offset" </string>
+							<vector2> 0, 0 </vector2>
+							<string> "snap_pixel" </string>
+							<bool> False </bool>
+							<string> "snap_relative" </string>
+							<bool> False </bool>
+							<string> "snap_rotation" </string>
+							<bool> False </bool>
+							<string> "snap_rotation_offset" </string>
+							<real> 0 </real>
+							<string> "snap_rotation_step" </string>
+							<real> 0.261799 </real>
+							<string> "snap_show_grid" </string>
+							<bool> False </bool>
+							<string> "snap_step" </string>
+							<vector2> 10, 10 </vector2>
+							<string> "zoom" </string>
+							<real> 0.54036 </real>
+						</dictionary>
+						<string> "3D" </string>
+						<dictionary  shared="false">
+							<string> "ambient_light_color" </string>
+							<color> 0.15, 0.15, 0.15, 1 </color>
+							<string> "default_light" </string>
+							<bool> True </bool>
+							<string> "default_srgb" </string>
+							<bool> False </bool>
+							<string> "deflight_rot_x" </string>
+							<real> 0.942478 </real>
+							<string> "deflight_rot_y" </string>
+							<real> 0.628319 </real>
+							<string> "fov" </string>
+							<real> 45 </real>
+							<string> "show_grid" </string>
+							<bool> True </bool>
+							<string> "show_origin" </string>
+							<bool> True </bool>
+							<string> "viewport_mode" </string>
+							<int> 1 </int>
+							<string> "viewports" </string>
+							<array  len="4" shared="false">
+								<dictionary  shared="false">
+									<string> "distance" </string>
+									<real> 4 </real>
+									<string> "listener" </string>
+									<bool> True </bool>
+									<string> "pos" </string>
+									<vector3> 0, 0, 0 </vector3>
+									<string> "use_environment" </string>
+									<bool> False </bool>
+									<string> "use_orthogonal" </string>
+									<bool> False </bool>
+									<string> "x_rot" </string>
+									<real> 0 </real>
+									<string> "y_rot" </string>
+									<real> 0 </real>
+								</dictionary>
+								<dictionary  shared="false">
+									<string> "distance" </string>
+									<real> 4 </real>
+									<string> "listener" </string>
+									<bool> False </bool>
+									<string> "pos" </string>
+									<vector3> 0, 0, 0 </vector3>
+									<string> "use_environment" </string>
+									<bool> False </bool>
+									<string> "use_orthogonal" </string>
+									<bool> False </bool>
+									<string> "x_rot" </string>
+									<real> 0 </real>
+									<string> "y_rot" </string>
+									<real> 0 </real>
+								</dictionary>
+								<dictionary  shared="false">
+									<string> "distance" </string>
+									<real> 4 </real>
+									<string> "listener" </string>
+									<bool> False </bool>
+									<string> "pos" </string>
+									<vector3> 0, 0, 0 </vector3>
+									<string> "use_environment" </string>
+									<bool> False </bool>
+									<string> "use_orthogonal" </string>
+									<bool> False </bool>
+									<string> "x_rot" </string>
+									<real> 0 </real>
+									<string> "y_rot" </string>
+									<real> 0 </real>
+								</dictionary>
+								<dictionary  shared="false">
+									<string> "distance" </string>
+									<real> 4 </real>
+									<string> "listener" </string>
+									<bool> False </bool>
+									<string> "pos" </string>
+									<vector3> 0, 0, 0 </vector3>
+									<string> "use_environment" </string>
+									<bool> False </bool>
+									<string> "use_orthogonal" </string>
+									<bool> False </bool>
+									<string> "x_rot" </string>
+									<real> 0 </real>
+									<string> "y_rot" </string>
+									<real> 0 </real>
+								</dictionary>
+							</array>
+							<string> "zfar" </string>
+							<real> 500 </real>
+							<string> "znear" </string>
+							<real> 0.1 </real>
+						</dictionary>
+						<string> "Anim" </string>
+						<dictionary  shared="false">
+							<string> "visible" </string>
+							<bool> False </bool>
+						</dictionary>
+					</dictionary>
+					<string> "__editor_run_settings__" </string>
+					<dictionary  shared="false">
+						<string> "custom_args" </string>
+						<string> "-l $scene" </string>
+						<string> "run_mode" </string>
+						<int> 0 </int>
+					</dictionary>
+				</dictionary>
+				<int> 1 </int>
+				<resource  resource_type="TileSet" path="local://62">  </resource>
+				<vector2> 72, 36 </vector2>
+				<int> 8 </int>
+				<matrix32> 1, 0, 0, 1, 0, 0 </matrix32>
+				<int> 2 </int>
+				<bool> True </bool>
+				<bool> False </bool>
+				<real> 1 </real>
+				<real> 0 </real>
+				<int_array  len="806"> 					-786422, 2, -720887, 2, -720886, 2, -720885, 2, -655352, 2, -655351, 2, -655350, 2, -655349, 2, -655348, 2, -589817, 2, -589816, 2, -589815, 2, -589814, 2, -589813, 2, -589812, 2, -589811, 2, -524282, 2, -524281, 2, -524280, 2, -524279, 2, -524278, 2, -524277, 2, -524276, 2, -524275, 2, -524274, 2, -458747, 2, -458746, 2, -458745, 2, -458744, 2, -458743, 2, -458742, 2, -458741, 2, -458740, 2, -458739, 2, -458738, 2, -458737, 2, -393212, 2, -393211, 2, -393210, 2, -393209, 2, -393208, 2, -393207, 2, -393206, 2, -393205, 2, -393204, 2, -393203, 2, -393202, 2, -393201, 2, -393200, 2, -327677, 2, -327676, 2, -327675, 2, -327674, 2, -327673, 2, -327672, 2, -327671, 2, -327670, 2, -327669, 2, -327668, 2, -327667, 2, -327666, 2, -327665, 2, -327664, 2, -327663, 2, -262142, 2, -262141, 2, -262140, 2, -262139, 2, -262138, 2, -262137, 2, -262136, 2, -262135, 2, -262134, 2, -262133, 2, -262132, 2, -262131, 2, -262130, 2, -262129, 2, -262128, 2, -262127, 2, -262126, 2, -196607, 2, -196606, 2, -196605, 2, -196604, 2, -196603, 2, -196602, 2, -196601, 2, -196600, 2, -196599, 2, -196598, 2, -196597, 2, -196596, 2, -196595, 2, -196594, 2, -196593, 2, -196592, 2, -196591, 2, -196590, 2, -196589, 2, -131072, 2, -131071, 2, -131070, 2, -131069, 2, -131068, 2, -131067, 2, -131066, 2, -131065, 2, -131064, 2, -131063, 2, -131062, 2, -131061, 2, -131060, 2, -131059, 2, -131058, 2, -131057, 2, -131056, 2, -131055, 2, -131054, 2, -131053, 2, -131052, 2, -1, 2, -65536, 2, -65535, 2, -65534, 2, -65533, 2, -65532, 2, -65531, 3, -65530, 3, -65529, 3, -65528, 3, -65527, 3, -65526, 3, -65525, 3, -65524, 3, -65523, 3, -65522, 3, -65521, 3, -65520, 3, -65519, 0, -65518, 0, -65517, 2, -65516, 2, -65515, 2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 2, 5, 3, 6, 3, 7, 3, 8, 3, 9, 3, 10, 3, 11, 3, 12, 7, 13, 7, 14, 3, 15, 3, 16, 3, 17, 0, 18, 0, 19, 2, 20, 2, 21, 2, 22, 2, 65537, 2, 65538, 2, 65539, 2, 65540, 2, 65541, 3, 65542, 3, 65543, 2, 65544, 2, 65545, 2, 65546, 2, 65547, 2, 65548, 2, 65549, 2, 65550, 2, 65551, 2, 65552, 2, 65553, 2, 65554, 2, 65555, 2, 65556, 2, 65557, 2, 65558, 2, 65559, 2, 131074, 2, 131075, 2, 131076, 2, 131077, 3, 131078, 3, 131079, 2, 131080, 2, 131081, 2, 131082, 2, 131083, 2, 131084, 2, 131085, 2, 131086, 2, 131087, 2, 131088, 2, 131089, 2, 131090, 2, 131091, 2, 131092, 2, 131093, 2, 131094, 2, 131095, 2, 131096, 2, 196611, 2, 196612, 2, 196613, 3, 196614, 3, 196615, 2, 196616, 2, 196617, 2, 196618, 2, 196619, 2, 196620, 2, 196621, 2, 196622, 2, 196623, 2, 196624, 2, 196625, 2, 196626, 2, 196627, 2, 196628, 2, 196629, 2, 196630, 2, 196631, 2, 196632, 2, 196633, 2, 262148, 2, 262149, 3, 262150, 3, 262151, 2, 262152, 2, 262153, 2, 262154, 2, 262155, 2, 262156, 2, 262157, 2, 262158, 2, 262159, 2, 262160, 2, 262161, 2, 262162, 2, 262163, 2, 262164, 2, 262165, 2, 262166, 2, 262167, 2, 262168, 2, 262169, 2, 262170, 2, 327685, 3, 327686, 3, 327687, 2, 327688, 2, 327689, 2, 327690, 2, 327691, 2, 327692, 2, 327693, 2, 327694, 2, 327695, 2, 327696, 2, 327697, 2, 327698, 2, 327699, 2, 327700, 2, 327701, 2, 327702, 2, 327703, 2, 327704, 2, 327705, 2, 327706, 2, 327707, 2, 393222, 3, 393223, 2, 393224, 2, 393225, 2, 393226, 2, 393227, 2, 393228, 2, 393229, 2, 393230, 2, 393231, 2, 393232, 2, 393233, 2, 393234, 2, 393235, 2, 393236, 2, 393237, 2, 393238, 2, 393239, 2, 393240, 2, 393241, 2, 393242, 2, 458759, 2, 458760, 2, 458761, 2, 458762, 2, 458763, 2, 458764, 2, 458765, 2, 458766, 2, 458767, 2, 458768, 2, 458769, 2, 458770, 2, 458771, 2, 458772, 2, 458773, 2, 458774, 2, 458775, 2, 458776, 2, 458777, 2, 524296, 2, 524297, 2, 524298, 2, 524299, 2, 524300, 2, 524301, 2, 524302, 2, 524303, 2, 524304, 2, 524305, 2, 524306, 2, 524307, 2, 524308, 2, 524309, 2, 524310, 2, 524311, 2, 524312, 2, 589833, 2, 589834, 2, 589835, 2, 589836, 2, 589837, 2, 589838, 2, 589839, 2, 589840, 2, 589841, 2, 589842, 2, 589843, 2, 589844, 2, 589845, 2, 589846, 2, 589847, 2, 655370, 2, 655371, 2, 655372, 2, 655373, 2, 655374, 2, 655375, 2, 655376, 2, 655377, 2, 655378, 2, 655379, 2, 655380, 2, 655381, 2, 655382, 2, 720907, 2, 720908, 2, 720909, 2, 720910, 7, 720911, 2, 720912, 2, 720913, 2, 720914, 2, 720915, 2, 720916, 2, 720917, 2, 786444, 2, 786445, 2, 786446, 2, 786447, 2, 786448, 2, 786449, 2, 786450, 2, 786451, 2, 786452, 2, 851981, 2, 851982, 2, 851983, 2, 851984, 2, 851985, 2, 851986, 2, 851987, 2, 917518, 2, 917519, 2, 917520, 2, 917521, 2, 917522, 2, 983055, 2, 983056, 2, 983057, 2, 1048592, 2 </int_array>
+				<dictionary  shared="false">
+					<string> "_edit_lock_" </string>
+					<bool> True </bool>
+				</dictionary>
+				<resource  resource_type="Script" path="local://63">  </resource>
+				<resource  external="7">  </resource>
+				<resource  external="8">  </resource>
+				<node_path> "" </node_path>
+				<vector2> 745.799, 49.9665 </vector2>
+				<resource  resource_type="Script" path="local://64">  </resource>
+				<dictionary  shared="false">
+					<string> "__editor_plugin_screen__" </string>
+					<string> "Script" </string>
 					<string> "__editor_plugin_states__" </string>
 					<dictionary  shared="false">
 						<string> "2D" </string>
@@ -319,27 +467,147 @@
 						<int> 0 </int>
 					</dictionary>
 				</dictionary>
-				<int> 1 </int>
-				<resource  resource_type="TileSet" path="local://62">  </resource>
-				<vector2> 72, 36 </vector2>
-				<int> 8 </int>
-				<matrix32> 1, 0, 0, 1, 0, 0 </matrix32>
-				<bool> True </bool>
-				<bool> False </bool>
-				<real> 1 </real>
-				<real> 0 </real>
-				<int_array  len="806"> 					-786422, 2, -720887, 2, -720886, 2, -720885, 2, -655352, 2, -655351, 2, -655350, 2, -655349, 2, -655348, 2, -589817, 2, -589816, 2, -589815, 2, -589814, 2, -589813, 2, -589812, 2, -589811, 2, -524282, 2, -524281, 2, -524280, 2, -524279, 2, -524278, 2, -524277, 2, -524276, 2, -524275, 2, -524274, 2, -458747, 2, -458746, 2, -458745, 2, -458744, 2, -458743, 2, -458742, 2, -458741, 2, -458740, 2, -458739, 2, -458738, 2, -458737, 2, -393212, 2, -393211, 2, -393210, 2, -393209, 2, -393208, 2, -393207, 2, -393206, 2, -393205, 2, -393204, 2, -393203, 2, -393202, 2, -393201, 2, -393200, 2, -327677, 2, -327676, 2, -327675, 2, -327674, 2, -327673, 2, -327672, 2, -327671, 2, -327670, 2, -327669, 2, -327668, 2, -327667, 2, -327666, 2, -327665, 2, -327664, 2, -327663, 2, -262142, 2, -262141, 2, -262140, 2, -262139, 2, -262138, 2, -262137, 2, -262136, 2, -262135, 2, -262134, 2, -262133, 2, -262132, 2, -262131, 2, -262130, 2, -262129, 2, -262128, 2, -262127, 2, -262126, 2, -196607, 2, -196606, 2, -196605, 2, -196604, 2, -196603, 2, -196602, 2, -196601, 2, -196600, 2, -196599, 2, -196598, 2, -196597, 2, -196596, 2, -196595, 2, -196594, 2, -196593, 2, -196592, 2, -196591, 2, -196590, 2, -196589, 2, -131072, 2, -131071, 2, -131070, 2, -131069, 2, -131068, 2, -131067, 2, -131066, 2, -131065, 2, -131064, 2, -131063, 2, -131062, 2, -131061, 2, -131060, 2, -131059, 2, -131058, 2, -131057, 2, -131056, 2, -131055, 2, -131054, 2, -131053, 2, -131052, 2, -1, 2, -65536, 2, -65535, 2, -65534, 2, -65533, 2, -65532, 2, -65531, 3, -65530, 3, -65529, 3, -65528, 3, -65527, 3, -65526, 3, -65525, 3, -65524, 3, -65523, 3, -65522, 3, -65521, 3, -65520, 3, -65519, 0, -65518, 0, -65517, 2, -65516, 2, -65515, 2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 2, 5, 3, 6, 3, 7, 3, 8, 3, 9, 3, 10, 3, 11, 3, 12, 7, 13, 7, 14, 3, 15, 3, 16, 3, 17, 0, 18, 0, 19, 2, 20, 2, 21, 2, 22, 2, 65537, 2, 65538, 2, 65539, 2, 65540, 2, 65541, 3, 65542, 3, 65543, 2, 65544, 2, 65545, 2, 65546, 2, 65547, 2, 65548, 2, 65549, 2, 65550, 2, 65551, 2, 65552, 2, 65553, 2, 65554, 2, 65555, 2, 65556, 2, 65557, 2, 65558, 2, 65559, 2, 131074, 2, 131075, 2, 131076, 2, 131077, 3, 131078, 3, 131079, 2, 131080, 2, 131081, 2, 131082, 2, 131083, 2, 131084, 2, 131085, 2, 131086, 2, 131087, 2, 131088, 2, 131089, 2, 131090, 2, 131091, 2, 131092, 2, 131093, 2, 131094, 2, 131095, 2, 131096, 2, 196611, 2, 196612, 2, 196613, 3, 196614, 3, 196615, 2, 196616, 2, 196617, 2, 196618, 2, 196619, 2, 196620, 2, 196621, 2, 196622, 2, 196623, 2, 196624, 2, 196625, 2, 196626, 2, 196627, 2, 196628, 2, 196629, 2, 196630, 2, 196631, 2, 196632, 2, 196633, 2, 262148, 2, 262149, 3, 262150, 3, 262151, 2, 262152, 2, 262153, 2, 262154, 2, 262155, 2, 262156, 2, 262157, 2, 262158, 2, 262159, 2, 262160, 2, 262161, 2, 262162, 2, 262163, 2, 262164, 2, 262165, 2, 262166, 2, 262167, 2, 262168, 2, 262169, 2, 262170, 2, 327685, 3, 327686, 3, 327687, 2, 327688, 2, 327689, 2, 327690, 2, 327691, 2, 327692, 2, 327693, 2, 327694, 2, 327695, 2, 327696, 2, 327697, 2, 327698, 2, 327699, 2, 327700, 2, 327701, 2, 327702, 2, 327703, 2, 327704, 2, 327705, 2, 327706, 2, 327707, 2, 393222, 3, 393223, 2, 393224, 2, 393225, 2, 393226, 2, 393227, 2, 393228, 2, 393229, 2, 393230, 2, 393231, 2, 393232, 2, 393233, 2, 393234, 2, 393235, 2, 393236, 2, 393237, 2, 393238, 2, 393239, 2, 393240, 2, 393241, 2, 393242, 2, 458759, 2, 458760, 2, 458761, 2, 458762, 2, 458763, 2, 458764, 2, 458765, 2, 458766, 2, 458767, 2, 458768, 2, 458769, 2, 458770, 2, 458771, 2, 458772, 2, 458773, 2, 458774, 2, 458775, 2, 458776, 2, 458777, 2, 524296, 2, 524297, 2, 524298, 2, 524299, 2, 524300, 2, 524301, 2, 524302, 2, 524303, 2, 524304, 2, 524305, 2, 524306, 2, 524307, 2, 524308, 2, 524309, 2, 524310, 2, 524311, 2, 524312, 2, 589833, 2, 589834, 2, 589835, 2, 589836, 2, 589837, 2, 589838, 2, 589839, 2, 589840, 2, 589841, 2, 589842, 2, 589843, 2, 589844, 2, 589845, 2, 589846, 2, 589847, 2, 655370, 2, 655371, 2, 655372, 2, 655373, 2, 655374, 2, 655375, 2, 655376, 2, 655377, 2, 655378, 2, 655379, 2, 655380, 2, 655381, 2, 655382, 2, 720907, 2, 720908, 2, 720909, 2, 720910, 7, 720911, 2, 720912, 2, 720913, 2, 720914, 2, 720915, 2, 720916, 2, 720917, 2, 786444, 2, 786445, 2, 786446, 2, 786447, 2, 786448, 2, 786449, 2, 786450, 2, 786451, 2, 786452, 2, 851981, 2, 851982, 2, 851983, 2, 851984, 2, 851985, 2, 851986, 2, 851987, 2, 917518, 2, 917519, 2, 917520, 2, 917521, 2, 917522, 2, 983055, 2, 983056, 2, 983057, 2, 1048592, 2 </int_array>
-				<resource  resource_type="Script" path="local://63">  </resource>
-				<vector2> 305.352, 333.111 </vector2>
-				<resource  resource_type="Shape2D" path="local://65">  </resource>
-				<matrix32> 1, -0, 0, 1, 0, 0 </matrix32>
-				<vector2> 0, 1 </vector2>
-				<real> 98 </real>
-				<real> 0.1 </real>
-				<resource  external="7">  </resource>
-				<int> 0 </int>
-				<resource  external="8">  </resource>
+				<string> "res://active-partials/environment/FPO_stage_a.xml" </string>
+				<nil>  </nil>
 				<resource  external="9">  </resource>
+				<vector2> 540, 370 </vector2>
+				<resource  resource_type="Script" path="local://65">  </resource>
+				<dictionary  shared="false">
+					<string> "__editor_plugin_screen__" </string>
+					<string> "Script" </string>
+					<string> "__editor_plugin_states__" </string>
+					<dictionary  shared="false">
+						<string> "2D" </string>
+						<dictionary  shared="false">
+							<string> "ofs" </string>
+							<vector2> -83.0496, 135.397 </vector2>
+							<string> "snap_grid" </string>
+							<bool> False </bool>
+							<string> "snap_offset" </string>
+							<vector2> 0, 0 </vector2>
+							<string> "snap_pixel" </string>
+							<bool> False </bool>
+							<string> "snap_relative" </string>
+							<bool> False </bool>
+							<string> "snap_rotation" </string>
+							<bool> False </bool>
+							<string> "snap_rotation_offset" </string>
+							<real> 0 </real>
+							<string> "snap_rotation_step" </string>
+							<real> 0.261799 </real>
+							<string> "snap_show_grid" </string>
+							<bool> False </bool>
+							<string> "snap_step" </string>
+							<vector2> 10, 10 </vector2>
+							<string> "zoom" </string>
+							<real> 1 </real>
+						</dictionary>
+						<string> "3D" </string>
+						<dictionary  shared="false">
+							<string> "ambient_light_color" </string>
+							<color> 0.15, 0.15, 0.15, 1 </color>
+							<string> "default_light" </string>
+							<bool> True </bool>
+							<string> "default_srgb" </string>
+							<bool> False </bool>
+							<string> "deflight_rot_x" </string>
+							<real> 0.942478 </real>
+							<string> "deflight_rot_y" </string>
+							<real> 0.628319 </real>
+							<string> "fov" </string>
+							<real> 45 </real>
+							<string> "show_grid" </string>
+							<bool> True </bool>
+							<string> "show_origin" </string>
+							<bool> True </bool>
+							<string> "viewport_mode" </string>
+							<int> 1 </int>
+							<string> "viewports" </string>
+							<array  len="4" shared="false">
+								<dictionary  shared="false">
+									<string> "distance" </string>
+									<real> 4 </real>
+									<string> "listener" </string>
+									<bool> True </bool>
+									<string> "pos" </string>
+									<vector3> 0, 0, 0 </vector3>
+									<string> "use_environment" </string>
+									<bool> False </bool>
+									<string> "use_orthogonal" </string>
+									<bool> False </bool>
+									<string> "x_rot" </string>
+									<real> 0 </real>
+									<string> "y_rot" </string>
+									<real> 0 </real>
+								</dictionary>
+								<dictionary  shared="false">
+									<string> "distance" </string>
+									<real> 4 </real>
+									<string> "listener" </string>
+									<bool> False </bool>
+									<string> "pos" </string>
+									<vector3> 0, 0, 0 </vector3>
+									<string> "use_environment" </string>
+									<bool> False </bool>
+									<string> "use_orthogonal" </string>
+									<bool> False </bool>
+									<string> "x_rot" </string>
+									<real> 0 </real>
+									<string> "y_rot" </string>
+									<real> 0 </real>
+								</dictionary>
+								<dictionary  shared="false">
+									<string> "distance" </string>
+									<real> 4 </real>
+									<string> "listener" </string>
+									<bool> False </bool>
+									<string> "pos" </string>
+									<vector3> 0, 0, 0 </vector3>
+									<string> "use_environment" </string>
+									<bool> False </bool>
+									<string> "use_orthogonal" </string>
+									<bool> False </bool>
+									<string> "x_rot" </string>
+									<real> 0 </real>
+									<string> "y_rot" </string>
+									<real> 0 </real>
+								</dictionary>
+								<dictionary  shared="false">
+									<string> "distance" </string>
+									<real> 4 </real>
+									<string> "listener" </string>
+									<bool> False </bool>
+									<string> "pos" </string>
+									<vector3> 0, 0, 0 </vector3>
+									<string> "use_environment" </string>
+									<bool> False </bool>
+									<string> "use_orthogonal" </string>
+									<bool> False </bool>
+									<string> "x_rot" </string>
+									<real> 0 </real>
+									<string> "y_rot" </string>
+									<real> 0 </real>
+								</dictionary>
+							</array>
+							<string> "zfar" </string>
+							<real> 500 </real>
+							<string> "znear" </string>
+							<real> 0.1 </real>
+						</dictionary>
+						<string> "Anim" </string>
+						<dictionary  shared="false">
+							<string> "visible" </string>
+							<bool> False </bool>
+						</dictionary>
+					</dictionary>
+					<string> "__editor_run_settings__" </string>
+					<dictionary  shared="false">
+						<string> "custom_args" </string>
+						<string> "-l $scene" </string>
+						<string> "run_mode" </string>
+						<int> 0 </int>
+					</dictionary>
+				</dictionary>
 			</array>
 			<string> "version" </string>
 			<int> 1 </int>
