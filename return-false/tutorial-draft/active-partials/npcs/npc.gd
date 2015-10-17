@@ -162,7 +162,7 @@ func init_branch(branch):
 		branch.build_response(response)
 
 		
-	quest.connect("quest_completed", self, "flash_popup")
+	#quest.connect("quest_completed", self, "flash_popup")
 
 
 func redirect_player(player, destination):
@@ -222,16 +222,28 @@ func start_interaction():
 		print("no dialogs!")
 		i_should_go()
 	else:
-		var branch_1 = dialog_branches[0]
-		if( branch_1 == null ):
-			MUI.close()
-		if( branch_1 != null ):
-			var branch_1_quest = branch_1.get("owned_by")
-			var branch_1_state = branch_1_quest.get("current_state")
-			if( branch_1._at_state(branch_1_state) == null ):
-				return
-		
+		for i in range(0, dialog_branches.size() -1):
+			var branch_ = dialog_branches[i]
+			if( ! has_conversation(branch_)  ):
+				MUI.close()
+				dialog_branches.remove(i)
+			else:
+				continue
 		present_conversations(dialog_branches)
+
+
+
+# Check whether this actor has anything to say
+# on a particular dialog branch, at its current state
+func has_conversation(branch_ = null):
+	if( branch_ == null ):
+		return false
+	else:
+		var branch_quest = branch_.get("owned_by")
+		var branch_state = branch_quest.get("current_state")
+		if( branch_._at_state(branch_state) == null ):
+			return false
+		return true
 
 
 func set_branches():
