@@ -159,10 +159,10 @@ func _enter_tree():
 	load_menu     = menu_layer.get_node("submenu_load")
 	
 	# other nodes
-	player        = get_node("/root/scene").get("player")
+	player        = get_node("/root/_").get("player")
 	
 	# hook up signals where needed
 	# todo - either connect all via scene or all via code
 #	save_btn.connect("pressed", self, "_on_save_pressed")
 #	load_btn.connect("pressed", self, "_on_load_pressed")
-	quit_btn.connect("pressed", self, "_on_quit_pressed")
+	#quit_btn.connect("pressed", self, "_on_quit_pressed")

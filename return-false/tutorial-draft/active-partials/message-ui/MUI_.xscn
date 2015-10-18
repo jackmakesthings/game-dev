@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resource_file type="PackedScene" subresource_count="9" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
-	<ext_resource path="res://assets/styleboxes/nobg-thin-border.sbx" type="StyleBox" index="3"></ext_resource>
-	<ext_resource path="res://scripts/message-ui.gd" type="Script" index="0"></ext_resource>
-	<ext_resource path="res://assets/fonts/imported/amiga-forever-12.fnt" type="Font" index="5"></ext_resource>
+	<ext_resource path="res://active-partials/message-ui/message-ui.gd" type="Script" index="0"></ext_resource>
 	<ext_resource path="res://assets/fpo/portrait-dude-mohawk.png" type="Texture" index="4"></ext_resource>
 	<ext_resource path="res://assets/ui.xthm" type="Theme" index="2"></ext_resource>
+	<ext_resource path="res://assets/styleboxes/nobg-thin-border.sbx" type="StyleBox" index="3"></ext_resource>
 	<ext_resource path="res://assets/ui2.xthm" type="Theme" index="1"></ext_resource>
+	<ext_resource path="res://assets/fonts/imported/amiga-forever-12.fnt" type="Font" index="5"></ext_resource>
 	<resource type="StyleBoxEmpty" path="local://41">
 		<real name="content_margin/left"> -1 </real>
 		<real name="content_margin/right"> -1 </real>
@@ -112,7 +112,7 @@
 				<resource  external="0">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
-					<string> "Script" </string>
+					<string> "2D" </string>
 					<string> "__editor_plugin_states__" </string>
 					<dictionary  shared="false">
 						<string> "2D" </string>
@@ -231,6 +231,11 @@
 							<real> 500 </real>
 							<string> "znear" </string>
 							<real> 0.1 </real>
+						</dictionary>
+						<string> "Anim" </string>
+						<dictionary  shared="false">
+							<string> "visible" </string>
+							<bool> False </bool>
 						</dictionary>
 					</dictionary>
 					<string> "__editor_run_settings__" </string>

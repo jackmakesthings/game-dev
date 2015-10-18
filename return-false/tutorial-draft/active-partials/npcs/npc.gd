@@ -54,6 +54,7 @@ var quest_loader
 
 var x
 var n
+var clickable
 
 signal player_redirected(successful, expected, actual)
 
@@ -262,12 +263,6 @@ func check_branches():
 			has_branches = true
 			continue
 
-func _process(delta):
-	if ( get_tree().get_root().has_node("/root/scene") ):
-		if( get_tree().get_root().get_node("/root/scene").get("player") != null ):
-			player = get_tree().get_root().get_node("scene").get("player")
-		if get_tree().get_root().get_node("/root/scene").get("MUI") != null:
-			MUI = get_tree().get_root().get_node("/root/scene").get("MUI")
 
 func _ready():
 	set_process(true)
@@ -282,13 +277,19 @@ func _ready():
 
 
 func _enter_tree():
-	var sceneroot = get_tree().get_root()
-
-	if( sceneroot.has_node("stage") ):
-		if( sceneroot.get_node("stage").get("player") != null ):
-			var scene = sceneroot.get_node("stage")
-			player = scene.get("player")
-			MUI = scene.get("MUI")
-			get_node("body/Sprite").connect("pressed", self, "_on_click")
-
+	#var r = get_tree().get_root()
+	clickable = get_node("body/Sprite")
+	player = get_node("/root/_").get("player")
+	MUI = get_node("/root/_").get("MUI")
+#	if( r.has_node("scene") ):
+#		var scene = r.get_node("scene")
+#		if( scene.get("player") != null ):
+#			player = scene.get("player")
+#			MUI = scene.get("MUI")
+#			clickable.connect("pressed", self, "_on_click")
+#
 	check_branches()
+	
+#func _exit_tree():
+#	if clickable.is_connected("pressed", self, "_on_click"):
+#		clickable.disconnect("pressed", self, "_on_click")

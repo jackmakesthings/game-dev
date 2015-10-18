@@ -22,9 +22,7 @@ signal stage_changed(stage)
 
 
 func swap_stage(new_stage):
-	#var transform = get_viewport_transform().affine_inverse().xform( ev.global_pos )
 
-	#player.get_node("Camera2D")
 	prev_pos = player.get_pos()
 	fade_screen.set("z/z", 10)
 	fade_anim.play("fade_out")

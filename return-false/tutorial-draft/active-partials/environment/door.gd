@@ -61,5 +61,6 @@ func use_door():
 	
 	scene = get_tree().get_root().get_node("/root/scene")
 	#if( has_user_signal("body_enter") and is_connected("body_enter", self, "_on_body_enter") ):
-	disconnect("body_enter", self, "_on_body_enter")
+	if is_connected("body_enter", self, "_on_body_enter"):
+		disconnect("body_enter", self, "_on_body_enter")
 	scene.call_deferred("swap_stage", new_stage)

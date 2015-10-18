@@ -148,7 +148,7 @@ func _ready():
 	if( ! get_tree().has_user_signal("done_moving") ):
 		get_tree().add_user_signal("done_moving", ["at"])
 		
-	#if( ! get_tree().has_user_signal("oriented") ):
-	get_tree().add_user_signal("oriented", ["dir", "at"])
+	if( ! get_tree().has_user_signal("oriented") ):
+		get_tree().add_user_signal("oriented", ["dir", "at"])
 		
 	set_fixed_process(false)

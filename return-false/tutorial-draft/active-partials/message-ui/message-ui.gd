@@ -154,6 +154,7 @@ func init_paths():
 	dialog_box = get_node(paths.dbox)
 	text_box = get_node(paths.tbox)
 	portrait = get_node(paths.pimg)
+	#M = get_node("/root/mocks").MUI.new()
 
 
 ###### other setup
