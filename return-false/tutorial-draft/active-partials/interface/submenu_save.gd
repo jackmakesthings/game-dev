@@ -12,6 +12,7 @@ const SAVEFILE_DIR = "res://savegames"
 const RED = Color("#ec1300")
 
 var utils            # global utils autoload
+var _                # somewhat experimental global registry
 var entries          # node for displaying existing files
 var btn              # save button
 var panel            # menu panel container
@@ -25,6 +26,7 @@ func _ready():
 	
 	# global autoload
 	utils = get_node("/root/utils")
+	_ = get_node("/root/_")
 	
 	# relevant nodes in this submenu
 	panel = self.get_node("Control/PopupPanel")
@@ -165,4 +167,5 @@ func _on_save_confirmed(dest):
 	show_file_list()
 	
 	# TODO: test, make sure this is hiding the node it should be
-	panel.hide()
+	close()
+	get_parent().get_parent().toggle_menu()

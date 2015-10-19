@@ -16,6 +16,7 @@ const player_scene = preload("res://active-partials/player/_robot.xml")
 const stage_scene = preload("res://active-partials/environment/FPO_stage_a.xml")
 const stage2_scene = preload("res://active-partials/environment/FPO_stage_b.xml")
 const MUI_scene = preload("res://active-partials/message-ui/MUI_.xscn")
+const ingame_menu_scene = preload("res://active-partials/interface/in-game-menu_.xscn")
 
 #signal scene_changed(new_scene, key)
 signal stage_changed(stage)
@@ -79,9 +80,15 @@ func _init():
 	
 	player = player_scene.instance()
 	MUI = MUI_scene.instance()
+	menu = ingame_menu_scene.instance()
+	
+	
+	add_child(menu)
+	move_child(menu, 0)
 	
 	add_child(MUI)
 	move_child(MUI, 0)
+	
 	
 	stage = stage2_scene.instance()
 	add_child(stage)

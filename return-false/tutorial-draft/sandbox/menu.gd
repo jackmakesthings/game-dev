@@ -42,6 +42,8 @@ func toggle_menu():
 
 func _ready():
 	menu_base = self
+	print_tree()
+	print(get_node(".").get_children())
 	menu_layer = get_node("menu_layer")
 	menu_popup = menu_layer.get_node("menu_window")
 	hide_menu()

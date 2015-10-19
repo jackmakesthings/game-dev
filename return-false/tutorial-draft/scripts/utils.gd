@@ -154,6 +154,9 @@ func wait(time):
 # while we're still using it
 func goto_scene(path, data):
 	current_scene = get_tree().get_current_scene()
+	print( current_scene )
+	#if ( current_scene.is_processing() ):
+	current_scene.set_process(false)
 	call_deferred("def_goto_scene",path, data)
 
 func def_goto_scene(path, loaded):

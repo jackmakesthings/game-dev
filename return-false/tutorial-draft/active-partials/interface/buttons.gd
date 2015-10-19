@@ -5,7 +5,7 @@ extends Node
 
 const RED = Color("#ec1300")
 const SAVEFILE_DIR = "res://savegames"
-const MAIN_MENU_SCENE = "res://assets/ui/main_menu_2.xscn"
+const MAIN_MENU_SCENE = "res://active-partials/interface/game-menu_.xscn"
 
 var utils = preload("res://scripts/utils.gd")
 
@@ -139,7 +139,7 @@ func _cancel_quit():
 
 
 
-func _enter_tree():
+func _ready():
 	utils = get_node("/root/utils")
 	# cache nodes and paths
 	
@@ -159,10 +159,6 @@ func _enter_tree():
 	load_menu     = menu_layer.get_node("submenu_load")
 	
 	# other nodes
-	player        = get_node("/root/_").get("player")
-	
-	# hook up signals where needed
-	# todo - either connect all via scene or all via code
-#	save_btn.connect("pressed", self, "_on_save_pressed")
-#	load_btn.connect("pressed", self, "_on_load_pressed")
-	#quit_btn.connect("pressed", self, "_on_quit_pressed")
+	var _ = get_node("/root/_")
+	var scene = _.get("root")
+	player        = _.get_player(scene)
