@@ -6,6 +6,7 @@ var npc_root
 var MUI
 var menu
 var utils
+var _
 
 var prev_pos
 
@@ -77,43 +78,49 @@ func fade_in():
 
 
 func _init():
-	
+
 	player = player_scene.instance()
 	MUI = MUI_scene.instance()
 	menu = ingame_menu_scene.instance()
-	
-	
+
 	add_child(menu)
 	move_child(menu, 0)
 	
 	add_child(MUI)
 	move_child(MUI, 0)
 	
-	
 	stage = stage2_scene.instance()
 	add_child(stage)
 	stage.set_name("stage")
 	move_child(stage, 1)
 	
-	if( stage.has_node("nav/floor/bodies") ):
+	if stage.get("body_layer"):
+		npc_root = stage.get("body_layer")
+	elif stage.has_node("nav/floor/bodies"):
 		npc_root = stage.get_node("nav/floor/bodies")
 		
 
 		
 	add_user_signal("stage_changed", ["stage"])
-#	add_user_signal("scene_changed", ["new_scene", "key"])
 
 
 
 func _ready():
+	_ = get_node("/root/_")
 	
 	fade_anim = get_node("AnimationPlayer")
 	fade_screen = get_node("fader")
+	
 	npc_root =  stage.get("body_layer")
-	stage.get("body_layer").add_child(player)
+	npc_root.add_child(player)
+	
+	_.player = player
+	_.stage = stage
+	_.MUI = MUI
+	
 	stage.set_process_unhandled_input(true)
 	get_tree().set_current_scene(get_tree().get_current_scene())
-	
-	if get_tree().get_root().has_node("scene/AnimationPlayer"):
-		fade_anim = get_tree().get_root().get_node("scene/AnimationPlayer")
-
+#	
+#	if get_tree().get_root().has_node("scene/AnimationPlayer"):
+#		fade_anim = get_tree().get_root().get_node("scene/AnimationPlayer")
+#

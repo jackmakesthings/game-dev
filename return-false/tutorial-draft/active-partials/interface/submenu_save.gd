@@ -70,7 +70,6 @@ func fill_from_btn(i):
 # show_file_list
 # builds a button array from files found in the save dir
 # 1 file = 1 button
-# TODO: needs to be called more often to ensure new files show up
 func show_file_list():
 	
 	var entry

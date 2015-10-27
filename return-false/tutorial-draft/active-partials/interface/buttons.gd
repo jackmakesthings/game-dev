@@ -24,6 +24,9 @@ var default_menu
 var save_menu
 var load_menu
 
+var _
+var scene
+
 ###### menu management and stuff
 
 
@@ -159,6 +162,6 @@ func _ready():
 	load_menu     = menu_layer.get_node("submenu_load")
 	
 	# other nodes
-	var _ = get_node("/root/_")
-	var scene = _.get("root")
+	_ = get_node("/root/_")
+	scene = _.get("root")
 	player        = _.get_player(scene)

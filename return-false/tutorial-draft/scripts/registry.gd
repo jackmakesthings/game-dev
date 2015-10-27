@@ -38,8 +38,12 @@ var stages = {
 
 func _ready():
 	root = get_node("/root/scene")
-	MUI = root.get("MUI")
-	set_process(true)
+	if( root == null ):
+		set_process(false)
+		return
+	else:
+		MUI = root.get("MUI")
+		set_process(true)
 
 func get_player(root):
 	if root.player != null:
