@@ -131,6 +131,17 @@ func angle_to_compass(angle):
 	return compass_dir
 
 
+# a more elegant (if less detailed) take, found on github
+# https://github.com/vnen/godot-rpg2d
+func get_direction_from_angle(angle):
+	if(angle >= -((3 * PI) / 4) and angle < -(PI / 4)):
+		return "N"
+	elif(angle >= -(PI / 4) and angle < (PI / 4) ):
+		return "E"
+	elif(angle >= (PI / 4) and angle < ((3 * PI) / 4)):
+		return "S"
+	return "W"
+	
 
 # fn() - simple string transformer
 # builds a path/filename string from arbitrary text
@@ -141,7 +152,6 @@ func fn(text):
 
 
 ##### generic shorthand for timeouts
-
 func wait(time):
 	var t = Timer.new()
 	t.set_one_shot(true)
