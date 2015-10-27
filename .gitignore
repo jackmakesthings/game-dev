@@ -10,3 +10,6 @@ bootstrap-test
 return-false/tutorial-draft/old-partials
 return-false/tutorial-draft/savegames
 *.scn
+blank
+return-false/tutorial-draft/semiflat
+return-false/tutorial-draft/assets/tiles/walls-teal
