@@ -5,7 +5,7 @@
 extends Node
 
 # Q_ID = quest id, i.e. "tutorial" or "0_diagnostic"
-var Q_ID
+export(String) var Q_ID
 
 # important nodes we'll need to reference, once we're in the scene
 var game
@@ -31,8 +31,8 @@ var actors = []
 var states
 var prev_state = null
 var current_state = 0 setget set_current_state,get_current_state
-var init_at = "0"
-var end_at = "100"
+export(String) var init_at
+export(String) var end_at
 
 # logs/journals also come from the data file
 # we preload the Branch class to use as a template later
@@ -57,6 +57,7 @@ signal quest_completed(quest_id, end_at)
 
 
 func _init():
+	Q_ID = Q_ID
 	branch_group = "" + str(Q_ID) + "-branches"
 
 func load_data(data_source):
@@ -75,6 +76,7 @@ func load_data(data_source):
 # and add the resulting branch node to the scene as children
 func create_branches_from_data(data=data):
 	for branch in branches:
+
 		var branch_node = Branch.new()
 		for key in branch:
 			branch_node.set(key, branch[key])
@@ -182,6 +184,8 @@ func deactivate():
 
 
 func set_current_state(state):
+	pre_state_change(current_state, state)
+	
 	prev_state = self.current_state
 	current_state = state
 	game.quest_states[Q_ID] = state
@@ -193,6 +197,8 @@ func set_current_state(state):
 		
 	emit_signal("state_changed", Q_ID, prev_state, state)
 	
+	post_state_change(prev_state, state)
+	
 	if( state == init_at ):
 		MUI.flash_popup("NEW TASK OBTAINED")
 	
@@ -200,6 +206,15 @@ func set_current_state(state):
 		print("Complete!")
 		MUI.flash_popup("TASK COMPLETE")
 		complete(end_at)
+	
+
+
+# this is here to be overridden
+func pre_state_change(old_state, new_state):
+	pass
+
+func post_state_change(old_state, new_state):
+	pass
 
 
 func get_current_state():
@@ -254,12 +269,8 @@ func _setup():
 
 
 func _ready():
-	game = get_node("/root/game")
-	log_base = get_node("/root/scene/journal_ui")
-	MUI = get_node("/root/scene/message-ui")
-	quest_root = get_parent()
 	_setup()
-	activate()
+	#activate()
 
 
 func _test():
