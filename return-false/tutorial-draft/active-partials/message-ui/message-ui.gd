@@ -1,9 +1,6 @@
+# MUI scene
 
-#extends CanvasLayer
 extends Node
-# member variables here, example:
-# var a=2
-# var b="textvar"
 
 var dialog_box
 var portrait_box
@@ -11,6 +8,10 @@ var portrait
 var text_box
 var response_box
 var response_base
+
+var popup
+var popup_text
+
 
 var is_active
 #var is_in_dialogue
@@ -32,7 +33,9 @@ const paths = {
 	pimg = "dialog-box/Panel/HBoxContainer/portraitBox/portrait",
 	tbox = "dialog-box/Panel/HBoxContainer/textBox/PanelContainer/RichTextLabel",
 	rbox = "dialog-box/Panel/HBoxContainer/textBox/VBoxContainer",
-	rbase = "res://active-partials/message-ui/response-button.xml"
+	rbase = "res://active-partials/message-ui/response-button.xml",
+	popup = "popup",
+	popup_text ="popup/Label"
 }
 
 const ResponseBase = preload("res://active-partials/message-ui/response-button.xml")
@@ -137,7 +140,8 @@ func close():
 
 
 
-func flash_popup():
+func flash_popup(text=""):
+	popup_text.set_text(text)
 	get_node("popup").show_modal(false)
 	var t = Timer.new()
 	t.set_wait_time(2)
@@ -154,6 +158,8 @@ func init_paths():
 	dialog_box = get_node(paths.dbox)
 	text_box = get_node(paths.tbox)
 	portrait = get_node(paths.pimg)
+	popup = get_node(paths.popup)
+	popup_text = get_node(paths.popup_text)
 	#M = get_node("/root/mocks").MUI.new()
 
 

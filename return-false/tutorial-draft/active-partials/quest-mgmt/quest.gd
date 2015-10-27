@@ -193,9 +193,12 @@ func set_current_state(state):
 		
 	emit_signal("state_changed", Q_ID, prev_state, state)
 	
+	if( state == init_at ):
+		MUI.flash_popup("NEW TASK OBTAINED")
+	
 	if( state == end_at ):
 		print("Complete!")
-		MUI.flash_popup()
+		MUI.flash_popup("TASK COMPLETE")
 		complete(end_at)
 
 
@@ -243,6 +246,10 @@ func _setup():
 		return
 	else:
 		load_data(data_source)
+		game = get_node("/root/game")
+		log_base = get_node("/root/scene/journal_ui")
+		MUI = get_node("/root/scene/message-ui")
+		quest_root = get_parent()
 
 
 
