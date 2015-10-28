@@ -62,6 +62,8 @@ func _on_stage_change(stage):
 	
 	var qs = get_tree().get_nodes_in_group("active_quests")
 	get_tree().call_group(0, "active_quests", "refresh")
+	get_tree().call_group(0, "npcs", "set_paths")
+
 	call_deferred("fade_in")
 	
 	

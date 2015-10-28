@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resource_file type="PackedScene" subresource_count="18" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
-	<ext_resource path="res://assets/tiles/white-iso-tile-flat.png" type="Texture" index="2"></ext_resource>
+	<ext_resource path="res://active-partials/environment/stairs.xml" type="PackedScene" index="9"></ext_resource>
 	<ext_resource path="res://assets/blue-iso-tile-1.png" type="Texture" index="5"></ext_resource>
 	<ext_resource path="res://assets/grate-iso-tile-1.png" type="Texture" index="4"></ext_resource>
-	<ext_resource path="res://assets/tiles/dotted-white-tile.png" type="Texture" index="6"></ext_resource>
 	<ext_resource path="res://assets/tiles/green-outline-glow.png" type="Texture" index="7"></ext_resource>
-	<ext_resource path="res://assets/tiles/black-iso-tile-flat.png" type="Texture" index="1"></ext_resource>
-	<ext_resource path="res://assets/blue-iso-tile-flat-2.png" type="Texture" index="0"></ext_resource>
-	<ext_resource path="res://assets/tiles/red-iso-tile-flat.png" type="Texture" index="3"></ext_resource>
-	<ext_resource path="res://active-partials/environment/stairs.xml" type="PackedScene" index="9"></ext_resource>
+	<ext_resource path="res://assets/tiles/dotted-white-tile.png" type="Texture" index="6"></ext_resource>
 	<ext_resource path="res://active-partials/environment/door.xml" type="PackedScene" index="8"></ext_resource>
-	<resource type="GDScript" path="local://61">
-		<string name="script/source"> "#####&#000a;# walkable stage, with floor tilemap and input handling for clicks&#000a;&#000a;extends Node2D&#000a;&#000a;var scene&#000a;var player&#000a;&#000a;var body_layer&#000a;var nav&#000a;var tiles&#000a;var outline&#000a;var movement_allowed = true&#000a;var utils&#000a;&#000a;const TILE_ATTRACT = 7&#000a;const TILE_TRANSITION = 0&#000a;&#000a;# shortcut for checking which tile type is at (x,y)&#000a;func tile_at(point):&#000a;&#0009;var map_point = tiles.world_to_map(point)&#000a;&#0009;var tile_id = tiles.get_cell(map_point.x, map_point.y)&#000a;&#0009;return tile_id&#000a;&#000a;# helper for checking all tiles adjacent to the one at a given point&#000a;func get_surrounding_tiles(point):&#000a;&#0009;var map_pos = tiles.world_to_map(point)&#000a;&#0009;var NW = tiles.get_cell(map_pos.x-1, map_pos.y)&#000a;&#0009;var NE = tiles.get_cell(map_pos.x, map_pos.y-1)&#000a;&#0009;var SE = tiles.get_cell(map_pos.x+1, map_pos.y)&#000a;&#0009;var SW = tiles.get_cell(map_pos.x, map_pos.y+1)&#000a;&#0009;return Array([NW, NE, SE, SW])&#000a;&#000a;func check_for_attractor(point):&#000a;&#0009;var borders = get_surrounding_tiles(point)&#000a;&#0009;if( borders[0] == TILE_ATTRACT ):&#000a;&#0009;&#0009;return &quot;NW&quot;&#000a;&#0009;elif( borders[1] == TILE_ATTRACT ):&#000a;&#0009;&#0009;return &quot;NE&quot;&#000a;&#0009;elif( borders[2] == TILE_ATTRACT ):&#000a;&#0009;&#0009;return &quot;SE&quot;&#000a;&#0009;elif( borders[3] == TILE_ATTRACT ):&#000a;&#0009;&#0009;return &quot;SW&quot;&#000a;&#0009;else:&#000a;&#0009;&#0009;return null&#000a;&#0009;&#0009;&#000a;&#000a;func check_for_transition(point):&#000a;&#0009;return ( tile_at(point) == TILE_TRANSITION )&#000a;&#000a;func _unhandled_input(ev):&#000a;&#000a;&#0009;# Move character around on click&#000a;&#0009;if (ev.type == InputEvent.MOUSE_BUTTON and ev.pressed and ev.button_index==1):&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;if( player == null ) :&#000a;&#0009;&#0009;&#0009;return&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;var begin = player.get_global_pos()&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;# This massive chunk of code cancels out the effects of the camera&#000a;&#0009;&#0009;# on our positioning calculations&#000a;&#0009;&#0009;var end = get_viewport_transform().affine_inverse().xform( ev.global_pos )&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;# Flag used mostly for placement of the outline&#000a;&#0009;&#0009;var adjust_path = false&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;# Find the closest tile center to where we clicked&#000a;&#0009;&#0009;var tilepos = tiles.world_to_map(end)&#000a;&#0009;&#0009;var mappos = tiles.map_to_world(tilepos)&#000a;&#0009;&#0009;end = mappos + Vector2(0, 18) &#000a;&#0009;&#0009;&#000a;&#0009;&#0009;# Store which type of tile is at that point&#000a;&#0009;&#0009;var tile_at = tiles.get_cell(tilepos.x, tilepos.y)&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;# if the player clicked an un-walkable tile,&#000a;&#0009;&#0009;# we&apos;ll remove the end point from the calculated path&#000a;&#0009;&#0009;# so the targeting outline shows where it will really end up&#000a;&#0009;&#0009;if ( tiles.get_tileset().tile_get_navigation_polygon(tile_at) == null ):&#000a;&#0009;&#0009;&#0009;adjust_path = true&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;if( movement_allowed ):&#000a;&#0009;&#0009;&#0009;player.update_path(begin, end, nav);&#000a;&#0009;&#0009;&#0009;outline.show()&#000a;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;&#0009;if( adjust_path ):&#000a;&#0009;&#0009;&#0009;&#0009;outline.set_global_pos(player.path[1])&#000a;&#0009;&#0009;&#0009;&#0009;player.path[0] = player.path[1]&#000a;&#0009;&#0009;&#0009;else:&#000a;&#0009;&#0009;&#0009;&#0009;outline.set_global_pos(end)&#000a;&#0009;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;&#0009;if( ev.meta == 1 ):&#000a;&#0009;&#0009;&#0009;&#0009;outline.hide()&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;&#0009;yield(player, &quot;done_moving&quot;)&#000a;&#0009;&#0009;&#0009;outline.hide()&#000a;&#0009;&#0009;&#0009;get_surrounding_tiles(player.get_global_pos())&#000a;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;&#0009;var orient = check_for_attractor(player.get_global_pos())&#000a;&#0009;&#0009;&#0009;if( not orient == null ):&#000a;&#0009;&#0009;&#0009;&#0009;player.orient(orient)&#000a;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;&#0009;var transitioning = check_for_transition(player.get_global_pos())&#000a;&#0009;&#0009;&#0009;if( transitioning == true ):&#000a;&#0009;&#0009;&#0009;&#0009;utils.goto_scene(&quot;res://adjacent-scene.xml&quot;, {})&#000a;&#0009;&#0009;&#0009;&#0009;&#000a;&#0009;&#000a;func _ready():&#000a;&#0009;# Setup the vars and conditions for this instance&#000a;&#0009;scene = get_parent()&#000a;&#0009;if( scene.get(&quot;player&quot;) != null ):&#000a;&#0009;&#0009;player = scene.get(&quot;player&quot;)&#000a;&#0009;else:&#000a;&#0009;&#0009;player = null&#000a;&#0009;&#000a;&#0009;nav = get_node(&quot;nav&quot;)&#000a;&#0009;tiles = get_node(&quot;nav/floor&quot;)&#000a;&#0009;body_layer = get_node(&quot;nav/floor/bodies&quot;)&#000a;&#0009;outline = get_node(&quot;destination_sprite&quot;)&#000a;&#0009;utils = get_node(&quot;/root/utils&quot;)&#000a;&#0009;&#000a;&#0009;outline.hide()&#000a;&#0009;#set_process_unhandled_input(true)&#000a;&#0009;&#000a;&#000a;&#000a;func _on_Area2D_body_enter( body ):&#000a;&#000a;&#0009;yield(player, &quot;done_moving&quot;)&#000a;&#0009;player[&quot;path&quot;] = Array()&#000a;&#0009;&#000a;&#0009;var p = Timer.new()&#000a;&#0009;p.set_wait_time(1)&#000a;&#0009;p.set_one_shot(true)&#000a;&#0009;add_child(p)&#000a;&#0009;p.start()&#000a;&#0009;&#000a;&#0009;yield(p, &quot;timeout&quot;)&#000a;&#0009;&#000a;&#0009;&#000a;&#0009;scene = get_parent()&#000a;&#0009;scene = get_tree().get_root().get_node(&quot;/root/scene&quot;)&#000a;&#0009;print(get_tree().get_current_scene())&#000a;&#0009;var new_stage = preload(&quot;res://active-partials/environment/FPO_stage_a.xml&quot;)&#000a;&#000a;&#0009;#scene.call(&quot;swap_scenes&quot;, [&quot;stage&quot;, new_stage] )&#000a;&#0009;#pass # replace with function body&#000a;&#0009;get_node(&quot;nav/floor/bodies/Area2D&quot;).disconnect(&quot;body_enter&quot;, get_node(&quot;.&quot;), &quot;_on_Area2D_body_enter&quot;)&#000a;&#0009;#scene.swap_stage(new_stage)&#000a;&#0009;scene.call(&quot;swap_stage&quot;, new_stage)&#000a;&#000a;func _on_Area2D_body_exit( body ):&#000a;&#0009;pass" </string>
+	<ext_resource path="res://assets/tiles/white-iso-tile-flat.png" type="Texture" index="2"></ext_resource>
+	<ext_resource path="res://assets/tiles/red-iso-tile-flat.png" type="Texture" index="3"></ext_resource>
+	<ext_resource path="res://assets/blue-iso-tile-flat-2.png" type="Texture" index="0"></ext_resource>
+	<ext_resource path="res://assets/tiles/black-iso-tile-flat.png" type="Texture" index="1"></ext_resource>
+	<resource type="GDScript" path="local://66">
+		<string name="script/source"> "extends &quot;res://active-partials/environment/walkable-area.gd&quot;" </string>
 
 	</resource>
 	<resource type="NavigationPolygon" path="local://1">
@@ -126,16 +126,18 @@
 			<int> 0 </int>
 			<string> "conns" </string>
 			<int_array  len="0"> 				 </int_array>
+			<string> "editable_instances" </string>
+			<array  len="0" shared="false">
+			</array>
 			<string> "names" </string>
-			<string_array  len="38">
+			<string_array  len="37">
 				<string> "stage" </string>
-				<string> "Node2D" </string>
 				<string> "script/script" </string>
 				<string> "__meta__" </string>
+				<string> "Node2D" </string>
 				<string> "nav" </string>
 				<string> "Navigation2D" </string>
 				<string> "floor" </string>
-				<string> "TileMap" </string>
 				<string> "mode" </string>
 				<string> "tile_set" </string>
 				<string> "cell/size" </string>
@@ -150,33 +152,36 @@
 				<string> "collision/layers" </string>
 				<string> "collision/mask" </string>
 				<string> "tile_data" </string>
+				<string> "TileMap" </string>
 				<string> "bodies" </string>
-				<string> "YSort" </string>
 				<string> "z/z" </string>
 				<string> "sort/enabled" </string>
+				<string> "YSort" </string>
 				<string> "destination_sprite" </string>
-				<string> "Sprite" </string>
 				<string> "visibility/visible" </string>
 				<string> "texture" </string>
+				<string> "Sprite" </string>
 				<string> "door" </string>
-				<string> "Area2D" </string>
-				<string> "_import_path" </string>
 				<string> "transform/pos" </string>
+				<string> "linear_damp" </string>
 				<string> "new_stage_path" </string>
-				<string> "door_id" </string>
 				<string> "doors" </string>
 				<string> "stairs" </string>
+				<string> "door_id" </string>
 			</string_array>
 			<string> "node_count" </string>
 			<int> 7 </int>
+			<string> "node_paths" </string>
+			<array  len="0" shared="false">
+			</array>
 			<string> "nodes" </string>
-			<int_array  len="121"> 				-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 0, 0, 0, 5, 4, -1, 0, 0, 1, 0, 7, 6, -1, 15, 8, 2, 9, 3, 10, 4, 11, 5, 12, 6, 13, 7, 14, 2, 15, 8, 16, 9, 17, 10, 18, 11, 19, 2, 20, 2, 21, 12, 3, 13, 0, 2, 0, 23, 22, -1, 3, 24, 2, 25, 8, 2, 14, 0, 0, 0, 27, 26, -1, 2, 28, 9, 29, 15, 0, 0, 0, 31, 30, 16, 7, 32, 17, 28, 9, 33, 18, 2, 19, 3, 20, 34, 21, 35, 22, 1, 36, 0, 0, 31, 37, 23, 6, 32, 17, 33, 24, 2, 25, 3, 26, 34, 21, 35, 7, 1, 36 </int_array>
+			<int_array  len="115"> 				-1, -1, 3, 0, -1, 2, 1, 0, 2, 1, 0, 0, 0, 5, 4, -1, 0, 0, 1, 0, 21, 6, -1, 15, 7, 2, 8, 3, 9, 4, 10, 5, 11, 6, 12, 7, 13, 2, 14, 8, 15, 9, 16, 10, 17, 11, 18, 2, 19, 2, 20, 12, 2, 13, 0, 2, 0, 25, 22, -1, 3, 23, 2, 24, 8, 1, 14, 0, 0, 0, 29, 26, -1, 2, 27, 9, 28, 15, 0, 0, 0, 2147483647, 30, 16, 5, 27, 9, 31, 17, 32, 18, 1, 19, 33, 20, 1, 34, 0, 0, 2147483647, 35, 21, 5, 31, 22, 32, 18, 1, 23, 33, 20, 36, 7, 1, 34 </int_array>
 			<string> "variants" </string>
-			<array  len="27" shared="false">
-				<resource  resource_type="Script" path="local://61">  </resource>
+			<array  len="24" shared="false">
+				<resource  resource_type="Script" path="local://66">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
-					<string> "2D" </string>
+					<string> "Script" </string>
 					<string> "__editor_plugin_states__" </string>
 					<dictionary  shared="false">
 						<string> "2D" </string>
@@ -328,289 +333,16 @@
 				<resource  resource_type="Script" path="local://63">  </resource>
 				<resource  external="7">  </resource>
 				<resource  external="8">  </resource>
-				<node_path> "" </node_path>
 				<vector2> 745.799, 49.9665 </vector2>
+				<real> 0.1 </real>
 				<resource  resource_type="Script" path="local://64">  </resource>
-				<dictionary  shared="false">
-					<string> "__editor_plugin_screen__" </string>
-					<string> "Script" </string>
-					<string> "__editor_plugin_states__" </string>
-					<dictionary  shared="false">
-						<string> "2D" </string>
-						<dictionary  shared="false">
-							<string> "ofs" </string>
-							<vector2> -89.9303, 146.271 </vector2>
-							<string> "snap_grid" </string>
-							<bool> False </bool>
-							<string> "snap_offset" </string>
-							<vector2> 0, 0 </vector2>
-							<string> "snap_pixel" </string>
-							<bool> False </bool>
-							<string> "snap_relative" </string>
-							<bool> False </bool>
-							<string> "snap_rotation" </string>
-							<bool> False </bool>
-							<string> "snap_rotation_offset" </string>
-							<real> 0 </real>
-							<string> "snap_rotation_step" </string>
-							<real> 0.261799 </real>
-							<string> "snap_show_grid" </string>
-							<bool> False </bool>
-							<string> "snap_step" </string>
-							<vector2> 10, 10 </vector2>
-							<string> "zoom" </string>
-							<real> 0.9025 </real>
-						</dictionary>
-						<string> "3D" </string>
-						<dictionary  shared="false">
-							<string> "ambient_light_color" </string>
-							<color> 0.15, 0.15, 0.15, 1 </color>
-							<string> "default_light" </string>
-							<bool> True </bool>
-							<string> "default_srgb" </string>
-							<bool> False </bool>
-							<string> "deflight_rot_x" </string>
-							<real> 0.942478 </real>
-							<string> "deflight_rot_y" </string>
-							<real> 0.628319 </real>
-							<string> "fov" </string>
-							<real> 45 </real>
-							<string> "show_grid" </string>
-							<bool> True </bool>
-							<string> "show_origin" </string>
-							<bool> True </bool>
-							<string> "viewport_mode" </string>
-							<int> 1 </int>
-							<string> "viewports" </string>
-							<array  len="4" shared="false">
-								<dictionary  shared="false">
-									<string> "distance" </string>
-									<real> 4 </real>
-									<string> "listener" </string>
-									<bool> True </bool>
-									<string> "pos" </string>
-									<vector3> 0, 0, 0 </vector3>
-									<string> "use_environment" </string>
-									<bool> False </bool>
-									<string> "use_orthogonal" </string>
-									<bool> False </bool>
-									<string> "x_rot" </string>
-									<real> 0 </real>
-									<string> "y_rot" </string>
-									<real> 0 </real>
-								</dictionary>
-								<dictionary  shared="false">
-									<string> "distance" </string>
-									<real> 4 </real>
-									<string> "listener" </string>
-									<bool> False </bool>
-									<string> "pos" </string>
-									<vector3> 0, 0, 0 </vector3>
-									<string> "use_environment" </string>
-									<bool> False </bool>
-									<string> "use_orthogonal" </string>
-									<bool> False </bool>
-									<string> "x_rot" </string>
-									<real> 0 </real>
-									<string> "y_rot" </string>
-									<real> 0 </real>
-								</dictionary>
-								<dictionary  shared="false">
-									<string> "distance" </string>
-									<real> 4 </real>
-									<string> "listener" </string>
-									<bool> False </bool>
-									<string> "pos" </string>
-									<vector3> 0, 0, 0 </vector3>
-									<string> "use_environment" </string>
-									<bool> False </bool>
-									<string> "use_orthogonal" </string>
-									<bool> False </bool>
-									<string> "x_rot" </string>
-									<real> 0 </real>
-									<string> "y_rot" </string>
-									<real> 0 </real>
-								</dictionary>
-								<dictionary  shared="false">
-									<string> "distance" </string>
-									<real> 4 </real>
-									<string> "listener" </string>
-									<bool> False </bool>
-									<string> "pos" </string>
-									<vector3> 0, 0, 0 </vector3>
-									<string> "use_environment" </string>
-									<bool> False </bool>
-									<string> "use_orthogonal" </string>
-									<bool> False </bool>
-									<string> "x_rot" </string>
-									<real> 0 </real>
-									<string> "y_rot" </string>
-									<real> 0 </real>
-								</dictionary>
-							</array>
-							<string> "zfar" </string>
-							<real> 500 </real>
-							<string> "znear" </string>
-							<real> 0.1 </real>
-						</dictionary>
-						<string> "Anim" </string>
-						<dictionary  shared="false">
-							<string> "visible" </string>
-							<bool> False </bool>
-						</dictionary>
-					</dictionary>
-					<string> "__editor_run_settings__" </string>
-					<dictionary  shared="false">
-						<string> "custom_args" </string>
-						<string> "-l $scene" </string>
-						<string> "run_mode" </string>
-						<int> 0 </int>
-					</dictionary>
-				</dictionary>
 				<string> "res://active-partials/environment/FPO_stage_a.xml" </string>
-				<nil>  </nil>
 				<resource  external="9">  </resource>
 				<vector2> 540, 370 </vector2>
 				<resource  resource_type="Script" path="local://65">  </resource>
-				<dictionary  shared="false">
-					<string> "__editor_plugin_screen__" </string>
-					<string> "Script" </string>
-					<string> "__editor_plugin_states__" </string>
-					<dictionary  shared="false">
-						<string> "2D" </string>
-						<dictionary  shared="false">
-							<string> "ofs" </string>
-							<vector2> -83.0496, 135.397 </vector2>
-							<string> "snap_grid" </string>
-							<bool> False </bool>
-							<string> "snap_offset" </string>
-							<vector2> 0, 0 </vector2>
-							<string> "snap_pixel" </string>
-							<bool> False </bool>
-							<string> "snap_relative" </string>
-							<bool> False </bool>
-							<string> "snap_rotation" </string>
-							<bool> False </bool>
-							<string> "snap_rotation_offset" </string>
-							<real> 0 </real>
-							<string> "snap_rotation_step" </string>
-							<real> 0.261799 </real>
-							<string> "snap_show_grid" </string>
-							<bool> False </bool>
-							<string> "snap_step" </string>
-							<vector2> 10, 10 </vector2>
-							<string> "zoom" </string>
-							<real> 1 </real>
-						</dictionary>
-						<string> "3D" </string>
-						<dictionary  shared="false">
-							<string> "ambient_light_color" </string>
-							<color> 0.15, 0.15, 0.15, 1 </color>
-							<string> "default_light" </string>
-							<bool> True </bool>
-							<string> "default_srgb" </string>
-							<bool> False </bool>
-							<string> "deflight_rot_x" </string>
-							<real> 0.942478 </real>
-							<string> "deflight_rot_y" </string>
-							<real> 0.628319 </real>
-							<string> "fov" </string>
-							<real> 45 </real>
-							<string> "show_grid" </string>
-							<bool> True </bool>
-							<string> "show_origin" </string>
-							<bool> True </bool>
-							<string> "viewport_mode" </string>
-							<int> 1 </int>
-							<string> "viewports" </string>
-							<array  len="4" shared="false">
-								<dictionary  shared="false">
-									<string> "distance" </string>
-									<real> 4 </real>
-									<string> "listener" </string>
-									<bool> True </bool>
-									<string> "pos" </string>
-									<vector3> 0, 0, 0 </vector3>
-									<string> "use_environment" </string>
-									<bool> False </bool>
-									<string> "use_orthogonal" </string>
-									<bool> False </bool>
-									<string> "x_rot" </string>
-									<real> 0 </real>
-									<string> "y_rot" </string>
-									<real> 0 </real>
-								</dictionary>
-								<dictionary  shared="false">
-									<string> "distance" </string>
-									<real> 4 </real>
-									<string> "listener" </string>
-									<bool> False </bool>
-									<string> "pos" </string>
-									<vector3> 0, 0, 0 </vector3>
-									<string> "use_environment" </string>
-									<bool> False </bool>
-									<string> "use_orthogonal" </string>
-									<bool> False </bool>
-									<string> "x_rot" </string>
-									<real> 0 </real>
-									<string> "y_rot" </string>
-									<real> 0 </real>
-								</dictionary>
-								<dictionary  shared="false">
-									<string> "distance" </string>
-									<real> 4 </real>
-									<string> "listener" </string>
-									<bool> False </bool>
-									<string> "pos" </string>
-									<vector3> 0, 0, 0 </vector3>
-									<string> "use_environment" </string>
-									<bool> False </bool>
-									<string> "use_orthogonal" </string>
-									<bool> False </bool>
-									<string> "x_rot" </string>
-									<real> 0 </real>
-									<string> "y_rot" </string>
-									<real> 0 </real>
-								</dictionary>
-								<dictionary  shared="false">
-									<string> "distance" </string>
-									<real> 4 </real>
-									<string> "listener" </string>
-									<bool> False </bool>
-									<string> "pos" </string>
-									<vector3> 0, 0, 0 </vector3>
-									<string> "use_environment" </string>
-									<bool> False </bool>
-									<string> "use_orthogonal" </string>
-									<bool> False </bool>
-									<string> "x_rot" </string>
-									<real> 0 </real>
-									<string> "y_rot" </string>
-									<real> 0 </real>
-								</dictionary>
-							</array>
-							<string> "zfar" </string>
-							<real> 500 </real>
-							<string> "znear" </string>
-							<real> 0.1 </real>
-						</dictionary>
-						<string> "Anim" </string>
-						<dictionary  shared="false">
-							<string> "visible" </string>
-							<bool> False </bool>
-						</dictionary>
-					</dictionary>
-					<string> "__editor_run_settings__" </string>
-					<dictionary  shared="false">
-						<string> "custom_args" </string>
-						<string> "-l $scene" </string>
-						<string> "run_mode" </string>
-						<int> 0 </int>
-					</dictionary>
-				</dictionary>
 			</array>
 			<string> "version" </string>
-			<int> 1 </int>
+			<int> 2 </int>
 		</dictionary>
 
 	</main_resource>
