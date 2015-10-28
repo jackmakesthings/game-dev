@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resource_file type="PackedScene" subresource_count="17" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
+	<ext_resource path="res://assets/ui/list31.tex" type="Texture" index="5"></ext_resource>
+	<ext_resource path="res://assets/ui.xthm" type="Theme" index="2"></ext_resource>
+	<ext_resource path="res://main.gd" type="Script" index="0"></ext_resource>
+	<ext_resource path="res://assets/ui/code39 (2).tex" type="Texture" index="6"></ext_resource>
 	<ext_resource path="res://assets/cursors/png/square185.png" type="Texture" index="8"></ext_resource>
 	<ext_resource path="res://active-partials/journal/base_journal.gd" type="Script" index="1"></ext_resource>
-	<ext_resource path="res://main.gd" type="Script" index="0"></ext_resource>
-	<ext_resource path="res://assets/ui.xthm" type="Theme" index="2"></ext_resource>
 	<ext_resource path="res://assets/ui/code39 (1).tex" type="Texture" index="7"></ext_resource>
-	<ext_resource path="res://assets/ui/code39 (2).tex" type="Texture" index="6"></ext_resource>
-	<ext_resource path="res://assets/ui/list31.tex" type="Texture" index="5"></ext_resource>
-	<ext_resource path="res://assets/ui/list31 (1).tex" type="Texture" index="4"></ext_resource>
 	<ext_resource path="res://active-partials/interface/interface.gd" type="Script" index="3"></ext_resource>
+	<ext_resource path="res://assets/ui/list31 (1).tex" type="Texture" index="4"></ext_resource>
 	<resource type="StyleBoxFlat" path="local://45">
 		<real name="content_margin/left"> 5 </real>
 		<real name="content_margin/right"> 5 </real>
@@ -43,11 +43,11 @@
 
 	</resource>
 	<resource type="GDScript" path="local://38">
-		<string name="script/source"> "# currently on the quests (managing) node, needs some refactoring&#000a;&#000a;extends Node&#000a;&#000a;var quests = []&#000a;var active_quests&#000a;var quests_ready = false&#000a;&#000a;const Quest = preload(&quot;res://active-partials/quest-mgmt/quest.gd&quot;)&#000a;&#000a;signal quests_loaded&#000a;&#000a;func get_state(quest, state):&#000a;&#0009;if not ( has_node(quest) ):&#000a;&#0009;&#0009;print(&quot;Error - no such quest to update&quot;)&#000a;&#0009;&#0009;return null&#000a;&#0009;return get_node(quest).current_state&#000a;&#000a;func set_state(quest, state):&#000a;&#0009;get_node(quest).set_current_state(state)&#000a;&#0009;&#000a;&#000a;func _quests_ready():&#000a;&#0009;var ret = false&#000a;&#0009;for quest in quests:&#000a;&#0009;&#0009;if( ! quest.has_method(&quot;is_attached&quot;) ):&#000a;&#0009;&#0009;&#0009;return false&#000a;&#0009;&#0009;if( quest.is_attached() == true ):&#000a;&#0009;&#0009;&#0009;continue&#000a;&#0009;&#0009;else:&#000a;&#0009;&#0009;&#0009;return false&#000a;&#0009;return true&#000a;&#000a;&#000a;func _fixed_process(delta):&#000a;&#0009;if( quests_ready == false ):&#000a;&#0009;&#0009;if( _quests_ready() == true ):&#000a;&#0009;&#0009;&#0009;emit_signal(&quot;quests_loaded&quot;)&#000a;&#0009;&#0009;&#0009;quests_ready = true&#000a;&#000a;func _ready():&#000a;&#000a;&#0009;var diag = get_node(&quot;0_diagnostic&quot;)&#000a;&#0009;diag.activate(&quot;20&quot;)&#000a;&#0009;&#000a;&#0009;quests = get_children()&#000a;&#0009;set_fixed_process(true)&#000a;&#000a;&#000a;" </string>
+		<string name="script/source"> "# currently on the quests (managing) node, needs some refactoring&#000a;&#000a;extends Node&#000a;&#000a;var quests = []&#000a;var active_quests&#000a;var quests_ready = false&#000a;&#000a;const Quest = preload(&quot;res://active-partials/quest-mgmt/quest.gd&quot;)&#000a;&#000a;signal quests_loaded&#000a;&#000a;func get_state(quest, state):&#000a;&#0009;if not ( has_node(quest) ):&#000a;&#0009;&#0009;print(&quot;Error - no such quest to update&quot;)&#000a;&#0009;&#0009;return null&#000a;&#0009;return get_node(quest).current_state&#000a;&#000a;func set_state(quest, state):&#000a;&#0009;get_node(quest).set_current_state(state)&#000a;&#0009;&#000a;&#000a;func _quests_ready():&#000a;&#0009;var ret = false&#000a;&#0009;for quest in quests:&#000a;&#0009;&#0009;if( ! quest.has_method(&quot;is_attached&quot;) ):&#000a;&#0009;&#0009;&#0009;return false&#000a;&#0009;&#0009;if( quest.is_attached() == true ):&#000a;&#0009;&#0009;&#0009;continue&#000a;&#0009;&#0009;else:&#000a;&#0009;&#0009;&#0009;return false&#000a;&#0009;return true&#000a;&#000a;&#000a;func _fixed_process(delta):&#000a;&#0009;if( quests_ready == false ):&#000a;&#0009;&#0009;if( _quests_ready() == true ):&#000a;&#0009;&#0009;&#0009;emit_signal(&quot;quests_loaded&quot;)&#000a;&#0009;&#0009;&#0009;quests_ready = true&#000a;&#000a;func _ready():&#000a;&#000a;&#0009;var diag = get_node(&quot;0_diagnostic&quot;)&#000a;&#0009;diag.activate(&quot;0&quot;)&#000a;&#0009;&#000a;&#0009;quests = get_children()&#000a;&#0009;set_fixed_process(true)&#000a;&#000a;&#000a;" </string>
 
 	</resource>
 	<resource type="GDScript" path="local://28">
-		<string name="script/source"> "extends &quot;res://active-partials/quest-mgmt/quest.gd&quot;&#000a;&#000a;&#000a;func post_state_change(old, new):&#000a;&#0009;&#000a;&#0009;var newq = quest_root.Quest.new()&#000a;&#0009;&#000a;&#0009;if( new == &quot;40&quot; ):&#000a;&#0009;&#0009;var quest_root = get_parent()&#000a;&#0009;&#000a;&#0009;&#0009;newq.set_name(&quot;Q_sandwich&quot;)&#000a;&#0009;&#0009;newq.Q_ID = &quot;Q_sandwich&quot;&#000a;&#0009;&#0009;newq.data_source = &quot;res://data/dialogue/temp/Q_sandwich.gd&quot;&#000a;&#0009;&#0009;newq.init_at = &quot;20&quot;&#000a;&#0009;&#0009;newq.end_at = &quot;100&quot;&#000a;&#0009;&#0009;get_parent().add_child(newq)&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;newq.activate()&#000a;" </string>
+		<string name="script/source"> "extends &quot;res://active-partials/quest-mgmt/quest.gd&quot;&#000a;&#000a;&#000a;func post_state_change(old, new):&#000a;&#000a;&#0009;if( new == &quot;20&quot; ):&#000a;&#0009;&#0009;MUI.flash_popup(&quot;TASK OBTAINED&quot;)&#000a;&#0009;&#000a;&#0009;var newq = quest_root.Quest.new()&#000a;&#0009;&#000a;&#0009;if( new == &quot;40&quot; ):&#000a;&#0009;&#0009;var quest_root = get_parent()&#000a;&#0009;&#000a;&#0009;&#0009;newq.set_name(&quot;Q_sandwich&quot;)&#000a;&#0009;&#0009;newq.Q_ID = &quot;Q_sandwich&quot;&#000a;&#0009;&#0009;newq.data_source = &quot;res://data/dialogue/temp/Q_sandwich.gd&quot;&#000a;&#0009;&#0009;newq.init_at = &quot;0&quot;&#000a;&#0009;&#0009;newq.end_at = &quot;100&quot;&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;get_parent().add_child(newq)&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;newq.activate(&quot;0&quot;)&#000a;&#000a;&#0009;if( new == &quot;100&quot; ):&#000a;&#0009;&#0009;MUI.flash_popup(&quot;TASK COMPLETED&quot;)" </string>
 
 	</resource>
 	<resource type="Animation" path="local://54">

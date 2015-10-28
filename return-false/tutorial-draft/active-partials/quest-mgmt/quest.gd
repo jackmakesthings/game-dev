@@ -199,12 +199,12 @@ func set_current_state(state):
 	
 	post_state_change(prev_state, state)
 	
-	if( state == init_at ):
-		MUI.flash_popup("NEW TASK OBTAINED")
+	#if( state == init_at ):
+	#	MUI.flash_popup("NEW TASK OBTAINED")
 	
 	if( state == end_at ):
 		print("Complete!")
-		MUI.flash_popup("TASK COMPLETE")
+		#MUI.flash_popup("TASK COMPLETE")
 		complete(end_at)
 	
 
