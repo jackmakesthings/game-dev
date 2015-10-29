@@ -47,7 +47,7 @@
 
 	</resource>
 	<resource type="GDScript" path="local://28">
-		<string name="script/source"> "extends &quot;res://active-partials/quest-mgmt/quest.gd&quot;&#000a;&#000a;&#000a;func post_state_change(old, new):&#000a;&#000a;&#0009;var newq = quest_root.Quest.new()&#000a;&#0009;&#000a;&#0009;if( new == &quot;40&quot; ):&#000a;&#0009;&#0009;var quest_root = get_parent()&#000a;&#0009;&#000a;&#0009;&#0009;newq.set_name(&quot;Q_sandwich&quot;)&#000a;&#0009;&#0009;newq.Q_ID = &quot;Q_sandwich&quot;&#000a;&#0009;&#0009;newq.data_source = &quot;res://data/dialogue/temp/Q_sandwich.gd&quot;&#000a;&#0009;&#0009;newq.init_at = &quot;0&quot;&#000a;&#0009;&#0009;newq.end_at = &quot;100&quot;&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;get_parent().add_child(newq)&#000a;&#0009;&#0009;newq.activate(&quot;0&quot;)" </string>
+		<string name="script/source"> "extends &quot;res://active-partials/quest-mgmt/quest.gd&quot;&#000a;&#000a;&#000a;func post_state_change(old, new):&#000a;&#000a;&#0009;var newq = quest_root.Quest.new()&#000a;&#0009;&#000a;&#0009;if( new == &quot;20&quot; ):&#000a;&#0009;&#0009;var quest_root = get_parent()&#000a;&#0009;&#000a;&#0009;&#0009;newq.set_name(&quot;Q_sandwich&quot;)&#000a;&#0009;&#0009;newq.Q_ID = &quot;Q_sandwich&quot;&#000a;&#0009;&#0009;newq.data_source = &quot;res://data/dialogue/temp/Q_sandwich.gd&quot;&#000a;&#0009;&#0009;newq.init_at = &quot;0&quot;&#000a;&#0009;&#0009;newq.complete_at = &quot;100&quot;&#000a;&#0009;&#0009;newq.dialog_label = &quot;Sandwiches&quot;&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;get_parent().add_child(newq)&#000a;&#0009;&#0009;newq.activate(&quot;0&quot;)" </string>
 
 	</resource>
 	<resource type="Animation" path="local://54">
@@ -221,7 +221,7 @@
 				<string> "Q_ID" </string>
 				<string> "data_source" </string>
 				<string> "init_at" </string>
-				<string> "end_at" </string>
+				<string> "complete_at" </string>
 				<string> "fader" </string>
 				<string> "visibility/opacity" </string>
 				<string> "transform/pos" </string>
@@ -591,7 +591,7 @@
 				<string> "0_diagnostic" </string>
 				<string> "res://data/dialogue/tutorial/0_diagnostic.gd" </string>
 				<string> "20" </string>
-				<string> "100" </string>
+				<nil>  </nil>
 				<vector2> 391.5, 274.5 </vector2>
 				<vector2> 67.125, 50.625 </vector2>
 				<resource  external="8">  </resource>

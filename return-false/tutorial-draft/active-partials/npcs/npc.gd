@@ -131,10 +131,16 @@ func present_conversations(dialog_branches):
 	elif( dialog_branches.size() > 1 ):
 		for branch in dialog_branches:
 			var response = {}
-			if branch.get("label"):
-				response["text"] = branch["label"]
-			elif branch.get("Q_ID"):
-				response["text"] = branch["Q_ID"]   # just in case
+			if branch.get("dialog_label"):
+				response["text"] = branch["dialog_label"]
+			elif branch.get("owned_by").get("dialog_label"):
+				response["text"] = branch["owned_by"]["dialog_label"]  # just in case
+			else:
+				print(branch.get_property_list())
+				print(branch.get_script())
+				#print(branch.dialog_label)
+				print("no dialog label?")
+				response["text"] = branch["Q_ID"]
 				
 			
 		#### this should get refactored into a proper init_branch method

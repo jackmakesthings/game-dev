@@ -1,6 +1,6 @@
 {
   "Q_ID": "0_diagnostic",
-  "label": "Diagnostics",
+  "dialog_label": "Diagnostics",
   "init_at": "0",
    "logs": {
      "20": {
@@ -108,6 +108,7 @@
     },
     {
       "actor": "engineer",
+      "dialog_label": "Diagnostics.",
       "states": {
         "0": {
           "dialogue": "I need you to fix that terminal. Start by running a diagnostic on it.",

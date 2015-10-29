@@ -1,7 +1,7 @@
 {
   "Q_ID": "Q_sandwich",
-  "label": "Make Sandwich",
-  "start_at": "0",
+  "dialog_label": "Sandwiches.",
+  "init_at": "0",
   "complete_at": "100",
   "logs": {
     "20": {
@@ -52,6 +52,7 @@
   "branches": [
     {
       "actor": "engineer",
+      "dialog_label": "Sandwiches.",
       "states": {
         "0": {
           "dialogue": "Hey Trace, can you make me a sandwich? I can't stop to eat right now, so just put it in the fridge when you're done.",

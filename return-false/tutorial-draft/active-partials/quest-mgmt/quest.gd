@@ -42,6 +42,8 @@ var Branch = preload("res://active-partials/quest-mgmt/quest_branch.gd")
 
 var MUI
 var popups
+var dialog_label
+
 
 # various boolean conditions this quest can be checked for
 var branches_ready = false
@@ -63,9 +65,9 @@ func _init():
 
 func load_data(data_source):
 	data = utils.get_json(data_source)
-	branches = data["branches"]
-	logs = data["logs"]
-	popups = data["popups"]
+	
+	for key in data:
+		self[key] = data[key]
 
 	# make sure our file and this quest are on the same page
 	if data.has("id") and not (data["id"] == Q_ID):
@@ -80,6 +82,14 @@ func create_branches_from_data(data=data):
 	for branch in branches:
 
 		var branch_node = Branch.new()
+				# branches can control their labels in the MUI individually,
+		# or they can fall back to a quest-level default for it
+		if( ! branch.has("dialog_label") ):
+			branch_node.set("dialog_label", dialog_label)
+		else:
+			branch_node.set("dialog_label", branch.dialog_label)
+			
+			
 		for key in branch:
 			branch_node.set(key, branch[key])
 		branch_node.set_name(Q_ID + "-" + branch["actor"])
@@ -97,6 +107,7 @@ func attach_branch(branch):
 		branch.set("Q_ID", Q_ID)
 		branch.set_name(Q_ID)
 		branch.set("owned_by", self)
+		branch.set("dialog_label", dialog_label)
 		
 		
 		var actor_owned = actor.get_children()

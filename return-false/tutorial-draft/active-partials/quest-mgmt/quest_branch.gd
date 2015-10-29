@@ -11,6 +11,8 @@ var game_root
 var scene_root
 var MUI
 
+export(String) var dialog_label
+
 # the npc to tie this branch to
 var actor
 
