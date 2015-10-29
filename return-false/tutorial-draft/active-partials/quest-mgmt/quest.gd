@@ -32,7 +32,7 @@ var states
 var prev_state = null
 var current_state = 0 setget set_current_state,get_current_state
 export(String) var init_at
-export(String) var end_at
+export(String) var complete_at
 
 # logs/journals also come from the data file
 # we preload the Branch class to use as a template later
@@ -195,6 +195,9 @@ func deactivate():
 		detach_branches()
 		is_active = false
 
+func destroy():
+	deactivate()
+	call_deferred("free")
 
 func set_current_state(state):
 	pre_state_change(current_state, state)
@@ -213,13 +216,10 @@ func set_current_state(state):
 	post_state_change(prev_state, state)
 	show_popups(state)
 	
-	#if( state == init_at ):
-	#	MUI.flash_popup("NEW TASK OBTAINED")
 	
-	if( state == end_at ):
+	if( state == complete_at ):
 		print("Complete!")
-		#MUI.flash_popup("TASK COMPLETE")
-		complete(end_at)
+		complete(complete_at)
 	
 
 
@@ -243,11 +243,11 @@ func get_current_state():
 	return current_state
 
 
-func complete(end_at="100"):
+func complete(complete_at="100"):
 	deactivate()
 	add_to_group("completed_quests")
 	is_complete = true
-	emit_signal("quest_completed", Q_ID, end_at)
+	emit_signal("quest_completed", Q_ID, complete_at)
 
 
 func refresh():
@@ -273,7 +273,7 @@ func _enter_tree():
 	add_user_signal("branches_added", [Q_ID, actors])
 	add_user_signal("branches_removed", [Q_ID, actors])
 	add_user_signal("state_changed", [Q_ID, prev_state, current_state])
-	add_user_signal("quest_completed", [Q_ID, end_at])
+	add_user_signal("quest_completed", [Q_ID, complete_at])
 
 
 
