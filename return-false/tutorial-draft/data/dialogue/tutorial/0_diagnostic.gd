@@ -30,6 +30,10 @@
         "summary": ""
      }
   },
+  "popups": {
+    "20": "NEW TASK: DIAGNOSTIC",
+    "100": "TASK COMPLETE"
+  },
   "branches": [
     {
       "actor": "terminal",

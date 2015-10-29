@@ -41,6 +41,7 @@ var log_base
 var Branch = preload("res://active-partials/quest-mgmt/quest_branch.gd")
 
 var MUI
+var popups
 
 # various boolean conditions this quest can be checked for
 var branches_ready = false
@@ -64,6 +65,7 @@ func load_data(data_source):
 	data = utils.get_json(data_source)
 	branches = data["branches"]
 	logs = data["logs"]
+	popups = data["popups"]
 
 	# make sure our file and this quest are on the same page
 	if data.has("id") and not (data["id"] == Q_ID):
@@ -198,6 +200,7 @@ func set_current_state(state):
 	emit_signal("state_changed", Q_ID, prev_state, state)
 	
 	post_state_change(prev_state, state)
+	show_popups(state)
 	
 	#if( state == init_at ):
 	#	MUI.flash_popup("NEW TASK OBTAINED")
@@ -215,6 +218,14 @@ func pre_state_change(old_state, new_state):
 
 func post_state_change(old_state, new_state):
 	pass
+
+
+func show_popups(state_key):
+	if( popups.size() < 1 ):
+		return
+		
+	if( popups.has(state_key) ):
+		MUI.flash_popup(popups[state_key])
 
 
 func get_current_state():

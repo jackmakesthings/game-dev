@@ -45,6 +45,10 @@
       "summary": ""
     }
   },
+  "popups": {
+    "20": "NEW TASK: SANDWICH",
+    "100": "TASK COMPLETED"
+    },
   "branches": [
     {
       "actor": "engineer",
