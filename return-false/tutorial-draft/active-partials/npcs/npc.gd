@@ -258,45 +258,16 @@ func redirect_player(player, destination):
 
 
 
-#func _on_body_enter(body_id, body_obj, body_shape_id, area_shape_id):
-#	if( body_obj == player ):
-#		player_nearby = true
-#
-#
-#func _on_body_exit(body_id, body_obj, body_shape_id, area_shape_id):
-#	if( body_obj == player ):
-#		player_nearby = false;
-#
-#
-#func player_is_nearby():
-#	return player_nearby
-
-#
-#func _on_click():
-#	
-#	player.set("path", Array())
-#	check_for_player()
-#	if( !player_nearby ):
-#		redirect_player(player, x)
-#		yield(player, "done_moving")
-#		
-#		if( player_nearby ):
-#			get_tree().set_input_as_handled()
-#			start_interaction()
-#		else:
-#			return
-#			
-#	else:
-#		get_tree().set_input_as_handled()
-#		start_interaction()
-
-#
 func _on_click():
-	
+	player = get_node("/root/scene").get("player")
 	player.set("path", Array())
 	check_for_player()
-	if( !player_nearby ):
+	if( player_nearby ):
+		get_tree().set_input_as_handled()
+		start_interaction()
+	else:
 		redirect_player(player, x)
+		
 		
 
 
@@ -395,4 +366,6 @@ func _ready():
 
 
 func _enter_tree():
+	set_paths()
+	player = get_node("/root/_").get("player")
 	check_branches()
