@@ -1,15 +1,11 @@
 # door script
 
-extends Area2D
+extends "res://types/approachable.gd"
 
 var new_stage
 export(String, FILE) var new_stage_path
 export(int) var door_id
 var scene
-var player
-
-const PLAYER_CLASS = preload("res://active-partials/player/player-k2d.gd")
-
 # member variables here, example:
 # var a=2
 # var b="textvar"
@@ -29,27 +25,34 @@ func _ready():
 #		connect("body_enter", self, "_on_body_enter")
 #		connect("body_exit", self, "_on_body_exit")
 #
-func _on_body_enter(body):
-	if body extends PLAYER_CLASS:
-		player = body
-		yield(body, "done_moving")
-		
-		var bodies = get_overlapping_bodies()
-		if( bodies.find( body ) > -1 ):
-			#if( pre_enter()):
-			use_door()
+#func _on_body_enter(body):
+#	if body extends PLAYER_CLASS:
+#		player = body
+#		yield(body, "done_moving")
+#		
+#		var bodies = get_overlapping_bodies()
+#		if( bodies.find( body ) > -1 ):
+#			#if( pre_enter()):
+#			use_door()
 
 
 func pre_enter():
 	return true
 
-func _on_body_exit(body):
+#func _on_body_exit(body):
+#	pass
+
+func _stopped_elsewhere(body):
 	pass
 
+func _stopped_nearby(body):
+	use_door(body)
 
-func use_door():
 
-	player["path"] = Array()
+func use_door(body):
+
+	
+	body["path"] = Array()
 	
 	var p = Timer.new()
 	p.set_wait_time(1)
@@ -60,7 +63,8 @@ func use_door():
 	yield(p, "timeout")
 	
 	scene = get_tree().get_root().get_node("/root/scene")
-	#if( has_user_signal("body_enter") and is_connected("body_enter", self, "_on_body_enter") ):
+#
 	if is_connected("body_enter", self, "_on_body_enter"):
 		disconnect("body_enter", self, "_on_body_enter")
+
 	scene.call_deferred("swap_stage", new_stage)

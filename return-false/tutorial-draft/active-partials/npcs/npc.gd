@@ -3,7 +3,8 @@
 # In use since 8/21 (updated 10/27)
 # Related: message-ui, quest
 
-extends Node2D
+#extends Node2D
+extends "res://types/approachable.gd"
 
 # instance-specific vars
 export(String) var id
@@ -47,7 +48,7 @@ var has_branches
 var branch_root_text = greeting
 var active_branch
 	
-var player_nearby = false
+#var player_nearby = false
 var can_interact = true
 var is_interacting = false
 
@@ -63,7 +64,7 @@ var footprint
 var attractors = Array() 
 var is_attracting         # bool
 
-var player
+#var player
 var quest_loader
 
 var x
@@ -247,41 +248,55 @@ func redirect_player(player, destination):
 	utils.fake_click(offset, 1)
 	
 	yield(player, "oriented")
-	emit_signal("player_redirected", player_is_nearby(), destination, player.get_global_pos())
+	emit_signal("player_redirected", player_nearby, destination, player.get_global_pos())
 
 
 
-func _on_body_enter(body_id, body_obj, body_shape_id, area_shape_id):
-	if( body_obj == player ):
-		player_nearby = true
+#func _on_body_enter(body_id, body_obj, body_shape_id, area_shape_id):
+#	if( body_obj == player ):
+#		player_nearby = true
+#
+#
+#func _on_body_exit(body_id, body_obj, body_shape_id, area_shape_id):
+#	if( body_obj == player ):
+#		player_nearby = false;
+#
+#
+#func player_is_nearby():
+#	return player_nearby
 
+#
+#func _on_click():
+#	
+#	player.set("path", Array())
+#	check_for_player()
+#	if( !player_nearby ):
+#		redirect_player(player, x)
+#		yield(player, "done_moving")
+#		
+#		if( player_nearby ):
+#			get_tree().set_input_as_handled()
+#			start_interaction()
+#		else:
+#			return
+#			
+#	else:
+#		get_tree().set_input_as_handled()
+#		start_interaction()
 
-func _on_body_exit(body_id, body_obj, body_shape_id, area_shape_id):
-	if( body_obj == player ):
-		player_nearby = false;
-
-
-func player_is_nearby():
-	return player_nearby
-
-
+#
 func _on_click():
 	
 	player.set("path", Array())
-	if( player_is_nearby() == false):
+	check_for_player()
+	if( !player_nearby ):
 		redirect_player(player, x)
-		yield(player, "done_moving")
 		
-		if( player_is_nearby() == true ):
-			get_tree().set_input_as_handled()
-			start_interaction()
-		else:
-			return
-			
-	else:
-		get_tree().set_input_as_handled()
-		start_interaction()
 
+
+func _stopped_nearby(body):
+	get_tree().set_input_as_handled()
+	start_interaction()
 
 
 func start_interaction():
@@ -355,11 +370,11 @@ func set_paths():
 	floor_layer = get_owner()
 	footprint = get_node("footprint")
 	
-	
-func set_signals():
-	body_node.connect("body_enter_shape", self, "_on_body_enter")
-	body_node.connect("body_exit_shape", self, "_on_body_exit")
-
+#	
+#func set_signals():
+#	body_node.connect("body_enter_shape", self, "_on_body_enter")
+#	body_node.connect("body_exit_shape", self, "_on_body_exit")
+#
 
 func npc_ready():
 	pass
@@ -368,7 +383,7 @@ func npc_ready():
 func _ready():
 	set_process(true)
 	set_paths()
-	set_signals()
+#	set_signals()
 	set_branches()
 	npc_ready()
 

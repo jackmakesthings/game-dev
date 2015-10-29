@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="18" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
-	<ext_resource path="res://active-partials/environment/stairs.xml" type="PackedScene" index="9"></ext_resource>
+<resource_file type="PackedScene" subresource_count="16" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
+	<ext_resource path="res://assets/tiles/black-iso-tile-flat.png" type="Texture" index="1"></ext_resource>
+	<ext_resource path="res://assets/blue-iso-tile-flat-2.png" type="Texture" index="0"></ext_resource>
+	<ext_resource path="res://assets/tiles/white-iso-tile-flat.png" type="Texture" index="2"></ext_resource>
 	<ext_resource path="res://assets/blue-iso-tile-1.png" type="Texture" index="5"></ext_resource>
+	<ext_resource path="res://assets/tiles/red-iso-tile-flat.png" type="Texture" index="3"></ext_resource>
 	<ext_resource path="res://assets/grate-iso-tile-1.png" type="Texture" index="4"></ext_resource>
 	<ext_resource path="res://assets/tiles/green-outline-glow.png" type="Texture" index="7"></ext_resource>
 	<ext_resource path="res://assets/tiles/dotted-white-tile.png" type="Texture" index="6"></ext_resource>
-	<ext_resource path="res://active-partials/environment/door.xml" type="PackedScene" index="8"></ext_resource>
-	<ext_resource path="res://assets/tiles/white-iso-tile-flat.png" type="Texture" index="2"></ext_resource>
-	<ext_resource path="res://assets/tiles/red-iso-tile-flat.png" type="Texture" index="3"></ext_resource>
-	<ext_resource path="res://assets/blue-iso-tile-flat-2.png" type="Texture" index="0"></ext_resource>
-	<ext_resource path="res://assets/tiles/black-iso-tile-flat.png" type="Texture" index="1"></ext_resource>
+	<ext_resource path="res://active-partials/environment/stairs.xml" type="PackedScene" index="8"></ext_resource>
 	<resource type="GDScript" path="local://66">
 		<string name="script/source"> "extends &quot;res://active-partials/environment/walkable-area.gd&quot;" </string>
 
@@ -112,10 +111,6 @@
 		<string name="script/source"> "# gdscript 14518, main.xml&#000a;# attached to stage/nav/floor/bodies (ysort node containing npcs)&#000a;extends YSort&#000a;&#000a;#func _ready():&#000a;#&#0009;add_user_signal(&quot;player_redirected&quot;, [&quot;successful&quot;, &quot;expected&quot;, &quot;actual&quot;])" </string>
 
 	</resource>
-	<resource type="GDScript" path="local://64">
-		<string name="script/source"> "extends &quot;res://active-partials/environment/door.gd&quot;&#000a;&#000a;func _init():&#000a;&#0009;new_stage_path = &quot;res://active-partials/environment/FPO_stage_a.xml&quot;&#000a;&#0009;new_stage = load(new_stage_path)" </string>
-
-	</resource>
 	<resource type="GDScript" path="local://65">
 		<string name="script/source"> "extends &quot;res://active-partials/environment/door.gd&quot;&#000a;&#000a;func _init():&#000a;&#0009;new_stage_path = &quot;res://active-partials/environment/FPO_stage_a.xml&quot;&#000a;&#0009;new_stage = load(new_stage_path)&#000a;&#000a;func _on_door_mouse_enter():&#000a;&#0009;get_node(&quot;CollisionShape2D/icon&quot;).show()&#000a;#pass # replace with function body&#000a;&#000a;&#000a;func _on_door_mouse_exit():&#000a;&#0009;get_node(&quot;CollisionShape2D/icon&quot;).hide()&#000a;&#0009;#pass # replace with function body&#000a;" </string>
 
@@ -161,33 +156,33 @@
 				<string> "visibility/visible" </string>
 				<string> "texture" </string>
 				<string> "Sprite" </string>
-				<string> "door" </string>
+				<string> "stairs" </string>
 				<string> "transform/pos" </string>
 				<string> "linear_damp" </string>
+				<string> "trigger_node" </string>
 				<string> "new_stage_path" </string>
-				<string> "doors" </string>
-				<string> "stairs" </string>
 				<string> "door_id" </string>
+				<string> "doors" </string>
 			</string_array>
 			<string> "node_count" </string>
-			<int> 7 </int>
+			<int> 6 </int>
 			<string> "node_paths" </string>
 			<array  len="0" shared="false">
 			</array>
 			<string> "nodes" </string>
-			<int_array  len="115"> 				-1, -1, 3, 0, -1, 2, 1, 0, 2, 1, 0, 0, 0, 5, 4, -1, 0, 0, 1, 0, 21, 6, -1, 15, 7, 2, 8, 3, 9, 4, 10, 5, 11, 6, 12, 7, 13, 2, 14, 8, 15, 9, 16, 10, 17, 11, 18, 2, 19, 2, 20, 12, 2, 13, 0, 2, 0, 25, 22, -1, 3, 23, 2, 24, 8, 1, 14, 0, 0, 0, 29, 26, -1, 2, 27, 9, 28, 15, 0, 0, 0, 2147483647, 30, 16, 5, 27, 9, 31, 17, 32, 18, 1, 19, 33, 20, 1, 34, 0, 0, 2147483647, 35, 21, 5, 31, 22, 32, 18, 1, 23, 33, 20, 36, 7, 1, 34 </int_array>
+			<int_array  len="99"> 				-1, -1, 3, 0, -1, 2, 1, 0, 2, 1, 0, 0, 0, 5, 4, -1, 0, 0, 1, 0, 21, 6, -1, 15, 7, 2, 8, 3, 9, 4, 10, 5, 11, 6, 12, 7, 13, 2, 14, 8, 15, 9, 16, 10, 17, 11, 18, 2, 19, 2, 20, 12, 2, 13, 0, 2, 0, 25, 22, -1, 3, 23, 2, 24, 8, 1, 14, 0, 0, 0, 29, 26, -1, 2, 27, 9, 28, 15, 0, 0, 0, 2147483647, 30, 16, 6, 31, 17, 32, 18, 1, 19, 33, 20, 34, 21, 35, 7, 1, 36 </int_array>
 			<string> "variants" </string>
-			<array  len="24" shared="false">
+			<array  len="22" shared="false">
 				<resource  resource_type="Script" path="local://66">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
-					<string> "Script" </string>
+					<string> "2D" </string>
 					<string> "__editor_plugin_states__" </string>
 					<dictionary  shared="false">
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> -477.671, -201.4 </vector2>
+							<vector2> -908, -708 </vector2>
 							<string> "snap_grid" </string>
 							<bool> False </bool>
 							<string> "snap_offset" </string>
@@ -207,7 +202,7 @@
 							<string> "snap_step" </string>
 							<vector2> 10, 10 </vector2>
 							<string> "zoom" </string>
-							<real> 0.54036 </real>
+							<real> 0.193711 </real>
 						</dictionary>
 						<string> "3D" </string>
 						<dictionary  shared="false">
@@ -333,13 +328,11 @@
 				<resource  resource_type="Script" path="local://63">  </resource>
 				<resource  external="7">  </resource>
 				<resource  external="8">  </resource>
-				<vector2> 745.799, 49.9665 </vector2>
-				<real> 0.1 </real>
-				<resource  resource_type="Script" path="local://64">  </resource>
-				<string> "res://active-partials/environment/FPO_stage_a.xml" </string>
-				<resource  external="9">  </resource>
 				<vector2> 540, 370 </vector2>
+				<real> 0.1 </real>
 				<resource  resource_type="Script" path="local://65">  </resource>
+				<node_path> "." </node_path>
+				<string> "res://active-partials/environment/FPO_stage_a.xml" </string>
 			</array>
 			<string> "version" </string>
 			<int> 2 </int>
