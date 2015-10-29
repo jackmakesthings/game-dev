@@ -91,7 +91,7 @@ func _init():
 	add_child(MUI)
 	move_child(MUI, 0)
 	
-	stage = stage2_scene.instance()
+	stage = stage_scene.instance()
 	add_child(stage)
 	stage.set_name("stage")
 	move_child(stage, 1)
