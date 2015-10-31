@@ -8,6 +8,7 @@ var layer_node     # the direct child of this, used as a canvaslayer
 var panel_node     # below that, the control root
 var entry_box      # descendant node for viewing an entry
 var entry_list_box # descendant node for listing all entries
+var completed_list_box
 
 var latest_entry   # some form of reference to the most recent addition
 var current_entry  # reference to which is/was most recently opened
@@ -36,7 +37,7 @@ func entry_exists(id):
 
 
 ####### update_journal - process a new or updated entry
-func update_journal(args):
+func update_journal(args, complete=false):
 
 	args["index"] = self.index
 	entry_box.clear()
@@ -48,6 +49,10 @@ func update_journal(args):
 	if ( entry_exists(e.entry_id) ):
 		e["history"] = get_entry_by('entry_id', e.entry_id)["history"]
 		update_entry(e)
+		
+		if( complete ):
+			print("marking entry as complete")
+			mark_entry_completed(e)
 	
 	# otherwise, create a new entry
 	else:
@@ -61,6 +66,7 @@ func add_entry(e):
 	new_btn.set_text(e.title)
 	new_btn.set_text_align(0)
 	new_btn.set_meta("ind", index)
+	new_btn.set_meta("id", e.entry_id)
 	entry_list_box.add_child(new_btn)
 	new_btn.connect("pressed", self, "show_entry", [e.index+1])
 	#entry_list_box.add_button(e.title)
@@ -87,6 +93,21 @@ func update_entry(e):
 	target.summary = e.summary
 	
 	target.timestamp = e.timestamp
+
+######## mark_entry_completed - for quests to call upon completion
+func mark_entry_completed(e):
+	var btns = entry_list_box.get_children()
+	var this_btn
+	for btn in btns:
+		if( btn.get_meta("id") == e.entry_id ):
+			this_btn = btn 
+		else:
+			continue
+	
+	print(this_btn)
+	entry_list_box.remove_child(this_btn)
+	completed_list_box.add_child(this_btn)
+	#pass
 
 
 ######## show_entry - function invoked by journal buttons
@@ -145,7 +166,7 @@ func _ready():
 	panel_node = layer_node.get_child(0)
 	entry_box = panel_node.get_node("HBoxContainer/RichTextLabel")
 	entry_list_box = panel_node.get_node("HBoxContainer/ButtonGroup/VBoxContainer")
-
+	completed_list_box = panel_node.get_node("HBoxContainer/ButtonGroup/completed")
 	player = get_node("/root/scene").get("player")
 	
 	hide_journal()

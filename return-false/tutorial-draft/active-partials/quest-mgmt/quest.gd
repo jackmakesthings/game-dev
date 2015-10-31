@@ -232,7 +232,12 @@ func set_current_state(state):
 	if( logs.has(state) ):
 		var _log = logs[state]
 		_log["entry_id"] = Q_ID
-		log_base.update_journal(_log)
+		if( state == complete_at ):
+			print("quest complete, marking entry as such")
+			log_base.update_journal(_log, true)
+		else:	
+			log_base.update_journal(_log, false)
+		
 		
 	emit_signal("state_changed", Q_ID, prev_state, state)
 	
