@@ -200,9 +200,32 @@ func destroy():
 	call_deferred("free")
 
 func set_current_state(state):
+
+	# a few special flags, mostly for debugging
+	if( state == "-" ):
+		current_state = null
+		state = null
+		deactivate()
+		
+
+	
+	if( state == "x"):
+		current_state = null
+		state=null
+		destroy()
+		return
+	
+		
+	if( state == "+" ):
+		activate(init_at)
+		current_state = "0"
+		state = "0"
+
+
 	pre_state_change(current_state, state)
 	
-	prev_state = self.current_state
+
+	prev_state = current_state
 	current_state = state
 	game.quest_states[Q_ID] = state
 	

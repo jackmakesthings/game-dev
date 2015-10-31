@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="17" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
+<resource_file type="PackedScene" subresource_count="19" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
 	<ext_resource path="res://assets/ui/list31.tex" type="Texture" index="5"></ext_resource>
 	<ext_resource path="res://assets/ui.xthm" type="Theme" index="2"></ext_resource>
 	<ext_resource path="res://main.gd" type="Script" index="0"></ext_resource>
@@ -47,7 +47,7 @@
 
 	</resource>
 	<resource type="GDScript" path="local://28">
-		<string name="script/source"> "extends &quot;res://active-partials/quest-mgmt/quest.gd&quot;&#000a;&#000a;&#000a;func post_state_change(old, new):&#000a;&#000a;&#0009;var newq = quest_root.Quest.new()&#000a;&#0009;&#000a;&#0009;if( new == &quot;20&quot; ):&#000a;&#0009;&#0009;var quest_root = get_parent()&#000a;&#0009;&#000a;&#0009;&#0009;newq.set_name(&quot;Q_sandwich&quot;)&#000a;&#0009;&#0009;newq.Q_ID = &quot;Q_sandwich&quot;&#000a;&#0009;&#0009;newq.data_source = &quot;res://data/dialogue/temp/Q_sandwich.gd&quot;&#000a;&#0009;&#0009;newq.init_at = &quot;0&quot;&#000a;&#0009;&#0009;newq.complete_at = &quot;100&quot;&#000a;&#0009;&#0009;newq.dialog_label = &quot;Sandwiches&quot;&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;get_parent().add_child(newq)&#000a;&#0009;&#0009;newq.activate(&quot;0&quot;)" </string>
+		<string name="script/source"> "extends &quot;res://active-partials/quest-mgmt/quest.gd&quot;&#000a;&#000a;&#000a;func post_state_change(old, new):&#000a;&#000a;&#0009;var newq = quest_root.Quest.new()&#000a;&#0009;&#000a;&#0009;if( str(new) == &quot;20&quot; ):&#000a;&#0009;&#0009;var quest_root = get_parent()&#000a;&#0009;&#000a;&#0009;&#0009;newq.set_name(&quot;Q_sandwich&quot;)&#000a;&#0009;&#0009;newq.Q_ID = &quot;Q_sandwich&quot;&#000a;&#0009;&#0009;newq.data_source = &quot;res://data/dialogue/temp/Q_sandwich.gd&quot;&#000a;&#0009;&#0009;newq.init_at = &quot;0&quot;&#000a;&#0009;&#0009;newq.complete_at = &quot;100&quot;&#000a;&#0009;&#0009;newq.dialog_label = &quot;Sandwiches&quot;&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;get_parent().add_child(newq)&#000a;&#0009;&#0009;newq.activate(&quot;0&quot;)&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;var ledit = get_parent().get_parent().get_node(&quot;Control/PopupPanel/VBoxContainer/Q_sandwich/LineEdit&quot;)&#000a;&#0009;&#0009;ledit.connect(&quot;text_entered&quot;, newq, &quot;set_current_state&quot;)" </string>
 
 	</resource>
 	<resource type="Animation" path="local://54">
@@ -126,17 +126,34 @@
 		</dictionary>
 
 	</resource>
+	<resource type="GDScript" path="local://57">
+		<string name="script/source"> "&#000a;extends CanvasLayer&#000a;&#000a;# member variables here, example:&#000a;# var a=2&#000a;# var b=&quot;textvar&quot;&#000a;&#000a;var rows&#000a;export(NodePath) var quest_root&#000a;&#000a;func _ready():&#000a;&#000a;&#0009;set_process_unhandled_key_input(true)&#000a;&#0009;# Initialization here&#000a;&#0009;pass&#000a;&#0009;&#000a;&#0009;&#000a;func _unhandled_key_input(key_event):&#000a;&#0009;if( key_event.pressed &amp;&amp; !key_event.is_echo() ):&#000a;&#0009;&#0009;if( key_event.scancode == KEY_D ):&#000a;&#0009;&#0009;&#0009;update_states()&#000a;&#0009;&#0009;&#0009;get_node(&quot;PopupPanel&quot;).popup()&#000a;&#0009;&#0009;#print(key_event.scancode)&#000a;&#0009;&#0009;#&amp;&amp; ev.scancode&#000a;&#0009;&#0009;#print(key_event.unicode)&#000a;&#0009;&#0009;&#000a;func update_states():&#000a;&#0009;rows = get_node(&quot;PopupPanel/VBoxContainer&quot;).get_children()&#000a;&#0009;for row in rows:&#000a;&#0009;&#0009;var id = row.get_name()&#000a;&#0009;&#0009;print(&quot;quest node is &quot;, quest_root)&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;if( ! get_node(quest_root).has_node(id) ):&#000a;&#0009;&#0009;&#0009;return&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;else:&#000a;&#0009;&#0009;&#0009;var related_quest = get_node(quest_root).get_node(id)&#000a;&#0009;&#0009;&#0009;print(&quot;checking on quest &quot;, id)&#000a;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;&#0009;var qstate = related_quest.get_current_state()&#000a;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;&#0009;print(&quot;state for &quot;, id, &quot;reported as &quot;, qstate)&#000a;&#0009;&#0009;&#0009;if( qstate == null ):&#000a;&#0009;&#0009;&#0009;&#0009;qstate = &quot;&quot;&#000a;&#0009;&#0009;&#0009;row.get_node(&quot;LineEdit&quot;).set_text(qstate)&#000a;" </string>
+
+	</resource>
+	<resource type="StyleBoxFlat" path="local://56">
+		<real name="content_margin/left"> -1 </real>
+		<real name="content_margin/right"> -1 </real>
+		<real name="content_margin/top"> -1 </real>
+		<real name="content_margin/bottom"> -1 </real>
+		<color name="bg_color"> 0.6, 0.6, 0.6, 1 </color>
+		<color name="light_color"> 0.8, 0.8, 0.8, 1 </color>
+		<color name="dark_color"> 0.8, 0.8, 0.8, 1 </color>
+		<int name="border_size"> 0 </int>
+		<bool name="border_blend"> True </bool>
+		<bool name="draw_bg"> True </bool>
+
+	</resource>
 	<main_resource>
 		<dictionary name="_bundled" shared="false">
 			<string> "conn_count" </string>
-			<int> 6 </int>
+			<int> 7 </int>
 			<string> "conns" </string>
-			<int_array  len="37"> 				0, 0, 103, 102, 2, 0, 3, 1, 105, 104, 2, 0, 5, 1, 107, 106, 2, 0, 9, 1, 108, 106, 2, 1, 21, 16, 13, 108, 109, 2, 0, 17, 13, 108, 110, 2, 0 </int_array>
+			<int_array  len="43"> 				0, 0, 114, 113, 2, 0, 3, 1, 116, 115, 2, 0, 5, 1, 118, 117, 2, 0, 9, 1, 119, 117, 2, 1, 21, 16, 13, 119, 120, 2, 0, 17, 13, 119, 121, 2, 0, 27, 19, 123, 122, 2, 0 </int_array>
 			<string> "editable_instances" </string>
 			<array  len="0" shared="false">
 			</array>
 			<string> "names" </string>
-			<string_array  len="111">
+			<string_array  len="124">
 				<string> "scene" </string>
 				<string> "z/z" </string>
 				<string> "script/script" </string>
@@ -239,6 +256,17 @@
 				<string> "playback/speed" </string>
 				<string> "blend_times" </string>
 				<string> "autoplay" </string>
+				<string> "quest_root" </string>
+				<string> "PopupPanel" </string>
+				<string> "Label" </string>
+				<string> "percent_visible" </string>
+				<string> "lines_skipped" </string>
+				<string> "max_lines_visible" </string>
+				<string> "LineEdit" </string>
+				<string> "max_length" </string>
+				<string> "editable" </string>
+				<string> "secret" </string>
+				<string> "Q_sandwich" </string>
 				<string> "_on_stage_change" </string>
 				<string> "stage_changed" </string>
 				<string> "_on_Panel_popup_hide" </string>
@@ -248,16 +276,18 @@
 				<string> "pressed" </string>
 				<string> "_on_journal_pressed" </string>
 				<string> "_on_menu_pressed" </string>
+				<string> "set_current_state" </string>
+				<string> "text_entered" </string>
 			</string_array>
 			<string> "node_count" </string>
-			<int> 22 </int>
+			<int> 31 </int>
 			<string> "node_paths" </string>
 			<array  len="0" shared="false">
 			</array>
 			<string> "nodes" </string>
-			<int_array  len="552"> 				-1, -1, 4, 0, -1, 3, 1, 0, 2, 1, 3, 2, 0, 0, 0, 4, 5, -1, 4, 6, 3, 7, 3, 2, 4, 3, 5, 0, 1, 0, 8, 8, -1, 4, 9, 6, 10, 7, 11, 8, 12, 9, 0, 2, 0, 13, 13, -1, 16, 6, 3, 14, 10, 15, 10, 16, 10, 17, 10, 18, 11, 19, 12, 20, 13, 21, 14, 22, 3, 23, 15, 24, 16, 25, 10, 26, 17, 27, 15, 28, 18, 0, 3, 0, 29, 29, -1, 12, 16, 0, 17, 0, 18, 19, 19, 19, 20, 19, 21, 19, 22, 3, 23, 3, 24, 10, 25, 10, 30, 20, 31, 21, 0, 4, 0, 32, 32, -1, 22, 6, 3, 19, 22, 20, 23, 21, 24, 33, 25, 22, 3, 23, 15, 24, 16, 25, 0, 26, 17, 34, 26, 35, 26, 36, 26, 37, 26, 38, 27, 39, 28, 40, 0, 41, 29, 42, 21, 43, 30, 44, 31, 45, 21, 0, 4, 0, 46, 46, -1, 10, 6, 3, 18, 32, 20, 33, 21, 34, 22, 3, 23, 15, 24, 16, 25, 16, 47, 35, 30, 6, 0, 4, 0, 48, 48, -1, 7, 20, 36, 21, 34, 22, 3, 23, 15, 24, 10, 25, 10, 49, 37, 0, 7, 0, 50, 50, -1, 8, 20, 38, 21, 39, 22, 3, 23, 3, 24, 10, 25, 10, 30, 28, 31, 21, 0, 8, 0, 57, 51, -1, 11, 20, 38, 21, 40, 22, 3, 23, 15, 24, 16, 25, 16, 52, 15, 53, 15, 54, 30, 55, 15, 56, 21, 0, 8, 0, 58, 58, -1, 7, 19, 41, 20, 38, 21, 42, 22, 3, 23, 15, 24, 16, 25, 16, 0, 4, 0, 59, 59, -1, 16, 18, 43, 19, 44, 20, 45, 21, 44, 22, 3, 23, 15, 24, 10, 25, 16, 49, 46, 60, 47, 61, 48, 38, 49, 62, 28, 63, 15, 64, 50, 65, 6, 0, 0, 0, 8, 66, -1, 4, 9, 21, 10, 7, 11, 8, 12, 9, 0, 12, 0, 67, 67, -1, 12, 14, 0, 15, 0, 16, 0, 17, 0, 18, 51, 19, 38, 22, 3, 23, 15, 24, 16, 25, 16, 26, 17, 2, 52, 0, 13, 0, 68, 68, -1, 10, 15, 0, 16, 0, 17, 0, 19, 53, 20, 19, 22, 3, 23, 15, 24, 16, 25, 16, 69, 54, 0, 14, 0, 50, 70, -1, 10, 16, 0, 17, 0, 18, 55, 19, 19, 21, 19, 22, 3, 23, 3, 24, 16, 25, 10, 31, 21, 0, 15, 0, 76, 71, -1, 11, 20, 56, 21, 57, 22, 3, 23, 15, 24, 16, 25, 10, 52, 3, 72, 58, 73, 58, 74, 59, 75, 59, 0, 15, 0, 76, 77, -1, 12, 19, 60, 20, 56, 21, 61, 22, 3, 23, 15, 24, 16, 25, 10, 52, 3, 72, 62, 73, 62, 74, 63, 75, 63, 0, 0, 0, 79, 78, -1, 1, 2, 64, 0, 18, 0, 79, 80, -1, 5, 2, 65, 81, 66, 82, 67, 83, 68, 84, 69, 0, 0, 0, 91, 85, -1, 5, 86, 8, 87, 70, 88, 71, 89, 72, 90, 73, 0, 0, 0, 92, 92, -1, 9, 93, 0, 94, 8, 95, 74, 96, 75, 97, 76, 98, 15, 99, 77, 100, 78, 101, 50, 0 </int_array>
+			<int_array  len="779"> 				-1, -1, 4, 0, -1, 3, 1, 0, 2, 1, 3, 2, 0, 0, 0, 4, 5, -1, 4, 6, 3, 7, 3, 2, 4, 3, 5, 0, 1, 0, 8, 8, -1, 4, 9, 6, 10, 7, 11, 8, 12, 9, 0, 2, 0, 13, 13, -1, 16, 6, 3, 14, 10, 15, 10, 16, 10, 17, 10, 18, 11, 19, 12, 20, 13, 21, 14, 22, 3, 23, 15, 24, 16, 25, 10, 26, 17, 27, 15, 28, 18, 0, 3, 0, 29, 29, -1, 12, 16, 0, 17, 0, 18, 19, 19, 19, 20, 19, 21, 19, 22, 3, 23, 3, 24, 10, 25, 10, 30, 20, 31, 21, 0, 4, 0, 32, 32, -1, 22, 6, 3, 19, 22, 20, 23, 21, 24, 33, 25, 22, 3, 23, 15, 24, 16, 25, 0, 26, 17, 34, 26, 35, 26, 36, 26, 37, 26, 38, 27, 39, 28, 40, 0, 41, 29, 42, 21, 43, 30, 44, 31, 45, 21, 0, 4, 0, 46, 46, -1, 10, 6, 3, 18, 32, 20, 33, 21, 34, 22, 3, 23, 15, 24, 16, 25, 16, 47, 35, 30, 6, 0, 4, 0, 48, 48, -1, 7, 20, 36, 21, 34, 22, 3, 23, 15, 24, 10, 25, 10, 49, 37, 0, 7, 0, 50, 50, -1, 8, 20, 38, 21, 39, 22, 3, 23, 3, 24, 10, 25, 10, 30, 28, 31, 21, 0, 8, 0, 57, 51, -1, 11, 20, 38, 21, 40, 22, 3, 23, 15, 24, 16, 25, 16, 52, 15, 53, 15, 54, 30, 55, 15, 56, 21, 0, 8, 0, 58, 58, -1, 7, 19, 41, 20, 38, 21, 42, 22, 3, 23, 15, 24, 16, 25, 16, 0, 4, 0, 59, 59, -1, 16, 18, 43, 19, 44, 20, 45, 21, 44, 22, 3, 23, 15, 24, 10, 25, 16, 49, 46, 60, 47, 61, 48, 38, 49, 62, 28, 63, 15, 64, 50, 65, 6, 0, 0, 0, 8, 66, -1, 4, 9, 21, 10, 7, 11, 8, 12, 9, 0, 12, 0, 67, 67, -1, 12, 14, 0, 15, 0, 16, 0, 17, 0, 18, 51, 19, 38, 22, 3, 23, 15, 24, 16, 25, 16, 26, 17, 2, 52, 0, 13, 0, 68, 68, -1, 10, 15, 0, 16, 0, 17, 0, 19, 53, 20, 19, 22, 3, 23, 15, 24, 16, 25, 16, 69, 54, 0, 14, 0, 50, 70, -1, 10, 16, 0, 17, 0, 18, 55, 19, 19, 21, 19, 22, 3, 23, 3, 24, 16, 25, 10, 31, 21, 0, 15, 0, 76, 71, -1, 11, 20, 56, 21, 57, 22, 3, 23, 15, 24, 16, 25, 10, 52, 3, 72, 58, 73, 58, 74, 59, 75, 59, 0, 15, 0, 76, 77, -1, 12, 19, 60, 20, 56, 21, 61, 22, 3, 23, 15, 24, 16, 25, 10, 52, 3, 72, 62, 73, 62, 74, 63, 75, 63, 0, 0, 0, 79, 78, -1, 1, 2, 64, 0, 18, 0, 79, 80, -1, 5, 2, 65, 81, 66, 82, 67, 83, 68, 84, 69, 0, 0, 0, 91, 85, -1, 5, 86, 8, 87, 70, 88, 71, 89, 72, 90, 73, 0, 0, 0, 92, 92, -1, 9, 93, 0, 94, 8, 95, 74, 96, 75, 97, 76, 98, 15, 99, 77, 100, 78, 101, 50, 0, 0, 0, 8, 67, -1, 7, 9, 0, 10, 7, 11, 8, 12, 9, 2, 79, 3, 80, 102, 81, 0, 22, 0, 103, 103, -1, 11, 16, 0, 18, 82, 20, 83, 21, 84, 33, 85, 22, 3, 23, 15, 24, 16, 25, 16, 69, 86, 27, 3, 0, 23, 0, 50, 50, -1, 7, 20, 87, 21, 84, 22, 3, 23, 3, 24, 16, 25, 16, 31, 21, 0, 24, 0, 29, 80, -1, 7, 20, 87, 21, 88, 22, 3, 23, 3, 24, 16, 25, 16, 31, 21, 0, 25, 0, 104, 104, -1, 10, 19, 46, 20, 89, 21, 90, 22, 15, 23, 15, 24, 10, 54, 91, 105, 92, 106, 21, 107, 6, 0, 25, 0, 108, 108, -1, 11, 18, 93, 20, 87, 21, 88, 22, 3, 23, 15, 24, 16, 25, 16, 54, 50, 109, 21, 110, 15, 111, 3, 0, 24, 0, 29, 112, -1, 8, 19, 94, 20, 87, 21, 95, 22, 3, 23, 3, 24, 16, 25, 16, 31, 21, 0, 28, 0, 104, 104, -1, 10, 19, 46, 20, 89, 21, 90, 22, 15, 23, 15, 24, 10, 54, 96, 105, 92, 106, 21, 107, 6, 0, 28, 0, 108, 108, -1, 11, 18, 93, 20, 87, 21, 88, 22, 3, 23, 15, 24, 16, 25, 16, 54, 50, 109, 21, 110, 15, 111, 3, 0 </int_array>
 			<string> "variants" </string>
-			<array  len="79" shared="false">
+			<array  len="97" shared="false">
 				<int> 1 </int>
 				<resource  external="0">  </resource>
 				<dictionary  shared="false">
@@ -268,7 +298,7 @@
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> -297.839, -194.735 </vector2>
+							<vector2> 547.25, -16.7589 </vector2>
 							<string> "snap_grid" </string>
 							<bool> True </bool>
 							<string> "snap_offset" </string>
@@ -288,7 +318,7 @@
 							<string> "snap_step" </string>
 							<vector2> 9, 9 </vector2>
 							<string> "zoom" </string>
-							<real> 0.598735 </real>
+							<real> 2.789501 </real>
 						</dictionary>
 						<string> "3D" </string>
 						<dictionary  shared="false">
@@ -602,6 +632,159 @@
 				<real> 3 </real>
 				<array  len="0" shared="false">
 				</array>
+				<resource  resource_type="Script" path="local://57">  </resource>
+				<dictionary  shared="false">
+					<string> "__editor_plugin_screen__" </string>
+					<string> "Script" </string>
+					<string> "__editor_plugin_states__" </string>
+					<dictionary  shared="false">
+						<string> "2D" </string>
+						<dictionary  shared="false">
+							<string> "ofs" </string>
+							<vector2> 214.573, -22.5017 </vector2>
+							<string> "snap_grid" </string>
+							<bool> True </bool>
+							<string> "snap_offset" </string>
+							<vector2> 0, 0 </vector2>
+							<string> "snap_pixel" </string>
+							<bool> False </bool>
+							<string> "snap_relative" </string>
+							<bool> False </bool>
+							<string> "snap_rotation" </string>
+							<bool> True </bool>
+							<string> "snap_rotation_offset" </string>
+							<real> 0 </real>
+							<string> "snap_rotation_step" </string>
+							<real> 0.523599 </real>
+							<string> "snap_show_grid" </string>
+							<bool> False </bool>
+							<string> "snap_step" </string>
+							<vector2> 9, 9 </vector2>
+							<string> "zoom" </string>
+							<real> 0.814504 </real>
+						</dictionary>
+						<string> "3D" </string>
+						<dictionary  shared="false">
+							<string> "ambient_light_color" </string>
+							<color> 0.15, 0.15, 0.15, 1 </color>
+							<string> "default_light" </string>
+							<bool> True </bool>
+							<string> "default_srgb" </string>
+							<bool> False </bool>
+							<string> "deflight_rot_x" </string>
+							<real> 0.942478 </real>
+							<string> "deflight_rot_y" </string>
+							<real> 0.628319 </real>
+							<string> "fov" </string>
+							<real> 45 </real>
+							<string> "show_grid" </string>
+							<bool> True </bool>
+							<string> "show_origin" </string>
+							<bool> True </bool>
+							<string> "viewport_mode" </string>
+							<int> 1 </int>
+							<string> "viewports" </string>
+							<array  len="4" shared="false">
+								<dictionary  shared="false">
+									<string> "distance" </string>
+									<real> 4 </real>
+									<string> "listener" </string>
+									<bool> True </bool>
+									<string> "pos" </string>
+									<vector3> 0, 0, 0 </vector3>
+									<string> "use_environment" </string>
+									<bool> False </bool>
+									<string> "use_orthogonal" </string>
+									<bool> False </bool>
+									<string> "x_rot" </string>
+									<real> 0 </real>
+									<string> "y_rot" </string>
+									<real> 0 </real>
+								</dictionary>
+								<dictionary  shared="false">
+									<string> "distance" </string>
+									<real> 4 </real>
+									<string> "listener" </string>
+									<bool> False </bool>
+									<string> "pos" </string>
+									<vector3> 0, 0, 0 </vector3>
+									<string> "use_environment" </string>
+									<bool> False </bool>
+									<string> "use_orthogonal" </string>
+									<bool> False </bool>
+									<string> "x_rot" </string>
+									<real> 0 </real>
+									<string> "y_rot" </string>
+									<real> 0 </real>
+								</dictionary>
+								<dictionary  shared="false">
+									<string> "distance" </string>
+									<real> 4 </real>
+									<string> "listener" </string>
+									<bool> False </bool>
+									<string> "pos" </string>
+									<vector3> 0, 0, 0 </vector3>
+									<string> "use_environment" </string>
+									<bool> False </bool>
+									<string> "use_orthogonal" </string>
+									<bool> False </bool>
+									<string> "x_rot" </string>
+									<real> 0 </real>
+									<string> "y_rot" </string>
+									<real> 0 </real>
+								</dictionary>
+								<dictionary  shared="false">
+									<string> "distance" </string>
+									<real> 4 </real>
+									<string> "listener" </string>
+									<bool> False </bool>
+									<string> "pos" </string>
+									<vector3> 0, 0, 0 </vector3>
+									<string> "use_environment" </string>
+									<bool> False </bool>
+									<string> "use_orthogonal" </string>
+									<bool> False </bool>
+									<string> "x_rot" </string>
+									<real> 0 </real>
+									<string> "y_rot" </string>
+									<real> 0 </real>
+								</dictionary>
+							</array>
+							<string> "zfar" </string>
+							<real> 500 </real>
+							<string> "znear" </string>
+							<real> 0.1 </real>
+						</dictionary>
+						<string> "Anim" </string>
+						<dictionary  shared="false">
+							<string> "visible" </string>
+							<bool> False </bool>
+						</dictionary>
+					</dictionary>
+					<string> "__editor_run_settings__" </string>
+					<dictionary  shared="false">
+						<string> "custom_args" </string>
+						<string> "-l $scene" </string>
+						<string> "run_mode" </string>
+						<int> 0 </int>
+					</dictionary>
+				</dictionary>
+				<node_path> "../quests" </node_path>
+				<real> 576 </real>
+				<real> -1 </real>
+				<real> 324 </real>
+				<vector2> 225, 324 </vector2>
+				<resource  resource_type="StyleBox" path="local://56">  </resource>
+				<real> 225 </real>
+				<real> 23 </real>
+				<real> 175 </real>
+				<real> 18 </real>
+				<string> "quest: 0_diagnostic" </string>
+				<real> 1 </real>
+				<real> 179 </real>
+				<real> 27 </real>
+				<real> 50 </real>
+				<string> "quest: Q_sandwich" </string>
 			</array>
 			<string> "version" </string>
 			<int> 2 </int>
