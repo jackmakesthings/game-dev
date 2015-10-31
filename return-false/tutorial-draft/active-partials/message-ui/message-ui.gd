@@ -132,11 +132,22 @@ func open():
 	dialog_box.popup()
 	is_active = true;
 	emit_signal("dialogue_opened")
+	set_process_unhandled_key_input(true)
 
 func close():
 	dialog_box.hide()
 	is_active = false;
 	emit_signal("dialogue_closed")
+
+
+######## keybind so we can escape if needed ######
+
+func _unhandled_key_input(key_event):
+	if( key_event.pressed && !key_event.echo):
+		if( key_event.scancode == KEY_ESCAPE ):
+			close()
+		#print(key_event.scancode)
+
 
 
 
