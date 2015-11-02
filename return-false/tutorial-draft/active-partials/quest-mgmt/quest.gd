@@ -122,6 +122,7 @@ func attach_branch(branch):
 		actor["has_branches"] = true
 		if ( actors.find(actor.get_name()) == -1 ):
 			actors.append(actor_ref)
+			actor.add_to_group(Q_ID + "-actors")
 
 # this will generally come right after the function above
 # it takes the child branches of this quest node and moves them
@@ -151,10 +152,15 @@ func detach_branch(branch):
 		return
 	else:
 		var actor = npc_root.get_node(actor_ref)
-		if( actor["dialog_branches"].find(Q_ID) > -1 ):
-			actor["dialog_branches"].remove(Q_ID)
-			actor["has_branches"] = (actor["dialog_branches"].size() > 0)
-	branch.queue_free()
+		if( actor["dialog_branches"].find(branch) > -1 ):
+			actor.get_node(Q_ID).queue_free()
+			actor["dialog_branches"].erase(branch)
+			actor.call("check_branches")
+#			actor["dialog_branches"].remove(Q_ID)
+#			print( actor )
+#			print(actor["dialog_branches"])
+#			actor["has_branches"] = (actor["dialog_branches"].size() > 0)
+#	branch.queue_free()
 
 # detach all branches for a given quest
 # this is probably going to get used much more than detach_branch alone
@@ -187,10 +193,10 @@ func activate(start_state=init_at):
 
 
 func deactivate():
-	if( is_active() == false ):
-		print("Quest ", Q_ID, " is not active.")
-		return
-	else:
+	#if( is_active() == false ):
+	#	print("Quest ", Q_ID, " is not active.")
+	#	return
+	#else:
 		self.remove_from_group("active_quests")
 		detach_branches()
 		is_active = false

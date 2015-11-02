@@ -122,6 +122,7 @@ func decline_conversation():
 func present_conversations(dialog_branches):
 
 	var options = []
+	check_branches()
 	
 	if( dialog_branches.size() == 1 ):
 		var branch = dialog_branches[0]
@@ -136,10 +137,10 @@ func present_conversations(dialog_branches):
 			elif branch.get("owned_by").get("dialog_label"):
 				response["text"] = branch["owned_by"]["dialog_label"]  # just in case
 			else:
-				print(branch.get_property_list())
-				print(branch.get_script())
+				#print(branch.get_property_list())
+				#print(branch.get_script())
 				#print(branch.dialog_label)
-				print("no dialog label?")
+				#print("no dialog label?")
 				response["text"] = branch["Q_ID"]
 				
 			
@@ -283,21 +284,38 @@ func start_interaction():
 	pause.start()
 	yield(pause, "timeout")
 	check_branches()
+#	print("branches are ", dialog_branches)
 	
 	if( dialog_branches.empty() ):
-		print("no dialogs!")
+#		print("no dialogs!")
 		i_should_go()
 	else:
-		for i in range(0, dialog_branches.size() -1):
-			var branch_ = dialog_branches[i]
-			if( ! has_conversation(branch_)  ):
-				MUI.close()
-				dialog_branches.remove(i)
+		var count = 0
+		while count < dialog_branches.size():
+			if( dialog_branches[count] == null ):
+#				print("that branch is null, returning")
+				return false
+				
+			if( !has_conversation(dialog_branches[count]) ):
+#				print( "no conversation for ", dialog_branches[count], ", erasing")
+				dialog_branches.erase(dialog_branches[count])
+				remove_child(dialog_branches[count])
+				count = count + 1
+#				print( "Dialog branch removed, size is now ", dialog_branches.size())
+				
 			else:
+				count = count + 1
 				continue
-		present_conversations(dialog_branches)
-
-
+		
+		if( dialog_branches.size() > 0 ):
+#			print("found ", dialog_branches.size(), " dialog branches, presenting conversations")		
+			present_conversations(dialog_branches)
+		else:
+#			print( "dialog branches size < 1, closing MUI")
+			MUI.close()
+			
+			
+			
 
 # Check whether this actor has anything to say
 # on a particular dialog branch, at its current state
@@ -322,15 +340,17 @@ func set_branches():
 
 
 func check_branches():
-	dialog_branches = Array()
-	var nodes = get_child_count()
-	for n in range(0, nodes-1):
-		if ( get_child(n).has_method( "_at_state" )):
-			dialog_branches.append(get_child(n))
-			has_branches = true
-			continue
-
-
+	dialog_branches.clear()
+	var kids = get_children()
+	for kid in kids:
+		if( kid.has_method("_at_state") ):
+			if( dialog_branches.find(kid) > -1):
+				continue
+			else:
+				dialog_branches.push_back(kid)
+	
+	if( dialog_branches.size() > 0 ):
+		has_branches = true
 
 func set_paths():
 	_ = get_node("/root/_")
@@ -347,12 +367,6 @@ func set_paths():
 	floor_layer = get_owner()
 	footprint = get_node("footprint")
 	
-#	
-#func set_signals():
-#	body_node.connect("body_enter_shape", self, "_on_body_enter")
-#	body_node.connect("body_exit_shape", self, "_on_body_exit")
-#
-
 func npc_ready():
 	pass
 	
@@ -360,7 +374,6 @@ func npc_ready():
 func _ready():
 	set_process(true)
 	set_paths()
-#	set_signals()
 	set_branches()
 	npc_ready()
 

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resource_file type="PackedScene" subresource_count="19" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
-	<ext_resource path="res://assets/ui/list31.tex" type="Texture" index="5"></ext_resource>
 	<ext_resource path="res://assets/ui.xthm" type="Theme" index="2"></ext_resource>
-	<ext_resource path="res://main.gd" type="Script" index="0"></ext_resource>
-	<ext_resource path="res://assets/ui/code39 (2).tex" type="Texture" index="6"></ext_resource>
 	<ext_resource path="res://assets/cursors/png/square185.png" type="Texture" index="8"></ext_resource>
-	<ext_resource path="res://active-partials/journal/base_journal.gd" type="Script" index="1"></ext_resource>
-	<ext_resource path="res://assets/ui/code39 (1).tex" type="Texture" index="7"></ext_resource>
 	<ext_resource path="res://active-partials/interface/interface.gd" type="Script" index="3"></ext_resource>
+	<ext_resource path="res://main.gd" type="Script" index="0"></ext_resource>
+	<ext_resource path="res://active-partials/journal/base_journal.gd" type="Script" index="1"></ext_resource>
+	<ext_resource path="res://assets/ui/list31.tex" type="Texture" index="5"></ext_resource>
+	<ext_resource path="res://assets/ui/code39 (1).tex" type="Texture" index="7"></ext_resource>
+	<ext_resource path="res://assets/ui/code39 (2).tex" type="Texture" index="6"></ext_resource>
 	<ext_resource path="res://assets/ui/list31 (1).tex" type="Texture" index="4"></ext_resource>
 	<resource type="StyleBoxFlat" path="local://45">
 		<real name="content_margin/left"> 5 </real>
@@ -47,45 +47,7 @@
 
 	</resource>
 	<resource type="GDScript" path="local://28">
-		<string name="script/source"> "extends &quot;res://active-partials/quest-mgmt/quest.gd&quot;&#000a;&#000a;&#000a;func post_state_change(old, new):&#000a;&#000a;&#0009;var newq = quest_root.Quest.new()&#000a;&#0009;&#000a;&#0009;if( str(new) == &quot;20&quot; ):&#000a;&#0009;&#0009;var quest_root = get_parent()&#000a;&#0009;&#000a;&#0009;&#0009;newq.set_name(&quot;Q_sandwich&quot;)&#000a;&#0009;&#0009;newq.Q_ID = &quot;Q_sandwich&quot;&#000a;&#0009;&#0009;newq.data_source = &quot;res://data/dialogue/temp/Q_sandwich.gd&quot;&#000a;&#0009;&#0009;newq.init_at = &quot;0&quot;&#000a;&#0009;&#0009;newq.complete_at = &quot;100&quot;&#000a;&#0009;&#0009;newq.dialog_label = &quot;Sandwiches&quot;&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;get_parent().add_child(newq)&#000a;&#0009;&#0009;newq.activate(&quot;0&quot;)&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;var ledit = get_parent().get_parent().get_node(&quot;Control/PopupPanel/VBoxContainer/Q_sandwich/LineEdit&quot;)&#000a;&#0009;&#0009;ledit.connect(&quot;text_entered&quot;, newq, &quot;set_current_state&quot;)" </string>
-
-	</resource>
-	<resource type="Animation" path="local://54">
-		<string name="resource/name"> "fade_in" </string>
-		<real name="length"> 3 </real>
-		<bool name="loop"> False </bool>
-		<real name="step"> 0.1 </real>
-		<string name="tracks/0/type"> "value" </string>
-		<node_path name="tracks/0/path"> "fader:visibility/opacity" </node_path>
-		<int name="tracks/0/interp"> 1 </int>
-		<dictionary name="tracks/0/keys" shared="false">
-			<string> "cont" </string>
-			<bool> True </bool>
-			<string> "times" </string>
-			<real_array  len="2"> 				0, 3 </real_array>
-			<string> "transitions" </string>
-			<real_array  len="2"> 				1, 1 </real_array>
-			<string> "values" </string>
-			<array  len="2" shared="false">
-				<real> 1 </real>
-				<real> 0 </real>
-			</array>
-		</dictionary>
-		<string name="tracks/1/type"> "value" </string>
-		<node_path name="tracks/1/path"> "fader:z/z" </node_path>
-		<int name="tracks/1/interp"> 1 </int>
-		<dictionary name="tracks/1/keys" shared="false">
-			<string> "cont" </string>
-			<bool> False </bool>
-			<string> "times" </string>
-			<real_array  len="1"> 				3 </real_array>
-			<string> "transitions" </string>
-			<real_array  len="1"> 				1 </real_array>
-			<string> "values" </string>
-			<array  len="1" shared="false">
-				<int> 0 </int>
-			</array>
-		</dictionary>
+		<string name="script/source"> "extends &quot;res://active-partials/quest-mgmt/quest.gd&quot;&#000a;&#000a;&#000a;func post_state_change(old, new):&#000a;&#000a;&#0009;&#000a;&#0009;if( str(new) == &quot;20&quot; ):&#000a;&#0009;&#0009;var newq = quest_root.Quest.new()&#000a;&#000a;&#0009;&#000a;&#0009;&#0009;newq.set_name(&quot;Q_sandwich&quot;)&#000a;&#0009;&#0009;newq.Q_ID = &quot;Q_sandwich&quot;&#000a;&#0009;&#0009;newq.data_source = &quot;res://data/dialogue/temp/Q_sandwich.gd&quot;&#000a;&#0009;&#0009;newq.init_at = &quot;0&quot;&#000a;&#0009;&#0009;newq.complete_at = &quot;100&quot;&#000a;&#0009;&#0009;newq.dialog_label = &quot;Sandwiches&quot;&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;get_parent().add_child(newq)&#000a;&#0009;&#0009;newq.activate(&quot;0&quot;)&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;var ledit = get_parent().get_parent().get_node(&quot;Control/PopupPanel/VBoxContainer/Q_sandwich/LineEdit&quot;)&#000a;&#0009;&#0009;ledit.connect(&quot;text_entered&quot;, newq, &quot;set_current_state&quot;)&#000a;&#0009;&#0009;&#000a;&#0009;if( str(new) == &quot;100&quot; ):&#000a;&#0009;&#0009;var eng = npc_root.get_node(&quot;engineer&quot;)&#000a;&#0009;&#0009;eng.set(&quot;fallback_dialogue&quot;, &quot;Thanks for helping me with that diagnostic!&quot;)&#000a;&#0009;&#000a;&#0009;&#000a;&#0009;print(actors)" </string>
 
 	</resource>
 	<resource type="Animation" path="local://55">
@@ -122,6 +84,44 @@
 			<string> "values" </string>
 			<array  len="1" shared="false">
 				<int> 3 </int>
+			</array>
+		</dictionary>
+
+	</resource>
+	<resource type="Animation" path="local://54">
+		<string name="resource/name"> "fade_in" </string>
+		<real name="length"> 3 </real>
+		<bool name="loop"> False </bool>
+		<real name="step"> 0.1 </real>
+		<string name="tracks/0/type"> "value" </string>
+		<node_path name="tracks/0/path"> "fader:visibility/opacity" </node_path>
+		<int name="tracks/0/interp"> 1 </int>
+		<dictionary name="tracks/0/keys" shared="false">
+			<string> "cont" </string>
+			<bool> True </bool>
+			<string> "times" </string>
+			<real_array  len="2"> 				0, 3 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="2"> 				1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="2" shared="false">
+				<real> 1 </real>
+				<real> 0 </real>
+			</array>
+		</dictionary>
+		<string name="tracks/1/type"> "value" </string>
+		<node_path name="tracks/1/path"> "fader:z/z" </node_path>
+		<int name="tracks/1/interp"> 1 </int>
+		<dictionary name="tracks/1/keys" shared="false">
+			<string> "cont" </string>
+			<bool> False </bool>
+			<string> "times" </string>
+			<real_array  len="1"> 				3 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="1"> 				1 </real_array>
+			<string> "values" </string>
+			<array  len="1" shared="false">
+				<int> 0 </int>
 			</array>
 		</dictionary>
 
@@ -251,8 +251,8 @@
 				<string> "playback/process_mode" </string>
 				<string> "playback/default_blend_time" </string>
 				<string> "root/root" </string>
-				<string> "anims/fade_in" </string>
 				<string> "anims/fade_out" </string>
+				<string> "anims/fade_in" </string>
 				<string> "playback/active" </string>
 				<string> "playback/speed" </string>
 				<string> "blend_times" </string>
@@ -286,14 +286,14 @@
 			<array  len="0" shared="false">
 			</array>
 			<string> "nodes" </string>
-			<int_array  len="852"> 				-1, -1, 4, 0, -1, 3, 1, 0, 2, 1, 3, 2, 0, 0, 0, 4, 5, -1, 4, 6, 3, 7, 3, 2, 4, 3, 5, 0, 1, 0, 8, 8, -1, 4, 9, 6, 10, 7, 11, 8, 12, 9, 0, 2, 0, 13, 13, -1, 15, 14, 10, 15, 10, 16, 10, 17, 10, 18, 11, 19, 12, 20, 13, 21, 14, 22, 3, 23, 15, 24, 16, 25, 10, 26, 17, 27, 15, 28, 18, 0, 3, 0, 29, 29, -1, 12, 16, 0, 17, 0, 18, 19, 19, 19, 20, 19, 21, 19, 22, 3, 23, 3, 24, 10, 25, 10, 30, 20, 31, 21, 0, 4, 0, 32, 32, -1, 22, 6, 3, 19, 22, 20, 23, 21, 24, 33, 25, 22, 3, 23, 15, 24, 16, 25, 0, 26, 17, 34, 26, 35, 26, 36, 26, 37, 26, 38, 27, 39, 28, 40, 0, 41, 29, 42, 21, 43, 30, 44, 31, 45, 21, 0, 4, 0, 46, 46, -1, 10, 6, 3, 18, 32, 20, 33, 21, 34, 22, 3, 23, 15, 24, 16, 25, 16, 47, 35, 30, 6, 0, 4, 0, 48, 48, -1, 7, 20, 36, 21, 34, 22, 3, 23, 15, 24, 10, 25, 10, 49, 37, 0, 7, 0, 50, 50, -1, 8, 20, 38, 21, 39, 22, 3, 23, 3, 24, 10, 25, 10, 30, 28, 31, 21, 0, 8, 0, 57, 51, -1, 11, 20, 38, 21, 40, 22, 3, 23, 15, 24, 16, 25, 16, 52, 15, 53, 15, 54, 41, 55, 15, 56, 21, 0, 8, 0, 58, 58, -1, 7, 19, 42, 20, 38, 21, 43, 22, 3, 23, 15, 24, 16, 25, 16, 0, 7, 0, 50, 59, -1, 9, 19, 44, 20, 38, 21, 45, 22, 3, 23, 3, 24, 10, 25, 10, 30, 28, 31, 21, 0, 11, 0, 57, 51, -1, 11, 20, 38, 21, 40, 22, 3, 23, 15, 24, 16, 25, 16, 52, 15, 53, 15, 54, 46, 55, 15, 56, 21, 0, 11, 0, 58, 58, -1, 7, 19, 42, 20, 38, 21, 43, 22, 3, 23, 15, 24, 16, 25, 16, 0, 4, 0, 60, 60, -1, 15, 18, 47, 20, 48, 21, 34, 22, 3, 23, 15, 24, 10, 25, 16, 49, 49, 61, 50, 62, 51, 38, 52, 63, 28, 64, 15, 65, 53, 66, 6, 0, 0, 0, 8, 67, -1, 4, 9, 21, 10, 7, 11, 8, 12, 9, 0, 15, 0, 68, 68, -1, 12, 14, 0, 15, 0, 16, 0, 17, 0, 18, 54, 19, 38, 22, 3, 23, 15, 24, 16, 25, 16, 26, 17, 2, 55, 0, 16, 0, 69, 69, -1, 10, 15, 0, 16, 0, 17, 0, 19, 56, 20, 19, 22, 3, 23, 15, 24, 16, 25, 16, 70, 57, 0, 17, 0, 50, 71, -1, 10, 16, 0, 17, 0, 18, 58, 19, 19, 21, 19, 22, 3, 23, 3, 24, 16, 25, 10, 31, 21, 0, 18, 0, 77, 72, -1, 11, 20, 59, 21, 60, 22, 3, 23, 15, 24, 16, 25, 10, 52, 3, 73, 61, 74, 61, 75, 62, 76, 62, 0, 18, 0, 77, 78, -1, 12, 19, 63, 20, 59, 21, 64, 22, 3, 23, 15, 24, 16, 25, 10, 52, 3, 73, 65, 74, 65, 75, 66, 76, 66, 0, 0, 0, 80, 79, -1, 1, 2, 67, 0, 21, 0, 80, 81, -1, 5, 2, 68, 82, 69, 83, 70, 84, 71, 85, 72, 0, 0, 0, 92, 86, -1, 5, 87, 8, 88, 73, 89, 74, 90, 75, 91, 76, 0, 0, 0, 93, 93, -1, 9, 94, 0, 95, 8, 96, 77, 97, 78, 98, 79, 99, 15, 100, 80, 101, 81, 102, 53, 0, 0, 0, 8, 68, -1, 7, 9, 0, 10, 7, 11, 8, 12, 9, 2, 82, 3, 83, 103, 84, 0, 25, 0, 104, 104, -1, 12, 6, 3, 16, 0, 18, 85, 20, 86, 21, 87, 33, 88, 22, 3, 23, 15, 24, 16, 25, 16, 70, 89, 27, 3, 0, 26, 0, 50, 50, -1, 7, 20, 90, 21, 87, 22, 3, 23, 3, 24, 16, 25, 16, 31, 21, 0, 27, 0, 29, 81, -1, 7, 20, 90, 21, 91, 22, 3, 23, 3, 24, 16, 25, 16, 31, 21, 0, 28, 0, 105, 105, -1, 10, 19, 49, 20, 92, 21, 93, 22, 15, 23, 15, 24, 10, 54, 94, 106, 95, 107, 21, 108, 6, 0, 28, 0, 109, 109, -1, 11, 18, 96, 20, 90, 21, 91, 22, 3, 23, 15, 24, 16, 25, 16, 54, 53, 110, 21, 111, 15, 112, 3, 0, 27, 0, 29, 113, -1, 8, 19, 97, 20, 90, 21, 98, 22, 3, 23, 3, 24, 16, 25, 16, 31, 21, 0, 31, 0, 105, 105, -1, 10, 19, 49, 20, 92, 21, 93, 22, 15, 23, 15, 24, 10, 54, 99, 106, 95, 107, 21, 108, 6, 0, 31, 0, 109, 109, -1, 11, 18, 96, 20, 90, 21, 91, 22, 3, 23, 15, 24, 16, 25, 16, 54, 53, 110, 21, 111, 15, 112, 3, 0 </int_array>
+			<int_array  len="854"> 				-1, -1, 4, 0, -1, 3, 1, 0, 2, 1, 3, 2, 0, 0, 0, 4, 5, -1, 4, 6, 3, 7, 3, 2, 4, 3, 5, 0, 1, 0, 8, 8, -1, 4, 9, 6, 10, 7, 11, 8, 12, 9, 0, 2, 0, 13, 13, -1, 16, 6, 3, 14, 10, 15, 10, 16, 10, 17, 10, 18, 11, 19, 12, 20, 13, 21, 14, 22, 3, 23, 15, 24, 16, 25, 10, 26, 17, 27, 15, 28, 18, 0, 3, 0, 29, 29, -1, 12, 16, 0, 17, 0, 18, 19, 19, 19, 20, 19, 21, 19, 22, 3, 23, 3, 24, 10, 25, 10, 30, 20, 31, 21, 0, 4, 0, 32, 32, -1, 22, 6, 3, 19, 22, 20, 23, 21, 24, 33, 25, 22, 3, 23, 15, 24, 16, 25, 0, 26, 17, 34, 26, 35, 26, 36, 26, 37, 26, 38, 27, 39, 28, 40, 0, 41, 29, 42, 21, 43, 30, 44, 31, 45, 21, 0, 4, 0, 46, 46, -1, 10, 6, 3, 18, 32, 20, 33, 21, 34, 22, 3, 23, 15, 24, 16, 25, 16, 47, 35, 30, 6, 0, 4, 0, 48, 48, -1, 7, 20, 36, 21, 34, 22, 3, 23, 15, 24, 10, 25, 10, 49, 37, 0, 7, 0, 50, 50, -1, 8, 20, 38, 21, 39, 22, 3, 23, 3, 24, 10, 25, 10, 30, 28, 31, 21, 0, 8, 0, 57, 51, -1, 11, 20, 38, 21, 40, 22, 3, 23, 15, 24, 16, 25, 16, 52, 15, 53, 15, 54, 41, 55, 15, 56, 21, 0, 8, 0, 58, 58, -1, 7, 19, 42, 20, 38, 21, 43, 22, 3, 23, 15, 24, 16, 25, 16, 0, 7, 0, 50, 59, -1, 9, 19, 44, 20, 38, 21, 45, 22, 3, 23, 3, 24, 10, 25, 10, 30, 28, 31, 21, 0, 11, 0, 57, 51, -1, 11, 20, 38, 21, 40, 22, 3, 23, 15, 24, 16, 25, 16, 52, 15, 53, 15, 54, 46, 55, 15, 56, 21, 0, 11, 0, 58, 58, -1, 7, 19, 42, 20, 38, 21, 43, 22, 3, 23, 15, 24, 16, 25, 16, 0, 4, 0, 60, 60, -1, 15, 18, 47, 20, 48, 21, 34, 22, 3, 23, 15, 24, 10, 25, 16, 49, 49, 61, 50, 62, 51, 38, 52, 63, 28, 64, 15, 65, 53, 66, 6, 0, 0, 0, 8, 67, -1, 4, 9, 21, 10, 7, 11, 8, 12, 9, 0, 15, 0, 68, 68, -1, 12, 14, 0, 15, 0, 16, 0, 17, 0, 18, 54, 19, 38, 22, 3, 23, 15, 24, 16, 25, 16, 26, 17, 2, 55, 0, 16, 0, 69, 69, -1, 10, 15, 0, 16, 0, 17, 0, 19, 56, 20, 19, 22, 3, 23, 15, 24, 16, 25, 16, 70, 57, 0, 17, 0, 50, 71, -1, 10, 16, 0, 17, 0, 18, 58, 19, 19, 21, 19, 22, 3, 23, 3, 24, 16, 25, 10, 31, 21, 0, 18, 0, 77, 72, -1, 11, 20, 59, 21, 60, 22, 3, 23, 15, 24, 16, 25, 10, 52, 3, 73, 61, 74, 61, 75, 62, 76, 62, 0, 18, 0, 77, 78, -1, 12, 19, 63, 20, 59, 21, 64, 22, 3, 23, 15, 24, 16, 25, 10, 52, 3, 73, 65, 74, 65, 75, 66, 76, 66, 0, 0, 0, 80, 79, -1, 1, 2, 67, 0, 21, 0, 80, 81, -1, 5, 2, 68, 82, 69, 83, 70, 84, 71, 85, 72, 0, 0, 0, 92, 86, -1, 5, 87, 8, 88, 73, 89, 74, 90, 75, 91, 76, 0, 0, 0, 93, 93, -1, 9, 94, 0, 95, 8, 96, 77, 97, 78, 98, 79, 99, 15, 100, 80, 101, 81, 102, 53, 0, 0, 0, 8, 68, -1, 7, 9, 0, 10, 7, 11, 8, 12, 9, 2, 82, 3, 83, 103, 84, 0, 25, 0, 104, 104, -1, 12, 6, 3, 16, 0, 18, 85, 20, 86, 21, 87, 33, 88, 22, 3, 23, 15, 24, 16, 25, 16, 70, 89, 27, 3, 0, 26, 0, 50, 50, -1, 7, 20, 90, 21, 87, 22, 3, 23, 3, 24, 16, 25, 16, 31, 21, 0, 27, 0, 29, 81, -1, 7, 20, 90, 21, 91, 22, 3, 23, 3, 24, 16, 25, 16, 31, 21, 0, 28, 0, 105, 105, -1, 10, 19, 49, 20, 92, 21, 93, 22, 15, 23, 15, 24, 10, 54, 94, 106, 95, 107, 21, 108, 6, 0, 28, 0, 109, 109, -1, 11, 18, 96, 20, 90, 21, 91, 22, 3, 23, 15, 24, 16, 25, 16, 54, 53, 110, 21, 111, 15, 112, 3, 0, 27, 0, 29, 113, -1, 8, 19, 97, 20, 90, 21, 98, 22, 3, 23, 3, 24, 16, 25, 16, 31, 21, 0, 31, 0, 105, 105, -1, 10, 19, 49, 20, 92, 21, 93, 22, 15, 23, 15, 24, 10, 54, 99, 106, 95, 107, 21, 108, 6, 0, 31, 0, 109, 109, -1, 11, 18, 96, 20, 90, 21, 91, 22, 3, 23, 15, 24, 16, 25, 16, 54, 53, 110, 21, 111, 15, 112, 3, 0 </int_array>
 			<string> "variants" </string>
 			<array  len="100" shared="false">
 				<int> 1 </int>
 				<resource  external="0">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
-					<string> "2D" </string>
+					<string> "Script" </string>
 					<string> "__editor_plugin_states__" </string>
 					<dictionary  shared="false">
 						<string> "2D" </string>
@@ -631,8 +631,8 @@
 				<resource  external="8">  </resource>
 				<color> 0.0784314, 0.0784314, 0.0784314, 1 </color>
 				<node_path> ".." </node_path>
-				<resource  resource_type="Animation" path="local://54">  </resource>
 				<resource  resource_type="Animation" path="local://55">  </resource>
+				<resource  resource_type="Animation" path="local://54">  </resource>
 				<real> 3 </real>
 				<array  len="0" shared="false">
 				</array>
