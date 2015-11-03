@@ -51,6 +51,7 @@ var active_branch
 #var player_nearby = false
 var can_interact = true
 var is_interacting = false
+export(bool) var show_fallback
 
 
 var _
@@ -104,11 +105,17 @@ func setup_MUI(portrait_path=null, labeltext=""):
 
 
 func i_should_go():
-	MUI.clear()
-	MUI.make_dialogue(n)
-	MUI.make_dialogue(fallback_dialogue)
-	MUI.make_close_button()
-	MUI.open()
+	if( fallback_dialogue == "" or fallback_dialogue == null or show_fallback == false ):
+		MUI.clear()
+		MUI.close()
+		return
+		
+	else:
+		MUI.clear()
+		MUI.make_dialogue(n)
+		MUI.make_dialogue(fallback_dialogue)
+		MUI.make_close_button()
+		MUI.open()
 	
 # alias for the in-joke name
 func decline_conversation():
@@ -299,7 +306,9 @@ func start_interaction():
 			if( !has_conversation(dialog_branches[count]) ):
 #				print( "no conversation for ", dialog_branches[count], ", erasing")
 				dialog_branches.erase(dialog_branches[count])
-				remove_child(dialog_branches[count])
+				
+				
+				#remove_child(dialog_branches[count])
 				count = count + 1
 #				print( "Dialog branch removed, size is now ", dialog_branches.size())
 				
