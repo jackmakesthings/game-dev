@@ -5,7 +5,7 @@ extends Node
 
 const RED = Color("#ec1300")
 const SAVEFILE_DIR = "res://savegames"
-const MAIN_MENU_SCENE = "res://active-partials/interface/game-menu_.xscn"
+const MAIN_MENU_SCENE= "res://active-partials/interface/game-menu_.xscn"
 
 var utils = preload("res://scripts/utils.gd")
 
@@ -94,7 +94,7 @@ func _on_sub_menu_closed():
 
 #### go to main menu
 func _on_mm_pressed():
-	utils.goto_scene(MAIN_MENU_SCENE, {})
+	get_tree().get_root().get_node("scene").show_main_menu()
 
 
 

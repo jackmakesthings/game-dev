@@ -171,10 +171,14 @@ func goto_scene(path, data):
 
 func def_goto_scene(path, loaded):
 
-	var s = ResourceLoader.load(path)
+	var s = load(path)
+	#print(s)
+	#print(s.get_name())
+	# = ResourcePreloader.preload(s)
+	var new_scene = s.instance()
 	   
-	current_scene.free()
-	current_scene = s.instance()
+	#current_scene.queue_free()
+	current_scene = new_scene
 	
 	get_tree().get_root().add_child(current_scene)
 	get_tree().set_current_scene( current_scene )

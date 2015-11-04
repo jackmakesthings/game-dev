@@ -5,6 +5,9 @@ var stage
 var npc_root
 var MUI
 var menu
+var main_menu
+var main_menu_open
+var ingame_menu_open
 var utils
 var _
 
@@ -13,11 +16,16 @@ var prev_pos
 var fade_anim
 var fade_screen
 
+var canv
+
 const player_scene = preload("res://active-partials/player/_robot.xml")
 const stage_scene = preload("res://active-partials/environment/FPO_stage_a.xml")
 const stage2_scene = preload("res://active-partials/environment/FPO_stage_b.xml")
 const MUI_scene = preload("res://active-partials/message-ui/MUI_.xscn")
 const ingame_menu_scene = preload("res://active-partials/interface/in-game-menu_.xscn")
+#const main_menu_scene = preload("res://active-partials/interface/game-menu_.xml")
+
+var main_menu_scene = "res://active-partials/interface/game-menu_.xml"
 
 #signal scene_changed(new_scene, key)
 signal stage_changed(stage)
@@ -74,9 +82,39 @@ func fade_in():
 	yield(fade_anim, "finished")
 	fade_screen.set("z/z", 0)
 	
-	
-	
+func show_main_menu():
+	#add_child(main_menu)
+	#get_tree().set_current_scene(main_menu)
+	get_tree().set_pause(true)
+	main_menu = main_menu_scene.instance()
+	canv = CanvasLayer.new()
+	add_child(canv)
+	canv.set_layer(3)
+	canv.add_child(main_menu)
+	canv.raise()
+	main_menu_open = true
 
+
+
+func hide_main_menu():
+	get_tree().set_pause(false)
+	if( canv != null ):
+		canv.set_layer(-1)
+		
+	
+		canv.queue_free()
+		
+		if( menu != null ):
+			menu.hide_menu()
+
+		main_menu_open = false
+	get_tree().set_pause(false)
+		
+		
+		
+func on_menu_toggle(state):
+	ingame_menu_open = state
+	get_tree().set_pause(state)
 
 
 func _init():
@@ -87,6 +125,8 @@ func _init():
 
 	add_child(menu)
 	move_child(menu, 0)
+	#menu.connect("menu_opened", self, "on_menu_toggle", [true])
+	#menu.connect("menu_closed", self, "on_menu_toggle", [false])
 	
 	add_child(MUI)
 	move_child(MUI, 0)
@@ -100,7 +140,8 @@ func _init():
 		npc_root = stage.get("body_layer")
 	elif stage.has_node("nav/floor/bodies"):
 		npc_root = stage.get_node("nav/floor/bodies")
-		
+	
+	
 
 		
 	add_user_signal("stage_changed", ["stage"])
@@ -122,6 +163,9 @@ func _ready():
 	
 	stage.set_process_unhandled_input(true)
 	get_tree().set_current_scene(get_tree().get_current_scene())
+	
+	main_menu_scene = preload("res://active-partials/interface/game-menu_.xml")
+
 #	
 #	if get_tree().get_root().has_node("scene/AnimationPlayer"):
 #		fade_anim = get_tree().get_root().get_node("scene/AnimationPlayer")
