@@ -130,7 +130,8 @@ func update_path(start, end, nav):
 
 
 func _ready():
-	nav = get_node("/root/scene/stage/nav")
+	#nav = get_node("/root/scene/env/nav")
+	nav = get_tree().get_current_scene().find_node("nav")
 	spr = get_node("Sprite")
 	
 	is_moving = false

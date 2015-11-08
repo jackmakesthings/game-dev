@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resource_file type="PackedScene" subresource_count="5" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
-	<ext_resource path="res://assets/fpo/stairway.png" type="Texture" index="2"></ext_resource>
 	<ext_resource path="res://active-partials/environment/stairs.gd" type="Script" index="0"></ext_resource>
 	<ext_resource path="res://assets/indigo-iso-tile-1.png" type="Texture" index="1"></ext_resource>
+	<ext_resource path="res://assets/fpo/stairway.png" type="Texture" index="2"></ext_resource>
 	<resource type="CircleShape2D" path="local://65">
 		<real name="custom_solver_bias"> 0 </real>
 		<real name="radius"> 40 </real>
@@ -32,7 +32,7 @@
 				<string> "script/script" </string>
 				<string> "__meta__" </string>
 				<string> "trigger_node" </string>
-				<string> "new_stage_path" </string>
+				<string> "new_env_path" </string>
 				<string> "door_id" </string>
 				<string> "Area2D" </string>
 				<string> "CollisionShape2D" </string>
@@ -55,9 +55,9 @@
 			<array  len="0" shared="false">
 			</array>
 			<string> "nodes" </string>
-			<int_array  len="72"> 				-1, -1, 15, 0, -1, 14, 1, 0, 2, 1, 3, 2, 4, 3, 5, 1, 6, 4, 7, 5, 8, 6, 9, 7, 10, 8, 11, 9, 12, 10, 13, 11, 14, 11, 0, 0, 0, 16, 16, -1, 3, 17, 2, 18, 1, 19, 12, 0, 1, 0, 20, 20, -1, 1, 21, 13, 0, 1, 0, 20, 22, -1, 4, 23, 14, 1, 15, 24, 16, 21, 17, 0 </int_array>
+			<int_array  len="72"> 				-1, -1, 15, 0, -1, 14, 1, 0, 2, 1, 3, 2, 4, 3, 5, 1, 6, 4, 7, 5, 8, 6, 9, 7, 10, 8, 11, 9, 12, 10, 13, 11, 14, 12, 0, 0, 0, 16, 16, -1, 3, 17, 2, 18, 1, 19, 13, 0, 1, 0, 20, 20, -1, 1, 21, 14, 0, 1, 0, 20, 22, -1, 4, 23, 15, 1, 16, 24, 17, 21, 18, 0 </int_array>
 			<string> "variants" </string>
-			<array  len="18" shared="false">
+			<array  len="19" shared="false">
 				<vector2> 305.352, 333.111 </vector2>
 				<bool> True </bool>
 				<resource  resource_type="Shape2D" path="local://65">  </resource>
@@ -69,7 +69,7 @@
 				<resource  external="0">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
-					<string> "Script" </string>
+					<string> "2D" </string>
 					<string> "__editor_plugin_states__" </string>
 					<dictionary  shared="false">
 						<string> "2D" </string>
@@ -204,6 +204,7 @@
 					</dictionary>
 				</dictionary>
 				<node_path> "CollisionShape2D" </node_path>
+				<string> "res://active-partials/environment/FPO_stage_a.xml" </string>
 				<nil>  </nil>
 				<int> 0 </int>
 				<resource  external="1">  </resource>

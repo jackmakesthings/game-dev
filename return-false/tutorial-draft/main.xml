@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resource_file type="PackedScene" subresource_count="19" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
-	<ext_resource path="res://assets/ui.xthm" type="Theme" index="2"></ext_resource>
-	<ext_resource path="res://assets/cursors/png/square185.png" type="Texture" index="8"></ext_resource>
 	<ext_resource path="res://active-partials/interface/interface.gd" type="Script" index="3"></ext_resource>
-	<ext_resource path="res://main.gd" type="Script" index="0"></ext_resource>
-	<ext_resource path="res://active-partials/journal/base_journal.gd" type="Script" index="1"></ext_resource>
+	<ext_resource path="res://assets/ui.xthm" type="Theme" index="2"></ext_resource>
 	<ext_resource path="res://assets/ui/list31.tex" type="Texture" index="5"></ext_resource>
-	<ext_resource path="res://assets/ui/code39 (1).tex" type="Texture" index="7"></ext_resource>
+	<ext_resource path="res://assets/cursors/png/square185.png" type="Texture" index="8"></ext_resource>
 	<ext_resource path="res://assets/ui/code39 (2).tex" type="Texture" index="6"></ext_resource>
 	<ext_resource path="res://assets/ui/list31 (1).tex" type="Texture" index="4"></ext_resource>
+	<ext_resource path="res://assets/ui/code39 (1).tex" type="Texture" index="7"></ext_resource>
+	<ext_resource path="res://active-partials/journal/base_journal.gd" type="Script" index="1"></ext_resource>
+	<ext_resource path="res://main.gd" type="Script" index="0"></ext_resource>
 	<resource type="StyleBoxFlat" path="local://45">
 		<real name="content_margin/left"> 5 </real>
 		<real name="content_margin/right"> 5 </real>
@@ -50,44 +50,6 @@
 		<string name="script/source"> "extends &quot;res://active-partials/quest-mgmt/quest.gd&quot;&#000a;&#000a;&#000a;func post_state_change(old, new):&#000a;&#000a;&#0009;&#000a;&#0009;if( str(new) == &quot;20&quot; ):&#000a;&#0009;&#0009;var newq = quest_root.Quest.new()&#000a;&#000a;&#0009;&#000a;&#0009;&#0009;newq.set_name(&quot;Q_sandwich&quot;)&#000a;&#0009;&#0009;newq.Q_ID = &quot;Q_sandwich&quot;&#000a;&#0009;&#0009;newq.data_source = &quot;res://data/dialogue/temp/Q_sandwich.gd&quot;&#000a;&#0009;&#0009;newq.init_at = &quot;0&quot;&#000a;&#0009;&#0009;newq.complete_at = &quot;100&quot;&#000a;&#0009;&#0009;newq.dialog_label = &quot;Sandwiches&quot;&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;get_parent().add_child(newq)&#000a;&#0009;&#0009;newq.activate(&quot;0&quot;)&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;var ledit = get_parent().get_parent().get_node(&quot;Control/PopupPanel/VBoxContainer/Q_sandwich/LineEdit&quot;)&#000a;&#0009;&#0009;ledit.connect(&quot;text_entered&quot;, newq, &quot;set_current_state&quot;)&#000a;&#0009;&#0009;&#000a;&#0009;if( str(new) == &quot;100&quot; ):&#000a;&#0009;&#0009;var eng = npc_root.get_node(&quot;engineer&quot;)&#000a;&#0009;&#0009;eng.set(&quot;fallback_dialogue&quot;, &quot;Thanks for helping me with that diagnostic!&quot;)&#000a;&#0009;&#000a;&#0009;&#000a;&#0009;print(actors)" </string>
 
 	</resource>
-	<resource type="Animation" path="local://55">
-		<string name="resource/name"> "fade_out" </string>
-		<real name="length"> 3 </real>
-		<bool name="loop"> False </bool>
-		<real name="step"> 0.1 </real>
-		<string name="tracks/0/type"> "value" </string>
-		<node_path name="tracks/0/path"> "fader:visibility/opacity" </node_path>
-		<int name="tracks/0/interp"> 1 </int>
-		<dictionary name="tracks/0/keys" shared="false">
-			<string> "cont" </string>
-			<bool> True </bool>
-			<string> "times" </string>
-			<real_array  len="2"> 				0, 3 </real_array>
-			<string> "transitions" </string>
-			<real_array  len="2"> 				1, 1 </real_array>
-			<string> "values" </string>
-			<array  len="2" shared="false">
-				<real> 0 </real>
-				<real> 1 </real>
-			</array>
-		</dictionary>
-		<string name="tracks/1/type"> "value" </string>
-		<node_path name="tracks/1/path"> "fader:z/z" </node_path>
-		<int name="tracks/1/interp"> 1 </int>
-		<dictionary name="tracks/1/keys" shared="false">
-			<string> "cont" </string>
-			<bool> False </bool>
-			<string> "times" </string>
-			<real_array  len="1"> 				0 </real_array>
-			<string> "transitions" </string>
-			<real_array  len="1"> 				1 </real_array>
-			<string> "values" </string>
-			<array  len="1" shared="false">
-				<int> 3 </int>
-			</array>
-		</dictionary>
-
-	</resource>
 	<resource type="Animation" path="local://54">
 		<string name="resource/name"> "fade_in" </string>
 		<real name="length"> 3 </real>
@@ -122,6 +84,44 @@
 			<string> "values" </string>
 			<array  len="1" shared="false">
 				<int> 0 </int>
+			</array>
+		</dictionary>
+
+	</resource>
+	<resource type="Animation" path="local://55">
+		<string name="resource/name"> "fade_out" </string>
+		<real name="length"> 3 </real>
+		<bool name="loop"> False </bool>
+		<real name="step"> 0.1 </real>
+		<string name="tracks/0/type"> "value" </string>
+		<node_path name="tracks/0/path"> "fader:visibility/opacity" </node_path>
+		<int name="tracks/0/interp"> 1 </int>
+		<dictionary name="tracks/0/keys" shared="false">
+			<string> "cont" </string>
+			<bool> True </bool>
+			<string> "times" </string>
+			<real_array  len="2"> 				0, 3 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="2"> 				1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="2" shared="false">
+				<real> 0 </real>
+				<real> 1 </real>
+			</array>
+		</dictionary>
+		<string name="tracks/1/type"> "value" </string>
+		<node_path name="tracks/1/path"> "fader:z/z" </node_path>
+		<int name="tracks/1/interp"> 1 </int>
+		<dictionary name="tracks/1/keys" shared="false">
+			<string> "cont" </string>
+			<bool> False </bool>
+			<string> "times" </string>
+			<real_array  len="1"> 				0 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="1"> 				1 </real_array>
+			<string> "values" </string>
+			<array  len="1" shared="false">
+				<int> 3 </int>
 			</array>
 		</dictionary>
 
@@ -251,8 +251,8 @@
 				<string> "playback/process_mode" </string>
 				<string> "playback/default_blend_time" </string>
 				<string> "root/root" </string>
-				<string> "anims/fade_out" </string>
 				<string> "anims/fade_in" </string>
+				<string> "anims/fade_out" </string>
 				<string> "playback/active" </string>
 				<string> "playback/speed" </string>
 				<string> "blend_times" </string>
@@ -268,8 +268,8 @@
 				<string> "editable" </string>
 				<string> "secret" </string>
 				<string> "Q_sandwich" </string>
-				<string> "_on_stage_change" </string>
-				<string> "stage_changed" </string>
+				<string> "_on_env_change" </string>
+				<string> "env_changed" </string>
 				<string> "_on_Panel_popup_hide" </string>
 				<string> "popup_hide" </string>
 				<string> "show_entry" </string>
@@ -633,8 +633,8 @@
 				<resource  external="8">  </resource>
 				<color> 0.0784314, 0.0784314, 0.0784314, 1 </color>
 				<node_path> ".." </node_path>
-				<resource  resource_type="Animation" path="local://55">  </resource>
 				<resource  resource_type="Animation" path="local://54">  </resource>
+				<resource  resource_type="Animation" path="local://55">  </resource>
 				<real> 3 </real>
 				<array  len="0" shared="false">
 				</array>

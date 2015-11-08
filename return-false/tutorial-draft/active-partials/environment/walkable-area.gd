@@ -84,8 +84,8 @@ func _unhandled_input(ev):
 		
 		# without this, running the scene standalone (while editing) fails
 		# realistically, there should always be a player reference
-		if( player == null ) :
-			return
+		#if( player == null ) :
+		#	return
 		
 		
 		var begin = player.get_global_pos()
@@ -100,7 +100,7 @@ func _unhandled_input(ev):
 		# Find the closest tile center to where we clicked
 		var tilepos = tiles.world_to_map(end)
 		var mappos = tiles.map_to_world(tilepos)
-		end = mappos + Vector2(0, 18) 
+		end = mappos + Vector2(0, 16) 
 		
 		# Store which type of tile is at that point
 		var tile_at = tiles.get_cell(tilepos.x, tilepos.y)
@@ -110,6 +110,8 @@ func _unhandled_input(ev):
 		# so the targeting outline shows where it will really end up
 		if ( tiles.get_tileset().tile_get_navigation_polygon(tile_at) == null ):
 			adjust_path = true
+			
+		#print("moving node ", player.get_name(), " from ", begin, " to ", end, " in ", nav.get_name())
 		
 		if( movement_allowed ):
 			player.update_path(begin, end, nav);

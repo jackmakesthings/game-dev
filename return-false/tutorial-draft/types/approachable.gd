@@ -53,5 +53,6 @@ func _enter_tree():
 	get_node(trigger_node).connect("body_exit", self, "_on_body_exit")
 
 func _exit_tree():
-	get_node(trigger_node).disconnect("body_enter", self, "_on_body_enter")
-	get_node(trigger_node).disconnect("body_exit", self, "_on_body_exit")
+	if( get_node(trigger_node).is_connected("body_enter", self, "_on_body_enter")):
+		get_node(trigger_node).disconnect("body_enter", self, "_on_body_enter")
+		get_node(trigger_node).disconnect("body_exit", self, "_on_body_exit")
