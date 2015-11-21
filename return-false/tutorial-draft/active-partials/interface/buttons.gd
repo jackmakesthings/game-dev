@@ -54,7 +54,8 @@ func _on_save_pressed():
 	data["player_y"] = player.get_pos().y
 	data["time"] = OS.get_time()
 	data["date"] = OS.get_date()
-	data["quest_states"] = get_node("/root/game")["quest_states"]
+	# TODO: Update the storage of quest data, root/game is being reconsidered
+#	data["quest_states"] = get_node("/root/game")["quest_states"]
 	
 	# show the submenu
 	save_menu.open()

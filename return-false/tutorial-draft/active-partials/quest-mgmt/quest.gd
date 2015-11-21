@@ -8,8 +8,8 @@ extends Node
 export(String) var Q_ID
 
 # important nodes we'll need to reference, once we're in the scene
-var game
-var paths
+#var game
+#var paths
 var utils
 
 var quest_root
@@ -233,7 +233,7 @@ func set_current_state(state):
 
 	prev_state = current_state
 	current_state = state
-	game.quest_states[Q_ID] = state
+#	game.quest_states[Q_ID] = state
 	
 	if( logs.has(state) ):
 		var _log = logs[state]
@@ -292,9 +292,9 @@ func refresh():
 
 
 func _enter_tree():
-	game = get_node("/root/game")
+	#game = get_node("/root/game")
 	utils = get_node("/root/utils")
-	paths = get_node("/root/paths")
+	#paths = get_node("/root/paths")
 	
 	var sceneroot = get_tree().get_root().get_node("/root/scene")
 	if( sceneroot.get("stage") ):
@@ -317,7 +317,6 @@ func _setup():
 		return
 	else:
 		load_data(data_source)
-		game = get_node("/root/game")
 		log_base = get_node("/root/scene/journal_ui")
 		MUI = get_node("/root/scene/message-ui")
 		quest_root = get_parent()

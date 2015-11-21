@@ -38,7 +38,7 @@ const paths = {
 	popup_text ="popup/Label"
 }
 
-const ResponseBase = preload("res://active-partials/message-ui/response-button.xml")
+#const ResponseBase = preload("res://active-partials/message-ui/response-button.xml")
 var M
 
 
@@ -74,8 +74,10 @@ func clear():
 
 ######## make_response ######### 
 func make_response(text, actions):
-	var new_button = ResponseBase.instance()
+	#var new_button = ResponseBase.instance()
+	var new_button = Button.new()
 	new_button.set_text(text)
+	new_button.set_text_align(0)
 	
 	if( actions.size() > 0  ):
 		for i in range(actions.size()):
@@ -146,10 +148,9 @@ func _unhandled_key_input(key_event):
 	if( key_event.pressed && !key_event.echo):
 		if( key_event.scancode == KEY_ESCAPE ):
 			close()
-		#print(key_event.scancode)
 
 
-
+######## short-displaying notifications ######
 
 func flash_popup(text=""):
 	popup_text.set_text(text)
@@ -163,16 +164,14 @@ func flash_popup(text=""):
 	get_node("popup").hide()
 
 
-
 ######## path setup ##########
-func init_paths():
-	dialog_box = get_node(paths.dbox)
-	text_box = get_node(paths.tbox)
-	portrait = get_node(paths.pimg)
-	popup = get_node(paths.popup)
-	popup_text = get_node(paths.popup_text)
-	#M = get_node("/root/mocks").MUI.new()
 
+func set_internals():
+	dialog_box = find_node("dialog-box")
+	text_box = dialog_box.find_node("RichTextLabel")
+	portrait = dialog_box.find_node("portrait")
+	popup = find_node("popup")
+	popup_text = popup.find_node("Label")
 
 ###### other setup
 
@@ -185,12 +184,8 @@ func enter_tree():
 
 ######## _ready ######### 
 func _ready():
-	#get_node("/root/scene").set("MUI", get_node("."))
-	#get_node("/root/game").set("MUI", get_node("."))
-	get_node("/root/paths").set("MUI", get_path())
-	init_paths()
+	set_internals()
 	close()
-	#demo()
 	
 	
 ######## demo ######### 	

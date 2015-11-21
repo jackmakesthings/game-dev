@@ -11,7 +11,7 @@ var nav
 var tiles
 var outline
 var movement_allowed = true
-var utils = preload("res://scripts/utils.gd").new()
+var utils
 
 const TILE_ATTRACT = 7
 const TILE_TRANSITION = 0
@@ -21,11 +21,6 @@ func tile_at(point):
 	var map_point = tiles.world_to_map(point)
 	var tile_id = tiles.get_cell(map_point.x, map_point.y)
 	return tile_id
-	
-
-# shortcut for getting the "tile position" at a point
-func cell_at(point):
-	return tiles.world_to_map(point)
 
 # helper for checking all tiles adjacent to the one at a given point
 func get_surrounding_tiles(point):
@@ -58,6 +53,10 @@ func _unhandled_input(ev):
 	# Move character around on click
 	if (ev.type == InputEvent.MOUSE_BUTTON and ev.pressed and ev.button_index==1):
 		
+		if( player == null ) :
+			return
+		
+		
 		var begin = player.get_global_pos()
 		
 		# This massive chunk of code cancels out the effects of the camera
@@ -82,6 +81,7 @@ func _unhandled_input(ev):
 			adjust_path = true
 		
 		
+		
 		if( movement_allowed ):
 			player.update_path(begin, end, nav);
 			outline.show()
@@ -103,57 +103,55 @@ func _unhandled_input(ev):
 			if( not orient == null ):
 				player.orient(orient)
 			
-			# this is going to be properly implemented soon
-			#var transitioning = check_for_transition(player.get_global_pos())
-			#if( transitioning == true ):
-			#	_test_tile_logic()
-			#	utils.goto_scene("res://main.xml", {})
-
-
-func change_tiles(new_tilemap):
-	tiles.hide()
-	tiles.remove_child(body_layer)
-	var new_tile_node = nav.get_node(new_tilemap)
-	nav.move_child(new_tile_node, 0)
-	tiles = nav.get_child(0)
-	tiles.add_child(body_layer)
-	body_layer = tiles.get_child(0)
-	tiles.show()
-	#for i in range(-20, 20):
-	#	tiles.set_cell(10+i, i, 5, false, false, false)
-	#	tiles.set_cell(i, 10, 5, false, false, false)
-		#tiles.set_cell(i, 10, 5, false, false, false)
+			
+			var transitioning = check_for_transition(player.get_global_pos())
+			if( transitioning == true ):
+				utils.goto_scene("res://adjacent-scene.xml", {})
+				
 	
-	
-func _test_tile_logic():
-	if( tiles.get_name() == "floor" ):
-		change_tiles("floor_2")
-	elif( tiles.get_name() == "floor_2"):
-		change_tiles("floor_3")
-	else:
-		change_tiles("floor")
-
-
 func _ready():
 	# Setup the vars and conditions for this instance
-	#if( get_node("/root/scene") ):
-	#	scene = get_node("/root/scene")
-	#	if( scene != null ):
-	#		player = scene.get("player")
+	scene = get_parent()
+	if( scene.get("player") != null ):
+		player = scene.get("player")
+	else:
+		player = null
 	
-	if ( get_node("nav/floor/bodies/robot") ):
-		player = get_node("nav/floor/bodies/robot")
-	
-	
-	
-	
-#	body_layer = get_node("nav/floor/bodies")
 	nav = get_node("nav")
-	tiles = get_node("nav").get_child(0)
-	body_layer = tiles.get_node("bodies")
+	tiles = get_node("nav/floor")
+	body_layer = get_node("nav/floor/bodies")
 	outline = get_node("destination_sprite")
 	utils = get_node("/root/utils")
 	
 	outline.hide()
-	if( player != null ):
-		set_process_unhandled_input(true)
+	#set_process_unhandled_input(true)
+	
+
+
+func _on_Area2D_body_enter( body ):
+
+	yield(player, "done_moving")
+	player["path"] = Array()
+	
+	var p = Timer.new()
+	p.set_wait_time(1)
+	p.set_one_shot(true)
+	add_child(p)
+	p.start()
+	
+	yield(p, "timeout")
+	
+	
+	scene = get_parent()
+	scene = get_tree().get_root().get_node("/root/scene")
+	print(get_tree().get_current_scene())
+	var new_stage = preload("res://active-partials/environment/FPO_stage_a.xml")
+
+	#scene.call("swap_scenes", ["stage", new_stage] )
+	#pass # replace with function body
+	get_node("nav/floor/bodies/Area2D").disconnect("body_enter", get_node("."), "_on_Area2D_body_enter")
+	#scene.swap_stage(new_stage)
+	scene.call("swap_stage", new_stage)
+
+func _on_Area2D_body_exit( body ):
+	pass

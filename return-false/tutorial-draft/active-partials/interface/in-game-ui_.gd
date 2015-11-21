@@ -1,6 +1,6 @@
 ######
 # global game ui - menus etc.
-# active-partials/interface/interface.gd
+# active-partials/interface/in-game-ui_.gd
 
 extends Control
 

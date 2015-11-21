@@ -6,7 +6,7 @@ var Q_ID
 var owned_by # the node for the quest represented by Q_ID
 var states
 
-var paths
+#var paths
 var game_root
 var scene_root
 var MUI
@@ -148,7 +148,7 @@ func continue_dialog(params=null):
 
 func _ready():
 	# todo: standardize path management
-	paths = get_node("/root/paths")
+#	paths = get_node("/root/paths")
 	game_root = get_node("/root")
 	scene_root = game_root.get_node("scene")
 	MUI = scene_root.get_node("message-ui")

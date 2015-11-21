@@ -55,9 +55,9 @@ export(bool) var show_fallback
 
 
 var _
-var game
+#var game
 var utils = preload("res://scripts/utils.gd")
-var MUI = preload("res://active-partials/message-ui/message-ui.xml").instance()
+var MUI = preload("res://active-partials/message-ui/MUI_.xscn").instance()
 
 var body_node
 var floor_layer
@@ -364,7 +364,7 @@ func check_branches():
 func set_paths():
 	_ = get_node("/root/_")
 	utils = get_node("/root/utils")
-	game = get_node("/root/game")
+	#game = get_node("/root/game")
 	body_node = get_node("body")
 	x = get_node("X")
 	clickable = get_node("body/Sprite")

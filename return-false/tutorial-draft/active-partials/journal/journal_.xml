@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="9" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
-	<ext_resource path="res://assets/styleboxes/nobg-thin-border.sbx" type="StyleBox" index="2"></ext_resource>
-	<ext_resource path="res://assets/fonts/imported/free-pixel-16.fnt" type="Font" index="1"></ext_resource>
-	<ext_resource path="res://scripts/message-ui.gd" type="Script" index="0"></ext_resource>
-	<ext_resource path="res://assets/fonts/imported/amiga-forever-12.fnt" type="Font" index="4"></ext_resource>
-	<ext_resource path="res://assets/fpo/portrait-dude-mohawk.png" type="Texture" index="3"></ext_resource>
-	<resource type="Theme" path="local://1">
-		<resource name="default_font" external="1">  </resource>
+<resource_file type="PackedScene" subresource_count="5" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
+	<ext_resource path="res://active-partials/journal/base_journal.gd" type="Script" index="0"></ext_resource>
+	<ext_resource path="res://assets/ui.xthm" type="Theme" index="1"></ext_resource>
+	<resource type="StyleBoxFlat" path="local://45">
+		<real name="content_margin/left"> 5 </real>
+		<real name="content_margin/right"> 5 </real>
+		<real name="content_margin/top"> 5 </real>
+		<real name="content_margin/bottom"> 5 </real>
+		<color name="bg_color"> 0.133333, 0.133333, 0.133333, 1 </color>
+		<color name="light_color"> 0.8, 0.8, 0.8, 1 </color>
+		<color name="dark_color"> 0.8, 0.8, 0.8, 1 </color>
+		<int name="border_size"> 0 </int>
+		<bool name="border_blend"> True </bool>
+		<bool name="draw_bg"> False </bool>
 
 	</resource>
-	<resource type="StyleBoxEmpty" path="local://2">
+	<resource type="StyleBoxFlat" path="local://44">
 		<real name="content_margin/left"> -1 </real>
 		<real name="content_margin/right"> -1 </real>
 		<real name="content_margin/top"> -1 </real>
 		<real name="content_margin/bottom"> -1 </real>
-
-	</resource>
-	<resource type="StyleBoxFlat" path="local://3">
-		<real name="content_margin/left"> 10 </real>
-		<real name="content_margin/right"> 10 </real>
-		<real name="content_margin/top"> 10 </real>
-		<real name="content_margin/bottom"> 10 </real>
-		<color name="bg_color"> 0.109804, 0.109804, 0.109804, 1 </color>
+		<color name="bg_color"> 0.6, 0.6, 0.6, 1 </color>
 		<color name="light_color"> 0.8, 0.8, 0.8, 1 </color>
 		<color name="dark_color"> 0.8, 0.8, 0.8, 1 </color>
 		<int name="border_size"> 0 </int>
-		<bool name="border_blend"> False </bool>
+		<bool name="border_blend"> True </bool>
 		<bool name="draw_bg"> True </bool>
 
 	</resource>
@@ -35,76 +34,87 @@
 			<int> 0 </int>
 			<string> "conns" </string>
 			<int_array  len="0"> 				 </int_array>
+			<string> "editable_instances" </string>
+			<array  len="0" shared="false">
+			</array>
 			<string> "names" </string>
-			<string_array  len="57">
-				<string> "message-ui" </string>
+			<string_array  len="65">
+				<string> "journal_ui" </string>
+				<string> "visibility/visible" </string>
+				<string> "z/relative" </string>
+				<string> "script/script" </string>
+				<string> "__meta__" </string>
+				<string> "Node2D" </string>
 				<string> "CanvasLayer" </string>
 				<string> "layer" </string>
 				<string> "offset" </string>
 				<string> "rotation" </string>
 				<string> "scale" </string>
-				<string> "script/script" </string>
-				<string> "__meta__" </string>
-				<string> "dialog-box" </string>
-				<string> "Control" </string>
+				<string> "WindowDialog" </string>
+				<string> "anchor/left" </string>
 				<string> "anchor/top" </string>
 				<string> "anchor/right" </string>
 				<string> "anchor/bottom" </string>
 				<string> "margin/left" </string>
 				<string> "margin/top" </string>
 				<string> "margin/right" </string>
-				<string> "rect/min_size" </string>
+				<string> "margin/bottom" </string>
 				<string> "focus/ignore_mouse" </string>
 				<string> "focus/stop_mouse" </string>
 				<string> "size_flags/horizontal" </string>
 				<string> "size_flags/vertical" </string>
 				<string> "theme/theme" </string>
-				<string> "Panel" </string>
-				<string> "margin/bottom" </string>
+				<string> "popup/exclusive" </string>
+				<string> "window/title" </string>
 				<string> "HBoxContainer" </string>
 				<string> "custom_constants/separation" </string>
 				<string> "alignment" </string>
-				<string> "portraitBox" </string>
-				<string> "ReferenceFrame" </string>
-				<string> "custom_styles/border" </string>
-				<string> "portrait" </string>
-				<string> "TextureFrame" </string>
-				<string> "visibility/behind_parent" </string>
-				<string> "anchor/left" </string>
-				<string> "texture" </string>
-				<string> "expand" </string>
-				<string> "textBox" </string>
-				<string> "VBoxContainer" </string>
+				<string> "VButtonArray" </string>
+				<string> "rect/min_size" </string>
+				<string> "custom_styles/hover" </string>
+				<string> "custom_styles/focus" </string>
+				<string> "custom_styles/selected" </string>
+				<string> "custom_styles/normal" </string>
+				<string> "custom_colors/font_color_selected" </string>
+				<string> "custom_constants/button_separator" </string>
+				<string> "button/count" </string>
+				<string> "button/min_button_size" </string>
+				<string> "button/align" </string>
+				<string> "button/0/text" </string>
+				<string> "button/0/icon" </string>
+				<string> "button/selected" </string>
+				<string> "VSeparator" </string>
+				<string> "custom_styles/separator" </string>
+				<string> "ButtonGroup" </string>
 				<string> "size_flags/stretch_ratio" </string>
-				<string> "characterNameBox" </string>
-				<string> "Button" </string>
-				<string> "visibility/visible" </string>
-				<string> "custom_styles/disabled" </string>
-				<string> "custom_fonts/font" </string>
-				<string> "custom_colors/font_color_disabled" </string>
-				<string> "disabled" </string>
+				<string> "VBoxContainer" </string>
+				<string> "log_home" </string>
 				<string> "toggle_mode" </string>
+				<string> "click_on_press" </string>
 				<string> "text" </string>
 				<string> "flat" </string>
 				<string> "align" </string>
-				<string> "PanelContainer" </string>
-				<string> "custom_styles/panel" </string>
+				<string> "Button" </string>
+				<string> "HSeparator" </string>
+				<string> "completed" </string>
 				<string> "RichTextLabel" </string>
+				<string> "custom_colors/default_color" </string>
+				<string> "custom_colors/selection_color" </string>
 				<string> "custom_constants/line_separation" </string>
 				<string> "bbcode/enabled" </string>
 				<string> "bbcode/bbcode" </string>
 				<string> "visible_characters" </string>
 			</string_array>
 			<string> "node_count" </string>
-			<int> 11 </int>
+			<int> 14 </int>
+			<string> "node_paths" </string>
+			<array  len="0" shared="false">
+			</array>
 			<string> "nodes" </string>
-			<int_array  len="313"> 				-1, -1, 1, 0, -1, 6, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 0, 0, 0, 9, 8, -1, 12, 10, 0, 11, 0, 12, 0, 13, 6, 14, 7, 15, 6, 16, 8, 17, 9, 18, 10, 19, 11, 20, 11, 21, 12, 0, 1, 0, 22, 22, -1, 10, 11, 0, 12, 0, 13, 6, 14, 13, 15, 6, 23, 14, 17, 9, 18, 10, 19, 11, 20, 11, 0, 2, 0, 24, 24, -1, 13, 11, 0, 12, 0, 13, 15, 14, 15, 15, 15, 23, 15, 16, 16, 17, 9, 18, 9, 19, 11, 20, 11, 25, 0, 26, 17, 0, 3, 0, 28, 27, -1, 8, 15, 18, 23, 19, 16, 20, 17, 9, 18, 10, 19, 11, 20, 11, 29, 21, 0, 4, 0, 31, 30, -1, 13, 32, 10, 33, 11, 11, 11, 13, 22, 14, 6, 15, 23, 23, 24, 17, 10, 18, 10, 19, 25, 20, 25, 34, 26, 35, 10, 0, 3, 0, 37, 36, -1, 11, 13, 27, 15, 28, 23, 19, 16, 29, 17, 9, 18, 10, 19, 11, 20, 11, 38, 30, 25, 31, 26, 17, 0, 6, 0, 40, 39, -1, 15, 41, 9, 15, 32, 23, 33, 17, 9, 18, 10, 19, 11, 20, 11, 42, 34, 43, 35, 44, 36, 45, 10, 46, 9, 47, 37, 48, 9, 49, 17, 0, 6, 0, 50, 50, -1, 8, 15, 32, 23, 38, 17, 9, 18, 10, 19, 11, 20, 11, 38, 39, 51, 40, 0, 8, 0, 52, 52, -1, 13, 13, 15, 14, 15, 15, 41, 23, 42, 17, 9, 18, 10, 19, 11, 20, 11, 38, 39, 53, 0, 54, 10, 55, 43, 56, 44, 0, 6, 0, 37, 37, -1, 9, 14, 45, 15, 32, 23, 19, 17, 9, 18, 9, 19, 11, 20, 11, 25, 31, 26, 17, 0 </int_array>
+			<int_array  len="386"> 				-1, -1, 5, 0, -1, 4, 1, 0, 2, 0, 3, 1, 4, 2, 0, 0, 0, 6, 6, -1, 4, 7, 3, 8, 4, 9, 5, 10, 6, 0, 1, 0, 11, 11, -1, 16, 1, 0, 12, 7, 13, 7, 14, 7, 15, 7, 16, 8, 17, 9, 18, 10, 19, 11, 20, 0, 21, 12, 22, 13, 23, 7, 24, 14, 25, 12, 26, 15, 0, 2, 0, 27, 27, -1, 12, 14, 16, 15, 16, 16, 17, 17, 17, 18, 17, 19, 17, 20, 0, 21, 0, 22, 7, 23, 7, 28, 18, 29, 19, 0, 3, 0, 30, 30, -1, 22, 1, 0, 17, 20, 18, 21, 19, 22, 31, 23, 20, 0, 21, 12, 22, 13, 23, 16, 24, 14, 32, 24, 33, 24, 34, 24, 35, 24, 36, 25, 37, 26, 38, 16, 39, 27, 40, 19, 41, 28, 42, 29, 43, 19, 0, 3, 0, 44, 44, -1, 10, 1, 0, 16, 30, 18, 31, 19, 32, 20, 0, 21, 12, 22, 13, 23, 13, 45, 33, 28, 3, 0, 3, 0, 46, 46, -1, 8, 18, 34, 19, 32, 20, 0, 21, 12, 22, 7, 23, 7, 47, 35, 29, 19, 0, 6, 0, 48, 48, -1, 8, 18, 36, 19, 37, 20, 0, 21, 0, 22, 7, 23, 7, 28, 26, 29, 19, 0, 7, 0, 55, 49, -1, 11, 18, 36, 19, 38, 20, 0, 21, 12, 22, 13, 23, 13, 50, 12, 51, 12, 52, 39, 53, 12, 54, 19, 0, 7, 0, 56, 56, -1, 7, 17, 40, 18, 36, 19, 41, 20, 0, 21, 12, 22, 13, 23, 13, 0, 6, 0, 48, 57, -1, 9, 17, 42, 18, 36, 19, 43, 20, 0, 21, 0, 22, 7, 23, 7, 28, 26, 29, 19, 0, 10, 0, 55, 49, -1, 11, 18, 36, 19, 38, 20, 0, 21, 12, 22, 13, 23, 13, 50, 12, 51, 12, 52, 44, 53, 12, 54, 19, 0, 10, 0, 56, 56, -1, 7, 17, 40, 18, 36, 19, 41, 20, 0, 21, 12, 22, 13, 23, 13, 0, 3, 0, 58, 58, -1, 15, 16, 45, 18, 46, 19, 32, 20, 0, 21, 12, 22, 7, 23, 13, 47, 47, 59, 48, 60, 49, 36, 50, 61, 26, 62, 12, 63, 51, 64, 3, 0 </int_array>
 			<string> "variants" </string>
-			<array  len="46" shared="false">
-				<int> 1 </int>
-				<vector2> 0, 0 </vector2>
-				<real> 0 </real>
-				<vector2> 1, 1 </vector2>
+			<array  len="52" shared="false">
+				<bool> False </bool>
 				<resource  external="0">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
@@ -114,7 +124,7 @@
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> -184.024, -184.58 </vector2>
+							<vector2> 49.2524, -37.6744 </vector2>
 							<string> "snap_grid" </string>
 							<bool> False </bool>
 							<string> "snap_offset" </string>
@@ -134,7 +144,7 @@
 							<string> "snap_step" </string>
 							<vector2> 10, 10 </vector2>
 							<string> "zoom" </string>
-							<real> 0.66342 </real>
+							<real> 0.814505 </real>
 						</dictionary>
 						<string> "3D" </string>
 						<dictionary  shared="false">
@@ -228,11 +238,6 @@
 							<string> "znear" </string>
 							<real> 0.1 </real>
 						</dictionary>
-						<string> "Anim" </string>
-						<dictionary  shared="false">
-							<string> "visible" </string>
-							<bool> False </bool>
-						</dictionary>
 					</dictionary>
 					<string> "__editor_run_settings__" </string>
 					<dictionary  shared="false">
@@ -242,49 +247,57 @@
 						<int> 0 </int>
 					</dictionary>
 				</dictionary>
-				<real> 20 </real>
-				<real> 236 </real>
-				<vector2> 0, 228 </vector2>
-				<bool> False </bool>
-				<bool> True </bool>
-				<int> 3 </int>
-				<resource  resource_type="Theme" path="local://1">  </resource>
-				<real> 22 </real>
-				<real> 28 </real>
-				<real> 10 </real>
-				<vector2> 160, 160 </vector2>
-				<int> 0 </int>
-				<real> 174 </real>
-				<real> 166 </real>
-				<vector2> 150, 150 </vector2>
-				<resource  external="2">  </resource>
-				<real> 65 </real>
-				<real> -65 </real>
-				<real> 150 </real>
-				<int> 2 </int>
-				<resource  external="3">  </resource>
-				<real> 175 </real>
-				<real> 700 </real>
-				<vector2> 0, 160 </vector2>
-				<real> 3 </real>
-				<int> -2 </int>
-				<real> 525 </real>
-				<real> 42 </real>
-				<resource  resource_type="StyleBox" path="local://2">  </resource>
-				<resource  external="4">  </resource>
-				<color> 1, 0.473427, 0.130869, 1 </color>
-				<string> "ENGINEER DANIELS:" </string>
-				<real> 112 </real>
-				<real> 2 </real>
-				<resource  resource_type="StyleBox" path="local://3">  </resource>
-				<real> 515 </real>
-				<real> 102 </real>
-				<string> "" </string>
 				<int> -1 </int>
-				<real> 110 </real>
+				<vector2> 0, 0 </vector2>
+				<real> 0 </real>
+				<vector2> 1, 1 </vector2>
+				<int> 3 </int>
+				<real> 350 </real>
+				<real> 257 </real>
+				<real> -350 </real>
+				<real> -243 </real>
+				<bool> True </bool>
+				<int> 2 </int>
+				<resource  external="1">  </resource>
+				<string> "system_log" </string>
+				<int> 1 </int>
+				<real> 20 </real>
+				<int> 70 </int>
+				<int> 0 </int>
+				<real> 217 </real>
+				<real> 66 </real>
+				<real> 242 </real>
+				<vector2> 50, 0 </vector2>
+				<resource  resource_type="StyleBox" path="local://45">  </resource>
+				<color> 0.482353, 1, 0.521569, 1 </color>
+				<int> 10 </int>
+				<real> 6 </real>
+				<string> "ENTRIES" </string>
+				<resource name=""></resource>				<real> 106 </real>
+				<real> 109 </real>
+				<real> 460 </real>
+				<resource  resource_type="StyleBox" path="local://44">  </resource>
+				<real> 168 </real>
+				<real> 2 </real>
+				<real> 200 </real>
+				<real> 189 </real>
+				<real> 15 </real>
+				<string> "ACTIVE" </string>
+				<real> 25 </real>
+				<real> 28 </real>
+				<real> 306 </real>
+				<real> 468 </real>
+				<string> "ARCHIVED" </string>
+				<real> 238 </real>
+				<real> 660 </real>
+				<real> 5 </real>
+				<color> 1, 1, 1, 1 </color>
+				<color> 0.167513, 0.162437, 0.16206, 1 </color>
+				<color> 0.93028, 0.944162, 0.944444, 1 </color>
+				<string> "" </string>
 			</array>
 			<string> "version" </string>
-			<int> 1 </int>
+			<int> 2 </int>
 		</dictionary>
 
 	</main_resource>

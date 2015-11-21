@@ -22,7 +22,7 @@ const player_scene = preload("res://active-partials/player/_robot.xml")
 const env_1_scene = preload("res://active-partials/environment/FPO_stage_a.xml")
 const env_2_scene = preload("res://active-partials/environment/FPO_stage_b.xml")
 const MUI_scene = preload("res://active-partials/message-ui/MUI_.xscn")
-const ingame_menu_scene = preload("res://active-partials/interface/in-game-menu_.xscn")
+const ingame_menu_scene = preload("res://active-partials/interface/in-game-menu_.xml")
 const main_menu_scene = preload("res://active-partials/interface/game-menu_.xml")
 
 #const main_menu_scene = preload("res://active-partials/interface/game-menu_.xml")
@@ -164,7 +164,6 @@ func set_externals():
 
 func update_registry(params):
 	for param in params:
-		#_[param] = self[param]
 		_.set(param, self[param])
 
 
