@@ -8,6 +8,7 @@ var portrait
 var text_box
 var response_box
 var response_base
+var tween
 
 var popup
 var popup_text
@@ -131,12 +132,23 @@ func make_formatted_name(npc_name):
 ####### open/close ########
 
 func open():
-	dialog_box.popup()
+	
+	if( !is_active ):
+		dialog_box.popup()
+		tween.interpolate_property(dialog_box, "margin/top", 0, 190, 0.25,1,1,0)
+		tween.interpolate_property(dialog_box, "margin/bottom", -190, 0, 0.25,1,1,0)
+		tween.interpolate_property(dialog_box, "visibility/opacity",0,1, 0.25,1,1,0)
+		tween.start()
 	is_active = true;
 	emit_signal("dialogue_opened")
 	set_process_unhandled_key_input(true)
 
 func close():
+	tween.interpolate_property(dialog_box, "margin/top", 190, 0, 0.25,1,1,0)
+	tween.interpolate_property(dialog_box, "margin/bottom", 0, -190, 0.25,1,1,0)
+	tween.interpolate_property(dialog_box, "visibility/opacity",1,0, 0.25,1,1,0)
+	tween.start()
+	yield(tween,"tween_complete")
 	dialog_box.hide()
 	is_active = false;
 	emit_signal("dialogue_closed")
@@ -172,6 +184,7 @@ func set_internals():
 	portrait = dialog_box.find_node("portrait")
 	popup = find_node("popup")
 	popup_text = popup.find_node("Label")
+	tween = find_node("Tween")
 
 ###### other setup
 
