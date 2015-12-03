@@ -10,13 +10,14 @@
 		<string name="script/source"> "### standard walking kinematic character&#000a;### needs to be passed a reference to the Nav2D node&#000a;### walks to point of click&#000a;### includes rudimentary sprite flipping and camera follow, now working!&#000a;### 8/8/15&#000a;&#000a;extends KinematicBody2D&#000a;&#000a;var begin=Vector2()&#000a;var end=Vector2()&#000a;var path=[]&#000a;&#000a;signal done_moving&#000a;&#000a;var nav&#000a;var front_texture&#000a;export(Texture) var back_texture&#000a;&#000a;var last_pos&#000a;var anim&#000a;var general_direction&#000a;&#000a;const SPEED=40.0&#000a;&#000a;var frames = {&#000a;&#0009;S = 0,&#000a;&#0009;SW = 9,&#000a;&#0009;W = 18,&#000a;&#0009;NW = 27,&#000a;&#0009;N = 36,&#000a;&#0009;NE = 45,&#000a;&#0009;E = 54,&#000a;&#0009;SE = 63&#000a;}&#000a;&#000a;&#000a;func _rotate_to(dir):&#000a;&#000a;&#0009;var new_anim&#000a;&#000a;&#0009;if( -25 &lt;= dir and dir &lt; 25 ):&#000a;&#0009;&#0009;new_anim = &quot;N&quot;&#000a;&#0009;elif( 25 &lt;= dir and dir &lt; 65 ):&#000a;&#0009;&#0009;new_anim = &quot;NW&quot;&#000a;&#0009;elif( 65 &lt;= dir and dir &lt; 116 ):&#000a;&#0009;&#0009;new_anim = &quot;W&quot;&#000a;&#0009;elif( 116 &lt;= dir and dir &lt; 155 ):&#000a;&#0009;&#0009;new_anim = &quot;SW&quot;&#000a;&#0009;elif(( 155 &lt;= dir and dir &lt;= 180 ) or ( -180 &lt;= dir and dir &lt;= -155 )):&#000a;&#0009;&#0009;new_anim = &quot;S&quot;&#000a;&#0009;elif( -65 &lt;= dir and dir &lt; -25 ):&#000a;&#0009;&#0009;new_anim = &quot;NE&quot;&#000a;&#0009;elif( -116 &lt;= dir and dir &lt; -65 ):&#000a;&#0009;&#0009;new_anim = &quot;E&quot;&#000a;&#0009;elif( -155 &lt;= dir and dir &lt; -116 ):&#000a;&#0009;&#0009;new_anim = &quot;SE&quot;&#000a;&#0009;else:&#000a;&#0009;&#0009;new_anim = &quot;S&quot;&#000a;&#0009;&#000a;&#0009;return new_anim&#000a;&#000a;&#000a;func _fixed_process(delta):&#000a;&#000a;&#0009;var dir = rad2deg(last_pos.angle_to_point(get_global_pos()))&#000a;&#0009;#print(last_pos.angle_to(get_global_pos()))&#000a;&#0009;#print(dir)&#000a;&#0009;&#000a;&#0009;&#000a;#&#0009;var new_anim = _rotate_to(dir)&#000a;#&#0009;if ( new_anim and anim.get_current_animation() != new_anim):&#000a;#&#0009;&#0009;anim.play(new_anim)&#000a;&#000a;&#0009;last_pos = get_global_pos()&#000a;&#000a;&#0009;if (path.size()&gt;1):&#000a;&#0009;&#000a;&#0009;&#0009;var to_walk = delta*SPEED&#000a;&#0009;&#0009;while(to_walk&gt;0 and path.size()&gt;=2):&#000a;&#0009;&#0009;&#0009;var pfrom = path[path.size()-1]&#000a;&#0009;&#0009;&#0009;var pto = path[path.size()-2]&#000a;&#0009;&#0009;&#0009;var d = pfrom.distance_to(pto)&#000a;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;&#0009;var direction = (pto - pfrom).normalized()&#000a;&#0009;&#0009;&#0009;var spr = get_node(&quot;Sprite&quot;)&#000a;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;&#0009;if (d&lt;=to_walk):&#000a;&#0009;&#0009;&#0009;&#0009;path.remove(path.size()-1)&#000a;&#0009;&#0009;&#0009;&#0009;to_walk-=d&#000a;&#0009;&#0009;&#0009;else:&#000a;&#0009;&#0009;&#0009;&#0009;path[path.size()-1] = pfrom.linear_interpolate(pto,to_walk/d)&#000a;&#0009;&#0009;&#0009;&#0009;to_walk=0&#000a;&#0009;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;var atpos = path[path.size()-1]&#000a;&#0009;&#0009;var direction = _rotate_to(rad2deg(get_pos().angle_to_point(atpos)))&#000a;&#0009;&#0009;if( direction != anim.get_current_animation() ):&#000a;&#0009;&#0009;&#0009;anim.play(direction)&#000a;&#0009;&#0009;move_to(atpos);&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;if(is_colliding()):&#000a;&#0009;&#0009;&#0009;var n = get_collision_normal()&#000a;&#0009;&#0009;&#0009;var motion = n.slide(atpos - get_global_pos())&#000a;&#0009;&#0009;&#0009;move(motion)&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;else:&#000a;&#0009;&#0009;&#0009;pass&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;if (path.size()&lt;2):&#000a;&#0009;&#0009;&#0009;var frame&#000a;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;&#0009;path=[]&#000a;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;&#0009;set_fixed_process(false)&#000a;&#0009;&#0009;&#0009;var curr = anim.get_current_animation()&#000a;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;&#0009;anim.set_current_animation(&quot;&quot;)&#000a;&#0009;&#0009;&#0009;anim.stop(true)&#000a;&#0009;&#0009;&#0009;get_node(&quot;Sprite&quot;).set_frame(frames[curr])&#000a;&#0009;&#0009;&#0009;emit_signal(&quot;done_moving&quot;)&#000a;&#0009;else:&#000a;&#0009;&#0009;anim.stop(true)&#000a;&#0009;&#0009;set_fixed_process(false);&#000a;&#0009;&#0009;anim.set_current_animation(&quot;&quot;)&#000a;&#000a;func update_path(begin, end, nav):&#000a;&#0009;var p = nav.get_simple_path(begin,end,false) # not documented yet&#000a;&#0009;path=Array(p)&#000a;&#0009;path.invert() &#000a;&#0009;&#000a;&#0009;general_direction = rad2deg(begin.angle_to_point(end))&#000a;&#0009;anim.set_active(true)&#000a;&#0009;set_fixed_process(true) # keep on movin&apos;&#000a;&#000a;func _ready():&#000a;&#0009;front_texture = get_node(&quot;Sprite&quot;).get_texture()&#000a;&#0009;back_texture = front_texture&#000a;&#0009;anim = get_node(&quot;anim&quot;)&#000a;&#0009;add_user_signal(&quot;done_moving&quot;)&#000a;&#0009;&#000a;&#0009;last_pos = get_pos()&#000a;&#000a;&#0009;set_fixed_process(true)&#000a;&#000a;" </string>
 
 	</resource>
-	<resource type="Animation" path="local://12">
+	<resource type="Animation" path="local://15">
+		<string name="resource/name"> "N" </string>
 		<real name="length"> 0.9 </real>
 		<bool name="loop"> True </bool>
 		<real name="step"> 0.15 </real>
 		<string name="tracks/0/type"> "value" </string>
 		<node_path name="tracks/0/path"> "Sprite:frame" </node_path>
-		<int name="tracks/0/interp"> 0 </int>
+		<int name="tracks/0/interp"> 1 </int>
 		<dictionary name="tracks/0/keys" shared="false">
 			<string> "cont" </string>
 			<bool> False </bool>
@@ -26,12 +27,12 @@
 			<real_array  len="6"> 				1, 1, 1, 1, 1, 1 </real_array>
 			<string> "values" </string>
 			<array  len="6" shared="false">
-				<int> 19 </int>
-				<int> 20 </int>
-				<int> 21 </int>
-				<int> 22 </int>
-				<int> 24 </int>
-				<int> 25 </int>
+				<int> 36 </int>
+				<int> 37 </int>
+				<int> 38 </int>
+				<int> 39 </int>
+				<int> 40 </int>
+				<int> 41 </int>
 			</array>
 		</dictionary>
 
@@ -117,35 +118,6 @@
 		</dictionary>
 
 	</resource>
-	<resource type="Animation" path="local://16">
-		<string name="resource/name"> "SE" </string>
-		<real name="length"> 0.9 </real>
-		<bool name="loop"> True </bool>
-		<real name="step"> 0.15 </real>
-		<string name="tracks/0/type"> "value" </string>
-		<node_path name="tracks/0/path"> "Sprite:frame" </node_path>
-		<int name="tracks/0/interp"> 1 </int>
-		<dictionary name="tracks/0/keys" shared="false">
-			<string> "cont" </string>
-			<bool> False </bool>
-			<string> "times" </string>
-			<real_array  len="8"> 				0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 0.9 </real_array>
-			<string> "transitions" </string>
-			<real_array  len="8"> 				1, 1, 1, 1, 1, 1, 1, 1 </real_array>
-			<string> "values" </string>
-			<array  len="8" shared="false">
-				<int> 64 </int>
-				<int> 65 </int>
-				<int> 66 </int>
-				<int> 67 </int>
-				<int> 68 </int>
-				<int> 69 </int>
-				<int> 70 </int>
-				<int> 62 </int>
-			</array>
-		</dictionary>
-
-	</resource>
 	<resource type="Animation" path="local://13">
 		<real name="length"> 0.9 </real>
 		<bool name="loop"> True </bool>
@@ -203,8 +175,8 @@
 		</dictionary>
 
 	</resource>
-	<resource type="Animation" path="local://15">
-		<string name="resource/name"> "N" </string>
+	<resource type="Animation" path="local://16">
+		<string name="resource/name"> "SE" </string>
 		<real name="length"> 0.9 </real>
 		<bool name="loop"> True </bool>
 		<real name="step"> 0.15 </real>
@@ -215,17 +187,45 @@
 			<string> "cont" </string>
 			<bool> False </bool>
 			<string> "times" </string>
+			<real_array  len="8"> 				0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 0.9 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="8"> 				1, 1, 1, 1, 1, 1, 1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="8" shared="false">
+				<int> 64 </int>
+				<int> 65 </int>
+				<int> 66 </int>
+				<int> 67 </int>
+				<int> 68 </int>
+				<int> 69 </int>
+				<int> 70 </int>
+				<int> 62 </int>
+			</array>
+		</dictionary>
+
+	</resource>
+	<resource type="Animation" path="local://12">
+		<real name="length"> 0.9 </real>
+		<bool name="loop"> True </bool>
+		<real name="step"> 0.15 </real>
+		<string name="tracks/0/type"> "value" </string>
+		<node_path name="tracks/0/path"> "Sprite:frame" </node_path>
+		<int name="tracks/0/interp"> 0 </int>
+		<dictionary name="tracks/0/keys" shared="false">
+			<string> "cont" </string>
+			<bool> False </bool>
+			<string> "times" </string>
 			<real_array  len="6"> 				0, 0.15, 0.3, 0.45, 0.6, 0.75 </real_array>
 			<string> "transitions" </string>
 			<real_array  len="6"> 				1, 1, 1, 1, 1, 1 </real_array>
 			<string> "values" </string>
 			<array  len="6" shared="false">
-				<int> 36 </int>
-				<int> 37 </int>
-				<int> 38 </int>
-				<int> 39 </int>
-				<int> 40 </int>
-				<int> 41 </int>
+				<int> 19 </int>
+				<int> 20 </int>
+				<int> 21 </int>
+				<int> 22 </int>
+				<int> 24 </int>
+				<int> 25 </int>
 			</array>
 		</dictionary>
 
@@ -287,14 +287,14 @@
 				<string> "playback/process_mode" </string>
 				<string> "playback/default_blend_time" </string>
 				<string> "root/root" </string>
-				<string> "anims/W" </string>
+				<string> "anims/N" </string>
 				<string> "anims/NW" </string>
 				<string> "anims/SW" </string>
 				<string> "anims/E" </string>
-				<string> "anims/SE" </string>
 				<string> "anims/S" </string>
 				<string> "anims/NE" </string>
-				<string> "anims/N" </string>
+				<string> "anims/SE" </string>
+				<string> "anims/W" </string>
 				<string> "playback/active" </string>
 				<string> "playback/speed" </string>
 				<string> "blend_times" </string>
@@ -469,14 +469,14 @@
 				<int> -1 </int>
 				<int> 0 </int>
 				<node_path> ".." </node_path>
-				<resource  resource_type="Animation" path="local://12">  </resource>
+				<resource  resource_type="Animation" path="local://15">  </resource>
 				<resource  resource_type="Animation" path="local://10">  </resource>
 				<resource  resource_type="Animation" path="local://11">  </resource>
 				<resource  resource_type="Animation" path="local://17">  </resource>
-				<resource  resource_type="Animation" path="local://16">  </resource>
 				<resource  resource_type="Animation" path="local://13">  </resource>
 				<resource  resource_type="Animation" path="local://14">  </resource>
-				<resource  resource_type="Animation" path="local://15">  </resource>
+				<resource  resource_type="Animation" path="local://16">  </resource>
+				<resource  resource_type="Animation" path="local://12">  </resource>
 				<real> 1 </real>
 				<array  len="0" shared="false">
 				</array>
