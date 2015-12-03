@@ -135,6 +135,9 @@ func present_conversations(dialog_branches):
 		var branch = dialog_branches[0]
 		init_branch(branch)
 		MUI.open()
+		
+	elif( dialog_branches.size() < 1 or dialog_branches == null ):
+		print("npc has nothing to say")
 	
 	elif( dialog_branches.size() > 1 ):
 		for branch in dialog_branches:
