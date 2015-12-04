@@ -1,110 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="14" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
-	<ext_resource path="res://assets/blue-iso-tile-1.png" type="Texture" index="5"></ext_resource>
-	<ext_resource path="res://assets/tiles/red-iso-tile-flat.png" type="Texture" index="3"></ext_resource>
-	<ext_resource path="res://assets/tiles/white-iso-tile-flat.png" type="Texture" index="2"></ext_resource>
-	<ext_resource path="res://assets/blue-iso-tile-flat-2.png" type="Texture" index="0"></ext_resource>
-	<ext_resource path="res://assets/tiles/black-iso-tile-flat.png" type="Texture" index="1"></ext_resource>
-	<ext_resource path="res://assets/grate-iso-tile-1.png" type="Texture" index="4"></ext_resource>
-	<ext_resource path="res://active-partials/environment/stairs.xml" type="PackedScene" index="8"></ext_resource>
-	<ext_resource path="res://assets/tiles/dotted-white-tile.png" type="Texture" index="6"></ext_resource>
-	<ext_resource path="res://assets/tiles/green-outline-glow.png" type="Texture" index="7"></ext_resource>
+<resource_file type="PackedScene" subresource_count="5" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
+	<ext_resource path="res://assets/tiles/floors/green-border--72x36.png" type="Texture" index="1"></ext_resource>
+	<ext_resource path="res://assets/tiles/tilesets/iso-floors-walkable.xml" type="TileSet" index="0"></ext_resource>
+	<ext_resource path="res://active-partials/environment/stairs.xml" type="PackedScene" index="2"></ext_resource>
 	<resource type="GDScript" path="local://66">
 		<string name="script/source"> "extends &quot;res://active-partials/environment/walkable-area.gd&quot;" </string>
-
-	</resource>
-	<resource type="NavigationPolygon" path="local://1">
-		<vector2_array name="vertices" len="4"> 			0, -19, 36, -1, 0, 17, -36, -1 </vector2_array>
-		<array name="polygons" len="1" shared="false">
-			<int_array  len="4"> 				0, 1, 2, 3 </int_array>
-		</array>
-		<array name="outlines" len="1" shared="false">
-			<vector2_array  len="4"> 				0, -19, 36, -1, 0, 17, -36, -1 </vector2_array>
-		</array>
-
-	</resource>
-	<resource type="ConcavePolygonShape2D" path="local://7">
-		<real name="custom_solver_bias"> 0 </real>
-		<vector2_array name="segments" len="8"> 			-36, 0, 0, -18, 0, -18, 36, 0, 36, 0, 0, 18, 0, 18, -36, 0 </vector2_array>
-
-	</resource>
-	<resource type="TileSet" path="local://62">
-		<string name="0/name"> "blue walkable" </string>
-		<resource name="0/texture" external="0">  </resource>
-		<vector2 name="0/tex_offset"> 0, 0 </vector2>
-		<resource name="0/material"></resource>		<rect2 name="0/region"> 0, 0, 0, 0 </rect2>
-		<vector2 name="0/occluder_offset"> 36, 18 </vector2>
-		<resource name="0/occluder"></resource>		<vector2 name="0/navigation_offset"> 36, 18 </vector2>
-		<resource name="0/navigation" resource_type="NavigationPolygon" path="local://1">  </resource>
-		<vector2 name="0/shape_offset"> 0, 0 </vector2>
-		<array name="0/shapes" len="0" shared="false">
-		</array>
-		<string name="1/name"> "black unwalkable" </string>
-		<resource name="1/texture" external="1">  </resource>
-		<vector2 name="1/tex_offset"> 0, 0 </vector2>
-		<resource name="1/material"></resource>		<rect2 name="1/region"> 0, 0, 0, 0 </rect2>
-		<vector2 name="1/occluder_offset"> 36, 18 </vector2>
-		<resource name="1/occluder"></resource>		<vector2 name="1/navigation_offset"> 36, 18 </vector2>
-		<resource name="1/navigation"></resource>		<vector2 name="1/shape_offset"> 0, 0 </vector2>
-		<array name="1/shapes" len="0" shared="false">
-		</array>
-		<string name="2/name"> "white walkable" </string>
-		<resource name="2/texture" external="2">  </resource>
-		<vector2 name="2/tex_offset"> 0, 0 </vector2>
-		<resource name="2/material"></resource>		<rect2 name="2/region"> 0, 0, 0, 0 </rect2>
-		<vector2 name="2/occluder_offset"> 36, 18 </vector2>
-		<resource name="2/occluder"></resource>		<vector2 name="2/navigation_offset"> 36, 18 </vector2>
-		<resource name="2/navigation" resource_type="NavigationPolygon" path="local://1">  </resource>
-		<vector2 name="2/shape_offset"> 0, 0 </vector2>
-		<array name="2/shapes" len="0" shared="false">
-		</array>
-		<string name="3/name"> "red unwalkable" </string>
-		<resource name="3/texture" external="3">  </resource>
-		<vector2 name="3/tex_offset"> 0, 0 </vector2>
-		<resource name="3/material"></resource>		<rect2 name="3/region"> 0, 0, 0, 0 </rect2>
-		<vector2 name="3/occluder_offset"> 36, 18 </vector2>
-		<resource name="3/occluder"></resource>		<vector2 name="3/navigation_offset"> 36, 18 </vector2>
-		<resource name="3/navigation"></resource>		<vector2 name="3/shape_offset"> 0, 0 </vector2>
-		<array name="3/shapes" len="0" shared="false">
-		</array>
-		<string name="4/name"> "grate unwalkable" </string>
-		<resource name="4/texture" external="4">  </resource>
-		<vector2 name="4/tex_offset"> 0, -1 </vector2>
-		<resource name="4/material"></resource>		<rect2 name="4/region"> 0, 0, 0, 0 </rect2>
-		<vector2 name="4/occluder_offset"> 36, 18 </vector2>
-		<resource name="4/occluder"></resource>		<vector2 name="4/navigation_offset"> 36, 18 </vector2>
-		<resource name="4/navigation"></resource>		<vector2 name="4/shape_offset"> 0, 0 </vector2>
-		<array name="4/shapes" len="0" shared="false">
-		</array>
-		<string name="5/name"> "blue walkable area2d" </string>
-		<resource name="5/texture" external="5">  </resource>
-		<vector2 name="5/tex_offset"> 0, 0 </vector2>
-		<resource name="5/material"></resource>		<rect2 name="5/region"> 0, 0, 0, 0 </rect2>
-		<vector2 name="5/occluder_offset"> 36, 18 </vector2>
-		<resource name="5/occluder"></resource>		<vector2 name="5/navigation_offset"> 36, 18 </vector2>
-		<resource name="5/navigation" resource_type="NavigationPolygon" path="local://1">  </resource>
-		<vector2 name="5/shape_offset"> 0, 0 </vector2>
-		<array name="5/shapes" len="0" shared="false">
-		</array>
-		<string name="6/name"> "grate collider" </string>
-		<resource name="6/texture" external="4">  </resource>
-		<vector2 name="6/tex_offset"> 0, 0 </vector2>
-		<resource name="6/material"></resource>		<rect2 name="6/region"> 0, 0, 0, 0 </rect2>
-		<vector2 name="6/occluder_offset"> 36, 18 </vector2>
-		<resource name="6/occluder"></resource>		<vector2 name="6/navigation_offset"> 36, 18 </vector2>
-		<resource name="6/navigation"></resource>		<vector2 name="6/shape_offset"> 36, 18 </vector2>
-		<array name="6/shapes" len="1" shared="false">
-			<resource  resource_type="Shape2D" path="local://7">  </resource>
-		</array>
-		<string name="7/name"> "attractor" </string>
-		<resource name="7/texture" external="6">  </resource>
-		<vector2 name="7/tex_offset"> 0, 0 </vector2>
-		<resource name="7/material"></resource>		<rect2 name="7/region"> 0, 0, 0, 0 </rect2>
-		<vector2 name="7/occluder_offset"> 36, 18 </vector2>
-		<resource name="7/occluder"></resource>		<vector2 name="7/navigation_offset"> 36, 18 </vector2>
-		<resource name="7/navigation"></resource>		<vector2 name="7/shape_offset"> 0, 0 </vector2>
-		<array name="7/shapes" len="0" shared="false">
-		</array>
 
 	</resource>
 	<main_resource>
@@ -176,7 +76,7 @@
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> -562.683, -273.775 </vector2>
+							<vector2> -901.928, -209.558 </vector2>
 							<string> "snap_grid" </string>
 							<bool> False </bool>
 							<string> "snap_offset" </string>
@@ -305,7 +205,7 @@
 					</dictionary>
 				</dictionary>
 				<int> 1 </int>
-				<resource  resource_type="TileSet" path="local://62">  </resource>
+				<resource  external="0">  </resource>
 				<vector2> 72, 36 </vector2>
 				<int> 8 </int>
 				<matrix32> 1, 0, 0, 1, 0, 0 </matrix32>
@@ -319,8 +219,8 @@
 					<string> "_edit_lock_" </string>
 					<bool> True </bool>
 				</dictionary>
-				<resource  external="7">  </resource>
-				<resource  external="8">  </resource>
+				<resource  external="1">  </resource>
+				<resource  external="2">  </resource>
 				<vector2> 540, 370 </vector2>
 				<real> 0.1 </real>
 				<node_path> "." </node_path>
