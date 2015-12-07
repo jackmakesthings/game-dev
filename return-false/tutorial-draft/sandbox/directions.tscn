@@ -1,0 +1,359 @@
+[gd_scene load_steps=8 format=1]
+
+[ext_resource path="res://assets/tiles/tilesets/iso-floors-walkable.xml" type="TileSet" id=1]
+[ext_resource path="res://assets/tiles/floors/green-border--72x36.png" type="Texture" id=4]
+[ext_resource path="res://assets/ui/Iso_Dark/pngs/textedit-completion.png" type="Texture" id=2]
+[ext_resource path="res://assets/fonts/droid-mono-13.fnt" type="Font" id=3]
+
+[sub_resource type="GDScript" id=66]
+
+script/source = "extends \"res://active-partials/environment/walkable-area.gd\""
+
+[sub_resource type="Theme" id=68]
+
+default_font = ExtResource( 3 )
+
+[sub_resource type="GDScript" id=67]
+
+script/source = "extends Control\n\nvar A\nvar B\nvar is_moving\n\nvar angle_to_b\nvar aa2b_string = \"A.angle_to(B): \"\n\nvar angle_to_point_b\nvar aa2pb_string = \"A.angle_to_point(B): \"\n\nvar deg_to_b\nvar d2b_string = \"\"\n\nvar deg_to_point_b\nvar d2pb_string = \"\"\n\nvar minus\nvar minus_string = \"B - A: \"\n\nvar minus_n\nvar minusn_string = \"- normalized:  \"\n\n###\n\nvar A_pos\nvar B_pos\n\nvar nav\nvar tiles\n\nvar w2m_A\nvar w2m_B\n\nvar w2m_A_label\nvar w2m_B_label\n\nvar A_y\nvar A_x\n\nfunc _ready():\n\tA = get_node(\"../A\")\n\tB = get_node(\"../B\")\n\t\n\tangle_to_b = get_node(\"VBoxContainer/a_angleto_b\")\n\tangle_to_point_b = get_node(\"VBoxContainer/a_angletopoint_b\")\n\tdeg_to_b = get_node(\"VBoxContainer/deg_to_b\")\n\tdeg_to_point_b = get_node(\"VBoxContainer/deg_topoint_b\")\n\tminus = get_node(\"VBoxContainer/minus\")\n\tminus_n = get_node(\"VBoxContainer/minus_norm\")\n\t\n\tw2m_A_label = get_node(\"VBoxContainer/w2m_a\")\n\tw2m_B_label = get_node(\"VBoxContainer/w2m_b\")\n\t\n\tA_pos = get_node(\"VBoxContainer/a_pos\")\n\tB_pos = get_node(\"VBoxContainer/b_pos\")\n\t\n\tnav = get_tree().get_root().find_node(\"nav\")\n\ttiles = get_tree().get_root().get_node(\"Node/env/nav/floor\")\n\t\n\tA_x = A.get_pos().x\n\tA_y = A.get_pos().y\n\t\n\tA_pos.set_text(\"A: \" + str(A.get_pos()) )\n\tB_pos.set_text(\"B: \" + str(B.get_pos()) )\n\t\n\t\n\tis_moving = true\n\tset_as_toplevel(true)\n\n\nfunc _draw():\n\tdraw_circle(A.get_pos(), 100.0, Color(\"#11efefef\"))\n\t#draw_circle(A.get_pos(), 99.0, Color(\"#ffffff\"))\n\tdraw_line(Vector2(0,A_y), Vector2(get_window().get_size().x,A_y), Color(\"#ffaa00\"), 1.0)\n\tdraw_line(Vector2(A_x, 0), Vector2(A_x, get_window().get_size().y), Color(\"#ffaa00\"), 1.0)\n\tdraw_line(A.get_pos(), B.get_pos(), Color(\"#00ccdd\"), 5.0)\n\t\n\tif( abs( floor(90 - rad2deg( A.get_pos().angle_to_point(B.get_pos()) ))) == 26 ):\n\t\t draw_line(A.get_pos(), B.get_pos(), Color(\"#ffcc11\"), 5.0)\n\t\n\tif( abs( floor(180 - rad2deg( A.get_pos().angle_to_point(B.get_pos()) ))) == 26 ):\n\t\tdraw_line(A.get_pos(), B.get_pos(), Color(\"#ffcc11\"), 5.0)\n\t\n\tif( abs( floor(90 + rad2deg( A.get_pos().angle_to_point(B.get_pos()) ))) == 26 ):\n\t\tdraw_line(A.get_pos(), B.get_pos(), Color(\"#ffcc11\"), 5.0)\n\t\n\tif( abs( floor(rad2deg( A.get_pos().angle_to_point(B.get_pos()) ))) == 26 ):\n\t\tdraw_line(A.get_pos(), B.get_pos(), Color(\"#ffcc11\"), 5.0)\n\t\n\nfunc _input_event(ev):\n\tif( ev.type == InputEvent.MOUSE_MOTION ):\n\t\tif( is_moving ):\n\t\t\tB.set_pos(ev.pos)\n\t\t\tupdate_labels(ev.pos)\n\t\t\tupdate_tiles(ev.pos)\n\t\t\tupdate()\n\t\n\telif( ev.type == InputEvent.MOUSE_BUTTON and ev.is_pressed() and ! ev.is_echo() ):\n\t\tis_moving = not(is_moving)\n\t\t\n\n\nfunc update_labels(pos):\n\t\n\tB_pos.set_text(\"B: \" + str(B.get_pos()) )\n\t\n\tangle_to_b.set_text(aa2b_string + str(A.get_pos().angle_to(B.get_pos())) + \" rad\")\n\tangle_to_point_b.set_text(aa2pb_string + str(A.get_pos().angle_to_point(B.get_pos())) + \" rad\")\n\tdeg_to_b.set_text(d2b_string + str( rad2deg(A.get_pos().angle_to(B.get_pos()) ) ) + \" deg\")\n\tdeg_to_point_b.set_text(d2pb_string + str( rad2deg(A.get_pos().angle_to_point(B.get_pos()) ) ) + \" deg\")\n\tminus.set_text(minus_string + str( B.get_pos() - A.get_pos() ))\n\tminus_n.set_text(minusn_string + str( (B.get_pos() - A.get_pos()).normalized() ))\n\n\nfunc update_tiles(pos):\n\tw2m_A = tiles.world_to_map(A.get_pos())\n\tw2m_B = tiles.world_to_map(B.get_pos())\n\t\n\ttiles.clear()\n\t\n\ttiles.set_cell(w2m_A.x, w2m_A.y, 3)\n\ttiles.set_cell(w2m_B.x, w2m_B.y, 3)\n\t\n\tw2m_A_label.set_text(\"A (tile): \" + str(w2m_A) )\n\tw2m_B_label.set_text(\"B (tile): \" + str(w2m_B) )\n\t\n"
+
+[node name="Node" type="Node"]
+
+__meta__ = { "__editor_plugin_screen__":"Script", "__editor_plugin_states__":{ "2D":{ "ofs":Vector2( 167.486, 2.042 ), "snap_grid":true, "snap_offset":Vector2( 0, 0 ), "snap_pixel":false, "snap_relative":false, "snap_rotation":true, "snap_rotation_offset":0, "snap_rotation_step":0.523599, "snap_show_grid":false, "snap_step":Vector2( 9, 9 ), "zoom":0.999996 }, "3D":{ "ambient_light_color":Color( 0.15, 0.15, 0.15, 1 ), "default_light":true, "default_srgb":false, "deflight_rot_x":0.942478, "deflight_rot_y":0.628319, "fov":45, "show_grid":true, "show_origin":true, "viewport_mode":1, "viewports":[ { "distance":4, "listener":true, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 } ], "zfar":500, "znear":0.1 }, "Anim":{ "visible":false } }, "__editor_run_settings__":{ "custom_args":"-l $scene", "run_mode":0 } }
+
+[node name="env" type="Node2D" parent="."]
+
+script/script = SubResource( 66 )
+__meta__ = { "__editor_plugin_screen__":"2D", "__editor_plugin_states__":{ "2D":{ "ofs":Vector2( -901.928, -209.558 ), "snap_grid":false, "snap_offset":Vector2( 0, 0 ), "snap_pixel":false, "snap_relative":false, "snap_rotation":false, "snap_rotation_offset":0, "snap_rotation_step":0.261799, "snap_show_grid":false, "snap_step":Vector2( 10, 10 ), "zoom":0.358485 }, "3D":{ "ambient_light_color":Color( 0.15, 0.15, 0.15, 1 ), "default_light":true, "default_srgb":false, "deflight_rot_x":0.942478, "deflight_rot_y":0.628319, "fov":45, "show_grid":true, "show_origin":true, "viewport_mode":1, "viewports":[ { "distance":4, "listener":true, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 } ], "zfar":500, "znear":0.1 }, "Anim":{ "visible":false } }, "__editor_run_settings__":{ "custom_args":"-l $scene", "run_mode":0 } }
+
+[node name="nav" type="Navigation2D" parent="env"]
+
+[node name="floor" type="TileMap" parent="env/nav"]
+
+mode = 1
+tile_set = ExtResource( 1 )
+cell/size = Vector2( 72, 36 )
+cell/quadrant_size = 8
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 1
+cell/y_sort = true
+collision/use_kinematic = false
+collision/friction = 1
+collision/bounce = 0
+collision/layers = 1
+collision/mask = 1
+tile_data = IntArray( -786422, 2, -720887, 2, -720886, 2, -720885, 2, -655352, 2, -655351, 2, -655350, 2, -655349, 2, -655348, 2, -589817, 2, -589816, 2, -589815, 2, -589814, 2, -589813, 2, -589812, 2, -589811, 2, -524282, 2, -524281, 2, -524280, 2, -524279, 2, -524278, 2, -524277, 2, -524276, 2, -524275, 2, -524274, 2, -458747, 2, -458746, 2, -458745, 2, -458744, 2, -458743, 2, -458742, 2, -458741, 2, -458740, 2, -458739, 2, -458738, 2, -458737, 2, -393212, 2, -393211, 2, -393210, 2, -393209, 2, -393208, 2, -393207, 2, -393206, 2, -393205, 2, -393204, 2, -393203, 2, -393202, 2, -393201, 2, -393200, 2, -327677, 2, -327676, 2, -327675, 2, -327674, 2, -327673, 2, -327672, 2, -327671, 2, -327670, 2, -327669, 2, -327668, 2, -327667, 2, -327666, 2, -327665, 2, -327664, 2, -327663, 2, -262142, 2, -262141, 2, -262140, 2, -262139, 2, -262138, 2, -262137, 2, -262136, 2, -262135, 2, -262134, 2, -262133, 2, -262132, 2, -262131, 2, -262130, 2, -262129, 2, -262128, 2, -262127, 2, -262126, 2, -196607, 2, -196606, 2, -196605, 2, -196604, 2, -196603, 2, -196602, 2, -196601, 2, -196600, 2, -196599, 2, -196598, 2, -196597, 2, -196596, 2, -196595, 2, -196594, 2, -196593, 2, -196592, 2, -196591, 2, -196590, 2, -196589, 2, -131072, 2, -131071, 2, -131070, 2, -131069, 2, -131068, 2, -131067, 2, -131066, 2, -131065, 2, -131064, 2, -131063, 2, -131062, 2, -131061, 2, -131060, 2, -131059, 2, -131058, 2, -131057, 2, -131056, 2, -131055, 2, -131054, 2, -131053, 2, -131052, 2, -1, 2, -65536, 2, -65535, 2, -65534, 2, -65533, 2, -65532, 2, -65531, 3, -65530, 3, -65529, 3, -65528, 3, -65527, 3, -65526, 3, -65525, 3, -65524, 3, -65523, 3, -65522, 3, -65521, 3, -65520, 3, -65519, 0, -65518, 0, -65517, 2, -65516, 2, -65515, 2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 2, 5, 3, 6, 3, 7, 3, 8, 3, 9, 3, 10, 3, 11, 3, 12, 7, 13, 7, 14, 3, 15, 3, 16, 3, 17, 0, 18, 0, 19, 2, 20, 2, 21, 2, 22, 2, 65537, 2, 65538, 2, 65539, 2, 65540, 2, 65541, 3, 65542, 3, 65543, 2, 65544, 2, 65545, 2, 65546, 2, 65547, 2, 65548, 2, 65549, 2, 65550, 2, 65551, 2, 65552, 2, 65553, 2, 65554, 2, 65555, 2, 65556, 2, 65557, 2, 65558, 2, 65559, 2, 131074, 2, 131075, 2, 131076, 2, 131077, 3, 131078, 3, 131079, 2, 131080, 2, 131081, 2, 131082, 2, 131083, 2, 131084, 2, 131085, 2, 131086, 2, 131087, 2, 131088, 2, 131089, 2, 131090, 2, 131091, 2, 131092, 2, 131093, 2, 131094, 2, 131095, 2, 131096, 2, 196611, 2, 196612, 2, 196613, 3, 196614, 3, 196615, 2, 196616, 2, 196617, 2, 196618, 2, 196619, 2, 196620, 2, 196621, 2, 196622, 2, 196623, 2, 196624, 2, 196625, 2, 196626, 2, 196627, 2, 196628, 2, 196629, 2, 196630, 2, 196631, 2, 196632, 2, 196633, 2, 262148, 2, 262149, 3, 262150, 3, 262151, 2, 262152, 2, 262153, 2, 262154, 2, 262155, 2, 262156, 2, 262157, 2, 262158, 2, 262159, 2, 262160, 2, 262161, 2, 262162, 2, 262163, 2, 262164, 2, 262165, 2, 262166, 2, 262167, 2, 262168, 2, 262169, 2, 262170, 2, 327685, 3, 327686, 3, 327687, 2, 327688, 2, 327689, 2, 327690, 2, 327691, 2, 327692, 2, 327693, 2, 327694, 2, 327695, 2, 327696, 2, 327697, 2, 327698, 2, 327699, 2, 327700, 2, 327701, 2, 327702, 2, 327703, 2, 327704, 2, 327705, 2, 327706, 2, 327707, 2, 393222, 3, 393223, 2, 393224, 2, 393225, 2, 393226, 2, 393227, 2, 393228, 2, 393229, 2, 393230, 2, 393231, 2, 393232, 2, 393233, 2, 393234, 2, 393235, 2, 393236, 2, 393237, 2, 393238, 2, 393239, 2, 393240, 2, 393241, 2, 393242, 2, 458759, 2, 458760, 2, 458761, 2, 458762, 2, 458763, 2, 458764, 2, 458765, 2, 458766, 2, 458767, 2, 458768, 2, 458769, 2, 458770, 2, 458771, 2, 458772, 2, 458773, 2, 458774, 2, 458775, 2, 458776, 2, 458777, 2, 524296, 2, 524297, 2, 524298, 2, 524299, 2, 524300, 2, 524301, 2, 524302, 2, 524303, 2, 524304, 2, 524305, 2, 524306, 2, 524307, 2, 524308, 2, 524309, 2, 524310, 2, 524311, 2, 524312, 2, 589833, 2, 589834, 2, 589835, 2, 589836, 2, 589837, 2, 589838, 2, 589839, 2, 589840, 2, 589841, 2, 589842, 2, 589843, 2, 589844, 2, 589845, 2, 589846, 2, 589847, 2, 655370, 2, 655371, 2, 655372, 2, 655373, 2, 655374, 2, 655375, 2, 655376, 2, 655377, 2, 655378, 2, 655379, 2, 655380, 2, 655381, 2, 655382, 2, 720907, 2, 720908, 2, 720909, 2, 720910, 7, 720911, 2, 720912, 2, 720913, 2, 720914, 2, 720915, 2, 720916, 2, 720917, 2, 786444, 2, 786445, 2, 786446, 2, 786447, 2, 786448, 2, 786449, 2, 786450, 2, 786451, 2, 786452, 2, 851981, 2, 851982, 2, 851983, 2, 851984, 2, 851985, 2, 851986, 2, 851987, 2, 917518, 2, 917519, 2, 917520, 2, 917521, 2, 917522, 2, 983055, 2, 983056, 2, 983057, 2, 1048592, 2 )
+__meta__ = { "_edit_lock_":true }
+
+[node name="bodies" type="YSort" parent="env/nav/floor"]
+
+z/z = 1
+sort/enabled = true
+
+[node name="A" type="StaticBody2D" parent="env/nav/floor"]
+
+transform/pos = Vector2( 266, 437 )
+z/z = 1
+input/pickable = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0
+friction = 1
+bounce = 0
+__meta__ = { "_edit_group_":true }
+
+[node name="Sprite" type="Sprite" parent="env/nav/floor/A"]
+
+z/z = 1
+texture = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="env/nav/floor/A"]
+
+margin/left = -5
+margin/top = -23
+margin/right = 35
+margin/bottom = 3
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "A"
+percent_visible = 1
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="B" type="StaticBody2D" parent="env/nav/floor"]
+
+transform/pos = Vector2( 149, 266 )
+z/z = 1
+input/pickable = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0
+friction = 1
+bounce = 0
+__meta__ = { "_edit_group_":true }
+
+[node name="Sprite" type="Sprite" parent="env/nav/floor/B"]
+
+z/z = 1
+texture = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="env/nav/floor/B"]
+
+margin/left = -5
+margin/top = -23
+margin/right = 35
+margin/bottom = 3
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "B"
+percent_visible = 1
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Control" type="Control" parent="env/nav/floor"]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+theme/theme = SubResource( 68 )
+script/script = SubResource( 67 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="env/nav/floor/Control"]
+
+anchor/left = 1
+anchor/right = 1
+margin/left = 300
+margin/right = 20
+margin/bottom = 192
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+alignment = 0
+
+[node name="a_pos" type="Label" parent="env/nav/floor/Control/VBoxContainer"]
+
+margin/right = 280
+margin/bottom = 17
+focus/ignore_mouse = true
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "(B - A).normalized(): "
+align = 2
+valign = 1
+percent_visible = 1
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="b_pos" type="Label" parent="env/nav/floor/Control/VBoxContainer"]
+
+margin/top = 21
+margin/right = 280
+margin/bottom = 38
+focus/ignore_mouse = true
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "(B - A).normalized(): "
+align = 2
+valign = 1
+percent_visible = 1
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="HSeparator" type="HSeparator" parent="env/nav/floor/Control/VBoxContainer"]
+
+margin/top = 42
+margin/right = 280
+margin/bottom = 45
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+
+[node name="a_angleto_b" type="Label" parent="env/nav/floor/Control/VBoxContainer"]
+
+margin/top = 49
+margin/right = 280
+margin/bottom = 66
+focus/ignore_mouse = true
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "A.angle_to(B):"
+align = 2
+valign = 1
+percent_visible = 1
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="deg_to_b" type="Label" parent="env/nav/floor/Control/VBoxContainer"]
+
+margin/top = 70
+margin/right = 280
+margin/bottom = 87
+focus/ignore_mouse = true
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "A.angle_to(B) (deg):"
+align = 2
+valign = 1
+percent_visible = 1
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="HSeparator1" type="HSeparator" parent="env/nav/floor/Control/VBoxContainer"]
+
+margin/top = 91
+margin/right = 280
+margin/bottom = 94
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+
+[node name="a_angletopoint_b" type="Label" parent="env/nav/floor/Control/VBoxContainer"]
+
+margin/top = 98
+margin/right = 280
+margin/bottom = 115
+focus/ignore_mouse = true
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "A.angle_to_point(B):"
+align = 2
+valign = 1
+percent_visible = 1
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="deg_topoint_b" type="Label" parent="env/nav/floor/Control/VBoxContainer"]
+
+margin/top = 119
+margin/right = 280
+margin/bottom = 136
+focus/ignore_mouse = true
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "A.angle_to_point(B) (deg):"
+align = 2
+valign = 1
+percent_visible = 1
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="HSeparator2" type="HSeparator" parent="env/nav/floor/Control/VBoxContainer"]
+
+margin/top = 140
+margin/right = 280
+margin/bottom = 143
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+
+[node name="minus" type="Label" parent="env/nav/floor/Control/VBoxContainer"]
+
+margin/top = 147
+margin/right = 280
+margin/bottom = 164
+focus/ignore_mouse = true
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "B - A: "
+align = 2
+valign = 1
+percent_visible = 1
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="minus_norm" type="Label" parent="env/nav/floor/Control/VBoxContainer"]
+
+margin/top = 168
+margin/right = 280
+margin/bottom = 185
+focus/ignore_mouse = true
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "(B - A).normalized(): "
+align = 2
+valign = 1
+percent_visible = 1
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="HSeparator3" type="HSeparator" parent="env/nav/floor/Control/VBoxContainer"]
+
+margin/top = 189
+margin/right = 280
+margin/bottom = 192
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+custom_constants/separation = 30
+
+[node name="w2m_a" type="Label" parent="env/nav/floor/Control/VBoxContainer"]
+
+margin/top = 196
+margin/right = 280
+margin/bottom = 213
+focus/ignore_mouse = true
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "(B - A).normalized(): "
+align = 2
+valign = 1
+percent_visible = 1
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="w2m_b" type="Label" parent="env/nav/floor/Control/VBoxContainer"]
+
+margin/top = 217
+margin/right = 280
+margin/bottom = 234
+focus/ignore_mouse = true
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "(B - A).normalized(): "
+align = 2
+valign = 1
+percent_visible = 1
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="destination_sprite" type="Sprite" parent="env"]
+
+visibility/visible = false
+texture = ExtResource( 4 )
+
+
