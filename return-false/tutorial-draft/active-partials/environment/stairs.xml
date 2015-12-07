@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resource_file type="PackedScene" subresource_count="5" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
-	<ext_resource path="res://active-partials/environment/stairs.gd" type="Script" index="0"></ext_resource>
-	<ext_resource path="res://assets/indigo-iso-tile-1.png" type="Texture" index="1"></ext_resource>
 	<ext_resource path="res://assets/fpo/stairway.png" type="Texture" index="2"></ext_resource>
+	<ext_resource path="res://active-partials/environment/stairs.gd" type="Script" index="0"></ext_resource>
+	<ext_resource path="res://assets/tiles/floors/cyan--72x36-L.png" type="Texture" index="1"></ext_resource>
 	<resource type="CircleShape2D" path="local://65">
 		<real name="custom_solver_bias"> 0 </real>
 		<real name="radius"> 40 </real>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resource_file type="TileSet" subresource_count="9" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
-	<ext_resource path="res://assets/tiles/floors/grate--72x36.png" type="Texture" index="4"></ext_resource>
 	<ext_resource path="res://assets/tiles/floors/black--72x36.png" type="Texture" index="1"></ext_resource>
-	<ext_resource path="res://assets/tiles/floors/gray--72x36-L.png" type="Texture" index="5"></ext_resource>
 	<ext_resource path="res://assets/tiles/floors/white--72x36-L.png" type="Texture" index="2"></ext_resource>
-	<ext_resource path="res://assets/tiles/floors/cyan--72x36-L.png" type="Texture" index="0"></ext_resource>
 	<ext_resource path="res://assets/tiles/floors/red--72x36.png" type="Texture" index="3"></ext_resource>
+	<ext_resource path="res://assets/tiles/floors/grate--72x36.png" type="Texture" index="4"></ext_resource>
+	<ext_resource path="res://assets/tiles/floors/gray--72x36-L.png" type="Texture" index="5"></ext_resource>
+	<ext_resource path="res://assets/tiles/floors/cyan--72x36-L.png" type="Texture" index="0"></ext_resource>
 	<resource type="NavigationPolygon" path="local://1">
 		<vector2_array name="vertices" len="4"> 			0, -19, 36, -1, 0, 17, -36, -1 </vector2_array>
 		<array name="polygons" len="1" shared="false">
@@ -95,8 +95,9 @@
 		<resource name="7/material"></resource>		<rect2 name="7/region"> 0, 0, 0, 0 </rect2>
 		<vector2 name="7/occluder_offset"> 36, 18 </vector2>
 		<resource name="7/occluder"></resource>		<vector2 name="7/navigation_offset"> 36, 18 </vector2>
-		<resource name="7/navigation"></resource>		<vector2 name="7/shape_offset"> 0, 0 </vector2>
-		<array name="7/shapes" len="0" shared="false">
+		<resource name="7/navigation"></resource>		<vector2 name="7/shape_offset"> 36, 18 </vector2>
+		<array name="7/shapes" len="1" shared="false">
+			<resource  resource_type="Shape2D" path="local://7">  </resource>
 		</array>
 
 	</main_resource>
