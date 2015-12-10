@@ -141,7 +141,60 @@ func get_direction_from_angle(angle):
 	elif(angle >= (PI / 4) and angle < ((3 * PI) / 4)):
 		return "S"
 	return "W"
-	
+
+
+
+# yet another compass-direction function
+func parse_direction(pos1, pos2):
+	var xy = floor(rad2deg(pos1.angle_to_point(pos2)))
+	if(xy == 63 ):
+		# 63 = NW
+		return "NW"
+	elif( xy == 0 ):
+		# 0 = N
+		return "N"
+	elif( xy == -63):
+		# -63 = NE
+		return "NE"
+	elif( xy == -90 ):
+		# -90 = E
+		return "E"
+	elif( xy == -116 ):
+		# -116 = SE
+		return "SE"
+	elif( xy == 116 ):
+		# 116 = SW
+		return "SW"
+	elif( xy == 90 ):
+		return "W"
+	else:
+		return "*"
+		
+# the same, but for ranges, not just exact angles
+func parse_loose_direction(pos1, pos2):
+	var xy = floor(rad2deg( pos1.angle_to_point(pos2)))
+	if( xy > -13 and xy < 13):
+		return "N"
+	elif( xy > 13 and xy < 76):
+		return "NW"
+	elif( xy > 76 and xy < 103 ):
+		return "W"
+	elif( xy > 103 and xy < 156 ):
+		return "SW"
+	elif( xy > 156 and xy < 180 ):
+		return "S"
+	elif( xy > -180 and xy < -156 ):
+		return "S"
+	elif( xy > -156 and xy < -103 ):
+		return "SE"
+	elif( xy > -103 and xy < -76 ):
+		return "E"
+	elif( xy > -76 and xy < -13 ):
+		return "NE"
+	else:
+		return "*"
+
+
 
 # fn() - simple string transformer
 # builds a path/filename string from arbitrary text

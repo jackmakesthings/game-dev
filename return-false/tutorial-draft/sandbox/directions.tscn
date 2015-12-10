@@ -1,29 +1,29 @@
 [gd_scene load_steps=8 format=1]
 
-[ext_resource path="res://assets/tiles/tilesets/iso-floors-walkable.xml" type="TileSet" id=1]
 [ext_resource path="res://assets/tiles/floors/green-border--72x36.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/tilesets/iso-floors-walkable.xml" type="TileSet" id=1]
 [ext_resource path="res://assets/ui/Iso_Dark/pngs/textedit-completion.png" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/droid-mono-13.fnt" type="Font" id=3]
 
-[sub_resource type="GDScript" id=66]
+[sub_resource type="GDScript" id=1]
 
 script/source = "extends \"res://active-partials/environment/walkable-area.gd\""
 
-[sub_resource type="Theme" id=68]
+[sub_resource type="Theme" id=2]
 
 default_font = ExtResource( 3 )
 
-[sub_resource type="GDScript" id=67]
+[sub_resource type="GDScript" id=3]
 
-script/source = "extends Control\n\nvar A\nvar B\nvar is_moving\n\nvar angle_to_b\nvar aa2b_string = \"A.angle_to(B): \"\n\nvar angle_to_point_b\nvar aa2pb_string = \"A.angle_to_point(B): \"\n\nvar deg_to_b\nvar d2b_string = \"\"\n\nvar deg_to_point_b\nvar d2pb_string = \"\"\n\nvar minus\nvar minus_string = \"B - A: \"\n\nvar minus_n\nvar minusn_string = \"- normalized:  \"\n\n###\n\nvar A_pos\nvar B_pos\n\nvar nav\nvar tiles\n\nvar w2m_A\nvar w2m_B\n\nvar w2m_A_label\nvar w2m_B_label\n\nvar A_y\nvar A_x\n\nfunc _ready():\n\tA = get_node(\"../A\")\n\tB = get_node(\"../B\")\n\t\n\tangle_to_b = get_node(\"VBoxContainer/a_angleto_b\")\n\tangle_to_point_b = get_node(\"VBoxContainer/a_angletopoint_b\")\n\tdeg_to_b = get_node(\"VBoxContainer/deg_to_b\")\n\tdeg_to_point_b = get_node(\"VBoxContainer/deg_topoint_b\")\n\tminus = get_node(\"VBoxContainer/minus\")\n\tminus_n = get_node(\"VBoxContainer/minus_norm\")\n\t\n\tw2m_A_label = get_node(\"VBoxContainer/w2m_a\")\n\tw2m_B_label = get_node(\"VBoxContainer/w2m_b\")\n\t\n\tA_pos = get_node(\"VBoxContainer/a_pos\")\n\tB_pos = get_node(\"VBoxContainer/b_pos\")\n\t\n\tnav = get_tree().get_root().find_node(\"nav\")\n\ttiles = get_tree().get_root().get_node(\"Node/env/nav/floor\")\n\t\n\tA_x = A.get_pos().x\n\tA_y = A.get_pos().y\n\t\n\tA_pos.set_text(\"A: \" + str(A.get_pos()) )\n\tB_pos.set_text(\"B: \" + str(B.get_pos()) )\n\t\n\tw2m_A_label.set_text(\"A (tile): \" + str(w2m_A) )\n\t\n\t\n\tis_moving = true\n\tset_as_toplevel(true)\n\n\nfunc _draw():\n\tdraw_circle(A.get_pos(), 100.0, Color(\"#11efefef\"))\n\t#draw_circle(A.get_pos(), 99.0, Color(\"#ffffff\"))\n\tdraw_line(Vector2(0,A_y), Vector2(get_window().get_size().x,A_y), Color(\"#ffaa00\"), 1.0)\n\tdraw_line(Vector2(A_x, 0), Vector2(A_x, get_window().get_size().y), Color(\"#ffaa00\"), 1.0)\n\tdraw_line(A.get_pos(), B.get_pos(), Color(\"#00ccdd\"), 5.0)\n\t\n\tif( abs( floor(90 - rad2deg( A.get_pos().angle_to_point(B.get_pos()) ))) == 26 ):\n\t\t draw_line(A.get_pos(), B.get_pos(), Color(\"#ffcc11\"), 5.0)\n\t\n\tif( abs( floor(180 - rad2deg( A.get_pos().angle_to_point(B.get_pos()) ))) == 26 ):\n\t\tdraw_line(A.get_pos(), B.get_pos(), Color(\"#ffcc11\"), 5.0)\n\t\n\tif( abs( floor(90 + rad2deg( A.get_pos().angle_to_point(B.get_pos()) ))) == 26 ):\n\t\tdraw_line(A.get_pos(), B.get_pos(), Color(\"#ffcc11\"), 5.0)\n\t\n\tif( abs( floor(rad2deg( A.get_pos().angle_to_point(B.get_pos()) ))) == 26 ):\n\t\tdraw_line(A.get_pos(), B.get_pos(), Color(\"#ffcc11\"), 5.0)\n\t\n\nfunc _input_event(ev):\n\tif( ev.type == InputEvent.MOUSE_MOTION ):\n\t\tif( is_moving ):\n\t\t\tB.set_pos(ev.pos)\n\t\t\tupdate_labels(ev.pos)\n\t\t\tupdate_tiles(ev.pos)\n\t\t\tupdate()\n\t\n\telif( ev.type == InputEvent.MOUSE_BUTTON and ev.is_pressed() and ! ev.is_echo() ):\n\t\tis_moving = not(is_moving)\n\t\t\n\n\nfunc update_labels(pos):\n\t\n\tB_pos.set_text(\"B: \" + str(B.get_pos()) )\n\t\n\tangle_to_b.set_text(aa2b_string + str(A.get_pos().angle_to(B.get_pos())) + \" rad\")\n\tangle_to_point_b.set_text(aa2pb_string + str(A.get_pos().angle_to_point(B.get_pos())) + \" rad\")\n\tdeg_to_b.set_text(d2b_string + str( rad2deg(A.get_pos().angle_to(B.get_pos()) ) ) + \" deg\")\n\tdeg_to_point_b.set_text(d2pb_string + str( rad2deg(A.get_pos().angle_to_point(B.get_pos()) ) ) + \" deg\")\n\tminus.set_text(minus_string + str( B.get_pos() - A.get_pos() ))\n\tminus_n.set_text(minusn_string + str( (B.get_pos() - A.get_pos()).normalized() ))\n\n\nfunc update_tiles(pos):\n\tw2m_A = tiles.world_to_map(A.get_pos())\n\tw2m_B = tiles.world_to_map(B.get_pos())\n\t\n\ttiles.clear()\n\t\n\ttiles.set_cell(w2m_A.x, w2m_A.y, 3)\n\ttiles.set_cell(w2m_B.x, w2m_B.y, 3)\n\t\n\tw2m_B_label.set_text(\"B (tile): \" + str(w2m_B) )\n\t\n"
+script/source = "extends Control\n\nvar A\nvar B\nvar is_moving\n\nvar angle_to_b\nvar aa2b_string = \"A.angle_to(B): \"\n\nvar angle_to_point_b\nvar aa2pb_string = \"A.angle_to_point(B): \"\n\nvar deg_to_b\nvar d2b_string = \"\"\n\nvar deg_to_point_b\nvar d2pb_string = \"\"\n\nvar minus\nvar minus_string = \"B - A: \"\n\nvar minus_n\nvar minusn_string = \"- normalized:  \"\n\n###\n\nvar A_pos\nvar B_pos\n\nvar nav\nvar tiles\n\nvar w2m_A\nvar w2m_B\n\nvar w2m_A_label\nvar w2m_B_label\nvar w2m_delta_label\n\nvar direction_label\n\nvar A_y\nvar A_x\n\nfunc _ready():\n\tA = get_node(\"../A\")\n\tB = get_node(\"../B\")\n\t\n\tangle_to_b = get_node(\"VBoxContainer/a_angleto_b\")\n\tangle_to_point_b = get_node(\"VBoxContainer/a_angletopoint_b\")\n\tdeg_to_b = get_node(\"VBoxContainer/deg_to_b\")\n\tdeg_to_point_b = get_node(\"VBoxContainer/deg_topoint_b\")\n\tminus = get_node(\"VBoxContainer/minus\")\n\tminus_n = get_node(\"VBoxContainer/minus_norm\")\n\t\n\tw2m_A_label = get_node(\"VBoxContainer/w2m_a\")\n\tw2m_B_label = get_node(\"VBoxContainer/w2m_b\")\n\tw2m_delta_label = get_node(\"VBoxContainer/w2m_delta\")\n\t\n\tA_pos = get_node(\"VBoxContainer/a_pos\")\n\tB_pos = get_node(\"VBoxContainer/b_pos\")\n\t\n\tnav = get_tree().get_root().find_node(\"nav\")\n\ttiles = get_tree().get_root().get_node(\"Node/env/nav/floor\")\n\t\n\tA_x = A.get_pos().x\n\tA_y = A.get_pos().y\n\t\n\tA_pos.set_text(\"A: \" + str(A.get_pos()) )\n\tB_pos.set_text(\"B: \" + str(B.get_pos()) )\n\t\n\tw2m_A_label.set_text(\"A (tile): \" + str(w2m_A) )\n\t\n\tdirection_label = get_node(\"VBoxContainer/direction\")\n\t\n\tis_moving = true\n\tset_as_toplevel(true)\n\n\nfunc _draw():\n\tdraw_circle(A.get_pos(), 100.0, Color(\"#11efefef\"))\n\t#draw_circle(A.get_pos(), 99.0, Color(\"#ffffff\"))\n\tdraw_line(Vector2(0,A_y), Vector2(get_window().get_size().x,A_y), Color(\"#ffaa00\"), 1.0)\n\tdraw_line(Vector2(A_x, 0), Vector2(A_x, get_window().get_size().y), Color(\"#ffaa00\"), 1.0)\n\tdraw_line(A.get_pos(), B.get_pos(), Color(\"#00ccdd\"), 5.0)\n\t\n\tif( abs( floor(90 - rad2deg( A.get_pos().angle_to_point(B.get_pos()) ))) == 26 ):\n\t\t draw_line(A.get_pos(), B.get_pos(), Color(\"#ffcc11\"), 5.0)\n\t\n\tif( abs( floor(180 - rad2deg( A.get_pos().angle_to_point(B.get_pos()) ))) == 26 ):\n\t\tdraw_line(A.get_pos(), B.get_pos(), Color(\"#ffcc11\"), 5.0)\n\t\n\tif( abs( floor(90 + rad2deg( A.get_pos().angle_to_point(B.get_pos()) ))) == 26 ):\n\t\tdraw_line(A.get_pos(), B.get_pos(), Color(\"#ffcc11\"), 5.0)\n\t\n\tif( abs( floor(rad2deg( A.get_pos().angle_to_point(B.get_pos()) ))) == 26 ):\n\t\tdraw_line(A.get_pos(), B.get_pos(), Color(\"#ffcc11\"), 5.0)\n\t\n\nfunc _input_event(ev):\n\tif( ev.type == InputEvent.MOUSE_MOTION ):\n\t\tif( is_moving ):\n\t\t\tB.set_pos(ev.pos)\n\t\t\tupdate_labels(ev.pos)\n\t\t\tupdate_tiles(ev.pos)\n\t\t\tparse_direction(ev.pos)\n\t\t\tupdate()\n\t\n\telif( ev.type == InputEvent.MOUSE_BUTTON and ev.is_pressed() and ! ev.is_echo() ):\n\t\tis_moving = not(is_moving)\n\t\t\n\n\nfunc update_labels(pos):\n\t\n\tB_pos.set_text(\"B: \" + str(B.get_pos()) )\n\t\n\tangle_to_b.set_text(aa2b_string + str(A.get_pos().angle_to(B.get_pos())) + \" rad\")\n\tangle_to_point_b.set_text(aa2pb_string + str(A.get_pos().angle_to_point(B.get_pos())) + \" rad\")\n\tdeg_to_b.set_text(d2b_string + str( rad2deg(A.get_pos().angle_to(B.get_pos()) ) ) + \" deg\")\n\tdeg_to_point_b.set_text(d2pb_string + str( rad2deg(A.get_pos().angle_to_point(B.get_pos()) ) ) + \" deg\")\n\tminus.set_text(minus_string + str( B.get_pos() - A.get_pos() ))\n\tminus_n.set_text(minusn_string + str( (B.get_pos() - A.get_pos()).normalized() ))\n\n\tdirection_label.set_text(parse_loose_direction(B.get_pos()))\n\n\nfunc update_tiles(pos):\n\tw2m_A = tiles.world_to_map(A.get_pos())\n\tw2m_B = tiles.world_to_map(B.get_pos())\n\t\n\ttiles.clear()\n\t\n\ttiles.set_cell(w2m_A.x, w2m_A.y, 3)\n\ttiles.set_cell(w2m_B.x, w2m_B.y, 3)\n\t\n\t\n\tw2m_A_label.set_text(\"A (tile): \" + str(w2m_A) )\n\tw2m_B_label.set_text(\"B (tile): \" + str(w2m_B) )\n\tw2m_delta_label.set_text(\"^: ( \" + str(w2m_B.x - w2m_A.x) + \", \" + str(w2m_B.y - w2m_A.y) + \")\")\n\t\n\nfunc parse_direction(pos):\n\tvar xy = floor(rad2deg(A.get_pos().angle_to_point(pos)))\n\t\n\tif(xy == 63 ):\n\t\t# 63 = NW\n\t\treturn \"NW\"\n\t\t\n\telif( xy == 0 ):\n\t\t# 0 = N\n\t\treturn \"N\"\n\t\t\n\telif( xy == -63):\n\t\t# -63 = NE\n\t\treturn \"NE\"\n\t\t\n\telif( xy == -90 ):\n\t\t# -90 = E\n\t\treturn \"E\"\n\t\n\telif( xy == -116 ):\n\t\t# -116 = SE\n\t\treturn \"SE\"\n\t\t\n\telif( xy == 116 ):\n\t\t# 116 = SW\n\t\treturn \"SW\"\n\t\n\telif( xy == 90 ):\n\t\treturn \"W\"\n\t\n\telse:\n\t\treturn \"*\"\n\t\t\nfunc parse_loose_direction(pos):\n\tvar xy = floor(rad2deg( A.get_pos().angle_to_point(pos)))\n\tif( xy > -13 and xy < 13):\n\t\treturn \"N\"\n\telif( xy > 13 and xy < 76):\n\t\treturn \"NW\"\n\telif( xy > 76 and xy < 103 ):\n\t\treturn \"W\"\n\telif( xy > 103 and xy < 156 ):\n\t\treturn \"SW\"\n\telif( xy > 156 and xy < 180 ):\n\t\treturn \"S\"\n\telif( xy > -180 and xy < -156 ):\n\t\treturn \"S\"\n\telif( xy > -156 and xy < -103 ):\n\t\treturn \"SE\"\n\telif( xy > -103 and xy < -76 ):\n\t\treturn \"E\"\n\telif( xy > -76 and xy < -13 ):\n\t\treturn \"NE\"\n\telse:\n\t\treturn \"*\""
 
 [node name="Node" type="Node"]
 
-__meta__ = { "__editor_plugin_screen__":"Script", "__editor_plugin_states__":{ "2D":{ "ofs":Vector2( 167.486, 2.042 ), "snap_grid":true, "snap_offset":Vector2( 0, 0 ), "snap_pixel":false, "snap_relative":false, "snap_rotation":true, "snap_rotation_offset":0, "snap_rotation_step":0.523599, "snap_show_grid":false, "snap_step":Vector2( 9, 9 ), "zoom":0.999996 }, "3D":{ "ambient_light_color":Color( 0.15, 0.15, 0.15, 1 ), "default_light":true, "default_srgb":false, "deflight_rot_x":0.942478, "deflight_rot_y":0.628319, "fov":45, "show_grid":true, "show_origin":true, "viewport_mode":1, "viewports":[ { "distance":4, "listener":true, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 } ], "zfar":500, "znear":0.1 }, "Anim":{ "visible":false } }, "__editor_run_settings__":{ "custom_args":"-l $scene", "run_mode":0 } }
+__meta__ = { "__editor_plugin_screen__":"Script", "__editor_plugin_states__":{ "2D":{ "ofs":Vector2( -291.768, -64.1754 ), "snap_grid":true, "snap_offset":Vector2( 0, 0 ), "snap_pixel":false, "snap_relative":false, "snap_rotation":true, "snap_rotation_offset":0, "snap_rotation_step":0.523599, "snap_show_grid":false, "snap_step":Vector2( 9, 9 ), "zoom":0.487673 }, "3D":{ "ambient_light_color":Color( 0.15, 0.15, 0.15, 1 ), "default_light":true, "default_srgb":false, "deflight_rot_x":0.942478, "deflight_rot_y":0.628319, "fov":45, "show_grid":true, "show_origin":true, "viewport_mode":1, "viewports":[ { "distance":4, "listener":true, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 } ], "zfar":500, "znear":0.1 }, "Anim":{ "visible":false } }, "__editor_run_settings__":{ "custom_args":"-l $scene", "run_mode":0 } }
 
 [node name="env" type="Node2D" parent="."]
 
-script/script = SubResource( 66 )
+script/script = SubResource( 1 )
 __meta__ = { "__editor_plugin_screen__":"2D", "__editor_plugin_states__":{ "2D":{ "ofs":Vector2( -901.928, -209.558 ), "snap_grid":false, "snap_offset":Vector2( 0, 0 ), "snap_pixel":false, "snap_relative":false, "snap_rotation":false, "snap_rotation_offset":0, "snap_rotation_step":0.261799, "snap_show_grid":false, "snap_step":Vector2( 10, 10 ), "zoom":0.358485 }, "3D":{ "ambient_light_color":Color( 0.15, 0.15, 0.15, 1 ), "default_light":true, "default_srgb":false, "deflight_rot_x":0.942478, "deflight_rot_y":0.628319, "fov":45, "show_grid":true, "show_origin":true, "viewport_mode":1, "viewports":[ { "distance":4, "listener":true, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 } ], "zfar":500, "znear":0.1 }, "Anim":{ "visible":false } }, "__editor_run_settings__":{ "custom_args":"-l $scene", "run_mode":0 } }
 
 [node name="nav" type="Navigation2D" parent="env"]
@@ -125,8 +125,8 @@ focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 3
 size_flags/vertical = 3
-theme/theme = SubResource( 68 )
-script/script = SubResource( 67 )
+theme/theme = SubResource( 2 )
+script/script = SubResource( 3 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="env/nav/floor/Control"]
 
@@ -149,7 +149,6 @@ focus/ignore_mouse = true
 focus/stop_mouse = false
 size_flags/horizontal = 3
 size_flags/vertical = 2
-custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "(B - A).normalized(): "
 align = 2
 valign = 1
@@ -166,7 +165,6 @@ focus/ignore_mouse = true
 focus/stop_mouse = false
 size_flags/horizontal = 3
 size_flags/vertical = 2
-custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "(B - A).normalized(): "
 align = 2
 valign = 1
@@ -193,7 +191,6 @@ focus/ignore_mouse = true
 focus/stop_mouse = false
 size_flags/horizontal = 3
 size_flags/vertical = 2
-custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "A.angle_to(B):"
 align = 2
 valign = 1
@@ -210,7 +207,6 @@ focus/ignore_mouse = true
 focus/stop_mouse = false
 size_flags/horizontal = 3
 size_flags/vertical = 2
-custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "A.angle_to(B) (deg):"
 align = 2
 valign = 1
@@ -237,7 +233,6 @@ focus/ignore_mouse = true
 focus/stop_mouse = false
 size_flags/horizontal = 3
 size_flags/vertical = 2
-custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "A.angle_to_point(B):"
 align = 2
 valign = 1
@@ -254,7 +249,6 @@ focus/ignore_mouse = true
 focus/stop_mouse = false
 size_flags/horizontal = 3
 size_flags/vertical = 2
-custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "A.angle_to_point(B) (deg):"
 align = 2
 valign = 1
@@ -281,7 +275,6 @@ focus/ignore_mouse = true
 focus/stop_mouse = false
 size_flags/horizontal = 3
 size_flags/vertical = 2
-custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "B - A: "
 align = 2
 valign = 1
@@ -298,7 +291,6 @@ focus/ignore_mouse = true
 focus/stop_mouse = false
 size_flags/horizontal = 3
 size_flags/vertical = 2
-custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "(B - A).normalized(): "
 align = 2
 valign = 1
@@ -326,7 +318,6 @@ focus/ignore_mouse = true
 focus/stop_mouse = false
 size_flags/horizontal = 3
 size_flags/vertical = 2
-custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "(B - A).normalized(): "
 align = 2
 valign = 1
@@ -343,7 +334,49 @@ focus/ignore_mouse = true
 focus/stop_mouse = false
 size_flags/horizontal = 3
 size_flags/vertical = 2
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "(B - A).normalized(): "
+align = 2
+valign = 1
+percent_visible = 1
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="w2m_delta" type="Label" parent="env/nav/floor/Control/VBoxContainer"]
+
+margin/top = 238
+margin/right = 280
+margin/bottom = 255
+focus/ignore_mouse = true
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 2
+text = "(B - A).normalized(): "
+align = 2
+valign = 1
+percent_visible = 1
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="HSeparator4" type="HSeparator" parent="env/nav/floor/Control/VBoxContainer"]
+
+margin/top = 259
+margin/right = 280
+margin/bottom = 262
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+custom_constants/separation = 30
+
+[node name="direction" type="Label" parent="env/nav/floor/Control/VBoxContainer"]
+
+margin/top = 266
+margin/right = 280
+margin/bottom = 283
+focus/ignore_mouse = true
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 2
 text = "(B - A).normalized(): "
 align = 2
 valign = 1
