@@ -1,0 +1,196 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://assets/ui/Iso_Dark/iso_dark.xthm" type="Theme" id=1]
+[ext_resource path="res://active-partials/interface/entry_container.gd" type="Script" id=2]
+[ext_resource path="res://assets/ui/Iso_Dark/pngs/tabcontainer-decrement-hilite.png" type="Texture" id=3]
+[ext_resource path="res://assets/ui/Iso_Dark/pngs/tabcontainer-increment-hilite.png" type="Texture" id=4]
+
+[node name="Control" type="Control"]
+
+anchor/left = 3
+anchor/top = 3
+anchor/right = 3
+anchor/bottom = 3
+margin/left = 400
+margin/top = 300
+margin/right = -400
+margin/bottom = -300
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+theme/theme = ExtResource( 1 )
+script/script = ExtResource( 2 )
+__meta__ = { "__editor_plugin_screen__":"Script", "__editor_plugin_states__":{ "2D":{ "ofs":Vector2( -118.466, -142.178 ), "snap_grid":false, "snap_offset":Vector2( 0, 0 ), "snap_pixel":false, "snap_relative":false, "snap_rotation":false, "snap_rotation_offset":0, "snap_rotation_step":0.261799, "snap_show_grid":false, "snap_step":Vector2( 10, 10 ), "zoom":0.598737 }, "3D":{ "ambient_light_color":Color( 0.15, 0.15, 0.15, 1 ), "default_light":true, "default_srgb":false, "deflight_rot_x":0.942478, "deflight_rot_y":0.628319, "fov":45, "show_grid":true, "show_origin":true, "viewport_mode":1, "viewports":[ { "distance":4, "listener":true, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 } ], "zfar":500, "znear":0.1 }, "Anim":{ "visible":false } }, "__editor_run_settings__":{ "custom_args":"-l $scene", "run_mode":0 } }
+entry_data = null
+
+[node name="dialog" type="WindowDialog" parent="."]
+
+anchor/left = 3
+anchor/top = 3
+anchor/right = 3
+anchor/bottom = 3
+margin/left = 400
+margin/top = 300
+margin/right = -395
+margin/bottom = -292
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+popup/exclusive = false
+window/title = ""
+
+[node name="ui" type="VBoxContainer" parent="dialog"]
+
+margin/left = 15
+margin/top = 15
+margin/right = 796
+margin/bottom = 591
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+alignment = 0
+
+[node name="contents" type="HBoxContainer" parent="dialog/ui"]
+
+margin/right = 781
+margin/bottom = 544
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+custom_constants/separation = 70
+alignment = 0
+
+[node name="entry_list" type="ButtonGroup" parent="dialog/ui/contents"]
+
+margin/right = 203
+margin/bottom = 544
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+size_flags/stretch_ratio = 2
+alignment = 0
+
+[node name="entries" type="VBoxContainer" parent="dialog/ui/contents/entry_list"]
+
+margin/right = 203
+margin/bottom = 544
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+custom_constants/separation = 10
+alignment = 0
+
+[node name="entries_home" type="Button" parent="dialog/ui/contents/entry_list/entries"]
+
+margin/right = 203
+margin/bottom = 27
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = true
+click_on_press = true
+text = "FILES"
+flat = true
+align = 0
+
+[node name="HSeparator" type="HSeparator" parent="dialog/ui/contents/entry_list/entries"]
+
+margin/top = 37
+margin/right = 203
+margin/bottom = 40
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+
+[node name="entry_text" type="RichTextLabel" parent="dialog/ui/contents"]
+
+margin/left = 273
+margin/right = 781
+margin/bottom = 544
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 2
+size_flags/stretch_ratio = 5
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+custom_colors/selection_color = Color( 0.167513, 0.162437, 0.16206, 1 )
+custom_colors/font_color_selected = Color( 0.93028, 0.944162, 0.944444, 1 )
+custom_constants/line_separation = 10
+bbcode/enabled = true
+bbcode/bbcode = ""
+visible_characters = -1
+
+[node name="actions" type="HBoxContainer" parent="dialog/ui"]
+
+margin/top = 548
+margin/right = 781
+margin/bottom = 576
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+alignment = 2
+
+[node name="prev" type="Button" parent="dialog/ui/actions"]
+
+margin/left = 617
+margin/right = 645
+margin/bottom = 28
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+icon = ExtResource( 3 )
+flat = false
+
+[node name="next" type="Button" parent="dialog/ui/actions"]
+
+margin/left = 649
+margin/right = 677
+margin/bottom = 28
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+icon = ExtResource( 4 )
+flat = false
+
+[node name="save" type="Button" parent="dialog/ui/actions"]
+
+margin/left = 681
+margin/right = 725
+margin/bottom = 28
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+text = "Save"
+flat = false
+
+[node name="close" type="Button" parent="dialog/ui/actions"]
+
+margin/left = 729
+margin/right = 781
+margin/bottom = 28
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+text = "Close"
+flat = false
+
+[connection signal="pressed" from="dialog/ui/actions/close" to="." method="close"]
+
+
