@@ -394,3 +394,4 @@ func _enter_tree():
 	set_paths()
 	player = get_node("/root/_").get("player")
 	check_branches()
+	set_attractors()
