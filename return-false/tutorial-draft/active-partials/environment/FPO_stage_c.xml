@@ -1,58 +1,52 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="22" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
-	<ext_resource path="res://assets/tiles/tilesets/iso-floors-walkable.xml" type="TileSet" index="0"></ext_resource>
-	<ext_resource path="res://assets/fpo/tall-white-block-hover.png" type="Texture" index="4"></ext_resource>
-	<ext_resource path="res://assets/fpo/stairway.png" type="Texture" index="9"></ext_resource>
-	<ext_resource path="res://active-partials/environment/stairs.gd" type="Script" index="7"></ext_resource>
+<resource_file type="PackedScene" subresource_count="20" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
+	<ext_resource path="res://assets/fpo/temp-trace-back.png" type="Texture" index="4"></ext_resource>
+	<ext_resource path="res://assets/tiles/floors/cyan--72x36-L.png" type="Texture" index="7"></ext_resource>
+	<ext_resource path="res://assets/fpo/stairway.png" type="Texture" index="8"></ext_resource>
+	<ext_resource path="res://active-partials/environment/stairs.gd" type="Script" index="6"></ext_resource>
 	<ext_resource path="res://scripts/click-masker.gd" type="Script" index="2"></ext_resource>
-	<ext_resource path="res://assets/fpo/tall-white-block.png" type="Texture" index="3"></ext_resource>
-	<ext_resource path="res://assets/tiles/floors/green-border--72x36.png" type="Texture" index="6"></ext_resource>
-	<ext_resource path="res://assets/fpo/temp-trace-back.png" type="Texture" index="5"></ext_resource>
-	<ext_resource path="res://assets/fpo/computer_by_hydroksyde-smaller.png" type="Texture" index="1"></ext_resource>
-	<ext_resource path="res://assets/tiles/floors/cyan--72x36-L.png" type="Texture" index="8"></ext_resource>
+	<ext_resource path="res://assets/tiles/floors/green-border--72x36.png" type="Texture" index="5"></ext_resource>
+	<ext_resource path="res://assets/tiles/tilesets/iso-floors-walkable.xml" type="TileSet" index="0"></ext_resource>
+	<ext_resource path="res://assets/desk-with-computer.png" type="Texture" index="1"></ext_resource>
+	<ext_resource path="res://assets/fpo/tall-white-cabinet.png" type="Texture" index="3"></ext_resource>
 	<resource type="GDScript" path="local://63">
 		<string name="script/source"> "extends &quot;res://active-partials/environment/walkable-area.gd&quot;" </string>
+
+	</resource>
+	<resource type="GDScript" path="local://66">
+		<string name="script/source"> "# pc terminal&#000a;extends &quot;res://active-partials/npcs/npc.gd&quot;&#000a;&#000a;func _on_click():&#000a;&#0009;print(&quot;clicked pc&quot;)&#000a;&#0009;player = get_node(&quot;/root/scene&quot;).get(&quot;player&quot;)&#000a;&#0009;player.set(&quot;path&quot;, Array())&#000a;&#0009;check_for_player()&#000a;&#0009;if( player_nearby ):&#000a;&#0009;&#0009;get_tree().set_input_as_handled()&#000a;&#0009;&#0009;start_interaction()&#000a;&#0009;else:&#000a;&#0009;&#0009;redirect_player(player, x)&#000a;&#000a;func start_interaction():&#000a;&#0009;_.get(&quot;MUI&quot;).flash_popup(&quot;Hey kid I&apos;m a computer&quot;)&#000a;" </string>
+
+	</resource>
+	<resource type="ConvexPolygonShape2D" path="local://70">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2_array name="points" len="6"> 			83.6604, 75.9949, 24.729, 82.1336, 7.5407, 79.6781, 44.3728, 57.5789, 95.9379, 30.5686, 94.7101, 42.846 </vector2_array>
 
 	</resource>
 	<resource type="GDScript" path="local://29">
 		<string name="script/source"> "# terminal npc&#000a;extends &quot;res://active-partials/npcs/npc.gd&quot;" </string>
 
 	</resource>
-	<resource type="ConvexPolygonShape2D" path="local://47">
+	<resource type="ConvexPolygonShape2D" path="local://71">
 		<real name="custom_solver_bias"> 0 </real>
-		<vector2_array name="points" len="4"> 			54.5391, 68.1499, -53.4609, 113.15, -80.4609, 86.1499, 0.539093, 50.1499 </vector2_array>
+		<vector2_array name="points" len="4"> 			12.4569, 49.3787, -52.6132, 83.7554, -99.2672, 72.7057, -9.64233, 23.5962 </vector2_array>
 
 	</resource>
 	<resource type="GDScript" path="local://19">
 		<string name="script/source"> "# cabinet npc&#000a;extends &quot;res://active-partials/npcs/npc.gd&quot;" </string>
 
 	</resource>
-	<resource type="ConvexPolygonShape2D" path="local://46">
+	<resource type="ConvexPolygonShape2D" path="local://72">
 		<real name="custom_solver_bias"> 0 </real>
-		<vector2_array name="points" len="4"> 			-67, 22, 32, -41, 113, 31, 41, 67 </vector2_array>
+		<vector2_array name="points" len="4"> 			0.346222, 40.0609, 65.4163, 3.22881, 80.1492, 31.4668, 34.7229, 60.9325 </vector2_array>
 
 	</resource>
 	<resource type="GDScript" path="local://59">
 		<string name="script/source"> "# engineer npc&#000a;extends &quot;res://active-partials/npcs/npc.gd&quot;" </string>
 
 	</resource>
-	<resource type="ConvexPolygonShape2D" path="local://60">
+	<resource type="ConvexPolygonShape2D" path="local://69">
 		<real name="custom_solver_bias"> 0 </real>
 		<vector2_array name="points" len="5"> 			13, 67, 31, 40, 121, 76, 76, 103, 31, 94 </vector2_array>
-
-	</resource>
-	<resource type="GDScript" path="local://66">
-		<string name="script/source"> "# pc terminal&#000a;extends &quot;res://active-partials/npcs/npc.gd&quot;&#000a;&#000a;func _on_click():&#000a;&#0009;print(&quot;clicked pc&quot;)&#000a;&#0009;player = get_node(&quot;/root/scene&quot;).get(&quot;player&quot;)&#000a;&#0009;player.set(&quot;path&quot;, Array())&#000a;&#0009;check_for_player()&#000a;&#0009;if( player_nearby ):&#000a;&#0009;&#0009;get_tree().set_input_as_handled()&#000a;&#0009;&#0009;start_interaction()&#000a;&#0009;else:&#000a;&#0009;&#0009;redirect_player(player, x)&#000a;&#000a;#extends &quot;res://types/approachable.gd&quot;&#000a;#var dialog_branches = [{}]&#000a;&#000a;func start_interaction():&#000a;&#0009;get_node(&quot;/root/_&quot;).get(&quot;MUI&quot;).flash_popup(&quot;Hey kid I&apos;m a computer&quot;)&#000a;&#000a;#func _stopped_nearby(body):&#000a;#&#0009;get_node(&quot;/root/_&quot;).get(&quot;MUI&quot;).flash_popup(&quot;Hey kid I&apos;m a computer&quot;)" </string>
-
-	</resource>
-	<resource type="ConvexPolygonShape2D" path="local://67">
-		<real name="custom_solver_bias"> 0 </real>
-		<vector2_array name="points" len="5"> 			26.3088, 95.6859, 56.0287, 77.854, 79.2642, 67.0468, 169.801, 61.2351, 55.2432, 129.065 </vector2_array>
-
-	</resource>
-	<resource type="ConvexPolygonShape2D" path="local://68">
-		<real name="custom_solver_bias"> 0 </real>
-		<vector2_array name="points" len="4"> 			126.816, 43.8113, 169.801, 61.2351, 79.2642, 67.0468, 102.5, 49.7552 </vector2_array>
 
 	</resource>
 	<resource type="CircleShape2D" path="local://65">
@@ -65,12 +59,12 @@
 			<string> "conn_count" </string>
 			<int> 6 </int>
 			<string> "conns" </string>
-			<int_array  len="36"> 				6, 4, 102, 101, 2, 0, 12, 10, 102, 101, 2, 0, 18, 16, 102, 101, 2, 0, 24, 22, 102, 101, 2, 0, 29, 29, 104, 103, 2, 0, 29, 29, 106, 105, 2, 0 </int_array>
+			<int_array  len="36"> 				6, 4, 99, 98, 2, 0, 12, 10, 99, 98, 2, 0, 18, 16, 99, 98, 2, 0, 24, 22, 99, 98, 2, 0, 29, 29, 101, 100, 2, 0, 29, 29, 103, 102, 2, 0 </int_array>
 			<string> "editable_instances" </string>
 			<array  len="0" shared="false">
 			</array>
 			<string> "names" </string>
-			<string_array  len="107">
+			<string_array  len="104">
 				<string> "env" </string>
 				<string> "script/script" </string>
 				<string> "__meta__" </string>
@@ -98,7 +92,7 @@
 				<string> "z/z" </string>
 				<string> "sort/enabled" </string>
 				<string> "YSort" </string>
-				<string> "terminal" </string>
+				<string> "pc" </string>
 				<string> "trigger_node" </string>
 				<string> "id" </string>
 				<string> "label" </string>
@@ -106,7 +100,6 @@
 				<string> "npc_type" </string>
 				<string> "trigger_mode" </string>
 				<string> "show_fallback" </string>
-				<string> "npcs" </string>
 				<string> "body" </string>
 				<string> "input/pickable" </string>
 				<string> "shapes/0/shape" </string>
@@ -136,7 +129,6 @@
 				<string> "TextureButton" </string>
 				<string> "trigger" </string>
 				<string> "visibility/visible" </string>
-				<string> "z/relative" </string>
 				<string> "build_mode" </string>
 				<string> "polygon" </string>
 				<string> "shape_range" </string>
@@ -144,6 +136,10 @@
 				<string> "X" </string>
 				<string> "Position2D" </string>
 				<string> "footprint" </string>
+				<string> "visibility/behind_parent" </string>
+				<string> "terminal" </string>
+				<string> "npcs" </string>
+				<string> "z/relative" </string>
 				<string> "uv" </string>
 				<string> "color" </string>
 				<string> "offset" </string>
@@ -158,11 +154,6 @@
 				<string> "transform/scale" </string>
 				<string> "visibility/opacity" </string>
 				<string> "engineer" </string>
-				<string> "pc" </string>
-				<string> "shapes/1/shape" </string>
-				<string> "shapes/1/transform" </string>
-				<string> "shapes/1/trigger" </string>
-				<string> "visibility/behind_parent" </string>
 				<string> "destination_sprite" </string>
 				<string> "texture" </string>
 				<string> "stairs" </string>
@@ -185,9 +176,9 @@
 			<array  len="0" shared="false">
 			</array>
 			<string> "nodes" </string>
-			<int_array  len="744"> 				-1, -1, 3, 0, -1, 2, 1, 0, 2, 1, 0, 0, 0, 5, 4, -1, 0, 0, 1, 0, 22, 6, -1, 16, 7, 2, 8, 3, 9, 4, 10, 5, 11, 6, 12, 7, 13, 8, 14, 3, 15, 9, 16, 10, 17, 11, 18, 12, 19, 3, 20, 3, 21, 13, 2, 14, 0, 2, 0, 26, 23, -1, 2, 24, 3, 25, 9, 0, 3, 0, 3, 27, -1, 10, 7, 15, 1, 16, 2, 17, 28, 18, 29, 19, 30, 20, 31, 21, 32, 22, 33, 22, 34, 10, 1, 35, 4, 0, 45, 36, -1, 9, 24, 3, 37, 10, 38, 23, 39, 24, 40, 9, 41, 25, 42, 26, 43, 27, 44, 11, 0, 5, 0, 62, 46, -1, 16, 47, 28, 48, 29, 49, 30, 50, 31, 51, 10, 52, 10, 53, 8, 54, 8, 55, 10, 56, 9, 57, 32, 58, 32, 59, 32, 60, 32, 61, 32, 1, 33, 0, 5, 0, 69, 63, -1, 7, 64, 10, 7, 34, 65, 10, 66, 22, 67, 35, 68, 36, 63, 9, 0, 4, 0, 71, 70, -1, 2, 64, 10, 7, 37, 0, 4, 0, 82, 72, -1, 10, 67, 38, 73, 39, 74, 40, 75, 41, 76, 42, 77, 41, 78, 43, 79, 12, 80, 10, 81, 44, 0, 3, 0, 3, 83, -1, 12, 7, 45, 84, 46, 24, 3, 1, 47, 2, 48, 28, 18, 29, 49, 30, 50, 31, 21, 32, 22, 33, 22, 34, 10, 1, 35, 10, 0, 45, 36, -1, 8, 37, 10, 38, 51, 39, 52, 40, 9, 41, 25, 42, 26, 43, 27, 44, 11, 0, 11, 0, 62, 46, -1, 15, 47, 53, 48, 54, 49, 55, 50, 56, 51, 10, 52, 10, 53, 8, 54, 8, 55, 10, 57, 57, 58, 58, 59, 58, 60, 57, 61, 57, 1, 33, 0, 11, 0, 69, 63, -1, 7, 64, 10, 85, 59, 65, 10, 66, 22, 67, 60, 68, 36, 63, 9, 0, 10, 0, 71, 70, -1, 3, 64, 10, 7, 61, 84, 62, 0, 10, 0, 82, 72, -1, 10, 67, 63, 73, 39, 74, 64, 75, 41, 76, 42, 77, 41, 78, 43, 79, 12, 80, 10, 81, 44, 0, 3, 0, 3, 86, -1, 11, 7, 65, 24, 3, 1, 66, 2, 67, 28, 18, 29, 68, 30, 69, 31, 21, 32, 22, 33, 22, 34, 9, 1, 35, 16, 0, 45, 36, -1, 8, 37, 9, 38, 70, 39, 7, 40, 9, 41, 25, 42, 26, 43, 27, 44, 11, 0, 17, 0, 62, 46, -1, 13, 49, 71, 50, 72, 51, 10, 52, 9, 53, 8, 54, 8, 55, 10, 57, 73, 58, 73, 59, 73, 60, 73, 61, 73, 1, 33, 0, 17, 0, 69, 63, -1, 5, 64, 10, 66, 22, 67, 74, 68, 41, 63, 9, 0, 16, 0, 71, 70, -1, 1, 7, 75, 0, 16, 0, 82, 72, -1, 10, 67, 76, 73, 39, 74, 77, 75, 41, 76, 42, 77, 41, 78, 43, 79, 12, 80, 10, 81, 44, 0, 3, 0, 3, 87, -1, 9, 7, 78, 1, 79, 28, 18, 29, 80, 30, 81, 31, 21, 32, 22, 33, 22, 34, 10, 0, 22, 0, 45, 36, -1, 12, 24, 3, 37, 10, 38, 82, 39, 7, 40, 9, 88, 83, 89, 7, 90, 9, 41, 25, 42, 26, 43, 27, 44, 11, 0, 23, 0, 62, 46, -1, 16, 47, 84, 48, 85, 49, 86, 50, 87, 51, 10, 52, 9, 53, 8, 54, 8, 55, 10, 56, 9, 57, 32, 58, 32, 59, 32, 60, 32, 61, 32, 1, 33, 0, 23, 0, 69, 63, -1, 5, 64, 10, 66, 22, 67, 88, 68, 25, 63, 9, 0, 22, 0, 71, 70, -1, 1, 7, 89, 0, 22, 0, 82, 72, -1, 11, 91, 9, 67, 90, 73, 39, 74, 91, 75, 41, 76, 42, 77, 41, 78, 43, 79, 12, 80, 10, 81, 44, 0, 0, 0, 46, 92, -1, 2, 64, 10, 93, 92, 0, 0, 0, 45, 94, -1, 14, 7, 93, 37, 9, 38, 94, 39, 52, 40, 9, 41, 25, 42, 26, 43, 27, 44, 11, 1, 95, 2, 96, 28, 97, 95, 98, 96, 8, 0, 29, 0, 97, 97, -1, 3, 98, 94, 63, 9, 99, 22, 0, 30, 0, 46, 46, -1, 1, 93, 99, 0, 30, 0, 46, 100, -1, 4, 64, 10, 7, 100, 84, 101, 93, 102, 0 </int_array>
+			<int_array  len="732"> 				-1, -1, 3, 0, -1, 2, 1, 0, 2, 1, 0, 0, 0, 5, 4, -1, 0, 0, 1, 0, 22, 6, -1, 16, 7, 2, 8, 3, 9, 4, 10, 5, 11, 6, 12, 7, 13, 8, 14, 3, 15, 9, 16, 10, 17, 11, 18, 12, 19, 3, 20, 3, 21, 13, 2, 14, 0, 2, 0, 26, 23, -1, 2, 24, 3, 25, 9, 0, 3, 0, 3, 27, -1, 9, 7, 15, 1, 16, 28, 17, 29, 18, 30, 19, 31, 20, 32, 21, 33, 21, 34, 10, 0, 4, 0, 44, 35, -1, 9, 24, 3, 36, 10, 37, 22, 38, 7, 39, 9, 40, 23, 41, 24, 42, 25, 43, 11, 0, 5, 0, 61, 45, -1, 16, 46, 26, 47, 27, 48, 28, 49, 29, 50, 10, 51, 9, 52, 8, 53, 8, 54, 10, 55, 9, 56, 30, 57, 30, 58, 30, 59, 30, 60, 30, 1, 31, 0, 5, 0, 67, 62, -1, 5, 63, 10, 64, 21, 65, 32, 66, 33, 62, 9, 0, 4, 0, 69, 68, -1, 2, 63, 10, 7, 34, 0, 4, 0, 67, 70, -1, 6, 63, 10, 71, 9, 64, 21, 65, 35, 66, 36, 62, 10, 0, 3, 0, 3, 72, -1, 10, 7, 37, 1, 38, 2, 39, 28, 40, 29, 41, 30, 42, 31, 20, 32, 21, 33, 21, 34, 10, 1, 73, 10, 0, 44, 35, -1, 9, 24, 3, 36, 10, 37, 43, 38, 44, 39, 9, 40, 23, 41, 24, 42, 25, 43, 11, 0, 11, 0, 61, 45, -1, 16, 46, 45, 47, 46, 48, 47, 49, 48, 50, 10, 51, 10, 52, 8, 53, 8, 54, 10, 55, 9, 56, 30, 57, 30, 58, 30, 59, 30, 60, 30, 1, 31, 0, 11, 0, 67, 62, -1, 7, 63, 10, 7, 49, 74, 10, 64, 21, 65, 50, 66, 33, 62, 9, 0, 10, 0, 69, 68, -1, 2, 63, 10, 7, 51, 0, 10, 0, 84, 70, -1, 11, 63, 10, 65, 52, 75, 53, 76, 54, 77, 33, 78, 55, 79, 33, 80, 56, 81, 12, 82, 10, 83, 57, 0, 3, 0, 3, 85, -1, 10, 7, 58, 86, 59, 1, 60, 28, 40, 29, 61, 30, 62, 31, 20, 32, 21, 33, 21, 34, 10, 1, 73, 16, 0, 44, 35, -1, 8, 36, 10, 37, 63, 38, 64, 39, 9, 40, 23, 41, 24, 42, 25, 43, 11, 0, 17, 0, 61, 45, -1, 15, 46, 65, 47, 66, 48, 67, 49, 68, 50, 10, 51, 10, 52, 8, 53, 8, 54, 10, 56, 69, 57, 69, 58, 69, 59, 69, 60, 69, 1, 31, 0, 17, 0, 67, 62, -1, 6, 87, 70, 74, 10, 64, 21, 65, 71, 66, 33, 62, 9, 0, 16, 0, 69, 68, -1, 3, 63, 10, 7, 72, 86, 73, 0, 16, 0, 84, 70, -1, 11, 63, 10, 65, 74, 75, 53, 76, 75, 77, 33, 78, 55, 79, 33, 80, 56, 81, 12, 82, 10, 83, 57, 0, 3, 0, 3, 88, -1, 11, 7, 76, 24, 8, 1, 77, 2, 78, 28, 40, 29, 79, 30, 80, 31, 20, 32, 21, 33, 21, 34, 9, 1, 73, 22, 0, 44, 35, -1, 8, 36, 9, 37, 81, 38, 7, 39, 10, 40, 23, 41, 24, 42, 25, 43, 11, 0, 23, 0, 61, 45, -1, 13, 48, 82, 49, 83, 50, 10, 51, 9, 52, 8, 53, 8, 54, 10, 56, 84, 57, 84, 58, 84, 59, 84, 60, 84, 1, 31, 0, 23, 0, 67, 62, -1, 5, 63, 10, 64, 21, 65, 85, 66, 33, 62, 10, 0, 22, 0, 69, 68, -1, 2, 63, 10, 7, 86, 0, 22, 0, 84, 70, -1, 11, 63, 10, 65, 87, 75, 53, 76, 88, 77, 33, 78, 55, 79, 33, 80, 56, 81, 12, 82, 10, 83, 57, 0, 0, 0, 45, 89, -1, 2, 63, 10, 90, 89, 0, 0, 0, 44, 91, -1, 14, 7, 90, 36, 9, 37, 91, 38, 64, 39, 9, 40, 23, 41, 24, 42, 25, 43, 11, 1, 92, 2, 93, 28, 94, 92, 95, 93, 8, 0, 29, 0, 94, 94, -1, 3, 95, 91, 62, 9, 96, 21, 0, 30, 0, 45, 45, -1, 1, 90, 96, 0, 30, 0, 45, 97, -1, 4, 63, 10, 7, 97, 86, 98, 90, 99, 0 </int_array>
 			<string> "variants" </string>
-			<array  len="103" shared="false">
+			<array  len="100" shared="false">
 				<resource  resource_type="Script" path="local://63">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
@@ -336,12 +327,34 @@
 				<bool> False </bool>
 				<real> 1 </real>
 				<real> 0 </real>
-				<int_array  len="806"> 					-786422, 2, -720887, 2, -720886, 2, -720885, 2, -655352, 2, -655351, 2, -655350, 2, -655349, 2, -655348, 2, -589817, 2, -589816, 2, -589815, 2, -589814, 2, -589813, 2, -589812, 2, -589811, 2, -524282, 2, -524281, 2, -524280, 2, -524279, 2, -524278, 2, -524277, 2, -524276, 2, -524275, 2, -524274, 2, -458747, 2, -458746, 2, -458745, 2, -458744, 2, -458743, 2, -458742, 2, -458741, 2, -458740, 2, -458739, 2, -458738, 2, -458737, 2, -393212, 2, -393211, 2, -393210, 2, -393209, 2, -393208, 2, -393207, 2, -393206, 2, -393205, 2, -393204, 2, -393203, 2, -393202, 2, -393201, 2, -393200, 2, -327677, 2, -327676, 2, -327675, 2, -327674, 2, -327673, 2, -327672, 2, -327671, 2, -327670, 2, -327669, 2, -327668, 2, -327667, 2, -327666, 2, -327665, 2, -327664, 2, -327663, 2, -262142, 2, -262141, 2, -262140, 2, -262139, 2, -262138, 2, -262137, 2, -262136, 2, -262135, 2, -262134, 2, -262133, 2, -262132, 2, -262131, 2, -262130, 2, -262129, 2, -262128, 2, -262127, 2, -262126, 2, -196607, 2, -196606, 2, -196605, 2, -196604, 2, -196603, 2, -196602, 2, -196601, 2, -196600, 2, -196599, 2, -196598, 2, -196597, 2, -196596, 2, -196595, 2, -196594, 2, -196593, 2, -196592, 2, -196591, 2, -196590, 2, -196589, 2, -131072, 2, -131071, 2, -131070, 2, -131069, 2, -131068, 2, -131067, 2, -131066, 2, -131065, 2, -131064, 2, -131063, 2, -131062, 2, -131061, 2, -131060, 2, -131059, 2, -131058, 2, -131057, 2, -131056, 2, -131055, 2, -131054, 2, -131053, 2, -131052, 2, -1, 2, -65536, 2, -65535, 2, -65534, 2, -65533, 2, -65532, 2, -65531, 3, -65530, 3, -65529, 3, -65528, 3, -65527, 3, -65526, 2, -65525, 2, -65524, 2, -65523, 2, -65522, 2, -65521, 3, -65520, 3, -65519, 0, -65518, 0, -65517, 2, -65516, 2, -65515, 2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 2, 5, 3, 6, 3, 7, 3, 8, 3, 9, 3, 10, 2, 11, 2, 12, 2, 13, 2, 14, 2, 15, 3, 16, 3, 17, 0, 18, 0, 19, 2, 20, 2, 21, 2, 22, 2, 65537, 2, 65538, 2, 65539, 2, 65540, 2, 65541, 2, 65542, 2, 65543, 2, 65544, 2, 65545, 2, 65546, 2, 65547, 2, 65548, 2, 65549, 2, 65550, 2, 65551, 2, 65552, 2, 65553, 2, 65554, 2, 65555, 2, 65556, 2, 65557, 2, 65558, 2, 65559, 2, 131074, 2, 131075, 2, 131076, 2, 131077, 2, 131078, 2, 131079, 2, 131080, 2, 131081, 2, 131082, 2, 131083, 2, 131084, 2, 131085, 2, 131086, 2, 131087, 2, 131088, 2, 131089, 2, 131090, 2, 131091, 2, 131092, 2, 131093, 2, 131094, 2, 131095, 2, 131096, 2, 196611, 2, 196612, 2, 196613, 2, 196614, 2, 196615, 2, 196616, 2, 196617, 2, 196618, 2, 196619, 3, 196620, 3, 196621, 3, 196622, 2, 196623, 2, 196624, 2, 196625, 2, 196626, 2, 196627, 2, 196628, 2, 196629, 2, 196630, 2, 196631, 2, 196632, 2, 196633, 2, 262148, 2, 262149, 2, 262150, 3, 262151, 2, 262152, 2, 262153, 2, 262154, 2, 262155, 2, 262156, 2, 262157, 2, 262158, 2, 262159, 2, 262160, 2, 262161, 2, 262162, 2, 262163, 2, 262164, 2, 262165, 2, 262166, 2, 262167, 2, 262168, 2, 262169, 2, 262170, 2, 327685, 2, 327686, 2, 327687, 2, 327688, 2, 327689, 2, 327690, 2, 327691, 2, 327692, 2, 327693, 2, 327694, 2, 327695, 2, 327696, 2, 327697, 2, 327698, 2, 327699, 2, 327700, 2, 327701, 2, 327702, 2, 327703, 2, 327704, 2, 327705, 2, 327706, 2, 327707, 2, 393222, 2, 393223, 2, 393224, 2, 393225, 2, 393226, 2, 393227, 2, 393228, 2, 393229, 2, 393230, 2, 393231, 2, 393232, 2, 393233, 2, 393234, 2, 393235, 2, 393236, 2, 393237, 2, 393238, 2, 393239, 2, 393240, 2, 393241, 2, 393242, 2, 458759, 2, 458760, 2, 458761, 2, 458762, 2, 458763, 2, 458764, 2, 458765, 2, 458766, 2, 458767, 2, 458768, 2, 458769, 2, 458770, 2, 458771, 2, 458772, 2, 458773, 2, 458774, 2, 458775, 2, 458776, 2, 458777, 2, 524296, 2, 524297, 2, 524298, 2, 524299, 3, 524300, 3, 524301, 3, 524302, 2, 524303, 2, 524304, 2, 524305, 2, 524306, 2, 524307, 2, 524308, 2, 524309, 2, 524310, 2, 524311, 2, 524312, 2, 589833, 2, 589834, 2, 589835, 2, 589836, 2, 589837, 2, 589838, 2, 589839, 2, 589840, 2, 589841, 2, 589842, 2, 589843, 2, 589844, 2, 589845, 2, 589846, 2, 589847, 2, 655370, 2, 655371, 2, 655372, 2, 655373, 2, 655374, 2, 655375, 2, 655376, 2, 655377, 2, 655378, 2, 655379, 2, 655380, 2, 655381, 2, 655382, 2, 720907, 2, 720908, 2, 720909, 2, 720910, 2, 720911, 2, 720912, 2, 720913, 2, 720914, 2, 720915, 2, 720916, 2, 720917, 2, 786444, 2, 786445, 2, 786446, 2, 786447, 2, 786448, 2, 786449, 2, 786450, 2, 786451, 2, 786452, 2, 851981, 2, 851982, 2, 851983, 2, 851984, 2, 851985, 2, 851986, 2, 851987, 2, 917518, 2, 917519, 2, 917520, 2, 917521, 2, 917522, 2, 983055, 2, 983056, 2, 983057, 2, 1048592, 2 </int_array>
+				<int_array  len="806"> 					-786422, 2, -720887, 2, -720886, 2, -720885, 2, -655352, 2, -655351, 2, -655350, 2, -655349, 2, -655348, 2, -589817, 2, -589816, 2, -589815, 2, -589814, 2, -589813, 2, -589812, 2, -589811, 2, -524282, 2, -524281, 2, -524280, 2, -524279, 2, -524278, 2, -524277, 2, -524276, 2, -524275, 2, -524274, 2, -458747, 2, -458746, 2, -458745, 2, -458744, 2, -458743, 2, -458742, 2, -458741, 2, -458740, 2, -458739, 2, -458738, 2, -458737, 2, -393212, 2, -393211, 2, -393210, 2, -393209, 2, -393208, 2, -393207, 2, -393206, 2, -393205, 2, -393204, 2, -393203, 2, -393202, 2, -393201, 2, -393200, 2, -327677, 2, -327676, 2, -327675, 2, -327674, 2, -327673, 2, -327672, 2, -327671, 2, -327670, 2, -327669, 2, -327668, 2, -327667, 2, -327666, 2, -327665, 2, -327664, 2, -327663, 2, -262142, 2, -262141, 2, -262140, 2, -262139, 2, -262138, 2, -262137, 2, -262136, 2, -262135, 2, -262134, 2, -262133, 2, -262132, 2, -262131, 2, -262130, 2, -262129, 2, -262128, 2, -262127, 2, -262126, 2, -196607, 2, -196606, 2, -196605, 2, -196604, 2, -196603, 2, -196602, 2, -196601, 2, -196600, 2, -196599, 2, -196598, 2, -196597, 2, -196596, 2, -196595, 2, -196594, 2, -196593, 2, -196592, 2, -196591, 2, -196590, 2, -196589, 2, -131072, 2, -131071, 2, -131070, 2, -131069, 2, -131068, 2, -131067, 2, -131066, 2, -131065, 2, -131064, 2, -131063, 2, -131062, 2, -131061, 2, -131060, 2, -131059, 2, -131058, 2, -131057, 2, -131056, 2, -131055, 2, -131054, 2, -131053, 2, -131052, 2, -1, 2, -65536, 2, -65535, 2, -65534, 2, -65533, 2, -65532, 2, -65531, 3, -65530, 3, -65529, 3, -65528, 3, -65527, 3, -65526, 2, -65525, 2, -65524, 2, -65523, 2, -65522, 2, -65521, 3, -65520, 3, -65519, 0, -65518, 0, -65517, 2, -65516, 2, -65515, 2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 2, 5, 3, 6, 3, 7, 3, 8, 3, 9, 3, 10, 2, 11, 2, 12, 2, 13, 2, 14, 2, 15, 3, 16, 3, 17, 0, 18, 0, 19, 2, 20, 2, 21, 2, 22, 2, 65537, 2, 65538, 2, 65539, 2, 65540, 2, 65541, 2, 65542, 2, 65543, 2, 65544, 2, 65545, 2, 65546, 2, 65547, 2, 65548, 2, 65549, 2, 65550, 2, 65551, 2, 65552, 2, 65553, 2, 65554, 2, 65555, 2, 65556, 2, 65557, 2, 65558, 2, 65559, 2, 131074, 2, 131075, 2, 131076, 2, 131077, 2, 131078, 2, 131079, 2, 131080, 2, 131081, 2, 131082, 2, 131083, 2, 131084, 2, 131085, 2, 131086, 2, 131087, 2, 131088, 2, 131089, 2, 131090, 2, 131091, 2, 131092, 2, 131093, 2, 131094, 2, 131095, 2, 131096, 2, 196611, 2, 196612, 2, 196613, 2, 196614, 2, 196615, 2, 196616, 2, 196617, 2, 196618, 2, 196619, 2, 196620, 2, 196621, 2, 196622, 2, 196623, 2, 196624, 2, 196625, 2, 196626, 2, 196627, 2, 196628, 2, 196629, 2, 196630, 2, 196631, 2, 196632, 2, 196633, 2, 262148, 2, 262149, 2, 262150, 3, 262151, 2, 262152, 2, 262153, 2, 262154, 2, 262155, 2, 262156, 2, 262157, 2, 262158, 2, 262159, 2, 262160, 2, 262161, 2, 262162, 2, 262163, 2, 262164, 2, 262165, 2, 262166, 2, 262167, 2, 262168, 2, 262169, 2, 262170, 2, 327685, 2, 327686, 2, 327687, 2, 327688, 2, 327689, 2, 327690, 2, 327691, 2, 327692, 2, 327693, 2, 327694, 2, 327695, 2, 327696, 2, 327697, 2, 327698, 2, 327699, 2, 327700, 2, 327701, 2, 327702, 2, 327703, 2, 327704, 2, 327705, 2, 327706, 2, 327707, 2, 393222, 2, 393223, 2, 393224, 2, 393225, 2, 393226, 2, 393227, 2, 393228, 2, 393229, 2, 393230, 2, 393231, 2, 393232, 2, 393233, 2, 393234, 2, 393235, 2, 393236, 2, 393237, 2, 393238, 2, 393239, 2, 393240, 2, 393241, 2, 393242, 2, 458759, 2, 458760, 2, 458761, 2, 458762, 2, 458763, 2, 458764, 2, 458765, 2, 458766, 2, 458767, 2, 458768, 2, 458769, 2, 458770, 2, 458771, 2, 458772, 2, 458773, 2, 458774, 2, 458775, 2, 458776, 2, 458777, 2, 524296, 2, 524297, 2, 524298, 2, 524299, 2, 524300, 2, 524301, 2, 524302, 2, 524303, 2, 524304, 2, 524305, 2, 524306, 2, 524307, 2, 524308, 2, 524309, 2, 524310, 2, 524311, 2, 524312, 2, 589833, 2, 589834, 2, 589835, 2, 589836, 2, 589837, 2, 589838, 2, 589839, 2, 589840, 2, 589841, 2, 589842, 2, 589843, 2, 589844, 2, 589845, 2, 589846, 2, 589847, 2, 655370, 2, 655371, 2, 655372, 2, 655373, 2, 655374, 2, 655375, 2, 655376, 2, 655377, 2, 655378, 2, 655379, 2, 655380, 2, 655381, 2, 655382, 2, 720907, 2, 720908, 2, 720909, 2, 720910, 2, 720911, 2, 720912, 2, 720913, 2, 720914, 2, 720915, 2, 720916, 2, 720917, 2, 786444, 2, 786445, 2, 786446, 2, 786447, 2, 786448, 2, 786449, 2, 786450, 2, 786451, 2, 786452, 2, 851981, 2, 851982, 2, 851983, 2, 851984, 2, 851985, 2, 851986, 2, 851987, 2, 917518, 2, 917519, 2, 917520, 2, 917521, 2, 917522, 2, 983055, 2, 983056, 2, 983057, 2, 1048592, 2 </int_array>
 				<dictionary  shared="false">
 					<string> "_edit_lock_" </string>
 					<bool> True </bool>
 				</dictionary>
-				<vector2> 167, 203 </vector2>
+				<vector2> 250.675, 297.196 </vector2>
+				<resource  resource_type="Script" path="local://66">  </resource>
+				<node_path> "body" </node_path>
+				<string> "pc" </string>
+				<string> "PC" </string>
+				<nil>  </nil>
+				<int> 0 </int>
+				<resource  resource_type="Shape2D" path="local://70">  </resource>
+				<vector2> 0, 1 </vector2>
+				<real> 98 </real>
+				<real> 0.1 </real>
+				<real> -49 </real>
+				<real> -70 </real>
+				<real> 95 </real>
+				<real> 77 </real>
+				<resource  external="1">  </resource>
+				<resource  external="2">  </resource>
+				<vector2_array  len="6"> 					44.3728, 57.5789, 7.5407, 79.6781, 24.729, 82.1336, 83.6604, 75.9949, 94.7101, 42.846, 95.9379, 30.5686 </vector2_array>
+				<vector2> 0, 0 </vector2>
+				<vector2> 75.093, 65.9135 </vector2>
+				<vector2_array  len="6"> 					45.6006, 47.757, 88.5714, 26.8854, 60.3335, 3.55838, 5.08522, 15.8358, -36.6579, 41.6183, -8.41988, 73.5395 </vector2_array>
+				<vector2> -1, -1 </vector2>
+				<vector2> 230.842, 369.972 </vector2>
 				<resource  resource_type="Script" path="local://29">  </resource>
 				<dictionary  shared="false">
 					<string> "_edit_group_" </string>
@@ -350,53 +363,39 @@
 				<node_path> "body" </node_path>
 				<string> "terminal" </string>
 				<string> "Terminal" </string>
-				<nil>  </nil>
-				<int> 0 </int>
-				<resource  resource_type="Shape2D" path="local://47">  </resource>
+				<resource  resource_type="Shape2D" path="local://71">  </resource>
 				<matrix32> 1, -0, 0, 1, 12.4609, -19.1499 </matrix32>
-				<vector2> 0, 1 </vector2>
-				<real> 98 </real>
-				<real> 0.1 </real>
-				<real> -158 </real>
-				<real> -77 </real>
-				<real> 42 </real>
-				<real> 81 </real>
-				<resource  external="1">  </resource>
-				<resource  external="2">  </resource>
+				<real> -132 </real>
+				<real> -91 </real>
+				<real> 12 </real>
+				<real> 58 </real>
 				<vector2> 12.4609, -19.1499 </vector2>
-				<vector2_array  len="4"> 					-80.4609, 86.1499, -53.4609, 113.15, 54.5391, 68.1499, 0.539093, 50.1499 </vector2_array>
-				<vector2> -1, -1 </vector2>
-				<vector2> -13, 68 </vector2>
-				<vector2_array  len="10"> 					-138.754, 33.0738, -120.193, 56.4245, -79.4788, 66.6031, -47.6539, 54.3301, 23.059, 20.1928, 17.5166, 12.7167, -14.2165, -14.2264, -48.3445, -19.0163, -78.3774, -7.60468, -107.021, 11.5193 </vector2_array>
+				<vector2_array  len="4"> 					-99.2672, 72.7057, -52.6132, 83.7554, 12.4569, 49.3787, -9.64233, 23.5962 </vector2_array>
+				<vector2> -13, 39.762 </vector2>
+				<vector2_array  len="9"> 					-118.727, 36.3675, -95.4005, 46.1894, -59.7961, 33.912, -34.0135, 17.9514, -7.00333, 6.90178, -14.2165, -14.2264, -26.6471, -7.83109, -56.1128, 4.4463, -89.2618, 19.1792 </vector2_array>
 				<vector2_array  len="0"> 					 </vector2_array>
 				<color> 0.458333, 0.0359849, 1, 0.544041 </color>
-				<vector2> 0, 0 </vector2>
 				<resource name=""></resource>				<vector2> 1, 1 </vector2>
 				<real> 100 </real>
 				<vector2> 455, 230 </vector2>
 				<vector2> -1, 1 </vector2>
 				<resource  resource_type="Script" path="local://19">  </resource>
-				<dictionary  shared="false">
-					<string> "_edit_group_" </string>
-					<bool> True </bool>
-				</dictionary>
 				<string> "cabinet" </string>
 				<string> "Cabinet" </string>
-				<resource  resource_type="Shape2D" path="local://46">  </resource>
+				<resource  resource_type="Shape2D" path="local://72">  </resource>
 				<matrix32> 1, -0, 0, 1, 0, 0 </matrix32>
-				<real> -41 </real>
-				<real> -149 </real>
-				<real> 87 </real>
-				<real> 32 </real>
+				<real> -45 </real>
+				<real> -153 </real>
+				<real> 63 </real>
+				<real> 41 </real>
 				<resource  external="3">  </resource>
-				<resource  external="4">  </resource>
 				<real> 0.5 </real>
-				<vector2_array  len="4"> 					-67, 22, 41, 67, 113, 31, 32, -41 </vector2_array>
-				<vector2> 60, 32 </vector2>
+				<vector2_array  len="4"> 					0.346222, 40.0609, 34.7229, 60.9325, 80.1492, 31.4668, 65.4163, 3.22881 </vector2_array>
+				<vector2> 53.8613, 39.3664 </vector2>
 				<vector2> -0.8, 1 </vector2>
-				<vector2_array  len="4"> 					56.5311, -0.468628, -3.03394, 27.5089, -40.9389, 10.3614, 20.4311, -20.3236 </vector2_array>
+				<vector2_array  len="4"> 					70.3273, 10.5952, 2.8017, 30.239, -9.47571, 22.8726, 53.1389, 2.00107 </vector2_array>
 				<color> 0, 1, 1, 0.26943 </color>
-				<vector2> 77, 365 </vector2>
+				<vector2> 77, 438.664 </vector2>
 				<resource  resource_type="Script" path="local://59">  </resource>
 				<dictionary  shared="false">
 					<string> "_edit_group_" </string>
@@ -404,32 +403,18 @@
 				</dictionary>
 				<string> "engineer" </string>
 				<string> "Engineer" </string>
-				<resource  resource_type="Shape2D" path="local://60">  </resource>
+				<resource  resource_type="Shape2D" path="local://69">  </resource>
 				<real> 67 </real>
 				<real> 121 </real>
-				<resource  external="5">  </resource>
+				<resource  external="4">  </resource>
 				<vector2_array  len="5"> 					13, 67, 31, 94, 76, 103, 121, 76, 31, 40 </vector2_array>
 				<vector2> 59, 77 </vector2>
 				<vector2_array  len="4"> 					17.0692, 100.86, 38.6836, 110.046, 51.1119, 101.401, 34.3607, 93.8357 </vector2_array>
 				<color> 0.390625, 0.522254, 1, 0.831416 </color>
-				<vector2> 250.675, 297.196 </vector2>
-				<resource  resource_type="Script" path="local://66">  </resource>
-				<string> "pc" </string>
-				<string> "PC" </string>
-				<resource  resource_type="Shape2D" path="local://67">  </resource>
-				<resource  resource_type="Shape2D" path="local://68">  </resource>
-				<real> -63 </real>
-				<real> -52 </real>
-				<real> 137 </real>
-				<real> 106 </real>
-				<vector2_array  len="7"> 					56.0287, 77.854, 26.3088, 95.6859, 55.2432, 129.065, 169.801, 61.2351, 126.816, 43.8113, 102.5, 49.7552, 79.2642, 67.0468 </vector2_array>
-				<vector2> 98.42, 86.785 </vector2>
-				<vector2_array  len="7"> 					-40.3414, 62.4903, -26.1061, 80.0154, 16.042, 92.4437, 73.8383, 68.629, 119.791, 37.3269, 50.0847, -12.9266, 1.40173, 19.5195 </vector2_array>
-				<color> 0.307292, 0.797348, 0.865285, 1 </color>
-				<resource  external="6">  </resource>
+				<resource  external="5">  </resource>
 				<vector2> 541.363, 370.784 </vector2>
 				<resource  resource_type="Shape2D" path="local://65">  </resource>
-				<resource  external="7">  </resource>
+				<resource  external="6">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
 					<string> "2D" </string>
@@ -572,10 +557,10 @@
 				</dictionary>
 				<node_path> "." </node_path>
 				<string> "res://active-partials/environment/FPO_stage_b.xml" </string>
-				<resource  external="8">  </resource>
+				<resource  external="7">  </resource>
 				<vector2> -4.00003, -47 </vector2>
 				<vector2> 0.7, 0.7 </vector2>
-				<resource  external="9">  </resource>
+				<resource  external="8">  </resource>
 			</array>
 			<string> "version" </string>
 			<int> 2 </int>
