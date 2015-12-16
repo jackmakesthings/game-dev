@@ -2,13 +2,13 @@
 <resource_file type="PackedScene" subresource_count="19" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
 	<ext_resource path="res://main.gd" type="Script" index="0"></ext_resource>
 	<ext_resource path="res://assets/ui.xthm" type="Theme" index="2"></ext_resource>
-	<ext_resource path="res://assets/ui/list31.tex" type="Texture" index="5"></ext_resource>
 	<ext_resource path="res://active-partials/journal/base_journal.gd" type="Script" index="1"></ext_resource>
+	<ext_resource path="res://assets/ui/list31.tex" type="Texture" index="5"></ext_resource>
+	<ext_resource path="res://assets/ui/code39 (1).tex" type="Texture" index="7"></ext_resource>
+	<ext_resource path="res://active-partials/interface/in-game-ui_.gd" type="Script" index="3"></ext_resource>
 	<ext_resource path="res://assets/ui/list31 (1).tex" type="Texture" index="4"></ext_resource>
 	<ext_resource path="res://assets/cursors/png/square185.png" type="Texture" index="8"></ext_resource>
 	<ext_resource path="res://assets/ui/code39 (2).tex" type="Texture" index="6"></ext_resource>
-	<ext_resource path="res://assets/ui/code39 (1).tex" type="Texture" index="7"></ext_resource>
-	<ext_resource path="res://active-partials/interface/in-game-ui_.gd" type="Script" index="3"></ext_resource>
 	<resource type="StyleBoxFlat" path="local://45">
 		<real name="content_margin/left"> 5 </real>
 		<real name="content_margin/right"> 5 </real>
@@ -293,13 +293,13 @@
 				<resource  external="0">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
-					<string> "2D" </string>
+					<string> "Script" </string>
 					<string> "__editor_plugin_states__" </string>
 					<dictionary  shared="false">
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> -157.008, -299.577 </vector2>
+							<vector2> -157.008, -731.347 </vector2>
 							<string> "snap_grid" </string>
 							<bool> True </bool>
 							<string> "snap_offset" </string>

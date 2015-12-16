@@ -1,27 +1,18 @@
 [gd_scene load_steps=5 format=1]
 
-[ext_resource path="res://assets/ui/Iso_Dark/iso_dark.xthm" type="Theme" id=1]
-[ext_resource path="res://active-partials/interface/entry_container.gd" type="Script" id=2]
+[ext_resource path="res://assets/ui/Iso_Dark/iso_dark.xthm" type="Theme" id=2]
+[ext_resource path="res://active-partials/interface/entry_container.gd" type="Script" id=1]
 [ext_resource path="res://assets/ui/Iso_Dark/pngs/tabcontainer-decrement-hilite.png" type="Texture" id=3]
 [ext_resource path="res://assets/ui/Iso_Dark/pngs/tabcontainer-increment-hilite.png" type="Texture" id=4]
 
-[node name="Control" type="Control"]
+[node name="Control" type="CanvasLayer"]
 
-anchor/left = 3
-anchor/top = 3
-anchor/right = 3
-anchor/bottom = 3
-margin/left = 400
-margin/top = 300
-margin/right = -400
-margin/bottom = -300
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-theme/theme = ExtResource( 1 )
-script/script = ExtResource( 2 )
-__meta__ = { "__editor_plugin_screen__":"Script", "__editor_plugin_states__":{ "2D":{ "ofs":Vector2( -118.466, -142.178 ), "snap_grid":false, "snap_offset":Vector2( 0, 0 ), "snap_pixel":false, "snap_relative":false, "snap_rotation":false, "snap_rotation_offset":0, "snap_rotation_step":0.261799, "snap_show_grid":false, "snap_step":Vector2( 10, 10 ), "zoom":0.598737 }, "3D":{ "ambient_light_color":Color( 0.15, 0.15, 0.15, 1 ), "default_light":true, "default_srgb":false, "deflight_rot_x":0.942478, "deflight_rot_y":0.628319, "fov":45, "show_grid":true, "show_origin":true, "viewport_mode":1, "viewports":[ { "distance":4, "listener":true, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 } ], "zfar":500, "znear":0.1 }, "Anim":{ "visible":false } }, "__editor_run_settings__":{ "custom_args":"-l $scene", "run_mode":0 } }
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0
+scale = Vector2( 1, 1 )
+script/script = ExtResource( 1 )
+__meta__ = { "__editor_plugin_screen__":"Script", "__editor_plugin_states__":{ "2D":{ "ofs":Vector2( -129.224, -96.1844 ), "snap_grid":false, "snap_offset":Vector2( 0, 0 ), "snap_pixel":false, "snap_relative":false, "snap_rotation":false, "snap_rotation_offset":0, "snap_rotation_step":0.261799, "snap_show_grid":false, "snap_step":Vector2( 10, 10 ), "zoom":0.814506 }, "3D":{ "ambient_light_color":Color( 0.15, 0.15, 0.15, 1 ), "default_light":true, "default_srgb":false, "deflight_rot_x":0.942478, "deflight_rot_y":0.628319, "fov":45, "show_grid":true, "show_origin":true, "viewport_mode":1, "viewports":[ { "distance":4, "listener":true, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 } ], "zfar":500, "znear":0.1 }, "Anim":{ "visible":false } }, "__editor_run_settings__":{ "custom_args":"-l $scene", "run_mode":0 } }
 entry_data = null
 
 [node name="dialog" type="WindowDialog" parent="."]
@@ -38,6 +29,7 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
+theme/theme = ExtResource( 2 )
 popup/exclusive = false
 window/title = ""
 
@@ -64,31 +56,29 @@ size_flags/vertical = 3
 custom_constants/separation = 70
 alignment = 0
 
-[node name="entry_list" type="ButtonGroup" parent="dialog/ui/contents"]
+[node name="VBoxContainer" type="VBoxContainer" parent="dialog/ui/contents"]
 
-margin/right = 203
-margin/bottom = 544
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 3
-size_flags/vertical = 3
-size_flags/stretch_ratio = 2
-alignment = 0
-
-[node name="entries" type="VBoxContainer" parent="dialog/ui/contents/entry_list"]
-
-margin/right = 203
+margin/right = 68
 margin/bottom = 544
 focus/ignore_mouse = false
 focus/stop_mouse = false
-size_flags/horizontal = 3
+size_flags/horizontal = 2
 size_flags/vertical = 3
-custom_constants/separation = 10
 alignment = 0
 
-[node name="entries_home" type="Button" parent="dialog/ui/contents/entry_list/entries"]
+[node name="entry_list" type="ButtonGroup" parent="dialog/ui/contents/VBoxContainer"]
 
-margin/right = 203
+margin/right = 68
+margin/bottom = 270
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 3
+alignment = 0
+
+[node name="entry_header" type="Button" parent="dialog/ui/contents/VBoxContainer/entry_list"]
+
+margin/right = 68
 margin/bottom = 27
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -96,15 +86,50 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 toggle_mode = true
 click_on_press = true
-text = "FILES"
-flat = true
+text = "Entries"
+flat = false
 align = 0
 
-[node name="HSeparator" type="HSeparator" parent="dialog/ui/contents/entry_list/entries"]
+[node name="HSeparator" type="HSeparator" parent="dialog/ui/contents/VBoxContainer/entry_list"]
 
-margin/top = 37
-margin/right = 203
-margin/bottom = 40
+margin/top = 27
+margin/right = 68
+margin/bottom = 30
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+
+[node name="saved_entry_list" type="ButtonGroup" parent="dialog/ui/contents/VBoxContainer"]
+
+margin/top = 274
+margin/right = 68
+margin/bottom = 544
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 3
+alignment = 0
+
+[node name="entry_header" type="Button" parent="dialog/ui/contents/VBoxContainer/saved_entry_list"]
+
+margin/right = 68
+margin/bottom = 27
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = true
+click_on_press = true
+text = "Saved"
+flat = false
+align = 0
+
+[node name="HSeparator" type="HSeparator" parent="dialog/ui/contents/VBoxContainer/saved_entry_list"]
+
+margin/top = 27
+margin/right = 68
+margin/bottom = 30
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -112,7 +137,7 @@ size_flags/vertical = 2
 
 [node name="entry_text" type="RichTextLabel" parent="dialog/ui/contents"]
 
-margin/left = 273
+margin/left = 138
 margin/right = 781
 margin/bottom = 544
 focus/ignore_mouse = false
@@ -138,6 +163,18 @@ focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 alignment = 2
+
+[node name="status" type="Label" parent="dialog/ui/actions"]
+
+margin/top = 6
+margin/right = 613
+margin/bottom = 21
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 3
+percent_visible = 1
+lines_skipped = 0
+max_lines_visible = -1
 
 [node name="prev" type="Button" parent="dialog/ui/actions"]
 
@@ -190,6 +227,12 @@ size_flags/vertical = 2
 toggle_mode = false
 text = "Close"
 flat = false
+
+[connection signal="pressed" from="dialog/ui/actions/prev" to="." method="show_prev_entry"]
+
+[connection signal="pressed" from="dialog/ui/actions/next" to="." method="show_next_entry"]
+
+[connection signal="pressed" from="dialog/ui/actions/save" to="." method="save_entry"]
 
 [connection signal="pressed" from="dialog/ui/actions/close" to="." method="close"]
 
