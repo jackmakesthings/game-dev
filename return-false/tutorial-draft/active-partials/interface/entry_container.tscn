@@ -1,9 +1,49 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=7 format=1]
 
-[ext_resource path="res://assets/ui/Iso_Dark/iso_dark.xthm" type="Theme" id=2]
-[ext_resource path="res://active-partials/interface/entry_container.gd" type="Script" id=1]
-[ext_resource path="res://assets/ui/Iso_Dark/pngs/tabcontainer-decrement-hilite.png" type="Texture" id=3]
 [ext_resource path="res://assets/ui/Iso_Dark/pngs/tabcontainer-increment-hilite.png" type="Texture" id=4]
+[ext_resource path="res://active-partials/interface/entry_container.gd" type="Script" id=1]
+[ext_resource path="res://assets/ui/Iso_Dark/iso_dark.xthm" type="Theme" id=2]
+[ext_resource path="res://assets/ui/Iso_Dark/pngs/tabcontainer-decrement-hilite.png" type="Texture" id=3]
+[ext_resource path="res://scale-in.anm" type="Animation" id=5]
+
+[sub_resource type="Animation" id=1]
+
+resource/name = "scale-out"
+length = 1
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("dialog:margin/left")
+tracks/0/interp = 2
+tracks/0/keys = { "cont":true, "times":FloatArray( 0, 0.2, 0.5, 1 ), "transitions":FloatArray( 1, 1, 1, 1 ), "values":[ 0, 200, 334.4, -300 ] }
+tracks/1/type = "value"
+tracks/1/path = NodePath("dialog:margin/top")
+tracks/1/interp = 2
+tracks/1/keys = { "cont":true, "times":FloatArray( 0, 0.2, 0.4, 1 ), "transitions":FloatArray( 1, 1, 1, 1 ), "values":[ -300, 250.8, 150, 0 ] }
+tracks/2/type = "value"
+tracks/2/path = NodePath("dialog:margin/right")
+tracks/2/interp = 2
+tracks/2/keys = { "cont":true, "times":FloatArray( 0, 0.2, 0.4, 1 ), "transitions":FloatArray( 1, 1, 1, 1 ), "values":[ 300, -333.8, -200, 0 ] }
+tracks/3/type = "value"
+tracks/3/path = NodePath("dialog:margin/bottom")
+tracks/3/interp = 2
+tracks/3/keys = { "cont":true, "times":FloatArray( 0, 0.2, 0.4, 1 ), "transitions":FloatArray( 1, 1, 1, 1 ), "values":[ 300, -250.6, -150, 0 ] }
+tracks/4/type = "value"
+tracks/4/path = NodePath("dialog:rect/pos")
+tracks/4/interp = 2
+tracks/4/keys = { "cont":true, "times":FloatArray( 0, 0.2, 0.4, 1 ), "transitions":FloatArray( 1, 1, 1, 1 ), "values":[ Vector2( 0, 0 ), Vector2( 65, 49 ), Vector2( 200, 150 ), Vector2( 400, 300 ) ] }
+tracks/5/type = "value"
+tracks/5/path = NodePath("dialog:rect/min_size")
+tracks/5/interp = 2
+tracks/5/keys = { "cont":true, "times":FloatArray( 0, 0.2, 0.4, 1 ), "transitions":FloatArray( 1, 1, 1, 1 ), "values":[ Vector2( 800, 600 ), Vector2( 668.8, 501.6 ), Vector2( 400, 300 ), Vector2( 0, 0 ) ] }
+tracks/6/type = "value"
+tracks/6/path = NodePath("dialog:rect/size")
+tracks/6/interp = 2
+tracks/6/keys = { "cont":true, "times":FloatArray( 0, 0.2, 0.4, 1 ), "transitions":FloatArray( 1, 1, 1, 1 ), "values":[ Vector2( 800, 600 ), Vector2( 668.8, 501.6 ), Vector2( 400, 300 ), Vector2( 0, 0 ) ] }
+tracks/7/type = "value"
+tracks/7/path = NodePath("dialog/ui:visibility/opacity")
+tracks/7/interp = 0
+tracks/7/keys = { "cont":false, "times":FloatArray( 0, 0.1 ), "transitions":FloatArray( 1, 1 ), "values":[ 1, 0 ] }
 
 [node name="Control" type="CanvasLayer"]
 
@@ -12,7 +52,7 @@ offset = Vector2( 0, 0 )
 rotation = 0
 scale = Vector2( 1, 1 )
 script/script = ExtResource( 1 )
-__meta__ = { "__editor_plugin_screen__":"Script", "__editor_plugin_states__":{ "2D":{ "ofs":Vector2( -129.224, -96.1844 ), "snap_grid":false, "snap_offset":Vector2( 0, 0 ), "snap_pixel":false, "snap_relative":false, "snap_rotation":false, "snap_rotation_offset":0, "snap_rotation_step":0.261799, "snap_show_grid":false, "snap_step":Vector2( 10, 10 ), "zoom":0.814506 }, "3D":{ "ambient_light_color":Color( 0.15, 0.15, 0.15, 1 ), "default_light":true, "default_srgb":false, "deflight_rot_x":0.942478, "deflight_rot_y":0.628319, "fov":45, "show_grid":true, "show_origin":true, "viewport_mode":1, "viewports":[ { "distance":4, "listener":true, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 } ], "zfar":500, "znear":0.1 }, "Anim":{ "visible":false } }, "__editor_run_settings__":{ "custom_args":"-l $scene", "run_mode":0 } }
+__meta__ = { "__editor_plugin_screen__":"2D", "__editor_plugin_states__":{ "2D":{ "ofs":Vector2( -487.775, 45.5422 ), "snap_grid":false, "snap_offset":Vector2( 0, 0 ), "snap_pixel":false, "snap_relative":false, "snap_rotation":false, "snap_rotation_offset":0, "snap_rotation_step":0.261799, "snap_show_grid":false, "snap_step":Vector2( 10, 10 ), "zoom":0.487675 }, "3D":{ "ambient_light_color":Color( 0.15, 0.15, 0.15, 1 ), "default_light":true, "default_srgb":false, "deflight_rot_x":0.942478, "deflight_rot_y":0.628319, "fov":45, "show_grid":true, "show_origin":true, "viewport_mode":1, "viewports":[ { "distance":4, "listener":true, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 } ], "zfar":500, "znear":0.1 }, "Anim":{ "animation":"scale-out", "editing":true, "player":NodePath("AnimationPlayer"), "visible":true } }, "__editor_run_settings__":{ "custom_args":"-l $scene", "run_mode":0 } }
 entry_data = null
 
 [node name="dialog" type="WindowDialog" parent="."]
@@ -21,10 +61,6 @@ anchor/left = 3
 anchor/top = 3
 anchor/right = 3
 anchor/bottom = 3
-margin/left = 400
-margin/top = 300
-margin/right = -395
-margin/bottom = -292
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -35,6 +71,7 @@ window/title = ""
 
 [node name="ui" type="VBoxContainer" parent="dialog"]
 
+visibility/opacity = 0
 margin/left = 15
 margin/top = 15
 margin/right = 796
@@ -227,6 +264,18 @@ size_flags/vertical = 2
 toggle_mode = false
 text = "Close"
 flat = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0
+root/root = NodePath("..")
+anims/scale-in = ExtResource( 5 )
+anims/scale-out = SubResource( 1 )
+playback/active = true
+playback/speed = 3
+blend_times = [  ]
+autoplay = ""
 
 [connection signal="pressed" from="dialog/ui/actions/prev" to="." method="show_prev_entry"]
 

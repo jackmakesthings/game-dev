@@ -84,10 +84,13 @@ func save_entry():
 func open():
 	set_layer(5)
 	dialog.popup_centered()
+	get_node("AnimationPlayer").play("scale-in")
 	entry_list_box.set_pressed_button(entry_list_box.get_child(0))
 	is_open = true
 
 func close():
+	get_node("AnimationPlayer").play("scale-out")
+	yield(get_node("AnimationPlayer"), "finished")
 	dialog.hide()
 	set_layer(-1)
 	is_open = false
