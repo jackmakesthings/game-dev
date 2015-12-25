@@ -39,7 +39,7 @@ func swap_env(new_env):
 	fade_screen.set("z/z", 10)
 	fade_anim.play("fade_out")
 	yield(fade_anim, "finished")
-	call_deferred("_swap_env", new_env)
+	call_deferred("simple_swap_env", new_env)
 	
 	
 func _swap_env(new_env):
@@ -49,7 +49,7 @@ func _swap_env(new_env):
 	var _player = player
 	
 	env.body_layer.remove_child(player)
-	#player.get_parent().remove_child(player)
+
 	
 	env.set_process_unhandled_input(false)
 	env.set_name("_env")
@@ -68,6 +68,28 @@ func _swap_env(new_env):
 	npc_root = env.body_layer
 	
 
+	emit_signal("env_changed", env)
+
+
+func simple_swap_env(new_env):
+	
+#	var _name = env.get_name()
+	var _pos = env.get_position_in_parent()
+		
+	env.set_process_unhandled_input(false)
+	env.set_name("_env")
+	env.free()
+	
+	var _env = new_env.instance()
+	
+	add_child(_env)
+	_env.set_name("env")
+	move_child(_env, _pos)
+	
+	env = _env
+	npc_root = env.body_layer
+	player = env.find_node("robot")
+	
 	emit_signal("env_changed", env)
 
 

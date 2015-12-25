@@ -150,6 +150,7 @@ func set_internals():
 	nav = get_node("nav")
 	tiles = get_node("nav/floor")
 	body_layer = get_node("nav/floor/bodies")
+	player = find_node("robot")
 	npcs = get_tree().get_nodes_in_group("npcs")
 	outline = get_node("destination_sprite")
 	TILE_ATTRACT = tiles.get_tileset().find_tile_by_name("attractor")
@@ -183,12 +184,13 @@ func set_externals():
 	# vars
 	# 1) stage nodes will always be children of the main scene
 	scene = get_parent()
+	player = find_node("robot")
 	
 	# 2) player --- TODO: should this use scene.player or _.player?
-	if( scene.get("player") != null ):
-		player = scene.get("player")
-	else:
-		player = null
+#	if( scene.get("player") != null ):
+#		player = scene.get("player")
+#	else:
+#		player = null
 
 
 

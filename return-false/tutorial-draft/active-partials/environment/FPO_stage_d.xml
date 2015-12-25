@@ -189,13 +189,13 @@
 				<resource  resource_type="Script" path="local://63">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
-					<string> "2D" </string>
+					<string> "Script" </string>
 					<string> "__editor_plugin_states__" </string>
 					<dictionary  shared="false">
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> 74.3737, 91.582 </vector2>
+							<vector2> -76.3873, -25.5086 </vector2>
 							<string> "snap_grid" </string>
 							<bool> False </bool>
 							<string> "snap_offset" </string>
@@ -215,7 +215,7 @@
 							<string> "snap_step" </string>
 							<vector2> 10, 10 </vector2>
 							<string> "zoom" </string>
-							<real> 1.227737 </real>
+							<real> 0.814506 </real>
 						</dictionary>
 						<string> "3D" </string>
 						<dictionary  shared="false">
@@ -414,6 +414,8 @@
 				<dictionary  shared="false">
 					<string> "_edit_group_" </string>
 					<bool> True </bool>
+					<string> "_editor_collapsed" </string>
+					<bool> True </bool>
 				</dictionary>
 				<string> "engineer" </string>
 				<string> "Engineer" </string>
@@ -426,7 +428,7 @@
 				<vector2_array  len="4"> 					17.0692, 100.86, 38.6836, 110.046, 51.1119, 101.401, 34.3607, 93.8357 </vector2_array>
 				<color> 0.390625, 0.522254, 1, 0.831416 </color>
 				<resource  external="5">  </resource>
-				<vector2> 538.611, 382.024 </vector2>
+				<vector2> 538.101, 374.01 </vector2>
 				<real> 0.08 </real>
 				<resource  external="6">  </resource>
 				<resource  external="7">  </resource>
@@ -574,7 +576,7 @@
 					<bool> True </bool>
 				</dictionary>
 				<node_path> "." </node_path>
-				<string> "res://active-partials/environment/FPO_stage_d.xml" </string>
+				<string> "res://active-partials/environment/FPO_stage_c.xml" </string>
 				<resource  external="9">  </resource>
 				<vector2> -4.00003, -47 </vector2>
 				<vector2> 0.7, 0.7 </vector2>
