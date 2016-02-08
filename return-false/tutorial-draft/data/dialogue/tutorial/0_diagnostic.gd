@@ -113,10 +113,37 @@
         "0": {
           "dialogue": "I need you to fix that terminal. Start by running a diagnostic on it.",
           "responses": [
-          {
-            "text": "<NEW TASK: Diagnose and repair terminal.>",
-            "new_state": "20",
-            "dialog_action": 0
+            {
+              "text": "<NEW TASK: Diagnose and repair terminal.>",
+              "new_state": "20",
+              "dialog_action": 0
+              },
+            {
+              "text": "<Bluff> I already fixed it. [Trust: 1]",
+              "new_state": "80",
+              "conditions": [
+                {
+                  "compare": "gt",
+                  "owner": "self",
+                  "param": "trust",
+                  "val": 0
+                }
+              ],
+              "dialog_action": 1
+            },
+            {
+              "text": "<Lie> I was told you should fix it instead. [Trust: 10]",
+              "new_state": "80",
+              "conditions": [
+                {
+                  "compare": "gt",
+                  "owner": "self",
+                  "param": "trust",
+                  "val": 9
+                }
+              ],
+              "hide_if_invalid": true,
+              "dialog_action": 1
             }
           ]
         },

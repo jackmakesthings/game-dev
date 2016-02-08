@@ -66,6 +66,19 @@
               "text": "<Decline task>",
               "new_state": "5",
               "dialog_action": 1
+            },
+            {
+              "text": "<Bluff> I already gave it to you. It's in your truck. [Trust: 1]",
+              "new_state": "80",
+              "conditions": [
+                {
+                  "compare": "gt",
+                  "owner": "self",
+                  "param": "trust",
+                  "val": 0
+                }
+              ],
+              "dialog_action": 1
             }
           ]
         },

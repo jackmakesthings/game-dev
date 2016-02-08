@@ -11,7 +11,8 @@ export(String) var id
 export(String) var label
 export(Texture) var portrait
 
-
+# 2/8 - starting to play with the 'trust' variable concept
+export(int) var trust
 
 # npc_type: Is this a person, an object, 
 # a simpler object, or just something in the background?
@@ -388,6 +389,8 @@ func _ready():
 	set_paths()
 	set_branches()
 	npc_ready()
+	if( trust == null ):
+		trust = 0
 
 
 func _enter_tree():
