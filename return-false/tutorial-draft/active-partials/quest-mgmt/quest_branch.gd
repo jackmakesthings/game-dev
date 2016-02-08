@@ -121,6 +121,8 @@ func build_response(response_data):
 				print("invalid!")
 				btn.disconnect("pressed", self, fn)
 				btn.set("disabled", true)
+				if( r.has("hide_if_invalid") && r["hide_if_invalid"] == true ):
+					btn.set("visibility/visible", false)
 	return btn
 
 
