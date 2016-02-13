@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resource_file type="PackedScene" subresource_count="4" version="2.0" version_name="Godot Engine v2.0.rc1.custom_build">
+	<ext_resource path="res://active-partials/player/_robot.xml" type="PackedScene" index="1"></ext_resource>
+	<ext_resource path="res://assets/tiles/tilesets/iso-floors-walkable.xml" type="TileSet" index="0"></ext_resource>
+	<resource type="GDScript" path="local://1">
+		<string name="script/source"> "extends &quot;res://active-partials/environment/walkable-area.gd&quot;" </string>
+
+	</resource>
+	<main_resource>
+		<dictionary name="_bundled" shared="false">
+			<string> "conn_count" </string>
+			<int> 0 </int>
+			<string> "conns" </string>
+			<int_array  len="0"> 				 </int_array>
+			<string> "editable_instances" </string>
+			<array  len="0" shared="false">
+			</array>
+			<string> "names" </string>
+			<string_array  len="26">
+				<string> "env" </string>
+				<string> "script/script" </string>
+				<string> "__meta__" </string>
+				<string> "Node2D" </string>
+				<string> "nav" </string>
+				<string> "Navigation2D" </string>
+				<string> "floor" </string>
+				<string> "mode" </string>
+				<string> "tile_set" </string>
+				<string> "cell/size" </string>
+				<string> "cell/quadrant_size" </string>
+				<string> "cell/custom_transform" </string>
+				<string> "cell/half_offset" </string>
+				<string> "cell/tile_origin" </string>
+				<string> "cell/y_sort" </string>
+				<string> "collision/use_kinematic" </string>
+				<string> "collision/friction" </string>
+				<string> "collision/bounce" </string>
+				<string> "collision/layers" </string>
+				<string> "collision/mask" </string>
+				<string> "occluder/light_mask" </string>
+				<string> "tile_data" </string>
+				<string> "TileMap" </string>
+				<string> "robot" </string>
+				<string> "transform/pos" </string>
+				<string> "collision/margin" </string>
+			</string_array>
+			<string> "node_count" </string>
+			<int> 4 </int>
+			<string> "node_paths" </string>
+			<array  len="0" shared="false">
+			</array>
+			<string> "nodes" </string>
+			<int_array  len="66"> 				-1, -1, 3, 0, -1, 2, 1, 0, 2, 1, 0, 0, 0, 5, 4, -1, 0, 0, 1, 0, 22, 6, -1, 15, 7, 2, 8, 3, 9, 4, 10, 5, 11, 6, 12, 7, 13, 2, 14, 8, 15, 8, 16, 9, 17, 10, 18, 2, 19, 2, 20, 2, 21, 11, 0, 1, 0, 2147483647, 23, 12, 2, 24, 13, 25, 14, 0 </int_array>
+			<string> "variants" </string>
+			<array  len="15" shared="false">
+				<resource  resource_type="Script" path="local://1">  </resource>
+				<dictionary  shared="false">
+					<string> "__editor_plugin_screen__" </string>
+					<string> "2D" </string>
+				</dictionary>
+				<int> 1 </int>
+				<resource  external="0">  </resource>
+				<vector2> 72, 36 </vector2>
+				<int> 16 </int>
+				<matrix32> 1, 0, 0, 1, 0, 0 </matrix32>
+				<int> 2 </int>
+				<bool> False </bool>
+				<real> 1 </real>
+				<real> 0 </real>
+				<int_array  len="218"> 					-524272, 1, -524271, 1, -524270, 1, -458741, 1, -458740, 1, -458739, 1, -458738, 1, -458737, 1, -458736, 1, -458734, 1, -458733, 1, -393210, 1, -393209, 1, -393208, 1, -393207, 1, -393205, 1, -393202, 1, -393197, 1, -327674, 1, -327671, 1, -327670, 1, -327669, 1, -327666, 1, -327661, 1, -262138, 1, -262134, 1, -262130, 1, -262125, 1, -262124, 1, -196588, 1, -131066, 1, -131062, 1, -131052, 1, -65530, 1, -65526, 1, -65522, 1, -65519, 1, -65518, 1, -65517, 1, -65516, 1, -65515, 1, -65514, 1, -65513, 1, 6, 1, 7, 1, 8, 1, 9, 1, 10, 1, 14, 1, 15, 1, 16, 1, 17, 1, 23, 1, 65542, 1, 65546, 1, 131078, 1, 131082, 1, 131095, 1, 196614, 1, 196615, 1, 196618, 1, 196619, 1, 196631, 1, 196632, 1, 196633, 1, 196634, 1, 196635, 1, 196636, 1, 262151, 1, 262152, 1, 262153, 1, 262154, 1, 262159, 1, 262160, 1, 262161, 1, 262162, 1, 262163, 1, 262167, 1, 327690, 1, 327696, 1, 327701, 1, 327702, 1, 327703, 1, 393226, 1, 393232, 1, 393237, 1, 393239, 1, 393240, 1, 458762, 1, 458763, 1, 458773, 1, 524299, 1, 524300, 1, 524301, 1, 524304, 1, 524309, 1, 589838, 1, 589839, 1, 589840, 1, 589845, 1, 655377, 1, 655378, 1, 655379, 1, 655380, 1, 655381, 1, 655382, 1, 720913, 1, 720914, 1, 720919, 1 </int_array>
+				<resource  external="1">  </resource>
+				<vector2> 414.556, 275.231 </vector2>
+				<real> 0.08 </real>
+			</array>
+			<string> "version" </string>
+			<int> 2 </int>
+		</dictionary>
+
+	</main_resource>
+</resource_file>

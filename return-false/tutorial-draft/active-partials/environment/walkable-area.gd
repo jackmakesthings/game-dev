@@ -7,6 +7,11 @@ extends Node2D
 
 var TILE_ATTRACT = 8
 var TILE_TRANSITION = 0
+var TILE_DEFAULT = 2   # basic walkable
+var TILE_BLOCKED = 1   # basic unwalkable
+
+var map_size = Vector2(1000,1000)
+
 
 var scene
 var player
@@ -19,6 +24,20 @@ var tiles
 var outline
 
 var movement_allowed = true
+
+
+#################
+# fill_tiles(from=-1, to=TILE_DEFAULT)
+# quickly replace any blank tiles within our space
+# with plain walkable ones (or any other type)
+
+func fill_tiles(from=-1, to=TILE_DEFAULT):
+    var end = tiles.world_to_map(map_size)
+    for x in range(-end.x, end.x):
+        for y in range(-end.y, end.y):
+            if tiles.get_cell(x,y) == from:
+                tiles.set_cell(x,y, to)
+
 
 
 #################
@@ -116,21 +135,26 @@ func _unhandled_input(ev):
 		if( movement_allowed ):
 			print("moving node ", player.get_name(), " from ", begin, " to ", end, " in ", nav.get_name())
 			player.update_path(begin, end, nav);
-			outline.show()
+			if outline:
+				outline.show()
 			
 			# move the outline and remove the unwalkable point, if needed
-			if( adjust_path ):
-				outline.set_global_pos(player.path[1])
+			if( adjust_path and player.path.size() > 1):
+				if outline:
+					outline.set_global_pos(player.path[1])
 				player.path[0] = player.path[1]
 			else:
-				outline.set_global_pos(end)
+				if outline:
+					outline.set_global_pos(end)
 			
 			# ev.meta can be set to prevent an outline from appearing
 			if( ev.meta == 1 ):
-				outline.hide()
+				if outline:
+					outline.hide()
 		
 			yield(player, "done_moving")
-			outline.hide()
+			if outline:
+				outline.hide()
 			get_surrounding_tiles(player.get_global_pos())
 			
 			# are we standing next to someone we should turn and face?
@@ -148,16 +172,17 @@ func set_internals():
 	
 	# vars
 	nav = get_node("nav")
-	tiles = get_node("nav/floor")
-	body_layer = get_node("nav/floor/bodies")
+	tiles = find_node("floor")
+	# body_layer = find_node("robot").get_parent()
 	player = find_node("robot")
 	npcs = get_tree().get_nodes_in_group("npcs")
-	outline = get_node("destination_sprite")
+	outline = find_node("destination_sprite")
 	TILE_ATTRACT = tiles.get_tileset().find_tile_by_name("attractor")
 	
 	#actions
 	# hide the green destination indicator, to start
-	outline.hide()
+	if outline:
+		outline.hide()
 	
 	# and hook up the npcs so they can create attractor tiles
 	for i in npcs:
@@ -202,6 +227,10 @@ func _ready():
 	set_internals()
 	set_externals()
 	
+	fill_tiles(-1,TILE_DEFAULT) # change empty tiles to invisible tile with just navigation poly
+	#delete_squares() # remove nav tiles near the walls
+	remove_child(tiles) # readd tilemap, otherwise navigation poly wont work
+	add_child(tiles)
 	# start listening for clicks (for moving the player)
 	set_process_unhandled_input(true)
 
