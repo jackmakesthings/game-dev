@@ -106,6 +106,8 @@ func setup_MUI(portrait_path=null, labeltext=""):
 
 
 func i_should_go():
+	if( !MUI ):
+		return
 	if( fallback_dialogue == "" or fallback_dialogue == null or show_fallback == false ):
 		MUI.clear()
 		MUI.close()
@@ -271,7 +273,8 @@ func redirect_player(player, destination):
 
 
 func _on_click():
-	player = get_node("/root/scene").get("player")
+	#player = get_node("/root/scene").get("player")
+	player = get_tree().get_current_scene().find_node("robot")
 	player.set("path", Array())
 	check_for_player()
 	if( player_nearby ):
