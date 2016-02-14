@@ -2,7 +2,6 @@ extends Node2D
 
 var player
 var env
-var npc_root
 var MUI
 var menu
 var main_menu
@@ -26,9 +25,6 @@ const MUI_scene = preload("res://active-partials/message-ui/MUI_.xscn")
 const ingame_menu_scene = preload("res://active-partials/interface/in-game-menu_.xml")
 const main_menu_scene = preload("res://active-partials/interface/game-menu_.xml")
 
-#const main_menu_scene = preload("res://active-partials/interface/game-menu_.xml")
-#var main_menu_scene = "res://active-partials/interface/game-menu_.xml"
-#signal scene_changed(new_scene, key)
 
 signal env_changed(env)
 
@@ -41,39 +37,10 @@ func swap_env(new_env):
 	yield(fade_anim, "finished")
 	call_deferred("simple_swap_env", new_env)
 	
-	
-func _swap_env(new_env):
-
-	var _name = env.get_name()
-	var _pos = env.get_position_in_parent()
-	var _player = player
-	
-	env.body_layer.remove_child(player)
-
-	
-	env.set_process_unhandled_input(false)
-	env.set_name("_env")
-	env.free()
-	
-	var _env = new_env.instance()
-	
-	add_child(_env)
-	_env.set_name("env")
-	move_child(_env, _pos)
-	
-	_env.body_layer.add_child(player)
-	player.set_pos(prev_pos)
-	
-	env = _env
-	npc_root = env.body_layer
-	
-
-	emit_signal("env_changed", env)
 
 
 func simple_swap_env(new_env):
 	
-#	var _name = env.get_name()
 	var _pos = env.get_position_in_parent()
 		
 	env.set_process_unhandled_input(false)
@@ -87,7 +54,6 @@ func simple_swap_env(new_env):
 	move_child(_env, _pos)
 	
 	env = _env
-	npc_root = env.body_layer
 	player = env.find_node("robot")
 	
 	emit_signal("env_changed", env)
@@ -157,17 +123,6 @@ func create_env(base):
 	env.set_name("env")
 	move_child(env, 1)
 	
-	if typeof(env.body_layer) != TYPE_NIL:
-		npc_root = env.body_layer
-	#	return true
-	elif env.has_node("nav/floor/bodies"):
-		env.body_layer = env.get_node("nav/floor/bodies")
-		npc_root = env.body_layer
-	#	return true
-	##else:
-	#	return false
-	
-
 
 func _init():
 	create_instances()
@@ -182,7 +137,6 @@ func set_internals():
 
 func set_externals():
 	_ = get_node("/root/_")
-	npc_root =  env.body_layer
 
 
 func update_registry(params):
@@ -196,8 +150,7 @@ func _ready():
 	set_externals()
 	update_registry(["player", "env", "MUI"])
 	
-	#npc_root.add_child(player)
+
 	env.set_process_unhandled_input(true)
-	#env.body_layer.add_child(player)
 	get_tree().set_current_scene(get_tree().get_current_scene())
 

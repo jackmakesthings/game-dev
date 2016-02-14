@@ -1,6 +1,6 @@
 #quest class - expects external data, creates branch nodes from json,
 # attaches them to npcs based on references (names)
-# 9/7/15
+# 2/13/16
 
 extends Node
 
@@ -8,12 +8,9 @@ extends Node
 export(String) var Q_ID
 
 # important nodes we'll need to reference, once we're in the scene
-#var game
-#var paths
 var utils
 
 var quest_root
-var npc_root
 
 # todo: see if this can be removed now
 var branch_group
@@ -63,6 +60,8 @@ func _init():
 	Q_ID = Q_ID
 	branch_group = "" + str(Q_ID) + "-branches"
 
+
+
 func load_data(data_source):
 	data = utils.get_json(data_source)
 	
@@ -75,6 +74,8 @@ func load_data(data_source):
 		branch_group = Q_ID + "-branches"
 		
 	is_ready = true
+
+
 
 # apply data from our parsed json to the Branch template
 # and add the resulting branch node to the scene as children
@@ -96,6 +97,7 @@ func create_branches_from_data(data=data):
 		add_child(branch_node)
 		branch_node.add_to_group(branch_group)
 
+
 				
 func attach_branch(branch):
 	var actor_ref = branch.get("actor")
@@ -103,7 +105,7 @@ func attach_branch(branch):
 		return
 	else:
 		remove_child(branch)
-		var actor = npc_root.get_node(actor_ref)
+		var actor = get_tree().get_root().find_node(actor_ref)
 		branch.set("Q_ID", Q_ID)
 		branch.set_name(Q_ID)
 		branch.set("owned_by", self)
@@ -124,12 +126,13 @@ func attach_branch(branch):
 			actors.append(actor_ref)
 			actor.add_to_group(Q_ID + "-actors")
 
+
+
 # this will generally come right after the function above
 # it takes the child branches of this quest node and moves them
 # so they're children of their associated NPCs instead
 func attach_branches():
 
-	npc_root = get_tree().get_root().get_node("/root/scene").get("npc_root")
 	var branch_nodes = get_children()
 	for branch in branch_nodes:
 	
@@ -148,19 +151,15 @@ func attach_branches():
 # this involves updating the npc associated with the branch.
 func detach_branch(branch):
 	var actor_ref = branch.get("actor")
-	if not npc_root.has_node(actor_ref):
+	if not get_tree().get_root().find_node(actor_ref):
 		return
 	else:
-		var actor = npc_root.get_node(actor_ref)
+		var actor =  get_tree().get_root().find_node(actor_ref)
 		if( actor["dialog_branches"].find(branch) > -1 ):
 			actor.get_node(Q_ID).queue_free()
 			actor["dialog_branches"].erase(branch)
 			actor.call("check_branches")
-#			actor["dialog_branches"].remove(Q_ID)
-#			print( actor )
-#			print(actor["dialog_branches"])
-#			actor["has_branches"] = (actor["dialog_branches"].size() > 0)
-#	branch.queue_free()
+
 
 # detach all branches for a given quest
 # this is probably going to get used much more than detach_branch alone
@@ -171,14 +170,19 @@ func detach_branches():
 		detach_branch(branch)
 	emit_signal("branches_removed", Q_ID, actors)
 
+
+
 func is_active():
 	return is_active
+
 
 func is_ready():
 	return is_ready
 
+
 func is_attached():
 	return branches_ready
+
 
 func activate(start_state=init_at):
 	if( is_active() == true ):
@@ -193,17 +197,17 @@ func activate(start_state=init_at):
 
 
 func deactivate():
-	#if( is_active() == false ):
-	#	print("Quest ", Q_ID, " is not active.")
-	#	return
-	#else:
 		self.remove_from_group("active_quests")
 		detach_branches()
 		is_active = false
 
+
+
 func destroy():
 	deactivate()
 	call_deferred("free")
+
+
 
 func set_current_state(state):
 
@@ -233,7 +237,6 @@ func set_current_state(state):
 
 	prev_state = current_state
 	current_state = state
-#	game.quest_states[Q_ID] = state
 	
 	if( logs.has(state) ):
 		var _log = logs[state]
@@ -292,17 +295,7 @@ func refresh():
 
 
 func _enter_tree():
-	#game = get_node("/root/game")
 	utils = get_node("/root/utils")
-	#paths = get_node("/root/paths")
-	
-	var sceneroot = get_tree().get_root().get_node("/root/scene")
-	if( sceneroot.get("stage") ):
-		var stage = sceneroot["stage"]
-		if ( stage.get("body_layer") ):
-			npc_root = stage["body_layer"]
-	
-	#npc_root = get_tree().get_root().find_node("robot").get_parent()	
 	quest_root = get_parent()
 
 	add_user_signal("branches_added", [Q_ID, actors])
@@ -321,13 +314,10 @@ func _setup():
 		log_base = get_node("/root/scene/journal_ui")
 		MUI = get_node("/root/scene/message-ui")
 		quest_root = get_parent()
-		#npc_root = get_tree().get_root().find_node("nav").get_child(1)
-		npc_root = null
 
 
 func _ready():
 	_setup()
-	#activate()
 
 
 func _test():

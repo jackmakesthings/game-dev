@@ -18,7 +18,6 @@ var player
 var npcs
 var utils
 
-var body_layer
 var nav
 var tiles
 var outline
@@ -173,7 +172,6 @@ func set_internals():
 	# vars
 	nav = get_node("nav")
 	tiles = find_node("floor")
-	# body_layer = find_node("robot").get_parent()
 	player = find_node("robot")
 	npcs = get_tree().get_nodes_in_group("npcs")
 	outline = find_node("destination_sprite")
@@ -211,11 +209,6 @@ func set_externals():
 	scene = get_parent()
 	player = find_node("robot")
 	
-	# 2) player --- TODO: should this use scene.player or _.player?
-#	if( scene.get("player") != null ):
-#		player = scene.get("player")
-#	else:
-#		player = null
 
 
 
@@ -227,11 +220,10 @@ func _ready():
 	set_internals()
 	set_externals()
 	
-	fill_tiles(-1,TILE_DEFAULT) # change empty tiles to invisible tile with just navigation poly
-	#delete_squares() # remove nav tiles near the walls
-	remove_child(tiles) # readd tilemap, otherwise navigation poly wont work
+	fill_tiles(-1,TILE_DEFAULT) # change empty tiles
+	remove_child(tiles) # "refresh" the tilemap so navpoly works
 	add_child(tiles)
-	# start listening for clicks (for moving the player)
+
 	set_process_unhandled_input(true)
 	setup()
 
@@ -242,6 +234,5 @@ func setup():
 	pass
 
 func _enter_tree():
-#	set_name("stage")
 	set_internals()
 	set_externals()
