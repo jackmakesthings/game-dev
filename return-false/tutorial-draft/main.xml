@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="19" version="2.0" version_name="Godot Engine v2.0.beta.custom_build">
+<resource_file type="PackedScene" subresource_count="19" version="2.0" version_name="Godot Engine v2.0.rc1.custom_build">
 	<ext_resource path="res://assets/cursors/png/square185.png" type="Texture" index="8"></ext_resource>
-	<ext_resource path="res://main.gd" type="Script" index="0"></ext_resource>
-	<ext_resource path="res://assets/ui.xthm" type="Theme" index="2"></ext_resource>
-	<ext_resource path="res://active-partials/journal/base_journal.gd" type="Script" index="1"></ext_resource>
-	<ext_resource path="res://active-partials/interface/in-game-ui_.gd" type="Script" index="3"></ext_resource>
-	<ext_resource path="res://assets/ui/code39 (2).tex" type="Texture" index="6"></ext_resource>
-	<ext_resource path="res://assets/ui/list31 (1).tex" type="Texture" index="4"></ext_resource>
 	<ext_resource path="res://assets/ui/list31.tex" type="Texture" index="5"></ext_resource>
+	<ext_resource path="res://active-partials/journal/base_journal.gd" type="Script" index="1"></ext_resource>
+	<ext_resource path="res://assets/ui.xthm" type="Theme" index="2"></ext_resource>
+	<ext_resource path="res://main.gd" type="Script" index="0"></ext_resource>
+	<ext_resource path="res://assets/ui/list31 (1).tex" type="Texture" index="4"></ext_resource>
+	<ext_resource path="res://active-partials/interface/in-game-ui_.gd" type="Script" index="3"></ext_resource>
 	<ext_resource path="res://assets/ui/code39 (1).tex" type="Texture" index="7"></ext_resource>
+	<ext_resource path="res://assets/ui/code39 (2).tex" type="Texture" index="6"></ext_resource>
 	<resource type="StyleBoxFlat" path="local://45">
 		<real name="content_margin/left"> 5 </real>
 		<real name="content_margin/right"> 5 </real>
@@ -47,7 +47,7 @@
 
 	</resource>
 	<resource type="GDScript" path="local://28">
-		<string name="script/source"> "extends &quot;res://active-partials/quest-mgmt/quest.gd&quot;&#000a;&#000a;&#000a;func post_state_change(old, new):&#000a;&#000a;&#0009;&#000a;&#0009;if( str(new) == &quot;20&quot; ):&#000a;&#0009;&#0009;var newq = quest_root.Quest.new()&#000a;&#000a;&#0009;&#000a;&#0009;&#0009;newq.set_name(&quot;Q_sandwich&quot;)&#000a;&#0009;&#0009;newq.Q_ID = &quot;Q_sandwich&quot;&#000a;&#0009;&#0009;newq.data_source = &quot;res://data/dialogue/temp/Q_sandwich.gd&quot;&#000a;&#0009;&#0009;newq.init_at = &quot;0&quot;&#000a;&#0009;&#0009;newq.complete_at = &quot;100&quot;&#000a;&#0009;&#0009;newq.dialog_label = &quot;Sandwiches&quot;&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;get_parent().add_child(newq)&#000a;&#0009;&#0009;newq.activate(&quot;0&quot;)&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;var ledit = get_parent().get_parent().get_node(&quot;Control/PopupPanel/VBoxContainer/Q_sandwich/LineEdit&quot;)&#000a;&#0009;&#0009;ledit.connect(&quot;text_entered&quot;, newq, &quot;set_current_state&quot;)&#000a;&#0009;&#0009;&#000a;&#0009;if( str(new) == &quot;100&quot; ):&#000a;&#0009;&#0009;var eng = npc_root.get_node(&quot;engineer&quot;)&#000a;&#0009;&#0009;eng.set(&quot;fallback_dialogue&quot;, &quot;Thanks for helping me with that diagnostic!&quot;)&#000a;&#0009;&#0009;eng.set(&quot;trust&quot;, 5)&#000a;&#0009;&#000a;&#0009;print(actors)" </string>
+		<string name="script/source"> "# node script for the diagnostics quest prototype&#000a;extends &quot;res://active-partials/quest-mgmt/quest.gd&quot;&#000a;&#000a;func post_state_change(old, new):&#000a;&#000a;&#0009;&#000a;&#0009;if( str(new) == &quot;20&quot; ):&#000a;&#0009;&#0009;var newq = quest_root.Quest.new()&#000a;&#000a;&#0009;&#000a;&#0009;&#0009;newq.set_name(&quot;Q_sandwich&quot;)&#000a;&#0009;&#0009;newq.Q_ID = &quot;Q_sandwich&quot;&#000a;&#0009;&#0009;newq.data_source = &quot;res://data/dialogue/temp/Q_sandwich.gd&quot;&#000a;&#0009;&#0009;newq.init_at = &quot;0&quot;&#000a;&#0009;&#0009;newq.complete_at = &quot;100&quot;&#000a;&#0009;&#0009;newq.dialog_label = &quot;Sandwiches&quot;&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;get_parent().add_child(newq)&#000a;&#0009;&#0009;newq.activate(&quot;0&quot;)&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;&#000a;&#0009;if( str(new) == &quot;100&quot; ):&#000a;&#0009;&#0009;var eng = get_tree().get_current_scene().find_node(&quot;engineer&quot;)&#000a;&#0009;&#0009;eng.set(&quot;fallback_dialogue&quot;, &quot;Thanks for helping me with that diagnostic!&quot;)&#000a;&#0009;&#0009;eng.set(&quot;trust&quot;, 5)&#000a;&#0009;" </string>
 
 	</resource>
 	<resource type="Animation" path="local://54">

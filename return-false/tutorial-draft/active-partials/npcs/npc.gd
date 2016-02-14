@@ -1,6 +1,6 @@
 # active-partials/npcs/npc.gd
 # General interaction-based NPC base
-# In use since 8/21 (updated 10/27)
+# In use since 8/21 (updated 2/13)
 # Related: message-ui, quest
 
 #extends Node2D
@@ -66,7 +66,6 @@ var footprint
 var attractors = Array() 
 var is_attracting         # bool
 
-#var player
 var quest_loader
 
 var x
@@ -260,7 +259,7 @@ func stop_attracting():
 
 
 func redirect_player(player, destination):
-
+	player = get_parent().find_node("robot")
 	player.set_fixed_process(false)
 	
 	var offset = destination.get_global_pos()
@@ -274,8 +273,9 @@ func redirect_player(player, destination):
 
 func _on_click():
 	#player = get_node("/root/scene").get("player")
-	player = get_tree().get_current_scene().find_node("robot")
-	player.set("path", Array())
+	player = get_parent().find_node("robot")
+	print(player)
+	#player.set("path", Array())
 	check_for_player()
 	if( player_nearby ):
 		get_tree().set_input_as_handled()
@@ -375,7 +375,9 @@ func set_paths():
 	body_node = get_node("body")
 	x = get_node("X")
 	clickable = get_node("body/Sprite")
-	player =_.get("player")
+	#player =_.get("player")
+	
+	player = get_parent().find_node("robot")
 	MUI = _.get("MUI")
 	if( MUI != null ):
 		n = MUI.make_formatted_name(label)
@@ -390,6 +392,8 @@ func npc_ready():
 func _ready():
 	set_process(true)
 	set_paths()
+	
+	#player = get_node("/root").find_node("robot")
 	set_branches()
 	npc_ready()
 	if( trust == null ):
@@ -398,6 +402,6 @@ func _ready():
 
 func _enter_tree():
 	set_paths()
-	player = get_node("/root/_").get("player")
+	#player = get_node("/root").find_node("robot")
 	check_branches()
 	set_attractors()
