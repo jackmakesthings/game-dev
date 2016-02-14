@@ -1,93 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="12" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
-	<ext_resource path="res://sandbox/detailed-walk-cycle-rbt.png" type="Texture" index="0"></ext_resource>
+<resource_file type="PackedScene" subresource_count="12" version="2.0" version_name="Godot Engine v2.0.rc1.custom_build">
+	<ext_resource path="res://sandbox/detailed-walk-cycle-rbt.png" type="Texture" index="1"></ext_resource>
+	<ext_resource path="res://active-partials/player/animated-k2d.gd" type="Script" index="0"></ext_resource>
 	<resource type="CircleShape2D" path="local://8">
 		<real name="custom_solver_bias"> 0 </real>
 		<real name="radius"> 19.5 </real>
-
-	</resource>
-	<resource type="GDScript" path="local://18">
-		<string name="script/source"> "### standard walking kinematic character&#000a;### needs to be passed a reference to the Nav2D node&#000a;### walks to point of click&#000a;### includes rudimentary sprite flipping and camera follow, now working!&#000a;### 8/8/15&#000a;&#000a;extends KinematicBody2D&#000a;&#000a;var begin=Vector2()&#000a;var end=Vector2()&#000a;var path=[]&#000a;&#000a;signal done_moving&#000a;&#000a;var nav&#000a;var front_texture&#000a;export(Texture) var back_texture&#000a;&#000a;var last_pos&#000a;var anim&#000a;var general_direction&#000a;&#000a;const SPEED=40.0&#000a;&#000a;var frames = {&#000a;&#0009;S = 0,&#000a;&#0009;SW = 9,&#000a;&#0009;W = 18,&#000a;&#0009;NW = 27,&#000a;&#0009;N = 36,&#000a;&#0009;NE = 45,&#000a;&#0009;E = 54,&#000a;&#0009;SE = 63&#000a;}&#000a;&#000a;&#000a;func _rotate_to(dir):&#000a;&#000a;&#0009;var new_anim&#000a;&#000a;&#0009;if( -25 &lt;= dir and dir &lt; 25 ):&#000a;&#0009;&#0009;new_anim = &quot;N&quot;&#000a;&#0009;elif( 25 &lt;= dir and dir &lt; 65 ):&#000a;&#0009;&#0009;new_anim = &quot;NW&quot;&#000a;&#0009;elif( 65 &lt;= dir and dir &lt; 116 ):&#000a;&#0009;&#0009;new_anim = &quot;W&quot;&#000a;&#0009;elif( 116 &lt;= dir and dir &lt; 155 ):&#000a;&#0009;&#0009;new_anim = &quot;SW&quot;&#000a;&#0009;elif(( 155 &lt;= dir and dir &lt;= 180 ) or ( -180 &lt;= dir and dir &lt;= -155 )):&#000a;&#0009;&#0009;new_anim = &quot;S&quot;&#000a;&#0009;elif( -65 &lt;= dir and dir &lt; -25 ):&#000a;&#0009;&#0009;new_anim = &quot;NE&quot;&#000a;&#0009;elif( -116 &lt;= dir and dir &lt; -65 ):&#000a;&#0009;&#0009;new_anim = &quot;E&quot;&#000a;&#0009;elif( -155 &lt;= dir and dir &lt; -116 ):&#000a;&#0009;&#0009;new_anim = &quot;SE&quot;&#000a;&#0009;else:&#000a;&#0009;&#0009;new_anim = &quot;S&quot;&#000a;&#0009;&#000a;&#0009;return new_anim&#000a;&#000a;&#000a;func _fixed_process(delta):&#000a;&#000a;&#0009;var dir = rad2deg(last_pos.angle_to_point(get_global_pos()))&#000a;&#0009;#print(last_pos.angle_to(get_global_pos()))&#000a;&#0009;#print(dir)&#000a;&#0009;&#000a;&#0009;&#000a;#&#0009;var new_anim = _rotate_to(dir)&#000a;#&#0009;if ( new_anim and anim.get_current_animation() != new_anim):&#000a;#&#0009;&#0009;anim.play(new_anim)&#000a;&#000a;&#0009;last_pos = get_global_pos()&#000a;&#000a;&#0009;if (path.size()&gt;1):&#000a;&#0009;&#000a;&#0009;&#0009;var to_walk = delta*SPEED&#000a;&#0009;&#0009;while(to_walk&gt;0 and path.size()&gt;=2):&#000a;&#0009;&#0009;&#0009;var pfrom = path[path.size()-1]&#000a;&#0009;&#0009;&#0009;var pto = path[path.size()-2]&#000a;&#0009;&#0009;&#0009;var d = pfrom.distance_to(pto)&#000a;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;&#0009;var direction = (pto - pfrom).normalized()&#000a;&#0009;&#0009;&#0009;var spr = get_node(&quot;Sprite&quot;)&#000a;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;&#0009;if (d&lt;=to_walk):&#000a;&#0009;&#0009;&#0009;&#0009;path.remove(path.size()-1)&#000a;&#0009;&#0009;&#0009;&#0009;to_walk-=d&#000a;&#0009;&#0009;&#0009;else:&#000a;&#0009;&#0009;&#0009;&#0009;path[path.size()-1] = pfrom.linear_interpolate(pto,to_walk/d)&#000a;&#0009;&#0009;&#0009;&#0009;to_walk=0&#000a;&#0009;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;var atpos = path[path.size()-1]&#000a;&#0009;&#0009;var direction = _rotate_to(rad2deg(get_pos().angle_to_point(atpos)))&#000a;&#0009;&#0009;if( direction != anim.get_current_animation() ):&#000a;&#0009;&#0009;&#0009;anim.play(direction)&#000a;&#0009;&#0009;move_to(atpos);&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;if(is_colliding()):&#000a;&#0009;&#0009;&#0009;var n = get_collision_normal()&#000a;&#0009;&#0009;&#0009;var motion = n.slide(atpos - get_global_pos())&#000a;&#0009;&#0009;&#0009;move(motion)&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;else:&#000a;&#0009;&#0009;&#0009;pass&#000a;&#0009;&#0009;&#000a;&#0009;&#0009;if (path.size()&lt;2):&#000a;&#0009;&#0009;&#0009;var frame&#000a;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;&#0009;path=[]&#000a;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;&#0009;set_fixed_process(false)&#000a;&#0009;&#0009;&#0009;var curr = anim.get_current_animation()&#000a;&#0009;&#0009;&#0009;&#000a;&#0009;&#0009;&#0009;anim.set_current_animation(&quot;&quot;)&#000a;&#0009;&#0009;&#0009;anim.stop(true)&#000a;&#0009;&#0009;&#0009;get_node(&quot;Sprite&quot;).set_frame(frames[curr])&#000a;&#0009;&#0009;&#0009;emit_signal(&quot;done_moving&quot;)&#000a;&#0009;else:&#000a;&#0009;&#0009;anim.stop(true)&#000a;&#0009;&#0009;set_fixed_process(false);&#000a;&#0009;&#0009;anim.set_current_animation(&quot;&quot;)&#000a;&#000a;func update_path(begin, end, nav):&#000a;&#0009;var p = nav.get_simple_path(begin,end,false) # not documented yet&#000a;&#0009;path=Array(p)&#000a;&#0009;path.invert() &#000a;&#0009;&#000a;&#0009;general_direction = rad2deg(begin.angle_to_point(end))&#000a;&#0009;anim.set_active(true)&#000a;&#0009;set_fixed_process(true) # keep on movin&apos;&#000a;&#000a;func _ready():&#000a;&#0009;front_texture = get_node(&quot;Sprite&quot;).get_texture()&#000a;&#0009;back_texture = front_texture&#000a;&#0009;anim = get_node(&quot;anim&quot;)&#000a;&#0009;add_user_signal(&quot;done_moving&quot;)&#000a;&#0009;&#000a;&#0009;last_pos = get_pos()&#000a;&#000a;&#0009;set_fixed_process(true)&#000a;&#000a;" </string>
-
-	</resource>
-	<resource type="Animation" path="local://15">
-		<string name="resource/name"> "N" </string>
-		<real name="length"> 0.9 </real>
-		<bool name="loop"> True </bool>
-		<real name="step"> 0.15 </real>
-		<string name="tracks/0/type"> "value" </string>
-		<node_path name="tracks/0/path"> "Sprite:frame" </node_path>
-		<int name="tracks/0/interp"> 1 </int>
-		<dictionary name="tracks/0/keys" shared="false">
-			<string> "cont" </string>
-			<bool> False </bool>
-			<string> "times" </string>
-			<real_array  len="6"> 				0, 0.15, 0.3, 0.45, 0.6, 0.75 </real_array>
-			<string> "transitions" </string>
-			<real_array  len="6"> 				1, 1, 1, 1, 1, 1 </real_array>
-			<string> "values" </string>
-			<array  len="6" shared="false">
-				<int> 36 </int>
-				<int> 37 </int>
-				<int> 38 </int>
-				<int> 39 </int>
-				<int> 40 </int>
-				<int> 41 </int>
-			</array>
-		</dictionary>
-
-	</resource>
-	<resource type="Animation" path="local://10">
-		<real name="length"> 0.9 </real>
-		<bool name="loop"> True </bool>
-		<real name="step"> 0.15 </real>
-		<string name="tracks/0/type"> "value" </string>
-		<node_path name="tracks/0/path"> "Sprite:frame" </node_path>
-		<int name="tracks/0/interp"> 0 </int>
-		<dictionary name="tracks/0/keys" shared="false">
-			<string> "cont" </string>
-			<bool> False </bool>
-			<string> "times" </string>
-			<real_array  len="6"> 				0, 0.15, 0.3, 0.45, 0.6, 0.75 </real_array>
-			<string> "transitions" </string>
-			<real_array  len="6"> 				1, 1, 1, 1, 1, 1 </real_array>
-			<string> "values" </string>
-			<array  len="6" shared="false">
-				<int> 27 </int>
-				<int> 28 </int>
-				<int> 30 </int>
-				<int> 31 </int>
-				<int> 32 </int>
-				<int> 33 </int>
-			</array>
-		</dictionary>
-
-	</resource>
-	<resource type="Animation" path="local://11">
-		<real name="length"> 0.9 </real>
-		<bool name="loop"> True </bool>
-		<real name="step"> 0.15 </real>
-		<string name="tracks/0/type"> "value" </string>
-		<node_path name="tracks/0/path"> "Sprite:frame" </node_path>
-		<int name="tracks/0/interp"> 0 </int>
-		<dictionary name="tracks/0/keys" shared="false">
-			<string> "cont" </string>
-			<bool> False </bool>
-			<string> "times" </string>
-			<real_array  len="7"> 				0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9 </real_array>
-			<string> "transitions" </string>
-			<real_array  len="7"> 				1, 1, 1, 1, 1, 1, 1 </real_array>
-			<string> "values" </string>
-			<array  len="7" shared="false">
-				<int> 9 </int>
-				<int> 10 </int>
-				<int> 11 </int>
-				<int> 12 </int>
-				<int> 13 </int>
-				<int> 14 </int>
-				<int> 15 </int>
-			</array>
-		</dictionary>
 
 	</resource>
 	<resource type="Animation" path="local://17">
@@ -118,7 +35,8 @@
 		</dictionary>
 
 	</resource>
-	<resource type="Animation" path="local://13">
+	<resource type="Animation" path="local://15">
+		<string name="resource/name"> "N" </string>
 		<real name="length"> 0.9 </real>
 		<bool name="loop"> True </bool>
 		<real name="step"> 0.15 </real>
@@ -129,18 +47,17 @@
 			<string> "cont" </string>
 			<bool> False </bool>
 			<string> "times" </string>
-			<real_array  len="7"> 				0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9 </real_array>
+			<real_array  len="6"> 				0, 0.15, 0.3, 0.45, 0.6, 0.75 </real_array>
 			<string> "transitions" </string>
-			<real_array  len="7"> 				1, 1, 1, 1, 1, 1, 1 </real_array>
+			<real_array  len="6"> 				1, 1, 1, 1, 1, 1 </real_array>
 			<string> "values" </string>
-			<array  len="7" shared="false">
-				<int> 1 </int>
-				<int> 2 </int>
-				<int> 3 </int>
-				<int> 4 </int>
-				<int> 5 </int>
-				<int> 6 </int>
-				<int> 7 </int>
+			<array  len="6" shared="false">
+				<int> 36 </int>
+				<int> 37 </int>
+				<int> 38 </int>
+				<int> 39 </int>
+				<int> 40 </int>
+				<int> 41 </int>
 			</array>
 		</dictionary>
 
@@ -175,6 +92,59 @@
 		</dictionary>
 
 	</resource>
+	<resource type="Animation" path="local://10">
+		<real name="length"> 0.9 </real>
+		<bool name="loop"> True </bool>
+		<real name="step"> 0.15 </real>
+		<string name="tracks/0/type"> "value" </string>
+		<node_path name="tracks/0/path"> "Sprite:frame" </node_path>
+		<int name="tracks/0/interp"> 0 </int>
+		<dictionary name="tracks/0/keys" shared="false">
+			<string> "cont" </string>
+			<bool> False </bool>
+			<string> "times" </string>
+			<real_array  len="6"> 				0, 0.15, 0.3, 0.45, 0.6, 0.75 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="6"> 				1, 1, 1, 1, 1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="6" shared="false">
+				<int> 27 </int>
+				<int> 28 </int>
+				<int> 30 </int>
+				<int> 31 </int>
+				<int> 32 </int>
+				<int> 33 </int>
+			</array>
+		</dictionary>
+
+	</resource>
+	<resource type="Animation" path="local://13">
+		<real name="length"> 0.9 </real>
+		<bool name="loop"> True </bool>
+		<real name="step"> 0.15 </real>
+		<string name="tracks/0/type"> "value" </string>
+		<node_path name="tracks/0/path"> "Sprite:frame" </node_path>
+		<int name="tracks/0/interp"> 1 </int>
+		<dictionary name="tracks/0/keys" shared="false">
+			<string> "cont" </string>
+			<bool> False </bool>
+			<string> "times" </string>
+			<real_array  len="7"> 				0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="7"> 				1, 1, 1, 1, 1, 1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="7" shared="false">
+				<int> 1 </int>
+				<int> 2 </int>
+				<int> 3 </int>
+				<int> 4 </int>
+				<int> 5 </int>
+				<int> 6 </int>
+				<int> 7 </int>
+			</array>
+		</dictionary>
+
+	</resource>
 	<resource type="Animation" path="local://16">
 		<string name="resource/name"> "SE" </string>
 		<real name="length"> 0.9 </real>
@@ -200,6 +170,33 @@
 				<int> 69 </int>
 				<int> 70 </int>
 				<int> 62 </int>
+			</array>
+		</dictionary>
+
+	</resource>
+	<resource type="Animation" path="local://11">
+		<real name="length"> 0.9 </real>
+		<bool name="loop"> True </bool>
+		<real name="step"> 0.15 </real>
+		<string name="tracks/0/type"> "value" </string>
+		<node_path name="tracks/0/path"> "Sprite:frame" </node_path>
+		<int name="tracks/0/interp"> 0 </int>
+		<dictionary name="tracks/0/keys" shared="false">
+			<string> "cont" </string>
+			<bool> False </bool>
+			<string> "times" </string>
+			<real_array  len="7"> 				0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="7"> 				1, 1, 1, 1, 1, 1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="7" shared="false">
+				<int> 9 </int>
+				<int> 10 </int>
+				<int> 11 </int>
+				<int> 12 </int>
+				<int> 13 </int>
+				<int> 14 </int>
+				<int> 15 </int>
 			</array>
 		</dictionary>
 
@@ -240,7 +237,7 @@
 			<array  len="0" shared="false">
 			</array>
 			<string> "names" </string>
-			<string_array  len="59">
+			<string_array  len="61">
 				<string> "player" </string>
 				<string> "transform/pos" </string>
 				<string> "input/pickable" </string>
@@ -252,6 +249,7 @@
 				<string> "collision/margin" </string>
 				<string> "script/script" </string>
 				<string> "__meta__" </string>
+				<string> "front_texture" </string>
 				<string> "back_texture" </string>
 				<string> "KinematicBody2D" </string>
 				<string> "Sprite" </string>
@@ -266,7 +264,6 @@
 				<string> "anchor_mode" </string>
 				<string> "rotating" </string>
 				<string> "current" </string>
-				<string> "smoothing" </string>
 				<string> "zoom" </string>
 				<string> "limit/left" </string>
 				<string> "limit/top" </string>
@@ -274,6 +271,8 @@
 				<string> "limit/bottom" </string>
 				<string> "drag_margin/h_enabled" </string>
 				<string> "drag_margin/v_enabled" </string>
+				<string> "smoothing/enable" </string>
+				<string> "smoothing/speed" </string>
 				<string> "drag_margin/left" </string>
 				<string> "drag_margin/top" </string>
 				<string> "drag_margin/right" </string>
@@ -287,13 +286,13 @@
 				<string> "playback/process_mode" </string>
 				<string> "playback/default_blend_time" </string>
 				<string> "root/root" </string>
-				<string> "anims/N" </string>
-				<string> "anims/NW" </string>
-				<string> "anims/SW" </string>
 				<string> "anims/E" </string>
-				<string> "anims/S" </string>
+				<string> "anims/N" </string>
 				<string> "anims/NE" </string>
+				<string> "anims/NW" </string>
+				<string> "anims/S" </string>
 				<string> "anims/SE" </string>
+				<string> "anims/SW" </string>
 				<string> "anims/W" </string>
 				<string> "playback/active" </string>
 				<string> "playback/speed" </string>
@@ -307,175 +306,44 @@
 			<array  len="0" shared="false">
 			</array>
 			<string> "nodes" </string>
-			<int_array  len="141"> 				-1, -1, 12, 0, -1, 11, 1, 0, 2, 1, 3, 2, 4, 3, 5, 1, 6, 4, 7, 4, 8, 5, 9, 6, 10, 7, 11, 8, 0, 0, 0, 13, 13, -1, 6, 14, 4, 15, 9, 16, 10, 17, 11, 18, 12, 19, 13, 0, 0, 0, 37, 20, -1, 16, 21, 1, 22, 4, 23, 1, 24, 1, 25, 14, 26, 15, 27, 16, 28, 16, 29, 17, 30, 17, 31, 18, 32, 18, 33, 19, 34, 19, 35, 19, 36, 19, 0, 0, 0, 38, 38, -1, 5, 21, 1, 1, 20, 39, 2, 40, 1, 41, 21, 0, 0, 0, 58, 42, -1, 15, 43, 22, 44, 14, 45, 23, 46, 24, 47, 25, 48, 26, 49, 27, 50, 28, 51, 29, 52, 30, 53, 31, 54, 18, 55, 32, 56, 33, 57, 34, 0 </int_array>
+			<int_array  len="145"> 				-1, -1, 13, 0, -1, 12, 1, 0, 2, 1, 3, 2, 4, 3, 5, 1, 6, 4, 7, 4, 8, 5, 9, 6, 10, 7, 11, 8, 12, 8, 0, 0, 0, 14, 14, -1, 6, 15, 4, 16, 9, 17, 10, 18, 11, 19, 12, 20, 13, 0, 0, 0, 39, 21, -1, 17, 22, 1, 23, 4, 24, 1, 25, 1, 26, 14, 27, 15, 28, 15, 29, 16, 30, 16, 31, 17, 32, 17, 33, 1, 34, 18, 35, 19, 36, 19, 37, 19, 38, 19, 0, 0, 0, 40, 40, -1, 5, 22, 1, 1, 20, 41, 2, 42, 1, 43, 21, 0, 0, 0, 60, 44, -1, 15, 45, 22, 46, 23, 47, 24, 48, 25, 49, 26, 50, 27, 51, 28, 52, 29, 53, 30, 54, 31, 55, 32, 56, 17, 57, 33, 58, 34, 59, 35, 0 </int_array>
 			<string> "variants" </string>
-			<array  len="35" shared="false">
+			<array  len="36" shared="false">
 				<vector2> 182.001, 220.645 </vector2>
 				<bool> False </bool>
 				<resource  resource_type="Shape2D" path="local://8">  </resource>
 				<matrix32> 1, -0, 0, 1, -4.91095, 19.1876 </matrix32>
 				<int> 1 </int>
 				<real> 0.08 </real>
-				<resource  resource_type="Script" path="local://18">  </resource>
+				<resource  external="0">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
 					<string> "2D" </string>
-					<string> "__editor_plugin_states__" </string>
-					<dictionary  shared="false">
-						<string> "2D" </string>
-						<dictionary  shared="false">
-							<string> "ofs" </string>
-							<vector2> -273.451, -184.445 </vector2>
-							<string> "snap_grid" </string>
-							<bool> True </bool>
-							<string> "snap_offset" </string>
-							<vector2> 0, 0 </vector2>
-							<string> "snap_pixel" </string>
-							<bool> False </bool>
-							<string> "snap_relative" </string>
-							<bool> False </bool>
-							<string> "snap_rotation" </string>
-							<bool> True </bool>
-							<string> "snap_rotation_offset" </string>
-							<real> 0 </real>
-							<string> "snap_rotation_step" </string>
-							<real> 0.523599 </real>
-							<string> "snap_show_grid" </string>
-							<bool> False </bool>
-							<string> "snap_step" </string>
-							<vector2> 9, 9 </vector2>
-							<string> "zoom" </string>
-							<real> 0.735091 </real>
-						</dictionary>
-						<string> "3D" </string>
-						<dictionary  shared="false">
-							<string> "ambient_light_color" </string>
-							<color> 0.15, 0.15, 0.15, 1 </color>
-							<string> "default_light" </string>
-							<bool> True </bool>
-							<string> "default_srgb" </string>
-							<bool> False </bool>
-							<string> "deflight_rot_x" </string>
-							<real> 0.942478 </real>
-							<string> "deflight_rot_y" </string>
-							<real> 0.628319 </real>
-							<string> "fov" </string>
-							<real> 45 </real>
-							<string> "show_grid" </string>
-							<bool> True </bool>
-							<string> "show_origin" </string>
-							<bool> True </bool>
-							<string> "viewport_mode" </string>
-							<int> 1 </int>
-							<string> "viewports" </string>
-							<array  len="4" shared="false">
-								<dictionary  shared="false">
-									<string> "distance" </string>
-									<real> 4 </real>
-									<string> "listener" </string>
-									<bool> True </bool>
-									<string> "pos" </string>
-									<vector3> 0, 0, 0 </vector3>
-									<string> "use_environment" </string>
-									<bool> False </bool>
-									<string> "use_orthogonal" </string>
-									<bool> False </bool>
-									<string> "x_rot" </string>
-									<real> 0 </real>
-									<string> "y_rot" </string>
-									<real> 0 </real>
-								</dictionary>
-								<dictionary  shared="false">
-									<string> "distance" </string>
-									<real> 4 </real>
-									<string> "listener" </string>
-									<bool> False </bool>
-									<string> "pos" </string>
-									<vector3> 0, 0, 0 </vector3>
-									<string> "use_environment" </string>
-									<bool> False </bool>
-									<string> "use_orthogonal" </string>
-									<bool> False </bool>
-									<string> "x_rot" </string>
-									<real> 0 </real>
-									<string> "y_rot" </string>
-									<real> 0 </real>
-								</dictionary>
-								<dictionary  shared="false">
-									<string> "distance" </string>
-									<real> 4 </real>
-									<string> "listener" </string>
-									<bool> False </bool>
-									<string> "pos" </string>
-									<vector3> 0, 0, 0 </vector3>
-									<string> "use_environment" </string>
-									<bool> False </bool>
-									<string> "use_orthogonal" </string>
-									<bool> False </bool>
-									<string> "x_rot" </string>
-									<real> 0 </real>
-									<string> "y_rot" </string>
-									<real> 0 </real>
-								</dictionary>
-								<dictionary  shared="false">
-									<string> "distance" </string>
-									<real> 4 </real>
-									<string> "listener" </string>
-									<bool> False </bool>
-									<string> "pos" </string>
-									<vector3> 0, 0, 0 </vector3>
-									<string> "use_environment" </string>
-									<bool> False </bool>
-									<string> "use_orthogonal" </string>
-									<bool> False </bool>
-									<string> "x_rot" </string>
-									<real> 0 </real>
-									<string> "y_rot" </string>
-									<real> 0 </real>
-								</dictionary>
-							</array>
-							<string> "zfar" </string>
-							<real> 500 </real>
-							<string> "znear" </string>
-							<real> 0.1 </real>
-						</dictionary>
-						<string> "Anim" </string>
-						<dictionary  shared="false">
-							<string> "visible" </string>
-							<bool> False </bool>
-						</dictionary>
-					</dictionary>
-					<string> "__editor_run_settings__" </string>
-					<dictionary  shared="false">
-						<string> "custom_args" </string>
-						<string> "-l $scene" </string>
-						<string> "run_mode" </string>
-						<int> 0 </int>
-					</dictionary>
 				</dictionary>
 				<nil>  </nil>
-				<resource  external="0">  </resource>
+				<resource  external="1">  </resource>
 				<vector2> 0, -50 </vector2>
 				<int> 8 </int>
 				<int> 9 </int>
 				<int> 58 </int>
-				<real> 0 </real>
 				<vector2> 1, 1 </vector2>
 				<int> -10000000 </int>
 				<int> 10000000 </int>
 				<bool> True </bool>
+				<real> 5 </real>
 				<real> 0.2 </real>
 				<vector2> -4.91095, 19.1876 </vector2>
 				<int> -1 </int>
 				<int> 0 </int>
+				<real> 0 </real>
 				<node_path> ".." </node_path>
-				<resource  resource_type="Animation" path="local://15">  </resource>
-				<resource  resource_type="Animation" path="local://10">  </resource>
-				<resource  resource_type="Animation" path="local://11">  </resource>
 				<resource  resource_type="Animation" path="local://17">  </resource>
-				<resource  resource_type="Animation" path="local://13">  </resource>
+				<resource  resource_type="Animation" path="local://15">  </resource>
 				<resource  resource_type="Animation" path="local://14">  </resource>
+				<resource  resource_type="Animation" path="local://10">  </resource>
+				<resource  resource_type="Animation" path="local://13">  </resource>
 				<resource  resource_type="Animation" path="local://16">  </resource>
+				<resource  resource_type="Animation" path="local://11">  </resource>
 				<resource  resource_type="Animation" path="local://12">  </resource>
 				<real> 1 </real>
 				<array  len="0" shared="false">
