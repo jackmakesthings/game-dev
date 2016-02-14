@@ -233,6 +233,13 @@ func _ready():
 	add_child(tiles)
 	# start listening for clicks (for moving the player)
 	set_process_unhandled_input(true)
+	setup()
+
+
+###################
+# provided as a post-ready callback, basically
+func setup():
+	pass
 
 func _enter_tree():
 #	set_name("stage")
