@@ -198,6 +198,6 @@ func _ready():
 	
 	#npc_root.add_child(player)
 	env.set_process_unhandled_input(true)
-	env.body_layer.add_child(player)
+	#env.body_layer.add_child(player)
 	get_tree().set_current_scene(get_tree().get_current_scene())
 

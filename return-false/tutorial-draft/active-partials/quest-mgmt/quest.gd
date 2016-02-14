@@ -99,7 +99,7 @@ func create_branches_from_data(data=data):
 				
 func attach_branch(branch):
 	var actor_ref = branch.get("actor")
-	if not npc_root.has_node(actor_ref):
+	if not get_tree().get_root().find_node(actor_ref):
 		return
 	else:
 		remove_child(branch)
@@ -301,7 +301,8 @@ func _enter_tree():
 		var stage = sceneroot["stage"]
 		if ( stage.get("body_layer") ):
 			npc_root = stage["body_layer"]
-			
+	
+	#npc_root = get_tree().get_root().find_node("robot").get_parent()	
 	quest_root = get_parent()
 
 	add_user_signal("branches_added", [Q_ID, actors])
@@ -320,7 +321,8 @@ func _setup():
 		log_base = get_node("/root/scene/journal_ui")
 		MUI = get_node("/root/scene/message-ui")
 		quest_root = get_parent()
-
+		#npc_root = get_tree().get_root().find_node("nav").get_child(1)
+		npc_root = null
 
 
 func _ready():
