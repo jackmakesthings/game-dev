@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resource_file type="PackedScene" subresource_count="14" version="2.0" version_name="Godot Engine v2.0.rc1.custom_build">
+	<ext_resource path="res://assets/tiles/walls-test/w_0007_dark-v.png" type="Texture" index="9"></ext_resource>
+	<ext_resource path="res://assets/tiles/walls-test/w_0004_light-f.png" type="Texture" index="2"></ext_resource>
+	<ext_resource path="res://assets/tiles/walls-test/w_0002_light-v.png" type="Texture" index="8"></ext_resource>
+	<ext_resource path="res://assets/tiles/walls-test/w_0001_light-^.png" type="Texture" index="4"></ext_resource>
+	<ext_resource path="res://assets/tiles/walls-test/w_0006_dark-^.png" type="Texture" index="5"></ext_resource>
+	<ext_resource path="res://assets/tiles/walls-test/w_0000_light-x.png" type="Texture" index="7"></ext_resource>
+	<ext_resource path="res://assets/tiles/walls-test/w_0009_dark-f.png" type="Texture" index="0"></ext_resource>
+	<ext_resource path="res://assets/tiles/walls-test/w_0005_dark-x.png" type="Texture" index="6"></ext_resource>
+	<ext_resource path="res://assets/tiles/walls-test/w_0003_light-b.png" type="Texture" index="3"></ext_resource>
+	<ext_resource path="res://assets/tiles/walls-test/w_0008_dark-b.png" type="Texture" index="1"></ext_resource>
+	<resource type="ConvexPolygonShape2D" path="local://5">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2_array name="points" len="4"> 			-42.0943, -20.9151, 0.260044, -43.7213, 0.260044, -14.3991, -41.2798, 10.0361 </vector2_array>
+
+	</resource>
+	<resource type="ConvexPolygonShape2D" path="local://6">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2_array name="points" len="4"> 			-21.2238, 28.042, 19.8649, 46.807, 20.512, 67.1896, -20.9003, 46.4834 </vector2_array>
+
+	</resource>
+	<resource type="NavigationPolygon" path="local://4">
+		<vector2_array name="vertices" len="6"> 			-41.9125, -1.05835, -53.3558, -8.98064, -13.3042, -32.3073, -0.100449, -21.7443, 13.5435, -12.0615, -26.0679, 11.2652 </vector2_array>
+		<array name="polygons" len="3" shared="false">
+			<int_array  len="3"> 				0, 1, 2 </int_array>
+			<int_array  len="3"> 				3, 4, 5 </int_array>
+			<int_array  len="4"> 				5, 0, 2, 3 </int_array>
+		</array>
+		<array name="outlines" len="1" shared="false">
+			<vector2_array  len="6"> 				-41.9125, -1.05835, -53.3558, -8.98064, -13.3042, -32.3073, -0.100449, -21.7443, 13.5435, -12.0615, -26.0679, 11.2652 </vector2_array>
+		</array>
+
+	</resource>
+	<main_resource>
+		<dictionary name="_bundled" shared="false">
+			<string> "conn_count" </string>
+			<int> 0 </int>
+			<string> "conns" </string>
+			<int_array  len="0"> 				 </int_array>
+			<string> "editable_instances" </string>
+			<array  len="0" shared="false">
+			</array>
+			<string> "names" </string>
+			<string_array  len="38">
+				<string> "Node2D" </string>
+				<string> "__meta__" </string>
+				<string> "dark-s" </string>
+				<string> "transform/pos" </string>
+				<string> "texture" </string>
+				<string> "offset" </string>
+				<string> "region" </string>
+				<string> "region_rect" </string>
+				<string> "Sprite" </string>
+				<string> "StaticBody2D" </string>
+				<string> "input/pickable" </string>
+				<string> "shapes/0/shape" </string>
+				<string> "shapes/0/transform" </string>
+				<string> "shapes/0/trigger" </string>
+				<string> "collision/layers" </string>
+				<string> "collision/mask" </string>
+				<string> "constant_linear_velocity" </string>
+				<string> "constant_angular_velocity" </string>
+				<string> "friction" </string>
+				<string> "bounce" </string>
+				<string> "CollisionPolygon2D" </string>
+				<string> "build_mode" </string>
+				<string> "polygon" </string>
+				<string> "shape_range" </string>
+				<string> "trigger" </string>
+				<string> "dark-b" </string>
+				<string> "light-s" </string>
+				<string> "transform/scale" </string>
+				<string> "navpoly" </string>
+				<string> "enabled" </string>
+				<string> "NavigationPolygonInstance" </string>
+				<string> "light-b" </string>
+				<string> "light-n" </string>
+				<string> "dark-n" </string>
+				<string> "dark-x" </string>
+				<string> "light-x" </string>
+				<string> "light-v" </string>
+				<string> "dark-v" </string>
+			</string_array>
+			<string> "node_count" </string>
+			<int> 23 </int>
+			<string> "node_paths" </string>
+			<array  len="0" shared="false">
+			</array>
+			<string> "nodes" </string>
+			<int_array  len="391"> 				-1, -1, 0, 0, -1, 1, 1, 0, 0, 0, 0, 8, 2, -1, 5, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 0, 1, 0, 9, 9, -1, 10, 10, 6, 11, 7, 12, 8, 13, 4, 14, 9, 15, 9, 16, 10, 17, 11, 18, 12, 19, 11, 0, 2, 0, 20, 20, -1, 4, 21, 13, 22, 14, 23, 10, 24, 4, 0, 0, 0, 8, 25, -1, 5, 3, 15, 4, 16, 5, 17, 6, 4, 7, 18, 0, 4, 0, 9, 9, -1, 10, 10, 6, 11, 19, 12, 20, 13, 6, 14, 9, 15, 9, 16, 10, 17, 11, 18, 12, 19, 11, 0, 5, 0, 20, 20, -1, 5, 3, 17, 21, 13, 22, 21, 23, 10, 24, 6, 0, 0, 0, 8, 26, -1, 5, 3, 22, 4, 23, 5, 24, 6, 4, 7, 5, 0, 7, 0, 30, 20, -1, 4, 3, 25, 27, 26, 28, 27, 29, 4, 0, 0, 0, 8, 31, -1, 5, 3, 28, 4, 29, 5, 30, 6, 4, 7, 31, 0, 9, 0, 20, 20, -1, 5, 3, 30, 21, 13, 22, 32, 23, 10, 24, 6, 0, 0, 0, 8, 32, -1, 5, 3, 33, 4, 34, 5, 35, 6, 4, 7, 36, 0, 11, 0, 20, 20, -1, 5, 3, 35, 21, 13, 22, 37, 23, 10, 24, 6, 0, 0, 0, 8, 33, -1, 5, 3, 38, 4, 39, 5, 40, 6, 4, 7, 41, 0, 13, 0, 20, 20, -1, 5, 3, 40, 21, 13, 22, 42, 23, 10, 24, 6, 0, 0, 0, 8, 34, -1, 5, 3, 43, 4, 44, 5, 45, 6, 4, 7, 46, 0, 15, 0, 20, 20, -1, 5, 3, 45, 21, 13, 22, 47, 23, 10, 24, 6, 0, 0, 0, 8, 35, -1, 5, 3, 48, 4, 49, 5, 50, 6, 4, 7, 51, 0, 17, 0, 20, 20, -1, 5, 3, 50, 21, 13, 22, 52, 23, 10, 24, 6, 0, 0, 0, 8, 36, -1, 3, 3, 53, 4, 54, 5, 55, 0, 19, 0, 20, 20, -1, 5, 3, 55, 21, 13, 22, 56, 23, 10, 24, 6, 0, 0, 0, 8, 37, -1, 3, 3, 57, 4, 58, 5, 59, 0, 21, 0, 20, 20, -1, 5, 3, 59, 21, 13, 22, 60, 23, 10, 24, 6, 0 </int_array>
+			<string> "variants" </string>
+			<array  len="61" shared="false">
+				<dictionary  shared="false">
+					<string> "__editor_plugin_screen__" </string>
+					<string> "2D" </string>
+				</dictionary>
+				<vector2> 42.3054, 139.286 </vector2>
+				<resource  external="0">  </resource>
+				<vector2> -21.3054, -65.2856 </vector2>
+				<bool> True </bool>
+				<rect2> 0, 0, 42, 130 </rect2>
+				<bool> False </bool>
+				<resource  resource_type="Shape2D" path="local://5">  </resource>
+				<matrix32> 1, -0, 0, 1, 0, 0 </matrix32>
+				<int> 1 </int>
+				<vector2> 0, 0 </vector2>
+				<real> 0 </real>
+				<real> 1 </real>
+				<int> 0 </int>
+				<vector2_array  len="4"> 					-41.2798, 10.0361, 0.260044, -14.3991, 0.260044, -43.7213, -42.0943, -20.9151 </vector2_array>
+				<vector2> 60.4232, 136.05 </vector2>
+				<resource  external="1">  </resource>
+				<vector2> 20.5768, -65.2484 </vector2>
+				<rect2> -1, 0, 42, 130 </rect2>
+				<resource  resource_type="Shape2D" path="local://6">  </resource>
+				<matrix32> 1, -0, 0, 1, 20.5768, -65.2484 </matrix32>
+				<vector2_array  len="4"> 					-21.2238, 28.042, 19.8649, 46.807, 20.512, 67.1896, -20.9003, 46.4834 </vector2_array>
+				<vector2> 162.013, 139.286 </vector2>
+				<resource  external="2">  </resource>
+				<vector2> -21.0128, -65.2856 </vector2>
+				<vector2> 0.325275, -0.440125 </vector2>
+				<vector2> 1.0311, 1 </vector2>
+				<resource  resource_type="NavigationPolygon" path="local://4">  </resource>
+				<vector2> 179.128, 137.78 </vector2>
+				<resource  external="3">  </resource>
+				<vector2> 21.8717, -65.6943 </vector2>
+				<rect2> 0, -1, 42, 130 </rect2>
+				<vector2_array  len="4"> 					-20.8693, 45.8464, 20.543, 68.4937, 20.543, 44.8758, -20.8693, 23.5226 </vector2_array>
+				<vector2> 172.481, 301.288 </vector2>
+				<resource  external="4">  </resource>
+				<vector2> -0.480865, -67.2882 </vector2>
+				<rect2> 0, -1, 80, 130 </rect2>
+				<vector2_array  len="5"> 					-40.2975, 65.8263, 39.479, 66.0214, 39.1367, 44.6597, -1.89326, 27.2015, -40.5353, 47.038 </vector2_array>
+				<vector2> 39.5923, 298.861 </vector2>
+				<resource  external="5">  </resource>
+				<vector2> 0.407661, -64.8606 </vector2>
+				<rect2> 1, -2, 80, 130 </rect2>
+				<vector2_array  len="5"> 					-40.2231, 65.535, -40.1742, 46.1638, -1.40845, 26.1863, 39.9734, 45.4503, 40.0076, 66.1337 </vector2_array>
+				<vector2> 302.838, 155.659 </vector2>
+				<resource  external="6">  </resource>
+				<vector2> -2.83841, -72.6593 </vector2>
+				<rect2> 0, 0, 80, 150 </rect2>
+				<vector2_array  len="4"> 					-40.1685, 74.0579, 39.7264, 74.5824, 38.9489, 38.4449, -40.0968, 38.8421 </vector2_array>
+				<vector2> 299.544, 319.434 </vector2>
+				<resource  external="7">  </resource>
+				<vector2> 0.456085, -76.4337 </vector2>
+				<rect2> 0, -2, 80, 150 </rect2>
+				<vector2_array  len="4"> 					-39.9578, 35.4689, -39.9578, 76.4337, 39.5333, 76.4337, 40.0209, 35.4689 </vector2_array>
+				<vector2> 417.126, 134.19 </vector2>
+				<resource  external="8">  </resource>
+				<vector2> 1.8735, -69.1896 </vector2>
+				<vector2_array  len="5"> 					-39.3978, 36.0479, 39.8679, 36.0479, 39.8679, 45.1069, 0.0733032, 67.1072, -40.0449, 45.754 </vector2_array>
+				<vector2> 419.663, 291.905 </vector2>
+				<resource  external="9">  </resource>
+				<vector2> -0.66272, -66.9052 </vector2>
+				<vector2_array  len="5"> 					-39.1844, 36.501, 39.1678, 35.9606, 39.1678, 46.425, 1.35339, 66.1646, -39.5529, 46.1872 </vector2_array>
+			</array>
+			<string> "version" </string>
+			<int> 2 </int>
+		</dictionary>
+
+	</main_resource>
+</resource_file>

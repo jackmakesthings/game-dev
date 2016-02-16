@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resource_file type="NavigationPolygon" subresource_count="1" version="2.0" version_name="Godot Engine v2.0.rc1.custom_build">
+	<main_resource>
+		<string name="resource/name"> "iso-navpoly" </string>
+		<vector2_array name="vertices" len="4"> 		-36, 0, 0, 18, 36, 0, 0, -18 </vector2_array>
+		<array name="polygons" len="1" shared="false">
+			<int_array  len="4"> 				0, 1, 2, 3 </int_array>
+		</array>
+		<array name="outlines" len="1" shared="false">
+			<vector2_array  len="4"> 				-36, 0, 0, 18, 36, 0, 0, -18 </vector2_array>
+		</array>
+	</main_resource>
+</resource_file>
