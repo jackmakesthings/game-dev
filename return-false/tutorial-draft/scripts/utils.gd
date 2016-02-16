@@ -61,7 +61,7 @@ func save_game(data, dest):
 # (path should be something like "res://savegames/savefile.txt")
 func load_game(path):
 	var data = get_json(path)
-	goto_scene(path, data)
+	#goto_scene(path, data)
 
 
 
@@ -85,7 +85,7 @@ func new_game(filename):
 	# TODO: should have a file.exists? check here
 
 	save_game(data, dest)
-	goto_scene(data["scene"], data)
+#	goto_scene(data["scene"], data)
 
 
 
@@ -211,43 +211,3 @@ func wait(time):
 	t.set_wait_time(time)
 	return t
 
-
-###### goto_scene - a function in two parts
-# using call_deferred ensures we won't close a scene
-# while we're still using it
-func goto_scene(path, data):
-	current_scene = get_tree().get_current_scene()
-	print( current_scene )
-	#if ( current_scene.is_processing() ):
-	current_scene.set_process(false)
-	call_deferred("def_goto_scene",path, data)
-
-func def_goto_scene(path, loaded):
-
-	var s = load(path)
-	#print(s)
-	#print(s.get_name())
-	# = ResourcePreloader.preload(s)
-	var new_scene = s.instance()
-	   
-	#current_scene.queue_free()
-	current_scene = new_scene
-	
-	get_tree().get_root().add_child(current_scene)
-	get_tree().set_current_scene( current_scene )
-	
-	# if there's no data, we're done here
-	if( loaded == null ):
-		return
-	
-	# TODO: abstract out an apply_save_data method and put it here
-	if( loaded.has("player_x") and loaded.has("player_y")):
-		if( get_tree().get_current_scene().get("player")):
-			var player = get_tree().get_current_scene().get("player")
-			player.set_pos(Vector2(loaded["player_x"], loaded["player_y"]))
-			print(loaded)
-	
-	if( loaded.has("quest_states") ):
-		for q in loaded["quest_states"]:
-			print("savefile has quest ", q, " at state ", loaded["quest_states"][q])
-			get_node("/root/game").update_quest(q, loaded["quest_states"][q])

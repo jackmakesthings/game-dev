@@ -221,8 +221,9 @@ func _ready():
 	set_externals()
 	
 	fill_tiles(-1,TILE_DEFAULT) # change empty tiles
-	remove_child(tiles) # "refresh" the tilemap so navpoly works
-	add_child(tiles)
+#	remove_child(tiles) # "refresh" the tilemap so navpoly works
+	# delete squares went here
+#	add_child(tiles)
 
 	set_process_unhandled_input(true)
 	setup()

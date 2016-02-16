@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resource_file type="PackedScene" subresource_count="22" version="2.0" version_name="Godot Engine v2.0.rc1.custom_build">
-	<ext_resource path="res://assets/fpo/tall-white-cabinet.png" type="Texture" index="4"></ext_resource>
-	<ext_resource path="res://active-partials/player/_robot.xml" type="PackedScene" index="6"></ext_resource>
-	<ext_resource path="res://assets/tiles/tilesets/iso-floors-walkable.xml" type="TileSet" index="0"></ext_resource>
-	<ext_resource path="res://assets/tiles/floors/green-border--72x36.png" type="Texture" index="7"></ext_resource>
+	<ext_resource path="res://assets/tiles/floors/cyan--72x36-L.png" type="Texture" index="9"></ext_resource>
 	<ext_resource path="res://assets/fpo/stairway.png" type="Texture" index="10"></ext_resource>
 	<ext_resource path="res://active-partials/environment/stairs.gd" type="Script" index="8"></ext_resource>
-	<ext_resource path="res://assets/tiles/tilesets/walls-basic.xml" type="TileSet" index="1"></ext_resource>
-	<ext_resource path="res://assets/desk-with-computer.png" type="Texture" index="5"></ext_resource>
+	<ext_resource path="res://assets/tiles/tilesets/iso-floors-walkable.xml" type="TileSet" index="0"></ext_resource>
+	<ext_resource path="res://assets/fpo/tall-white-cabinet.png" type="Texture" index="4"></ext_resource>
+	<ext_resource path="res://assets/tiles/floors/green-border--72x36.png" type="Texture" index="7"></ext_resource>
 	<ext_resource path="res://assets/fpo/temp-trace-back.png" type="Texture" index="2"></ext_resource>
-	<ext_resource path="res://assets/tiles/floors/cyan--72x36-L.png" type="Texture" index="9"></ext_resource>
+	<ext_resource path="res://active-partials/player/_robot.xml" type="PackedScene" index="6"></ext_resource>
 	<ext_resource path="res://scripts/click-masker.gd" type="Script" index="3"></ext_resource>
+	<ext_resource path="res://assets/desk-with-computer.png" type="Texture" index="5"></ext_resource>
+	<ext_resource path="res://assets/tiles/tilesets/walls-basic.xml" type="TileSet" index="1"></ext_resource>
 	<resource type="GDScript" path="local://63">
 		<string name="script/source"> "extends &quot;res://active-partials/environment/walkable-area.gd&quot;" </string>
 
@@ -43,7 +43,7 @@
 
 	</resource>
 	<resource type="GDScript" path="local://66">
-		<string name="script/source"> "# pc terminal&#000a;extends &quot;res://active-partials/npcs/npc.gd&quot;&#000a;&#000a;func _on_click():&#000a;&#0009;print(&quot;clicked pc&quot;)&#000a;#&#0009;player = get_node(&quot;/root/scene&quot;).get(&quot;player&quot;)&#000a;&#0009;player = get_tree().get_current_scene().find_node(&quot;robot&quot;)&#000a;&#0009;player.set(&quot;path&quot;, Array())&#000a;&#0009;check_for_player()&#000a;&#0009;if( player_nearby ):&#000a;&#0009;&#0009;get_tree().set_input_as_handled()&#000a;&#0009;&#0009;start_interaction()&#000a;&#0009;else:&#000a;&#0009;&#0009;redirect_player(player, x)&#000a;&#000a;func start_interaction():&#000a;&#0009;var interaction = load(&quot;res://active-partials/interface/entry_container.tscn&quot;)&#000a;&#0009;var I = interaction.instance()&#000a;&#000a;&#0009;get_tree().get_root().add_child(I)&#000a;&#0009;&#000a;&#0009;I.open()&#000a;&#0009;#I.set_as_toplevel(true)&#000a;&#0009;#_.get(&quot;MUI&quot;).flash_popup(&quot;Hey kid I&apos;m a computer&quot;)&#000a;" </string>
+		<string name="script/source"> "# pc terminal&#000a;extends &quot;res://active-partials/npcs/npc.gd&quot;&#000a;&#000a;func _on_click():&#000a;&#0009;print(&quot;clicked pc&quot;)&#000a;#&#0009;player = get_node(&quot;/root/scene&quot;).get(&quot;player&quot;)&#000a;&#0009;player = get_tree().get_current_scene().find_node(&quot;robot&quot;)&#000a;&#0009;#player.set(&quot;path&quot;, Array())&#000a;&#0009;check_for_player()&#000a;&#0009;if( player_nearby ):&#000a;&#0009;&#0009;get_tree().set_input_as_handled()&#000a;&#0009;&#0009;start_interaction()&#000a;&#0009;else:&#000a;&#0009;&#0009;redirect_player(player, x)&#000a;&#000a;func start_interaction():&#000a;&#0009;var interaction = load(&quot;res://active-partials/interface/entry_container.tscn&quot;)&#000a;&#0009;var I = interaction.instance()&#000a;&#000a;&#0009;get_tree().get_root().add_child(I)&#000a;&#0009;&#000a;&#0009;I.open()&#000a;&#0009;#I.set_as_toplevel(true)&#000a;&#0009;#_.get(&quot;MUI&quot;).flash_popup(&quot;Hey kid I&apos;m a computer&quot;)&#000a;" </string>
 
 	</resource>
 	<resource type="ConvexPolygonShape2D" path="local://70">
@@ -186,7 +186,7 @@
 				<resource  resource_type="Script" path="local://63">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
-					<string> "2D" </string>
+					<string> "Script" </string>
 				</dictionary>
 				<vector2> 0, -1.85062 </vector2>
 				<int> 1 </int>
