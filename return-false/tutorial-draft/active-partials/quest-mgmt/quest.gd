@@ -57,21 +57,14 @@ signal quest_completed(quest_id, end_at)
 
 
 func _init():
-	Q_ID = Q_ID
 	branch_group = "" + str(Q_ID) + "-branches"
 
 
 
 func load_data(data_source):
 	data = utils.get_json(data_source)
-	
 	for key in data:
 		self[key] = data[key]
-
-	# make sure our file and this quest are on the same page
-	if data.has("id") and not (data["id"] == Q_ID):
-		Q_ID = data["id"]
-		branch_group = Q_ID + "-branches"
 		
 	is_ready = true
 
@@ -83,7 +76,8 @@ func create_branches_from_data(data=data):
 	for branch in branches:
 
 		var branch_node = Branch.new()
-				# branches can control their labels in the MUI individually,
+
+		# branches can control their labels in the MUI individually,
 		# or they can fall back to a quest-level default for it
 		if( ! branch.has("dialog_label") ):
 			branch_node.set("dialog_label", dialog_label)
@@ -93,6 +87,7 @@ func create_branches_from_data(data=data):
 			
 		for key in branch:
 			branch_node.set(key, branch[key])
+
 		branch_node.set_name(Q_ID + "-" + branch["actor"])
 		add_child(branch_node)
 		branch_node.add_to_group(branch_group)
@@ -211,30 +206,7 @@ func destroy():
 
 func set_current_state(state):
 
-	# a few special flags, mostly for debugging
-	if( state == "-" ):
-		current_state = null
-		state = null
-		deactivate()
-		
-
-	
-	if( state == "x"):
-		current_state = null
-		state=null
-		destroy()
-		return
-	
-		
-	if( state == "+" ):
-		activate(init_at)
-		current_state = "0"
-		state = "0"
-
-
 	pre_state_change(current_state, state)
-	
-
 	prev_state = current_state
 	current_state = state
 	
@@ -255,7 +227,6 @@ func set_current_state(state):
 	
 	
 	if( state == complete_at ):
-		print("Complete!")
 		complete(complete_at)
 	
 
@@ -298,11 +269,10 @@ func _enter_tree():
 	utils = get_node("/root/utils")
 	quest_root = get_parent()
 
-	add_user_signal("branches_added", [Q_ID, actors])
-	add_user_signal("branches_removed", [Q_ID, actors])
-	add_user_signal("state_changed", [Q_ID, prev_state, current_state])
-	add_user_signal("quest_completed", [Q_ID, complete_at])
-
+#	add_user_signal("branches_added", [Q_ID, actors])
+#	add_user_signal("branches_removed", [Q_ID, actors])
+#	add_user_signal("state_changed", [Q_ID, prev_state, current_state])
+#	add_user_signal("quest_completed", [Q_ID, complete_at])
 
 
 func _setup():

@@ -1,22 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="4" version="2.0" version_name="Godot Engine v2.0.rc1.custom_build">
-	<ext_resource path="res://active-partials/player/_robot.xml" type="PackedScene" index="1"></ext_resource>
+<resource_file type="PackedScene" subresource_count="8" version="2.0" version_name="Godot Engine v2.0.rc1.custom_build">
 	<ext_resource path="res://assets/tiles/tilesets/iso-floors-walkable.xml" type="TileSet" index="0"></ext_resource>
+	<ext_resource path="res://active-partials/player/_robot.xml" type="PackedScene" index="1"></ext_resource>
+	<ext_resource path="res://assets/fpo/basic_block128.tex" type="Texture" index="3"></ext_resource>
+	<ext_resource path="res://assets/fpo/white-block-lighter.png" type="Texture" index="2"></ext_resource>
 	<resource type="GDScript" path="local://1">
 		<string name="script/source"> "extends &quot;res://active-partials/environment/walkable-area.gd&quot;&#000a;&#000a;" </string>
+
+	</resource>
+	<resource type="ConvexPolygonShape2D" path="local://4">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2_array name="points" len="4"> 			265.073, 329.101, 355.297, 345.505, 289.68, 372.163, 217.911, 353.708 </vector2_array>
+
+	</resource>
+	<resource type="GDScript" path="local://3">
+		<string name="script/source"> "#Inventory-able item - WIP&#000a;&#000a;extends StaticBody2D&#000a;&#000a;export(String) var item_ID&#000a;export(String) var label&#000a;export(String) var description&#000a;export(Texture) var large_image&#000a;&#000a;&#000a;var MUI&#000a;var btn&#000a;&#000a;func _ready():&#000a;&#0009;MUI = get_tree().get_root().get_node(&quot;scene&quot;).get_node(&quot;message-ui&quot;)&#000a;&#0009;# Initialization here&#000a;&#0009;pass&#000a;&#000a;&#000a;func on_click():&#000a;&#0009;MUI = get_tree().get_root().get_node(&quot;scene&quot;).get_node(&quot;message-ui&quot;)&#000a;&#0009;MUI.clear()&#000a;&#0009;MUI.make_dialogue(description)&#000a;&#0009;MUI.make_collect_button(self)&#000a;&#0009;MUI.make_close_button()&#000a;&#0009;MUI.open()&#000a;&#0009;&#000a;&#0009;&#000a;&#000a;func collect():&#000a;&#0009;MUI.close()&#000a;&#0009;MUI.clear()&#000a;&#0009;&#000a;&#0009;var popup_str = label + &quot; obtained.&quot;&#000a;&#0009;MUI.flash_popup(popup_str)&#000a;&#0009;&#000a;&#0009;var scn = get_tree().get_root().get_node(&quot;scene&quot;)&#000a;&#0009;scn[&quot;inventory&quot;].append(label)&#000a;&#0009;&#000a;&#0009;print(scn[&quot;inventory&quot;])&#000a;&#0009;&#000a;&#0009;&#000a;&#0009;#queue_free()&#000a;&#000a;#&#0009;for i in range(0, MUI.get_child_count() - 1):&#000a;#&#0009;&#0009;var n = MUI.get_child(i)&#000a;#&#0009;&#0009;print(n.get_name())&#000a;&#0009;#print(MUI.get_children())&#000a;&#0009;&#000a;#&#0009;if MUI and description:&#000a;#&#0009;&#0009;MUI.flash_popup(description)&#000a;#&#0009;elif not MUI:&#000a;#&#0009;&#0009;print(&quot;no MUI here&quot;)" </string>
 
 	</resource>
 	<main_resource>
 		<dictionary name="_bundled" shared="false">
 			<string> "conn_count" </string>
-			<int> 0 </int>
+			<int> 1 </int>
 			<string> "conns" </string>
-			<int_array  len="0"> 				 </int_array>
+			<int_array  len="6"> 				5, 4, 61, 60, 2, 0 </int_array>
 			<string> "editable_instances" </string>
 			<array  len="0" shared="false">
 			</array>
 			<string> "names" </string>
-			<string_array  len="26">
+			<string_array  len="62">
 				<string> "env" </string>
 				<string> "script/script" </string>
 				<string> "__meta__" </string>
@@ -43,16 +54,52 @@
 				<string> "robot" </string>
 				<string> "transform/pos" </string>
 				<string> "collision/margin" </string>
+				<string> "item" </string>
+				<string> "input/pickable" </string>
+				<string> "shapes/0/shape" </string>
+				<string> "shapes/0/transform" </string>
+				<string> "shapes/0/trigger" </string>
+				<string> "constant_linear_velocity" </string>
+				<string> "constant_angular_velocity" </string>
+				<string> "friction" </string>
+				<string> "bounce" </string>
+				<string> "item_ID" </string>
+				<string> "label" </string>
+				<string> "description" </string>
+				<string> "large_image" </string>
+				<string> "StaticBody2D" </string>
+				<string> "TextureButton" </string>
+				<string> "margin/left" </string>
+				<string> "margin/top" </string>
+				<string> "margin/right" </string>
+				<string> "margin/bottom" </string>
+				<string> "focus/ignore_mouse" </string>
+				<string> "focus/stop_mouse" </string>
+				<string> "size_flags/horizontal" </string>
+				<string> "size_flags/vertical" </string>
+				<string> "toggle_mode" </string>
+				<string> "textures/normal" </string>
+				<string> "textures/pressed" </string>
+				<string> "textures/hover" </string>
+				<string> "textures/disabled" </string>
+				<string> "textures/focused" </string>
+				<string> "CollisionPolygon2D" </string>
+				<string> "build_mode" </string>
+				<string> "polygon" </string>
+				<string> "shape_range" </string>
+				<string> "trigger" </string>
+				<string> "on_click" </string>
+				<string> "pressed" </string>
 			</string_array>
 			<string> "node_count" </string>
-			<int> 4 </int>
+			<int> 7 </int>
 			<string> "node_paths" </string>
 			<array  len="0" shared="false">
 			</array>
 			<string> "nodes" </string>
-			<int_array  len="66"> 				-1, -1, 3, 0, -1, 2, 1, 0, 2, 1, 0, 0, 0, 5, 4, -1, 0, 0, 1, 0, 22, 6, -1, 15, 7, 2, 8, 3, 9, 4, 10, 5, 11, 6, 12, 7, 13, 2, 14, 8, 15, 8, 16, 9, 17, 10, 18, 2, 19, 2, 20, 2, 21, 11, 0, 1, 0, 2147483647, 23, 12, 2, 24, 13, 25, 14, 0 </int_array>
+			<int_array  len="153"> 				-1, -1, 3, 0, -1, 2, 1, 0, 2, 1, 0, 0, 0, 5, 4, -1, 0, 0, 1, 0, 22, 6, -1, 15, 7, 2, 8, 3, 9, 4, 10, 5, 11, 6, 12, 7, 13, 2, 14, 8, 15, 8, 16, 9, 17, 10, 18, 2, 19, 2, 20, 2, 21, 11, 0, 1, 0, 2147483647, 23, 12, 2, 24, 13, 25, 14, 0, 1, 0, 39, 26, -1, 15, 27, 15, 28, 16, 29, 17, 30, 8, 18, 2, 19, 2, 31, 18, 32, 10, 33, 9, 34, 10, 1, 19, 35, 20, 36, 21, 37, 22, 38, 23, 0, 4, 0, 40, 40, -1, 14, 41, 24, 42, 25, 43, 26, 44, 27, 45, 8, 46, 15, 47, 7, 48, 7, 49, 8, 50, 28, 51, 28, 52, 28, 53, 28, 54, 28, 0, 4, 0, 55, 55, -1, 4, 56, 29, 57, 30, 58, 18, 59, 8, 0 </int_array>
 			<string> "variants" </string>
-			<array  len="15" shared="false">
+			<array  len="31" shared="false">
 				<resource  resource_type="Script" path="local://1">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
@@ -71,6 +118,22 @@
 				<resource  external="1">  </resource>
 				<vector2> 414.556, 275.231 </vector2>
 				<real> 0.08 </real>
+				<bool> True </bool>
+				<resource  resource_type="Shape2D" path="local://4">  </resource>
+				<matrix32> 1, -0, 0, 1, 0, 0 </matrix32>
+				<vector2> 0, 0 </vector2>
+				<resource  resource_type="Script" path="local://3">  </resource>
+				<string> "cube_01" </string>
+				<string> "Uninteresting Cube" </string>
+				<string> "This thing isn&apos;t particularly special." </string>
+				<resource  external="2">  </resource>
+				<real> 221 </real>
+				<real> 246 </real>
+				<real> 285 </real>
+				<real> 311 </real>
+				<resource  external="3">  </resource>
+				<int> 0 </int>
+				<vector2_array  len="4"> 					217.911, 353.708, 289.68, 372.163, 355.297, 345.505, 265.073, 329.101 </vector2_array>
 			</array>
 			<string> "version" </string>
 			<int> 2 </int>

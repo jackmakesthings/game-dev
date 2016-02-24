@@ -121,6 +121,20 @@ func make_close_button():
 	make_response(_text, _actions)
 
 
+####### shortcut setup of a "collect" option for items
+func make_collect_button(item_node):
+	var _text = "<Pick up.>"
+	var _actions = [{
+			fn = "collect",
+			target = item_node,
+			args = []
+		}]
+	
+	make_response(_text, _actions)
+
+
+
+
 ####### setup character ########
 
 func make_portrait(npc_texture):

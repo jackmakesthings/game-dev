@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="TileSet" subresource_count="22" version="2.0" version_name="Godot Engine v2.0.rc1.custom_build">
-	<ext_resource path="res://assets/tiles/walls-test/w_0007_dark-v.png" type="Texture" index="9"></ext_resource>
-	<ext_resource path="res://assets/tiles/walls-test/w_0004_light-f.png" type="Texture" index="2"></ext_resource>
-	<ext_resource path="res://assets/tiles/walls-test/w_0002_light-v.png" type="Texture" index="8"></ext_resource>
-	<ext_resource path="res://assets/tiles/walls-test/w_0001_light-^.png" type="Texture" index="4"></ext_resource>
-	<ext_resource path="res://assets/tiles/walls-test/w_0006_dark-^.png" type="Texture" index="5"></ext_resource>
-	<ext_resource path="res://assets/tiles/walls-test/w_0000_light-x.png" type="Texture" index="7"></ext_resource>
+<resource_file type="TileSet" subresource_count="24" version="2.0" version_name="Godot Engine v2.0.rc1.custom_build">
 	<ext_resource path="res://assets/tiles/walls-test/w_0009_dark-f.png" type="Texture" index="0"></ext_resource>
-	<ext_resource path="res://assets/tiles/walls-test/w_0005_dark-x.png" type="Texture" index="6"></ext_resource>
-	<ext_resource path="res://assets/tiles/walls-test/w_0003_light-b.png" type="Texture" index="3"></ext_resource>
+	<ext_resource path="res://assets/tiles/walls-test/server-wall.png" type="Texture" index="2"></ext_resource>
 	<ext_resource path="res://assets/tiles/walls-test/w_0008_dark-b.png" type="Texture" index="1"></ext_resource>
+	<ext_resource path="res://assets/tiles/walls-test/w_0005_dark-x.png" type="Texture" index="7"></ext_resource>
+	<ext_resource path="res://assets/tiles/walls-test/w_0001_light-^.png" type="Texture" index="5"></ext_resource>
+	<ext_resource path="res://assets/tiles/walls-test/w_0000_light-x.png" type="Texture" index="8"></ext_resource>
+	<ext_resource path="res://assets/tiles/walls-test/w_0004_light-f.png" type="Texture" index="3"></ext_resource>
+	<ext_resource path="res://assets/tiles/walls-test/w_0006_dark-^.png" type="Texture" index="6"></ext_resource>
+	<ext_resource path="res://assets/tiles/walls-test/w_0002_light-v.png" type="Texture" index="9"></ext_resource>
+	<ext_resource path="res://assets/tiles/walls-test/w_0003_light-b.png" type="Texture" index="4"></ext_resource>
+	<ext_resource path="res://assets/tiles/walls-test/w_0007_dark-v.png" type="Texture" index="10"></ext_resource>
 	<resource type="ConvexPolygonShape2D" path="local://5">
 		<real name="custom_solver_bias"> 0 </real>
 		<vector2_array name="points" len="4"> 			-42.0943, -20.9151, 0.260044, -43.7213, 0.260044, -14.3991, -41.2798, 10.0361 </vector2_array>
@@ -18,6 +19,11 @@
 	<resource type="ConvexPolygonShape2D" path="local://6">
 		<real name="custom_solver_bias"> 0 </real>
 		<vector2_array name="points" len="4"> 			-21.2238, 28.042, 19.8649, 46.807, 20.512, 67.1896, -20.9003, 46.4834 </vector2_array>
+
+	</resource>
+	<resource type="ConvexPolygonShape2D" path="local://7">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2_array name="points" len="4"> 			102.667, 13.9264, 159.143, 50.7585, -94.9984, 188.265, -152.702, 152.661 </vector2_array>
 
 	</resource>
 	<resource type="NavigationPolygon" path="local://4">
@@ -52,7 +58,7 @@
 		<vector2_array name="points" len="5"> 			-40.2231, 65.535, -40.1742, 46.1638, -1.40845, 26.1863, 39.9734, 45.4503, 40.0076, 66.1337 </vector2_array>
 
 	</resource>
-	<resource type="ConvexPolygonShape2D" path="local://7">
+	<resource type="ConvexPolygonShape2D" path="local://15">
 		<real name="custom_solver_bias"> 0 </real>
 		<vector2_array name="points" len="4"> 			-40.0968, 38.8421, 38.9489, 38.4449, 39.7264, 74.5824, -40.1685, 74.0579 </vector2_array>
 
@@ -94,7 +100,7 @@
 			<resource  resource_type="Shape2D" path="local://6">  </resource>
 		</array>
 		<string name="2/name"> "light-s" </string>
-		<resource name="2/texture" external="2">  </resource>
+		<resource name="2/texture" external="3">  </resource>
 		<vector2 name="2/tex_offset"> -21.0128, -65.2856 </vector2>
 		<resource name="2/material"></resource>		<rect2 name="2/region"> 0, 0, 42, 130 </rect2>
 		<vector2 name="2/occluder_offset"> 21, 65 </vector2>
@@ -105,7 +111,7 @@
 			<resource  resource_type="Shape2D" path="local://11">  </resource>
 		</array>
 		<string name="3/name"> "light-b" </string>
-		<resource name="3/texture" external="3">  </resource>
+		<resource name="3/texture" external="4">  </resource>
 		<vector2 name="3/tex_offset"> 21.8717, -65.6943 </vector2>
 		<resource name="3/material"></resource>		<rect2 name="3/region"> 0, -1, 42, 130 </rect2>
 		<vector2 name="3/occluder_offset"> 21, 65 </vector2>
@@ -115,7 +121,7 @@
 			<resource  resource_type="Shape2D" path="local://12">  </resource>
 		</array>
 		<string name="4/name"> "light-n" </string>
-		<resource name="4/texture" external="4">  </resource>
+		<resource name="4/texture" external="5">  </resource>
 		<vector2 name="4/tex_offset"> -0.480865, -67.2882 </vector2>
 		<resource name="4/material"></resource>		<rect2 name="4/region"> 0, -1, 80, 130 </rect2>
 		<vector2 name="4/occluder_offset"> 40, 65 </vector2>
@@ -125,7 +131,7 @@
 			<resource  resource_type="Shape2D" path="local://13">  </resource>
 		</array>
 		<string name="5/name"> "dark-n" </string>
-		<resource name="5/texture" external="5">  </resource>
+		<resource name="5/texture" external="6">  </resource>
 		<vector2 name="5/tex_offset"> 0.407661, -64.8606 </vector2>
 		<resource name="5/material"></resource>		<rect2 name="5/region"> 1, -2, 80, 130 </rect2>
 		<vector2 name="5/occluder_offset"> 40, 65 </vector2>
@@ -135,17 +141,17 @@
 			<resource  resource_type="Shape2D" path="local://14">  </resource>
 		</array>
 		<string name="6/name"> "dark-x" </string>
-		<resource name="6/texture" external="6">  </resource>
+		<resource name="6/texture" external="7">  </resource>
 		<vector2 name="6/tex_offset"> -2.83841, -72.6593 </vector2>
 		<resource name="6/material"></resource>		<rect2 name="6/region"> 0, 0, 80, 150 </rect2>
 		<vector2 name="6/occluder_offset"> 40, 75 </vector2>
 		<resource name="6/occluder"></resource>		<vector2 name="6/navigation_offset"> 40, 75 </vector2>
 		<resource name="6/navigation"></resource>		<vector2 name="6/shape_offset"> 0, 0 </vector2>
 		<array name="6/shapes" len="1" shared="false">
-			<resource  resource_type="Shape2D" path="local://7">  </resource>
+			<resource  resource_type="Shape2D" path="local://15">  </resource>
 		</array>
 		<string name="7/name"> "light-x" </string>
-		<resource name="7/texture" external="7">  </resource>
+		<resource name="7/texture" external="8">  </resource>
 		<vector2 name="7/tex_offset"> 0.456085, -76.4337 </vector2>
 		<resource name="7/material"></resource>		<rect2 name="7/region"> 0, -2, 80, 150 </rect2>
 		<vector2 name="7/occluder_offset"> 40, 75 </vector2>
@@ -155,7 +161,7 @@
 			<resource  resource_type="Shape2D" path="local://8">  </resource>
 		</array>
 		<string name="8/name"> "light-v" </string>
-		<resource name="8/texture" external="8">  </resource>
+		<resource name="8/texture" external="9">  </resource>
 		<vector2 name="8/tex_offset"> 1.8735, -69.1896 </vector2>
 		<resource name="8/material"></resource>		<rect2 name="8/region"> 0, 0, 0, 0 </rect2>
 		<vector2 name="8/occluder_offset"> 39, 65 </vector2>
@@ -165,7 +171,7 @@
 			<resource  resource_type="Shape2D" path="local://9">  </resource>
 		</array>
 		<string name="9/name"> "dark-v" </string>
-		<resource name="9/texture" external="9">  </resource>
+		<resource name="9/texture" external="10">  </resource>
 		<vector2 name="9/tex_offset"> -0.66272, -66.9052 </vector2>
 		<resource name="9/material"></resource>		<rect2 name="9/region"> 0, 0, 0, 0 </rect2>
 		<vector2 name="9/occluder_offset"> 39, 64.5 </vector2>
@@ -173,6 +179,16 @@
 		<resource name="9/navigation"></resource>		<vector2 name="9/shape_offset"> 0, 0 </vector2>
 		<array name="9/shapes" len="1" shared="false">
 			<resource  resource_type="Shape2D" path="local://10">  </resource>
+		</array>
+		<string name="10/name"> "server-wall" </string>
+		<resource name="10/texture" external="2">  </resource>
+		<vector2 name="10/tex_offset"> 0, 0 </vector2>
+		<resource name="10/material"></resource>		<rect2 name="10/region"> 0, 0, 0, 0 </rect2>
+		<vector2 name="10/occluder_offset"> 161, 192.5 </vector2>
+		<resource name="10/occluder"></resource>		<vector2 name="10/navigation_offset"> 161, 192.5 </vector2>
+		<resource name="10/navigation"></resource>		<vector2 name="10/shape_offset"> 161, 192.5 </vector2>
+		<array name="10/shapes" len="1" shared="false">
+			<resource  resource_type="Shape2D" path="local://7">  </resource>
 		</array>
 
 	</main_resource>

@@ -12,6 +12,8 @@ var _
 
 var prev_pos
 
+var inventory = []
+
 var fade_anim
 var fade_screen
 
@@ -24,6 +26,8 @@ const env_3_scene = preload("res://active-partials/environment/FPO_stage_d.xml")
 const MUI_scene = preload("res://active-partials/message-ui/MUI_.xscn")
 const ingame_menu_scene = preload("res://active-partials/interface/in-game-menu_.xml")
 const main_menu_scene = preload("res://active-partials/interface/game-menu_.xml")
+
+var env_scene = preload("res://active-partials/environment/FPO_new_stage.xscn")
 
 
 signal env_changed(env)
@@ -106,14 +110,14 @@ func on_menu_toggle(state):
 
 func create_instances():
 	player = player_scene.instance()
-	MUI = MUI_scene.instance()
+#	MUI = MUI_scene.instance()
 	menu = ingame_menu_scene.instance()
 
 	add_child(menu)
 	move_child(menu, 0)
 
-	add_child(MUI)
-	move_child(MUI, 0)
+#	add_child(MUI)
+#	move_child(MUI, 0)
 
 
 
@@ -126,13 +130,14 @@ func create_env(base):
 
 func _init():
 	create_instances()
-	create_env(env_3_scene)
+	create_env(env_scene)
 	add_user_signal("env_changed", ["env"])
 
 
 func set_internals():
 	fade_anim = get_node("AnimationPlayer")
 	fade_screen = get_node("fader")
+	MUI = get_node("message-ui")
 
 
 func set_externals():
@@ -152,5 +157,5 @@ func _ready():
 	
 
 	env.set_process_unhandled_input(true)
-	get_tree().set_current_scene(get_tree().get_current_scene())
+	#aget_tree().set_current_scene(get_tree().get_current_scene())
 
