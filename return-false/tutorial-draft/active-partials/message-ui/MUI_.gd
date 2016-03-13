@@ -12,6 +12,8 @@ var tween
 
 var popup
 var popup_text
+var popup_timer
+var is_popup_active
 
 
 var is_active
@@ -180,14 +182,10 @@ func _unhandled_key_input(key_event):
 
 func flash_popup(text=""):
 	popup_text.set_text(text)
-	get_node("popup").show_modal(false)
-	var t = Timer.new()
-	t.set_wait_time(2)
-	t.set_one_shot(true)
-	add_child(t)
-	t.start()
-	yield(t, "timeout")
-	get_node("popup").hide()
+	popup.show_modal(false)
+	popup_timer.start()
+	yield(popup_timer, "timeout")
+	popup.hide()
 
 
 ######## path setup ##########
@@ -199,6 +197,7 @@ func set_internals():
 	popup = find_node("popup")
 	popup_text = popup.find_node("Label")
 	tween = find_node("Tween")
+	popup_timer = find_node("Timer")
 
 ###### other setup
 
