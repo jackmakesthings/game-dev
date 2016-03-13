@@ -21,7 +21,7 @@ var canv
 
 const player_scene = preload("res://active-partials/player/_robot.xml")
 const env_1_scene = preload("res://active-partials/environment/FPO_stage_a.xml")
-const env_2_scene = preload("res://active-partials/environment/FPO_stage_b.xml")
+#const env_2_scene = preload("res://active-partials/environment/FPO_stage_b.xml")
 const env_3_scene = preload("res://active-partials/environment/FPO_stage_d.xml")
 const MUI_scene = preload("res://active-partials/message-ui/MUI_.xscn")
 const ingame_menu_scene = preload("res://active-partials/interface/in-game-menu_.xml")
