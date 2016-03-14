@@ -155,7 +155,7 @@ func open():
 		tween.interpolate_property(dialog_box, "margin/bottom", -190, 0, 0.25,1,1,0)
 		tween.interpolate_property(dialog_box, "visibility/opacity",0,1, 0.25,1,1,0)
 		tween.start()
-	is_active = true;
+		is_active = true;
 	emit_signal("dialogue_opened")
 	set_process_unhandled_key_input(true)
 
@@ -211,7 +211,7 @@ func enter_tree():
 ######## _ready ######### 
 func _ready():
 	set_internals()
-	close()
+#	close()
 	
 	
 ######## demo ######### 	
