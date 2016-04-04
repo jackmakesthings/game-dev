@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://scenes/NPCs/bot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/NPCs/human-1.gd" type="Script" id=2]
+[ext_resource path="res://assets/game-art/lil-lady-1.png" type="Texture" id=3]
+
+[node name="lady" instance=ExtResource( 1 )]
+
+script/script = ExtResource( 2 )
+trigger_node = NodePath("body/trigger")
+id = "human"
+label = "Human"
+
+[node name="body" parent="."]
+
+linear_damp = 0.1
+
+[node name="Sprite" parent="body"]
+
+margin/right = 36.0
+margin/bottom = 113.0
+textures/normal = ExtResource( 3 )
+textures/pressed = ExtResource( 3 )
+textures/hover = ExtResource( 3 )
+textures/disabled = ExtResource( 3 )
+textures/focused = ExtResource( 3 )
+
+[node name="trigger" parent="body"]
+
+polygon = Vector2Array( 27.1642, 108.538, 54.8573, 93.0625, 103.728, 100.393, 27.9787, 141.933 )
+
+[node name="X" parent="."]
+
+transform/pos = Vector2( 53.0028, 111.779 )
+
+[node name="footprint" parent="."]
+
+polygon = Vector2Array( 19.8336, 85.7319, 42.6398, 96.3205, 19.8336, 114.24, 0.285507, 99.5785 )
+
+

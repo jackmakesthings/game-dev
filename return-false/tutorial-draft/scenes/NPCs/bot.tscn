@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://scenes/NPCs/desk.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/NPCs/bot.gd" type="Script" id=2]
+[ext_resource path="res://assets/game-art/lil-bot.png" type="Texture" id=3]
+
+[node name="bot" instance=ExtResource( 1 )]
+
+script/script = ExtResource( 2 )
+trigger_node = NodePath("body/trigger")
+id = "bot"
+label = "Bot"
+
+[node name="body" parent="."]
+
+linear_damp = 0.1
+
+[node name="Sprite" parent="body"]
+
+margin/top = -4.0
+margin/right = 33.0
+margin/bottom = 99.0
+textures/normal = ExtResource( 3 )
+textures/pressed = ExtResource( 3 )
+textures/hover = ExtResource( 3 )
+textures/disabled = ExtResource( 3 )
+textures/focused = ExtResource( 3 )
+
+[node name="trigger" parent="body"]
+
+polygon = Vector2Array( 15.8341, 103.139, 41.8342, 86.1391, 91.8342, 95.1391, 21.8342, 136.139 )
+
+[node name="X" parent="."]
+
+transform/pos = Vector2( 47.9303, 105.263 )
+
+[node name="footprint" parent="."]
+
+polygon = Vector2Array( 14.9469, 71.071, 41.0111, 84.9176, 11.6889, 100.393, -0.528748, 85.7321 )
+
+

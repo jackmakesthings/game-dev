@@ -1,0 +1,69 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://scenes/NPCs/desk.gd" type="Script" id=1]
+[ext_resource path="res://assets/game-art/desk-with-laptop.png" type="Texture" id=2]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 4.93845, 215.72, 264.201, 364.947, 164.716, 396.601, -4.10559, 283.55 )
+
+[node name="desk" type="Node2D"]
+
+script/script = ExtResource( 1 )
+trigger_node = NodePath("body/trigger")
+id = "desk"
+label = "Desk"
+portrait = null
+trust = null
+npc_type = 0
+trigger_mode = 0
+show_fallback = null
+
+[node name="body" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, -0, 0, 1, 0, 0 )
+shapes/0/trigger = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="Sprite" type="TextureButton" parent="body"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+toggle_mode = false
+textures/normal = ExtResource( 2 )
+textures/pressed = ExtResource( 2 )
+textures/hover = ExtResource( 2 )
+textures/disabled = ExtResource( 2 )
+textures/focused = ExtResource( 2 )
+
+[node name="trigger" type="CollisionPolygon2D" parent="body"]
+
+build_mode = 0
+polygon = Vector2Array( 4.93845, 215.72, 264.201, 364.947, 164.716, 396.601, -4.10559, 283.55 )
+shape_range = Vector2( 0, 0 )
+trigger = true
+
+[node name="X" type="Position2D" parent="."]
+
+transform/pos = Vector2( 88.9331, 318.049 )
+
+[node name="footprint" type="CollisionPolygon2D" parent="."]
+
+build_mode = 0
+polygon = Vector2Array( 39.6072, 193.11, 84.8275, 155.426, 148.136, 132.816, 253.649, 172.007, 336.553, 235.315, 359.163, 282.043, 326.002, 315.204, 273.245, 331.785, 212.951, 306.16, 93.8715, 236.823 )
+shape_range = Vector2( -1, -1 )
+trigger = false
+
+

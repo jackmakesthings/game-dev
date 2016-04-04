@@ -1,0 +1,84 @@
+[gd_scene load_steps=11 format=1]
+
+[ext_resource path="res://assets/tiles/tilesets/iso-floors-walkable.xml" type="TileSet" id=1]
+[ext_resource path="res://assets/game-art/servers4.png" type="Texture" id=2]
+[ext_resource path="res://assets/game-art/servers.png" type="Texture" id=3]
+[ext_resource path="res://assets/game-art/game-env-snapshot.png" type="Texture" id=4]
+[ext_resource path="res://assets/game-art/server-room-lg.png" type="Texture" id=5]
+[ext_resource path="res://active-partials/player/_robot.xml" type="PackedScene" id=6]
+[ext_resource path="res://scenes/NPCs/human-1.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/NPCs/bot.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/NPCs/desk.tscn" type="PackedScene" id=9]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"res://active-partials/environment/walkable-area.gd\"\n\n"
+
+[node name="env" type="Node2D"]
+
+script/script = SubResource( 1 )
+__meta__ = { "__editor_plugin_screen__":"Script" }
+
+[node name="nav" type="Navigation2D" parent="."]
+
+[node name="floor" type="TileMap" parent="nav"]
+
+mode = 1
+tile_set = ExtResource( 1 )
+cell/size = Vector2( 72, 36 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 1
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( -524272, 1, -524271, 1, -524270, 1, -458741, 1, -458740, 1, -458739, 1, -458738, 1, -458737, 1, -458736, 1, -458734, 1, -458733, 1, -393210, 1, -393209, 1, -393197, 1, -327674, 1, -327661, 1, -262125, 1, -262124, 1, -131066, 1, -65530, 1, -65514, 1, -65513, 1, 6, 1, 65542, 1, 131078, 1, 196614, 1, 196635, 1, 196636, 1, 393237, 1, 393239, 1, 393240, 1, 458773, 1, 524309, 1, 589845, 1, 655377, 1, 655378, 1, 655379, 1, 655380, 1, 655381, 1, 655382, 1, 720913, 1, 720914, 1, 720919, 1 )
+
+[node name="Sprite2" type="Sprite" parent="nav"]
+
+transform/pos = Vector2( 594.38, 67.151 )
+transform/scale = Vector2( 0.29815, 0.29815 )
+texture = ExtResource( 2 )
+
+[node name="Sprite1" type="Sprite" parent="nav"]
+
+transform/pos = Vector2( 423.388, 92.3379 )
+transform/scale = Vector2( 0.29815, 0.29815 )
+texture = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="nav"]
+
+transform/pos = Vector2( 308.22, 214.452 )
+transform/scale = Vector2( 0.519952, 0.519952 )
+texture = ExtResource( 4 )
+
+[node name="Sprite3" type="Sprite" parent="nav"]
+
+transform/pos = Vector2( 131.41, 312.967 )
+transform/scale = Vector2( 0.620355, 0.620356 )
+texture = ExtResource( 5 )
+
+[node name="robot" parent="nav" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 365.447, 261.726 )
+collision/margin = 0.08
+
+[node name="lady" parent="nav" instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 179.51, 196.165 )
+
+[node name="bot" parent="nav" instance=ExtResource( 8 )]
+
+transform/pos = Vector2( 669.924, 153.601 )
+
+[node name="desk" parent="nav" instance=ExtResource( 9 )]
+
+transform/pos = Vector2( 838.676, -14.4588 )
+transform/scale = Vector2( 0.374669, 0.374669 )
+
+
