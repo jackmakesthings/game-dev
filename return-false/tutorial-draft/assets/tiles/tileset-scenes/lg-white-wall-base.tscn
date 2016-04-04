@@ -1,0 +1,86 @@
+[gd_scene load_steps=12 format=1]
+
+[ext_resource path="res://assets/game-art/white-wall-1-short.png" type="Texture" id=1]
+[ext_resource path="res://assets/game-art/white-wall-2-short.png" type="Texture" id=2]
+[ext_resource path="res://assets/game-art/white-corner-1.png" type="Texture" id=3]
+[ext_resource path="res://assets/game-art/white-corner-2.png" type="Texture" id=4]
+[ext_resource path="res://assets/game-art/white-corner-large.png" type="Texture" id=5]
+[ext_resource path="res://assets/game-art/white-t-large-2.png" type="Texture" id=6]
+[ext_resource path="res://assets/game-art/white-t-large.png" type="Texture" id=7]
+[ext_resource path="res://assets/game-art/white-t-large-3.png" type="Texture" id=8]
+[ext_resource path="res://assets/game-art/white-t-large-4.png" type="Texture" id=9]
+[ext_resource path="res://assets/game-art/white-x-large.png" type="Texture" id=10]
+[ext_resource path="res://assets/game-art/white-x-large-2.png" type="Texture" id=11]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="flat-1" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+centered = false
+offset = Vector2( -2, -250 )
+
+[node name="flat-2" type="Sprite" parent="."]
+
+transform/pos = Vector2( 65, -5 )
+texture = ExtResource( 2 )
+centered = false
+offset = Vector2( 52, -250 )
+
+[node name="corner-1" type="Sprite" parent="."]
+
+transform/pos = Vector2( 240, 0 )
+texture = ExtResource( 3 )
+centered = false
+offset = Vector2( -2, -248 )
+
+[node name="corner-2" type="Sprite" parent="."]
+
+transform/pos = Vector2( 380, 0 )
+texture = ExtResource( 4 )
+centered = false
+offset = Vector2( 52, -250 )
+
+[node name="corner-3" type="Sprite" parent="."]
+
+transform/pos = Vector2( 540, -10 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="t-1" type="Sprite" parent="."]
+
+transform/pos = Vector2( 0, 350 )
+texture = ExtResource( 6 )
+centered = false
+
+[node name="t-2" type="Sprite" parent="."]
+
+transform/pos = Vector2( 340, 350 )
+texture = ExtResource( 7 )
+centered = false
+
+[node name="t-3" type="Sprite" parent="."]
+
+transform/pos = Vector2( 680, 350 )
+texture = ExtResource( 8 )
+centered = false
+
+[node name="t-4" type="Sprite" parent="."]
+
+transform/pos = Vector2( 1080, 360 )
+texture = ExtResource( 9 )
+centered = false
+
+[node name="x-1" type="Sprite" parent="."]
+
+transform/pos = Vector2( 10, 850 )
+texture = ExtResource( 10 )
+centered = false
+
+[node name="x-2" type="Sprite" parent="."]
+
+transform/pos = Vector2( 400, 850 )
+texture = ExtResource( 11 )
+centered = false
+
+

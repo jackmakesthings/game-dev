@@ -1,0 +1,8 @@
+[gd_resource type="NavigationPolygon" format=1]
+
+[resource]
+
+vertices = Vector2Array( 36, 0, 72, 21, 36, 42, 0, 21 )
+polygons = [ IntArray( 0, 1, 2, 3 ) ]
+outlines = [ Vector2Array( 36, 0, 72, 21, 36, 42, 0, 21 ) ]
+

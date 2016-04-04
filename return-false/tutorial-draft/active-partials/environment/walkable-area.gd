@@ -220,7 +220,7 @@ func _ready():
 	set_internals()
 	set_externals()
 	
-	fill_tiles(-1,TILE_DEFAULT) # change empty tiles
+	#fill_tiles(-1,TILE_DEFAULT) # change empty tiles
 #	remove_child(tiles) # "refresh" the tilemap so navpoly works
 	# delete squares went here
 #	add_child(tiles)

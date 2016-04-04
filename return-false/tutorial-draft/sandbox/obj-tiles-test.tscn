@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://assets/tiles/tilesets/iso-floors-walkable--v2b.tres" type="TileSet" id=1]
+[ext_resource path="res://active-partials/player/_robot.xml" type="PackedScene" id=2]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"res://active-partials/environment/walkable-area.gd\"\n\n"
+
+[node name="env" type="Node2D"]
+
+script/script = SubResource( 1 )
+__meta__ = { "__editor_plugin_screen__":"2D" }
+
+[node name="nav" type="Navigation2D" parent="."]
+
+[node name="floor" type="TileMap" parent="nav"]
+
+mode = 1
+tile_set = ExtResource( 1 )
+cell/size = Vector2( 70, 40 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 1
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( -131059, 1, -65524, 1, -65523, 1, -65522, 1, 13, 1, 15, 0, 16, 0, 17, 0, 18, 0, 19, 0, 65550, 0, 65551, 0, 65552, 0, 65553, 0, 65554, 0, 65555, 0, 131086, 0, 131087, 0, 131088, 0, 131089, 0, 131090, 0, 131091, 0, 196622, 0, 196623, 0, 196624, 0, 196625, 0, 196626, 0, 196627, 0, 262158, 0, 262159, 0, 262160, 0, 262161, 0, 262162, 0, 262163, 0, 327694, 0, 327695, 0, 327696, 0, 327697, 0, 327698, 0, 327699, 0, 393231, 0, 393232, 0, 393233, 0, 393234, 0, 393235, 0 )
+
+[node name="robot" parent="nav" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 552, 412 )
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+
+

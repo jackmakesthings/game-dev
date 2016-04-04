@@ -1,0 +1,95 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://assets/game-art/floor-tiles-72px.png" type="Texture" id=1]
+[ext_resource path="res://assets/tiles/72x42-iso-navpoly.tres" type="NavigationPolygon" id=2]
+[ext_resource path="res://assets/fpo/white-block-lighter.png" type="Texture" id=3]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="white" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+centered = false
+region = true
+region_rect = Rect2( 11, 68, 72, 42 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="white"]
+
+navpoly = ExtResource( 2 )
+enabled = true
+
+[node name="checked" type="Sprite" parent="."]
+
+transform/pos = Vector2( 78, 0 )
+texture = ExtResource( 1 )
+centered = false
+region = true
+region_rect = Rect2( 98, 67, 72, 42 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="checked"]
+
+navpoly = ExtResource( 2 )
+enabled = true
+
+[node name="wood" type="Sprite" parent="."]
+
+transform/pos = Vector2( 159, 0 )
+texture = ExtResource( 1 )
+centered = false
+region = true
+region_rect = Rect2( 187, 65, 72, 42 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="wood"]
+
+navpoly = ExtResource( 2 )
+enabled = true
+
+[node name="black" type="Sprite" parent="."]
+
+transform/pos = Vector2( 0, 51 )
+texture = ExtResource( 1 )
+centered = false
+region = true
+region_rect = Rect2( 273, 65, 72, 42 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="black"]
+
+navpoly = ExtResource( 2 )
+enabled = true
+
+[node name="grate" type="Sprite" parent="."]
+
+transform/pos = Vector2( 81, 51 )
+texture = ExtResource( 1 )
+centered = false
+region = true
+region_rect = Rect2( 119, 8, 72, 42 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="grate"]
+
+navpoly = ExtResource( 2 )
+enabled = true
+
+[node name="black-unwalkable" type="Sprite" parent="."]
+
+transform/pos = Vector2( 0, 102 )
+texture = ExtResource( 1 )
+centered = false
+region = true
+region_rect = Rect2( 273, 65, 72, 42 )
+
+[node name="white-unwalkable" type="Sprite" parent="."]
+
+transform/pos = Vector2( 81, 102 )
+texture = ExtResource( 1 )
+centered = false
+region = true
+region_rect = Rect2( 11, 68, 72, 42 )
+
+[node name="block" type="Sprite" parent="."]
+
+transform/pos = Vector2( 202.5, 112.5 )
+transform/scale = Vector2( 0.492188, 0.492188 )
+texture = ExtResource( 3 )
+
+

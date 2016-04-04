@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="8" version="2.0" version_name="Godot Engine v2.0.rc1.custom_build">
-	<ext_resource path="res://assets/tiles/tilesets/iso-floors-walkable.xml" type="TileSet" index="0"></ext_resource>
+<resource_file type="PackedScene" subresource_count="8" version="2.1" version_name="Godot Engine v2.1.alpha.custom_build">
 	<ext_resource path="res://active-partials/player/_robot.xml" type="PackedScene" index="1"></ext_resource>
-	<ext_resource path="res://assets/fpo/basic_block128.tex" type="Texture" index="3"></ext_resource>
 	<ext_resource path="res://assets/fpo/white-block-lighter.png" type="Texture" index="2"></ext_resource>
+	<ext_resource path="res://assets/tiles/tilesets/iso-floors-walkable.xml" type="TileSet" index="0"></ext_resource>
+	<ext_resource path="res://assets/fpo/basic_block128.tex" type="Texture" index="3"></ext_resource>
 	<resource type="GDScript" path="local://1">
 		<string name="script/source"> "extends &quot;res://active-partials/environment/walkable-area.gd&quot;&#000a;&#000a;" </string>
 
@@ -69,14 +69,14 @@
 				<string> "large_image" </string>
 				<string> "StaticBody2D" </string>
 				<string> "TextureButton" </string>
-				<string> "margin/left" </string>
-				<string> "margin/top" </string>
-				<string> "margin/right" </string>
-				<string> "margin/bottom" </string>
 				<string> "focus/ignore_mouse" </string>
 				<string> "focus/stop_mouse" </string>
 				<string> "size_flags/horizontal" </string>
 				<string> "size_flags/vertical" </string>
+				<string> "margin/left" </string>
+				<string> "margin/top" </string>
+				<string> "margin/right" </string>
+				<string> "margin/bottom" </string>
 				<string> "toggle_mode" </string>
 				<string> "textures/normal" </string>
 				<string> "textures/pressed" </string>
@@ -97,7 +97,7 @@
 			<array  len="0" shared="false">
 			</array>
 			<string> "nodes" </string>
-			<int_array  len="153"> 				-1, -1, 3, 0, -1, 2, 1, 0, 2, 1, 0, 0, 0, 5, 4, -1, 0, 0, 1, 0, 22, 6, -1, 15, 7, 2, 8, 3, 9, 4, 10, 5, 11, 6, 12, 7, 13, 2, 14, 8, 15, 8, 16, 9, 17, 10, 18, 2, 19, 2, 20, 2, 21, 11, 0, 1, 0, 2147483647, 23, 12, 2, 24, 13, 25, 14, 0, 1, 0, 39, 26, -1, 15, 27, 15, 28, 16, 29, 17, 30, 8, 18, 2, 19, 2, 31, 18, 32, 10, 33, 9, 34, 10, 1, 19, 35, 20, 36, 21, 37, 22, 38, 23, 0, 4, 0, 40, 40, -1, 14, 41, 24, 42, 25, 43, 26, 44, 27, 45, 8, 46, 15, 47, 7, 48, 7, 49, 8, 50, 28, 51, 28, 52, 28, 53, 28, 54, 28, 0, 4, 0, 55, 55, -1, 4, 56, 29, 57, 30, 58, 18, 59, 8, 0 </int_array>
+			<int_array  len="153"> 				-1, -1, 3, 0, -1, 2, 1, 0, 2, 1, 0, 0, 0, 5, 4, -1, 0, 0, 1, 0, 22, 6, -1, 15, 7, 2, 8, 3, 9, 4, 10, 5, 11, 6, 12, 7, 13, 2, 14, 8, 15, 8, 16, 9, 17, 10, 18, 2, 19, 2, 20, 2, 21, 11, 0, 1, 0, 2147483647, 23, 12, 2, 24, 13, 25, 14, 0, 1, 0, 39, 26, -1, 15, 27, 15, 28, 16, 29, 17, 30, 8, 18, 2, 19, 2, 31, 18, 32, 10, 33, 9, 34, 10, 1, 19, 35, 20, 36, 21, 37, 22, 38, 23, 0, 4, 0, 40, 40, -1, 14, 41, 8, 42, 15, 43, 7, 44, 7, 45, 24, 46, 25, 47, 26, 48, 27, 49, 8, 50, 28, 51, 28, 52, 28, 53, 28, 54, 28, 0, 4, 0, 55, 55, -1, 4, 56, 29, 57, 30, 58, 18, 59, 8, 0 </int_array>
 			<string> "variants" </string>
 			<array  len="31" shared="false">
 				<resource  resource_type="Script" path="local://1">  </resource>
