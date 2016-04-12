@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://assets/tiles/floors/floor-72x36.tres" type="TileSet" id=1]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"./walkable-area.gd\""
+
+[node name="env" type="Node2D"]
+
+script/script = SubResource( 1 )
+
+[node name="nav" type="Navigation2D" parent="."]
+
+[node name="floor" type="TileMap" parent="nav"]
+
+mode = 1
+tile_set = ExtResource( 1 )
+cell/size = Vector2( 72, 36 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( -196598, 0, -196597, 0, -196596, 0, -196595, 0, -196594, 0, -196593, 0, -196592, 0, -196591, 0, -131062, 0, -131061, 3, -131060, 3, -131059, 3, -131058, 3, -131057, 3, -131056, 3, -131055, 0, -65526, 0, -65525, 3, -65524, 3, -65523, 3, -65522, 3, -65521, 3, -65520, 3, -65519, 0, 10, 0, 11, 3, 12, 3, 13, 3, 14, 3, 15, 3, 16, 3, 17, 0, 65546, 0, 65547, 3, 65548, 3, 65549, 3, 65550, 3, 65551, 3, 65552, 3, 65553, 0, 131082, 0, 131083, 3, 131084, 3, 131085, 3, 131086, 3, 131087, 3, 131088, 3, 131089, 0, 196618, 0, 196619, 3, 196620, 3, 196621, 3, 196622, 3, 196623, 3, 196624, 3, 196625, 0, 262154, 0, 262155, 0, 262156, 0, 262157, 0, 262158, 0, 262159, 0, 262160, 0, 262161, 0 )
+
+[node name="objects" type="TileMap" parent="nav"]
+
+mode = 0
+tile_set = null
+cell/size = Vector2( 64, 64 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray(  )
+
+
