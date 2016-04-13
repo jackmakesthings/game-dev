@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://assets/tiles/floors/floor-72x36.tres" type="TileSet" id=1]
+[ext_resource path="res://assets/tiles/floors/72x36/red--72x36.png" type="Texture" id=2]
+
+[sub_resource type="GDScript" id=3]
+
+script/source = "extends \"res://systems/environment/_Environment.gd\""
+
+[sub_resource type="GDScript" id=2]
+
+script/source = "extends \"res://systems/character/_Walker.gd\""
+
+[node name="environment" type="Node2D"]
+
+script/script = SubResource( 3 )
+
+[node name="nav" type="Navigation2D" parent="."]
+
+[node name="ground" type="TileMap" parent="nav"]
+
+mode = 1
+tile_set = ExtResource( 1 )
+cell/size = Vector2( 72, 36 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( -196602, 0, -196601, 0, -196600, 0, -196599, 0, -196598, 0, -196597, 0, -196596, 0, -131066, 0, -131065, 0, -131064, 0, -131063, 0, -131062, 0, -131061, 0, -131060, 0, -65530, 0, -65529, 0, -65528, 0, -65527, 0, -65526, 0, -65525, 0, -65524, 0, 6, 0, 7, 0, 8, 0, 9, 0, 10, 0, 11, 0, 12, 0, 65542, 0, 65543, 0, 65544, 0, 65545, 0, 65546, 0, 65547, 0, 65548, 0, 131078, 0, 131079, 0, 131080, 0, 131081, 0, 131082, 0, 131083, 0, 131084, 0 )
+
+[node name="walls" type="TileMap" parent="nav"]
+
+mode = 1
+tile_set = null
+cell/size = Vector2( 72, 36 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray(  )
+
+[node name="player" type="KinematicBody2D" parent="nav/walls"]
+
+transform/pos = Vector2( 161.884, 160.524 )
+input/pickable = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="nav/walls/player"]
+
+texture = ExtResource( 2 )
+
+[connection signal="walk_to" from="." to="nav/walls/player" method="update_path"]
+
+
