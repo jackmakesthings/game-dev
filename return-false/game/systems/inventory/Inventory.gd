@@ -1,7 +1,7 @@
 # Inventory base class
 extends Node
 
-const Item = preload("res://template-scenes/inventory/_Item.gd")
+const Item = preload("res://systems/inventory/_Item.gd")
 export(Array) var contents
 signal inventory_updated(was_item_added, which_item)
 
