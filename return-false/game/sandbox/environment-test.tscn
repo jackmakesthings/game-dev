@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://assets/tiles/floors/floor-72x36.tres" type="TileSet" id=1]
-[ext_resource path="res://assets/tiles/floors/72x36/red--72x36.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/floors/72x36/green-border--72x36.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/floors/72x36/red--72x36.png" type="Texture" id=3]
 
 [sub_resource type="GDScript" id=3]
 
@@ -33,7 +34,12 @@ collision/bounce = 0.0
 collision/layers = 1
 collision/mask = 1
 occluder/light_mask = 1
-tile_data = IntArray( -196602, 0, -196601, 0, -196600, 0, -196599, 0, -196598, 0, -196597, 0, -196596, 0, -131066, 0, -131065, 0, -131064, 0, -131063, 0, -131062, 0, -131061, 0, -131060, 0, -65530, 0, -65529, 0, -65528, 0, -65527, 0, -65526, 0, -65525, 0, -65524, 0, 6, 0, 7, 0, 8, 0, 9, 0, 10, 0, 11, 0, 12, 0, 65542, 0, 65543, 0, 65544, 0, 65545, 0, 65546, 0, 65547, 0, 65548, 0, 131078, 0, 131079, 0, 131080, 0, 131081, 0, 131082, 0, 131083, 0, 131084, 0 )
+tile_data = IntArray( -196602, 0, -196601, 0, -196600, 0, -196599, 0, -196598, 0, -196597, 0, -196596, 0, -131066, 0, -131065, 0, -131064, 0, -131063, 3, -131062, 0, -131061, 0, -131060, 0, -65530, 0, -65529, 0, -65528, 0, -65527, 3, -65526, 0, -65525, 0, -65524, 0, 6, 0, 7, 0, 8, 3, 9, 3, 10, 0, 11, 0, 12, 0, 65542, 0, 65543, 0, 65544, 0, 65545, 3, 65546, 0, 65547, 0, 65548, 0, 131078, 0, 131079, 0, 131080, 0, 131081, 0, 131082, 0, 131083, 0, 131084, 0 )
+
+[node name="marker" type="Sprite" parent="nav/ground"]
+
+visibility/visible = false
+texture = ExtResource( 2 )
 
 [node name="walls" type="TileMap" parent="nav"]
 
@@ -64,8 +70,12 @@ script/script = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="nav/walls/player"]
 
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [connection signal="walk_to" from="." to="nav/walls/player" method="update_path"]
+
+[connection signal="path_updated" from="nav/walls/player" to="." method="on_path_updated"]
+
+[connection signal="done_moving" from="nav/walls/player" to="." method="on_motion_end"]
 
 

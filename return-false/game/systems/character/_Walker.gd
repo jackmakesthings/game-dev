@@ -9,11 +9,12 @@ var is_moving = false
 
 const SPEED = 150.0
 
-signal done_moving(from, to, path)
+signal path_updated(path)
+signal done_moving(from, to)
 
 # update_path(nav, end)
 # takes a navigation2d node and a destination
-func update_path(nav, end):
+func update_path(nav, end, adjust_path, tiles):
 
 	last_pos = get_pos()
 	begin = last_pos
@@ -21,7 +22,20 @@ func update_path(nav, end):
 	var p = nav.get_simple_path(begin, end, false)
 	path = Array(p)
 	path.invert()
+
+
+	# if the tile clicked is not actually walkable,
+	# we need to do some math to direct the actor to a nearby point that is
+	if adjust_path:
+		path[0] = path[1]
+		var tilesize = tiles.get_cell_size()
+		var endpos_map = tiles.world_to_map(path[0])
+		var endpos_world = tiles.map_to_world(endpos_map)
+		var adjusted = endpos_world + Vector2(0, tilesize.y/2)
+		path[0] = adjusted
+
 	set_fixed_process(true)
+	emit_signal("path_updated", path)
 
 
 func walk(delta):
@@ -55,6 +69,7 @@ func walk(delta):
 		#reaching our destination
 		if path.size() < 2:
 			halt()
+			emit_signal("done_moving", last_pos, get_pos())
 
 	else:
 		halt()
