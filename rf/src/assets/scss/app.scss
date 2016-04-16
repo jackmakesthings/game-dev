@@ -53,3 +53,29 @@ li img { margin-bottom: 0; }
 .tabs-title > a {
 	font-size: inherit;
 }
+
+.dialogue {
+	background: #2aa;
+	height: 100vh;
+	font-size: 12px;
+	> .callout {
+		height: 80vh;
+		margin: 10vh auto;
+	}
+	.callout {
+		border: 0;
+	}
+	img { width: 100%; }
+}
+
+.rel { position: relative; }
+
+.img-overlay {
+	position: absolute;
+	color: #111;
+	font-weight: bold;
+	letter-spacing: 0.02em;
+}
+
+.top { top: 2rem; }
+.left { left: 2rem; }
