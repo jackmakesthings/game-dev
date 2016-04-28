@@ -4,6 +4,8 @@ extends Node
 const config_path = "user://config.cfg"
 const savefile_path = "res://savegames"
 
+const PLAYER_CLASS = "res://systems/character/_Walker.gd"
+
 ## Data methods ##
 
 # get_json(file)
@@ -56,3 +58,28 @@ func fake_click(position, flags=0):
 	ev.global_pos = position
 	ev.meta = flags
 	get_tree().input_event(ev)
+
+
+
+# Misc. utilities
+
+# Player checking; currently used by NPCs to trigger interactions
+
+func is_player(node):
+	if node extends PLAYER_CLASS:
+		return true
+	else:
+		return false
+
+func is_player_nearby(trigger):
+	var nearby_bodies
+	var player_found = false
+
+	nearby_bodies = trigger.get_overlapping_bodies()
+	for body in nearby_bodies:
+		if is_player(body):
+			player_found = true
+		else:
+			continue
+
+	return player_found

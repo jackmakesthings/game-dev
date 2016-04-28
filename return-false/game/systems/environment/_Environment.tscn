@@ -4,7 +4,7 @@
 
 [sub_resource type="GDScript" id=1]
 
-script/source = "# To add the player:\n# 1) create or instance k2d under the \'objects\' node\n# 2) make k2d extend from systems/player/_Walker.gd\n# 3) connect this node\'s \"walk_to\" signal to \"update_path\" on the k2d\n\nextends \"./_Environment.gd\""
+script/source = "# To add the player:\n# 1) create or instance k2d under the \'objects\' node\n# 2) make k2d extend from systems/player/_Walker.gd\n# 3) connect this node\'s \"walk_to\" signal to \"update_path\" on the k2d\n\nextends \"res://systems/environment/_Environment.gd\""
 
 [node name="env" type="Node2D"]
 
