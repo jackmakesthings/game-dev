@@ -1,6 +1,5 @@
 extends Node2D
 
-onready var Utils = get_node("/root/utils")
 onready var nav = find_node("nav")
 onready var tiles = find_node("ground")
 onready var marker = find_node("marker")
