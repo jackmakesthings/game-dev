@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=1]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"res://systems/character/_Walker.gd\"\n\n"
+
+[node name="Player" type="KinematicBody2D"]
+
+input/pickable = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = SubResource( 1 )
+
+
