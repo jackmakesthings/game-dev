@@ -47,6 +47,16 @@ func _ready():
 	setup()
 
 
+
+func say(text):
+	_Dialogue.make(text)
+
+func response(obj):
+	_Responses.add_response(obj.text, obj.actions)
+
+func responses(arr):
+	_Responses.add_responses(arr)
+
 class Dialogue:
 	
 	extends Node
