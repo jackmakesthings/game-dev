@@ -15,6 +15,7 @@ dialog_path = NodePath("dialog")
 
 [node name="dialog" type="PopupPanel" parent="."]
 
+visibility/visible = false
 anchor/right = 1
 anchor/bottom = 1
 margin/left = 230.0
@@ -88,6 +89,7 @@ margin/bottom = 82.0
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 3
+size_flags/vertical = 2
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 bbcode/enabled = true
 bbcode/bbcode = "[right]DR SURNAME\nENGINEERING DEPT.\n[/right]"
