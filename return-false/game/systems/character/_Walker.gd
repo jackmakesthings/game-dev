@@ -59,6 +59,7 @@ func walk(delta):
 				to_walk = 0
 
 		var next_pos = path[path.size() - 1]
+		print(get_pos().angle_to_point(next_pos))
 		move_to(next_pos)
 
 		if is_colliding():
