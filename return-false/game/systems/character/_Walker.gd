@@ -82,7 +82,7 @@ func walk(delta):
 
 func halt():
 	set_fixed_process(false)
-	anim_node.seek(0.0)
+	anim_node.seek(0.0, true)
 	anim_node.stop()
 	path.clear()
 
