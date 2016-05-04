@@ -22,6 +22,8 @@ onready var MUI = get_tree().get_current_scene().find_node("MessageUI")
 
 onready var x = get_node(approach_point)
 onready var trigger = get_node(trigger_area)
+onready var sprite = get_node('Sprite')
+onready var collider = get_node('collider')
 
 var player_nearby = false
 var dialog_branches = [\
@@ -45,8 +47,16 @@ func _on_click():
 		var destination = get_canvas_transform().xform(x.get_global_pos())
 		Utils.fake_click(destination, 1)
 		yield(Player, "done_moving")
+		Player.orient_towards(_get_orientation())
 		start_interaction()
 
+
+
+# Figure out where the player will stand relative to the NPC
+func _get_orientation():
+	var pos1 = collider.get_pos()
+	var pos2 = x.get_pos()
+	return pos1 - pos2
 
 
 ## Init or decline conversation ##

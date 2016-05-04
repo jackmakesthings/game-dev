@@ -13,6 +13,7 @@ const SPEED = 50.0
 
 signal path_updated(path)
 signal done_moving(from, to)
+signal done_orienting
 
 # update_path(nav, end)
 # takes a navigation2d node and a destination
@@ -117,7 +118,13 @@ func orient(NESW):
 		anim_node.play(NESW)
 	if anim_node.get_current_animation() == NESW and !anim_node.is_playing():
 		anim_node.play(NESW)
-	
+
+func orient_towards(vector):
+	var NESW = get_orient(vector)
+	anim_node.set_current_animation(NESW)
+	anim_node.seek(0.0, true)	
+	anim_node.stop()
+	emit_signal("done_orienting")
 
 func _fixed_process(delta):
 	walk(delta);
