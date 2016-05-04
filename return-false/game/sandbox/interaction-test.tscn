@@ -1,0 +1,141 @@
+[gd_scene load_steps=10 format=1]
+
+[ext_resource path="res://systems/dialogue/Dialogue.example.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/tiles/floors/floor-72x36.tres" type="TileSet" id=2]
+[ext_resource path="res://assets/tiles/floors/72x36/green-border--72x36.png" type="Texture" id=3]
+[ext_resource path="res://systems/character/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://sandbox/NPC.draft.gd" type="Script" id=5]
+[ext_resource path="res://assets/temp/trace.png" type="Texture" id=6]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"res://systems/environment/_Environment.gd\""
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -20.499, 28.2692, -1.33946, 22.8806, 17.2214, 24.6768, 41.1709, 34.8553, 47.757, 46.83, 43.5658, 67.1871, 19.0176, 72.5757, 1.65422, 66.5883, -21.6965, 55.2124, -28.8814, 43.2376 )
+
+[sub_resource type="CircleShape2D" id=3]
+
+custom_solver_bias = 0.0
+radius = 10.0
+
+[node name="environment" type="Node2D"]
+
+script/script = SubResource( 1 )
+
+[node name="MessageUI" parent="." instance=ExtResource( 1 )]
+
+[node name="nav" type="Navigation2D" parent="."]
+
+[node name="ground" type="TileMap" parent="nav"]
+
+mode = 1
+tile_set = ExtResource( 2 )
+cell/size = Vector2( 72, 36 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( -196602, 0, -196601, 0, -196600, 0, -196599, 0, -196598, 0, -196597, 0, -196596, 0, -131066, 0, -131065, 0, -131064, 0, -131063, 3, -131062, 0, -131061, 0, -131060, 0, -65530, 0, -65529, 0, -65528, 0, -65527, 3, -65526, 0, -65525, 0, -65524, 0, 6, 0, 7, 0, 8, 3, 9, 3, 10, 0, 11, 0, 12, 0, 65542, 0, 65543, 0, 65544, 0, 65545, 3, 65546, 0, 65547, 0, 65548, 0, 131078, 0, 131079, 0, 131080, 0, 131081, 0, 131082, 0, 131083, 0, 131084, 0 )
+
+[node name="marker" type="Sprite" parent="nav/ground"]
+
+visibility/visible = false
+texture = ExtResource( 3 )
+
+[node name="walls" type="TileMap" parent="nav"]
+
+mode = 1
+tile_set = null
+cell/size = Vector2( 72, 36 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray(  )
+
+[node name="player" parent="nav/walls" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 217.239, 124.211 )
+collision/margin = 0.08
+
+[node name="Sprite" parent="nav/walls/player"]
+
+frame = 36
+
+[node name="NPC" type="Area2D" parent="nav/walls"]
+
+transform/pos = Vector2( 156.443, 118.353 )
+input/pickable = true
+shapes/0/shape = SubResource( 4 )
+shapes/0/transform = Matrix32( 1, -0, 0, 1, 0, 0 )
+shapes/0/trigger = true
+shapes/1/shape = SubResource( 3 )
+shapes/1/transform = Matrix32( 1, -0, 0, 1, -0.113419, 42.3676 )
+shapes/1/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 5 )
+trigger_area = NodePath(".")
+approach_point = NodePath("Position2D")
+single_option_fallback = "Did you get that thing I sent you\?"
+multi_option_fallback = "Hey, what\'s up\?"
+no_options_fallback = "Can this wait\? I\'m in the middle of some calibrations."
+show_fallback = true
+
+[node name="Sprite" type="TextureButton" parent="nav/walls/NPC"]
+
+rect/scale = Vector2( -0.8, 0.8 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 24.0
+margin/top = -38.0
+margin/right = 78.0
+margin/bottom = 80.0
+toggle_mode = false
+textures/normal = ExtResource( 6 )
+
+[node name="trigger" type="CollisionPolygon2D" parent="nav/walls/NPC"]
+
+build_mode = 0
+polygon = Vector2Array( -28.8814, 43.2376, -21.6965, 55.2124, 1.65422, 66.5883, 19.0176, 72.5757, 43.5658, 67.1871, 47.757, 46.83, 41.1709, 34.8553, 17.2214, 24.6768, -1.33946, 22.8806, -20.499, 28.2692 )
+shape_range = Vector2( 0, 0 )
+trigger = true
+
+[node name="Position2D" type="Position2D" parent="nav/walls/NPC"]
+
+transform/pos = Vector2( 31.1343, 57.4787 )
+
+[node name="collider" type="CollisionShape2D" parent="nav/walls/NPC"]
+
+transform/pos = Vector2( -0.113419, 42.3676 )
+shape = SubResource( 3 )
+trigger = false
+_update_shape_index = 1
+
+[connection signal="walk_to" from="." to="nav/walls/player" method="update_path"]
+
+[connection signal="pressed" from="nav/walls/NPC/Sprite" to="nav/walls/NPC" method="_on_click"]
+
+
+[editable path="nav/walls/player"]

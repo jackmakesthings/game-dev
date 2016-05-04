@@ -6,9 +6,9 @@ export(NodePath) var text_path
 export(NodePath) var response_path
 export(NodePath) var dialog_path
 
-var text_box
-var response_box
-var dialog_box
+onready var text_box = get_node(text_path)
+onready var response_box = get_node(response_path)
+onready var dialog_box = get_node(dialog_path)
 
 var _Dialogue
 var _Responses
@@ -25,7 +25,7 @@ func open():
 		emit_signal("dialog_opened")
 
 func close():
-	dialog_box.hide()
+	_Root.hide()
 	is_active = false
 	emit_signal("dialog_closed")
 
@@ -35,13 +35,10 @@ func clear():
 	emit_signal("dialog_cleared")
 
 func setup():
-	dialog_box = get_node(dialog_path)
-	text_box = get_node(text_path)
-	response_box = get_node(response_path)
-
 	_Root = dialog_box
 	_Dialogue = Dialogue.new(text_box, self)
 	_Responses = ResponseList.new(response_box, self)
+	close()
 
 func _ready():
 	setup()

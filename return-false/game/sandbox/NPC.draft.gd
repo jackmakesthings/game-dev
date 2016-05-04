@@ -1,53 +1,70 @@
+# NPC base class
+extends Area2D
+
+# trigger_area: generally the NPC root node, used for "player nearby" detection
+# approach_point: the position2D used to direct the player over
+# single_option_fallback: Intro text, could be changed by quests as added, need to flesh out further
+# multi_option_fallback: Default text for "there are multiple topics available" situations
+# no_options_fallback: "Can this wait? Calibrations."
+# show_fallback: Set to false to suppress showing the no_options_fallback
 export(NodePath) var trigger_area
 export(NodePath) var approach_point
-
-
 export(String) var single_option_fallback
 export(String) var multi_option_fallback
 export(String) var no_options_fallback
-
 export(bool) var show_fallback
+
 
 # TODO: better handling of global-ish vars like player node
 # maybe set up a dependencies pattern?
 onready var Player = get_parent().find_node("player")
 onready var MUI = get_tree().get_current_scene().find_node("MessageUI")
 
+onready var x = get_node(approach_point)
+onready var trigger = get_node(trigger_area)
 
 var player_nearby = false
-var dialog_branches = []
+var dialog_branches = [\
+{"dialog_label": "Robots", "active": true}, \
+{"dialog_label": "Humans", "active": true}, \
+{"dialog_label": "Aliens", "active": false} \
+]
+
 
 
 ## Input & player redirection ##
-# When an NPC is clicked on, the player walks over;
-# if there's dialogue, it starts once they arrive.
-func _on_click():
-	var trigger = get_node(trigger_area)
-	var x = get_node(approach_point)
-	var destination
-
+# Connected to the 'pressed' signal on the TextureButton.
+func _on_click():	
+	# Player's here already? Let's talk.
+	# Player's somewhere else? Call them over.
 	if Utils.is_player_nearby(trigger):
 		get_tree().set_input_as_handled()
 		start_interaction()
 	else:
 		Player.halt()
-		destination = get_canvas_transform().xform(x.get_global_pos())
+		var destination = get_canvas_transform().xform(x.get_global_pos())
 		Utils.fake_click(destination, 1)
+		yield(Player, "done_moving")
+		start_interaction()
 
 
-# init/decline conversation
+
+## Init or decline conversation ##
 func start_interaction():
-
-	#check_branches()
 	if dialog_branches.empty():
 		print("no dialogs!")
 		end_interaction()
 	else:
-		# dialog branch checking loop went here
-		# remove branches with no active state dialog
-		present_conversations(dialog_branches)
+		# TODO: this works, convert it to use state/pointer/quest logic
+		var active_branches = Array()
+		for branch in dialog_branches:
+			if branch.active:
+				active_branches.append(branch)
+		present_conversations(active_branches)
 
 
+
+# Create a "start talking about this" button for a given conversation
 func create_branch_option(branch):
 	var response = {
 		text = branch.dialog_label,
@@ -62,49 +79,60 @@ func create_branch_option(branch):
 	return response
 
 
-
+# Translate available conversations into a dialogue
+# using one of the fallbacks (single_option, multi_option) as text
+# with response options to trigger each available conversation.
 func present_conversations(dialog_branches):
 
-	if !MUI:
-		return
-
 	var options = Array()
+	
+	# Only a likely issue in subscenes, test scenes, etc.
+	if !MUI:
+		return "No MUI!"
 
+	# Nothing to talk about: (shouldn't happen at this point)
 	if dialog_branches == null or dialog_branches.size() < 1:
-		print("npc has nothing to say, somehow")
 		end_interaction()
 
+	# Only one thing to talk about:
 	elif dialog_branches.size() == 1:
-		# show whatever the dialog for that branch now is
-		pass
+		MUI.clear()
+		MUI.say(single_option_fallback)
+		MUI._Responses.add_close()
+		MUI.open()
 
+	# Several things to talk about:
 	elif dialog_branches.size() > 1:
-
 		for branch in dialog_branches:
 			var option = create_branch_option(branch)
 			options.append(option)
-
-		# clear MUI dialogue
 		MUI.clear()
 		MUI.say(multi_option_fallback)
 		MUI.responses(options)
-
 		MUI.open()
 
 
+# Stub - this will be used to kick off a conversation branch, ultimately.
+func enter_branch(branch):
+	MUI.clear()
+	MUI.say(branch.dialog_label + " it is!")
+	MUI._Responses.add_close("Okay.")
+	pass
+
+
+# Called when there's nothing to talk about
+# Either show the fallback ("calibrations") or don't, depending on the show_fallback property
 func end_interaction():
 	if !MUI:
-		return
-
+		return "No MUI!"
 	if no_options_fallback and show_fallback:
 		MUI.clear()
 		MUI.say(no_options_fallback)
 		MUI._Responses.add_close()
 		MUI.open()
-
 	else:
 		MUI.clear()
 		MUI.close()
+	return 0
 
-	return
 
