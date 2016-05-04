@@ -2,7 +2,8 @@
 
 [ext_resource path="res://assets/tiles/floors/floor-72x36.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/tiles/floors/72x36/green-border--72x36.png" type="Texture" id=2]
-[ext_resource path="res://systems/character/Player.draft.tscn" type="PackedScene" id=3]
+[ext_resource path="res://systems/character/Player.tscn" type="PackedScene" id=3]
+
 
 [sub_resource type="GDScript" id=1]
 
@@ -57,11 +58,17 @@ tile_data = IntArray(  )
 
 [node name="player" parent="nav/walls" instance=ExtResource( 3 )]
 
-transform/pos = Vector2( 535.987, 141.479 )
-collision/margin = 0.08
+transform/pos = Vector2( 512.861, 165.966 )
 
-[connection signal="walk_to" from="." to="" method="update_path"]
+[node name="Sprite" parent="nav/walls/player"]
+
+frame = 36
+
+[node name="AnimationPlayer" parent="nav/walls/player/Sprite"]
+
+root/root = NodePath("..")
 
 [connection signal="walk_to" from="." to="nav/walls/player" method="update_path"]
 
 
+[editable path="nav/walls/player"]

@@ -7,7 +7,9 @@ var destination = Vector2()
 var path = []
 var is_moving = false
 
-const SPEED = 150.0
+onready var anim_node = find_node("AnimationPlayer")
+
+const SPEED = 50.0
 
 signal path_updated(path)
 signal done_moving(from, to)
@@ -59,7 +61,9 @@ func walk(delta):
 				to_walk = 0
 
 		var next_pos = path[path.size() - 1]
-		print(get_pos().angle_to_point(next_pos))
+		var dir = next_pos - get_pos()
+
+		orient(get_orient(dir))
 		move_to(next_pos)
 
 		if is_colliding():
@@ -78,9 +82,42 @@ func walk(delta):
 
 func halt():
 	set_fixed_process(false)
+	anim_node.seek(0.0)
+	anim_node.stop()
 	path.clear()
-	#set_fixed_process(true)
 
+
+func get_orient(vector):
+	if vector.x > 0:
+		if vector.y > 0:
+			return 'SE'
+		elif vector.y == 0:
+			return 'E'
+		elif vector.y < 0:
+			return 'NE'
+	elif vector.x == 0:
+		if vector.y > 0:
+			return 'S'
+		elif vector.y == 0:
+			return 'S'
+		elif vector.y < 0:
+			return 'N'
+	elif vector.x < 0:
+		if vector.y > 0:
+			return 'SW'
+		elif vector.y == 0:
+			return 'W'
+		elif vector.y < 0:
+			return 'NW'
+	else:
+		return 'S'
+
+func orient(NESW):
+	if anim_node.get_current_animation() != NESW:
+		anim_node.play(NESW)
+	if anim_node.get_current_animation() == NESW and !anim_node.is_playing():
+		anim_node.play(NESW)
+	
 
 func _fixed_process(delta):
 	walk(delta);

@@ -5,7 +5,7 @@
 
 [sub_resource type="GDScript" id=1]
 
-script/source = "extends \"res://systems/character/_Walker.gd\"\n\n"
+script/source = "extends \"res://systems/character/_Walker.gd\""
 
 [sub_resource type="Animation" id=8]
 
@@ -100,9 +100,11 @@ script/script = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 
 texture = ExtResource( 1 )
+centered = false
+offset = Vector2( -25, -80 )
 vframes = 8
 hframes = 9
-frame = 23
+frame = 22
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
 
@@ -118,13 +120,13 @@ anims/SE = SubResource( 9 )
 anims/SW = SubResource( 6 )
 anims/W = ExtResource( 2 )
 playback/active = true
-playback/speed = 1.6
+playback/speed = 1.5
 blend_times = [  ]
 autoplay = ""
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite"]
 
-transform/pos = Vector2( 2.08772, 32.9861 )
+transform/pos = Vector2( 1.57509, 4.27846 )
 shape = SubResource( 10 )
 trigger = false
 _update_shape_index = -1
