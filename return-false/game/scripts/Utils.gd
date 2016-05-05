@@ -6,6 +6,8 @@ const savefile_path = "res://savegames"
 
 const PLAYER_CLASS = "res://systems/character/_Walker.gd"
 
+var debug = true
+
 ## Data methods ##
 
 # get_json(file)
@@ -83,3 +85,8 @@ func is_player_nearby(trigger):
 			continue
 
 	return player_found
+
+
+func debug(text):
+	if debug:
+		print(text)
