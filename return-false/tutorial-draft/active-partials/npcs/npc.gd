@@ -78,31 +78,23 @@ signal player_redirected(successful, expected, actual)
 func _init():
 	dialog_branches = Array()
 
-
 func set_MUI_portrait(portrait_path):
 	var pic = ImageTexture.new()
 	pic.load(portrait_path)
 	pic = portrait
 	MUI.make_portrait(pic)
 
-
-
 func setup_MUI(portrait_path=null, labeltext=""):
 	if portrait_path != null:
 		set_MUI_portrait(portrait_path)
 	
-	
-
 # TODO: fix this --------------
-#	if labeltext != "":
-#		label = labeltext
-#		
-#	MUI.make_dialogue(n)
-#	
-#	MUI.make_portrait(null)
-
-
-
+	#	if labeltext != "":
+	#		label = labeltext
+	#		
+	#	MUI.make_dialogue(n)
+	#	
+	#	MUI.make_portrait(null)
 
 func i_should_go():
 	if( !MUI ):
@@ -122,7 +114,6 @@ func i_should_go():
 # alias for the in-joke name
 func decline_conversation():
 	i_should_go()
-
 
 #################
 # present_conversations(dialog_branches)
@@ -176,8 +167,6 @@ func present_conversations(dialog_branches):
 
 		MUI.open()
 
-
-
 #################
 # init_branch(branch)
 # TODO: clean this up
@@ -197,7 +186,6 @@ func init_branch(branch):
 	for response in branch.responses_at_state(s):
 		branch.build_response(response)
 	MUI.open()
-
 
 #################
 # set_attractors()
@@ -241,7 +229,6 @@ func set_attractors():
 		attractors.append(data)
 		is_attracting = true
 		
-
 #################
 # stop_attracting()
 # turn off the charm and put tiles back to the way you found them
@@ -256,8 +243,6 @@ func stop_attracting():
 	attractors.clear()
 	is_attracting = false
 
-
-
 func redirect_player(player, destination):
 	player = get_parent().find_node("robot")
 	player.set_fixed_process(false)
@@ -268,8 +253,6 @@ func redirect_player(player, destination):
 	
 	yield(player, "oriented")
 	emit_signal("player_redirected", player_nearby, destination, player.get_global_pos())
-
-
 
 func _on_click():
 	#player = get_node("/root/scene").get("player")
@@ -283,13 +266,9 @@ func _on_click():
 	else:
 		redirect_player(player, x)
 		
-		
-
-
 func _stopped_nearby(body):
 	get_tree().set_input_as_handled()
 	start_interaction()
-
 
 func start_interaction():
 	setup_MUI(null, label)
@@ -298,41 +277,38 @@ func start_interaction():
 	pause.start()
 	yield(pause, "timeout")
 	check_branches()
-#	print("branches are ", dialog_branches)
+	#	print("branches are ", dialog_branches)
 	
 	if( dialog_branches.empty() ):
-#		print("no dialogs!")
+	#		print("no dialogs!")
 		i_should_go()
 	else:
 		var count = 0
 		while count < dialog_branches.size():
 			if( dialog_branches[count] == null ):
-#				print("that branch is null, returning")
+				# print("that branch is null, returning")
 				return false
 				
 			if( !has_conversation(dialog_branches[count]) ):
-#				print( "no conversation for ", dialog_branches[count], ", erasing")
+				#print( "no conversation for ", dialog_branches[count], ", erasing")
 				dialog_branches.erase(dialog_branches[count])
 				
 				
 				#remove_child(dialog_branches[count])
 				count = count + 1
-#				print( "Dialog branch removed, size is now ", dialog_branches.size())
+				#print( "Dialog branch removed, size is now ", dialog_branches.size())
 				
 			else:
 				count = count + 1
 				continue
 		
 		if( dialog_branches.size() > 0 ):
-#			print("found ", dialog_branches.size(), " dialog branches, presenting conversations")		
+			#print("found ", dialog_branches.size(), " dialog branches, presenting conversations")		
 			present_conversations(dialog_branches)
 		else:
-#			print( "dialog branches size < 1, closing MUI")
+			#print( "dialog branches size < 1, closing MUI")
 			MUI.close()
 			
-			
-			
-
 # Check whether this actor has anything to say
 # on a particular dialog branch, at its current state
 func has_conversation(branch_ = null):
@@ -345,15 +321,12 @@ func has_conversation(branch_ = null):
 			return false
 		return true
 
-
 func set_branches():
 	if( quest_loader == null ):
 		return
 	else:
 		yield(quest_loader, "quests_loaded")
 		check_branches()
-
-
 
 func check_branches():
 	dialog_branches.clear()
@@ -387,7 +360,6 @@ func set_paths():
 	
 func npc_ready():
 	pass
-	
 
 func _ready():
 	set_process(true)
@@ -398,7 +370,6 @@ func _ready():
 	npc_ready()
 	if( trust == null ):
 		trust = 0
-
 
 func _enter_tree():
 	set_paths()
