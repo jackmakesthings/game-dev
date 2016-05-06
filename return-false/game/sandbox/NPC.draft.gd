@@ -27,11 +27,10 @@ onready var collider = get_node('collider')
 
 var player_nearby = false
 var dialog_branches = [\
-{"dialog_label": "Robots", "active": true}, \
-{"dialog_label": "Humans", "active": true}, \
+{"dialog_label": "Robots", "active": false}, \
+{"dialog_label": "Humans", "active": false}, \
 {"dialog_label": "Aliens", "active": false} \
 ]
-
 
 
 ## Input & player redirection ##
@@ -68,10 +67,20 @@ func start_interaction():
 		# TODO: this works, convert it to use state/pointer/quest logic
 		var active_branches = Array()
 		for branch in dialog_branches:
-			if branch.active:
+			if branch.active and active_branches.find(branch) < 0:
 				active_branches.append(branch)
 		present_conversations(active_branches)
 
+
+# Pseudo code for future implementation - needs quests working
+#func _is_branch_active(branch):
+#	var lookup = branch.id
+#	var branch_quest = Quests.get_quest(lookup)
+#	var state_lookup = branch_quest.current_state
+#	if branch.states[state_lookup] != null:
+#		return true
+#	return false
+#	pass
 
 
 # Create a "start talking about this" button for a given conversation
@@ -108,7 +117,7 @@ func present_conversations(dialog_branches):
 	elif dialog_branches.size() == 1:
 		MUI.clear()
 		MUI.say(single_option_fallback)
-		MUI._Responses.add_close()
+		MUI.response(create_branch_option(dialog_branches[0]))
 		MUI.open()
 
 	# Several things to talk about:
@@ -146,3 +155,8 @@ func end_interaction():
 	return 0
 
 
+
+
+#func _ready():
+#	var temp_data = Utils.get_json("res://sandbox/sample-branch.json")
+#	dialog_branches.append(temp_data)

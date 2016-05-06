@@ -1,10 +1,17 @@
-# Quest base class
+## Quest base class
+# Designed to be initialized with data (ie via Utils.get_json)
+# and instanced via the Quest Manager node (which should always be in-scene)
 extends Node
-
 export(String) var key
-export(int) var otherprop
 
+# actors = npcs involved in this quest; NPCS = all npcs in the scene
 var actors 
+var NPCS
+
+var previous_state
+var current_state setget set_current_state
+
+signal state_changed(to, from)
 
 func _init(data):
 	for prop in data:
@@ -13,50 +20,34 @@ func _init(data):
 	
 
 func _find_actors():
-	print(self.actors)
-	var NPCS = get_tree().get_current_scene().find_node("NPCManager")
-
 	for actor in self.actors:
-		var _actor_node = NPCS.get_node(actor)
-		if !_actor_node:
-			print("can't find node ", actor)
-			return
-		if _actor_node.is_in_group("actors_" + self.key):
-			print("actor ", actor, " is already accounted for")
-			return
-			
-		_actor_node.add_to_group("actors_" + self.key)
-		_actor_node.newline()
-		_actor_node.append_bbcode("Now enrolled in quest " + self.key)
+		_find_actor(actor)
 
+		
+func _find_actor(actor):
+	NPCS = get_tree().get_current_scene().find_node("NPCManager").npcs
+	
+	if !NPCS.has(actor):
+		Utils.debug("can't find node " + actor)
+		return
+	else:
+		var _actor_node = NPCS[actor]
+		if _actor_node.is_in_group("actors_" + self.key):
+			Utils.debug("actor " + actor + " is already accounted for")
+			return
+		
+		else:
+			_actor_node.add_to_group("actors_" + self.key)
+			_actor_node.dialog_branches.append({"dialog_label": self.key, "active": true})
+	
+							
+func set_current_state(value):
+	previous_state = current_state
+	current_state = value
+	emit_signal("state_changed", current_state, previous_state)
+	Utils.debug("state changed from "+ str(previous_state) + " to " + str(current_state))
+	
+													
 func _ready():
 	if is_inside_tree():
 		_find_actors()
-
-#func _find_actors():
-#	var _actor_nodes = Array()
-#	var npcs = get_tree().get_nodes_in_group("npcs")
-#	var npc_names = Array()
-#	for npc in npcs:
-#		npc_names.append(npc.get_name())
-#		
-#	var npc_manager = get_tree().get_current_scene().find_node("NPCManager")
-#	#print(npcs)
-#	if self.actors.size() < 1:
-#		return
-#	else:
-#		for actor in self.actors:
-#			if npc_names.find(actor):
-#			#if npc_manager.has_node(actor):
-#				_actor_nodes.append(get_tree().get_current_scene().find_node(actor))
-#	
-#	print(_actor_nodes)
-#	return _actor_nodes
-#
-#	
-#func _setup_actors():
-#	var nodes = _find_actors()
-#	print("nodes are ", nodes)
-#	for node in nodes:
-#		node.append_bbcode(get_name())
-#

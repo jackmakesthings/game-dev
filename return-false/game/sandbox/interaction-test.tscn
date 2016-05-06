@@ -11,7 +11,7 @@
 
 script/source = "extends \"res://systems/environment/_Environment.gd\""
 
-[sub_resource type="ConvexPolygonShape2D" id=4]
+[sub_resource type="ConvexPolygonShape2D" id=2]
 
 custom_solver_bias = 0.0
 points = Vector2Array( -1.33946, 22.8806, 20.1323, 16.6407, 45.5881, 24.5929, 68.4747, 52.3209, 32.8244, 76.968, -2.82585, 66.4049, -20.871, 40.8776 )
@@ -83,11 +83,11 @@ frame = 36
 
 transform/pos = Vector2( 156.443, 118.353 )
 input/pickable = true
-shapes/0/shape = SubResource( 4 )
-shapes/0/transform = Matrix32( 1, -0, 0, 1, 0, 0 )
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = true
 shapes/1/shape = SubResource( 3 )
-shapes/1/transform = Matrix32( 1, -0, 0, 1, 10, 35.1476 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 10, 35.1476 )
 shapes/1/trigger = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
