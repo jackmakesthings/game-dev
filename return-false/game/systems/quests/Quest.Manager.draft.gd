@@ -49,13 +49,11 @@ func _on_update_npcs():
 func _test():
 	var data = {
 		key = "first",
-		otherprop = "42",
-		actors = ["abbot", "costello"]
+		actors = { "abbot": { "dialog_label": "HEY ABBOT", "states": {}}, "costello": { "dialog_label": "hey lou", "states": {}}}
 	}
 	var data2 = {
 		key = "second",
-		otherprop = "420",
-		actors = ["abbot"]
+		actors = {"abbot": { "dialog_label": "HEYYYY ABBOT", "states": {}}}
 	}
 	var first_quest = add_quest(data)
 	var timeout = Timer.new()

@@ -67,8 +67,8 @@ func start_interaction():
 		# TODO: this works, convert it to use state/pointer/quest logic
 		var active_branches = Array()
 		for branch in dialog_branches:
-			if branch.active and active_branches.find(branch) < 0:
-				active_branches.append(branch)
+			#if branch.active and active_branches.find(branch) < 0:
+			active_branches.append(branch)
 		present_conversations(active_branches)
 
 

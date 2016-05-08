@@ -18,6 +18,7 @@ signal QM_update_npcs
 
 
 func _ready():
+	_test()
 	pass
 
 ## Add npc (STUB)
