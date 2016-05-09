@@ -26,11 +26,7 @@ onready var sprite = get_node('Sprite')
 onready var collider = get_node('collider')
 
 var player_nearby = false
-var dialog_branches = [\
-{"dialog_label": "Robots", "active": false}, \
-{"dialog_label": "Humans", "active": false}, \
-{"dialog_label": "Aliens", "active": false} \
-]
+var dialog_branches = []
 
 
 ## Input & player redirection ##
@@ -133,9 +129,16 @@ func present_conversations(dialog_branches):
 
 # Stub - this will be used to kick off a conversation branch, ultimately.
 func enter_branch(branch):
+	var _state = branch.get_parent_state()
+	if !branch.has_state(_state):
+		MUI.close()
+		return
+
 	MUI.clear()
-	MUI.say(branch.dialog_label + " it is!")
-	MUI._Responses.add_close("Okay.")
+	MUI.say(branch.text_at_state(_state))
+	for response in branch.responses_at_state(_state):
+		branch.build_response(response)	
+	MUI.open()
 	pass
 
 
@@ -145,10 +148,10 @@ func end_interaction():
 	if !MUI:
 		return "No MUI!"
 	if no_options_fallback and show_fallback:
+		MUI.open()
 		MUI.clear()
 		MUI.say(no_options_fallback)
 		MUI._Responses.add_close()
-		MUI.open()
 	else:
 		MUI.clear()
 		MUI.close()

@@ -49,12 +49,13 @@ func _on_update_npcs():
 func _test():
 	var data = {
 		key = "first",
-		actors = { "abbot": { "dialog_label": "HEY ABBOT", "states": {}}, "costello": { "dialog_label": "hey lou", "states": {}}}
+		actors = { "abbot": { "dialog_label": "HEY ABBOT", "states": { "0": { "dialogue": "HEY ABBOT", "responses": [{"text": "okay", "dialog_action": 0}]}}}, "costello": { "dialog_label": "hey lou", "states": {}}}
 	}
 	var data2 = {
 		key = "second",
 		actors = {"abbot": { "dialog_label": "HEYYYY ABBOT", "states": {}}}
 	}
+
 	var first_quest = add_quest(data)
 	var timeout = Timer.new()
 	add_child(timeout)
@@ -63,4 +64,5 @@ func _test():
 	timeout.start()
 	yield(timeout, "timeout")
 	var second_quest = add_quest(data2)
+
 	#set_state("second", 30)

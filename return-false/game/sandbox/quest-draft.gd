@@ -9,7 +9,7 @@ var actors = {}
 var NPCS
 
 var previous_state
-var current_state setget set_current_state
+var current_state = "0" setget set_current_state,get_current_state
 var Branch = preload('res://systems/quests/_Quest.Branch.gd')
 
 signal state_changed(to, from)
@@ -23,6 +23,7 @@ func _init(data):
 func _create_branch(actor_name, actor_node):
 	var _branch = Branch.new(self.actors[actor_name])
 	_branch.parent_quest = self.key
+	actor_node.add_child(_branch)
 	actor_node.dialog_branches.append(_branch)
 
 func _find_actors():
@@ -51,7 +52,9 @@ func set_current_state(value):
 	previous_state = current_state
 	current_state = value
 	emit_signal("state_changed", self.key, current_state, previous_state)
-	
+
+func get_current_state():
+	return current_state	
 													
 func _ready():
 	if is_inside_tree():

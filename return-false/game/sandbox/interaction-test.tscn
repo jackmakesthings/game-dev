@@ -7,7 +7,7 @@
 [ext_resource path="res://sandbox/NPC.draft.gd" type="Script" id=5]
 [ext_resource path="res://assets/temp/trace.png" type="Texture" id=6]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id=4]
 
 script/source = "extends \"res://systems/environment/_Environment.gd\""
 
@@ -23,7 +23,7 @@ radius = 8.91534
 
 [node name="environment" type="Node2D"]
 
-script/script = SubResource( 1 )
+script/script = SubResource( 4 )
 
 [node name="MessageUI" parent="." instance=ExtResource( 1 )]
 
