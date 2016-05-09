@@ -118,13 +118,11 @@ class ResponseList:
 		responses.append(response)
 		node.add_child(response)
 		response.raise()
-				# TODO: only one connection allowed per signal;
-		# may need to refactor this
+		
 		if actions.size() > 0:
 			for action in actions:
-		#		response.connect('pressed', action['target'], action['fn'], action['args'])
-				if action.has('arg'):
-					response.connect('pressed', action['target'], action['fn'], action['arg'])
+				if action.has('args'):
+					response.connect('pressed', action['target'], action['fn'], action['args'])
 				else:
 					response.connect('pressed', action['target'], action['fn'])
 
@@ -143,7 +141,6 @@ class ResponseList:
 			target = owner,
 			args = []
 		}]
-		#add_response(_text, _actions)
 		owner.response({ "text": _text, "actions": _actions})
 
 	func add_collect(_text='<Pick up.>', item_node=null):

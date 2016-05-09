@@ -46,9 +46,10 @@ func build_response(data):
 	var fn
 	var arg = null
 	var target = self
+	var A = {}
 
 	if data.has('new_state'):
-		arg = data.new_state
+		A["args"] = Array(data.new_state)
 		
 		if data.dialog_action == 1:
 			fn = 'update_and_continue'
@@ -58,13 +59,9 @@ func build_response(data):
 	else:
 		fn = 'end_dialog'
 
-	var A = {
-		"fm": fn,
-		"arg": arg,
-		"target": target
-	}
-	var btn = MUI.response({ "text": data.text, "actions": [A] })
-	#btn.connect('pressed', target, fn, arg)
+	A["fn"] = fn
+	A["target"] = target
+	MUI.response({ "text": data.text, "actions": [A] })
 
 
 func update_and_close(new_state):
