@@ -2,7 +2,7 @@
 
 [sub_resource type="GDScript" id=1]
 
-script/source = "## NPC Manager node\n# Gets initialized right into the main game node\n# Handles creating and updating NPCs, and communicating with quests.\nextends Node\n\nvar npcs = {}\nvar npc_keys = []\nvar npc_container\n\nconst npc_base = preload(\"res://systems/npc/_NPC.tscn\")\n\nsignal QM_update_npcs\n\n\n## Add npc (STUB)\n# currently just creates a copy from template and names it;\n# in the long run, this should probably take a scene filepath as a param\n# and instance from that.\nfunc _add_npc(name):\n\tvar new_npc = npc_base.instance()\n\tnpc_container.add_child(new_npc)\n\tnew_npc.set_name(name)\n\tnew_npc.add_to_group(\'npcs\')\n\tnpcs[new_npc.get_name()] = new_npc\n\tnpc_keys.append(new_npc.get_name())\n\t\n\temit_signal(\"QM_update_npcs\")\n\n\t\n# Alternately, you can call this when adding a scene\n# that already contains NPC nodes; this should parse them\n# and add them to the npc registry, if they aren\'t there already.\t\t\t\nfunc _pull_npcs():\n\tfor npc in npc_container.get_children():\n\t\tif ! npc.has_method(\'start_interaction\'):\n\t\t\treturn \n\t\tif ! npcs.has(npc):\n\t\t\tnpcs[npc.get_name()] = npc\n\t\t\tnpc_keys.append(npc.get_name())\n\t\t\t\n\t\t\tif !npc.is_in_group(\'npcs\'):\n\t\t\t\tnpc.add_to_group(\'npcs\')\n\t\t\t\t\n\temit_signal(\"QM_update_npcs\")\t\t\t\n\t\t\nfunc get_npcs():\n\treturn npcs\n\nfunc get_npc_keys():\n\treturn npc_keys\n\nfunc _ready():\n\tnpc_container = get_tree().get_current_scene().Scene.object_layer\n\t_pull_npcs()"
+script/source = "extends \"res://systems/npc/NPC.Manager.gd\""
 
 [node name="NPCManager" type="Node"]
 

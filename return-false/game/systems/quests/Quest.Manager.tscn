@@ -2,7 +2,7 @@
 
 [sub_resource type="GDScript" id=1]
 
-script/source = "## QuestManager base script (work in progress)\n# Creates and updates quests, and communicates with other Managers\n# (currently that\'s just the NPC one)\nextends Node\n\nvar QuestBase = preload(\"res://sandbox/quest-draft.gd\")\n\n\nfunc add_quest(data):\n\tvar Q = QuestBase.new(data)\n\tadd_child(Q)\n\tQ.add_to_group(\"quests\")\n\t\n\treturn Q\n\nfunc remove_quest(key):\n\tvar Qx = get_node(key)\n\tremove_child(Qx)\n\treturn Qx\n\t\nfunc get_quest(key):\n\treturn get_node(key)\n\nfunc get_all():\n\treturn get_tree().get_nodes_in_group(\'quests\')\n\t\nfunc get_all_keys():\n\tvar keys = []\n\tfor quest in get_all():\n\t\tkeys.append(quest.key)\n\treturn keys\n\t\nfunc set_state(quest_key, value):\n\tvar Q = get_node(quest_key)\n\tQ.set_current_state(value)\n\nfunc set_state_directly(quest, value):\n\tquest.set_current_state(value)\t\n\nfunc _ready():\n\tvar npcman = get_parent().NPCManager\n\tnpcman.connect(\"QM_update_npcs\", self, \"_on_update_npcs\",[],1)\n\t_test()\n\n\t\nfunc _on_update_npcs():\n\tget_tree().call_group(0, \"quests\", \"_find_actors\")\n\t\nfunc _test():\n\tvar data = {\n\t\tkey = \"first\",\n\t\tactors = { \"NPC\": { \"dialog_label\": \"HEY ABBOT\", \"states\": { \"0\": { \"dialogue\": \"HEY ABBOT\", \"responses\": [{\"text\": \"okay\", \"dialog_action\": 0}]}}}}\n\t}\n\n\tvar first_quest = add_quest(data)\n\t_on_update_npcs()"
+script/source = "extends \"res://systems/quests/Quest.Manager.gd\""
 
 [node name="QuestManager" type="Node"]
 

@@ -31,9 +31,7 @@ func _find_actors():
 	for actor_name in self.actors.keys():
 		_find_actor(actor_name)
 
-
-# TODO: the last step of this is still using the "active" stub;
-# should be removed once quest/state/dialogue logic is hooked up		
+		
 func _find_actor(actor_name):
 	NPCS = get_tree().get_current_scene().NPCManager.npcs
 	
@@ -46,8 +44,7 @@ func _find_actor(actor_name):
 		else:
 			_actor_node.add_to_group("actors_" + self.key)
 			_create_branch(actor_name, _actor_node)
-			# _actor_node.dialog_branches.append({"dialog_label": self.key, "active": true})
-	
+
 							
 func set_current_state(value):
 	previous_state = current_state
