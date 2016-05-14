@@ -12,11 +12,12 @@ func _init(data):
 		self[key] = data[key]
 
 func _ready():
-	QM = get_tree().get_current_scene().find_node("QuestManager")
-	MUI = get_tree().get_current_scene().find_node("MessageUI")
+	QM = get_tree().get_current_scene().QuestManager
+	MUI = get_tree().get_current_scene().MessageUI
 
 
 func get_parent_state():
+	QM = get_tree().get_current_scene().QuestManager
 	var _quest = QM.get_quest(parent_quest)
 	return _quest.current_state
 

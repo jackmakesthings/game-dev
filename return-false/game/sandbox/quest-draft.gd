@@ -18,6 +18,7 @@ func _init(data):
 	for prop in data:
 		self[prop] = data[prop]
 	set_name(self.key)
+	print(self.actors)
 
 
 func _create_branch(actor_name, actor_node):
@@ -34,7 +35,7 @@ func _find_actors():
 # TODO: the last step of this is still using the "active" stub;
 # should be removed once quest/state/dialogue logic is hooked up		
 func _find_actor(actor_name):
-	NPCS = get_tree().get_current_scene().find_node("NPCManager").npcs
+	NPCS = get_tree().get_current_scene().NPCManager.npcs
 	
 	if !NPCS.has(actor_name):
 		return

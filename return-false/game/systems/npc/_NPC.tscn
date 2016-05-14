@@ -1,17 +1,12 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=4 format=1]
 
-[ext_resource path="res://sandbox/NPC.draft.gd" type="Script" id=1]
+[ext_resource path="res://systems/npc/_NPC.gd" type="Script" id=1]
 [ext_resource path="res://assets/temp/trace.png" type="Texture" id=2]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -1.33946, 22.8806, 20.1323, 16.6407, 45.5881, 24.5929, 68.4747, 52.3209, 32.8244, 76.968, -2.82585, 66.4049, -20.871, 40.8776 )
-
-[sub_resource type="CircleShape2D" id=2]
-
-custom_solver_bias = 0.0
-radius = 8.91534
+points = Vector2Array( -1.33946, 22.8806, 20.1323, 16.6407, 59.0142, 22.2191, 86.2144, 61.3609, 47.0726, 91.2148, -7.99121, 82.5903, -20.871, 40.8776 )
 
 [node name="NPC" type="Area2D"]
 
@@ -20,19 +15,18 @@ input/pickable = true
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = true
-shapes/1/shape = SubResource( 2 )
-shapes/1/transform = Matrix32( 1, 0, 0, 1, 10, 35.1476 )
-shapes/1/trigger = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
+collision/layers = 1025
+collision/mask = 1025
 script/script = ExtResource( 1 )
 trigger_area = NodePath(".")
 approach_point = NodePath("Position2D")
 single_option_fallback = "Did you get that thing I sent you\?"
 multi_option_fallback = "Hey, what\'s up\?"
-no_options_fallback = "Can this wait\? I\'m in the middle of some calibrations."
+no_options_fallback = "Can this wait\? I\'m calibrating something."
 show_fallback = true
 
 [node name="Sprite" type="TextureButton" parent="."]
@@ -52,20 +46,17 @@ textures/normal = ExtResource( 2 )
 [node name="trigger" type="CollisionPolygon2D" parent="."]
 
 build_mode = 0
-polygon = Vector2Array( -20.871, 40.8776, -2.82585, 66.4049, 32.8244, 76.968, 68.4747, 52.3209, 45.5881, 24.5929, 20.1323, 16.6407, -1.33946, 22.8806 )
+polygon = Vector2Array( -20.871, 40.8776, -7.99121, 82.5903, 47.0726, 91.2148, 86.2144, 61.3609, 59.0142, 22.2191, 20.1323, 16.6407, -1.33946, 22.8806 )
 shape_range = Vector2( 0, 0 )
 trigger = true
 
+[node name="collider" type="Position2D" parent="trigger"]
+
+transform/pos = Vector2( 12.605, 34.4978 )
+
 [node name="Position2D" type="Position2D" parent="."]
 
-transform/pos = Vector2( 34.207, 46.5423 )
-
-[node name="collider" type="CollisionShape2D" parent="."]
-
-transform/pos = Vector2( 10, 35.1476 )
-shape = SubResource( 2 )
-trigger = false
-_update_shape_index = 1
+transform/pos = Vector2( 36.1973, 49.196 )
 
 [connection signal="pressed" from="Sprite" to="." method="_on_click"]
 

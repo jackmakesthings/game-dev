@@ -64,6 +64,7 @@ func walk(delta):
 		var next_pos = path[path.size() - 1]
 		var dir = next_pos - get_pos()
 
+
 		orient(get_orient(dir))
 		move_to(next_pos)
 
@@ -121,7 +122,7 @@ func orient(NESW):
 
 func orient_towards(vector):
 	var NESW = get_orient(vector)
-	anim_node.set_current_animation(NESW)
+	anim_node.play(NESW)
 	anim_node.seek(0.0, true)	
 	anim_node.stop()
 	emit_signal("done_orienting")

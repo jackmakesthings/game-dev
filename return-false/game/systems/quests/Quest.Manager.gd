@@ -10,6 +10,7 @@ func add_quest(data):
 	var Q = QuestBase.new(data)
 	add_child(Q)
 	Q.add_to_group("quests")
+	
 	return Q
 
 func remove_quest(key):
@@ -37,32 +38,19 @@ func set_state_directly(quest, value):
 	quest.set_current_state(value)	
 
 func _ready():
-	var npcman = get_tree().get_current_scene().find_node("NPCManager")
+	var npcman = get_parent().NPCManager
 	npcman.connect("QM_update_npcs", self, "_on_update_npcs",[],1)
 	_test()
+
 	
 func _on_update_npcs():
 	get_tree().call_group(0, "quests", "_find_actors")
-
-
-
+	
 func _test():
 	var data = {
 		key = "first",
-		actors = { "abbot": { "dialog_label": "HEY ABBOT", "states": { "0": { "dialogue": "HEY ABBOT", "responses": [{"text": "okay", "dialog_action": 0}]}}}, "costello": { "dialog_label": "hey lou", "states": {}}}
-	}
-	var data2 = {
-		key = "second",
-		actors = {"abbot": { "dialog_label": "HEYYYY ABBOT", "states": {}}}
+		actors = { "NPC": { "dialog_label": "HEY ABBOT", "states": { "0": { "dialogue": "HEY ABBOT", "responses": [{"text": "okay", "dialog_action": 0}]}}}}
 	}
 
 	var first_quest = add_quest(data)
-	var timeout = Timer.new()
-	add_child(timeout)
-	timeout.set_one_shot(true)
-	timeout.set_wait_time(4.5)
-	timeout.start()
-	yield(timeout, "timeout")
-	var second_quest = add_quest(data2)
-
-	#set_state("second", 30)
+	_on_update_npcs()

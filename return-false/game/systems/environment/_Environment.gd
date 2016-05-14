@@ -3,6 +3,7 @@ extends Node2D
 onready var nav = find_node("nav")
 onready var tiles = find_node("ground")
 onready var marker = find_node("marker")
+onready var object_layer = find_node("objects")
 
 
 signal walk_to(nav, end, adjust)
@@ -26,7 +27,7 @@ func _unhandled_input(ev):
 		# See what kind of tile we're trying to walk to
 		# If it's unwalkable, the actor will go to the next closest point on the way.
 		var tile_at = tiles.get_cell(tilepos.x, tilepos.y)
-		if tiles.get_tileset().tile_get_navigation_polygon(tile_at) == null:
+		if !tiles.get_tileset().tile_get_navigation_polygon(tile_at):
 			adjust_path = true
 
 		emit_signal("walk_to", nav, end, adjust_path, tiles)

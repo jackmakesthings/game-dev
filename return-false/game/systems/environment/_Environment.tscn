@@ -1,10 +1,11 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://assets/tiles/floors/floor-72x36.tres" type="TileSet" id=1]
+[ext_resource path="res://systems/npc/_NPC.tscn" type="PackedScene" id=2]
 
 [sub_resource type="GDScript" id=1]
 
-script/source = "# To add the player:\n# 1) create or instance k2d under the \'objects\' node\n# 2) make k2d extend from systems/player/_Walker.gd\n# 3) connect this node\'s \"walk_to\" signal to \"update_path\" on the k2d\n\nextends \"res://systems/environment/_Environment.gd\""
+script/source = "# To add the player:\n# 1) create or instance k2d under the \'objects\' node\n# 2) make k2d extend from systems/player/_Walker.gd\n# 3) connect this node\'s \"walk_to\" signal to \"update_path\" on the k2d\n\nextends \"res://systems/environment/_Environment.gd\"\n\nvar Player = null"
 
 [node name="env" type="Node2D"]
 
@@ -47,5 +48,10 @@ collision/layers = 1
 collision/mask = 1
 occluder/light_mask = 1
 tile_data = IntArray(  )
+
+[node name="NPC" parent="nav/objects" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 201.335, 228.543 )
+linear_damp = 0.1
 
 

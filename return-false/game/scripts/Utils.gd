@@ -4,7 +4,7 @@ extends Node
 const config_path = "user://config.cfg"
 const savefile_path = "res://savegames"
 
-const PLAYER_CLASS = "res://systems/character/_Walker.gd"
+const PLAYER_CLASS = preload("res://systems/character/_Walker.gd")
 
 var debug = true
 
@@ -74,11 +74,14 @@ func is_player(node):
 		return false
 
 func is_player_nearby(trigger):
+#	print(trigger)
+#	print(trigger.get_name())
 	var nearby_bodies
 	var player_found = false
 
 	nearby_bodies = trigger.get_overlapping_bodies()
 	for body in nearby_bodies:
+#		print(body.get_name())
 		if is_player(body):
 			player_found = true
 		else:

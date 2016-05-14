@@ -14,12 +14,8 @@ const npc_base = preload("res://systems/npc/_NPC.draft.tscn")
 
 signal QM_update_npcs
 
-
-
-
 func _ready():
 	_test()
-	pass
 
 ## Add npc (STUB)
 # currently just creates a copy from template and names it;

@@ -1,25 +1,20 @@
-[gd_scene load_steps=10 format=1]
+[gd_scene load_steps=9 format=1]
 
 [ext_resource path="res://systems/dialogue/Dialogue.example.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/tiles/floors/floor-72x36.tres" type="TileSet" id=2]
 [ext_resource path="res://assets/tiles/floors/72x36/green-border--72x36.png" type="Texture" id=3]
 [ext_resource path="res://systems/character/Player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://sandbox/NPC.draft.gd" type="Script" id=5]
+[ext_resource path="res://systems/npc/_NPC.gd" type="Script" id=5]
 [ext_resource path="res://assets/temp/trace.png" type="Texture" id=6]
 
 [sub_resource type="GDScript" id=4]
 
 script/source = "extends \"res://systems/environment/_Environment.gd\""
 
-[sub_resource type="ConvexPolygonShape2D" id=2]
+[sub_resource type="ConvexPolygonShape2D" id=5]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -1.33946, 22.8806, 20.1323, 16.6407, 45.5881, 24.5929, 68.4747, 52.3209, 32.8244, 76.968, -2.82585, 66.4049, -20.871, 40.8776 )
-
-[sub_resource type="CircleShape2D" id=3]
-
-custom_solver_bias = 0.0
-radius = 8.91534
+points = Vector2Array( 8.56418, 11.259, 30.5642, -8.74099, 86.5642, -20.741, 137.564, 32.259, 70.5642, 105.259, -2.82585, 66.4049, -20.871, 40.8776 )
 
 [node name="environment" type="Node2D"]
 
@@ -70,25 +65,19 @@ collision/mask = 1
 occluder/light_mask = 1
 tile_data = IntArray(  )
 
-[node name="player" parent="nav/walls" instance=ExtResource( 4 )]
+[node name="Player" parent="nav/walls" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 217.239, 124.211 )
-collision/margin = 0.08
-
-[node name="Sprite" parent="nav/walls/player"]
-
-frame = 36
+collision/layers = 1
+collision/mask = 1
 
 [node name="NPC" type="Area2D" parent="nav/walls"]
 
 transform/pos = Vector2( 156.443, 118.353 )
 input/pickable = true
-shapes/0/shape = SubResource( 2 )
+shapes/0/shape = SubResource( 5 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = true
-shapes/1/shape = SubResource( 3 )
-shapes/1/transform = Matrix32( 1, 0, 0, 1, 10, 35.1476 )
-shapes/1/trigger = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
@@ -96,9 +85,9 @@ angular_damp = 1.0
 script/script = ExtResource( 5 )
 trigger_area = NodePath(".")
 approach_point = NodePath("Position2D")
-single_option_fallback = "Did you get that thing I sent you\?"
-multi_option_fallback = "Hey, what\'s up\?"
-no_options_fallback = "Can this wait\? I\'m in the middle of some calibrations."
+single_option_fallback = "That thing."
+multi_option_fallback = "What up\?"
+no_options_fallback = "Calibrating."
 show_fallback = true
 
 [node name="Sprite" type="TextureButton" parent="nav/walls/NPC"]
@@ -118,7 +107,7 @@ textures/normal = ExtResource( 6 )
 [node name="trigger" type="CollisionPolygon2D" parent="nav/walls/NPC"]
 
 build_mode = 0
-polygon = Vector2Array( -20.871, 40.8776, -2.82585, 66.4049, 32.8244, 76.968, 68.4747, 52.3209, 45.5881, 24.5929, 20.1323, 16.6407, -1.33946, 22.8806 )
+polygon = Vector2Array( -20.871, 40.8776, -2.82585, 66.4049, 70.5642, 105.259, 137.564, 32.259, 86.5642, -20.741, 30.5642, -8.74099, 8.56418, 11.259 )
 shape_range = Vector2( 0, 0 )
 trigger = true
 
@@ -126,16 +115,12 @@ trigger = true
 
 transform/pos = Vector2( 34.207, 46.5423 )
 
-[node name="collider" type="CollisionShape2D" parent="nav/walls/NPC"]
+[node name="collider" type="Position2D" parent="nav/walls/NPC"]
 
 transform/pos = Vector2( 10, 35.1476 )
-shape = SubResource( 3 )
-trigger = false
-_update_shape_index = 1
 
-[connection signal="walk_to" from="." to="nav/walls/player" method="update_path"]
+[connection signal="walk_to" from="." to="nav/walls/Player" method="update_path"]
 
 [connection signal="pressed" from="nav/walls/NPC/Sprite" to="nav/walls/NPC" method="_on_click"]
 
 
-[editable path="nav/walls/player"]

@@ -1,5 +1,5 @@
 # NPC base class
-extends Area2D
+extends CollisionObject2D
 
 # trigger_area: generally the NPC root node, used for "player nearby" detection
 # approach_point: the position2D used to direct the player over
@@ -17,8 +17,8 @@ export(bool) var show_fallback
 
 # TODO: better handling of global-ish vars like player node
 # maybe set up a dependencies pattern?
-onready var Player = get_parent().find_node("player")
-onready var MUI = get_tree().get_current_scene().find_node("MessageUI")
+onready var Player = get_tree().get_current_scene().Player
+onready var MUI = get_tree().get_current_scene().MessageUI
 
 onready var x = get_node(approach_point)
 onready var trigger = get_node(trigger_area)
@@ -32,6 +32,9 @@ var dialog_branches = []
 ## Input & player redirection ##
 # Connected to the 'pressed' signal on the TextureButton.
 func _on_click():	
+	Player = get_tree().get_current_scene().Player
+	if !Player:
+		return
 	# Player's here already? Let's talk.
 	# Player's somewhere else? Call them over.
 	if Utils.is_player_nearby(trigger):
@@ -41,12 +44,9 @@ func _on_click():
 		var destination = get_canvas_transform().xform(x.get_global_pos())
 		Utils.fake_click(destination, 1)
 		yield(Player, "done_moving")
-		print("bodies are ", get_overlapping_bodies())
-		print("trigger is", trigger)
 		if Utils.is_player_nearby(trigger):
 			Player.orient_towards(_get_orientation())
 			start_interaction()
-
 
 
 # Figure out where the player will stand relative to the NPC
@@ -102,9 +102,11 @@ func create_branch_option(branch):
 func present_conversations(dialog_branches):
 
 	var options = Array()
+	MUI = get_tree().get_current_scene().MessageUI
 	
 	# Only a likely issue in subscenes, test scenes, etc.
 	if !MUI:
+		print("where is MUI")
 		return "No MUI!"
 
 	# Nothing to talk about: (shouldn't happen at this point)

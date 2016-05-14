@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=1]
+[gd_scene load_steps=10 format=1]
 
 [ext_resource path="res://systems/quests/Quest.Manager.draft.gd" type="Script" id=1]
 [ext_resource path="res://systems/npc/NPC.Manager.draft.gd" type="Script" id=2]
@@ -11,17 +11,13 @@
 
 script/source = "\nextends RichTextLabel\n\n# member variables here, example:\n# var a=2\n# var b=\"textvar\"\n\nfunc _on_quest_add(quest):\n\tappend_bbcode(\"Added quest \" + quest.key)\n\tnewline()\n\nfunc _on_quest_remove(quest):\n\tappend_bbcode(\"Removed quest \" + quest.key)\n\tnewline()\n\t\n\nfunc _on_quest_update(quest, action, params):\n\tif action == \"add\":\n\t\t_on_quest_add(quest)\n\telif action == \"remove\":\n\t\t_on_quest_remove(quest)\n\telse:\n\t\tif params.state:\n\t\t\tappend_bbcode(\"Updated quest \" + quest.key + \" to state \" + params.state)\n\t\t\tnewline()\n\t\t\n\nfunc _ready():\n\tset_bbcode(\"\")\n\t# Called every time the node is added to the scene.\n\t# Initialization here\n\tpass\n\n\n"
 
-[sub_resource type="GDScript" id=4]
+[sub_resource type="GDScript" id=6]
 
 script/source = "extends \"res://systems/environment/_Environment.gd\""
 
 [sub_resource type="GDScript" id=5]
 
 script/source = "extends \"res://systems/dialogue/_Dialogue.gd\"\n\nfunc _ready():\n\tsetup()\n\tclose()\n#\t_Dialogue.make(\"So, you\'re the new IT bot\?\")\n#\t_Responses.add_close(\"Yes.\")\n#\t_Responses.add_close(\"<Lie> No, this is just my robot costume.\")"
-
-[sub_resource type="GDScript" id=6]
-
-script/source = "extends \"res://systems/character/_Walker.gd\""
 
 [node name="Node2D" type="Node2D"]
 
@@ -58,7 +54,6 @@ margin/top = 16.0
 margin/right = 1.0
 margin/bottom = 1.0
 script/script = ExtResource( 2 )
-__meta__ = { "_editor_collapsed":true }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="NPCManager"]
 
@@ -74,14 +69,11 @@ alignment = 0
 
 [node name="environment" type="Node2D" parent="."]
 
-script/script = SubResource( 4 )
+script/script = SubResource( 6 )
 
-[node name="MessageUI" type="Node" parent="environment" instance=ExtResource( 3 )]
+[node name="MessageUI" parent="environment" instance=ExtResource( 3 )]
 
 script/script = SubResource( 5 )
-text_path = NodePath("dialog/VBoxContainer/textbox")
-response_path = NodePath("dialog/VBoxContainer/responsebox")
-dialog_path = NodePath("dialog")
 
 [node name="nav" type="Navigation2D" parent="environment"]
 
@@ -101,7 +93,7 @@ collision/bounce = 0.0
 collision/layers = 1
 collision/mask = 1
 occluder/light_mask = 1
-tile_data = IntArray( -196602, 0, -196601, 0, -196600, 0, -196599, 0, -196598, 0, -196597, 0, -196596, 0, -131066, 0, -131065, 0, -131064, 0, -131063, 3, -131062, 0, -131061, 0, -131060, 0, -65530, 0, -65529, 0, -65528, 0, -65527, 3, -65526, 0, -65525, 0, -65524, 0, 6, 0, 7, 0, 8, 3, 9, 3, 10, 0, 11, 0, 12, 0, 65542, 0, 65543, 0, 65544, 0, 65545, 3, 65546, 0, 65547, 0, 65548, 0, 131078, 0, 131079, 0, 131080, 0, 131081, 0, 131082, 0, 131083, 0, 131084, 0 )
+tile_data = IntArray( -262140, 0, -262139, 0, -262138, 0, -262137, 0, -262136, 0, -262135, 0, -262134, 0, -262133, 0, -262132, 0, -196604, 0, -196603, 0, -196602, 0, -196601, 0, -196600, 0, -196599, 0, -196598, 0, -196597, 0, -196596, 0, -131068, 0, -131067, 0, -131066, 0, -131065, 0, -131064, 0, -131063, 3, -131062, 0, -131061, 0, -131060, 0, -65532, 0, -65531, 0, -65530, 0, -65529, 0, -65528, 0, -65527, 3, -65526, 0, -65525, 0, -65524, 0, 4, 0, 5, 0, 6, 0, 7, 0, 8, 3, 9, 3, 10, 0, 11, 0, 12, 0, 65540, 0, 65541, 0, 65542, 0, 65543, 0, 65544, 0, 65545, 3, 65546, 0, 65547, 0, 65548, 0, 131076, 0, 131077, 0, 131078, 0, 131079, 0, 131080, 0, 131081, 0, 131082, 0, 131083, 0, 131084, 0, 196612, 0, 196613, 0, 196614, 0, 196615, 0, 196616, 0, 196617, 0, 196618, 0, 196619, 0, 196620, 0 )
 
 [node name="marker" type="Sprite" parent="environment/nav/ground"]
 
@@ -126,15 +118,11 @@ collision/mask = 1
 occluder/light_mask = 1
 tile_data = IntArray(  )
 
-[node name="player" type="KinematicBody2D" parent="environment/nav/walls" instance=ExtResource( 6 )]
+[node name="Player" parent="environment/nav/walls" instance=ExtResource( 6 )]
 
-transform/pos = Vector2( 217.239, 124.211 )
-input/pickable = false
+transform/pos = Vector2( 321, 125 )
 collision/layers = 1
 collision/mask = 1
 collision/margin = 0.08
-script/script = SubResource( 6 )
-
-[connection signal="walk_to" from="environment" to="environment/nav/walls/player" method="update_path"]
 
 
