@@ -3,7 +3,7 @@
 # (currently that's just the NPC one)
 extends Node
 
-var QuestBase = preload("res://sandbox/quest-draft.gd")
+var QuestBase = preload("res://systems/quests/_Quest.gd")
 
 
 func add_quest(data):

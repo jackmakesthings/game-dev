@@ -1,56 +1,59 @@
-## QuestManager base script (work in progress)
-# Creates and updates quests, and communicates with other Managers
-# (currently that's just the NPC one)
+## Quest base class
+# Designed to be initialized with data (ie via Utils.get_json)
+# and instanced via the Quest Manager node (which should always be in-scene)
 extends Node
+export(String) var key
 
-var QuestBase = preload("res://sandbox/quest-draft.gd")
+# actors = npcs involved in this quest; NPCS = all npcs in the scene
+var actors = {}
+var NPCS
+
+var previous_state
+var current_state = "0" setget set_current_state,get_current_state
+var Branch = preload('res://systems/quests/_Quest.Branch.gd')
+
+signal state_changed(to, from)
+
+func _init(data):
+	for prop in data:
+		self[prop] = data[prop]
+	set_name(self.key)
+	print(self.actors)
 
 
-func add_quest(data):
-	var Q = QuestBase.new(data)
-	add_child(Q)
-	Q.add_to_group("quests")
+func _create_branch(actor_name, actor_node):
+	var _branch = Branch.new(self.actors[actor_name])
+	_branch.parent_quest = self.key
+	actor_node.add_child(_branch)
+	actor_node.dialog_branches.append(_branch)
+
+func _find_actors():
+	for actor_name in self.actors.keys():
+		_find_actor(actor_name)
+
+		
+func _find_actor(actor_name):
+	NPCS = get_tree().get_current_scene().NPCManager.npcs
 	
-	return Q
+	if !NPCS.has(actor_name):
+		return
+	else:
+		var _actor_node = NPCS[actor_name]
+		if _actor_node.is_in_group("actors_" + self.key):
+			return
+		else:
+			_actor_node.add_to_group("actors_" + self.key)
+			_create_branch(actor_name, _actor_node)
 
-func remove_quest(key):
-	var Qx = get_node(key)
-	remove_child(Qx)
-	return Qx
-	
-func get_quest(key):
-	return get_node(key)
+							
+func set_current_state(value):
+	previous_state = current_state
+	current_state = value
+	emit_signal("state_changed", self.key, current_state, previous_state)
 
-func get_all():
-	return get_tree().get_nodes_in_group('quests')
-	
-func get_all_keys():
-	var keys = []
-	for quest in get_all():
-		keys.append(quest.key)
-	return keys
-	
-func set_state(quest_key, value):
-	var Q = get_node(quest_key)
-	Q.set_current_state(value)
-
-func set_state_directly(quest, value):
-	quest.set_current_state(value)	
-
+func get_current_state():
+	return current_state	
+													
 func _ready():
-	var npcman = get_parent().NPCManager
-	npcman.connect("QM_update_npcs", self, "_on_update_npcs",[],1)
-	_test()
-
-	
-func _on_update_npcs():
-	get_tree().call_group(0, "quests", "_find_actors")
-	
-func _test():
-	var data = {
-		key = "first",
-		actors = { "NPC": { "dialog_label": "HEY ABBOT", "states": { "0": { "dialogue": "HEY ABBOT", "responses": [{"text": "okay", "dialog_action": 0}]}}}}
-	}
-
-	var first_quest = add_quest(data)
-	_on_update_npcs()
+	if is_inside_tree():
+		_find_actors()

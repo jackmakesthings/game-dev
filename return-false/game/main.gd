@@ -18,9 +18,9 @@ func setup(name, path, raise=false):
 	
 func set_scene(scene_path):
 	var _scene = load(scene_path).instance()
-	if Scene:
-		queue_free(Scene)
-		Scene = null
+	if Scene != null:
+		Scene.queue_free()
+		#Scene = null
 	add_child(_scene)
 	Scene = _scene
 	return Scene
@@ -35,6 +35,9 @@ func set_player():
 	return Player
 
 func _ready():
+	set_scene("res://systems/ui/Splash.tscn")
+	
+func _enter_game():	
 	setup('MessageUI', "res://systems/dialogue/Dialogue.Example.tscn")
 	set_scene("res://systems/environment/_Environment.tscn")
 	set_player()
