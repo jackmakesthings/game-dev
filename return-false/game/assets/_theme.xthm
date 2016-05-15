@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resource_file type="Theme" subresource_count="2" version="2.1" version_name="Godot Engine v2.1.alpha.custom_build">
+	<ext_resource path="res://assets/fonts/input-mono/InputMono.tres" type="DynamicFont" index="0"></ext_resource>
+	<main_resource>
+		<resource name="default_font" external="0">  </resource>
+
+	</main_resource>
+</resource_file>
