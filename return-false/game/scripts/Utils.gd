@@ -74,14 +74,11 @@ func is_player(node):
 		return false
 
 func is_player_nearby(trigger):
-#	print(trigger)
-#	print(trigger.get_name())
 	var nearby_bodies
 	var player_found = false
 
 	nearby_bodies = trigger.get_overlapping_bodies()
 	for body in nearby_bodies:
-#		print(body.get_name())
 		if is_player(body):
 			player_found = true
 		else:
@@ -89,6 +86,32 @@ func is_player_nearby(trigger):
 
 	return player_found
 
+
+# Compass direction parsing	
+func get_orient(vector):
+	if vector.x > 0:
+		if vector.y > 0:
+			return 'SE'
+		elif vector.y == 0:
+			return 'E'
+		elif vector.y < 0:
+			return 'NE'
+	elif vector.x == 0:
+		if vector.y > 0:
+			return 'S'
+		elif vector.y == 0:
+			return 'S'
+		elif vector.y < 0:
+			return 'N'
+	elif vector.x < 0:
+		if vector.y > 0:
+			return 'SW'
+		elif vector.y == 0:
+			return 'W'
+		elif vector.y < 0:
+			return 'NW'
+	else:
+		return 'S'
 
 func debug(text):
 	if debug:

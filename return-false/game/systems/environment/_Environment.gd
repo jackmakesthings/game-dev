@@ -72,7 +72,7 @@ func _unhandled_input(ev):
 
 		emit_signal("walk_to", nav, end, adjust_path, tiles)
 		
-		
+
 ##
 # on_path_updated(path)
 # If connected to the matching signal on Player,
@@ -84,7 +84,7 @@ func on_path_updated(path):
 	var endpoint = path[0]
 	marker.set_pos(endpoint)
 	marker.set('visibility/visible', true)
-	
+
 
 ##
 # on_motion_end(from, to)
