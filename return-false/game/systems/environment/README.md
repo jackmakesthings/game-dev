@@ -16,24 +16,24 @@ The current thinking is that we'll create a new instance of Environment for each
 
 ## Member variables
 
-- **nav**
-    Nodepath 
-    Navigation2D instance
-- **tiles** 
-    Nodepath
-    TileMap representing the ground
-- **marker**
-    Nodepath
-    Sprite used to highlight a destination
-- **object_layer**
-    Nodepath
-    TileMap representing walls, parent to any interactive entities in the scene
+- **nav**  
+   Nodepath  
+   Navigation2D instance  
+- **tiles**  
+   Nodepath  
+   TileMap representing the ground  
+- **marker**  
+   Nodepath  
+   Sprite used to highlight a destination  
+- **object_layer**  
+   Nodepath  
+   TileMap representing walls, parent to any interactive entities in the scene  
 
 ## Signals
 
-- **walk_to(nav, end, adjust)**
-  Emitted in response to a click event
-  Recieved by `Player.update_path()`
+- **walk_to(nav, end, adjust)**  
+   Emitted in response to a click event  
+   Recieved by `Player.update_path()`
 
 ## Methods
 
