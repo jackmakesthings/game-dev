@@ -17,16 +17,16 @@ The current thinking is that we'll create a new instance of Environment for each
 ## Member variables
 
 - **nav**  
-   Nodepath  
+   *Nodepath*  
    Navigation2D instance  
 - **tiles**  
-   Nodepath  
+   *Nodepath*  
    TileMap representing the ground  
 - **marker**  
-   Nodepath  
+   *Nodepath*  
    Sprite used to highlight a destination  
 - **object_layer**  
-   Nodepath  
+   *Nodepath*  
    TileMap representing walls, parent to any interactive entities in the scene  
 
 ## Signals
