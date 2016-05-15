@@ -146,7 +146,6 @@ func walk(delta):
 		# If we're reaching our destination:
 		if path.size() < 2:
 			halt()
-			emit_signal("done_moving", last_pos, get_pos())
 
 ##
 # halt()
@@ -154,6 +153,7 @@ func walk(delta):
 # Call this to bring the player to a 'complete stop'.
 ##
 func halt():
+	emit_signal("done_moving", last_pos, get_pos())
 	set_fixed_process(false)
 	anim_node.seek(0.0, true)
 	anim_node.stop()
@@ -185,3 +185,5 @@ func orient_towards(vector):
 	anim_node.seek(0.0, true)	
 	anim_node.stop()
 	emit_signal("done_orienting")
+	
+	

@@ -49,8 +49,12 @@ func _on_update_npcs():
 func _test():
 	var data = {
 		key = "first",
-		actors = { "NPC": { "dialog_label": "HEY ABBOT", "states": { "0": { "dialogue": "HEY ABBOT", "responses": [{"text": "okay", "dialog_action": 0}]}}}}
+		actors = { "NPC": { "dialog_label": "HEY ABBOT", "states": { "10": { "dialogue": "HEY ABBOT", "responses": [{"text": "okay", "dialog_action": 0}]}}}}
 	}
-
+	var data2 = {
+		key = "second",
+		actors = { "NPC": { "dialog_label": "Some other thing", "states": { "10": { "dialogue": "This is at 20.", "responses" : [{"text": "neato", "dialog_action": 0}] }}}}
+	}
 	var first_quest = add_quest(data)
+	var second = add_quest(data2)
 	_on_update_npcs()

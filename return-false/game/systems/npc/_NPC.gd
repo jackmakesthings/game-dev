@@ -31,13 +31,22 @@ var dialog_branches = []
 # Connected to the 'pressed' signal on the TextureButton.
 func _on_click():	
 	Player = get_tree().get_current_scene().Player
+	
+	# No Player? Never mind.
 	if !Player:
 		return
+	
+	# Don't drag them over if there's nothing to talk about
+	if check_branches().size() < 1 and !show_fallback:
+		get_tree().set_input_as_handled()
+		return
+		
 	# Player's here already? Let's talk.
 	# Player's somewhere else? Call them over.
 	if Utils.is_player_nearby(trigger):
 		Player.orient_towards(_get_orientation(Player.find_node("CollisionShape2D")))
 		get_tree().set_input_as_handled()
+		yield(Player, "done_orienting")
 		start_interaction()
 	else:
 		var destination = get_canvas_transform().xform(x.get_global_pos())
@@ -45,6 +54,7 @@ func _on_click():
 		yield(Player, "done_moving")
 		if Utils.is_player_nearby(trigger):
 			Player.orient_towards(_get_orientation(x))
+			yield(Player, "done_orienting")
 			start_interaction()
 
 
@@ -58,26 +68,20 @@ func _get_orientation(to):
 ## Init or decline conversation ##
 func start_interaction():
 	if dialog_branches.empty():
-		print("no dialogs!")
 		end_interaction()
 	else:
-		# TODO: this works, convert it to use state/pointer/quest logic
+		var active_branches = check_branches()
+		if active_branches.size() > 0:
+			present_conversations(active_branches)
+		else:
+			end_interaction()
+
+func check_branches():
 		var active_branches = Array()
 		for branch in dialog_branches:
-			#if branch.active and active_branches.find(branch) < 0:
-			active_branches.append(branch)
-		present_conversations(active_branches)
-
-
-# Pseudo code for future implementation - needs quests working
-#func _is_branch_active(branch):
-#	var lookup = branch.id
-#	var branch_quest = Quests.get_quest(lookup)
-#	var state_lookup = branch_quest.current_state
-#	if branch.states[state_lookup] != null:
-#		return true
-#	return false
-#	pass
+			if branch.has_active_state() and active_branches.find(branch) < 0:
+				active_branches.append(branch)
+		return active_branches
 
 
 # Create a "start talking about this" button for a given conversation
