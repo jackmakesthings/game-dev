@@ -15,8 +15,6 @@ export(String) var no_options_fallback
 export(bool) var show_fallback
 
 
-# TODO: better handling of global-ish vars like player node
-# maybe set up a dependencies pattern?
 onready var Player = get_tree().get_current_scene().Player
 onready var MUI = get_tree().get_current_scene().MessageUI
 
@@ -38,6 +36,7 @@ func _on_click():
 	# Player's here already? Let's talk.
 	# Player's somewhere else? Call them over.
 	if Utils.is_player_nearby(trigger):
+		Player.orient_towards(_get_orientation(Player.find_node("CollisionShape2D")))
 		get_tree().set_input_as_handled()
 		start_interaction()
 	else:
@@ -45,14 +44,14 @@ func _on_click():
 		Utils.fake_click(destination, 1)
 		yield(Player, "done_moving")
 		if Utils.is_player_nearby(trigger):
-			Player.orient_towards(_get_orientation())
+			Player.orient_towards(_get_orientation(x))
 			start_interaction()
 
 
 # Figure out where the player will stand relative to the NPC
-func _get_orientation():
-	var pos1 = collider.get_pos()
-	var pos2 = x.get_pos()
+func _get_orientation(to):
+	var pos1 = collider.get_global_pos()
+	var pos2 = to.get_global_pos()
 	return pos1 - pos2
 
 

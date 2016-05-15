@@ -134,7 +134,7 @@ func walk(delta):
 		var dir = next_pos - get_pos()
 
 		# Turn towards the next path point, then walk there
-		orient(get_orient(dir))
+		orient(Utils.get_orient(dir))
 		move_to(next_pos)
 
 		# Handle collisions - note, not currently tested, needs work
