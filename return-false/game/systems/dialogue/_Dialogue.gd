@@ -1,6 +1,21 @@
+# Dialogue UI base class (aka MUI/MessageUI)
+# This goes with the Dialogue subscene, which gets instanced as MessageUI
+# under the root game node. This is the UI used for conversations with NPCs.
 extends Node
 
-var is_active
+
+# Member Vars
+
+# text_path     : Nodepath; the root of the dialogue ui (a Popup-based node)
+# response_path : Nodepath; the container node for player responses
+# dialog_path   : Nodepath; the container node for NPC dialogue text
+#
+# text_box      : Node; the node found at text_path
+# response_box  : Node; the node found at response_path
+# dialog_box    : Node; the node found at dialog_path
+#
+# is_active     : Boolean; whether the dialogue is open
+# _Dialogue, _Responses, _Root: descendant instance references
 
 export(NodePath) var text_path
 export(NodePath) var response_path
@@ -10,50 +25,106 @@ onready var text_box = get_node(text_path)
 onready var response_box = get_node(response_path)
 onready var dialog_box = get_node(dialog_path)
 
+var is_active
 var _Dialogue
 var _Responses
 var _Root
+
+
+# Signals
 
 signal dialog_opened
 signal dialog_closed
 signal dialog_cleared
 
+
+# Methods
+
+
+##
+# open
+# Shows the dialogue UI
+##
 func open():
 	if !is_active:
 		_Root.popup()
 		is_active = true
 		emit_signal("dialog_opened")
 
+
+##
+# close
+# Hides the dialogue UI
+##
 func close():
 	_Root.hide()
 	is_active = false
 	emit_signal("dialog_closed")
 
+
+##
+# clear
+# Removes all text and options
+##
 func clear():
 	_Dialogue.clear()
 	_Responses.clear()
 	emit_signal("dialog_cleared")
 
+
+##
+# setup
+# Creates all the necessary subclass instances
+##
 func setup():
 	_Root = dialog_box
 	_Dialogue = Dialogue.new(text_box, self)
 	_Responses = ResponseList.new(response_box, self)
 	close()
 
+
+##
+# _ready 
+# Just calls setup
+##
 func _ready():
 	setup()
 
 
-
+##
+# say(text)
+# Shortcut for defining the text to show
+#
+# @text : String; Text (bbcode allowed) to put in the dialog box
+##
 func say(text):
 	_Dialogue.make(text)
 
+
+##
+# response(obj)
+# Shortcut for adding one response option
+#
+# @obj : Dictionary; one response object ({ text: "", actions: [] })
+##
 func response(obj):
 	return _Responses.add_response(obj.text, obj.actions)
 
+
+##
+# responses(arr)
+# Shortcut for adding multiple response options
+#
+# @arr : Array; Set of response objects
+##
 func responses(arr):
 	return _Responses.add_responses(arr)
 
+
+# Subclass: Dialogue
+# Holds all the methods for dealing with the text area that holds NPC text
+# Note: these should not generally be accessed directly;
+# use the API from the parent class (MessageUI.say vs this.make)
 class Dialogue:
 	
 	extends Node
@@ -89,7 +160,9 @@ class Dialogue:
 		emit_signal("cleared")
 
 
-
+# Subclass: ResponseList
+# Holds all the methods relating to the response set and its container
+# Same disclaimer as above; use parent API methods
 class ResponseList:
 	
 	extends Node
@@ -105,7 +178,6 @@ class ResponseList:
 		self.node = response_box
 		self.owner = owner
 		
-	
 	func _enter_tree():
 		self.owner = get_tree().get_current_scene().find_node("MessageUI")
 
