@@ -1,0 +1,217 @@
+[gd_scene load_steps=2 format=1]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "\nextends Node2D\n\n# member variables here, example:\n# var a=2\n# var b=\"textvar\"\n\nonready var write_box = find_node(\"write\")\nonready var read_box = find_node(\"read\")\n\nfunc _ready():\n\t# Called every time the node is added to the scene.\n\t# Initialization here\n\tpass\n\nfunc _on_write_pressed():\n#\tvar data = [{\"section\": \"Character\", \"key\": \"color\", \"val\": \"red\" }]\n\tvar name = find_node(\"name\").get_text()\n\tvar color = find_node(\"color\").get_text()\n\tvar data = []\n\tdata.append({ \"section\": \"defaults\", \"key\": \"name\", \"val\": name})\n\tdata.append({ \"section\": \"defaults\", \"key\": \"color\", \"val\": color})\n\tUtils.save_cfg(data)\n\n\nfunc _on_read_pressed():\n\tvar loaded = Utils.load_cfg()\n\tfor section in loaded.get_sections():\n\t\tread_box.newline()\n\t\tread_box.append_bbcode(\"[b]\" + section + \"[/b]\")\n\t\tread_box.newline()\n\t\t\n\t\tvar keys = loaded.get_section_keys(section)\n\t\tfor key in keys:\n\t\t\tvar val = loaded.get_value(section, key)\n\t\t\tread_box.append_bbcode(key + \": \" + val)\n\t\t\tread_box.newline()\n\t\n#\n\tpass # replace with function body\n"
+
+[node name="Node2D" type="Node2D"]
+
+script/script = SubResource( 1 )
+
+[node name="Panel" type="Panel" parent="."]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 32.0
+margin/top = 30.0
+margin/right = -994.0
+margin/bottom = -585.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 15.0
+margin/bottom = 2.0
+alignment = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+size_flags/stretch_ratio = 3.0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 1011.0
+margin/bottom = 459.0
+alignment = 0
+
+[node name="MarginContainer 2" type="MarginContainer" parent="Panel/VBoxContainer/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 503.0
+margin/bottom = 459.0
+custom_constants/margin_right = 30
+custom_constants/margin_top = 30
+custom_constants/margin_left = 30
+__meta__ = { "_editor_collapsed":true }
+
+[node name="MarginContainer" type="VBoxContainer" parent="Panel/VBoxContainer/HBoxContainer/MarginContainer 2"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 30.0
+margin/top = 30.0
+margin/right = 473.0
+margin/bottom = 459.0
+alignment = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/HBoxContainer/MarginContainer 2/MarginContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 443.0
+margin/bottom = 23.0
+alignment = 0
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/HBoxContainer/MarginContainer 2/MarginContainer/HBoxContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+margin/left = 0.0
+margin/top = 5.0
+margin/right = 84.0
+margin/bottom = 18.0
+text = "Hi my name is "
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="name" type="LineEdit" parent="Panel/VBoxContainer/HBoxContainer/MarginContainer 2/MarginContainer/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+margin/left = 88.0
+margin/top = 0.0
+margin/right = 443.0
+margin/bottom = 23.0
+text = "wut"
+max_length = 0
+editable = true
+secret = false
+
+[node name="HBoxContainer1" type="HBoxContainer" parent="Panel/VBoxContainer/HBoxContainer/MarginContainer 2/MarginContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 27.0
+margin/right = 443.0
+margin/bottom = 50.0
+alignment = 0
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/HBoxContainer/MarginContainer 2/MarginContainer/HBoxContainer1"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+margin/left = 0.0
+margin/top = 5.0
+margin/right = 133.0
+margin/bottom = 18.0
+text = "and my favorite color is"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="color" type="LineEdit" parent="Panel/VBoxContainer/HBoxContainer/MarginContainer 2/MarginContainer/HBoxContainer1"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+margin/left = 137.0
+margin/top = 0.0
+margin/right = 443.0
+margin/bottom = 23.0
+text = "blue"
+max_length = 0
+editable = true
+secret = false
+
+[node name="read" type="RichTextLabel" parent="Panel/VBoxContainer/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 2
+margin/left = 507.0
+margin/top = 0.0
+margin/right = 1011.0
+margin/bottom = 459.0
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode/enabled = false
+bbcode/bbcode = ""
+visible_characters = -1
+
+[node name="HBoxContainer 2" type="HBoxContainer" parent="Panel/VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 463.0
+margin/right = 1011.0
+margin/bottom = 617.0
+alignment = 0
+
+[node name="write_btn" type="Button" parent="Panel/VBoxContainer/HBoxContainer 2"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 503.0
+margin/bottom = 154.0
+toggle_mode = false
+text = "save config"
+flat = false
+
+[node name="read_btn" type="Button" parent="Panel/VBoxContainer/HBoxContainer 2"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 2
+margin/left = 507.0
+margin/top = 0.0
+margin/right = 1011.0
+margin/bottom = 154.0
+toggle_mode = false
+text = "load config"
+flat = false
+
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer 2/write_btn" to="." method="_on_write_pressed"]
+
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer 2/read_btn" to="." method="_on_read_pressed"]
+
+
