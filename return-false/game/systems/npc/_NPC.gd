@@ -16,7 +16,7 @@ export(bool) var show_fallback
 
 
 onready var Player = get_tree().get_current_scene().Player
-onready var MUI = get_tree().get_current_scene().MessageUI
+onready var MessageUI = get_tree().get_current_scene().MessageUI
 
 onready var x = get_node(approach_point)
 onready var trigger = get_node(trigger_area)
@@ -27,64 +27,32 @@ var player_nearby = false
 var dialog_branches = []
 
 
-## Input & player redirection ##
-# Connected to the 'pressed' signal on the TextureButton.
-func _on_click():	
-	Player = get_tree().get_current_scene().Player
-	
-	# No Player? Never mind.
-	if !Player:
-		return
-	
-	# Don't drag them over if there's nothing to talk about
-	if check_branches().size() < 1 and !show_fallback:
-		get_tree().set_input_as_handled()
-		return
-		
-	# Player's here already? Let's talk.
-	# Player's somewhere else? Call them over.
-	if Utils.is_player_nearby(trigger):
-		Player.orient_towards(_get_orientation(Player.find_node("CollisionShape2D")))
-		get_tree().set_input_as_handled()
-		yield(Player, "done_orienting")
-		start_interaction()
-	else:
-		var destination = get_canvas_transform().xform(x.get_global_pos())
-		Utils.fake_click(destination, 1)
-		yield(Player, "done_moving")
-		if Utils.is_player_nearby(trigger):
-			Player.orient_towards(_get_orientation(x))
-			yield(Player, "done_orienting")
-			start_interaction()
+# Methods
+
+# Notes on the flow of actions:
 
 
-# Figure out where the player will stand relative to the NPC
+
+##
+# _get_orientation(to)
+# Small, private helper for getting an angle.
+# Note - this, and its use later, need some cleaning up.
+# Figures out where the player will stand relative to the NPC
+##
 func _get_orientation(to):
 	var pos1 = collider.get_global_pos()
 	var pos2 = to.get_global_pos()
 	return pos1 - pos2
 
-
-## Init or decline conversation ##
-func start_interaction():
-	if dialog_branches.empty():
-		end_interaction()
-	else:
-		var active_branches = check_branches()
-		if active_branches.size() > 0:
-			present_conversations(active_branches)
-		else:
-			end_interaction()
-
-func check_branches():
-		var active_branches = Array()
-		for branch in dialog_branches:
-			if branch.has_active_state() and active_branches.find(branch) < 0:
-				active_branches.append(branch)
-		return active_branches
-
-
-# Create a "start talking about this" button for a given conversation
+##
+# create_branch_option(branch)
+# Helper for building "start this conversation"
+# response options (for NPCs with multiple things
+# to talk about.)
+# TODO: should this be somewhere else? MessageUI? Branch?
+#
+# @branch : QuestBranch
+##
 func create_branch_option(branch):
 	var response = {
 		text = branch.dialog_label,
@@ -98,75 +66,160 @@ func create_branch_option(branch):
 	}
 	return response
 
+##
+# _on_click
+# This is the first step invoked to start an interaction.
+# Connected to the 'pressed' signal on the TextureButton.
+# (We look up Player just in case our reference is outdated.)
+##
+func _on_click():	
 
-# Translate available conversations into a dialogue
-# using one of the fallbacks (single_option, multi_option) as text
-# with response options to trigger each available conversation.
+	Player = get_tree().get_current_scene().Player
+	
+	# No Player? Never mind.
+	if !Player:
+		return
+	
+	# Don't drag them over if there's nothing to talk about
+	# (unless we want to show a "can't talk right now" fallback)
+	if check_branches().size() < 1 and !show_fallback:
+		get_tree().set_input_as_handled()
+		return
+		
+	if Utils.is_player_nearby(trigger):
+		# Player's here already?
+		# Make sure they're facing us, then start talking.
+
+		Player.orient_towards(_get_orientation(Player.find_node("CollisionShape2D")))
+		get_tree().set_input_as_handled()
+
+		yield(Player, "done_orienting")
+		start_interaction()
+
+	else:
+		# Player's somewhere else? Call them over,
+		# turn them towards us, then start talking.
+
+		var destination = get_canvas_transform().xform(x.get_global_pos())
+		Utils.fake_click(destination, 1)
+
+		yield(Player, "done_moving")
+
+		# Make sure they actually stopped near the NPC
+		if Utils.is_player_nearby(trigger):
+			Player.orient_towards(_get_orientation(x))
+			start_interaction()
+
+
+## 
+# start_interaction
+# Called once the Player is close enough to talk to.
+# Determines whether to proceed with a dialogue or not.
+##
+func start_interaction():
+		var active_branches = check_branches()
+		if active_branches.empty():
+			end_interaction()
+		else:
+			present_conversations(active_branches)
+
+##
+# check_branches
+# Loops through all the quest branches this NPC has access to
+# and returns the ones with dialogue at their active states.
+##
+func check_branches():
+		var active_branches = Array()
+		for branch in dialog_branches:
+			if branch.has_active_state() and active_branches.find(branch) < 0:
+				active_branches.append(branch)
+		return active_branches
+
+
+##
+# present_conversations(dialog_branches)
+# Once we have an array of the NPC's active branches,
+# this builds a dialogue to let the player choose
+# what to talk about. Text comes from the *_fallback options.
+#
+# @dialog_branches: Array; open conversations
+##
 func present_conversations(dialog_branches):
 
 	var options = Array()
-	MUI = get_tree().get_current_scene().MessageUI
+	MessageUI = get_tree().get_current_scene().MessageUI
 	
-	# Only a likely issue in subscenes, test scenes, etc.
-	if !MUI:
-		print("where is MUI")
-		return "No MUI!"
+	# Covering for lack of MessageUI in subscenes, test scenes, etc.
+	if !MessageUI:
+		print("where is MessageUI")
+		return "No MessageUI!"
 
-	# Nothing to talk about: (shouldn't happen at this point)
+	# Nothing to talk about: (in theory this will never happen)
 	if dialog_branches == null or dialog_branches.size() < 1:
 		end_interaction()
 
 	# Only one thing to talk about:
 	elif dialog_branches.size() == 1:
-		MUI.clear()
-		MUI.say(single_option_fallback)
-		MUI.response(create_branch_option(dialog_branches[0]))
-		MUI.open()
+		MessageUI.clear()
+
+		# Here's how we could jump right into the topic:
+		# var branch = dialog_branches[0]
+		# enter_branch(branch)
+
+		# ...but instead we'll ease into it
+		# and treat it like we would treat multiple options
+		
+		MessageUI.say(single_option_fallback)
+		MessageUI.response(create_branch_option(dialog_branches[0]))
+		MessageUI.open()
 
 	# Several things to talk about:
 	elif dialog_branches.size() > 1:
 		for branch in dialog_branches:
 			var option = create_branch_option(branch)
 			options.append(option)
-		MUI.clear()
-		MUI.say(multi_option_fallback)
-		MUI.responses(options)
-		MUI.open()
+		MessageUI.clear()
+		MessageUI.say(multi_option_fallback)
+		MessageUI.responses(options)
+		MessageUI.open()
 
 
-# Stub - this will be used to kick off a conversation branch, ultimately.
+##
+# enter_branch(branch)
+# Kicks off the current dialogue for a given branch.
+# This gets called when the player selects a topic.
+#
+# @branch : QuestBranch
+##
 func enter_branch(branch):
 	var _state = branch.get_parent_state()
 	if !branch.has_state(_state):
-		MUI.close()
+		MessageUI.close()
 		return
 
-	MUI.clear()
-	MUI.say(branch.text_at_state(_state))
+	MessageUI.clear()
+	MessageUI.say(branch.text_at_state(_state))
 	for response in branch.responses_at_state(_state):
 		branch.build_response(response)	
-	MUI.open()
+	MessageUI.open()
 	pass
 
 
+##
+# end_interaction
 # Called when there's nothing to talk about
-# Either show the fallback ("calibrations") or don't, depending on the show_fallback property
+# Either show the fallback ("calibrations") or don't, 
+# depending on the show_fallback property
+##
 func end_interaction():
-	if !MUI:
-		return "No MUI!"
+	if !MessageUI:
+		return "No MessageUI!"
 	if no_options_fallback and show_fallback:
-		MUI.open()
-		MUI.clear()
-		MUI.say(no_options_fallback)
-		MUI._Responses.add_close()
+		MessageUI.open()
+		MessageUI.clear()
+		MessageUI.say(no_options_fallback)
+		MessageUI._Responses.add_close()
 	else:
-		MUI.clear()
-		MUI.close()
+		MessageUI.clear()
+		MessageUI.close()
 	return 0
-
-
-
-
-#func _ready():
-#	var temp_data = Utils.get_json("res://sandbox/sample-branch.json")
-#	dialog_branches.append(temp_data)
