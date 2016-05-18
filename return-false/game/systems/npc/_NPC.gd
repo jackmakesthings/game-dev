@@ -1,12 +1,13 @@
 # NPC base class
 extends CollisionObject2D
 
-# trigger_area: generally the NPC root node, used for "player nearby" detection
-# approach_point: the position2D used to direct the player over
-# single_option_fallback: Intro text, could be changed by quests as added, need to flesh out further
-# multi_option_fallback: Default text for "there are multiple topics available" situations
-# no_options_fallback: "Can this wait? Calibrations."
-# show_fallback: Set to false to suppress showing the no_options_fallback
+# trigger_area: Nodepath; generally the NPC root node, used for "player nearby" detection
+# approach_point: Nodepath; the position2D used to direct the player over
+# single_option_fallback: String; starting dialogue if only one topic exists
+# multi_option_fallback: String; starting dialogue if several topics exist
+# no_options_fallback: String; dialogue if no topics exist
+# show_fallback: Boolean; Set to false to suppress showing the no_options_fallback
+
 export(NodePath) var trigger_area
 export(NodePath) var approach_point
 export(String) var single_option_fallback
@@ -14,7 +15,7 @@ export(String) var multi_option_fallback
 export(String) var no_options_fallback
 export(bool) var show_fallback
 
-
+# Node references
 onready var Player = get_tree().get_current_scene().Player
 onready var MessageUI = get_tree().get_current_scene().MessageUI
 
@@ -23,26 +24,26 @@ onready var trigger = get_node(trigger_area)
 onready var sprite = get_node('Sprite')
 onready var collider = find_node('collider')
 
+# player_nearby   : Boolean; is Player close enough to talk to?
+# dialog_branches : Array; the topics this NPC can talk about
 var player_nearby = false
 var dialog_branches = []
 
 
+
 # Methods
-
-# Notes on the flow of actions:
-
-
 
 ##
 # _get_orientation(to)
 # Small, private helper for getting an angle.
-# Note - this, and its use later, need some cleaning up.
+# TODO: this, and its use later, need some cleaning up.
 # Figures out where the player will stand relative to the NPC
 ##
 func _get_orientation(to):
 	var pos1 = collider.get_global_pos()
 	var pos2 = to.get_global_pos()
 	return pos1 - pos2
+
 
 ##
 # create_branch_option(branch)
@@ -65,6 +66,7 @@ func create_branch_option(branch):
 		]
 	}
 	return response
+
 
 ##
 # _on_click
@@ -146,7 +148,6 @@ func check_branches():
 ##
 func present_conversations(dialog_branches):
 
-	var options = Array()
 	MessageUI = get_tree().get_current_scene().MessageUI
 	
 	# Covering for lack of MessageUI in subscenes, test scenes, etc.
@@ -160,24 +161,19 @@ func present_conversations(dialog_branches):
 
 	# Only one thing to talk about:
 	elif dialog_branches.size() == 1:
-		MessageUI.clear()
-
-		# Here's how we could jump right into the topic:
-		# var branch = dialog_branches[0]
-		# enter_branch(branch)
-
-		# ...but instead we'll ease into it
-		# and treat it like we would treat multiple options
-		
+		MessageUI.clear()		
 		MessageUI.say(single_option_fallback)
 		MessageUI.response(create_branch_option(dialog_branches[0]))
 		MessageUI.open()
 
 	# Several things to talk about:
 	elif dialog_branches.size() > 1:
+		var options = Array()
+		var option
 		for branch in dialog_branches:
-			var option = create_branch_option(branch)
+			option = create_branch_option(branch)
 			options.append(option)
+
 		MessageUI.clear()
 		MessageUI.say(multi_option_fallback)
 		MessageUI.responses(options)
