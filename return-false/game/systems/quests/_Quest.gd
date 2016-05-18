@@ -8,6 +8,11 @@ export(String) var key
 var actors = {}
 var NPCS
 
+var logs
+var popups
+var dialog_label
+var init_at
+
 var previous_state
 var current_state = "0" setget set_current_state,get_current_state
 var Branch = preload('res://systems/quests/_Quest.Branch.gd')

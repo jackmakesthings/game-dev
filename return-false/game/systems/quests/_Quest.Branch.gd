@@ -50,7 +50,7 @@ func build_response(data):
 	var A = {}
 
 	if data.has('new_state'):
-		A["args"] = Array(data.new_state)
+		A["args"] = [data.new_state]
 		
 		if data.dialog_action == 1:
 			fn = 'update_and_continue'
@@ -71,10 +71,15 @@ func update_and_close(new_state):
 
 func update_and_continue(new_state):
 	QM.set_state(parent_quest, new_state)
+	print(QM.get_quest(parent_quest).get_current_state())
+	
 	MUI.clear()
 	MUI.say(text_at_state(new_state))
 	for r in responses_at_state(new_state):
-		MUI.response(build_response(r))
+		if r == null:
+			return
+		else:
+			build_response(r)
 
 func end_dialog():
 	MUI.close()
