@@ -49,9 +49,9 @@ collision/mask = 1
 occluder/light_mask = 1
 tile_data = IntArray(  )
 
-[node name="NPC" parent="nav/objects" instance=ExtResource( 2 )]
+[node name="engineer" parent="nav/objects" instance=ExtResource( 2 )]
 
-transform/pos = Vector2( 201.335, 228.543 )
+transform/pos = Vector2( 285.678, 194.534 )
 linear_damp = 0.1
 
 
