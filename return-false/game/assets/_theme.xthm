@@ -1,8 +1,62 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="Theme" subresource_count="2" version="2.1" version_name="Godot Engine v2.1.alpha.custom_build">
-	<ext_resource path="res://assets/fonts/input-mono/InputMono.tres" type="DynamicFont" index="0"></ext_resource>
+<resource_file type="Theme" subresource_count="6" version="2.1" version_name="Godot Engine v2.1.alpha.custom_build">
+	<ext_resource path="res://assets/fonts/input-mono/InputMono.tres" type="DynamicFont" index="1"></ext_resource>
+	<ext_resource path="res://assets/fonts/input-mono/InputMono-Med.fnt" type="BitmapFont" index="0"></ext_resource>
+	<resource type="StyleBoxFlat" path="local://2">
+		<real name="content_margin/left"> 10 </real>
+		<real name="content_margin/right"> 10 </real>
+		<real name="content_margin/top"> 10 </real>
+		<real name="content_margin/bottom"> 10 </real>
+		<color name="bg_color"> 0, 0, 0, 1 </color>
+		<color name="light_color"> 0.8, 0.8, 0.8, 1 </color>
+		<color name="dark_color"> 0.8, 0.8, 0.8, 1 </color>
+		<int name="border_size"> 0 </int>
+		<bool name="border_blend"> True </bool>
+		<bool name="draw_bg"> True </bool>
+
+	</resource>
+	<resource type="StyleBoxFlat" path="local://3">
+		<real name="content_margin/left"> 10 </real>
+		<real name="content_margin/right"> 10 </real>
+		<real name="content_margin/top"> 10 </real>
+		<real name="content_margin/bottom"> 10 </real>
+		<color name="bg_color"> 0, 0, 0, 1 </color>
+		<color name="light_color"> 0.235294, 0.254902, 0.262745, 1 </color>
+		<color name="dark_color"> 0.238647, 0.257405, 0.265625, 1 </color>
+		<int name="border_size"> 1 </int>
+		<bool name="border_blend"> False </bool>
+		<bool name="draw_bg"> True </bool>
+
+	</resource>
+	<resource type="StyleBoxFlat" path="local://1">
+		<real name="content_margin/left"> -1 </real>
+		<real name="content_margin/right"> -1 </real>
+		<real name="content_margin/top"> -1 </real>
+		<real name="content_margin/bottom"> -1 </real>
+		<color name="bg_color"> 0, 0, 0, 1 </color>
+		<color name="light_color"> 0.8, 0.8, 0.8, 1 </color>
+		<color name="dark_color"> 0.8, 0.8, 0.8, 1 </color>
+		<int name="border_size"> 0 </int>
+		<bool name="border_blend"> True </bool>
+		<bool name="draw_bg"> True </bool>
+
+	</resource>
 	<main_resource>
-		<resource name="default_font" external="0">  </resource>
+		<resource name="default_font" external="1">  </resource>
+		<color name="Button/colors/font_color"> 0.878431, 0.878431, 0.878431, 1 </color>
+		<color name="Button/colors/font_color_disabled"> 0.9, 0.9, 0.9, 0.2 </color>
+		<color name="Button/colors/font_color_hover"> 0.941176, 0.941176, 0.941176, 1 </color>
+		<color name="Button/colors/font_color_pressed"> 1, 1, 1, 1 </color>
+		<int name="Button/constants/hseparation"> 2 </int>
+		<resource name="Button/fonts/font" external="0">  </resource>
+		<resource name="Button/styles/disabled" resource_type="StyleBox" path="local://2">  </resource>
+		<resource name="Button/styles/focus" resource_type="StyleBox" path="local://3">  </resource>
+		<resource name="Button/styles/hover" resource_type="StyleBox" path="local://3">  </resource>
+		<resource name="Button/styles/normal" resource_type="StyleBox" path="local://2">  </resource>
+		<resource name="Button/styles/pressed" resource_type="StyleBox" path="local://3">  </resource>
+		<resource name="Panel/styles/panel" resource_type="StyleBox" path="local://1">  </resource>
+		<resource name="Panel/styles/panelf" resource_type="StyleBox" path="local://1">  </resource>
+		<resource name="Panel/styles/panelnc" resource_type="StyleBox" path="local://1">  </resource>
 
 	</main_resource>
 </resource_file>
