@@ -94,8 +94,6 @@ func _on_click():
 
 		Player.orient_towards(_get_orientation(Player.find_node("CollisionShape2D")))
 		get_tree().set_input_as_handled()
-
-		yield(Player, "done_orienting")
 		start_interaction()
 
 	else:
@@ -119,11 +117,13 @@ func _on_click():
 # Determines whether to proceed with a dialogue or not.
 ##
 func start_interaction():
-		var active_branches = check_branches()
-		if active_branches.empty():
-			end_interaction()
-		else:
-			present_conversations(active_branches)
+	var active_branches = check_branches()
+	for branch in active_branches:
+		print(branch.get_parent_state())
+	if active_branches.empty():
+		end_interaction()
+	else:
+		present_conversations(active_branches)
 
 ##
 # check_branches
@@ -131,11 +131,11 @@ func start_interaction():
 # and returns the ones with dialogue at their active states.
 ##
 func check_branches():
-		var active_branches = Array()
-		for branch in dialog_branches:
-			if branch.has_active_state() and active_branches.find(branch) < 0:
-				active_branches.append(branch)
-		return active_branches
+	var active_branches = Array()
+	for branch in dialog_branches:
+		if branch.has_active_state() and active_branches.find(branch) < 0:
+			active_branches.append(branch)
+	return active_branches
 
 
 ##
