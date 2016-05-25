@@ -53,7 +53,7 @@
 		<resource name="Button/styles/focus" resource_type="StyleBox" path="local://3">  </resource>
 		<resource name="Button/styles/hover" resource_type="StyleBox" path="local://3">  </resource>
 		<resource name="Button/styles/normal" resource_type="StyleBox" path="local://2">  </resource>
-		<resource name="Button/styles/pressed" resource_type="StyleBox" path="local://3">  </resource>
+		<resource name="Button/styles/pressed" resource_type="StyleBox" path="local://2">  </resource>
 		<resource name="Panel/styles/panel" resource_type="StyleBox" path="local://1">  </resource>
 		<resource name="Panel/styles/panelf" resource_type="StyleBox" path="local://1">  </resource>
 		<resource name="Panel/styles/panelnc" resource_type="StyleBox" path="local://1">  </resource>

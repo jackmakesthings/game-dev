@@ -1,14 +1,14 @@
 [gd_scene load_steps=3 format=1]
 
-[ext_resource path="res://assets/_theme.xthm" type="Theme" id=1]
-
-[sub_resource type="GDScript" id=1]
-
-script/source = "\nextends Node2D\n\n# member variables here, example:\n# var a=2\n# var b=\"textvar\"\n\nvar item_array = []\nvar shuffled\n\n\n\nfunc get_opposite(of):\n\tif typeof(of) != TYPE_STRING:\n\t\tif of == 0:\n\t\t\treturn 1\n\t\telif of == 1:\n\t\t\treturn 0\n\telse:\n\t\tif of == \"1\":\n\t\t\treturn \"0\"\n\t\telif of ==\"0\":\n\t\t\treturn \"1\"\n\nfunc shuffle(array):\n\tvar new_array = Array()\n\tnew_array.resize(array.size())\n\tfor i in range(1, new_array.size()):\n\t\trandomize()\n\t\tvar j = floor(randf() * (i + 1))\n\t\tvar temp = array[i]\n\t\tnew_array[i] = array[j]\n\t\tnew_array[j] = temp\n\treturn new_array\n\t\n\n\nfunc change_one_box(which):\n\tvar old = int(which.get_text())\t\n\tvar array_index = which.get_position_in_parent()\n\tshuffled[array_index] = get_opposite(old)\n\twhich.set_text(get_opposite(str(old)))\n\t\n\tif is_solved():\n\t\tfind_node(\"PopupPanel\").popup()\n\n\nfunc is_solved():\n\treturn (shuffled == item_array)\n\nfunc init_array():\n\tfor i in range(0,8):\n\t\titem_array.append(1)\n\t\titem_array.append(0)\n\tprint(item_array)\n\n\t\t\n\t\t\n\t\t\nfunc _ready():\n\tinit_array()\n\tvar first = find_node(\"GridContainer\")\n\tvar second = find_node(\"GridContainer1\")\n\tfor item in item_array:\n\t\tvar box = Button.new()\n\t\tbox.set_h_size_flags(3)\n\t\tbox.set_v_size_flags(3)\n\t\tbox.set_text(str(item))\n\t\tfirst.add_child(box)\n\t\tbox.set_disabled(true)\n\t\t\n\t\t\n\tshuffled = shuffle(item_array)\n\tprint(shuffled)\n\t\n\tfor new_item in shuffled:\n\t\tvar box2 = Button.new()\n\t\tbox2.set_text(str(new_item))\n\t\tbox2.set_h_size_flags(3)\n\t\tbox2.set_v_size_flags(3)\n\t\tsecond.add_child(box2)\n\t\tbox2.connect(\"pressed\", self, \"change_one_box\", [box2])\n\t# Called every time the node is added to the scene.\n\t# Initialization here\n\tpass\n\n\n"
+[ext_resource path="res://sandbox/BitGrid.gd" type="Script" id=1]
+[ext_resource path="res://assets/_theme.xthm" type="Theme" id=2]
 
 [node name="Node2D" type="Node2D"]
 
-script/script = SubResource( 1 )
+script/script = ExtResource( 1 )
+cols = 4
+rows = 4
+selection_mode = 3
 
 [node name="Panel" type="Panel" parent="."]
 
@@ -16,26 +16,41 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-theme/theme = ExtResource( 1 )
+theme/theme = ExtResource( 2 )
 margin/left = 121.0
 margin/top = 20.0
 margin/right = 883.0
-margin/bottom = 579.0
+margin/bottom = 465.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 2.0
+margin/bottom = -1.0
+alignment = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = false
-size_flags/horizontal = 2
-size_flags/vertical = 2
+size_flags/horizontal = 3
+size_flags/vertical = 3
+size_flags/stretch_ratio = 4.0
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 733.0
-margin/bottom = 422.0
+margin/right = 760.0
+margin/bottom = 353.0
 custom_constants/separation = 40
 alignment = 0
 
-[node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer"]
+[node name="target" type="GridContainer" parent="Panel/VBoxContainer/HBoxContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = false
@@ -43,25 +58,53 @@ size_flags/horizontal = 3
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 346.0
-margin/bottom = 422.0
+margin/right = 360.0
+margin/bottom = 353.0
 custom_constants/vseparation = 10
 custom_constants/hseparation = 10
 columns = 4
 
-[node name="GridContainer1" type="GridContainer" parent="Panel/HBoxContainer"]
+[node name="puzzle" type="GridContainer" parent="Panel/VBoxContainer/HBoxContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 3
 size_flags/vertical = 2
-margin/left = 386.0
+margin/left = 400.0
 margin/top = 0.0
-margin/right = 733.0
-margin/bottom = 422.0
+margin/right = 760.0
+margin/bottom = 353.0
 custom_constants/vseparation = 10
 custom_constants/hseparation = 10
 columns = 4
+
+[node name="HBoxContainer 2" type="HBoxContainer" parent="Panel/VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 357.0
+margin/right = 760.0
+margin/bottom = 446.0
+alignment = 0
+
+[node name="mode_switch" type="MenuButton" parent="Panel/VBoxContainer/HBoxContainer 2"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 760.0
+margin/bottom = 89.0
+toggle_mode = false
+click_on_press = true
+text = "Select mode"
+flat = true
+items = [ "None", null, false, false, false, 0, 0, null, "", false, "Single", null, false, false, false, 1, 0, null, "", false, "Row", null, false, false, false, 2, 0, null, "", false, "Column", null, false, false, false, 3, 0, null, "", false, "2x2", null, false, false, false, 4, 0, null, "", false, "3x2", null, false, false, false, 5, 0, null, "", false, "X", null, false, false, false, 6, 0, null, "", false ]
 
 [node name="PopupPanel" type="PopupPanel" parent="."]
 
