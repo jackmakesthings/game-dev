@@ -1,0 +1,137 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://sandbox/BitGrid.gd" type="Script" id=1]
+[ext_resource path="res://assets/_theme.xthm" type="Theme" id=2]
+
+[node name="Node2D" type="Node2D"]
+
+script/script = ExtResource( 1 )
+cols = 4
+rows = 4
+selection_mode = 3
+
+[node name="Panel" type="Panel" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+theme/theme = ExtResource( 2 )
+margin/left = 121.0
+margin/top = 20.0
+margin/right = 883.0
+margin/bottom = 465.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 2.0
+margin/bottom = -1.0
+alignment = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+size_flags/stretch_ratio = 4.0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 760.0
+margin/bottom = 353.0
+custom_constants/separation = 40
+alignment = 0
+
+[node name="target" type="GridContainer" parent="Panel/VBoxContainer/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 360.0
+margin/bottom = 353.0
+custom_constants/vseparation = 10
+custom_constants/hseparation = 10
+columns = 4
+
+[node name="puzzle" type="GridContainer" parent="Panel/VBoxContainer/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 2
+margin/left = 400.0
+margin/top = 0.0
+margin/right = 760.0
+margin/bottom = 353.0
+custom_constants/vseparation = 10
+custom_constants/hseparation = 10
+columns = 4
+
+[node name="HBoxContainer 2" type="HBoxContainer" parent="Panel/VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 357.0
+margin/right = 760.0
+margin/bottom = 446.0
+alignment = 0
+
+[node name="mode_switch" type="MenuButton" parent="Panel/VBoxContainer/HBoxContainer 2"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 760.0
+margin/bottom = 89.0
+toggle_mode = false
+click_on_press = true
+text = "Select mode"
+flat = true
+items = [ "None", null, false, false, false, 0, 0, null, "", false, "Single", null, false, false, false, 1, 0, null, "", false, "Row", null, false, false, false, 2, 0, null, "", false, "Column", null, false, false, false, 3, 0, null, "", false, "2x2", null, false, false, false, 4, 0, null, "", false, "3x2", null, false, false, false, 5, 0, null, "", false, "X", null, false, false, false, 6, 0, null, "", false ]
+
+[node name="PopupPanel" type="PopupPanel" parent="."]
+
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 298.0
+margin/top = 130.0
+margin/right = 697.0
+margin/bottom = 276.0
+popup/exclusive = false
+
+[node name="Label" type="Label" parent="PopupPanel"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+margin/left = 26.0
+margin/top = 54.0
+margin/right = 373.0
+margin/bottom = 94.0
+text = "gg"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+
