@@ -92,7 +92,7 @@ func _on_click():
 		# Player's here already?
 		# Make sure they're facing us, then start talking.
 
-		Player.orient_towards(_get_orientation(Player.find_node("CollisionShape2D")))
+		Player.orient_towards(collider.get_global_pos())
 		get_tree().set_input_as_handled()
 		start_interaction()
 
@@ -107,7 +107,7 @@ func _on_click():
 
 		# Make sure they actually stopped near the NPC
 		if Utils.is_player_nearby(trigger):
-			Player.orient_towards(_get_orientation(x))
+			Player.orient_towards(collider.get_global_pos())
 			start_interaction()
 
 

@@ -62,32 +62,34 @@ func fake_click(position, flags=0):
 	get_tree().input_event(ev)
 
 
-
-# Misc. utilities
+## Misc. utilities ##
 
 # Player checking; currently used by NPCs to trigger interactions
 
+# Identify whether a node is the Player or not
 func is_player(node):
 	if node extends PLAYER_CLASS:
 		return true
 	else:
 		return false
 
+# Check for the presence of the Player within a given trigger area
 func is_player_nearby(trigger):
 	var nearby_bodies
 	var player_found = false
-
 	nearby_bodies = trigger.get_overlapping_bodies()
 	for body in nearby_bodies:
 		if is_player(body):
 			player_found = true
 		else:
 			continue
-
 	return player_found
 
 
 # Compass direction parsing	
+
+# This converts a simple Vector2 into an NESW string
+# (useful for setting animations on moving characters)
 func get_orient(vector):
 	if vector.x > 0:
 		if vector.y > 0:
@@ -113,6 +115,17 @@ func get_orient(vector):
 	else:
 		return 'S'
 
+# Finds the NESW orientation from one vector to another
+func get_orient_between(from, to):
+	var vector = to - from;
+	return get_orient(vector)
+
+# Finds the NESW orientation from one *node* to another
+func get_orient_between_nodes(from, to):
+	var vector = to.get_global_pos() - from.get_global_pos();
+	return get_orient(vector)
+
+# Just a wrapper for print(), to make debug-only logging a little easier
 func debug(text):
 	if debug:
 		print(text)
