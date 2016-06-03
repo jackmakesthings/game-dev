@@ -28,7 +28,7 @@ margin/left = 230.0
 margin/top = 50.0
 margin/right = 230.0
 margin/bottom = 50.0
-popup/exclusive = false
+popup/exclusive = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="dialog"]
 
@@ -58,6 +58,7 @@ margin/bottom = 392.0
 texture = ExtResource( 2 )
 modulate = Color( 0.508408, 0.544479, 0.558594, 1 )
 expand = true
+stretch_mode = 0
 
 [node name="textbox" type="RichTextLabel" parent="dialog/VBoxContainer"]
 
