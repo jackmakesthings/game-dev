@@ -51,6 +51,14 @@ func _ready():
 func _unhandled_input(ev):
 	if Utils.is_click(ev):
 
+		var Player = get_tree().get_current_scene().Player
+
+		if Player !=null:
+			if ev.meta == 1:	
+				Player.conversation_queued = true
+			else:
+				Player.conversation_queued = false
+
 		# This chunk of code cancels out the effects of the camera
 		# on our positioning calculations
 		var end = get_viewport_transform().affine_inverse().xform(ev.global_pos)

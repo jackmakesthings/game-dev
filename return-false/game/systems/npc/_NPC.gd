@@ -106,7 +106,7 @@ func _on_click():
 		yield(Player, "done_moving")
 
 		# Make sure they actually stopped near the NPC
-		if Utils.is_player_nearby(trigger):
+		if Utils.is_player_nearby(trigger) and Player.conversation_queued:
 			Player.orient_towards(collider.get_global_pos())
 			start_interaction()
 
