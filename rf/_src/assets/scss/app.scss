@@ -54,31 +54,18 @@ li img { margin-bottom: 0; }
 	font-size: inherit;
 }
 
-.dialogue-page {
-	max-height: 100vh;
-	overflow: hidden;
-}
-
 .dialogue {
-	// background: #2aa;
-	background: transparentize(#15161B, 0.03);
+	background: #2aa;
 	height: 100vh;
-	font-size: 14px;
+	font-size: 12px;
 	> .callout {
 		height: 80vh;
 		margin: 10vh auto;
-		border-radius: 8px;
-		box-shadow: 0px 8px 10px 0px rgba(0,0,0,0.6);
-		.callout { border: 0; }
 	}
-	img { 
-		width: 70%;
-		margin: 10% 15%;
-		border-radius: 30px; 
-		background: #15161B;
-		border: 3px solid transparentize(white, 0.8);
-		// border: 3px solid #15161B;
+	.callout {
+		border: 0;
 	}
+	img { width: 100%; }
 }
 
 .rel { position: relative; }
@@ -90,10 +77,5 @@ li img { margin-bottom: 0; }
 	letter-spacing: 0.02em;
 }
 
-.type-box {
-	margin: 10%;
-}
-
 .top { top: 2rem; }
-.bottom { bottom: 1rem;}
-.left { left: 1rem; }
+.left { left: 2rem; }

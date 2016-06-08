@@ -15,12 +15,7 @@ function loop(node, contents) {
 		return;
 	}
 
-	if (contents[0] == '#') {
-		node.innerHTML += '<br>';
-	}
-	else {
-		node.innerHTML += contents[0];
-	}
+	node.innerHTML += contents[0];
 	contents.shift();
 	setTimeout(function() { loop(node, contents); }, 70);
 }
@@ -37,7 +32,7 @@ function reset(node, new_text) {
 	loop(node, contents);
 }
 
-var lines = ["Testing. Testing.#Is this thing on?", "Oh - good.#My name is Dr. Scientist.#But you can call me...Dr. Scientist. Have you gotten familiar with the facility yet?"];
+var lines = ["Testing. Testing.", "Is this thing on?", "Oh - good."];
 var _lines = [].concat(lines);
 
 $(document).on('keypress', function(e) {
