@@ -4,6 +4,7 @@
 
 [resource]
 
-size = 14
-font = ExtResource( 1 )
+font/size = 16
+font/font = ExtResource( 1 )
+fallback/0 = ExtResource( 1 )
 
