@@ -1,0 +1,103 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://assets/_theme.xthm" type="Theme" id=1]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+layer = 2
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+
+[node name="Control" type="Control" parent="."]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = true
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+theme/theme = ExtResource( 1 )
+margin/left = 0.0
+margin/top = 0.0
+margin/right = -1.0
+margin/bottom = 2.0
+
+[node name="Panel" type="Panel" parent="Control"]
+
+anchor/top = 1
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 51.0
+margin/right = 3.0
+margin/bottom = 2.0
+
+[node name="Panel-1" type="Panel" parent="Control"]
+
+visibility/visible = false
+anchor/left = 1
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 58.0
+margin/top = 3.0
+margin/right = 3.0
+margin/bottom = 2.0
+
+[node name="Label" type="Label" parent="Control"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+margin/left = 10.0
+margin/top = 10.0
+margin/right = 90.0
+margin/bottom = 48.0
+text = "Top Left"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label-1" type="Label" parent="Control"]
+
+visibility/visible = false
+anchor/top = 1
+anchor/bottom = 1
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+margin/left = 4.0
+margin/top = 31.0
+margin/right = 114.0
+margin/bottom = -7.0
+text = "Bottom Left"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label-2" type="Label" parent="Control"]
+
+visibility/visible = false
+anchor/left = 1
+anchor/right = 1
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+margin/left = 127.0
+margin/top = 11.0
+margin/right = 17.0
+margin/bottom = 49.0
+text = "Top Right"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+

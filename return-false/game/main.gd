@@ -10,12 +10,14 @@ extends Node
 # MessageUI    : Node; reference to the Dialgoue UI 
 # NPCManager   : Node; reference to the handler for all NPCs
 # QuestManager : Node; reference to the handler for quests
+# HUD					 : Node; reference to the persistent UI layer
 
 var Scene = null
 var Player = null
 var MessageUI = null
 var NPCManager = null
 var QuestManager = null
+var HUD = null
 
 
 # Methods
@@ -92,6 +94,7 @@ func _enter_game():
 	change_scene("res://systems/environment/_Environment.tscn")
 	setup('NPCManager', "res://systems/npc/NPC.Manager.tscn")
 	setup('QuestManager', "res://systems/quests/Quest.Manager.tscn", true)
+	setup('HUD', "res://systems/ui/HUD.tscn")
 	MessageUI.raise()
 
 
