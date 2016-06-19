@@ -1,5 +1,6 @@
 # Skill/upgrade/currency management
 
+extends Node
 
 ########
 # Locals
@@ -19,6 +20,8 @@ const STEPS = {
 	4: 300,
 	5: 400
 }
+
+signal update_ui(text)
 
 ###################
 # Setters & getters
@@ -97,18 +100,20 @@ func downgrade(target_skill):
 
 
 
-# Init and update
+# Init and update - this is overridden by UI instances
 func update_UI(text=null):
-	var chips_node = find_node("Label")
+	
+	emit_signal("update_ui")
+	
 	if text:
-		chips_node.set_text(text)
+		print("Upgrade system: ", text)
 	else:
-		chips_node.set_text("Chips: "+ str(free_chips))
-
-	for s in ['Hardware', 'Software', 'Social', 'Subvert']:
-		var skill_node = find_node(s)
-		var skill_val = get_skill(s)
-		skill_node.set_value(skill_val)
+		print("Chips: "+ str(free_chips))
+		for s in ['Hardware', 'Software', 'Social', 'Subvert']:
+			print(s, ': ', get_skill(s))
+#		var skill_node = find_node(s)
+#		var skill_val = get_skill(s)
+#		skill_node.set_value(skill_val)
 
 func _ready():
 	set_free_chips(1500)
