@@ -21,13 +21,17 @@ const STEPS = {
 	5: 400
 }
 
-signal update_ui(text)
+signal update_UI(text)
 
 ###################
 # Setters & getters
 
 func set_free_chips(quantity):
+	if typeof(quantity) != TYPE_REAL and typeof(quantity) != TYPE_INT:
+		update_UI('???')
+		return
 	free_chips = quantity
+	update_UI(quantity)
 	
 func get_free_chips():
 	return free_chips
@@ -102,19 +106,10 @@ func downgrade(target_skill):
 
 # Init and update - this is overridden by UI instances
 func update_UI(text=null):
+	emit_signal("update_UI", text)
 	
-	emit_signal("update_ui")
 	
-	if text:
-		print("Upgrade system: ", text)
-	else:
-		print("Chips: "+ str(free_chips))
-		for s in ['Hardware', 'Software', 'Social', 'Subvert']:
-			print(s, ': ', get_skill(s))
-#		var skill_node = find_node(s)
-#		var skill_val = get_skill(s)
-#		skill_node.set_value(skill_val)
-
 func _ready():
+	add_user_signal('update_UI', [])
 	set_free_chips(1500)
 	update_UI()
