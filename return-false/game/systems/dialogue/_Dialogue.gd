@@ -177,6 +177,7 @@ class ResponseList:
 	func _init(response_box, owner):
 		self.node = response_box
 		self.owner = owner
+		owner.add_child(self)
 		
 	func _enter_tree():
 		self.owner = get_tree().get_current_scene().find_node("MessageUI")
@@ -193,6 +194,10 @@ class ResponseList:
 		
 		if actions.size() > 0:
 			for action in actions:
+				if typeof(action.target) == TYPE_STRING:
+					var new_target = get_tree().get_root().get_node(action.target)
+					action.target = new_target
+
 				if action.has('args'):
 					response.connect('pressed', action['target'], action['fn'], action['args'])
 				else:

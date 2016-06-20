@@ -23,7 +23,6 @@ func _init(data):
 	for prop in data:
 		self[prop] = data[prop]
 	set_name(self.key)
-	print(self.actors)
 
 
 func _create_branch(actor_name, actor_node):

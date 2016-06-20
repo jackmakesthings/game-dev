@@ -115,7 +115,14 @@
             {
               "text": "<NEW TASK: Diagnose and repair terminal.>",
               "new_state": "20",
-              "dialog_action": 0
+              "dialog_action": 0,
+              "actions": [
+                { 
+                  "target": "/root/Upgrades",
+                  "fn": "set_free_chips",
+                  "args": [2000]
+                }
+              ]
             },
             {
               "text": "<Bluff> I already fixed it. [Trust: 1]",
