@@ -64,14 +64,14 @@ func build_response(data):
 
 	else:
 		fn = 'end_dialog'
-
+		
+	A["fn"] = fn
+	A["target"] = target
 
 	if data.has('actions'):
 		for action in data.actions:
 			all_actions.append(action)
 		
-	A["fn"] = fn
-	A["target"] = target
 	MUI.response({ "text": data.text, "actions": all_actions })
 
 

@@ -163,7 +163,7 @@ func present_conversations(dialog_branches):
 	elif dialog_branches.size() == 1:
 		MessageUI.clear()		
 		MessageUI.say(single_option_fallback)
-		MessageUI.response(create_branch_option(dialog_branches[0]))
+		MessageUI.show_branch(dialog_branches[0], self)
 		MessageUI.open()
 
 	# Several things to talk about:
@@ -171,7 +171,7 @@ func present_conversations(dialog_branches):
 		var options = Array()
 		var option
 		for branch in dialog_branches:
-			option = create_branch_option(branch)
+			option = MessageUI.show_branch(branch, self)
 			options.append(option)
 
 		MessageUI.clear()

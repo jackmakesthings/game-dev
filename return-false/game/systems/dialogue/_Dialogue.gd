@@ -121,6 +121,9 @@ func responses(arr):
 	return _Responses.add_responses(arr)
 
 
+func show_branch(branch, npc):
+	return _Responses.add_branch_option(branch, npc)
+
 # Subclass: Dialogue
 # Holds all the methods for dealing with the text area that holds NPC text
 # Note: these should not generally be accessed directly;
@@ -225,6 +228,15 @@ class ResponseList:
 			fn = "collect",
 			target = item_node,
 			args = []
+		}]
+		add_response(_text, _actions)
+
+	func add_branch_option(branch, npc):
+		var _text = branch.dialog_label
+		var _actions = [{
+			fn = "enter_branch",
+			target = npc,
+			args = [branch]
 		}]
 		add_response(_text, _actions)
 
