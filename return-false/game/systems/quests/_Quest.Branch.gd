@@ -52,7 +52,7 @@ func build_response(data):
 	var arg = null
 	var target = self
 	var A = {}
-	var all_actions = [A]
+	var all_actions = []
 
 	if data.has('new_state'):
 		A["args"] = [data.new_state]
@@ -68,6 +68,7 @@ func build_response(data):
 	A["fn"] = fn
 	A["target"] = target
 
+	all_actions.append(A)
 	if data.has('actions'):
 		for action in data.actions:
 			all_actions.append(action)

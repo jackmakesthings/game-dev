@@ -74,6 +74,7 @@ func _unhandled_input(ev):
 
 		# See what kind of tile we're trying to walk to
 		# If it's unwalkable, the actor will go to the next closest point on the way.
+		# TODO: Looks like godot may support this check natively now, neeed to investigate
 		var tile_at = tiles.get_cell(tilepos.x, tilepos.y)
 		if tile_at == -1:
 			adjust_path = true
@@ -81,7 +82,8 @@ func _unhandled_input(ev):
 			adjust_path = false
 
 		emit_signal("walk_to", nav, end, adjust_path, tiles)
-		
+
+
 
 ##
 # on_path_updated(path)

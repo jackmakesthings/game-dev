@@ -13,6 +13,8 @@ var popups
 var dialog_label
 var init_at
 
+var flags
+
 var previous_state
 var current_state = "0" setget set_current_state,get_current_state
 var Branch = preload('res://systems/quests/_Quest.Branch.gd')
@@ -57,7 +59,14 @@ func set_current_state(value):
 
 func get_current_state():
 	return current_state	
-													
+
+func set_flag(flag, value):
+	print("setting ", flag, " to ", value)
+	self.flags[flag] = value													
+
+func get_flag(flag):
+	return self.flags[flag]
+																																																																													
 func _ready():
 	if is_inside_tree():
 		_find_actors()

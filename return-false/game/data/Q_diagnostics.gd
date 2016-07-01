@@ -2,7 +2,10 @@
   "key": "diagnostics",
   "dialog_label": "Diagnostics",
   "init_at": "0",
-   "logs": {
+  "flags": {
+    "got_task": 0
+  },
+  "logs": {
      "20": {
        "title": "Diagnostics",
        "body": "Today the diagnostics quest was at 20.",
@@ -121,6 +124,11 @@
                   "target": "/root/Upgrades",
                   "fn": "set_free_chips",
                   "args": [2000]
+                },
+                {
+                  "target": "/root/game/QuestManager/diagnostics",
+                  "fn": "set_flag",
+                  "args": ["got_task", 1]
                 }
               ]
             },

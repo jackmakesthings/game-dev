@@ -182,8 +182,8 @@ class ResponseList:
 		self.owner = owner
 		owner.add_child(self)
 		
-	func _enter_tree():
-		self.owner = get_tree().get_current_scene().find_node("MessageUI")
+	#func _enter_tree():
+		#self.owner = get_tree().get_current_scene().find_node("MessageUI")
 
 	func add_response(text, actions):
 		var response = Button.new()

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/temp/trace.png" type="Texture" id=1]
 
-[sub_resource type="ConvexPolygonShape2D" id=3]
+[sub_resource type="ConvexPolygonShape2D" id=1]
 
 custom_solver_bias = 0.0
 points = Vector2Array( -1.33946, 22.8806, 20.1323, 16.6407, 37.7845, 12.2678, 62.9944, 56.0535, 28.4966, 74.6293, 3.28662, 58.0438, -20.871, 40.8776 )
@@ -15,8 +15,8 @@ script/source = "extends \"res://systems/npc/_NPC.gd\""
 
 transform/pos = Vector2( 156.443, 118.353 )
 input/pickable = true
-shapes/0/shape = SubResource( 3 )
-shapes/0/transform = Matrix32( 1, -0, 0, 1, 0, 0 )
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -44,6 +44,8 @@ margin/top = -47.0
 margin/right = 91.0
 margin/bottom = 71.0
 toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
 textures/normal = ExtResource( 1 )
 
 [node name="trigger" type="CollisionPolygon2D" parent="."]

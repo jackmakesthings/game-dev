@@ -30,7 +30,6 @@ var player_nearby = false
 var dialog_branches = []
 
 
-
 # Methods
 
 ##
@@ -43,6 +42,13 @@ func _get_orientation(to):
 	var pos1 = collider.get_global_pos()
 	var pos2 = to.get_global_pos()
 	return pos1 - pos2
+
+
+func get_pos():
+	if collider:
+		return collider.get_pos()
+	else:
+		return get_pos()
 
 
 ##
@@ -147,7 +153,7 @@ func check_branches():
 # @dialog_branches: Array; open conversations
 ##
 func present_conversations(dialog_branches):
-
+	
 	MessageUI = get_tree().get_current_scene().MessageUI
 	
 	# Covering for lack of MessageUI in subscenes, test scenes, etc.
