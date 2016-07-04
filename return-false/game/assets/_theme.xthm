@@ -180,6 +180,7 @@
 		<resource name="Panel/styles/panel" resource_type="StyleBox" path="local://20">  </resource>
 		<resource name="Panel/styles/panelf" resource_type="StyleBox" path="local://20">  </resource>
 		<resource name="Panel/styles/panelnc" resource_type="StyleBox" path="local://20">  </resource>
+		<resource name="PanelContainer/styles/panel" resource_type="StyleBox" path="local://20">  </resource>
 		<color name="TabContainer/colors/font_color_bg"> 0.690196, 0.690196, 0.690196, 1 </color>
 		<color name="TabContainer/colors/font_color_fg"> 0.941176, 0.941176, 0.941176, 1 </color>
 		<int name="TabContainer/constants/hseparation"> 0 </int>
