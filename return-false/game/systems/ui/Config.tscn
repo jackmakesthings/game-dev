@@ -1,10 +1,7 @@
 [gd_scene load_steps=3 format=1]
 
 [ext_resource path="res://assets/_theme.xthm" type="Theme" id=1]
-
-[sub_resource type="GDScript" id=1]
-
-script/source = "# Sample config (settings) UI that reads/writes to a file\n# (defined in Utils, where the config file methods live.)\n\n# Note - if new field types get added, make sure their setters\n# are included in both the save and load functions.\nextends Control\n\n# These keys map to both the form data keys\n# and the nodes where they\'re input, for convenience.\nvar settings = [\"custom_string\", \n\t\t\t\t\t\t\t\t\"custom_number\", \n\t\t\t\t\t\t\t\t\"custom_bool\", \n\t\t\t\t\t\t\t\t\"custom_options\", \n\t\t\t\t\t\t\t\t\"custom_color\"] \n\n# Start by populating the fields from the existing config file\nfunc _ready():\n\tload_config()\n\nfunc save_config():\n\t\n\tvar config_data = []\n\n\tfor setting in settings:\n\t\tvar _node = find_node(setting)\n\t\tvar _val \n\t\tif _node.has_method(\'get_value\'):\n\t\t\t_val = _node.get_value()\n\t\telif _node extends ColorPickerButton:\n\t\t\t_val = _node.get_color()\n\t\telif _node.has_method(\'get_text\'):\n\t\t\t_val = _node.get_text()\n\t\telse:\n\t\t\t_val = \"nope\"\n\t\n\t\tvar _obj = { \"section\": \"global\", \"key\": setting, \"val\": _val }\n\t\tconfig_data.append(_obj)\n\t\t\n\tUtils.save_cfg(config_data)\n\tfind_node(\"save\").set_text(\"saved!\")\n\t\n\t\nfunc load_config():\n\tvar cfg = Utils.load_cfg()\n\tvar keys = cfg.get_section_keys(\"global\")\n\t\n\tfor key in keys:\n\t\tif cfg.has_section_key(\'global\', key):\n\t\t\tvar _key = key \n\t\t\tvar _val = cfg.get_value(\"global\", _key)\n\t\t\tvar _node = find_node(_key)\n\t\t\t\n\t\t\tif _node.has_method(\'set_value\'):\n\t\t\t\t_node.set_value(_val)\n\t\t\telif _node extends ColorPickerButton:\n\t\t\t\t_node.set_color(_val)\n\t\t\telif _node.has_method(\'set_text\'):\n\t\t\t\t_node.set_text(str(_val))\n\t\t\telse:\n\t\t\t\tprint(\"not sure what to do with \", str(_val))\n\nfunc revert_changes():\n\tload_config()\t\t"
+[ext_resource path="res://systems/ui/Config.gd" type="Script" id=2]
 
 [node name="Control" type="Control"]
 
@@ -19,7 +16,7 @@ margin/left = 0.0
 margin/top = 0.0
 margin/right = -2.0
 margin/bottom = 1.0
-script/script = SubResource( 1 )
+script/script = ExtResource( 2 )
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 
@@ -34,19 +31,34 @@ margin/top = 0.0
 margin/right = 0.0
 margin/bottom = 0.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
 
 focus/ignore_mouse = false
-focus/stop_mouse = false
+focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
 margin/right = 1002.0
 margin/bottom = 599.0
+custom_constants/margin_right = 30
+custom_constants/margin_top = 30
+custom_constants/margin_left = 30
+custom_constants/margin_bottom = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 30.0
+margin/top = 30.0
+margin/right = 972.0
+margin/bottom = 569.0
 alignment = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = false
@@ -54,11 +66,12 @@ size_flags/horizontal = 3
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 499.0
-margin/bottom = 599.0
+margin/right = 469.0
+margin/bottom = 539.0
+custom_constants/separation = 6
 alignment = 0
 
-[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -66,37 +79,52 @@ size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 499.0
+margin/right = 469.0
 margin/bottom = 16.0
 text = "config"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 20.0
-margin/right = 499.0
-margin/bottom = 23.0
+margin/top = 22.0
+margin/right = 469.0
+margin/bottom = 25.0
+custom_constants/separation = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="fields" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 27.0
-margin/right = 499.0
-margin/bottom = 53.0
+margin/top = 31.0
+margin/right = 469.0
+margin/bottom = 229.0
+custom_constants/separation = 15
 alignment = 0
 
-[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/fields"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 469.0
+margin/bottom = 26.0
+custom_constants/separation = 20
+alignment = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/fields/HBoxContainer"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -104,23 +132,22 @@ size_flags/horizontal = 3
 size_flags/vertical = 0
 margin/left = 0.0
 margin/top = 5.0
-margin/right = 165.0
+margin/right = 224.0
 margin/bottom = 21.0
 text = "Custom String"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="custom_string" type="LineEdit" parent="PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="custom_string" type="LineEdit" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/fields/HBoxContainer" groups=[ "fields" ]]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 3
 size_flags/vertical = 2
-size_flags/stretch_ratio = 2.0
-margin/left = 169.0
+margin/left = 244.0
 margin/top = 0.0
-margin/right = 499.0
+margin/right = 469.0
 margin/bottom = 26.0
 placeholder/text = "Lorem Ipsum"
 placeholder/alpha = 0.6
@@ -128,19 +155,20 @@ focus_mode = 2
 caret/caret_blink = false
 caret/caret_blink_speed = 0.65
 
-[node name="HBoxContainer-1" type="HBoxContainer" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer-1" type="HBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/fields"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 57.0
-margin/right = 499.0
-margin/bottom = 83.0
+margin/top = 41.0
+margin/right = 469.0
+margin/bottom = 67.0
+custom_constants/separation = 20
 alignment = 0
 
-[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer-1"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/fields/HBoxContainer-1"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -148,25 +176,25 @@ size_flags/horizontal = 3
 size_flags/vertical = 0
 margin/left = 0.0
 margin/top = 5.0
-margin/right = 247.0
+margin/right = 224.0
 margin/bottom = 21.0
 text = "Numeric value"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="custom_number" type="SpinBox" parent="PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer-1"]
+[node name="custom_number" type="SpinBox" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/fields/HBoxContainer-1" groups=[ "fields" ]]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 3
 size_flags/vertical = 2
-margin/left = 251.0
+margin/left = 244.0
 margin/top = 0.0
-margin/right = 499.0
+margin/right = 469.0
 margin/bottom = 26.0
 range/min = 0.0
-range/max = 100.0
+range/max = 1000.0
 range/step = 1.0
 range/page = 0.0
 range/value = 1.0
@@ -176,19 +204,20 @@ editable = true
 prefix = ""
 suffix = ""
 
-[node name="HBoxContainer-2" type="HBoxContainer" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer-2" type="HBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/fields"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 87.0
-margin/right = 499.0
-margin/bottom = 111.0
+margin/top = 82.0
+margin/right = 469.0
+margin/bottom = 106.0
+custom_constants/separation = 20
 alignment = 0
 
-[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer-2"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/fields/HBoxContainer-2"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -196,22 +225,22 @@ size_flags/horizontal = 3
 size_flags/vertical = 0
 margin/left = 0.0
 margin/top = 4.0
-margin/right = 247.0
+margin/right = 224.0
 margin/bottom = 20.0
 text = "Boolean value"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="custom_bool" type="CheckButton" parent="PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer-2"]
+[node name="custom_bool" type="CheckButton" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/fields/HBoxContainer-2" groups=[ "fields" ]]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 3
 size_flags/vertical = 2
-margin/left = 251.0
+margin/left = 244.0
 margin/top = 0.0
-margin/right = 499.0
+margin/right = 469.0
 margin/bottom = 24.0
 toggle_mode = true
 enabled_focus_mode = 2
@@ -219,19 +248,20 @@ shortcut = null
 flat = false
 align = 0
 
-[node name="HBoxContainer-3" type="HBoxContainer" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer-3" type="HBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/fields"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 115.0
-margin/right = 499.0
-margin/bottom = 137.0
+margin/top = 121.0
+margin/right = 469.0
+margin/bottom = 143.0
+custom_constants/separation = 20
 alignment = 0
 
-[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer-3"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/fields/HBoxContainer-3"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -239,22 +269,22 @@ size_flags/horizontal = 3
 size_flags/vertical = 0
 margin/left = 0.0
 margin/top = 3.0
-margin/right = 247.0
+margin/right = 224.0
 margin/bottom = 19.0
 text = "Selection from menu"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="custom_options" type="OptionButton" parent="PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer-3"]
+[node name="custom_options" type="OptionButton" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/fields/HBoxContainer-3" groups=[ "fields" ]]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 3
 size_flags/vertical = 2
-margin/left = 251.0
+margin/left = 244.0
 margin/top = 0.0
-margin/right = 499.0
+margin/right = 469.0
 margin/bottom = 22.0
 toggle_mode = false
 enabled_focus_mode = 2
@@ -265,19 +295,20 @@ align = 0
 selected = 0
 items = [ "Robots", null, false, 0, null, "Humans", null, false, 1, null, "Other", null, false, 2, null ]
 
-[node name="HBoxContainer-4" type="HBoxContainer" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer-4" type="HBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/fields"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 141.0
-margin/right = 499.0
-margin/bottom = 163.0
+margin/top = 158.0
+margin/right = 469.0
+margin/bottom = 180.0
+custom_constants/separation = 20
 alignment = 0
 
-[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer-4"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/fields/HBoxContainer-4"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -285,22 +316,22 @@ size_flags/horizontal = 3
 size_flags/vertical = 0
 margin/left = 0.0
 margin/top = 3.0
-margin/right = 247.0
+margin/right = 224.0
 margin/bottom = 19.0
 text = "Color value"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="custom_color" type="ColorPickerButton" parent="PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer-4"]
+[node name="custom_color" type="ColorPickerButton" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/fields/HBoxContainer-4" groups=[ "fields" ]]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 3
 size_flags/vertical = 2
-margin/left = 251.0
+margin/left = 244.0
 margin/top = 0.0
-margin/right = 499.0
+margin/right = 469.0
 margin/bottom = 22.0
 toggle_mode = false
 enabled_focus_mode = 2
@@ -310,75 +341,158 @@ flat = false
 color = Color( 1, 1, 1, 1 )
 edit_alpha = false
 
-[node name="HSeparator-1" type="HSeparator" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="HSeparator-1" type="HSeparator" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/fields"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 167.0
-margin/right = 499.0
-margin/bottom = 170.0
+margin/top = 195.0
+margin/right = 469.0
+margin/bottom = 198.0
+custom_constants/separation = 20
 
-[node name="HBoxContainer-5" type="HBoxContainer" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="use_default" type="HBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 174.0
-margin/right = 499.0
-margin/bottom = 210.0
+margin/top = 235.0
+margin/right = 469.0
+margin/bottom = 271.0
+alignment = 2
+
+[node name="reset" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/use_default"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 249.0
+margin/top = 0.0
+margin/right = 469.0
+margin/bottom = 36.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "use default settings"
+flat = false
+align = 2
+
+[node name="HSeparator-2" type="HSeparator" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 277.0
+margin/right = 469.0
+margin/bottom = 280.0
+custom_constants/separation = 20
+
+[node name="save_cancel" type="HBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+
+editor/display_folded = true
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 286.0
+margin/right = 469.0
+margin/bottom = 322.0
 alignment = 0
 
-[node name="save" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer-5"]
+[node name="back" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/save_cancel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 160.0
+margin/bottom = 36.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "< back to menu"
+flat = false
+align = 0
+
+[node name="save" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/save_cancel"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 3
 size_flags/vertical = 2
-margin/left = 0.0
+margin/left = 164.0
 margin/top = 0.0
-margin/right = 247.0
+margin/right = 314.0
 margin/bottom = 36.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 text = "save"
 flat = false
+align = 2
 
-[node name="cancel" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer-5"]
+[node name="cancel" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/save_cancel"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 3
 size_flags/vertical = 2
-margin/left = 251.0
+margin/left = 318.0
 margin/top = 0.0
-margin/right = 499.0
+margin/right = 469.0
 margin/bottom = 36.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 text = "cancel"
 flat = false
+align = 2
 
-[node name="VBoxContainer-1" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
+[node name="HSeparator-3" type="HSeparator" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 328.0
+margin/right = 469.0
+margin/bottom = 331.0
+custom_constants/separation = 20
+
+[node name="VBoxContainer-1" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 3
 size_flags/vertical = 2
-margin/left = 503.0
+margin/left = 473.0
 margin/top = 0.0
-margin/right = 1002.0
-margin/bottom = 599.0
+margin/right = 942.0
+margin/bottom = 539.0
 alignment = 0
 
-[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer-5/save" to="." method="save_config"]
+[connection signal="input_event" from="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/fields" to="." method="_on_fields_input_event"]
 
-[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer-5/cancel" to="." method="revert_changes"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/use_default/reset" to="." method="revert_to_defaults"]
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/save_cancel/back" to="." method="back_to_menu"]
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/save_cancel/save" to="." method="save_config"]
+
+[connection signal="focus_exit" from="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/save_cancel/save" to="." method="_on_save_focus_exit"]
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/save_cancel/cancel" to="." method="revert_changes"]
 
 

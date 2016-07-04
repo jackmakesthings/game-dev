@@ -76,13 +76,13 @@ size_flags/horizontal = 3
 size_flags/vertical = 3
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 800.0
+margin/right = 1000.0
 margin/bottom = 180.0
 bbcode/enabled = true
 bbcode/bbcode = "[center][color=lime]return[/color] [color=red]False;[/color][/center]"
 visible_characters = -1
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="new" type="Button" parent="VBoxContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -90,7 +90,7 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 184.0
-margin/right = 800.0
+margin/right = 1000.0
 margin/bottom = 200.0
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
@@ -103,6 +103,29 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 text = "NEW_GAME"
+flat = false
+
+[node name="config" type="Button" parent="VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 204.0
+margin/right = 1000.0
+margin/bottom = 220.0
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0, 0.898039, 0.184314, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "config"
 flat = false
 
 
