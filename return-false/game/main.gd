@@ -19,9 +19,23 @@ var NPCManager = null
 var QuestManager = null
 var HUD = null
 
+var last_player_pos = Vector2(340,200)
+
+onready var anim = find_node('fader')
+
+signal player_ready(Player)
 
 # Methods
 
+
+func fade_out():
+	anim.get_parent().get_parent().set_layer(5)
+	anim.play('fade_out')
+
+func fade_in():
+	anim.play('fade_in')
+	yield(anim, 'finished')
+	anim.get_parent().get_parent().set_layer(-1)
 
 ##
 # setup(name, path, raise)
@@ -64,10 +78,21 @@ func set_scene(scene_path):
 #
 # @scene_path : String; path to the new environment scene file
 ##
-func change_scene(scene_path):
+func change_scene(scene_path, animate=true):
+	
+	if Player:
+		last_player_pos = Player.get_pos()
+	
+	if animate:
+		fade_out()
+		yield(anim, 'finished')
+		
 	Player = null
 	set_scene(scene_path)
 	set_player()
+	
+	if animate:
+		fade_in()
 
 
 ##
@@ -78,9 +103,11 @@ func set_player():
 	var _player = load("res://systems/character/Player.tscn").instance()
 	var _destination = Scene.object_layer
 	_destination.add_child(_player)
-	_player.set_pos(Vector2(340,200))
+	_player.set_pos(last_player_pos)
 	Player = _player
 	Scene.connect('walk_to', Player, 'update_path')
+	Player.connect('path_updated', Scene, 'on_path_updated')
+	Player.connect('done_moving', Scene, 'on_motion_end')
 	return Player
 
 
@@ -91,7 +118,7 @@ func set_player():
 ##	
 func _enter_game():	
 	setup('MessageUI', "res://systems/dialogue/Dialogue.Example.tscn")
-	change_scene("res://systems/environment/_Environment.tscn")
+	change_scene("res://systems/environment/_Environment.tscn", false)
 	setup('NPCManager', "res://systems/npc/NPC.Manager.tscn")
 	setup('QuestManager', "res://systems/quests/Quest.Manager.tscn", true)
 	setup('HUD', "res://systems/ui/HUD.tscn")

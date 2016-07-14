@@ -17,6 +17,7 @@ onready var tiles = find_node("ground")
 onready var marker = find_node("marker")
 onready var object_layer = find_node("objects")
 
+var marker_locked = false
 
 # Signals
 
@@ -61,7 +62,7 @@ func _unhandled_input(ev):
 
 		# This chunk of code cancels out the effects of the camera
 		# on our positioning calculations
-		var end = get_viewport_transform().affine_inverse().xform(ev.global_pos)
+		var end = make_input_local(ev).pos
 		
 		# Flag used mostly for placement of the outline
 		var adjust_path = true
@@ -82,6 +83,17 @@ func _unhandled_input(ev):
 			adjust_path = false
 
 		emit_signal("walk_to", nav, end, adjust_path, tiles)
+	
+	elif ev.type == InputEvent.MOUSE_MOTION:
+		if marker_locked:
+			return
+		else:
+			ev = make_input_local(ev)
+			var rounded_pos = Vector2(stepify(ev.x, 36), stepify(ev.y, 18))
+
+			marker.set('visibility/visible', true)
+			marker.set_pos(rounded_pos)
+		
 
 
 
@@ -96,8 +108,8 @@ func on_path_updated(path):
 	var endpoint = path[0]
 	marker.set_pos(endpoint)
 	marker.set('visibility/visible', true)
-
-
+	marker_locked = true
+	
 ##
 # on_motion_end(from, to)
 # The counterpart to on_path_updated, this can be triggered
@@ -108,4 +120,5 @@ func on_path_updated(path):
 # @to   : Vector2; Player's ending point
 ##
 func on_motion_end(from, to):
-	marker.set('visibility/visible', false)	
+	marker.set('visibility/visible', false)
+	marker_locked = false

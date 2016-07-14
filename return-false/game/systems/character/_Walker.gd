@@ -85,12 +85,16 @@ func update_path(nav, end, adjust_path, tiles):
 	# if the tile clicked is not actually walkable,
 	# we need to do some math to direct the actor to a nearby point that is
 	if adjust_path:
-		path[0] = path[1]
-		var tilesize = tiles.get_cell_size()
-		var endpos_map = tiles.world_to_map(path[0])
-		var endpos_world = tiles.map_to_world(endpos_map)
-		var adjusted = endpos_world + Vector2(0, tilesize.y/2)
-		path[0] = adjusted
+		var _end = nav.get_closest_point(end)
+		p = nav.get_simple_path(last_pos, _end, false)
+		path = Array(p)
+		path.invert()
+		
+#	var tilesize = tiles.get_cell_size()
+#	var endpos_map = tiles.world_to_map(path[0])
+#	var endpos_world = tiles.map_to_world(endpos_map)
+#	var adjusted = endpos_world + Vector2(0, tilesize.y/2)
+#	path[0] = adjusted
 
 	# Start moving
 	set_fixed_process(true)
