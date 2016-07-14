@@ -47,7 +47,7 @@ signal dialog_cleared
 ##
 func open():
 	if !is_active:
-		_Root.popup()
+		_Root.popup_centered()
 		is_active = true
 		emit_signal("dialog_opened")
 

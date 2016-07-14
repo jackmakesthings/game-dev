@@ -7,8 +7,12 @@
 
 script/source = "extends \"res://systems/dialogue/_Dialogue.gd\"\n\nfunc _ready():\n\tsetup()\n\tclose()\n#\t_Dialogue.make(\"So, you\'re the new IT bot\?\")\n#\t_Responses.add_close(\"Yes.\")\n#\t_Responses.add_close(\"<Lie> No, this is just my robot costume.\")"
 
-[node name="Node" type="Node"]
+[node name="Node" type="CanvasLayer"]
 
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
 script/script = SubResource( 1 )
 text_path = NodePath("dialog/VBoxContainer/textbox")
 response_path = NodePath("dialog/VBoxContainer/responsebox")
@@ -53,7 +57,7 @@ size_flags/vertical = 3
 size_flags/stretch_ratio = 3.0
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 544.0
+margin/right = 520.0
 margin/bottom = 392.0
 texture = ExtResource( 2 )
 modulate = Color( 0.508408, 0.544479, 0.558594, 1 )
@@ -69,7 +73,7 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 396.0
-margin/right = 544.0
+margin/right = 520.0
 margin/bottom = 476.0
 bbcode/enabled = true
 bbcode/bbcode = ""
@@ -83,7 +87,7 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 480.0
-margin/right = 544.0
+margin/right = 520.0
 margin/bottom = 480.0
 alignment = 2
 
