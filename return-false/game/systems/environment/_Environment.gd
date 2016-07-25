@@ -62,7 +62,7 @@ func _unhandled_input(ev):
 
 		# This chunk of code cancels out the effects of the camera
 		# on our positioning calculations
-		var end = make_input_local(ev).pos
+		var end = get_viewport_transform().affine_inverse().xform(ev.global_pos)
 		
 		# Flag used mostly for placement of the outline
 		var adjust_path = true
@@ -91,8 +91,9 @@ func _unhandled_input(ev):
 			ev = make_input_local(ev)
 			var rounded_pos = Vector2(stepify(ev.x, 36), stepify(ev.y, 18))
 
-			marker.set('visibility/visible', true)
-			marker.set_pos(rounded_pos)
+			if marker:
+				marker.set('visibility/visible', true)
+				marker.set_pos(rounded_pos)
 		
 
 
