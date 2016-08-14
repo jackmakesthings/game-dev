@@ -32,23 +32,46 @@ func set_bit(index, group = current_bits, value=0):
 
 func flip_bit(index, group):
 	assert(group[index] != null)
-	if group[index] == 1:
+#	print('bit at index ', index, ' in group ', group, ' is ', group[index])
+	if int(group[index]) == 1:
 		set_bit(index, group, 0)
+		# group[index] = 0
 	else:
+		# group[index] = 1
 		set_bit(index, group, 1)
+	
+	update_ui(group, true)
 
 func get_bit(index, group = current_bits):
 	assert(group != null and group.size() >= index)
 	return group[index]
 
 
+# This gets overridden to create different game modes
+func _selection_from(index):
+	return [index]
+
 func make_selection(index):
-	var _selection = [index, index+1, index+2] #temporary for testing
 	# do some magic to populate an array of points on our grid, make them active
-	active_bits = _selection
-	update_ui(current_bits, false)
+	active_bits = _selection_from(index)
+	update_ui(current_bits, true)
 
 
+func make_move(index):
+	make_selection(index)
+	for i in range(active_bits.size()):
+		print(current_bits[i], " | ", current_bits[active_bits[i]])
+		if current_bits[active_bits[i]] == 1:
+			current_bits[active_bits[i]] = 0
+			return
+		current_bits[active_bits[i]] = 1
+		
+#	for i in range(active_bits.size()):
+#		flip_bit(active_bits[i], current_bits)
+	update_ui(current_bits, true)
+
+# Note: this builds a half-0, half-1 array every time.
+# This can be changed by randomizing the target_bits assignments.
 func build_data():
 	target_bits = Array()
 	target_bits.resize(total)
@@ -75,7 +98,8 @@ func build_ui():
 		puzzle_btn.set_v_size_flags(3)
 		puzzle_btn.set_h_size_flags(3)
 		puzzle_btn.connect('mouse_enter', self, 'make_selection', [i])
-		
+		puzzle_btn.connect('pressed', self, 'make_move', [i])
+
 	update_ui(target_bits, true)
 	update_ui(current_bits, true)
 		
@@ -92,26 +116,34 @@ func update_ui(group=current_bits, values_changed=false):
 		var block = blocks[j]
 		
 		if values_changed:
-				block.set_text(str(get_bit(j, group)))
-		else:
-			var block_val = get_bit(j, group)
-			if j in active_bits:
+			block.set_text(str(group[j]))
+				#block.set_text(str(get_bit(j, group)))
+		
+		block.add_style_override('normal', StyleBoxEmpty.new())
+
+		if j in active_bits:
+
+			block.add_style_override('normal', styled)
+			block.add_style_override('hover', styled)
+
+		# var block_val = get_bit(j, group)
+		# if j in active_bits:
+			
+		# 	if block_val == 1:
+		# 		block.add_style_override('normal', styled)
+		# 		block.add_style_override('hover', styled)
+		# 	else:
+		# 		block.add_style_override('normal', styled2)
+		# 		block.add_style_override('hover', styled2)
 				
-				if block_val == 1:
-					block.add_style_override('normal', styled)
-					block.add_style_override('hover', styled)
-				else:
-					block.add_style_override('normal', styled2)
-					block.add_style_override('hover', styled2)
-					
-			else:
-				if block_val == 1:
-					block.add_style_override('normal', unstyled)
-					block.add_style_override('hover', unstyled)
-				else:
-					block.add_style_override('normal', unstyled2)
-					block.add_style_override('hover', unstyled2)
-					
+		# else:
+		# 	if block_val == 1:
+		# 		block.add_style_override('normal', unstyled)
+		# 		block.add_style_override('hover', unstyled)
+		# 	else:
+		# 		block.add_style_override('normal', unstyled2)
+		# 		block.add_style_override('hover', unstyled2)
+				
 
 
 func _ready():
