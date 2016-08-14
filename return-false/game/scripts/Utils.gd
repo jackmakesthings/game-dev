@@ -129,3 +129,20 @@ func get_orient_between_nodes(from, to):
 func debug(text):
 	if debug:
 		print(text)
+		
+		
+# Array manipulation!
+# Take an array, make a copy, shuffle the copy and return it
+# (Leaves the original intact.)
+
+func shuffle(array):
+	var new_array = Array()
+	new_array.resize(array.size())
+	for i in range(1, new_array.size()):
+		randomize()
+		var j = floor(randf() * (i + 1))
+		var temp = array[i]
+		new_array[i] = array[j]
+		new_array[j] = temp
+	return new_array	
+		
