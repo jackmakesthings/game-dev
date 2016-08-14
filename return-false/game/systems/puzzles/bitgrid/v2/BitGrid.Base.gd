@@ -9,8 +9,11 @@ var current_bits = []
 var target_bits = []
 var active_bits = [] setget make_selection
 
-var unstyled = StyleBoxEmpty.new()
-var styled = StyleBoxEmpty.new()
+
+var styled = load("res://systems/puzzles/bitgrid/v2/stylebox_teal.tres")
+var styled2 = load("res://systems/puzzles/bitgrid/v2/stylebox_orange.tres")
+var unstyled = load("res://systems/puzzles/bitgrid/v2/stylebox_dark_teal.tres")
+var unstyled2 = load("res://systems/puzzles/bitgrid/v2/stylebox_dark_orange.tres")
 
 onready var current_grid = find_node('current')
 onready var target_grid = find_node('target')
@@ -40,7 +43,7 @@ func get_bit(index, group = current_bits):
 
 
 func make_selection(index):
-	var _selection = [(index - 1),index,(index+1)]
+	var _selection = [index, index+1, index+2] #temporary for testing
 	# do some magic to populate an array of points on our grid, make them active
 	active_bits = _selection
 	update_ui(current_bits, false)
@@ -86,19 +89,31 @@ func update_ui(group=current_bits, values_changed=false):
 	var blocks = grid_node.get_children()
 
 	for j in range(blocks.size()):
+		var block = blocks[j]
+		
 		if values_changed:
-				blocks[j].set_text(str(get_bit(j, group)))
+				block.set_text(str(get_bit(j, group)))
 		else:
+			var block_val = get_bit(j, group)
 			if j in active_bits:
-				blocks[j].add_style_override('normal', styled)
+				
+				if block_val == 1:
+					block.add_style_override('normal', styled)
+					block.add_style_override('hover', styled)
+				else:
+					block.add_style_override('normal', styled2)
+					block.add_style_override('hover', styled2)
+					
 			else:
-				blocks[j].add_style_override('normal', unstyled)
+				if block_val == 1:
+					block.add_style_override('normal', unstyled)
+					block.add_style_override('hover', unstyled)
+				else:
+					block.add_style_override('normal', unstyled2)
+					block.add_style_override('hover', unstyled2)
+					
 
 
 func _ready():
 	build_data()
 	build_ui()
-	
-	var theme = get_node('Panel').get_theme()
-	styled = theme.get_stylebox('focus','Button')
-	#styled = theme.get_stylebox('hover', 'Button')
