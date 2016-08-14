@@ -50,8 +50,8 @@ onready var total = cols * rows
 # whether we pass in "1" (a string) or 1 (an integer).
 func get_opposite(bit):
 	if str(bit) == "0":
-		return 1
-	return 0
+		return '1'
+	return '0'
 
 # This returns a new copy of an array with the contents randomly reordered.
 func shuffle(array):
@@ -71,7 +71,7 @@ func make_btn(text):
 	var _btn = Button.new()
 	_btn.set_h_size_flags(3)
 	_btn.set_v_size_flags(3)
-	_btn.set_text(str(text))
+	_btn.set_text(text)
 	return _btn
 
 # Simple check for 'do the grids match', called after every move
@@ -84,7 +84,7 @@ func flip(bit):
 	var _new = get_opposite(_old)
 	var _index = bit.get_index()
 	current_bits[_index] = _new
-	bit.set_text(str(_new))
+	bit.set_text(_new)
 
 # A wrapper around flip() that calls it on all the actively highlighted bits
 func flip_group():
