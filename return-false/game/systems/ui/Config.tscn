@@ -489,9 +489,9 @@ alignment = 0
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/save_cancel/back" to="." method="back_to_menu"]
 
-[connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/save_cancel/save" to="." method="save_config"]
-
 [connection signal="focus_exit" from="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/save_cancel/save" to="." method="_on_save_focus_exit"]
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/save_cancel/save" to="." method="save_config"]
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/save_cancel/cancel" to="." method="revert_changes"]
 
