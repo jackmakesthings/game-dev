@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="Theme" subresource_count="18" version="2.1" version_name="Godot Engine v2.1.alpha.custom_build">
+<resource_file type="Theme" subresource_count="18" version="2.2" version_name="Godot Engine v2.2.alpha.custom_build">
 	<ext_resource path="res://assets/fonts/input-mono/InputMono.fnt" type="BitmapFont" index="0"></ext_resource>
 	<resource type="StyleBoxFlat" path="local://2">
 		<real name="content_margin/left"> 10 </real>
@@ -161,8 +161,7 @@
 		<color name="Button/colors/font_color_hover"> 0.941176, 0.941176, 0.941176, 1 </color>
 		<color name="Button/colors/font_color_pressed"> 1, 1, 1, 1 </color>
 		<int name="Button/constants/hseparation"> 2 </int>
-		<resource name="Button/fonts/font" external="0">  </resource>
-		<resource name="Button/styles/disabled" resource_type="StyleBox" path="local://2">  </resource>
+		<resource name="Button/fonts/font"></resource>		<resource name="Button/styles/disabled" resource_type="StyleBox" path="local://2">  </resource>
 		<resource name="Button/styles/focus" resource_type="StyleBox" path="local://3">  </resource>
 		<resource name="Button/styles/hover" resource_type="StyleBox" path="local://3">  </resource>
 		<resource name="Button/styles/normal" resource_type="StyleBox" path="local://2">  </resource>
@@ -171,9 +170,7 @@
 		<color name="HButtonArray/colors/font_color_selected"> 0.941176, 0.941176, 0.941176, 1 </color>
 		<int name="HButtonArray/constants/button_separator"> 0 </int>
 		<int name="HButtonArray/constants/icon_separator"> 4 </int>
-		<resource name="HButtonArray/fonts/font" external="0">  </resource>
-		<resource name="HButtonArray/fonts/font_selected" external="0">  </resource>
-		<resource name="HButtonArray/styles/focus" resource_type="StyleBox" path="local://18">  </resource>
+		<resource name="HButtonArray/fonts/font"></resource>		<resource name="HButtonArray/fonts/font_selected"></resource>		<resource name="HButtonArray/styles/focus" resource_type="StyleBox" path="local://18">  </resource>
 		<resource name="HButtonArray/styles/hover" resource_type="StyleBox" path="local://18">  </resource>
 		<resource name="HButtonArray/styles/normal" resource_type="StyleBox" path="local://19">  </resource>
 		<resource name="HButtonArray/styles/selected" resource_type="StyleBox" path="local://18">  </resource>
@@ -188,8 +185,7 @@
 		<int name="TabContainer/constants/label_valign_fg"> 0 </int>
 		<int name="TabContainer/constants/side_margin"> 10 </int>
 		<int name="TabContainer/constants/top_margin"> 24 </int>
-		<resource name="TabContainer/fonts/font" external="0">  </resource>
-		<resource name="TabContainer/icons/decrement" resource_type="Texture" path="local://12">  </resource>
+		<resource name="TabContainer/fonts/font"></resource>		<resource name="TabContainer/icons/decrement" resource_type="Texture" path="local://12">  </resource>
 		<resource name="TabContainer/icons/decrement_hilite" resource_type="Texture" path="local://13">  </resource>
 		<resource name="TabContainer/icons/increment" resource_type="Texture" path="local://14">  </resource>
 		<resource name="TabContainer/icons/increment_hilite" resource_type="Texture" path="local://15">  </resource>
@@ -204,8 +200,7 @@
 		<int name="Tabs/constants/label_valign_bg"> 2 </int>
 		<int name="Tabs/constants/label_valign_fg"> 0 </int>
 		<int name="Tabs/constants/top_margin"> 24 </int>
-		<resource name="Tabs/fonts/font" external="0">  </resource>
-		<resource name="Tabs/icons/close" resource_type="Texture" path="local://6">  </resource>
+		<resource name="Tabs/fonts/font"></resource>		<resource name="Tabs/icons/close" resource_type="Texture" path="local://6">  </resource>
 		<resource name="Tabs/icons/decrement" resource_type="Texture" path="local://7">  </resource>
 		<resource name="Tabs/icons/decrement_hilite" resource_type="Texture" path="local://8">  </resource>
 		<resource name="Tabs/icons/increment" resource_type="Texture" path="local://9">  </resource>
