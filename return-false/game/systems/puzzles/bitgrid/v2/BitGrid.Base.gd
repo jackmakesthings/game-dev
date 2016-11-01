@@ -9,11 +9,7 @@ var current_bits = []
 var target_bits = []
 var active_bits = [] setget make_selection
 
-
-var styled = preload("res://systems/puzzles/bitgrid/v2/stylebox_teal.tres")
-var styled2 = preload("res://systems/puzzles/bitgrid/v2/stylebox_orange.tres")
-var unstyled = preload("res://systems/puzzles/bitgrid/v2/stylebox_dark_teal.tres")
-var unstyled2 = preload("res://systems/puzzles/bitgrid/v2/stylebox_dark_orange.tres")
+var button_base = preload("res://systems/puzzles/bitgrid/v2/_BitButton.Base.tscn")
 
 onready var current_grid = find_node('current')
 onready var target_grid = find_node('target')
@@ -50,7 +46,7 @@ func make_move(index):
 			current_bits[bit] = 0
 		else:
 			current_bits[bit] = 1
-		update_ui(current_bits, true)
+	update_ui(current_bits, true)
 
 
 # Note: this builds a half-0, half-1 array every time.
@@ -67,19 +63,21 @@ func build_data():
 
 func build_ui():
 	for i in range(rows*cols):
-		var target_btn = Button.new()
-		var puzzle_btn = Button.new()
+		var target_btn = button_base.instance()
+		var puzzle_btn = button_base.instance()
 		
 		target_grid.add_child(target_btn)
-		target_btn.set_text(str(target_bits[i]))
-		target_btn.set_v_size_flags(3)
-		target_btn.set_h_size_flags(3)
-		target_btn.set_disabled(true)
-		
 		current_grid.add_child(puzzle_btn)
-		puzzle_btn.set_text(str(current_bits[i]))
-		puzzle_btn.set_v_size_flags(3)
-		puzzle_btn.set_h_size_flags(3)
+		
+		if target_bits[i] == 1:
+			target_btn.show_1(false)
+			puzzle_btn.show_1(false)
+		else:
+			target_btn.show_0(false)
+			puzzle_btn.show_0(false)
+			
+		target_btn.set_disabled(true)
+#		
 		puzzle_btn.connect('mouse_enter', self, 'make_selection', [i])
 		puzzle_btn.connect('pressed', self, 'make_move', [i])
 #		puzzle_btn.connect('released', self, 'update_ui', [current_bits, true])
@@ -90,64 +88,27 @@ func build_ui():
 
 
 func update_ui(group=current_bits, values_changed=false):
+		
 	var grid_node = current_grid
 	if group == target_bits:
 		grid_node = target_grid
 
 	var blocks = grid_node.get_children()
+	
+
+
+		
 
 	for j in range(blocks.size()):
+		var is_active = (active_bits.has(j))
 		var block = blocks[j]
-		
-		if values_changed:
-			block.set_text(str(group[j]))
-			block.update()
-		
-		if block.is_disabled():
-			if block.get_text() == '1':
-				block.add_style_override('disabled', unstyled)
-			else:
-				block.add_style_override('disabled', unstyled2)
-		
-		if block.get_text() == '1':
-			block.add_style_override('normal', unstyled)
-			block.add_style_override('hover', styled)
+			
+		if str(group[j]) == '1':
+			block.show_1(is_active)
 		else:
-			block.add_style_override('normal', unstyled2)
-			block.add_style_override('hover', styled2)
+			block.show_0(is_active)
 		
-
-		if j in active_bits:
-			
-			if block.get_text() == '1':
-				block.add_style_override('normal', styled)
-				block.add_style_override('hover', styled)
-			
-			else:
-				block.add_style_override('normal', styled2)
-				block.add_style_override('hover', styled2)
-				
-			block.update()
-
-		# var block_val = get_bit(j, group)
-		# if j in active_bits:
-			
-		# 	if block_val == 1:
-		# 		block.add_style_override('normal', styled)
-		# 		block.add_style_override('hover', styled)
-		# 	else:
-		# 		block.add_style_override('normal', styled2)
-		# 		block.add_style_override('hover', styled2)
-				
-		# else:
-		# 	if block_val == 1:
-		# 		block.add_style_override('normal', unstyled)
-		# 		block.add_style_override('hover', unstyled)
-		# 	else:
-		# 		block.add_style_override('normal', unstyled2)
-		# 		block.add_style_override('hover', unstyled2)
-				
-
+		block.update()
 
 func _ready():
 	build_data()

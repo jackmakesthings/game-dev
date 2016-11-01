@@ -107,9 +107,10 @@ func _unhandled_input(ev):
 ##
 func on_path_updated(path):
 	var endpoint = path[0]
-	marker.set_pos(endpoint)
-	marker.set('visibility/visible', true)
-	marker_locked = true
+	if marker:
+		marker.set_pos(endpoint)
+		marker.set('visibility/visible', true)
+		marker_locked = true
 	
 ##
 # on_motion_end(from, to)
@@ -121,5 +122,6 @@ func on_path_updated(path):
 # @to   : Vector2; Player's ending point
 ##
 func on_motion_end(from, to):
-	marker.set('visibility/visible', false)
+	if marker:
+		marker.set('visibility/visible', false)
 	marker_locked = false

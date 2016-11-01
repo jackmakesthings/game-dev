@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://assets/empty-squared-room.png" type="Texture" id=1]
+[ext_resource path="res://assets/blockybot.png" type="Texture" id=2]
+
+[sub_resource type="GDScript" id=4]
+
+script/source = "extends TextureFrame\n\nfunc _ready():\n\tset_process_unhandled_input(true)\n\t\n\t\nfunc _unhandled_input(ev):\n\tif Utils.is_click(ev):\n\t\tget_parent().find_node(\'player\').call(\'walk_to\', ev.pos)\n"
+
+[sub_resource type="NavigationPolygon" id=2]
+
+vertices = Vector2Array( 825.338, 348.6, 1003.97, 611.575, 1.58679, 602.531, 158.35, 347.79 )
+polygons = [ IntArray( 0, 1, 2, 3 ) ]
+outlines = [ Vector2Array( 825.338, 348.6, 1003.97, 611.575, 1.58679, 602.531, 158.35, 347.79 ) ]
+
+[sub_resource type="GDScript" id=3]
+
+script/source = "extends KinematicBody2D\n\nvar nav\nvar path\nvar speed = 200\nvar last_pos\nvar is_moving\n\nvar perspective_factor = .8\n\n\nfunc _ready():\n\tlast_pos = get_pos()\n\tnav = get_tree().get_current_scene().find_node(\'Navigation2D\')\n\tset_fixed_process(false)\n\tupdate_scale()\n\nfunc walk_to(where):\n\tlast_pos = get_pos()\n\tnav = get_tree().get_current_scene().find_node(\'Navigation2D\')\n\tvar p = nav.get_simple_path(last_pos, where, true)\n\tpath = Array(p)\n\tpath.invert()\n\tset_fixed_process(true)\n\nfunc _fixed_process(delta):\n\twalk(delta)\n\t\nfunc walk(delta):\n\n\t# If we\'re already there, forget it\n\tif path.size() <= 1:\n\t\thalt()\n\t\treturn\n\n\telse:\n\t\t# Calculate how far to move this time\n\t\tvar to_walk = delta * speed\n\n\t\twhile to_walk > 0 and path.size() >= 2:\n\t\t\tis_moving = true\n\n\t\t\t# Get the current path segment, and the direction of travel\n\t\t\tvar pfrom = path[path.size() - 1]\n\t\t\tvar pto = path[path.size() - 2]\n\t\t\tvar d = pfrom.distance_to(pto)\n\n\t\t\t# If it\'s a short trip, go all the way\n\t\t\tif d <= to_walk:\n\t\t\t\tpath.remove(path.size() - 1)\n\t\t\t\tto_walk = to_walk - d\n\n\t\t\t# If not, interpolate some steps to get there\n\t\t\telse:\n\t\t\t\tpath[path.size()-1] = pfrom.linear_interpolate(pto,to_walk/d)\n\t\t\t\tto_walk = 0\n\n\t\tvar next_pos = path[path.size() - 1]\n\t\tmove_to(next_pos)\n\t\tupdate_scale()\n\n\t\t# If we\'re reaching our destination:\n\t\tif path.size() < 2:\n\t\t\thalt()\n\n##\n# halt()\n# Stops the walk process and animation, and resets the path\n# Call this to bring the player to a \'complete stop\'.\n##\nfunc halt():\n\temit_signal(\"done_moving\", last_pos, get_pos())\n\tset_fixed_process(false)\n\tpath.clear()\n\n\n\n# EXPERIMENTAL\n# scaling functions\n\nfunc update_scale():\n\tvar ypos = get_pos().y\n\tvar vp = get_viewport_rect().size.y\n\tvar ratio = (ypos / vp) * perspective_factor\n\tset_scale(Vector2(ratio, ratio))"
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TextureFrame" type="TextureFrame" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = -148.0
+margin/right = 997.0
+margin/bottom = 600.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 5
+script/script = SubResource( 4 )
+
+[node name="Navigation2D" type="Navigation2D" parent="."]
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
+
+navpoly = SubResource( 2 )
+enabled = true
+
+[node name="player" type="KinematicBody2D" parent="Navigation2D/NavigationPolygonInstance"]
+
+transform/pos = Vector2( 303.051, 483.268 )
+input/pickable = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = SubResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="Navigation2D/NavigationPolygonInstance/player"]
+
+transform/pos = Vector2( 11.0703, 22.105 )
+texture = ExtResource( 2 )
+centered = false
+offset = Vector2( -54.2397, -258.401 )
+
+

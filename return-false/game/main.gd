@@ -10,7 +10,7 @@ extends Node
 # MessageUI    : Node; reference to the Dialgoue UI 
 # NPCManager   : Node; reference to the handler for all NPCs
 # QuestManager : Node; reference to the handler for quests
-# HUD					 : Node; reference to the persistent UI layer
+# HUD		   : Node; reference to the persistent UI layer
 
 var Scene = null
 var Player = null
