@@ -1,0 +1,778 @@
+[gd_scene load_steps=8 format=1]
+
+[ext_resource path="res://assets/_theme.xthm" type="Theme" id=1]
+[ext_resource path="res://assets/icon---grid.png" type="Texture" id=2]
+[ext_resource path="res://assets/icon---list.png" type="Texture" id=3]
+[ext_resource path="res://assets/tablet.png" type="Texture" id=4]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Panel\n\nvar use_thumbnails = false\n\nvar item_1 = { \'name\': \'weed\', \'img\': preload(\'res://assets/dank.png\') }\nvar item_2 = { \'name\': \'technology\', \'img\': preload(\'res://assets/tablet.png\') }\nvar items = [item_1, item_2, item_1, item_2]\n\nonready var list_node = find_node(\'ItemList\')\n\nonready var list_view = find_node(\'listview\')\nonready var grid_view = find_node(\'gridview\')\n#\nfunc _ready():\n\tvar item \n\tfor item in items:\n\t\tlist_node.add_item(item[\'name\'], item[\'img\'], true)\n\nfunc change_view(thumbnails):\n\tuse_thumbnails = thumbnails\n#\tif use_thumbnails:\n#\t\tprint(\'thumbnails is \', thumbnails, \', showing grid view\')\n#\t\tlist_view.hide()\n#\t\tgrid_view.show()\n#\telse:\n#\t\tprint(\'thumbnails is \', thumbnails, \', showing list view\')\n#\t\tlist_view.show()\n#\t\tgrid_view.hide()\n\t\n\tif use_thumbnails:\n\t\tlist_node.set_icon_mode(ItemList.ICON_MODE_TOP)\n\t\tlist_node.set_max_columns(0)\n#\t\tlist_node.set_fixed_column_width(list_node.get_size().width/3 - 6)\n\t\tlist_node.set_max_text_lines(4)\n\t\tlist_node.set_same_column_width(true)\n\n\telse:\n\t\tlist_node.set_icon_mode(ItemList.ICON_MODE_LEFT)\n\t\tlist_node.set_max_columns(1)\n\t\tlist_node.set_max_text_lines(1)"
+
+[sub_resource type="GDScript" id=2]
+
+script/source = "extends Button\n\n# class member variables go here, for example:\n\nvar list_icon = preload(\'res://assets/icon---list.png\')\nvar grid_icon = preload(\'res://assets/icon---grid.png\')\n\nonready var view_root = get_parent().get_parent()\n\nfunc _ready():\n\t# Called every time the node is added to the scene.\n\t# Initialization here\n\tpass\n\n\nfunc _on_Button_toggled( pressed ):\n\tif pressed:\n\t\tset_button_icon(list_icon)\n\telse:\n\t\tset_button_icon(grid_icon)\n\t\n\tif view_root and view_root.has_method(\'change_view\'):\n\t\tview_root.change_view(pressed)\n\t\n"
+
+[sub_resource type="StyleBoxFlat" id=3]
+
+content_margin/left = 10.0
+content_margin/right = 10.0
+content_margin/top = 10.0
+content_margin/bottom = 10.0
+bg_color = Color( 0.6, 0.6, 0.6, 1 )
+light_color = Color( 0.8, 0.8, 0.8, 1 )
+dark_color = Color( 0.8, 0.8, 0.8, 1 )
+border_size = 1
+border_blend = true
+draw_bg = false
+
+[node name="Panel" type="Panel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 2
+theme/theme = ExtResource( 1 )
+margin/left = 380.0
+margin/top = 157.0
+margin/right = 680.0
+margin/bottom = 457.0
+script/script = SubResource( 1 )
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+
+editor/display_folded = true
+visibility/visible = false
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 1.0
+margin/bottom = 4.0
+alignment = 0
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer2"]
+
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 24.0
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 2 )
+textures/pressed = ExtResource( 3 )
+
+[node name="Button" type="Button" parent="VBoxContainer2"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 265.0
+margin/bottom = 44.0
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+text = "change view"
+icon = ExtResource( 2 )
+flat = true
+script/script = SubResource( 2 )
+
+[node name="listview" type="GridContainer" parent="VBoxContainer2"]
+
+editor/display_folded = true
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+size_flags/stretch_ratio = 3.0
+margin/left = 0.0
+margin/top = 48.0
+margin/right = 265.0
+margin/bottom = 292.0
+columns = 1
+
+[node name="Panel" type="Panel" parent="VBoxContainer2/listview"]
+
+editor/display_folded = true
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 265.0
+margin/bottom = 45.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/listview/Panel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 0
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 82.0
+margin/bottom = 26.0
+alignment = 0
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer2/listview/Panel/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 38.0
+margin/bottom = 26.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="VBoxContainer2/listview/Panel/HBoxContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 42.0
+margin/top = 5.0
+margin/right = 82.0
+margin/bottom = 21.0
+text = "tech"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Panel2" type="Panel" parent="VBoxContainer2/listview"]
+
+editor/display_folded = true
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 49.0
+margin/right = 265.0
+margin/bottom = 94.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/listview/Panel2"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 0
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 82.0
+margin/bottom = 26.0
+alignment = 0
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer2/listview/Panel2/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 38.0
+margin/bottom = 26.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="VBoxContainer2/listview/Panel2/HBoxContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 42.0
+margin/top = 5.0
+margin/right = 82.0
+margin/bottom = 21.0
+text = "tech"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Panel3" type="Panel" parent="VBoxContainer2/listview"]
+
+editor/display_folded = true
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 98.0
+margin/right = 265.0
+margin/bottom = 143.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/listview/Panel3"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 0
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 82.0
+margin/bottom = 26.0
+alignment = 0
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer2/listview/Panel3/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 38.0
+margin/bottom = 26.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="VBoxContainer2/listview/Panel3/HBoxContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 42.0
+margin/top = 5.0
+margin/right = 82.0
+margin/bottom = 21.0
+text = "tech"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Panel4" type="Panel" parent="VBoxContainer2/listview"]
+
+editor/display_folded = true
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 147.0
+margin/right = 265.0
+margin/bottom = 192.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/listview/Panel4"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 0
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 82.0
+margin/bottom = 26.0
+alignment = 0
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer2/listview/Panel4/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 38.0
+margin/bottom = 26.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="VBoxContainer2/listview/Panel4/HBoxContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 42.0
+margin/top = 5.0
+margin/right = 82.0
+margin/bottom = 21.0
+text = "tech"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Panel5" type="Panel" parent="VBoxContainer2/listview"]
+
+editor/display_folded = true
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 196.0
+margin/right = 265.0
+margin/bottom = 241.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/listview/Panel5"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 0
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 82.0
+margin/bottom = 26.0
+alignment = 0
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer2/listview/Panel5/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 38.0
+margin/bottom = 26.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="VBoxContainer2/listview/Panel5/HBoxContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 42.0
+margin/top = 5.0
+margin/right = 82.0
+margin/bottom = 21.0
+text = "tech"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="gridview" type="GridContainer" parent="VBoxContainer2"]
+
+editor/display_folded = true
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 160.0
+margin/right = 265.0
+margin/bottom = 296.0
+columns = 4
+
+[node name="Panel" type="PanelContainer" parent="VBoxContainer2/gridview"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 66.0
+margin/bottom = 66.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer2/gridview/Panel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 0
+size_flags/vertical = 0
+margin/left = 13.0
+margin/top = 10.0
+margin/right = 53.0
+margin/bottom = 56.0
+alignment = 0
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer2/gridview/Panel/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 26.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="VBoxContainer2/gridview/Panel/HBoxContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 30.0
+margin/right = 40.0
+margin/bottom = 46.0
+text = "tech"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Panel2" type="PanelContainer" parent="VBoxContainer2/gridview"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 2
+margin/left = 70.0
+margin/top = 0.0
+margin/right = 136.0
+margin/bottom = 66.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer2/gridview/Panel2"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 0
+size_flags/vertical = 0
+margin/left = 13.0
+margin/top = 10.0
+margin/right = 53.0
+margin/bottom = 56.0
+alignment = 0
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer2/gridview/Panel2/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 26.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="VBoxContainer2/gridview/Panel2/HBoxContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 30.0
+margin/right = 40.0
+margin/bottom = 46.0
+text = "tech"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Panel3" type="PanelContainer" parent="VBoxContainer2/gridview"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 140.0
+margin/top = 0.0
+margin/right = 200.0
+margin/bottom = 66.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer2/gridview/Panel3"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 0
+size_flags/vertical = 0
+margin/left = 10.0
+margin/top = 10.0
+margin/right = 50.0
+margin/bottom = 56.0
+alignment = 0
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer2/gridview/Panel3/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 26.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="VBoxContainer2/gridview/Panel3/HBoxContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 30.0
+margin/right = 40.0
+margin/bottom = 46.0
+text = "tech"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Panel4" type="PanelContainer" parent="VBoxContainer2/gridview"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 204.0
+margin/top = 0.0
+margin/right = 264.0
+margin/bottom = 66.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer2/gridview/Panel4"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 0
+size_flags/vertical = 0
+margin/left = 10.0
+margin/top = 10.0
+margin/right = 50.0
+margin/bottom = 56.0
+alignment = 0
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer2/gridview/Panel4/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 26.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="VBoxContainer2/gridview/Panel4/HBoxContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 30.0
+margin/right = 40.0
+margin/bottom = 46.0
+text = "tech"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Panel5" type="PanelContainer" parent="VBoxContainer2/gridview"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 70.0
+margin/right = 66.0
+margin/bottom = 136.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer2/gridview/Panel5"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 0
+size_flags/vertical = 0
+margin/left = 13.0
+margin/top = 10.0
+margin/right = 53.0
+margin/bottom = 56.0
+alignment = 0
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer2/gridview/Panel5/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 26.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="VBoxContainer2/gridview/Panel5/HBoxContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 30.0
+margin/right = 40.0
+margin/bottom = 46.0
+text = "tech"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer2"]
+
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 48.0
+margin/right = 265.0
+margin/bottom = 94.0
+columns = 1
+
+[node name="Button" type="Button" parent="VBoxContainer2/GridContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 100.0
+margin/bottom = 46.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "tech"
+icon = ExtResource( 4 )
+flat = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 1.0
+margin/bottom = 4.0
+alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer"]
+
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 24.0
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 2 )
+textures/pressed = ExtResource( 3 )
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 299.0
+margin/bottom = 44.0
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+text = "change view"
+icon = ExtResource( 2 )
+flat = true
+script/script = SubResource( 2 )
+
+[node name="ItemList" type="ItemList" parent="VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 48.0
+margin/right = 299.0
+margin/bottom = 296.0
+custom_constants/vseparation = 0
+custom_constants/line_separation = 0
+custom_constants/icon_margin = 0
+custom_constants/hseparation = 0
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
+
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 158.0
+margin/right = 213.0
+margin/bottom = 264.0
+columns = 1
+
+[connection signal="toggled" from="VBoxContainer2/Button" to="VBoxContainer2/Button" method="_on_Button_toggled"]
+
+[connection signal="toggled" from="VBoxContainer/Button" to="VBoxContainer/Button" method="_on_Button_toggled"]
+
+
