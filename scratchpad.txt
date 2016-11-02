@@ -1,0 +1,69 @@
+# actions that could be triggered in conversation
+
+update state of parent quest
+update state of different quest
+initialize new quest
+
+update global var (ex: overall trust level among humans)
+update parent NPC var (ex: individual trust level)
+update outside NPC var (no use case yet, but who knows)
+
+# systems that could be queried
+conversation - active npc, dialogue data
+npc - specific character vars, individual trust
+quests - status (active/inactive/completed) & data (state, states, actors)
+inventory
+chips
+upgrades/stats
+global vars
+arbitrary vars
+
+
+
+
+
+
+
+
+
+
+Inventory.Item = {
+	id = ""
+	name = ""
+	description = "[/]"
+	image = [T]
+	thumbnail = [T]
+	effects: [{}]
+}
+
+
+
+
+
+
+
+
+
+# Notes on the flow of actions:
+#
+# On initial click:
+	# _on_click -> start_interaction -> check_branches ->
+	# end_interaction OR present_conversations
+# From present_conversations:
+	# create_branch_option -> enter_branch
+	# (Branch and MessageUI handle it from there)
+
+
+	
+	# Here's how we could jump right into the topic:
+	# var branch = dialog_branches[0]
+	# enter_branch(branch)
+
+	# ...but instead we'll ease into it
+	# and treat it like we would treat multiple options
+
+
+
+	
+
+
