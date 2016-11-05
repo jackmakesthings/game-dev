@@ -7,7 +7,7 @@
 
 [sub_resource type="GDScript" id=1]
 
-script/source = "extends Panel\n\nvar use_thumbnails = false\n\nvar item_1 = { \'name\': \'weed\', \'img\': preload(\'res://assets/dank.png\') }\nvar item_2 = { \'name\': \'technology\', \'img\': preload(\'res://assets/tablet.png\') }\nvar items = [item_1, item_2, item_1, item_2]\n\nonready var list_node = find_node(\'ItemList\')\n\nonready var list_view = find_node(\'listview\')\nonready var grid_view = find_node(\'gridview\')\n#\nfunc _ready():\n\tvar item \n\tfor item in items:\n\t\tlist_node.add_item(item[\'name\'], item[\'img\'], true)\n\nfunc change_view(thumbnails):\n\tuse_thumbnails = thumbnails\n#\tif use_thumbnails:\n#\t\tprint(\'thumbnails is \', thumbnails, \', showing grid view\')\n#\t\tlist_view.hide()\n#\t\tgrid_view.show()\n#\telse:\n#\t\tprint(\'thumbnails is \', thumbnails, \', showing list view\')\n#\t\tlist_view.show()\n#\t\tgrid_view.hide()\n\t\n\tif use_thumbnails:\n\t\tlist_node.set_icon_mode(ItemList.ICON_MODE_TOP)\n\t\tlist_node.set_max_columns(0)\n#\t\tlist_node.set_fixed_column_width(list_node.get_size().width/3 - 6)\n\t\tlist_node.set_max_text_lines(4)\n\t\tlist_node.set_same_column_width(true)\n\n\telse:\n\t\tlist_node.set_icon_mode(ItemList.ICON_MODE_LEFT)\n\t\tlist_node.set_max_columns(1)\n\t\tlist_node.set_max_text_lines(1)"
+script/source = "extends Panel\n\nvar use_thumbnails = false\n\nvar item_1 = { \'name\': \'weed\', \'img\': preload(\'res://assets/dank.png\') }\nvar item_2 = { \'name\': \'technology\', \'img\': preload(\'res://assets/tablet.png\') }\nvar items = [item_1, item_2, item_1, item_2]\n\nonready var list_node = find_node(\'ItemList\')\n\nonready var list_view = find_node(\'listview\')\nonready var grid_view = find_node(\'gridview\')\n#\nfunc _ready():\n\tvar item \n\tfor item in items:\n\t\tlist_node.add_item(item[\'name\'], item[\'img\'], true)\n\nfunc change_view(thumbnails):\n\tuse_thumbnails = thumbnails\n#\tif use_thumbnails:\n#\t\tprint(\'thumbnails is \', thumbnails, \', showing grid view\')\n#\t\tlist_view.hide()\n#\t\tgrid_view.show()\n#\telse:\n#\t\tprint(\'thumbnails is \', thumbnails, \', showing list view\')\n#\t\tlist_view.show()\n#\t\tgrid_view.hide()\n\t\n\tif use_thumbnails:\n\t\tvar scrollbar = list_node.get_child(0)\n\t\tlist_node.set_icon_mode(ItemList.ICON_MODE_TOP)\n\t\tlist_node.set_max_columns(2)\n#\t\tlist_node.set_same_column_width(true)\n\t\tlist_node.set_fixed_column_width(list_node.get_size().width / 2 - scrollbar.get_size().width )\n\t\tlist_node.set_max_text_lines(4)\n\n\telse:\n\t\tlist_node.set_icon_mode(ItemList.ICON_MODE_LEFT)\n#\t\tlist_node.set_same_column_width(false)\n\t\tlist_node.set_max_columns(1)\n\t\tlist_node.set_max_text_lines(1)"
 
 [sub_resource type="GDScript" id=2]
 
@@ -753,10 +753,6 @@ margin/left = 0.0
 margin/top = 48.0
 margin/right = 299.0
 margin/bottom = 296.0
-custom_constants/vseparation = 0
-custom_constants/line_separation = 0
-custom_constants/icon_margin = 0
-custom_constants/hseparation = 0
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="Theme" subresource_count="22" version="2.2" version_name="Godot Engine v2.2.alpha.custom_build">
+<resource_file type="Theme" subresource_count="24" version="2.2" version_name="Godot Engine v2.2.alpha.custom_build">
 	<ext_resource path="res://assets/fonts/input-mono/InputMono.fnt" type="BitmapFont" index="0"></ext_resource>
 	<resource type="StyleBoxFlat" path="local://2">
 		<real name="content_margin/left"> 10 </real>
@@ -54,10 +54,10 @@
 
 	</resource>
 	<resource type="StyleBoxEmpty" path="local://21">
-		<real name="content_margin/left"> -1 </real>
-		<real name="content_margin/right"> -1 </real>
-		<real name="content_margin/top"> -1 </real>
-		<real name="content_margin/bottom"> -1 </real>
+		<real name="content_margin/left"> 5 </real>
+		<real name="content_margin/right"> 5 </real>
+		<real name="content_margin/top"> 5 </real>
+		<real name="content_margin/bottom"> 5 </real>
 
 	</resource>
 	<resource type="StyleBoxEmpty" path="local://22">
@@ -67,12 +67,38 @@
 		<real name="content_margin/bottom"> -1 </real>
 
 	</resource>
-	<resource type="StyleBoxFlat" path="local://23">
-		<real name="content_margin/left"> -1 </real>
-		<real name="content_margin/right"> -1 </real>
-		<real name="content_margin/top"> -1 </real>
-		<real name="content_margin/bottom"> -1 </real>
+	<resource type="StyleBoxFlat" path="local://25">
+		<real name="content_margin/left"> 5 </real>
+		<real name="content_margin/right"> 5 </real>
+		<real name="content_margin/top"> 5 </real>
+		<real name="content_margin/bottom"> 5 </real>
 		<color name="bg_color"> 0.6, 0.6, 0.6, 1 </color>
+		<color name="light_color"> 0.231766, 0.972656, 0.903198, 1 </color>
+		<color name="dark_color"> 0.106079, 0.617188, 0.56851, 1 </color>
+		<int name="border_size"> 1 </int>
+		<bool name="border_blend"> True </bool>
+		<bool name="draw_bg"> False </bool>
+
+	</resource>
+	<resource type="StyleBoxFlat" path="local://26">
+		<real name="content_margin/left"> 5 </real>
+		<real name="content_margin/right"> 5 </real>
+		<real name="content_margin/top"> 5 </real>
+		<real name="content_margin/bottom"> 5 </real>
+		<color name="bg_color"> 0.6, 0.6, 0.6, 1 </color>
+		<color name="light_color"> 0.8, 0.8, 0.8, 1 </color>
+		<color name="dark_color"> 0.8, 0.8, 0.8, 1 </color>
+		<int name="border_size"> 1 </int>
+		<bool name="border_blend"> True </bool>
+		<bool name="draw_bg"> False </bool>
+
+	</resource>
+	<resource type="StyleBoxFlat" path="local://23">
+		<real name="content_margin/left"> 5 </real>
+		<real name="content_margin/right"> 5 </real>
+		<real name="content_margin/top"> 5 </real>
+		<real name="content_margin/bottom"> 5 </real>
+		<color name="bg_color"> 0.640625, 0.640625, 0.640625, 1 </color>
 		<color name="light_color"> 0.8, 0.8, 0.8, 1 </color>
 		<color name="dark_color"> 0.8, 0.8, 0.8, 1 </color>
 		<int name="border_size"> 0 </int>
@@ -215,15 +241,17 @@
 		<resource name="HButtonArray/styles/normal" resource_type="StyleBox" path="local://19">  </resource>
 		<resource name="HButtonArray/styles/selected" resource_type="StyleBox" path="local://18">  </resource>
 		<color name="ItemList/colors/font_color"> 0.627451, 0.627451, 0.627451, 1 </color>
-		<color name="ItemList/colors/font_color_selected"> 1, 1, 1, 1 </color>
-		<color name="ItemList/colors/guide_color"> 0, 0, 0, 0 </color>
+		<color name="ItemList/colors/font_color_selected"> 0.09375, 0.09375, 0.09375, 1 </color>
+		<color name="ItemList/colors/guide_color"> 0.16748, 0.80867, 0.875, 0 </color>
 		<int name="ItemList/constants/hseparation"> 0 </int>
-		<int name="ItemList/constants/icon_margin"> 10 </int>
+		<int name="ItemList/constants/icon_margin"> 3 </int>
 		<int name="ItemList/constants/line_separation"> 0 </int>
 		<int name="ItemList/constants/vseparation"> 0 </int>
 		<resource name="ItemList/fonts/font"></resource>		<resource name="ItemList/styles/bg" resource_type="StyleBox" path="local://21">  </resource>
 		<resource name="ItemList/styles/bg_focus" resource_type="StyleBox" path="local://22">  </resource>
-		<resource name="ItemList/styles/cursor"></resource>		<resource name="ItemList/styles/cursor_unfocused"></resource>		<resource name="ItemList/styles/selected" resource_type="StyleBox" path="local://23">  </resource>
+		<resource name="ItemList/styles/cursor" resource_type="StyleBox" path="local://25">  </resource>
+		<resource name="ItemList/styles/cursor_unfocused" resource_type="StyleBox" path="local://26">  </resource>
+		<resource name="ItemList/styles/selected" resource_type="StyleBox" path="local://23">  </resource>
 		<resource name="ItemList/styles/selected_focus" resource_type="StyleBox" path="local://24">  </resource>
 		<resource name="Panel/styles/panel" resource_type="StyleBox" path="local://20">  </resource>
 		<resource name="Panel/styles/panelf" resource_type="StyleBox" path="local://20">  </resource>

@@ -1,12 +1,14 @@
-[gd_scene load_steps=14 format=1]
+[gd_scene load_steps=16 format=1]
 
 [ext_resource path="res://assets/empty-squared-room.png" type="Texture" id=1]
-[ext_resource path="res://assets/blockybot-front.png" type="Texture" id=2]
-[ext_resource path="res://assets/blockybot.png" type="Texture" id=3]
-[ext_resource path="res://assets/leftbot.png" type="Texture" id=4]
-[ext_resource path="res://assets/rightbot.png" type="Texture" id=5]
-[ext_resource path="res://assets/backwall.png" type="Texture" id=6]
-[ext_resource path="res://assets/frontwall.png" type="Texture" id=7]
+[ext_resource path="res://assets/simple-green-room.png" type="Texture" id=2]
+[ext_resource path="res://assets/blockybot-front.png" type="Texture" id=3]
+[ext_resource path="res://assets/blockybot.png" type="Texture" id=4]
+[ext_resource path="res://assets/leftbot.png" type="Texture" id=5]
+[ext_resource path="res://assets/rightbot.png" type="Texture" id=6]
+[ext_resource path="res://assets/backwall.png" type="Texture" id=7]
+[ext_resource path="res://assets/frontwall.png" type="Texture" id=8]
+[ext_resource path="res://assets/lab-bench.png" type="Texture" id=9]
 
 [sub_resource type="GDScript" id=1]
 
@@ -14,9 +16,9 @@ script/source = "extends TextureFrame\n"
 
 [sub_resource type="NavigationPolygon" id=2]
 
-vertices = Vector2Array( 388.51, 385.624, 159.695, 387.294, 189.758, 352.22, 1654.21, 345.174, 1794.63, 595.183, 1.58679, 602.531, 99.5682, 465.793, 355.106, 472.474 )
-polygons = [ IntArray( 0, 1, 2, 3 ), IntArray( 4, 5, 6, 7 ), IntArray( 3, 4, 7, 0 ) ]
-outlines = [ Vector2Array( 1654.21, 345.174, 1794.63, 595.183, 1.58679, 602.531, 99.5682, 465.793, 355.106, 472.474, 388.51, 385.624, 159.695, 387.294, 189.758, 352.22 ) ]
+vertices = Vector2Array( 388.51, 385.624, 159.695, 387.294, 189.758, 352.22, 1132.68, 407.413, 1851.69, 592.421, 1.58679, 602.531, 99.5682, 465.793, 355.106, 472.474, 1136.89, 533.555, 1359.74, 537.76, 1355.53, 407.413, 1742.37, 399.003 )
+polygons = [ IntArray( 0, 1, 2 ), IntArray( 0, 2, 3 ), IntArray( 4, 5, 6, 7, 8 ), IntArray( 9, 10, 11, 4 ), IntArray( 0, 3, 8, 7 ), IntArray( 9, 4, 8 ) ]
+outlines = [ Vector2Array( 1742.37, 399.003, 1851.69, 592.421, 1.58679, 602.531, 99.5682, 465.793, 355.106, 472.474, 388.51, 385.624, 159.695, 387.294, 189.758, 352.22, 1132.68, 407.413, 1136.89, 533.555, 1359.74, 537.76, 1355.53, 407.413 ) ]
 
 [sub_resource type="GDScript" id=6]
 
@@ -33,7 +35,7 @@ script/source = "extends KinematicBody2D\n\nvar nav\nvar sprite\nvar path\nvar s
 
 [sub_resource type="SpriteFrames" id=5]
 
-animations = [ { "frames":[ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ], "loop":false, "name":"default", "speed":30.0 } ]
+animations = [ { "frames":[ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ], "loop":false, "name":"default", "speed":30.0 } ]
 
 [node name="Node2D" type="Node2D"]
 
@@ -62,7 +64,7 @@ margin/left = 830.0
 margin/top = -151.0
 margin/right = 1827.0
 margin/bottom = 597.0
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 expand = true
 stretch_mode = 5
 script/script = SubResource( 1 )
@@ -130,13 +132,20 @@ _update_shape_index = 0
 [node name="Sprite" type="Sprite" parent="Navigation2D/NavigationPolygonInstance/YSort"]
 
 transform/pos = Vector2( 201.981, 452.122 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 offset = Vector2( -3.00604, -94.7023 )
 
 [node name="Sprite2" type="Sprite" parent="Navigation2D/NavigationPolygonInstance/YSort"]
 
-transform/pos = Vector2( 870.459, 585.408 )
-texture = ExtResource( 7 )
+transform/pos = Vector2( 857.845, 602.227 )
+texture = ExtResource( 8 )
 offset = Vector2( -7.10699, -121.359 )
+
+[node name="Sprite3" type="Sprite" parent="Navigation2D/NavigationPolygonInstance/YSort"]
+
+transform/pos = Vector2( 1248.24, 497.838 )
+transform/scale = Vector2( 0.478874, 0.655893 )
+texture = ExtResource( 9 )
+offset = Vector2( -8.63458, -170.42 )
 
 
