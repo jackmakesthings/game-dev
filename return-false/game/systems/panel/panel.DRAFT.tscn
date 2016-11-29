@@ -1,43 +1,138 @@
-[gd_scene load_steps=16 format=1]
+[gd_scene load_steps=26 format=1]
 
-[ext_resource path="res://assets/empty-squared-room.png" type="Texture" id=1]
-[ext_resource path="res://assets/simple-green-room.png" type="Texture" id=2]
-[ext_resource path="res://assets/blockybot-front.png" type="Texture" id=3]
-[ext_resource path="res://assets/blockybot.png" type="Texture" id=4]
-[ext_resource path="res://assets/leftbot.png" type="Texture" id=5]
-[ext_resource path="res://assets/rightbot.png" type="Texture" id=6]
-[ext_resource path="res://assets/backwall.png" type="Texture" id=7]
-[ext_resource path="res://assets/frontwall.png" type="Texture" id=8]
-[ext_resource path="res://assets/lab-bench.png" type="Texture" id=9]
+[ext_resource path="res://assets/panels/sketches/viewport.jpg" type="Texture" id=1]
+[ext_resource path="res://assets/panels/sketches/viewport copy.jpg" type="Texture" id=2]
+[ext_resource path="res://assets/panels/sketches/viewport copy 2.jpg" type="Texture" id=3]
+[ext_resource path="res://addons/arc_dark/assets/slider/slider-insensitive@2x.png" type="Texture" id=4]
+[ext_resource path="res://addons/arc_dark/assets/slider/slider-prelight@2x.png" type="Texture" id=5]
+[ext_resource path="res://assets/fonts/input-mono/InputMono.tres" type="DynamicFont" id=6]
+[ext_resource path="res://assets/panels/sketches/viewport copy 3.jpg" type="Texture" id=7]
+[ext_resource path="res://assets/panels/sketches/viewport copy 4.jpg" type="Texture" id=8]
+[ext_resource path="res://assets/panels/sketches/viewport copy 5.jpg" type="Texture" id=9]
+[ext_resource path="res://assets/panels/sketches/viewport copy 6.jpg" type="Texture" id=10]
+[ext_resource path="res://systems/panel/separated-poly.tres" type="NavigationPolygon" id=11]
+[ext_resource path="res://assets/blockybot-front.png" type="Texture" id=12]
+[ext_resource path="res://assets/blockybot.png" type="Texture" id=13]
+[ext_resource path="res://assets/leftbot.png" type="Texture" id=14]
+[ext_resource path="res://assets/rightbot.png" type="Texture" id=15]
+[ext_resource path="res://assets/backwall.png" type="Texture" id=16]
+[ext_resource path="res://assets/frontwall.png" type="Texture" id=17]
+[ext_resource path="res://assets/lab-bench.png" type="Texture" id=18]
 
 [sub_resource type="GDScript" id=1]
 
-script/source = "extends TextureFrame\n"
+script/source = "extends TextureFrame\n\n#var contains_player = false\n#\n#onready var label = get_tree().get_current_scene().find_node(\'Label\')\n#onready var player = get_tree().get_current_scene().find_node(\'player\')\n#\n#func check_for_player():\n#\tvar player_pos = player.get_global_pos()\n#\tif get_rect().has_point(player_pos):\n#\t\tcontains_player = true\n#\t\tlabel.set_text(\'Room: \' + get_name())\n#\t\treturn\n#\tcontains_player = false\n#\treturn\n#\n#func _fixed_process(delta):\n#\tcheck_for_player()\n#\t\n#func _ready():\n#\tset_fixed_process(true)"
 
-[sub_resource type="NavigationPolygon" id=2]
+[sub_resource type="GDScript" id=8]
 
-vertices = Vector2Array( 388.51, 385.624, 159.695, 387.294, 189.758, 352.22, 1132.68, 407.413, 1851.69, 592.421, 1.58679, 602.531, 99.5682, 465.793, 355.106, 472.474, 1136.89, 533.555, 1359.74, 537.76, 1355.53, 407.413, 1742.37, 399.003 )
-polygons = [ IntArray( 0, 1, 2 ), IntArray( 0, 2, 3 ), IntArray( 4, 5, 6, 7, 8 ), IntArray( 9, 10, 11, 4 ), IntArray( 0, 3, 8, 7 ), IntArray( 9, 4, 8 ) ]
-outlines = [ Vector2Array( 1742.37, 399.003, 1851.69, 592.421, 1.58679, 602.531, 99.5682, 465.793, 355.106, 472.474, 388.51, 385.624, 159.695, 387.294, 189.758, 352.22, 1132.68, 407.413, 1136.89, 533.555, 1359.74, 537.76, 1355.53, 407.413 ) ]
+script/source = "extends TextureButton\n\n# class member variables go here, for example:\n# var a = 2\n# var b = \"textvar\"\nonready var player = get_tree().get_current_scene().find_node(\'player\')\nexport(float) var distance\n\nfunc _ready():\n\t# Called every time the node is added to the scene.\n\t# Initialization here\n\tpass\n\nfunc _pressed():\n\tvar where = get_global_pos() + Vector2(-96, 50)\n\tUtils.fake_click(where)\n\tyield(player, \'done_moving\')\n\tplayer.find_node(\'Camera2D\').set_v_drag_enabled(true)\n\tplayer.call_deferred(\'pan_down\', distance)"
 
-[sub_resource type="GDScript" id=6]
+[sub_resource type="GDScript" id=3]
 
 script/source = "extends NavigationPolygonInstance\n\nfunc _ready():\n\tset_process_unhandled_input(true)\n\t\nfunc _unhandled_input(ev):\n\tif Utils.is_click(ev):\n\t\tvar evpos = get_viewport_transform().affine_inverse().xform(ev.global_pos)\n\t\tget_parent().find_node(\'player\').call(\'walk_to\', evpos)"
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=4]
 
 custom_solver_bias = 0.0
 radius = 30.0
 
-[sub_resource type="GDScript" id=4]
+[sub_resource type="GDScript" id=5]
 
-script/source = "extends KinematicBody2D\n\nvar nav\nvar sprite\nvar path\nvar speed = 200\nvar last_pos\nvar is_moving\n\nvar perspective_factor = 1\nvar max_scale = 1\n\nvar vp\n\n\nfunc _ready():\n\tlast_pos = get_pos()\n\tvp = get_viewport_rect().size.y\n\tnav = get_tree().get_current_scene().find_node(\'Navigation2D\')\n\tsprite = get_child(0)\n\tset_fixed_process(false)\n\tupdate_scale()\n\t\nfunc walk_to(where):\n\tlast_pos = get_pos()\n\t\n\tnav = get_tree().get_current_scene().find_node(\'Navigation2D\')\n\tvar p = nav.get_simple_path(last_pos, where, true)\n\tpath = Array(p)\n\tpath.invert()\n\tset_fixed_process(true)\n\nfunc _fixed_process(delta):\n\twalk(delta)\n\t\nfunc walk(delta):\n\n\t# If we\'re already there, forget it\n\tif path.size() <= 1:\n\t\thalt()\n\t\treturn\n\n\telse:\n\t\t# Calculate how far to move this time\n\t\tvar to_walk = delta * speed\n\n\t\twhile to_walk > 0 and path.size() >= 2:\n\t\t\tis_moving = true\n\n\t\t\t# Get the current path segment, and the direction of travel\n\t\t\tvar pfrom = path[path.size() - 1]\n\t\t\tvar pto = path[path.size() - 2]\n\t\t\tvar d = pfrom.distance_to(pto)\n\n\t\t\t# If it\'s a short trip, go all the way\n\t\t\tif d <= to_walk:\n\t\t\t\tpath.remove(path.size() - 1)\n\t\t\t\tto_walk = to_walk - d\n\n\t\t\t# If not, interpolate some steps to get there\n\t\t\telse:\n\t\t\t\tpath[path.size()-1] = pfrom.linear_interpolate(pto,to_walk/d)\n\t\t\t\tto_walk = 0\n\n\t\tvar next_pos = path[path.size() - 1]\n\t\t\n\t\tif (next_pos.y > last_pos.y):\n\t\t\tsprite.set_frame(0)\n\t\telse:\n\t\t\tsprite.set_frame(1)\n\n\t\t\t\n\t\t\n\t\t\t\n\t\tmove_to(next_pos)\n\t\tupdate_scale()\n\n\t\t# If we\'re reaching our destination:\n\t\tif path.size() < 2:\n\t\t\thalt()\n\n##\n# halt()\n# Stops the walk process and animation, and resets the path\n# Call this to bring the player to a \'complete stop\'.\n##\nfunc halt():\n\t#emit_signal(\"done_moving\", last_pos, get_pos())\n\tset_fixed_process(false)\n\tpath.clear()\n\n\n\n# EXPERIMENTAL\n# scaling functions\n\nfunc update_scale():\n\tvar ypos = get_pos().y\n\tvar ratio = pow((ypos / vp), perspective_factor) * max_scale\n\tset_scale(Vector2(ratio, ratio))\n\t\n\n\t"
+script/source = "extends KinematicBody2D\n\nvar nav\nvar sprite\nvar path\nvar speed = 600\nvar last_pos\nvar is_moving\n\nvar perspective_factor = 1\nexport(float) var max_scale\nexport(bool) var perspective_scaling_on\n\nvar poly_full = preload(\"res://systems/panel/elevator-poly.tres\")\nvar poly_split = preload(\"res://systems/panel/separated-poly.tres\")\n\nvar vp\n\nsignal done_moving(from, to)\n\n\nfunc _ready():\n\tlast_pos = get_pos()\n\tvp = get_viewport_rect().size.y\n\tnav = get_tree().get_current_scene().find_node(\'Navigation2D\')\n\tsprite = get_child(0)\n\tset_fixed_process(false)\n\tif perspective_scaling_on:\n\t\tupdate_scale()\n\t\nfunc walk_to(where):\n\tlast_pos = get_pos()\n\t\n\tnav = get_tree().get_current_scene().find_node(\'Navigation2D\')\n\tvar p = nav.get_simple_path(last_pos, where, true)\n\tpath = Array(p)\n\tpath.invert()\n\tset_fixed_process(true)\n\nfunc _fixed_process(delta):\n\twalk(delta)\n\t\nfunc walk(delta):\n\n\t# If we\'re already there, forget it\n\tif path.size() < 1:\n\t\thalt()\n\t\treturn\n\n\telse:\n\t\t# Calculate how far to move this time\n\t\tvar to_walk = delta * speed\n\n\t\twhile to_walk > 0 and path.size() >= 2:\n\t\t\tis_moving = true\n\n\t\t\t# Get the current path segment, and the direction of travel\n\t\t\tvar pfrom = path[path.size() - 1]\n\t\t\tvar pto = path[path.size() - 2]\n\t\t\tvar d = pfrom.distance_to(pto)\n\n\t\t\t# If it\'s a short trip, go all the way\n\t\t\tif d <= to_walk:\n\t\t\t\tpath.remove(path.size() - 1)\n\t\t\t\tto_walk = to_walk - d\n\n\t\t\t# If not, interpolate some steps to get there\n\t\t\telse:\n\t\t\t\tpath[path.size()-1] = pfrom.linear_interpolate(pto,to_walk/d)\n\t\t\t\tto_walk = 0\n\n\t\tvar next_pos = path[path.size() - 1]\n\t\t\n\t\tif (next_pos.y > last_pos.y):\n\t\t\tsprite.set_frame(0)\n\t\telse:\n\t\t\tsprite.set_frame(1)\n\n\t\tmove_to(next_pos)\n\t\tif perspective_scaling_on:\n\t\t\tupdate_scale()\n\n\t\t# If we\'re reaching our destination:\n\t\tif path.size() < 2:\n\t\t\thalt()\n\n##\n# halt()\n# Stops the walk process and animation, and resets the path\n# Call this to bring the player to a \'complete stop\'.\n##\nfunc halt():\n\temit_signal(\"done_moving\", last_pos, get_pos())\n\tset_fixed_process(false)\n\tis_moving = false\n\tpath.clear()\n\n\n# EXPERIMENTAL\n# scaling functions\n\nfunc update_scale():\n\tvar ypos = get_pos().y\n\tvar ratio = pow((ypos / vp), perspective_factor) * max_scale\n\tif ratio > max_scale:\n\t\tset_scale(Vector2(max_scale, max_scale))\n\telse:\n\t\tset_scale(Vector2(ratio, ratio))\n\t\n# elevator - will be refactored for sure\n\nfunc pan_down(spaces=1):\n\tnav.find_node(\"NavigationPolygonInstance\").set_navigation_polygon(poly_full)\n\tvar starting_pos = get_global_pos()\n\tvar ending_pos = starting_pos + Vector2(0, vp*spaces)\n\twalk_to(ending_pos)\n\tyield(self, \'done_moving\')\n\tfind_node(\'Camera2D\').set_v_drag_enabled(false)\n\tnav.find_node(\"NavigationPolygonInstance\").set_navigation_polygon(poly_split)\n\t\n"
 
-[sub_resource type="SpriteFrames" id=5]
+[sub_resource type="SpriteFrames" id=6]
 
-animations = [ { "frames":[ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ], "loop":false, "name":"default", "speed":30.0 } ]
+animations = [ { "frames":[ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ) ], "loop":false, "name":"default", "speed":30.0 } ]
+
+[sub_resource type="GDScript" id=7]
+
+script/source = "extends TextureButton\n\n# class member variables go here, for example:\n# var a = 2\n# var b = \"textvar\"\n\nfunc _fixed_process(delta):\n\tset_global_pos(get_global_mouse_pos())\n\nfunc _ready():\n\tInput.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)\n\tset_fixed_process(true)\n"
 
 [node name="Node2D" type="Node2D"]
+
+[node name="1-a" type="TextureFrame" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 2.0
+margin/top = -150.0
+margin/right = 1002.0
+margin/bottom = 650.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 0
+script/script = SubResource( 1 )
+
+[node name="1-b" type="TextureFrame" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 1000.0
+margin/top = -150.0
+margin/right = 2000.0
+margin/bottom = 650.0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+script/script = SubResource( 1 )
+
+[node name="1-z" type="TextureFrame" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 2000.0
+margin/top = -150.0
+margin/right = 3000.0
+margin/bottom = 721.0
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 5
+script/script = SubResource( 1 )
+
+[node name="Button" type="TextureButton" parent="1-z"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 275.0
+margin/top = 305.0
+margin/right = 339.0
+margin/bottom = 365.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 4 )
+textures/pressed = ExtResource( 5 )
+textures/hover = ExtResource( 5 )
+params/scale = Vector2( 2, 2 )
+script/script = SubResource( 8 )
+distance = 3.0
+
+[node name="Label" type="Label" parent="1-z/Button"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 14.0
+margin/top = 7.0
+margin/right = 48.0
+margin/bottom = 52.0
+custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color = Color( 1, 1, 1, 0.661216 )
+custom_constants/shadow_offset_x = 0
+text = "↓"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 [node name="TextureFrame" type="TextureFrame" parent="."]
 
@@ -45,14 +140,12 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 0.0
-margin/top = -148.0
-margin/right = 997.0
-margin/bottom = 600.0
-texture = ExtResource( 1 )
-expand = true
-stretch_mode = 5
-script/script = SubResource( 1 )
+margin/left = 2000.0
+margin/top = 649.0
+margin/right = 3000.0
+margin/bottom = 1449.0
+texture = ExtResource( 7 )
+stretch_mode = 0
 
 [node name="TextureFrame2" type="TextureFrame" parent="."]
 
@@ -60,22 +153,86 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 830.0
-margin/top = -151.0
-margin/right = 1827.0
-margin/bottom = 597.0
-texture = ExtResource( 2 )
-expand = true
-stretch_mode = 5
-script/script = SubResource( 1 )
+margin/left = 2000.0
+margin/top = 1451.0
+margin/right = 3000.0
+margin/bottom = 2251.0
+texture = ExtResource( 8 )
+stretch_mode = 0
+
+[node name="Button2" type="TextureButton" parent="TextureFrame2"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 243.0
+margin/top = 282.0
+margin/right = 307.0
+margin/bottom = 342.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 4 )
+textures/pressed = ExtResource( 5 )
+textures/hover = ExtResource( 5 )
+params/scale = Vector2( 2, 2 )
+script/script = SubResource( 8 )
+distance = -3.0
+
+[node name="Label" type="Label" parent="TextureFrame2/Button2"]
+
+rect/rotation = 180.0
+focus/ignore_mouse = true
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 47.0
+margin/top = 51.0
+margin/right = 81.0
+margin/bottom = 96.0
+custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color = Color( 1, 1, 1, 0.661216 )
+custom_constants/shadow_offset_x = 0
+text = "↓"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="TextureFrame3" type="TextureFrame" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 1000.0
+margin/top = 1451.0
+margin/right = 2000.0
+margin/bottom = 2251.0
+texture = ExtResource( 9 )
+stretch_mode = 0
+
+[node name="TextureFrame4" type="TextureFrame" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 1451.0
+margin/right = 1000.0
+margin/bottom = 2251.0
+texture = ExtResource( 10 )
+stretch_mode = 0
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
 
-navpoly = SubResource( 2 )
+navpoly = ExtResource( 11 )
 enabled = true
-script/script = SubResource( 6 )
+script/script = SubResource( 3 )
 
 [node name="YSort" type="YSort" parent="Navigation2D/NavigationPolygonInstance"]
 
@@ -83,69 +240,131 @@ sort/enabled = true
 
 [node name="player" type="KinematicBody2D" parent="Navigation2D/NavigationPolygonInstance/YSort"]
 
-transform/pos = Vector2( 303.051, 483.268 )
+transform/pos = Vector2( 470.021, 449.115 )
 input/pickable = false
-shapes/0/shape = SubResource( 3 )
+shapes/0/shape = SubResource( 4 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 5.41504, 11.7325 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
 collision/margin = 0.08
-script/script = SubResource( 4 )
+script/script = SubResource( 5 )
+max_scale = 1.0
+perspective_scaling_on = null
 
 [node name="Sprite" type="AnimatedSprite" parent="Navigation2D/NavigationPolygonInstance/YSort/player"]
 
 transform/pos = Vector2( 11.0703, 22.105 )
-frames = SubResource( 5 )
+frames = SubResource( 6 )
 animation = "default"
 centered = false
 offset = Vector2( -54.2397, -258.401 )
 
 [node name="Camera2D" type="Camera2D" parent="Navigation2D/NavigationPolygonInstance/YSort/player/Sprite"]
 
-transform/pos = Vector2( -7.6456, -213.893 )
+transform/pos = Vector2( 0, -213.893 )
 anchor_mode = 1
 rotating = false
 current = true
 zoom = Vector2( 1, 1 )
-limit/left = -10000000
+limit/left = 0
 limit/top = -10000000
-limit/right = 10000000
+limit/right = 3000
 limit/bottom = 10000000
-limit/smoothed = false
+limit/smoothed = true
 drag_margin/h_enabled = true
-drag_margin/v_enabled = true
+drag_margin/v_enabled = false
 smoothing/enable = false
 smoothing/speed = 5.0
 drag_margin/left = 0.0
-drag_margin/top = 0.9
+drag_margin/top = 0.0
 drag_margin/right = 0.0
-drag_margin/bottom = 0.9
+drag_margin/bottom = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Navigation2D/NavigationPolygonInstance/YSort/player"]
 
 transform/pos = Vector2( 5.41504, 11.7325 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 trigger = false
 _update_shape_index = 0
 
 [node name="Sprite" type="Sprite" parent="Navigation2D/NavigationPolygonInstance/YSort"]
 
+visibility/visible = false
 transform/pos = Vector2( 201.981, 452.122 )
-texture = ExtResource( 7 )
+texture = ExtResource( 16 )
 offset = Vector2( -3.00604, -94.7023 )
 
 [node name="Sprite2" type="Sprite" parent="Navigation2D/NavigationPolygonInstance/YSort"]
 
+visibility/visible = false
 transform/pos = Vector2( 857.845, 602.227 )
-texture = ExtResource( 8 )
+texture = ExtResource( 17 )
 offset = Vector2( -7.10699, -121.359 )
 
 [node name="Sprite3" type="Sprite" parent="Navigation2D/NavigationPolygonInstance/YSort"]
 
+visibility/visible = false
 transform/pos = Vector2( 1248.24, 497.838 )
 transform/scale = Vector2( 0.478874, 0.655893 )
-texture = ExtResource( 9 )
+texture = ExtResource( 18 )
 offset = Vector2( -8.63458, -170.42 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+
+visibility/visible = false
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 29.0
+margin/top = 19.0
+margin/right = 131.0
+margin/bottom = 33.0
+text = "Current room: A"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="cursor" type="TextureButton" parent="CanvasLayer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+toggle_mode = false
+enabled_focus_mode = 0
+shortcut = null
+textures/normal = ExtResource( 5 )
+textures/pressed = ExtResource( 4 )
+textures/hover = ExtResource( 5 )
+script/script = SubResource( 7 )
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+
+transform/pos = Vector2( 2991.89, -57.3209 )
+transform/scale = Vector2( 0.999999, 1 )
+polygon = Vector2Array( 2034.66, 604.054, 2025.11, 1693.15, 2407.25, 1712.26, 2378.59, 604.054 )
+uv = Vector2Array(  )
+color = Color( 1, 1, 1, 1 )
+vertex_colors = ColorArray(  )
+offset = Vector2( 0, 0 )
+texture/texture = null
+texture/offset = Vector2( 0, 0 )
+texture/scale = Vector2( 1, 1 )
+texture/rotation = 0.0
+invert/enable = false
+invert/border = 100.0
 
 
