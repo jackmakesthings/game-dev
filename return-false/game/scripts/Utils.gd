@@ -4,7 +4,7 @@ extends Node
 const config_path = "user://config.cfg"
 const savefile_path = "res://savegames"
 
-const PLAYER_CLASS = preload("res://systems/character/_Walker.gd")
+const PLAYER_CLASS = preload("res://systems/character/_SimpleWalker.gd")
 
 var debug = true
 
@@ -91,30 +91,27 @@ func is_player_nearby(trigger):
 # This converts a simple Vector2 into an NESW string
 # (useful for setting animations on moving characters)
 func get_orient(vector):
-	if vector.x > 0:
-		if vector.y > 0:
+#	print(vector)
+	if vector.x > .3:
+		if vector.y > .3:
 			return 'SE'
-		elif vector.y == 0:
-			return 'E'
-		elif vector.y < 0:
+		elif vector.y < -.3:
 			return 'NE'
-	elif vector.x == 0:
-		if vector.y > 0:
-			return 'S'
-		elif vector.y == 0:
-			return 'S'
-		elif vector.y < 0:
-			return 'N'
-	elif vector.x < 0:
-		if vector.y > 0:
+		else:
+			return 'E'
+	elif vector.x < -.3:
+		if vector.y > .3:
 			return 'SW'
-		elif vector.y == 0:
-			return 'W'
-		elif vector.y < 0:
+		elif vector.y < -.3:
 			return 'NW'
+		else:
+			return 'W'
 	else:
-		return 'S'
-
+		if vector.y >= 0:
+			return 'S'
+		else:
+			return 'N'
+			
 # Finds the NESW orientation from one vector to another
 func get_orient_between(from, to):
 	var vector = to - from;
