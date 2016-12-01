@@ -19,7 +19,11 @@ var NPCManager = null
 var QuestManager = null
 var HUD = null
 
-var last_player_pos = Vector2(340,200)
+var last_player_pos = Vector2(1540,600)
+
+var last_action = { 'event': null, 'target': null }
+
+export(String, FILE) var initial_scene # where do we start?
 
 onready var anim = find_node('fader')
 
@@ -101,13 +105,21 @@ func change_scene(scene_path, animate=true):
 ##
 func set_player():
 	var _player = load("res://systems/character/Player.tscn").instance()
-	var _destination = Scene.object_layer
+	var _destination
+	
+	if Scene.get('object_layer'):
+		_destination = Scene.object_layer
+	elif Scene.find_node('YSort'):
+		_destination = Scene.find_node('YSort')
+	else:
+		_destination = Scene.get_child(0)
 	_destination.add_child(_player)
-	_player.set_pos(last_player_pos)
+	_player.set_global_pos(last_player_pos)
+	_player.find_node('Camera2D').force_update_scroll()
 	Player = _player
 	Scene.connect('walk_to', Player, 'update_path')
-	Player.connect('path_updated', Scene, 'on_path_updated')
-	Player.connect('done_moving', Scene, 'on_motion_end')
+#	Player.connect('path_updated', Scene, 'on_path_updated')
+#	Player.connect('done_moving', Scene, 'on_motion_end')
 	return Player
 
 
@@ -118,7 +130,8 @@ func set_player():
 ##	
 func _enter_game():	
 	setup('MessageUI', "res://systems/dialogue/Dialogue.Example.tscn")
-	change_scene("res://systems/environment/_Environment.tscn", false)
+#	change_scene("res://systems/environment/_Environment.tscn", false)
+	change_scene(initial_scene, false)
 	setup('NPCManager', "res://systems/npc/NPC.Manager.tscn")
 	setup('QuestManager', "res://systems/quests/Quest.Manager.tscn", true)
 	setup('HUD', "res://systems/ui/HUD.tscn")

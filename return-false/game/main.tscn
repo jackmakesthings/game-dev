@@ -29,6 +29,7 @@ tracks/0/keys = { "times":FloatArray( 0, 0.4, 1 ), "transitions":FloatArray( 1, 
 [node name="game" type="Node"]
 
 script/script = ExtResource( 1 )
+initial_scene = "res://systems/panel/samples/Panel-with-elevator.tscn"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

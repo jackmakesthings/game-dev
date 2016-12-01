@@ -1,0 +1,106 @@
+[gd_scene load_steps=9 format=1]
+
+[ext_resource path="res://assets/panels/sketches/viewport.jpg" type="Texture" id=1]
+[ext_resource path="res://systems/panel/_Panel.gd" type="Script" id=2]
+[ext_resource path="res://assets/panels/sketches/viewport copy.jpg" type="Texture" id=3]
+[ext_resource path="res://assets/panels/sketches/viewport copy 2.jpg" type="Texture" id=4]
+[ext_resource path="res://addons/arc_dark/assets/slider/trough-vertical-active@2x.png" type="Texture" id=5]
+
+[sub_resource type="NavigationPolygon" id=1]
+
+vertices = Vector2Array( 180, 560, 300, 510, 2280, 510, 2600, 800, 0, 800, 50, 690 )
+polygons = [ IntArray( 0, 1, 2, 3, 4, 5 ) ]
+outlines = [ Vector2Array( 180, 560, 300, 510, 2280, 510, 2600, 800, 0, 800, 50, 690 ) ]
+
+[sub_resource type="GDScript" id=2]
+
+script/source = "extends \"res://systems/environment/_Door.gd\""
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 2270, 510, 2580, 790, 2220, 800, 1970, 500 )
+
+[node name="panel" type="TextureFrame"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = -110.0
+margin/right = 1000.0
+margin/bottom = 690.0
+texture = ExtResource( 1 )
+stretch_mode = 0
+script/script = ExtResource( 2 )
+
+[node name="TextureFrame" type="TextureFrame" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 998.0
+margin/top = 0.0
+margin/right = 1998.0
+margin/bottom = 800.0
+texture = ExtResource( 3 )
+stretch_mode = 0
+
+[node name="TextureFrame2" type="TextureFrame" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 1998.0
+margin/top = 0.0
+margin/right = 2998.0
+margin/bottom = 800.0
+texture = ExtResource( 4 )
+stretch_mode = 0
+
+[node name="Navigation2D" type="Navigation2D" parent="."]
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
+
+navpoly = SubResource( 1 )
+enabled = true
+
+[node name="YSort" type="YSort" parent="Navigation2D"]
+
+sort/enabled = true
+
+[node name="door" type="Node2D" parent="."]
+
+script/script = SubResource( 2 )
+destination_path = "res://systems/panel/samples/Panel-gray-3x1.tscn"
+door_id = null
+trigger_node = NodePath("Area2D")
+
+[node name="Area2D" type="Area2D" parent="door"]
+
+input/pickable = true
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="door/Area2D"]
+
+build_mode = 0
+polygon = Vector2Array( 2270, 510, 2580, 790, 2220, 800, 1970, 500 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="Sprite" type="Sprite" parent="door"]
+
+transform/pos = Vector2( 2330, 374 )
+transform/scale = Vector2( 6, 6 )
+texture = ExtResource( 5 )
+
+
