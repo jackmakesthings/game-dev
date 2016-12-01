@@ -91,6 +91,7 @@ tracks/0/keys = { "times":FloatArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6 ),
 
 [node name="Player" type="KinematicBody2D"]
 
+transform/scale = Vector2( 4, 4 )
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 1.57509, 4.27846 )
@@ -99,6 +100,7 @@ collision/layers = 1025
 collision/mask = 1025
 collision/margin = 0.08
 script/script = ExtResource( 1 )
+speed = 200
 
 [node name="Sprite" type="Sprite" parent="."]
 
@@ -106,7 +108,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0, -34.8311 )
 vframes = 8
 hframes = 9
-frame = 22
+frame = 56
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
 
@@ -122,7 +124,7 @@ anims/SE = SubResource( 7 )
 anims/SW = SubResource( 8 )
 anims/W = ExtResource( 3 )
 playback/active = true
-playback/speed = 1.5
+playback/speed = 1.7
 blend_times = [  ]
 autoplay = ""
 
@@ -138,6 +140,7 @@ _update_shape_index = 0
 visibility/visible = false
 transform/pos = Vector2( 3.521, -53.6954 )
 enabled = true
+editor_only = false
 texture = ExtResource( 4 )
 offset = Vector2( 0, 0 )
 scale = 3.0
@@ -158,21 +161,23 @@ shadow/item_mask = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
+offset = Vector2( 0, -150 )
 anchor_mode = 1
 rotating = false
 current = true
-zoom = Vector2( 0.7, 0.7 )
-limit/left = -10000000
-limit/top = -10000000
+zoom = Vector2( 1, 1 )
+limit/left = 0
+limit/top = 0
 limit/right = 10000000
-limit/bottom = 10000000
+limit/bottom = 3000
+limit/smoothed = true
 drag_margin/h_enabled = true
 drag_margin/v_enabled = true
-smoothing/enable = false
-smoothing/speed = 5.0
-drag_margin/left = 0.2
-drag_margin/top = 0.2
-drag_margin/right = 0.2
-drag_margin/bottom = 0.2
+smoothing/enable = true
+smoothing/speed = 1.0
+drag_margin/left = 0.0
+drag_margin/top = 0.0
+drag_margin/right = 0.0
+drag_margin/bottom = 0.0
 
 

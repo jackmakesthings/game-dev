@@ -1,1 +1,1 @@
-extends "./_Walker.gd"
+extends "./_SimpleWalker.gd"
