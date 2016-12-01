@@ -21,7 +21,7 @@
 
 [sub_resource type="GDScript" id=1]
 
-script/source = "extends TextureFrame\n\n#var contains_player = false\n#\n#onready var label = get_tree().get_current_scene().find_node(\'Label\')\n#onready var player = get_tree().get_current_scene().find_node(\'player\')\n#\n#func check_for_player():\n#\tvar player_pos = player.get_global_pos()\n#\tif get_rect().has_point(player_pos):\n#\t\tcontains_player = true\n#\t\tlabel.set_text(\'Room: \' + get_name())\n#\t\treturn\n#\tcontains_player = false\n#\treturn\n#\n#func _fixed_process(delta):\n#\tcheck_for_player()\n#\t\n#func _ready():\n#\tset_fixed_process(true)"
+script/source = "extends TextureFrame\n\nfunc _ready():\n\tset_process_unhandled_input(true)\n\t\nfunc _unhandled_input(ev):\n\tif Utils.is_click(ev):\n\t\tvar evpos = get_viewport_transform().affine_inverse().xform(ev.global_pos)\n\t\tget_parent().find_node(\'player\').call(\'walk_to\', evpos)\n\t\t\n#var contains_player = false\n#\n#onready var label = get_tree().get_current_scene().find_node(\'Label\')\n#onready var player = get_tree().get_current_scene().find_node(\'player\')\n#\n#func check_for_player():\n#\tvar player_pos = player.get_global_pos()\n#\tif get_rect().has_point(player_pos):\n#\t\tcontains_player = true\n#\t\tlabel.set_text(\'Room: \' + get_name())\n#\t\treturn\n#\tcontains_player = false\n#\treturn\n#\n#func _fixed_process(delta):\n#\tcheck_for_player()\n#\t\n#func _ready():\n#\tset_fixed_process(true)"
 
 [sub_resource type="GDScript" id=8]
 
@@ -29,7 +29,7 @@ script/source = "extends TextureButton\n\n# class member variables go here, for 
 
 [sub_resource type="GDScript" id=3]
 
-script/source = "extends NavigationPolygonInstance\n\nfunc _ready():\n\tset_process_unhandled_input(true)\n\t\nfunc _unhandled_input(ev):\n\tif Utils.is_click(ev):\n\t\tvar evpos = get_viewport_transform().affine_inverse().xform(ev.global_pos)\n\t\tget_parent().find_node(\'player\').call(\'walk_to\', evpos)"
+script/source = "extends NavigationPolygonInstance\n\n#func _ready():\n#\tset_process_unhandled_input(true)\n#\t\n#func _unhandled_input(ev):\n#\tif Utils.is_click(ev):\n#\t\tvar evpos = get_viewport_transform().affine_inverse().xform(ev.global_pos)\n#\t\tget_parent().find_node(\'player\').call(\'walk_to\', evpos)"
 
 [sub_resource type="CircleShape2D" id=4]
 

@@ -92,6 +92,7 @@ margin/bottom = 2.0
 
 [node name="Label-1" type="Label" parent="Control"]
 
+visibility/visible = false
 anchor/top = 1
 anchor/bottom = 1
 focus/ignore_mouse = true
@@ -109,6 +110,7 @@ max_lines_visible = -1
 
 [node name="Label-2" type="Label" parent="Control"]
 
+visibility/visible = false
 anchor/left = 1
 anchor/right = 1
 focus/ignore_mouse = true
@@ -126,6 +128,7 @@ max_lines_visible = -1
 
 [node name="object_popup" type="PopupDialog" parent="Control"]
 
+visibility/visible = false
 anchor/left = 3
 anchor/top = 3
 anchor/right = 3
@@ -166,6 +169,7 @@ margin/left = 0.0
 margin/top = 0.0
 margin/right = 294.0
 margin/bottom = 177.0
+stretch_mode = 0
 
 [node name="desc" type="RichTextLabel" parent="Control/object_popup/VBoxContainer"]
 
