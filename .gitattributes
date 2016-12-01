@@ -1,2 +1,3 @@
 *.gd linguist-language=GDScript
 *.inc linguist-vendored
+return-false/game/assets/fonts/* linguist-vendored
