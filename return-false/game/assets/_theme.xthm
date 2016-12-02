@@ -257,6 +257,7 @@
 		<resource name="Panel/styles/panelf" resource_type="StyleBox" path="local://20">  </resource>
 		<resource name="Panel/styles/panelnc" resource_type="StyleBox" path="local://20">  </resource>
 		<resource name="PanelContainer/styles/panel" resource_type="StyleBox" path="local://20">  </resource>
+		<resource name="PopupPanel/styles/panel" resource_type="StyleBox" path="local://20">  </resource>
 		<color name="TabContainer/colors/font_color_bg"> 0.690196, 0.690196, 0.690196, 1 </color>
 		<color name="TabContainer/colors/font_color_fg"> 0.941176, 0.941176, 0.941176, 1 </color>
 		<int name="TabContainer/constants/hseparation"> 0 </int>
@@ -289,6 +290,12 @@
 		<resource name="Tabs/styles/panel" resource_type="StyleBox" path="local://20">  </resource>
 		<resource name="Tabs/styles/tab_bg" resource_type="StyleBox" path="local://20">  </resource>
 		<resource name="Tabs/styles/tab_fg" resource_type="StyleBox" path="local://20">  </resource>
+		<color name="WindowDialog/colors/title_color"> 0, 0, 0, 1 </color>
+		<int name="WindowDialog/constants/close_h_ofs"> 22 </int>
+		<int name="WindowDialog/constants/close_v_ofs"> 20 </int>
+		<int name="WindowDialog/constants/title_height"> 20 </int>
+		<int name="WindowDialog/constants/titlebar_height"> 18 </int>
+		<resource name="WindowDialog/fonts/title_font"></resource>		<resource name="WindowDialog/icons/close"></resource>		<resource name="WindowDialog/icons/close_hilite"></resource>		<resource name="WindowDialog/styles/panel" resource_type="StyleBox" path="local://20">  </resource>
 
 	</main_resource>
 </resource_file>
