@@ -91,9 +91,7 @@ func change_scene(scene_path, animate=true):
 		fade_out()
 		yield(anim, 'finished')
 		
-	Player = null
 	set_scene(scene_path)
-	set_player()
 	
 	if animate:
 		fade_in()
@@ -117,7 +115,7 @@ func set_player():
 	_player.set_global_pos(last_player_pos)
 	_player.find_node('Camera2D').force_update_scroll()
 	Player = _player
-	Scene.connect('walk_to', Player, 'update_path')
+#	Scene.connect('walk_to', Player, 'update_path')
 #	Player.connect('path_updated', Scene, 'on_path_updated')
 #	Player.connect('done_moving', Scene, 'on_motion_end')
 	return Player
@@ -132,8 +130,8 @@ func _enter_game():
 	setup('MessageUI', "res://systems/dialogue/Dialogue.Example.tscn")
 #	change_scene("res://systems/environment/_Environment.tscn", false)
 	change_scene(initial_scene, false)
-	setup('NPCManager', "res://systems/npc/NPC.Manager.tscn")
-	setup('QuestManager', "res://systems/quests/Quest.Manager.tscn", true)
+#	setup('NPCManager', "res://systems/npc/NPC.Manager.tscn")
+#	setup('QuestManager', "res://systems/quests/Quest.Manager.tscn", true)
 	setup('HUD', "res://systems/ui/HUD.tscn")
 	MessageUI.raise()
 

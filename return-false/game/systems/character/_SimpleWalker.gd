@@ -97,8 +97,7 @@ func update_path(end, nav=self.nav):
 func walk(delta):
 
 	# If we're already there, forget it
-	if path.size() <= 1:
-		halt()
+	if path.size() < 1:
 		return
 
 	else:

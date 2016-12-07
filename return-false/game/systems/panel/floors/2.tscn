@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://assets/panels/sketches/viewport copy 11.jpg" type="Texture" id=1]
+
+[sub_resource type="NavigationPolygon" id=1]
+
+vertices = Vector2Array( 2053.91, 510, 3000, 510, 3000, 800, 1520.77, 800, 0, 510, 1734.03, 510, 1184.48, 800, 0, 800 )
+polygons = [ IntArray( 0, 1, 2, 3 ), IntArray( 4, 5, 0, 3, 6 ), IntArray( 7, 4, 6 ) ]
+outlines = [ Vector2Array( 0, 510, 1734.03, 510, 2053.91, 510, 3000, 510, 3000, 800, 1520.77, 800, 1184.48, 800, 0, 800 ) ]
+
+[node name="2" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+centered = false
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="."]
+
+navpoly = SubResource( 1 )
+enabled = true
+
+[node name="YSort" type="YSort" parent="."]
+
+sort/enabled = true
+
+

@@ -17,22 +17,22 @@
 
 script/source = "extends TextureButton\n\n# class member variables go here, for example:\n# var a = 2\n# var b = \"textvar\"\n\nonready var game = get_tree().get_current_scene()\nonready var endpoint1 = get_parent().get_node(\'endpoint-1\')\nonready var endpoint2 = get_parent().get_node(\'endpoint-2\')\nonready var navpoly = get_parent().get_node(\'NavigationPolygonInstance\')\nonready var follow = get_parent().find_node(\'PathFollow2D\')\nonready var followcam = get_parent().find_node(\'shaftcam\')\n\nfunc _ready():\n\t# Called every time the node is added to the scene.\n\t# Initialization here\n\tpass\n\nfunc _pressed():\n\t\n\tgame.last_action = { \'event\': \'click\', \'target\': self }\n\tgame.Player.update_path(endpoint1.get_global_pos(), game.Player.nav)\n\t\n\tyield(game.Player, \'done_moving\')\n\tif game.last_action.target == self:\n\n\t\tgame.Player.hide()\n#\t\tfollowcam.make_current()\n#\t\tfollow.set_fixed_process(true)\n\t\tgame.Player.move_to(endpoint1.get_global_pos() + Vector2(0, 1600))\n#\t\tyield(follow, \'arrived\')\n\t\tgame.Player.update_path(endpoint2.get_global_pos() + Vector2(200,0), game.Player.nav)\n\t\tyield(game.Player, \'done_moving\')\n\t\tgame.Player.show()\n\t\tgame.Player.update_path(endpoint2.get_global_pos(), game.Player.nav)\n#\t\tyield(game.Player, \'done_moving\')\n#\t\tgame.Player.camera.make_current()\n#\t\tgame.Player.camera.force_update_scroll()\n\n\n\n#\tif (game.Player and game.Player.is_moving):\n#\t\tprint(\"waiting\")\n#\t\tyield(game.Player, \'done_moving\')\n#\t\tif game.last_action.target == self:\n#\t\t\tprint(\"going somewhere\?\")\n#\t\telse:\n#\t\t\tprint(\"nvm\")\n#\telse:\n#\t\tprint(\"oh hi\")\n\t"
 
-[sub_resource type="Curve2D" id=5]
+[sub_resource type="Curve2D" id=2]
 
 bake_interval = 5.0
 _data = { "points":Vector2Array( 0, 0, 0, 0, 220, 300, 0, 0, 0, 0, 460, 300, 0, 0, 0, 0, 460, 1920, 0, 0, 0, 0, 210, 1910 ) }
 
-[sub_resource type="GDScript" id=6]
+[sub_resource type="GDScript" id=3]
 
 script/source = "extends PathFollow2D\n\n# class member variables go here, for example:\n# var a = 2\n# var b = \"textvar\"\nvar rate = .25\nsignal arrived\n\nfunc _fixed_process(delta):\n\tset_unit_offset(get_unit_offset() + delta*rate)\n\tif(get_unit_offset() >= 1.0):\n\t\temit_signal(\"arrived\")\n\t\tset_fixed_process(false)\n\nfunc _ready():\n\t# Called every time the node is added to the scene.\n\t# Initialization here\n\tpass\n"
 
-[sub_resource type="NavigationPolygon" id=2]
+[sub_resource type="NavigationPolygon" id=4]
 
 vertices = Vector2Array( 180, 560, 300, 510, 3008, 518, 2998, 798, 0, 800, 50, 690 )
 polygons = [ IntArray( 0, 1, 2, 3, 4, 5 ) ]
 outlines = [ Vector2Array( 180, 560, 300, 510, 3008, 518, 2998, 798, 0, 800, 50, 690 ) ]
 
-[sub_resource type="ConvexPolygonShape2D" id=3]
+[sub_resource type="ConvexPolygonShape2D" id=5]
 
 custom_solver_bias = 0.0
 points = Vector2Array( 2270, 510, 2580, 790, 2220, 800, 1970, 500 )
@@ -166,7 +166,7 @@ transform/pos = Vector2( -72, 1918 )
 [node name="Path2D" type="Path2D" parent="elevator"]
 
 editor/display_folded = true
-curve = SubResource( 5 )
+curve = SubResource( 2 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="elevator/Path2D"]
 
@@ -179,7 +179,7 @@ rotate = false
 cubic_interp = true
 loop = false
 lookahead = 4.0
-script/script = SubResource( 6 )
+script/script = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="elevator/Path2D/PathFollow2D"]
 
@@ -212,7 +212,7 @@ drag_margin/bottom = 0.2
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
 
 transform/pos = Vector2( 2, 2 )
-navpoly = SubResource( 2 )
+navpoly = SubResource( 4 )
 enabled = true
 
 [node name="YSort" type="YSort" parent="Navigation2D"]
@@ -227,7 +227,7 @@ visibility/visible = false
 [node name="Area2D" type="Area2D" parent="door"]
 
 input/pickable = true
-shapes/0/shape = SubResource( 3 )
+shapes/0/shape = SubResource( 5 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
