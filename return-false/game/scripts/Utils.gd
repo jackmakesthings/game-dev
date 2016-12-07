@@ -8,6 +8,9 @@ const PLAYER_CLASS = preload("res://systems/character/_SimpleWalker.gd")
 
 var debug = true
 
+var orientations = ['N', 'NW', 'W', 'SW', 'S', 'SE', 'E', 'NE', 'N']
+var deg_per_orient = 360 / (orientations.size() - 1)
+
 ## Data methods ##
 
 # get_json(file)
@@ -114,13 +117,17 @@ func get_orient(vector):
 			
 # Finds the NESW orientation from one vector to another
 func get_orient_between(from, to):
-	var vector = to - from;
-	return get_orient(vector)
-
+	var angle_to_pt = rad2deg(from.angle_to_point(to))
+	if angle_to_pt < 0:
+		angle_to_pt += 360.0
+		
+	var sector = round(angle_to_pt/deg_per_orient)
+	return orientations[sector]
+	
 # Finds the NESW orientation from one *node* to another
 func get_orient_between_nodes(from, to):
-	var vector = to.get_global_pos() - from.get_global_pos();
-	return get_orient(vector)
+	return get_orient_between(from.get_global_pos(), to.get_global_pos())
+
 
 # Just a wrapper for print(), to make debug-only logging a little easier
 func debug(text):
