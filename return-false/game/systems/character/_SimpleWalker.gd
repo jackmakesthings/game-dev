@@ -72,6 +72,8 @@ func _ready():
 # @end : Vector2; clicked destination point
 ##
 func update_path(end, nav=self.nav):
+	Game.last_action = {'event': 'walk', 'target': end}
+	
 	if nav and not self.nav:
 		self.nav = nav
 	# Store the current position
@@ -98,6 +100,7 @@ func walk(delta):
 
 	# If we're already there, forget it
 	if path.size() < 1:
+		halt()
 		return
 
 	else:

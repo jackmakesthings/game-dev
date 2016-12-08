@@ -1,30 +1,144 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=9 format=1]
 
-[ext_resource path="res://assets/panels/sketches/viewport copy 10.jpg" type="Texture" id=1]
+[ext_resource path="res://assets/panels/sketches/viewport copy 9.jpg" type="Texture" id=1]
+[ext_resource path="res://assets/panels/sketches/door-area-mask.png" type="Texture" id=2]
+[ext_resource path="res://assets/panels/sketches/blue-room-left.jpg" type="Texture" id=3]
+[ext_resource path="res://assets/panels/sketches/red-room-right.jpg" type="Texture" id=4]
+[ext_resource path="res://assets/panels/sketches/door-middle.png" type="Texture" id=5]
+
+[sub_resource type="GDScript" id=2]
+
+script/source = "extends Node2D\n\n# class member variables go here, for example:\n# var a = 2\n# var b = \"textvar\"\n\nfunc _ready():\n\tGame.Space = get_node(\'room-1-0\')"
+
+[sub_resource type="GDScript" id=3]
+
+script/source = "extends \'res://systems/panel/_Door.gd\'"
 
 [sub_resource type="NavigationPolygon" id=1]
 
-vertices = Vector2Array( 2053.91, 510, 3000, 510, 3000, 800, 1520.77, 800, 0, 510, 1734.03, 510, 1184.48, 800, 0, 800 )
-polygons = [ IntArray( 0, 1, 2, 3 ), IntArray( 4, 5, 0, 3, 6 ), IntArray( 7, 4, 6 ) ]
-outlines = [ Vector2Array( 0, 510, 1734.03, 510, 2053.91, 510, 3000, 510, 3000, 800, 1520.77, 800, 1184.48, 800, 0, 800 ) ]
+vertices = Vector2Array( -1012, 508, 2010, 510, 2010, 800, -1002, 798 )
+polygons = [ IntArray( 0, 1, 2, 3 ) ]
+outlines = [ Vector2Array( -1012, 508, 2010, 510, 2010, 800, -1002, 798 ) ]
 
 [node name="1" type="Node2D"]
 
-[node name="Sprite" type="Sprite" parent="."]
+script/script = SubResource( 2 )
+
+[node name="room-1-0" type="Sprite" parent="." groups=[ "rooms" ]]
 
 texture = ExtResource( 1 )
 centered = false
-offset = Vector2( 1000, 0 )
-region = true
-region_rect = Rect2( 1000, 0, 2000, 800 )
+
+[node name="door-0-1" type="TextureButton" parent="."]
+
+visibility/self_opacity = 0.5
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 770.0
+margin/top = 10.0
+margin/right = 1071.0
+margin/bottom = 810.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 2 )
+script/script = SubResource( 3 )
+target_room = NodePath("../room-1-1")
+
+[node name="room-1-1" type="Sprite" parent="." groups=[ "rooms" ]]
+
+transform/pos = Vector2( 1002, 2 )
+texture = ExtResource( 3 )
+centered = false
+region_rect = Rect2( 1000, 0, 1000, 800 )
+
+[node name="door-1-0" type="TextureButton" parent="."]
+
+visibility/self_opacity = 0.5
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 1010.0
+margin/top = 10.0
+margin/right = 1311.0
+margin/bottom = 810.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 2 )
+script/script = SubResource( 3 )
+target_room = NodePath("../room-1-0")
+
+[node name="door-1-2" type="TextureButton" parent="."]
+
+visibility/self_opacity = 0.5
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 1702.0
+margin/top = -1.0
+margin/right = 2003.0
+margin/bottom = 799.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 2 )
+script/script = SubResource( 3 )
+target_room = NodePath("../room-1-2")
+
+[node name="room-1-2" type="Sprite" parent="." groups=[ "rooms" ]]
+
+transform/pos = Vector2( 2002, 2 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="door-2-1" type="TextureButton" parent="."]
+
+visibility/self_opacity = 0.5
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 2002.0
+margin/top = 0.0
+margin/right = 2303.0
+margin/bottom = 800.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 2 )
+params/scale = Vector2( -1, 1 )
+script/script = SubResource( 3 )
+target_room = NodePath("../room-1-1")
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="."]
 
+transform/pos = Vector2( 1002, 2 )
 navpoly = SubResource( 1 )
 enabled = true
 
 [node name="YSort" type="YSort" parent="."]
 
 sort/enabled = true
+
+[node name="Sprite2" type="Sprite" parent="YSort"]
+
+transform/pos = Vector2( 2010, 790 )
+z/z = 1
+texture = ExtResource( 5 )
+centered = false
+offset = Vector2( -70, -790 )
+
+[node name="Sprite3" type="Sprite" parent="YSort"]
+
+transform/pos = Vector2( 990, 790 )
+z/z = 1
+texture = ExtResource( 5 )
+centered = false
+offset = Vector2( -70, -790 )
 
 

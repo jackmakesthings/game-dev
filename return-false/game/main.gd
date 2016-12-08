@@ -19,9 +19,12 @@ var NPCManager = null
 var QuestManager = null
 var HUD = null
 
-var last_player_pos = Vector2(1540,600)
+var last_player_pos = Vector2(1540,700)
 
 var last_action = { 'event': null, 'target': null }
+
+var current_floor
+var current_room
 
 export(String, FILE) var initial_scene # where do we start?
 

@@ -1,8 +1,8 @@
-[gd_scene load_steps=11 format=1]
+[gd_scene load_steps=9 format=1]
 
 [ext_resource path="res://sandbox/isometric_light/light2.png" type="Texture" id=1]
 [ext_resource path="res://assets/tiles/floors/floor-72x36.tres" type="TileSet" id=2]
-[ext_resource path="res://assets/tiles/floors/72x36/red--72x36.png" type="Texture" id=3]
+[ext_resource path="res://systems/environment/_Door.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/tiles/floors/72x36/green-border--72x36.png" type="Texture" id=4]
 [ext_resource path="res://sandbox/isometric_light/small-tileset.tres" type="TileSet" id=5]
 [ext_resource path="res://systems/npc/_NPC.tscn" type="PackedScene" id=6]
@@ -11,15 +11,6 @@
 [sub_resource type="GDScript" id=1]
 
 script/source = "# To add the player:\n# 1) create or instance k2d under the \'objects\' node\n# 2) make k2d extend from systems/player/_Walker.gd\n# 3) connect this node\'s \"walk_to\" signal to \"update_path\" on the k2d\n\nextends \"res://systems/environment/_Environment.gd\"\n\nvar Player = null\nvar MessageUI = null"
-
-[sub_resource type="GDScript" id=2]
-
-script/source = "extends \"res://systems/environment/_Door.gd\"\n"
-
-[sub_resource type="ConvexPolygonShape2D" id=3]
-
-custom_solver_bias = 0.0
-points = Vector2Array( -33.552, -0.0892334, 0.145668, -16.938, 34.2018, -0.806213, 0.145668, 17.8351 )
 
 [node name="env" type="Node2D"]
 
@@ -75,32 +66,7 @@ occluder/light_mask = 1
 tile_data = IntArray( -196598, 1, -196597, 1, -196596, 1, -196595, 1, -196594, 1, -196593, 1, -196592, 1, -196591, 1, -196590, 1, -131062, 1, -131061, 1, -131060, 1, -131059, 1, -131058, 1, -131057, 1, -131056, 1, -131055, 1, -131054, 1, -65531, 0, -65529, 1, -65528, 1, -65527, 1, -65526, 1, -65525, 1, -65524, 3, -65523, 3, -65522, 3, -65521, 3, -65520, 1, -65519, 1, -65518, 1, 4, 0, 5, 0, 6, 0, 7, 1, 8, 1, 9, 1, 10, 1, 11, 0, 12, 0, 13, 0, 14, 0, 15, 0, 16, 0, 17, 0, 18, 1, 65540, 0, 65541, 0, 65542, 0, 65543, 0, 65544, 0, 65545, 0, 65546, 0, 65547, 0, 65548, 0, 65549, 0, 65550, 0, 65551, 0, 65552, 0, 65553, 0, 65554, 0, 131076, 0, 131077, 0, 131078, 0, 131079, 0, 131080, 0, 131081, 0, 131082, 0, 131083, 0, 131084, 0, 131085, 0, 131086, 0, 131087, 0, 131088, 0, 131089, 0, 131090, 0, 196612, 0, 196613, 0, 196614, 0, 196615, 0, 196616, 0, 196617, 0, 196618, 0, 196619, 0, 196620, 0, 196621, 0, 196622, 0, 196623, 0, 196624, 0, 196625, 0, 196626, 0, 262150, 0, 262151, 0, 262152, 0, 262153, 0, 262154, 0, 262155, 0, 262156, 0, 262157, 0, 262158, 0, 262159, 0, 262160, 0, 262161, 0, 262162, 0, 327687, 0, 327688, 0, 327689, 0, 327690, 0, 327691, 0, 327692, 0, 327693, 0, 327694, 0, 327695, 0, 327696, 0, 327697, 0, 327698, 0, 393224, 0, 393225, 0, 393226, 0, 393227, 0, 393228, 0, 393229, 0, 393230, 0, 393231, 0, 393232, 0, 393233, 0, 393234, 0, 458761, 0, 458762, 0, 458763, 0, 458764, 0, 458765, 0, 458766, 0, 458767, 0, 458768, 0, 458769, 0, 458770, 0, 524298, 0, 524299, 0, 524300, 0, 524301, 0, 524302, 0, 524303, 0, 524304, 0, 524305, 0, 524306, 1 )
 __meta__ = { "_edit_lock_":true }
 
-[node name="door" type="Sprite" parent="nav/ground" groups=[ "doors" ]]
-
-transform/pos = Vector2( 297.922, 202.696 )
-texture = ExtResource( 3 )
-script/script = SubResource( 2 )
-destination_path = "res://systems/environment/_Environment-72x42.tscn"
-door_id = 1
-trigger_node = NodePath("Area2D")
-
-[node name="Area2D" type="Area2D" parent="nav/ground/door"]
-
-input/pickable = true
-shapes/0/shape = SubResource( 3 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="nav/ground/door/Area2D"]
-
-build_mode = 0
-polygon = Vector2Array( -33.552, -0.0892334, 0.145668, -16.938, 34.2018, -0.806213, 0.145668, 17.8351 )
-shape_range = Vector2( 0, 0 )
-trigger = true
+[node name="door" parent="nav/ground" instance=ExtResource( 3 )]
 
 [node name="marker" type="Sprite" parent="nav/ground"]
 
