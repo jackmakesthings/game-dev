@@ -4,8 +4,8 @@ var current_trigger
 
 func setup(data):
 	print(data)
-	if data.has('desc'):
-		find_node('desc').set_bbcode(data['desc'])
+	if data.has('description'):
+		find_node('desc').set_bbcode(data['description'])
 	if data.has('image'):
 		find_node('image').set_texture(data['image'])
 	if data.has('node'):

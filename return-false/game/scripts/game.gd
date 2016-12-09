@@ -11,6 +11,8 @@ var Nav
 var Object_Layer
 var View
 
+var HUD
+
 var last_action = {}
 var active_elevator
 

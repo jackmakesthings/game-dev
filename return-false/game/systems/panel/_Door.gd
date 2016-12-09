@@ -3,8 +3,15 @@
 extends BaseButton
 export(NodePath) var target_room
 
+# Timer and tween nodes for camera panning
 var tween
 var t
+
+# Camera pan settings
+var t_speed = 0.5
+var t_trans = Tween.TRANS_QUAD
+var t_ease = Tween.EASE_IN_OUT
+var t_delay = 0.0
 
 var direction # 1 = right, -1 = left
 var offset_size # how far to walk thru
@@ -37,10 +44,11 @@ func _pressed():
 
 func slide_camera():
 	# Establish where we are and where we're going
+	var target = get_node(target_room)
 	var current_left = Game.Player.camera.get('limit/left')
 	var current_right = Game.Player.camera.get('limit/right')
-	var target_left = get_node(target_room).get_global_pos().x
-	var target_right = target_left + get_node(target_room).get_item_rect().size.x
+	var target_left = target.get_global_pos().x
+	var target_right = target_left + target.get_item_rect().size.x
 
 	# Walk the player past the door
 	if direction > 0:
@@ -59,16 +67,15 @@ func slide_camera():
 	Game.Player.hide()
 
 	# Tween the camera over to the new room, pause briefly
-	tween.interpolate_property(Game.Player.camera, 'limit/left', current_left, target_left, 0.65, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, 0.0)
-	tween.interpolate_property(Game.Player.camera, 'limit/right', current_right, target_right, 0.65, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, 0.0)
+	tween.interpolate_property(Game.Player.camera, 'limit/left', current_left, target_left, t_speed, t_trans, t_ease, t_delay)
+	tween.interpolate_property(Game.Player.camera, 'limit/right', current_right, target_right, t_speed, t_trans, t_ease, t_delay)
 	tween.start()
 	yield(tween, 'tween_complete')
 	t.set_wait_time(0.75)
 	t.start()
 	yield(t, 'timeout')
 
-
 	# Show the player and walk them further into the room
 	Game.Player.show()
 	Game.Player.update_path(Game.Player.get_global_pos() + Vector2(offset_size, 0))
-	Game.Space = get_node(target_room)
+	Game.Space = target

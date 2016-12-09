@@ -57,6 +57,7 @@ func setup(name, path, raise=false):
 	add_child(_instance)
 	_instance.set_name(name)
 	self.set(name, _instance)
+	Game.set(name, _instance)
 	if raise:
 		_instance.raise()
 	return self[name]
