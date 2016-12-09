@@ -12,6 +12,7 @@ var Object_Layer
 var View
 
 var last_action = {}
+var active_elevator
 
 func clear_last_action():
 	last_action = {}

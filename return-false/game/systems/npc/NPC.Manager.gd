@@ -50,5 +50,5 @@ func get_npc_keys():
 	return npc_keys
 
 func _ready():
-	npc_container = get_tree().get_current_scene().Scene.object_layer
+	npc_container = Game.Object_Layer
 	_pull_npcs()

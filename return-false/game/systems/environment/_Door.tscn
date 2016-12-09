@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://assets/tiles/floors/72x36/red--72x36.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"res://systems/environment/_Door.gd\"\n"
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -33.552, -0.0892334, 0.145668, -16.938, 34.2018, -0.806213, 0.145668, 17.8351 )
+
+[node name="door" type="Sprite"]
+
+transform/pos = Vector2( 297.922, 202.696 )
+texture = ExtResource( 1 )
+script/script = SubResource( 1 )
+destination_path = "res://systems/environment/_Environment-72x42.tscn"
+door_id = 1
+trigger_node = NodePath("Area2D")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+
+build_mode = 0
+polygon = Vector2Array( -33.552, -0.0892334, 0.145668, -16.938, 34.2018, -0.806213, 0.145668, 17.8351 )
+shape_range = Vector2( 0, 0 )
+trigger = true
+
+
