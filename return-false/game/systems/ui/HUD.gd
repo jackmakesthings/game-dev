@@ -19,8 +19,6 @@ func resources_updated(text):
 		upgrade_label.set_text(str(Upgrades.get_free_chips()))
 
 func inventory_updated(was_item_added, which_item):
-	print("inventory_updated signal came in, calling HUD update")
-
 	if was_item_added:
 		inventory_wrapper.add_item(which_item.name, which_item.thumbnail, false)
 	else:
@@ -37,7 +35,8 @@ func inspect_item(index):
 	item_preview.set_texture(item.image)
 	item_desc.set_bbcode(item.description)
 	drop_btn.set_disabled(false)
-	drop_btn.connect('pressed', Inventory, 'drop_item', [item])
+	if !drop_btn.is_connected('pressed', Inventory, 'drop_item'):
+		drop_btn.connect('pressed', Inventory, 'drop_item', [item])
 
 func clear_item():
 	active_item = null

@@ -132,7 +132,7 @@ func _enter_game():
 #	change_scene("res://systems/environment/_Environment.tscn", false)
 	change_scene(initial_scene, false)
 	setup('NPCManager', "res://systems/npc/NPC.Manager.tscn")
-#	setup('QuestManager', "res://systems/quests/Quest.Manager.tscn", true)
+	setup('QuestManager', "res://systems/quests/Quest.Manager.tscn", true)
 	setup('HUD', "res://systems/ui/HUD.tscn")
 	MessageUI.raise()
 

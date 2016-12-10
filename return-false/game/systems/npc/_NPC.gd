@@ -16,8 +16,8 @@ export(String) var no_options_fallback
 export(bool) var show_fallback
 
 # Node references
-onready var Player = get_tree().get_current_scene().Player
-onready var MessageUI = get_tree().get_current_scene().MessageUI
+onready var Player = Game.Player
+onready var MessageUI = Game.MessageUI
 
 onready var x = get_node(approach_point)
 onready var trigger = get_node(trigger_area)
@@ -82,7 +82,7 @@ func create_branch_option(branch):
 ##
 func _on_click():	
 
-	Player = get_tree().get_current_scene().Player
+	Player = Game.Player
 	
 	# No Player? Never mind.
 	if !Player:
@@ -101,6 +101,7 @@ func _on_click():
 		Player.orient_towards(collider.get_global_pos())
 		get_tree().set_input_as_handled()
 		start_interaction()
+		print("chat!")
 
 	else:
 		# Player's somewhere else? Call them over,
@@ -108,13 +109,18 @@ func _on_click():
 
 		var destination = get_canvas_transform().xform(x.get_global_pos())
 		Utils.fake_click(destination, 1)
+		Game.last_action = { 'event': 'interact', 'target': self }
 
 		yield(Player, "done_moving")
 
 		# Make sure they actually stopped near the NPC
-		if Utils.is_player_nearby(trigger) and Player.conversation_queued:
-			Player.orient_towards(collider.get_global_pos())
-			start_interaction()
+#		if Utils.is_player_nearby(trigger) and Player.conversation_queued:
+		if Game.last_action.target != self:
+			return
+			
+		Player.orient_towards(collider.get_global_pos())
+		start_interaction()
+		
 
 
 ## 
@@ -154,7 +160,7 @@ func check_branches():
 ##
 func present_conversations(dialog_branches):
 	
-	MessageUI = get_tree().get_current_scene().MessageUI
+	MessageUI = Game.MessageUI
 	
 	# Covering for lack of MessageUI in subscenes, test scenes, etc.
 	if !MessageUI:

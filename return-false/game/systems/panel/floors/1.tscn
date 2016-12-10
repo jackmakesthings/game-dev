@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=1]
+[gd_scene load_steps=13 format=1]
 
 [ext_resource path="res://systems/panel/floors/_Floor.gd" type="Script" id=1]
 [ext_resource path="res://assets/panels/sketches/viewport copy 9.jpg" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/panels/sketches/door-middle.png" type="Texture" id=6]
 [ext_resource path="res://assets/dank-larger.png" type="Texture" id=7]
 [ext_resource path="res://assets/dank-portrait.png" type="Texture" id=8]
+[ext_resource path="res://systems/npc/_NPC.tscn" type="PackedScene" id=9]
 
 [sub_resource type="GDScript" id=3]
 
@@ -165,5 +166,10 @@ name = "Glass instrument"
 desc = "It appears to have water in the bottom."
 image = ExtResource( 8 )
 thumbnail = ExtResource( 7 )
+
+[node name="NPC" parent="YSort" instance=ExtResource( 9 )]
+
+transform/pos = Vector2( 508, 468 )
+transform/scale = Vector2( 4, 4 )
 
 

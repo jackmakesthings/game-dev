@@ -61,7 +61,7 @@ transform/pos = Vector2( 12.605, 34.4978 )
 
 [node name="Position2D" type="Position2D" parent="."]
 
-transform/pos = Vector2( 38.851, 58.4839 )
+transform/pos = Vector2( 25.5826, 47.2058 )
 
 [connection signal="pressed" from="Sprite" to="." method="_on_click"]
 
