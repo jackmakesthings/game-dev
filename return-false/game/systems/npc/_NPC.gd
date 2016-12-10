@@ -231,3 +231,14 @@ func end_interaction():
 		MessageUI.clear()
 		MessageUI.close()
 	return 0
+	
+# UI detail - the cursor should change on hover
+# TODO: Refine this so it reflects whether there are
+# active conversations available or not
+
+
+func _on_mouse_enter():
+	Input.set_custom_mouse_cursor(Game.HUD.npc_cursor)
+
+func _on_mouse_exit():
+	Input.set_custom_mouse_cursor(Game.HUD.walk_cursor)

@@ -63,6 +63,10 @@ transform/pos = Vector2( 12.605, 34.4978 )
 
 transform/pos = Vector2( 25.5826, 47.2058 )
 
+[connection signal="mouse_enter" from="Sprite" to="." method="_on_mouse_enter"]
+
+[connection signal="mouse_exit" from="Sprite" to="." method="_on_mouse_exit"]
+
 [connection signal="pressed" from="Sprite" to="." method="_on_click"]
 
 

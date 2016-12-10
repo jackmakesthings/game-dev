@@ -9,6 +9,11 @@ onready var item_name = find_node('item-name')
 onready var item_desc = find_node('item-desc')
 onready var drop_btn = find_node('drop-item')
 
+# cursors
+var walk_cursor = preload('res://assets/temp/ui/align-symbol.png')
+var inspect_cursor = preload('res://assets/temp/ui/search.png')
+var npc_cursor = preload('res://assets/temp/ui/chat.png')
+
 var active_item
 var active_item_idx
 
