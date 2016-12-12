@@ -9,15 +9,15 @@
 [ext_resource path="res://assets/dank-portrait.png" type="Texture" id=7]
 [ext_resource path="res://systems/npc/_NPC.tscn" type="PackedScene" id=8]
 
-[sub_resource type="GDScript" id=5]
+[sub_resource type="GDScript" id=1]
 
 script/source = "extends \'res://systems/panel/floors/_Floor.gd\'\n\nfunc _enter_tree():\n\ttheme_music = preload(\'res://assets/sound/335361_cabled-mess_little-happy-tune-22-10.ogg\')"
 
-[sub_resource type="GDScript" id=3]
+[sub_resource type="GDScript" id=2]
 
 script/source = "extends \'res://systems/panel/_Door.gd\'"
 
-[sub_resource type="NavigationPolygon" id=1]
+[sub_resource type="NavigationPolygon" id=3]
 
 vertices = Vector2Array( -1012, 508, 2708, 498, 2688, 808, -1002, 798 )
 polygons = [ IntArray( 0, 1, 2, 3 ) ]
@@ -29,7 +29,7 @@ script/source = "extends \'res://systems/inventory/CollectibleItem.gd\'\n\n"
 
 [node name="1" type="Node2D"]
 
-script/script = SubResource( 5 )
+script/script = SubResource( 1 )
 
 [node name="room-1-0" type="Sprite" parent="." groups=[ "rooms" ]]
 
@@ -52,7 +52,7 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 textures/normal = ExtResource( 2 )
-script/script = SubResource( 3 )
+script/script = SubResource( 2 )
 target_room = NodePath("../../room-1-1")
 
 [node name="room-1-1" type="Sprite" parent="." groups=[ "rooms" ]]
@@ -78,7 +78,7 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 textures/normal = ExtResource( 2 )
-script/script = SubResource( 3 )
+script/script = SubResource( 2 )
 target_room = NodePath("../../room-1-0")
 
 [node name="door-1-2" type="TextureButton" parent="room-1-1"]
@@ -96,7 +96,7 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 textures/normal = ExtResource( 2 )
-script/script = SubResource( 3 )
+script/script = SubResource( 2 )
 target_room = NodePath("../../room-1-2")
 
 [node name="room-1-2" type="Sprite" parent="." groups=[ "rooms" ]]
@@ -121,13 +121,13 @@ enabled_focus_mode = 2
 shortcut = null
 textures/normal = ExtResource( 2 )
 params/scale = Vector2( -1, 1 )
-script/script = SubResource( 3 )
+script/script = SubResource( 2 )
 target_room = NodePath("../../room-1-1")
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="."]
 
 transform/pos = Vector2( 1002, 2 )
-navpoly = SubResource( 1 )
+navpoly = SubResource( 3 )
 enabled = true
 
 [node name="YSort" type="YSort" parent="."]
