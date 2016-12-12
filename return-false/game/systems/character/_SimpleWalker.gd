@@ -149,9 +149,9 @@ func walk(delta):
 # Call this to bring the player to a 'complete stop'.
 ##
 func halt():
+	set_fixed_process(false)
 	is_moving = false
 	emit_signal("done_moving", last_pos, get_pos())
-	set_fixed_process(false)
 	anim_node.seek(0.0, true)
 	anim_node.stop()
 	path.clear()

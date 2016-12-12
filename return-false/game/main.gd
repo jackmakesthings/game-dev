@@ -142,4 +142,6 @@ func _enter_game():
 # Starts the game at the base game menu scene
 ##
 func _ready():
+	Game.SoundPlayer = find_node('SamplePlayer')
+	Game.MusicPlayer = find_node('StreamPlayer')
 	set_scene("res://systems/ui/Splash.tscn")

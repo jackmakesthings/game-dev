@@ -1,14 +1,17 @@
 [gd_scene load_steps=13 format=1]
 
-[ext_resource path="res://systems/panel/floors/_Floor.gd" type="Script" id=1]
-[ext_resource path="res://assets/panels/sketches/viewport copy 9.jpg" type="Texture" id=2]
-[ext_resource path="res://assets/panels/sketches/door-area-mask.png" type="Texture" id=3]
-[ext_resource path="res://assets/panels/sketches/blue-room-left.jpg" type="Texture" id=4]
-[ext_resource path="res://assets/panels/sketches/red-room-right-long.jpg" type="Texture" id=5]
-[ext_resource path="res://assets/panels/sketches/door-middle.png" type="Texture" id=6]
-[ext_resource path="res://assets/dank-larger.png" type="Texture" id=7]
-[ext_resource path="res://assets/dank-portrait.png" type="Texture" id=8]
-[ext_resource path="res://systems/npc/_NPC.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/panels/sketches/viewport copy 9.jpg" type="Texture" id=1]
+[ext_resource path="res://assets/panels/sketches/door-area-mask.png" type="Texture" id=2]
+[ext_resource path="res://assets/panels/sketches/blue-room-left.jpg" type="Texture" id=3]
+[ext_resource path="res://assets/panels/sketches/red-room-right-long.jpg" type="Texture" id=4]
+[ext_resource path="res://assets/panels/sketches/door-middle.png" type="Texture" id=5]
+[ext_resource path="res://assets/dank-larger.png" type="Texture" id=6]
+[ext_resource path="res://assets/dank-portrait.png" type="Texture" id=7]
+[ext_resource path="res://systems/npc/_NPC.tscn" type="PackedScene" id=8]
+
+[sub_resource type="GDScript" id=5]
+
+script/source = "extends \'res://systems/panel/floors/_Floor.gd\'\n\nfunc _enter_tree():\n\ttheme_music = preload(\'res://assets/sound/335361_cabled-mess_little-happy-tune-22-10.ogg\')"
 
 [sub_resource type="GDScript" id=3]
 
@@ -22,16 +25,16 @@ outlines = [ Vector2Array( -1012, 508, 2708, 498, 2688, 808, -1002, 798 ) ]
 
 [sub_resource type="GDScript" id=4]
 
-script/source = "extends \'res://systems/inventory/CollectibleItem.gd\'"
+script/source = "extends \'res://systems/inventory/CollectibleItem.gd\'\n\n"
 
 [node name="1" type="Node2D"]
 
-script/script = ExtResource( 1 )
+script/script = SubResource( 5 )
 
 [node name="room-1-0" type="Sprite" parent="." groups=[ "rooms" ]]
 
 transform/scale = Vector2( 1.1, 1 )
-texture = ExtResource( 2 )
+texture = ExtResource( 1 )
 centered = false
 
 [node name="door-0-1" type="TextureButton" parent="room-1-0"]
@@ -48,7 +51,7 @@ margin/bottom = 800.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-textures/normal = ExtResource( 3 )
+textures/normal = ExtResource( 2 )
 script/script = SubResource( 3 )
 target_room = NodePath("../../room-1-1")
 
@@ -56,7 +59,7 @@ target_room = NodePath("../../room-1-1")
 
 transform/pos = Vector2( 1080, 0 )
 transform/scale = Vector2( 1.1, 1 )
-texture = ExtResource( 4 )
+texture = ExtResource( 3 )
 centered = false
 region_rect = Rect2( 1000, 0, 1000, 800 )
 
@@ -74,7 +77,7 @@ margin/bottom = 800.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-textures/normal = ExtResource( 3 )
+textures/normal = ExtResource( 2 )
 script/script = SubResource( 3 )
 target_room = NodePath("../../room-1-0")
 
@@ -92,14 +95,14 @@ margin/bottom = 797.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-textures/normal = ExtResource( 3 )
+textures/normal = ExtResource( 2 )
 script/script = SubResource( 3 )
 target_room = NodePath("../../room-1-2")
 
 [node name="room-1-2" type="Sprite" parent="." groups=[ "rooms" ]]
 
 transform/pos = Vector2( 2160, 0 )
-texture = ExtResource( 5 )
+texture = ExtResource( 4 )
 centered = false
 
 [node name="door-2-1" type="TextureButton" parent="room-1-2"]
@@ -116,7 +119,7 @@ margin/bottom = 798.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-textures/normal = ExtResource( 3 )
+textures/normal = ExtResource( 2 )
 params/scale = Vector2( -1, 1 )
 script/script = SubResource( 3 )
 target_room = NodePath("../../room-1-1")
@@ -135,7 +138,7 @@ sort/enabled = true
 
 transform/pos = Vector2( 2150, 800 )
 z/z = 1
-texture = ExtResource( 6 )
+texture = ExtResource( 5 )
 centered = false
 offset = Vector2( -70, -790 )
 
@@ -143,7 +146,7 @@ offset = Vector2( -70, -790 )
 
 transform/pos = Vector2( 1100, 790 )
 z/z = 1
-texture = ExtResource( 6 )
+texture = ExtResource( 5 )
 centered = false
 offset = Vector2( -70, -790 )
 
@@ -160,14 +163,14 @@ margin/bottom = 686.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-textures/normal = ExtResource( 7 )
+textures/normal = ExtResource( 6 )
 script/script = SubResource( 4 )
 name = "Glass instrument"
 desc = "It appears to have water in the bottom."
-image = ExtResource( 8 )
-thumbnail = ExtResource( 7 )
+image = ExtResource( 7 )
+thumbnail = ExtResource( 6 )
 
-[node name="NPC" parent="YSort" instance=ExtResource( 9 )]
+[node name="NPC" parent="YSort" instance=ExtResource( 8 )]
 
 transform/pos = Vector2( 508, 468 )
 transform/scale = Vector2( 4, 4 )

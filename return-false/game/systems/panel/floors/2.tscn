@@ -6,7 +6,7 @@
 
 [sub_resource type="GDScript" id=2]
 
-script/source = "extends \'res://systems/panel/floors/_Floor.gd\'"
+script/source = "extends \'res://systems/panel/floors/_Floor.gd\'\n\nfunc _enter_tree():\n\ttheme_music = preload(\'res://assets/sound/362133_burinskas_chiptune-loop-light.ogg\')"
 
 [sub_resource type="GDScript" id=3]
 
@@ -36,9 +36,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 850.0
+margin/left = 910.0
 margin/top = 0.0
-margin/right = 1001.0
+margin/right = 1061.0
 margin/bottom = 800.0
 toggle_mode = false
 enabled_focus_mode = 2
@@ -50,7 +50,7 @@ target_room = NodePath("../../room-2-1")
 
 [node name="room-2-1" type="Sprite" parent="." groups=[ "rooms" ]]
 
-transform/pos = Vector2( 1010, 0 )
+transform/pos = Vector2( 1070, 0 )
 texture = ExtResource( 1 )
 centered = false
 flip_h = true
@@ -85,7 +85,7 @@ sort/enabled = true
 
 [node name="Sprite" type="Sprite" parent="YSort"]
 
-transform/pos = Vector2( 997, 400 )
+transform/pos = Vector2( 1057, 400 )
 z/z = 1
 texture = ExtResource( 3 )
 
