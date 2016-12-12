@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=8 format=1]
 
 [ext_resource path="res://systems/ui/HUD.gd" type="Script" id=1]
 [ext_resource path="res://assets/_theme.xthm" type="Theme" id=2]
-[ext_resource path="res://systems/ui/_ObjectPopup.gd" type="Script" id=3]
+[ext_resource path="res://systems/ui/Minimap.tscn" type="PackedScene" id=3]
+[ext_resource path="res://systems/ui/ItemView.tscn" type="PackedScene" id=4]
+[ext_resource path="res://systems/ui/ItemPopup.tscn" type="PackedScene" id=5]
 
-[sub_resource type="ImageTexture" id=3]
+[sub_resource type="ImageTexture" id=1]
 
 resource/name = "circuit-board-icon.png"
 flags = 1
@@ -60,25 +62,10 @@ max_lines_visible = -1
 [node name="Sprite" type="Sprite" parent="Control/upgrade_label"]
 
 transform/scale = Vector2( 0.4, 0.4 )
-texture = SubResource( 3 )
+texture = SubResource( 1 )
 centered = false
 offset = Vector2( -110, 0 )
 modulate = Color( 0.210938, 1, 0.24176, 1 )
-
-[node name="Panel" type="Panel" parent="Control"]
-
-visibility/visible = false
-anchor/top = 1
-anchor/right = 1
-anchor/bottom = 1
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 51.0
-margin/right = 3.0
-margin/bottom = 2.0
 
 [node name="Panel-1" type="Panel" parent="Control"]
 
@@ -94,104 +81,32 @@ margin/top = 0.0
 margin/right = -4.0
 margin/bottom = -2.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel-1"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/Panel-1"]
 
+anchor/right = 1
+anchor/bottom = 1
 focus/ignore_mouse = false
 focus/stop_mouse = false
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 500.0
-margin/bottom = 601.0
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 20.0
+margin/top = 20.0
+margin/right = -15.0
+margin/bottom = 20.0
 alignment = 0
 
-[node name="Label" type="Label" parent="Control/Panel-1/VBoxContainer"]
+[node name="minimap" parent="Control/Panel-1/VBoxContainer2" instance=ExtResource( 3 )]
 
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
+rect/min_size = Vector2( 360, 270 )
+margin/right = 360.0
+
+[node name="item-view" parent="Control/Panel-1/VBoxContainer2" instance=ExtResource( 4 )]
+
+size_flags/horizontal = 3
 size_flags/vertical = 3
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 500.0
-margin/bottom = 60.0
-custom_colors/font_color = Color( 0.984375, 0.972839, 0.972839, 1 )
-text = "ITEMS"
-valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="items" type="ItemList" parent="Control/Panel-1/VBoxContainer"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 3
-size_flags/stretch_ratio = 3.0
-margin/left = 0.0
-margin/top = 64.0
-margin/right = 500.0
-margin/bottom = 244.0
-
-[node name="item-preview" type="TextureFrame" parent="Control/Panel-1/VBoxContainer"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 3
-size_flags/stretch_ratio = 2.0
-margin/left = 0.0
-margin/top = 248.0
-margin/right = 500.0
-margin/bottom = 368.0
-stretch_mode = 0
-
-[node name="item-name" type="Label" parent="Control/Panel-1/VBoxContainer"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 3
-margin/left = 0.0
-margin/top = 372.0
-margin/right = 500.0
-margin/bottom = 432.0
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="item-desc" type="RichTextLabel" parent="Control/Panel-1/VBoxContainer"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 3
-size_flags/stretch_ratio = 2.0
-margin/left = 0.0
-margin/top = 436.0
-margin/right = 500.0
-margin/bottom = 556.0
-bbcode/enabled = false
-bbcode/bbcode = ""
-visible_characters = -1
-
-[node name="drop-item" type="Button" parent="Control/Panel-1/VBoxContainer"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 560.0
-margin/right = 500.0
-margin/bottom = 599.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-text = "[DROP]"
-flat = false
+margin/top = 274.0
+margin/right = 360.0
+margin/bottom = 662.0
 
 [node name="Label-1" type="Label" parent="Control"]
 
@@ -213,6 +128,7 @@ max_lines_visible = -1
 
 [node name="Label-2" type="Label" parent="Control"]
 
+visibility/visible = false
 anchor/left = 1
 anchor/right = 1
 focus/ignore_mouse = true
@@ -229,113 +145,6 @@ lines_skipped = 0
 max_lines_visible = -1
 script/script = SubResource( 2 )
 
-[node name="object_popup" type="PopupDialog" parent="Control"]
-
-visibility/visible = false
-anchor/left = 3
-anchor/top = 3
-anchor/right = 3
-anchor/bottom = 3
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 168.5
-margin/top = 197.0
-margin/right = -145.5
-margin/bottom = -234.0
-popup/exclusive = true
-script/script = ExtResource( 3 )
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/object_popup"]
-
-anchor/right = 1
-anchor/bottom = 1
-focus/ignore_mouse = false
-focus/stop_mouse = false
-size_flags/horizontal = 3
-size_flags/vertical = 3
-margin/left = 10.0
-margin/top = 10.0
-margin/right = 10.0
-margin/bottom = 10.0
-custom_constants/separation = 10
-alignment = 1
-
-[node name="image" type="TextureFrame" parent="Control/object_popup/VBoxContainer"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 3
-size_flags/vertical = 3
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 294.0
-margin/bottom = 177.0
-stretch_mode = 0
-
-[node name="desc" type="RichTextLabel" parent="Control/object_popup/VBoxContainer"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 3
-size_flags/vertical = 3
-margin/left = 0.0
-margin/top = 187.0
-margin/right = 294.0
-margin/bottom = 364.0
-bbcode/enabled = true
-bbcode/bbcode = ""
-visible_characters = -1
-
-[node name="ButtonGroup" type="HBoxContainer" parent="Control/object_popup/VBoxContainer"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = false
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 374.0
-margin/right = 294.0
-margin/bottom = 410.0
-alignment = 0
-
-[node name="btnTake" type="Button" parent="Control/object_popup/VBoxContainer/ButtonGroup"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 3
-size_flags/vertical = 3
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 145.0
-margin/bottom = 36.0
-toggle_mode = true
-click_on_press = true
-enabled_focus_mode = 2
-shortcut = null
-text = "Pick up"
-flat = false
-
-[node name="btnLeave" type="Button" parent="Control/object_popup/VBoxContainer/ButtonGroup"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 3
-size_flags/vertical = 3
-margin/left = 149.0
-margin/top = 0.0
-margin/right = 294.0
-margin/bottom = 36.0
-toggle_mode = true
-click_on_press = true
-enabled_focus_mode = 2
-shortcut = null
-text = "Leave"
-flat = false
-
-[connection signal="pressed" from="Control/object_popup/VBoxContainer/ButtonGroup/btnTake" to="." method="_on_btnTake_pressed"]
-
-[connection signal="pressed" from="Control/object_popup/VBoxContainer/ButtonGroup/btnLeave" to="." method="_on_btnLeave_pressed"]
+[node name="object_popup" parent="Control" instance=ExtResource( 5 )]
 
 

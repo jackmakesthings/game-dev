@@ -3,11 +3,6 @@ extends CanvasLayer
 
 onready var upgrade_label = find_node("upgrade_label")
 onready var object_popup = find_node("object_popup")
-onready var inventory_wrapper = find_node('items')
-onready var item_preview = find_node('item-preview')
-onready var item_name = find_node('item-name')
-onready var item_desc = find_node('item-desc')
-onready var drop_btn = find_node('drop-item')
 
 # cursors
 var default_cursor = preload('res://assets/temp/ui/cursor.png')
@@ -25,45 +20,14 @@ func resources_updated(text):
 	else:
 		upgrade_label.set_text(str(Upgrades.get_free_chips()))
 
-func inventory_updated(was_item_added, which_item):
-	if was_item_added:
-		inventory_wrapper.add_item(which_item.name, which_item.thumbnail, false)
-	else:
-		clear_item()
-		inventory_wrapper.remove_item(active_item_idx)
-
-
-func inspect_item(index):
-	var item_key = inventory_wrapper.get_item_text(index)
-	var item = Inventory.get_item_by('name', item_key)
-	active_item = item
-	active_item_idx = index
-	item_name.set_text(item.name)
-	item_preview.set_texture(item.image)
-	item_desc.set_bbcode(item.description)
-	drop_btn.set_disabled(false)
-	if !drop_btn.is_connected('pressed', Inventory, 'drop_item'):
-		drop_btn.connect('pressed', Inventory, 'drop_item', [item])
-
-func clear_item():
-	active_item = null
-	item_name.set_text('')
-	item_preview.set_texture(null)
-	item_desc.set_bbcode('')
-	drop_btn.disconnect('pressed', Inventory, 'drop_item')
-	drop_btn.set_disabled(true)
-
 
 func _ready():
 	resources_updated('ready')
 	if Upgrades.has_user_signal('update_UI'):
 		Upgrades.connect('update_UI', self, 'resources_updated')
 	
-	Inventory.connect('update_UI', self, 'inventory_updated')
-	inventory_wrapper.connect('item_selected', self, 'inspect_item')
-	drop_btn.set_disabled(true)
-
-
+	find_node('Panel-1').connect("mouse_enter", Input, 'set_custom_mouse_cursor', [default_cursor])
+	find_node('Panel-1').connect('mouse_exit', Input, 'set_custom_mouse_cursor', [walk_cursor])
 
 # Object popup - work in progress
 
