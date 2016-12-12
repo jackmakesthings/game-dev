@@ -5,11 +5,11 @@
 
 [sub_resource type="GDScript" id=1]
 
-script/source = "extends Node\n\nvar active_elevator = null\n\nvar _player = preload(\'res://systems/character/Player.tscn\')\nvar Player = _player.instance()\nvar current_floor\n\nonready var elevators = get_tree().get_nodes_in_group(\'elevators\')\nonready var nav = find_node(\'Navigation2D\')\n\nvar floors = { \'1\': preload(\'res://systems/panel/floors/1.tscn\'),\n               \'2\': preload(\'res://systems/panel/floors/2.tscn\') }\n\n\nfunc _ready():\n\tset_process_unhandled_input(true)\n\tset_process_unhandled_key_input(true)\n\tset_floor(\'1\')\n\t\n\tvar walk_cursor = load(\'res://assets/temp/ui/align-symbol.png\')\n\tInput.set_custom_mouse_cursor(walk_cursor)\n\nfunc _unhandled_key_input(key_event):\n\tif key_event.is_action(\'cancel_last_action\'):\n\t\tGame.clear_last_action()\n\t\tPlayer.halt()\n\nfunc _unhandled_input(ev):\n\tif Utils.is_click(ev):\n\t\tvar evpos = get_viewport_transform().affine_inverse().xform(ev.global_pos)\n\t\tif Player:\n\t\t\tPlayer.update_path(evpos, nav)\n\nfunc set_floor(which):\n\tvar old_floor = current_floor\n\tvar _floor = floors[which].instance()\n\tnav.add_child(_floor)\n\tcurrent_floor = _floor\n\tset_player()\n\tif old_floor:\n\t\told_floor.queue_free()\n\t\n\tGame.Floor = current_floor\n\t\nfunc set_player():\n\tvar old_player = Player\n\tvar player_pos = Vector2(400,550)\n\tvar destination = current_floor.find_node(\'YSort\')\n\tif old_player.get_global_pos() != Vector2(0,0):\n\t\tplayer_pos = old_player.get_global_pos()\n\t\n\tif destination:\n\t\told_player.free()\n\t\tvar _Player = _player.instance()\n\t\t_Player.set_global_pos(player_pos)\n\t\tdestination.add_child(_Player)\n\t\tGame.Player = _Player\n\t\tself.Player = _Player\n\t\t\n\t\tPlayer.nav = nav\n#\t\tPlayer.camera.set_limit(MARGIN_RIGHT, get_viewport().get_visible_rect().size.x)\n\t\t\n\n"
+script/source = "extends Node\n\nvar active_elevator = null\n\nvar _player = preload(\'res://systems/character/Player.tscn\')\nvar Player = _player.instance()\nvar current_floor\n\nonready var elevators = get_tree().get_nodes_in_group(\'elevators\')\nonready var nav = find_node(\'Navigation2D\')\n\nvar floors = { \'1\': preload(\'res://systems/panel/floors/1.tscn\'),\n               \'2\': preload(\'res://systems/panel/floors/2.tscn\') }\n\n\nfunc _ready():\n\tset_process_unhandled_input(true)\n\tset_process_unhandled_key_input(true)\n\tset_floor(\'1\')\n\n\nfunc _unhandled_key_input(key_event):\n\tif key_event.is_action(\'cancel_last_action\'):\n\t\tGame.clear_last_action()\n\t\tPlayer.halt()\n\nfunc _unhandled_input(ev):\n\tif Utils.is_click(ev):\n\t\tvar evpos = get_viewport_transform().affine_inverse().xform(ev.global_pos)\n\t\tif Player:\n\t\t\tPlayer.update_path(evpos, nav)\n\nfunc set_floor(which):\n\tvar old_floor = current_floor\n\tvar _floor = floors[which].instance()\n\tnav.add_child(_floor)\n\tcurrent_floor = _floor\n\tset_player()\n\tif old_floor:\n\t\told_floor.queue_free()\n#\t\tyield(old_floor, \'exit_tree\')\n\t\tif current_floor.get(\'theme_music\'):\n\t\t\tprint(current_floor.theme_music)\n\t\t\tprint(Game.MusicPlayer)\n\t\t\tGame.MusicPlayer.set_stream(current_floor.theme_music)\n\t\t\tGame.MusicPlayer.play()\n\t\n\tGame.Floor = current_floor\n\t\t\nfunc set_player():\n\tvar old_player = Player\n\tvar player_pos = Vector2(400,550)\n\tvar destination = current_floor.find_node(\'YSort\')\n\tif old_player.get_global_pos() != Vector2(0,0):\n\t\tplayer_pos = old_player.get_global_pos()\n\t\n\tif destination:\n\t\told_player.free()\n\t\tvar _Player = _player.instance()\n\t\t_Player.set_global_pos(player_pos)\n\t\tdestination.add_child(_Player)\n\t\tGame.Player = _Player\n\t\tself.Player = _Player\n\t\t\n\t\tPlayer.nav = nav\n#\t\tPlayer.camera.set_limit(MARGIN_RIGHT, get_viewport().get_visible_rect().size.x)\n\t\t\n\n"
 
 [sub_resource type="GDScript" id=2]
 
-script/source = "# Elevator\nextends Node2D\n\nonready var controls = find_node(\'controls\')\nonready var anim = find_node(\'AnimationPlayer\')\nonready var bldg = get_parent()\nonready var doors = get_node(\'doors\')\n\nfunc activate():\n\tGame.active_elevator = self\n\nfunc goto(where):\n\tGame.Player.update_path(doors.get_global_pos())\n\tGame.last_action.event = \'elevator\'\n\tyield(Game.Player, \'done_moving\')\n\tif Game.last_action.event != \'elevator\':\n\t\treturn\n\n\tGame.Floor.hide()\n\tvar anim_name = str(Game.Floor.get_name(), \'-\', where)\n\tif anim.has_animation(anim_name):\n\t\tanim.play(anim_name)\n\t\tyield(anim, \'finished\')\n\t\tbldg.call_deferred(\'set_floor\', where)\n\telse:\n\t\tvar flipped_name = str(where, \'-\', Game.Floor.get_name())\n\t\tanim.play_backwards(flipped_name)\n\t\tyield(anim, \'finished\')\n\t\tbldg.call_deferred(\'set_floor\', where)\n"
+script/source = "# Elevator\nextends Node2D\n\nonready var controls = find_node(\'controls\')\nonready var anim = find_node(\'AnimationPlayer\')\nonready var bldg = get_parent()\nonready var doors = get_node(\'doors\')\n\nfunc activate():\n\tGame.active_elevator = self\n\nfunc goto(where):\n\tGame.Player.update_path(doors.get_global_pos())\n\tGame.last_action.event = \'elevator\'\n\tyield(Game.Player, \'done_moving\')\n\tif Game.last_action.event != \'elevator\':\n\t\treturn\n\t\n\n\tGame.Floor.hide()\n\tvar anim_name = str(Game.Floor.get_name(), \'-\', where)\n\tif anim.has_animation(anim_name):\n\t\tanim.play(anim_name)\n#\t\tyield(anim, \'finished\')\n#\t\tbldg.call_deferred(\'set_floor\', where)\n\telse:\n\t\tvar flipped_name = str(where, \'-\', Game.Floor.get_name())\n\t\tanim.play_backwards(flipped_name)\n\tyield(anim, \'finished\')\n\tbldg.call_deferred(\'set_floor\', where)\n\t\n\tGame.SoundPlayer.play(\'ding\', true)\n\t\t\n\nfunc _on_mouse_enter():\n\tInput.set_custom_mouse_cursor(Game.HUD.elevator_cursor)\n\nfunc _on_mouse_exit():\n\tInput.set_custom_mouse_cursor(Game.HUD.walk_cursor)\n"
 
 [sub_resource type="Animation" id=3]
 
@@ -49,7 +49,7 @@ tracks/0/keys = { "times":FloatArray( 0.2, 0.8 ), "transitions":FloatArray( 1, 1
 
 [sub_resource type="GDScript" id=6]
 
-script/source = "# Elevator controls\n\nextends PopupPanel\n\nfunc floor_selected(which):\n\thide()\n\tGame.active_elevator.call(\'goto\', which)\n\t\nfunc show():\n\tget_tree().call_group(0, \'elevator-buttons\', \'show\')\n\tfind_node(Game.Floor.get_name()).call_deferred(\'hide\')\n\t.show()"
+script/source = "# Elevator controls\n\nextends PopupPanel\n\nfunc floor_selected(which):\n\thide()\n\tGame.active_elevator.call(\'goto\', which)\n\t\nfunc show():\n\tget_tree().call_group(0, \'elevator-buttons\', \'show\')\n\tfind_node(Game.Floor.get_name()).call_deferred(\'hide\')\n\t.show()\n\nfunc _mouse_enter():\n\tInput.set_custom_mouse_cursor(Game.HUD.default_cursor)\n\t\nfunc hide():\n\t.hide()\n\tInput.set_custom_mouse_cursor(Game.HUD.walk_cursor)"
 
 [node name="building" type="Node2D"]
 
@@ -76,7 +76,7 @@ anims/1-2 = SubResource( 3 )
 anims/1-3 = SubResource( 4 )
 anims/2-3 = SubResource( 5 )
 playback/active = true
-playback/speed = 1.0
+playback/speed = 0.7
 blend_times = [  ]
 autoplay = ""
 
@@ -209,6 +209,12 @@ flat = false
 [connection signal="button_down" from="W/controls" to="W" method="activate"]
 
 [connection signal="button_down" from="W/controls" to="PopupPanel" method="show"]
+
+[connection signal="mouse_enter" from="W/controls" to="W" method="_on_mouse_enter"]
+
+[connection signal="mouse_exit" from="W/controls" to="W" method="_on_mouse_exit"]
+
+[connection signal="mouse_enter" from="PopupPanel" to="PopupPanel" method="_mouse_enter"]
 
 [connection signal="pressed" from="PopupPanel/ButtonGroup/buttons/3" to="PopupPanel" method="floor_selected" binds= [ "3" ]]
 

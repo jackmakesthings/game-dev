@@ -10,9 +10,11 @@ onready var item_desc = find_node('item-desc')
 onready var drop_btn = find_node('drop-item')
 
 # cursors
+var default_cursor = preload('res://assets/temp/ui/cursor.png')
 var walk_cursor = preload('res://assets/temp/ui/align-symbol.png')
 var inspect_cursor = preload('res://assets/temp/ui/search.png')
 var npc_cursor = preload('res://assets/temp/ui/chat.png')
+var elevator_cursor = preload('res://assets/temp/ui/up-down.png')
 
 var active_item
 var active_item_idx
