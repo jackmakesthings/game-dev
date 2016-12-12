@@ -115,7 +115,7 @@ func _on_click():
 
 		# Make sure they actually stopped near the NPC
 #		if Utils.is_player_nearby(trigger) and Player.conversation_queued:
-		if Game.last_action.target != self:
+		if Game.last_action.event != 'interact' or Game.last_action.target != self:
 			return
 			
 		Player.orient_towards(collider.get_global_pos())
