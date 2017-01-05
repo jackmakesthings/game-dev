@@ -4,10 +4,10 @@
 [ext_resource path="res://assets/panels/sketches/door-area-mask.png" type="Texture" id=2]
 [ext_resource path="res://assets/panels/sketches/blue-room-left.jpg" type="Texture" id=3]
 [ext_resource path="res://assets/panels/sketches/red-room-right-long.jpg" type="Texture" id=4]
-[ext_resource path="res://assets/panels/sketches/door-middle.png" type="Texture" id=5]
-[ext_resource path="res://assets/dank-larger.png" type="Texture" id=6]
-[ext_resource path="res://assets/dank-portrait.png" type="Texture" id=7]
-[ext_resource path="res://systems/npc/_NPC.tscn" type="PackedScene" id=8]
+[ext_resource path="res://systems/npc/_NPC.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/panels/sketches/door-middle.png" type="Texture" id=6]
+[ext_resource path="res://assets/dank-larger.png" type="Texture" id=7]
+[ext_resource path="res://assets/dank-portrait.png" type="Texture" id=8]
 
 [sub_resource type="GDScript" id=1]
 
@@ -134,11 +134,16 @@ enabled = true
 
 sort/enabled = true
 
+[node name="engineer" parent="YSort" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 508, 468 )
+transform/scale = Vector2( 4, 4 )
+
 [node name="Sprite2" type="Sprite" parent="YSort"]
 
 transform/pos = Vector2( 2150, 800 )
 z/z = 1
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 centered = false
 offset = Vector2( -70, -790 )
 
@@ -146,7 +151,7 @@ offset = Vector2( -70, -790 )
 
 transform/pos = Vector2( 1100, 790 )
 z/z = 1
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 centered = false
 offset = Vector2( -70, -790 )
 
@@ -163,16 +168,11 @@ margin/bottom = 686.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-textures/normal = ExtResource( 6 )
+textures/normal = ExtResource( 7 )
 script/script = SubResource( 4 )
 name = "Glass instrument"
 desc = "It appears to have water in the bottom."
-image = ExtResource( 7 )
-thumbnail = ExtResource( 6 )
-
-[node name="NPC" parent="YSort" instance=ExtResource( 8 )]
-
-transform/pos = Vector2( 508, 468 )
-transform/scale = Vector2( 4, 4 )
+image = ExtResource( 8 )
+thumbnail = ExtResource( 7 )
 
 

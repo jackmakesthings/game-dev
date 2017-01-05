@@ -32,6 +32,7 @@ func _add_npc(name):
 # and add them to the npc registry, if they aren't there already.			
 func _pull_npcs():
 	for npc in npc_container.get_children():
+		print('found npc ', npc.get_name())
 		if ! npc.has_method('start_interaction'):
 			return 
 		if ! npcs.has(npc):

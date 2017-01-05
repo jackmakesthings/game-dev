@@ -44,7 +44,58 @@ func load_cfg():
 	return f
 
 
+## Game saving - work in progress
 
+####### save_game(data, dest)
+# data = object containing data to save to file
+# dest = file path (should be like res://savegames/file.txt)
+func save_game(data, filename):
+	if( data == null ):
+		return false
+	var filex = File.new()
+	var error
+	var dest = savefile_path + '/' + filename
+	error = filex.open(dest, File.WRITE)
+	if (filex.is_open()):
+		filex.store_string(data.to_json())
+		filex.close()
+		return true
+	else:
+		return error
+
+###### load_game(path)
+# pass in the path to a savefile, this will load and instantiate it
+func load_game(path):
+	var data = get_json(path)
+	#goto_scene(path, data)
+
+####### quit_game
+# super simple; stuff like confirming the action happens elsewhere
+func quit_game():
+	print("Bye!")
+	get_tree().quit()
+
+##### new_game(filename)
+# saves a basically-blank file at the specified path
+# then drops us into our starting scene (TODO: make this a constant)
+func new_game(filename):
+	var data = {}
+	data["scene"] = "res://main.xml"
+	data["timestamp"] = OS.get_time()
+	
+	var dest = "res://savegames/" + filename + ".txt"
+	# TODO: should have a file.exists? check here
+	save_game(data, dest)
+
+
+func save():
+	var data = {}
+	data['floor'] = Game.Floor
+	data['position'] = Game.Player.get_global_pos()
+	data['inventory'] = Inventory.get_contents()
+	save_game(data, 'save.txt')
+
+		
 ## Input helpers ##
 
 # is_click(ev)

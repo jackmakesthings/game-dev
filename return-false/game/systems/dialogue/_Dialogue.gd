@@ -142,6 +142,28 @@ class Dialogue:
 		self.node = text_box
 		self.owner = owner
 	
+
+	func parse(text):
+		if (text.find('{{') > -1):
+			var token_start = text.find('{{') 
+			var token_end = text.find('}}', token_start)
+			var token_len = token_end - token_start
+
+			var token = text.substr(token_start, token_len + 2)
+			var token_contents = text.substr(token_start + 2, token_len - 2)
+
+			print("token: ", token)
+			print("token contents: ", token_contents)
+
+			# this is one way we can set Pronoun to "she", "her", "hers", etc but display it as "she"
+			if typeof(Data[token_contents] == TYPE_ARRAY):
+				return text.replace(token, Data[token_contents][0])
+			else:
+				return text.replace(token, Data[token_contents])
+		return text
+
+
+
 	func make(from_text):
 		if from_text == null:
 			return
@@ -152,8 +174,8 @@ class Dialogue:
 				output = output + str(i)
 		else:
 			output = from_text
-		
-		node.set_bbcode(output)
+
+		node.set_bbcode(parse(output))
 		text = node.get_bbcode()
 		emit_signal("loaded", text)
 
