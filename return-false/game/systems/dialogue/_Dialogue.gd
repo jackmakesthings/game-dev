@@ -143,6 +143,8 @@ class Dialogue:
 		self.owner = owner
 	
 
+	# This is pretty limited right now but can be used for simple variable interpolation
+	# (Stored in the Data autoload)
 	func parse(text):
 		if (text.find('{{') > -1):
 			var token_start = text.find('{{') 
@@ -152,13 +154,11 @@ class Dialogue:
 			var token = text.substr(token_start, token_len + 2)
 			var token_contents = text.substr(token_start + 2, token_len - 2)
 
-			print("token: ", token)
-			print("token contents: ", token_contents)
-
 			# this is one way we can set Pronoun to "she", "her", "hers", etc but display it as "she"
-			if typeof(Data[token_contents] == TYPE_ARRAY):
-				return text.replace(token, Data[token_contents][0])
-			else:
+			# if typeof(Data[token_contents] == TYPE_ARRAY):
+			# 	return text.replace(token, Data[token_contents][0])
+			# else:
+			if Data[token_contents]:
 				return text.replace(token, Data[token_contents])
 		return text
 
@@ -219,14 +219,17 @@ class ResponseList:
 		
 		if actions.size() > 0:
 			for action in actions:
+				var new_target = action['target']
+				
 				if typeof(action.target) == TYPE_STRING:
-					var new_target = get_tree().get_root().get_node(action.target)
-					action.target = new_target
+#					print("target for action ", action['fn'], " is node ", action['target'])
+					new_target = get_tree().get_root().get_node(action['target'])
+#					print('new target is ', new_target)
 
 				if action.has('args'):
-					response.connect('pressed', action['target'], action['fn'], action['args'])
+					response.connect('pressed', new_target, action['fn'], action['args'])
 				else:
-					response.connect('pressed', action['target'], action['fn'])
+					response.connect('pressed', new_target, action['fn'])
 
 		has_responses = true
 		return response

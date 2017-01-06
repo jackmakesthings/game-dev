@@ -20,8 +20,8 @@
               "actions": [
                 {
                   "target": "Data",
-                  "fn": "set",
-                  "args": ["Pronoun", ["she", "her", "her", "hers"]]
+                  "fn": "set_pronoun",
+                  "args": [["she", "her", "her", "hers"]]
                 }
               ],
               "dialog_action": 1
@@ -32,8 +32,8 @@
               "actions": [
                 {
                   "target": "Data",
-                  "fn": "set",
-                  "args": ["Pronoun", ["he", "him", "his", "his"]]
+                  "fn": "set_pronoun",
+                  "args": [["he", "him", "his", "his"]]
                 }
               ],
               "dialog_action": 1
@@ -44,8 +44,8 @@
               "actions": [
                 {
                   "target": "Data",
-                  "fn": "set",
-                  "args": ["Pronoun", ["they", "them", "their", "theirs"]]
+                  "fn": "set_pronoun",
+                  "args": [["they", "them", "their", "theirs"]]
                 }
               ],
               "dialog_action": 1
@@ -53,13 +53,27 @@
           ]
         },
         "10": {
-          "dialogue": [
-            "Okay! So you prefer {{Pronoun}}. Good to know."
-          ],
+          "dialogue": "Okay! So you prefer {{THEY}}. Good to know.",
           "responses": [
             {
               "text": "Yep.",
-              "dialog_action": 0
+              "dialog_action": 0,
+              "new_state": "20"
+            }
+          ]
+        },
+        "20": {
+          "dialogue": "Last time we talked, you said you preferred '{{THEY}}' pronouns. Are you still okay with that?",
+          "responses": [
+            {
+              "text": "Yes, that's fine.",
+              "dialog_action": 0,
+              "new_state": "20"
+            },
+            {
+              "text": "I'd like to change this preference.",
+              "dialog_action": 1,
+              "new_state": "0"
             }
           ]
         }

@@ -145,3 +145,13 @@ func _ready():
 	Game.SoundPlayer = find_node('SamplePlayer')
 	Game.MusicPlayer = find_node('StreamPlayer')
 	set_scene("res://systems/ui/Splash.tscn")
+
+
+##
+# quit handling 
+##
+func _notification(what):
+	if (what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST):
+		QuestManager.save_current_quests()
+		Data.save_data()
+		get_tree().call_deferred('quit') # default behavior
