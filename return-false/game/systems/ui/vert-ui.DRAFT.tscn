@@ -1,0 +1,200 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://assets/_theme.xthm" type="Theme" id=1]
+[ext_resource path="res://systems/ui/vertical/dialog-block.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/arc_dark/assets/slider/slider-prelight@2x.png" type="Texture" id=3]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Control\n\nonready var dialog_area = find_node(\'dialog-blocks\')\nvar _dialog_block = preload(\'res://systems/ui/vertical/dialog-block.tscn\')\nvar _db_script = preload(\'res://systems/ui/vertical/dialog_block.gd\')\n\n# just for testing! \nvar abbott_pic = \'res://assets/temp/abbott.jpg\'\nvar costello_pic = \'res://assets/temp/costello.jpg\'\nvar test1 = { \'block_label\': \'Costello\', \'block_img\': costello_pic, \'block_text\': \'Who is on first\?\' }\nvar test2 = { \'block_label\': \'Abbott\', \'block_img\': abbott_pic, \'block_text\': \'Right.\' }\nvar test3 = { \'block_label\': \'Costello\', \'block_img\': costello_pic, \'block_text\': \'When you pay your first baseman, who gets the money\?\' }\nvar test4 = { \'block_label\': \'Abbott\', \'block_img\': abbott_pic, \'block_text\': \'Every dollar of it.\' }\nvar tests = [test1, test2, test3, test4]\nvar ind = -1\n#\n\nfunc _ready():\n\tvar new_data = { \'block_label\': \'Scientist\', \'block_text\': \'Hello world\' }\n\tadd_dialog_block(new_data)\n\nfunc add_dialog_block(data):\n\tvar _block = _dialog_block.instance()\n\t_block.init(data)\n\tdialog_area.add_child(_block)\n\nfunc clear_dialog_blocks():\n\tfor child in dialog_area.get_children():\n\t\tif child extends _db_script:\n\t\t\tchild.queue_free()\n\t\t\tprint(\'clearing dialog\')\n\n# test adding blocks\nfunc _on_Button_pressed():\n\tind += 1\n\tif ind > tests.size() - 1:\n\t\tind = 0\n\tadd_dialog_block(tests[ind])\n\n\n\nfunc _on_Button2_pressed():\n\tclear_dialog_blocks()\n"
+
+[node name="Control" type="Control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+theme/theme = ExtResource( 1 )
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+script/script = SubResource( 1 )
+
+[node name="Panel" type="Panel" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 3
+margin/left = 667.0
+margin/top = 0.0
+margin/right = 1080.0
+margin/bottom = 600.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 413.0
+margin/bottom = 600.0
+alignment = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 413.0
+margin/bottom = 557.0
+scroll/horizontal = true
+scroll/vertical = true
+
+[node name="dialog-blocks" type="VBoxContainer" parent="Panel/VBoxContainer/ScrollContainer"]
+
+rect/min_size = Vector2( 400, 0 )
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 400.0
+margin/bottom = 110.0
+alignment = 0
+
+[node name="dialog-block" parent="Panel/VBoxContainer/ScrollContainer/dialog-blocks" instance=ExtResource( 2 )]
+
+anchor/right = 0
+anchor/bottom = 0
+margin/right = 400.0
+margin/bottom = 110.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+
+editor/display_folded = true
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 561.0
+margin/right = 413.0
+margin/bottom = 600.0
+custom_constants/separation = 20
+alignment = 1
+
+[node name="Button" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 59.0
+margin/top = 0.0
+margin/right = 196.0
+margin/bottom = 39.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "add block"
+flat = false
+
+[node name="Button2" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 216.0
+margin/top = 0.0
+margin/right = 353.0
+margin/bottom = 39.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "clear all"
+flat = false
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+
+editor/display_folded = true
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 0
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 150.0
+margin/right = 610.0
+margin/bottom = 240.0
+alignment = 0
+
+[node name="TextureFrame" type="TextureFrame" parent="HBoxContainer2"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 32.0
+margin/bottom = 90.0
+texture = ExtResource( 3 )
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer2"]
+
+rect/min_size = Vector2( 0, 90 )
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 36.0
+margin/top = 0.0
+margin/right = 610.0
+margin/bottom = 90.0
+alignment = 0
+
+[node name="Label" type="Label" parent="HBoxContainer2/VBoxContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 574.0
+margin/bottom = 16.0
+text = "Dr Forrester"
+uppercase = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label2" type="RichTextLabel" parent="HBoxContainer2/VBoxContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 20.0
+margin/right = 574.0
+margin/bottom = 90.0
+bbcode/enabled = true
+bbcode/bbcode = "Your movie today is called Pod People. It has nothing to do with pods. It has nothing to do with people."
+visible_characters = -1
+
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/Button" to="." method="_on_Button_pressed"]
+
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/Button2" to="." method="_on_Button2_pressed"]
+
+
