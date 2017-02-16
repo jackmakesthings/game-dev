@@ -13,12 +13,18 @@
     {
       "_name": "Abbott",
       "_pic": "res://assets/temp/abbott.png",
-      "_text": "Yes."
-    },
-    {
-      "_name": "Costello",
-      "_pic": "res://assets/temp/costello.png",
-      "_text": "Well, then who's playing first?"
+      "_text": "Yes.",
+      "_options": [
+      	{
+      		"text": "Who's on first?"
+      	},
+      	{
+      		"text": "What's on second?"
+      	},
+      	{
+      		"text": "Third base!"
+      	}
+      ]
     },
     {
       "_name": "Abbott",

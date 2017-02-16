@@ -1,15 +1,14 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=5 format=1]
 
 [ext_resource path="res://assets/_theme.xthm" type="Theme" id=1]
-[ext_resource path="res://assets/temp/abbott.png" type="Texture" id=2]
+[ext_resource path="res://assets/temp/costello.png" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/input-mono/InputMono-B.tres" type="DynamicFont" id=3]
-[ext_resource path="res://assets/fonts/input-mono/inputmono_13px_filtered.tres" type="DynamicFont" id=4]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id=3]
 
-script/source = "extends Control\n\nvar _pic\nvar _name\nvar _text\nvar _options\n\nfunc setup(data):\n\tfor key in data:\n\t\tself[key] = data[key]\n\t\t\n\tif _pic and typeof(_pic) == TYPE_STRING:\n\t\tget_node(\'HBoxContainer/speaker_pic\').set_texture(load(_pic))\n\t\n\tif _name:\n\t\tget_node(\'HBoxContainer/VBoxContainer/speaker_name\').set_text(_name)\n\t\n\tif _text:\n\t\tget_node(\'HBoxContainer/VBoxContainer/speaker_text\').set_bbcode(_text)\n\t"
+script/source = "extends Control\n\nvar _pic\nvar _name\nvar _options\nvar _text\n\nsignal loaded\n\nonready var response_box = find_node(\'responses\')\n\nvar button_font = load(\'res://assets/fonts/input-mono/inputmono_13px_filtered.tres\')\n\nfunc setup(data):\n\tfor key in data:\n\t\tself[key] = data[key]\n\t\t\n#\tif _pic and typeof(_pic) == TYPE_STRING:\n#\t\tget_node(\'HBoxContainer/speaker_pic\').set_texture(load(_pic))\n\t\n#\tif _name:\n#\t\tget_node(\'HBoxContainer/VBoxContainer/speaker_name\').set_text(_name)\n\t\n\tfor _option in _options:\n\t\tvar _opt = Button.new()\n\t\t_opt.set_text_align(Button.ALIGN_LEFT)\n\t\t_opt.set(\'custom_fonts/font\', button_font)\n\t\t_opt.set_text(_option.text)\n\t\tfind_node(\'responses\').add_child(_opt)\n\t\n\tset(\'rect/min_size\', Vector2(get_size().x, get_child(0).get_size().y))\n\tset_custom_minimum_size(Vector2(get_size().x, get_node(\'HBoxContainer\').get_size().y))\n\temit_signal(\'loaded\')\n\t"
 
-[node name="dialog_block" type="Container"]
+[node name="response_block" type="Container"]
 
 rect/min_size = Vector2( 400, 90 )
 focus/ignore_mouse = false
@@ -20,8 +19,8 @@ theme/theme = ExtResource( 1 )
 margin/left = 0.0
 margin/top = 0.0
 margin/right = 400.0
-margin/bottom = 90.0
-script/script = SubResource( 1 )
+margin/bottom = 150.0
+script/script = SubResource( 3 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 
@@ -49,6 +48,7 @@ margin/right = 90.0
 margin/bottom = 90.0
 texture = ExtResource( 2 )
 expand = true
+stretch_mode = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 
@@ -74,25 +74,22 @@ margin/top = 0.0
 margin/right = 320.0
 margin/bottom = 16.0
 custom_fonts/font = ExtResource( 3 )
-text = "Abbot"
+text = "Costello"
 uppercase = true
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="speaker_text" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
+[node name="responses" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
 
 focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 3
+focus/stop_mouse = false
+size_flags/horizontal = 2
 size_flags/vertical = 3
 margin/left = 0.0
 margin/top = 26.0
 margin/right = 320.0
 margin/bottom = 90.0
-custom_fonts/normal_font = ExtResource( 4 )
-bbcode/enabled = false
-bbcode/bbcode = "Strange as it may seem, they give ball players nowadays very peculiar names."
-visible_characters = -1
+alignment = 0
 
 
