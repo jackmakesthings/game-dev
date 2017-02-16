@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://assets/_theme.xthm" type="Theme" id=1]
-[ext_resource path="res://assets/temp/abbott.jpg" type="Texture" id=2]
+[ext_resource path="res://assets/temp/abbott.png" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/input-mono/InputMono-B.tres" type="DynamicFont" id=3]
 [ext_resource path="res://assets/fonts/input-mono/InputMono-Regular.ttf" type="DynamicFontData" id=4]
 
@@ -37,24 +37,24 @@ focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 5.0
-margin/top = 5.0
-margin/right = 425.0
-margin/bottom = 95.0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 420.0
+margin/bottom = 90.0
 custom_constants/separation = 10
 alignment = 0
 
 [node name="speaker_pic" type="TextureFrame" parent="HBoxContainer"]
 
-rect/min_size = Vector2( 80, 80 )
+rect/min_size = Vector2( 90, 90 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 0.0
-margin/top = 5.0
-margin/right = 80.0
-margin/bottom = 85.0
+margin/top = 0.0
+margin/right = 90.0
+margin/bottom = 90.0
 texture = ExtResource( 2 )
 expand = true
 
@@ -64,7 +64,7 @@ focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 3
 size_flags/vertical = 3
-margin/left = 90.0
+margin/left = 100.0
 margin/top = 0.0
 margin/right = 420.0
 margin/bottom = 90.0
@@ -78,9 +78,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 3
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 0.0
-margin/right = 330.0
-margin/bottom = 16.0
+margin/top = 5.0
+margin/right = 320.0
+margin/bottom = 21.0
 custom_fonts/font = ExtResource( 3 )
 text = "Abbot"
 uppercase = true
@@ -96,7 +96,7 @@ size_flags/horizontal = 3
 size_flags/vertical = 3
 margin/left = 0.0
 margin/top = 26.0
-margin/right = 330.0
+margin/right = 320.0
 margin/bottom = 90.0
 custom_fonts/normal_font = SubResource( 2 )
 bbcode/enabled = false

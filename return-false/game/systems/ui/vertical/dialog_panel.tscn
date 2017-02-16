@@ -4,7 +4,7 @@
 
 [sub_resource type="GDScript" id=1]
 
-script/source = "# Dialogue panel demo, with vertical \"chat message\" style interface\n# and dynamic scrolling as new content is added. Whew!\n\nextends Control\n\nvar Block = preload(\'res://systems/ui/vertical/dialog_block.tscn\')\nvar data_src = \'res://data/dialogue-blocks-test-json.gd\'\n\nvar blocks = []\nvar latest_block\n\nonready var vbox = get_node(\'Panel/ScrollContainer/VBoxContainer\')\nonready var scrollbox = get_node(\'Panel/ScrollContainer\')\n\nfunc add_block():\n\tif blocks.empty():\n\t\treturn\n\tvar _data = blocks[0]\n\tvar _Block = Block.instance()\n\t_Block.setup(_data)\n\tvbox.add_child(_Block)\n\tlatest_block = _Block\n\tblocks.pop_front()\n\tupdate_scroll()\n\t\nfunc update_scroll():\n\tvar current_scroll = scrollbox.get_v_scroll()\n\tvar content_height = vbox.get_rect().size\n\tvbox.set_custom_minimum_size(Vector2(0, content_height.y + 95))\n\tif content_height.y >= 540:\n\t\tscrollbox.set_v_scroll(current_scroll + 95)\n\t\nfunc _ready():\n\tvar json = Utils.get_json(data_src)\n\tblocks = json.blocks\n\tadd_block()"
+script/source = "# Dialogue panel demo, with vertical \"chat message\" style interface\n# and dynamic scrolling as new content is added. Whew!\n\nextends Control\n\nvar Block = preload(\'res://systems/ui/vertical/dialog_block.tscn\')\nvar data_src = \'res://data/dialogue-blocks-test-json.gd\'\n\nvar blocks = []\nvar latest_block\n\nonready var vbox = get_node(\'Panel/ScrollContainer/VBoxContainer\')\nonready var scrollbox = get_node(\'Panel/ScrollContainer\')\n\nfunc add_block():\n\tif blocks.empty():\n\t\treturn\n\tvar _data = blocks[0]\n\tvar _Block = Block.instance()\n\t_Block.setup(_data)\n\tvbox.add_child(_Block)\n\tlatest_block = _Block\n\tblocks.pop_front()\n\tupdate_scroll()\n\t\nfunc update_scroll():\n\tvar current_scroll = scrollbox.get_v_scroll()\n\tvar content_height = vbox.get_rect().size\n\tvar added_height = latest_block.get_size().y + vbox.get(\'custom_constants/separation\')\n\tvbox.set_custom_minimum_size(Vector2(0, content_height.y + added_height))\n\tif content_height.y >= 540:\n\t\tscrollbox.set_v_scroll(current_scroll + added_height)\n\t\nfunc _ready():\n\tvar json = Utils.get_json(data_src)\n\tblocks = json.blocks\n\tadd_block()"
 
 [node name="dialog_panel" type="Control"]
 
@@ -41,9 +41,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 3
 size_flags/vertical = 3
 margin/left = -40.0
-margin/top = 0.0
+margin/top = 30.0
 margin/right = 400.0
-margin/bottom = 558.0
+margin/bottom = 588.0
 scroll/horizontal = false
 scroll/vertical = true
 
@@ -58,6 +58,7 @@ margin/left = 0.0
 margin/top = 0.0
 margin/right = 400.0
 margin/bottom = 90.0
+custom_constants/separation = 30
 alignment = 0
 
 [node name="Button" type="Button" parent="Panel"]
