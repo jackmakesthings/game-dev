@@ -18,6 +18,9 @@ var HUD
 var SoundPlayer
 var MusicPlayer
 
+var NPCManager
+var QuestManager
+
 var last_action = { 'event': null, 'target': null }
 var active_elevator
 

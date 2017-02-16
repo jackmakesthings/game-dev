@@ -16,9 +16,9 @@ signal QM_update_npcs
 # currently just creates a copy from template and names it;
 # in the long run, this should probably take a scene filepath as a param
 # and instance from that.
-func _add_npc(name):
-	var new_npc = npc_base.instance()
-	npc_container.add_child(new_npc)
+func _add_npc(name, base=npc_base):
+	var new_npc = base.instance()
+	Game.Object_Layer.add_child(new_npc)
 	new_npc.set_name(name)
 	new_npc.add_to_group('npcs')
 	npcs[new_npc.get_name()] = new_npc
@@ -31,11 +31,13 @@ func _add_npc(name):
 # that already contains NPC nodes; this should parse them
 # and add them to the npc registry, if they aren't there already.			
 func _pull_npcs():
-	for npc in npc_container.get_children():
-		print('found npc ', npc.get_name())
-		if ! npc.has_method('start_interaction'):
+	for npc in Game.Object_Layer.get_children():
+		if !npc.has_method('start_interaction'):
 			return 
-		if ! npcs.has(npc):
+
+		print('found npc ', npc.get_name())
+
+		if !npcs.has(npc):
 			npcs[npc.get_name()] = npc
 			npc_keys.append(npc.get_name())
 			
@@ -51,5 +53,6 @@ func get_npc_keys():
 	return npc_keys
 
 func _ready():
+	Game.NPCManager = self
 	npc_container = Game.Object_Layer
 	_pull_npcs()

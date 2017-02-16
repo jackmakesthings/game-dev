@@ -19,4 +19,7 @@ func pickup_object():
 	if current_trigger.has_method('on_pickup'):
 		current_trigger.call('on_pickup')
 	hide()
-	current_trigger = null
+#	current_trigger = null
+
+func leave_object():
+	hide()

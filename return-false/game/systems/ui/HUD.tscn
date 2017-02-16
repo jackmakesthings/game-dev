@@ -98,14 +98,14 @@ alignment = 0
 [node name="minimap" parent="Control/Panel-1/VBoxContainer2" instance=ExtResource( 3 )]
 
 rect/min_size = Vector2( 360, 270 )
-margin/right = 360.0
+margin/right = 400.0
 
 [node name="item-view" parent="Control/Panel-1/VBoxContainer2" instance=ExtResource( 4 )]
 
 size_flags/horizontal = 3
 size_flags/vertical = 3
 margin/top = 274.0
-margin/right = 360.0
+margin/right = 400.0
 margin/bottom = 662.0
 
 [node name="Label-1" type="Label" parent="Control"]
@@ -146,5 +146,7 @@ max_lines_visible = -1
 script/script = SubResource( 2 )
 
 [node name="object_popup" parent="Control" instance=ExtResource( 5 )]
+
+visibility/visible = false
 
 

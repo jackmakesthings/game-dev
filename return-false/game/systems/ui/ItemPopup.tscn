@@ -4,8 +4,6 @@
 
 [node name="object_popup" type="PopupDialog"]
 
-editor/display_folded = true
-visibility/visible = false
 anchor/left = 3
 anchor/top = 3
 anchor/right = 3
@@ -14,9 +12,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 168.5
+margin/left = 169.0
 margin/top = 197.0
-margin/right = -145.5
+margin/right = -145.0
 margin/bottom = -234.0
 popup/exclusive = true
 script/script = ExtResource( 1 )
@@ -45,7 +43,7 @@ size_flags/vertical = 3
 margin/left = 0.0
 margin/top = 0.0
 margin/right = 294.0
-margin/bottom = 177.0
+margin/bottom = 185.0
 stretch_mode = 0
 
 [node name="desc" type="RichTextLabel" parent="VBoxContainer"]
@@ -55,9 +53,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 3
 size_flags/vertical = 3
 margin/left = 0.0
-margin/top = 187.0
+margin/top = 195.0
 margin/right = 294.0
-margin/bottom = 364.0
+margin/bottom = 380.0
 bbcode/enabled = true
 bbcode/bbcode = ""
 visible_characters = -1
@@ -69,7 +67,7 @@ focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 374.0
+margin/top = 390.0
 margin/right = 294.0
 margin/bottom = 410.0
 alignment = 0
@@ -83,7 +81,7 @@ size_flags/vertical = 3
 margin/left = 0.0
 margin/top = 0.0
 margin/right = 145.0
-margin/bottom = 36.0
+margin/bottom = 20.0
 toggle_mode = true
 click_on_press = true
 enabled_focus_mode = 2
@@ -100,12 +98,16 @@ size_flags/vertical = 3
 margin/left = 149.0
 margin/top = 0.0
 margin/right = 294.0
-margin/bottom = 36.0
+margin/bottom = 20.0
 toggle_mode = true
 click_on_press = true
 enabled_focus_mode = 2
 shortcut = null
 text = "Leave"
 flat = false
+
+[connection signal="pressed" from="VBoxContainer/ButtonGroup/btnTake" to="." method="pickup_object"]
+
+[connection signal="pressed" from="VBoxContainer/ButtonGroup/btnLeave" to="." method="leave_object"]
 
 

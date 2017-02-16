@@ -8,6 +8,10 @@ var QuestBranch = preload('res://systems/quests/_Quest.Branch.gd')
 var QuestDataPath = 'res://data/quests.txt'
 
 
+func _setup():
+	Game.QuestManager = self
+	load_saved_quests()
+
 func save_current_quests():
 
 	var filex = File.new()
@@ -81,7 +85,7 @@ func set_state_directly(quest, value):
 	quest.set_current_state(value)	
 
 func _ready():
-	var npcman = get_parent().NPCManager
+	var npcman = Game.NPCManager
 	npcman.connect("QM_update_npcs", self, "_on_update_npcs",[],1)
 	load_saved_quests()
 	_test()
