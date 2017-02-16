@@ -1,0 +1,100 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "# Dialogue panel demo, with vertical \"chat message\" style interface
+# and dynamic scrolling as new content is added. Whew!
+
+extends Control
+
+var Block = preload('res://ui/dialog-block.tscn')
+var data_src = 'res://data/dialogue-blocks-test-json.gd'
+
+var blocks = []
+var latest_block
+
+onready var vbox = $Panel/ScrollContainer/VBoxContainer
+onready var scrollbox = $Panel/ScrollContainer
+
+func add_block():
+	var _data = blocks[0]
+	var _Block = Block.instance()
+	_Block.setup(_data)
+	vbox.add_child(_Block)
+	latest_block = _Block
+	blocks.pop_front()
+	update_scroll()
+	
+func update_scroll():
+	var current_scroll = scrollbox.get_v_scroll()
+	var content_height = vbox.rect_size
+	var added_height = latest_block.rect_size.y + 5
+	vbox.set_custom_minimum_size(Vector2(0, content_height.y + added_height))
+	if content_height.y >= 540:
+		scrollbox.set_v_scroll(current_scroll + added_height)
+	
+func _ready():
+	var json = Utils.get_json(data_src)
+	blocks = json.blocks
+	add_block()
+"
+
+[node name="dialog_panel" type="Control"]
+
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 400, 600 )
+rect_clip_content = false
+mouse_filter = 0
+script = SubResource( 1 )
+
+[node name="Panel" type="Panel" parent="."]
+
+margin_right = 400.0
+margin_bottom = 600.0
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="Panel"]
+
+margin_left = 139.0
+margin_top = 574.0
+margin_right = 212.0
+margin_bottom = 594.0
+rect_clip_content = false
+mouse_filter = 0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "add block"
+flat = false
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
+
+anchor_right = 1
+anchor_bottom = 1
+margin_bottom = 42.0
+rect_min_size = Vector2( 400, 558 )
+mouse_filter = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal = false
+scroll_vertical = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/ScrollContainer"]
+
+margin_right = 400.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 0, 90 )
+rect_clip_content = false
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 0
+alignment = 0
+
+[connection signal="button_down" from="Panel/Button" to="." method="add_block"]
+
+
