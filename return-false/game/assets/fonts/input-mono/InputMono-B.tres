@@ -4,6 +4,10 @@
 
 [resource]
 
-size = 16
-font = ExtResource( 1 )
+font/size = 12
+extra_spacing/top = 2
+extra_spacing/char = 1
+font/use_mipmaps = true
+font/use_filter = true
+font/font = ExtResource( 1 )
 

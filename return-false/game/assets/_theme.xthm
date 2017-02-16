@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="Theme" subresource_count="24" version="2.2" version_name="Godot Engine v2.2.alpha.custom_build">
-	<ext_resource path="res://assets/fonts/input-mono/InputMono.fnt" type="BitmapFont" index="0"></ext_resource>
+<resource_file type="Theme" subresource_count="24" version="2.1" version_name="Godot Engine v2.1.stable.official">
+	<ext_resource path="res://assets/fonts/input-mono/InputMono.tres" type="DynamicFont" index="0"></ext_resource>
 	<resource type="StyleBoxFlat" path="local://2">
 		<real name="content_margin/left"> 10 </real>
 		<real name="content_margin/right"> 10 </real>

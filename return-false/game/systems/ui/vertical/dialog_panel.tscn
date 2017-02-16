@@ -1,0 +1,81 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://assets/_theme.xthm" type="Theme" id=1]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "# Dialogue panel demo, with vertical \"chat message\" style interface\n# and dynamic scrolling as new content is added. Whew!\n\nextends Control\n\nvar Block = preload(\'res://systems/ui/vertical/dialog_block.tscn\')\nvar data_src = \'res://data/dialogue-blocks-test-json.gd\'\n\nvar blocks = []\nvar latest_block\n\nonready var vbox = get_node(\'Panel/ScrollContainer/VBoxContainer\')\nonready var scrollbox = get_node(\'Panel/ScrollContainer\')\n\nfunc add_block():\n\tif blocks.empty():\n\t\treturn\n\tvar _data = blocks[0]\n\tvar _Block = Block.instance()\n\t_Block.setup(_data)\n\tvbox.add_child(_Block)\n\tlatest_block = _Block\n\tblocks.pop_front()\n\tupdate_scroll()\n\t\nfunc update_scroll():\n\tvar current_scroll = scrollbox.get_v_scroll()\n\tvar content_height = vbox.get_rect().size\n\tvbox.set_custom_minimum_size(Vector2(0, content_height.y + 95))\n\tif content_height.y >= 540:\n\t\tscrollbox.set_v_scroll(current_scroll + 95)\n\t\nfunc _ready():\n\tvar json = Utils.get_json(data_src)\n\tblocks = json.blocks\n\tadd_block()"
+
+[node name="dialog_panel" type="Control"]
+
+rect/min_size = Vector2( 400, 610 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+theme/theme = ExtResource( 1 )
+margin/left = 1090.0
+margin/top = 0.0
+margin/right = 1490.0
+margin/bottom = 610.0
+script/script = SubResource( 1 )
+
+[node name="Panel" type="Panel" parent="."]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = -10.0
+margin/bottom = -90.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
+
+rect/min_size = Vector2( 440, 558 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = -40.0
+margin/top = 0.0
+margin/right = 400.0
+margin/bottom = 558.0
+scroll/horizontal = false
+scroll/vertical = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/ScrollContainer"]
+
+rect/min_size = Vector2( 400, 90 )
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 400.0
+margin/bottom = 90.0
+alignment = 0
+
+[node name="Button" type="Button" parent="Panel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 140.0
+margin/top = 640.0
+margin/right = 277.0
+margin/bottom = 679.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "add block"
+flat = false
+
+[connection signal="button_down" from="Panel/Button" to="." method="add_block"]
+
+

@@ -1,0 +1,106 @@
+[gd_scene load_steps=7 format=1]
+
+[ext_resource path="res://assets/_theme.xthm" type="Theme" id=1]
+[ext_resource path="res://assets/temp/abbott.jpg" type="Texture" id=2]
+[ext_resource path="res://assets/fonts/input-mono/InputMono-B.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/fonts/input-mono/InputMono-Regular.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Control\n\nvar _pic\nvar _name\nvar _text\n\nfunc setup(data):\n\tfor key in data:\n\t\tself[key] = data[key]\n\t\t\n\tif typeof(_pic) == TYPE_STRING:\n\t\tget_node(\'HBoxContainer/speaker_pic\').set_texture(load(_pic))\n\t\t\n\tget_node(\'HBoxContainer/VBoxContainer/speaker_name\').set_text(_name)\n\tget_node(\'HBoxContainer/VBoxContainer/speaker_text\').set_bbcode(_text)"
+
+[sub_resource type="DynamicFont" id=2]
+
+font/size = 13
+extra_spacing/bottom = 1
+font/use_mipmaps = false
+font/use_filter = true
+font/font = ExtResource( 4 )
+
+[node name="dialog_block" type="Container"]
+
+rect/min_size = Vector2( 400, 90 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 2
+theme/theme = ExtResource( 1 )
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 400.0
+margin/bottom = 90.0
+script/script = SubResource( 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 5.0
+margin/top = 5.0
+margin/right = 425.0
+margin/bottom = 95.0
+custom_constants/separation = 10
+alignment = 0
+
+[node name="speaker_pic" type="TextureFrame" parent="HBoxContainer"]
+
+rect/min_size = Vector2( 80, 80 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 5.0
+margin/right = 80.0
+margin/bottom = 85.0
+texture = ExtResource( 2 )
+expand = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 90.0
+margin/top = 0.0
+margin/right = 420.0
+margin/bottom = 90.0
+custom_constants/separation = 10
+alignment = 0
+
+[node name="speaker_name" type="Label" parent="HBoxContainer/VBoxContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 330.0
+margin/bottom = 16.0
+custom_fonts/font = ExtResource( 3 )
+text = "Abbot"
+uppercase = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="speaker_text" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 26.0
+margin/right = 330.0
+margin/bottom = 90.0
+custom_fonts/normal_font = SubResource( 2 )
+bbcode/enabled = false
+bbcode/bbcode = "Strange as it may seem, they give ball players nowadays very peculiar names."
+visible_characters = -1
+
+
