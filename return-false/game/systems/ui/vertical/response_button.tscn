@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://assets/fonts/input-mono/inputmono_13px_filtered.tres" type="DynamicFont" id=1]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Button\n\nvar next_block"
+
+[node name="Button" type="Button"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 320.0
+margin/bottom = 39.0
+custom_fonts/font = ExtResource( 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+flat = false
+align = 0
+script/script = SubResource( 1 )
+
+

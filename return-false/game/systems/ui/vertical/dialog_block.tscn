@@ -7,7 +7,7 @@
 
 [sub_resource type="GDScript" id=1]
 
-script/source = "extends Control\n\nvar pic\nvar name\nvar text\nvar options\nvar next_block\n\nfunc setup(data):\n\tfor key in data:\n\t\tself[key] = data[key]\n\t\t\n\tif pic and typeof(pic) == TYPE_STRING:\n\t\tget_node(\'HBoxContainer/speaker_pic\').set_texture(load(pic))\n\t\n\tif name:\n\t\tget_node(\'HBoxContainer/VBoxContainer/speaker_name\').set_text(name)\n\t\n\tif text:\n\t\tget_node(\'HBoxContainer/VBoxContainer/speaker_text\').set_bbcode(text)\n\t"
+script/source = "extends Control\n\nvar pic\nvar name\nvar text\nvar options\nvar next_block\nvar UI_ROOT\n\nfunc setup(data):\n\tfor key in data:\n\t\tself[key] = data[key]\n\t\t\n\tif pic and typeof(pic) == TYPE_STRING:\n\t\tget_node(\'HBoxContainer/speaker_pic\').set_texture(load(pic))\n\t\n\tif name:\n\t\tget_node(\'HBoxContainer/VBoxContainer/speaker_name\').set_text(name)\n\t\n\tif text:\n\t\tget_node(\'HBoxContainer/VBoxContainer/speaker_text\').set_bbcode(text)\n\t"
 
 [node name="dialog_block" type="Container"]
 
@@ -92,7 +92,7 @@ margin/top = 26.0
 margin/right = 320.0
 margin/bottom = 90.0
 custom_fonts/normal_font = ExtResource( 4 )
-bbcode/enabled = false
+bbcode/enabled = true
 bbcode/bbcode = "Strange as it may seem, they give ball players nowadays very peculiar names."
 visible_characters = -1
 
