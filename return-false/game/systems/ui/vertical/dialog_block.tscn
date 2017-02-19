@@ -7,7 +7,7 @@
 
 [sub_resource type="GDScript" id=1]
 
-script/source = "extends Control\n\nvar _pic\nvar _name\nvar _text\nvar _options\n\nfunc setup(data):\n\tfor key in data:\n\t\tself[key] = data[key]\n\t\t\n\tif _pic and typeof(_pic) == TYPE_STRING:\n\t\tget_node(\'HBoxContainer/speaker_pic\').set_texture(load(_pic))\n\t\n\tif _name:\n\t\tget_node(\'HBoxContainer/VBoxContainer/speaker_name\').set_text(_name)\n\t\n\tif _text:\n\t\tget_node(\'HBoxContainer/VBoxContainer/speaker_text\').set_bbcode(_text)\n\t"
+script/source = "extends Control\n\nvar _pic\nvar _name\nvar _text\nvar _options\n\nvar next_block\n\nfunc setup(data):\n\tfor key in data:\n\t\tself[key] = data[key]\n\t\t\n\tif _pic and typeof(_pic) == TYPE_STRING:\n\t\tget_node(\'HBoxContainer/speaker_pic\').set_texture(load(_pic))\n\t\n\tif _name:\n\t\tget_node(\'HBoxContainer/VBoxContainer/speaker_name\').set_text(_name)\n\t\n\tif _text:\n\t\tget_node(\'HBoxContainer/VBoxContainer/speaker_text\').set_bbcode(_text)\n\t"
 
 [node name="dialog_block" type="Container"]
 
@@ -49,6 +49,7 @@ margin/right = 90.0
 margin/bottom = 90.0
 texture = ExtResource( 2 )
 expand = true
+stretch_mode = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 
