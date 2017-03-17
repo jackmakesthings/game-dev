@@ -63,12 +63,14 @@
 		"GOOD_END": {
 			"name": "Abbott",
 			"pic": "res://assets/temp/abbott.png",
-			"text": "[i](Abbott high-fives you.)[/i]"
+			"text": "[i](Abbott high-fives you.)[/i]",
+			"next_block": ""
 		},
 		"MEH_END": {
 			"name": "Abbott",
 			"pic": "res://assets/temp/abbott.png",
-			"text": "[i](Annoyed grunt.)[/i]"
+			"text": "[i](Annoyed grunt.)[/i]",
+			"next_block": ""
 		}
 	}
 }

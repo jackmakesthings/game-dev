@@ -4,9 +4,9 @@
 
 [resource]
 
-font/size = 16
+font/size = 20
 font/use_mipmaps = false
-font/use_filter = false
+font/use_filter = true
 font/font = ExtResource( 1 )
 fallback/0 = ExtResource( 1 )
 

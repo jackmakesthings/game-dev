@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="Theme" subresource_count="24" version="2.1" version_name="Godot Engine v2.1.stable.official">
+<resource_file type="Theme" subresource_count="26" version="2.1" version_name="Godot Engine v2.1.stable.official">
 	<ext_resource path="res://assets/fonts/input-mono/InputMono.tres" type="DynamicFont" index="0"></ext_resource>
 	<resource type="StyleBoxFlat" path="local://2">
 		<real name="content_margin/left"> 10 </real>
@@ -132,6 +132,17 @@
 		<bool name="draw_bg"> True </bool>
 
 	</resource>
+	<resource type="DynamicFontData" path="local://30">
+		<string name="font_path"> "res://assets/fonts/input-mono/InputMono-Regular.ttf" </string>
+
+	</resource>
+	<resource type="DynamicFont" path="local://29">
+		<int name="font/size"> 16 </int>
+		<bool name="font/use_mipmaps"> False </bool>
+		<bool name="font/use_filter"> True </bool>
+		<resource name="font/font" resource_type="DynamicFontData" path="local://30">  </resource>
+		<resource name="fallback/0"></resource>
+	</resource>
 	<resource type="ImageTexture" path="local://12">
 		<int name="flags"> 4 </int>
 		<image name="image" encoding="raw" width="16" height="16" mipmaps="0" format="rgba"> 2D2C2F0848464AFE4C4A4EFF4C4A4EFF4C4A4EFF4C4A4EFF4C4A4EFF4C4A4EFF4C4A4EFF4C4A4EFF4C4A4EFF4C4A4EFF4C4A4EFF4C4A4EFF48464AFE2D2C2F0948464AFF403E42FF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF403E42FF48464AFF4C4A4EFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF4C4A4EFF4C4A4EFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF4C4A4EFF4C4A4EFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFFC3C3C3FFC3C3C3FF38363AFF38363AFF38363AFF38363AFF38363AFF4C4A4EFF4C4A4EFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFFC2C2C2FFC2C2C2FFC2C2C2FF38363AFF38363AFF38363AFF38363AFF38363AFF4C4A4EFF4C4A4EFF38363AFF38363AFF38363AFF38363AFF38363AFFC1C1C1FFC2C2C2FFC2C2C2FFC2C2C2FF38363AFF38363AFF38363AFF38363AFF38363AFF4C4A4EFF4C4A4EFF38363AFF38363AFF38363AFF38363AFFC1C1C1FFC1C1C1FFC1C1C1FFC1C1C1FFC1C1C1FF38363AFF38363AFF38363AFF38363AFF38363AFF4C4A4EFF4C4A4EFF38363AFF38363AFF38363AFF38363AFFC0C0C0FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0C0FF38363AFF38363AFF38363AFF38363AFF38363AFF4C4A4EFF4C4A4EFF38363AFF38363AFF38363AFF38363AFF38363AFFC0C0C0FFC0C0C0FFC0C0C0FFC0C0C0FF38363AFF38363AFF38363AFF38363AFF38363AFF4C4A4EFF4C4A4EFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFFBFBFBFFFBFBFBFFFBFBFBFFF38363AFF38363AFF38363AFF38363AFF38363AFF4C4A4EFF4C4A4EFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFFBEBEBEFFBEBEBEFF38363AFF38363AFF38363AFF38363AFF38363AFF4C4A4EFF4C4A4EFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF4C4A4EFF4C4A4EFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF4C4A4EFF48464AFF403E42FF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF38363AFF403E42FF48464AFF2D2C2F0D48464AFE4C4A4EFF4C4A4EFF4C4A4EFF4C4A4EFF4C4A4EFF4C4A4EFF4C4A4EFF4C4A4EFF4C4A4EFF4C4A4EFF4C4A4EFF4C4A4EFF48464AFE2D2C2F19 </image>
@@ -258,7 +269,15 @@
 		<resource name="Panel/styles/panelnc" resource_type="StyleBox" path="local://20">  </resource>
 		<resource name="PanelContainer/styles/panel" resource_type="StyleBox" path="local://20">  </resource>
 		<resource name="PopupPanel/styles/panel" resource_type="StyleBox" path="local://20">  </resource>
-		<color name="TabContainer/colors/font_color_bg"> 0.690196, 0.690196, 0.690196, 1 </color>
+		<color name="RichTextLabel/colors/default_color"> 0.878431, 0.878431, 0.878431, 1 </color>
+		<color name="RichTextLabel/colors/font_color_selected"> 0.490196, 0.490196, 0.490196, 1 </color>
+		<color name="RichTextLabel/colors/selection_color"> 0.1, 0.1, 1, 0.8 </color>
+		<int name="RichTextLabel/constants/line_separation"> 1 </int>
+		<int name="RichTextLabel/constants/table_hseparation"> 3 </int>
+		<int name="RichTextLabel/constants/table_vseparation"> 3 </int>
+		<resource name="RichTextLabel/fonts/bold_font" resource_type="DynamicFont" path="local://29">  </resource>
+		<resource name="RichTextLabel/fonts/bold_italics_font"></resource>		<resource name="RichTextLabel/fonts/italics_font"></resource>		<resource name="RichTextLabel/fonts/mono_font"></resource>		<resource name="RichTextLabel/fonts/normal_font" resource_type="DynamicFont" path="local://29">  </resource>
+		<resource name="RichTextLabel/styles/focus"></resource>		<color name="TabContainer/colors/font_color_bg"> 0.690196, 0.690196, 0.690196, 1 </color>
 		<color name="TabContainer/colors/font_color_fg"> 0.941176, 0.941176, 0.941176, 1 </color>
 		<int name="TabContainer/constants/hseparation"> 0 </int>
 		<int name="TabContainer/constants/label_valign_bg"> 2 </int>
