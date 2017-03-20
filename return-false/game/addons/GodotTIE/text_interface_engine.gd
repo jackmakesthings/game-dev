@@ -15,11 +15,11 @@ const BUFF_TEXT = 1
 const BUFF_SILENCE = 2
 const BUFF_BREAK = 3
 
-onready var _buffer = [] # 0 = Debug; 1 = Text; 2 = Silence; 3 = Break
-onready var _label = RichTextLabel.new() # The Label in which the text is going to be displayed
+var _buffer = [] # 0 = Debug; 1 = Text; 2 = Silence; 3 = Break
+var _label = RichTextLabel.new() # The Label in which the text is going to be displayed
 onready var _initial_size = get_size()
 onready var _current_size = get_size()
-onready var _state = 0 # 0 = Waiting; 1 = Output
+var _state = 0 # 0 = Waiting; 1 = Output
 
 onready var _output_delay = 0
 onready var _output_delay_limit = 0

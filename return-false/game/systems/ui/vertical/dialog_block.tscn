@@ -1,13 +1,15 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=8 format=1]
 
 [ext_resource path="res://assets/_theme.xthm" type="Theme" id=1]
 [ext_resource path="res://assets/temp/abbott.png" type="Texture" id=2]
-[ext_resource path="res://assets/fonts/input-mono/InputMono-B.tres" type="DynamicFont" id=3]
-[ext_resource path="res://assets/fonts/input-mono/inputmono_13px_filtered.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/fonts/res/InputMono/InputMono-bold-dynamic-16px.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/fonts/res/InputMono/InputMono-regular-dynamic-16px.tres" type="DynamicFont" id=4]
+[ext_resource path="res://addons/GodotTIE/text_interface_engine.gd" type="Script" id=5]
+[ext_resource path="res://addons/GodotTIE/GodotTIE_icon.png" type="Texture" id=6]
 
 [sub_resource type="GDScript" id=1]
 
-script/source = "extends Control\n\nvar pic\nvar name\nvar text\nvar options\nvar next_block\nvar UI_ROOT\n\nfunc setup(data):\n\tfor key in data:\n\t\tself[key] = data[key]\n\t\t\n\tif pic and typeof(pic) == TYPE_STRING:\n\t\tget_node(\'HBoxContainer/speaker_pic\').set_texture(load(pic))\n\t\n\tif name:\n\t\tget_node(\'HBoxContainer/VBoxContainer/speaker_name\').set_text(name)\n\t\n\tif text:\n\t\tget_node(\'HBoxContainer/VBoxContainer/speaker_text\').set_bbcode(text)\n\t"
+script/source = "extends Control\n\nvar pic\nvar name\nvar text\nvar options\nvar next_block\nvar UI_ROOT\nvar default_speed = 0.05\n\nonready var tie = get_node(\'HBoxContainer/VBoxContainer/TextInterfaceEngine\')\n\nfunc output_text(text):\n\tif typeof(text) == TYPE_STRING:\n\t\ttie.buff_text(text, default_speed)\n\telif typeof(text) == TYPE_ARRAY:\n\t\tvar i\n\t\tfor i in range(0, text.size()):\n\t\t\t\n\t\t\tvar fragment = text[i]\n\t\t\tvar speed = default_speed\n\t\t\tif fragment.has(\'speed\'):\n\t\t\t\tspeed = fragment.speed\n\t\t\t\t\n\t\t\tif fragment.text == \"\":\n\t\t\t\ttie.buff_silence(fragment.speed)\n\t\t\telse:\n\t\t\t\tif fragment.has(\'wraps\'):\n\t\t\t\t\ttie.buff_text(fragment.text, speed, fragment.wraps)\n\t\t\t\telse:\n\t\t\t\t\ttie.buff_text(fragment.text, speed)\n\ttie.set_state(tie.STATE_OUTPUT)\n\nfunc setup(data):\n\tfor key in data:\n\t\tself[key] = data[key]\n\t\t\n\tif pic and typeof(pic) == TYPE_STRING:\n\t\tget_node(\'HBoxContainer/speaker_pic\').set_texture(load(pic))\n\t\n\tif name:\n\t\tget_node(\'HBoxContainer/VBoxContainer/speaker_name\').set_text(name)\n\t\n\tif text != null:\n\t\ttie = get_node(\'HBoxContainer/VBoxContainer/TextInterfaceEngine\')\n\t\toutput_text(text)\n#\t\tget_node(\'HBoxContainer/VBoxContainer/speaker_text\').set_bbcode(text)\n\t\t"
 
 [node name="dialog_block" type="Container"]
 
@@ -73,7 +75,7 @@ size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
 margin/right = 320.0
-margin/bottom = 16.0
+margin/bottom = 19.0
 custom_fonts/font = ExtResource( 3 )
 text = "Abbot"
 uppercase = true
@@ -83,17 +85,32 @@ max_lines_visible = -1
 
 [node name="speaker_text" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
 
+visibility/visible = false
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 3
 size_flags/vertical = 3
 margin/left = 0.0
-margin/top = 26.0
+margin/top = 29.0
 margin/right = 320.0
 margin/bottom = 90.0
 custom_fonts/normal_font = ExtResource( 4 )
 bbcode/enabled = true
 bbcode/bbcode = "Strange as it may seem, they give ball players nowadays very peculiar names."
 visible_characters = -1
+
+[node name="TextInterfaceEngine" type="ReferenceFrame" parent="HBoxContainer/VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 29.0
+margin/right = 320.0
+margin/bottom = 90.0
+script/script = ExtResource( 5 )
+__meta__ = { "_editor_icon":ExtResource( 6 ) }
+FONT = null
 
 

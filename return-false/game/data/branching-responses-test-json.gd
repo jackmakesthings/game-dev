@@ -22,7 +22,11 @@
 		"PICKED_RED": {
 			"name": "Abbott",
 			"pic": "res://assets/temp/abbott.png",
-			"text": "Red? What are you, a commie?",
+			"text": [
+				{"text": "Red?", "wraps": ["[color=red]", "[/color] "]},
+				{"text": "What are you, a "},
+				{"text": "commie?", "wraps": ["[color=red]", "[/color]"]}
+			],
 			"options": [
 				{
 					"text": "Only on weekends",
