@@ -1,6 +1,7 @@
 [gd_scene load_steps=3 format=1]
 
-[ext_resource path="res://assets/fonts/input-mono/inputmono_13px_filtered.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/fonts/res/InputMono/InputMono-regular-dynamic-16px.tres" type="DynamicFont" id=1]
+
 
 [sub_resource type="GDScript" id=1]
 

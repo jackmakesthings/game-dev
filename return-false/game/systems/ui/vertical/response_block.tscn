@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/_theme.xthm" type="Theme" id=1]
 [ext_resource path="res://assets/temp/costello.png" type="Texture" id=2]
-[ext_resource path="res://assets/fonts/input-mono/InputMono-B.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/fonts/res/InputMono/InputMono-bold-dynamic-16px.tres" type="DynamicFont" id=3]
 
 [sub_resource type="GDScript" id=1]
 
@@ -72,7 +72,7 @@ size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
 margin/right = 320.0
-margin/bottom = 16.0
+margin/bottom = 19.0
 custom_fonts/font = ExtResource( 3 )
 text = "Costello"
 uppercase = true
@@ -87,7 +87,7 @@ focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 3
 margin/left = 0.0
-margin/top = 26.0
+margin/top = 29.0
 margin/right = 320.0
 margin/bottom = 90.0
 alignment = 0
