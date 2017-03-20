@@ -1,11 +1,7 @@
 [gd_scene load_steps=3 format=1]
 
 [ext_resource path="res://assets/fonts/res/InputMono/InputMono-regular-dynamic-16px.tres" type="DynamicFont" id=1]
-
-
-[sub_resource type="GDScript" id=1]
-
-script/source = "extends Button\n\nvar next_block"
+[ext_resource path="res://systems/ui/vertical/response_button.gd" type="Script" id=2]
 
 [node name="Button" type="Button"]
 
@@ -23,6 +19,6 @@ enabled_focus_mode = 2
 shortcut = null
 flat = false
 align = 0
-script/script = SubResource( 1 )
+script/script = ExtResource( 2 )
 
 

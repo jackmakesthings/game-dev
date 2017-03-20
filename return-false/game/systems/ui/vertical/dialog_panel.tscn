@@ -35,7 +35,7 @@ margin/bottom = -90.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
 
-rect/min_size = Vector2( 440, 558 )
+rect/min_size = Vector2( 440, 100 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 3
@@ -43,7 +43,7 @@ size_flags/vertical = 3
 margin/left = -40.0
 margin/top = 30.0
 margin/right = 400.0
-margin/bottom = 588.0
+margin/bottom = 605.0
 scroll/horizontal = false
 scroll/vertical = true
 
