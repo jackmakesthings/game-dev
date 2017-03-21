@@ -33,9 +33,9 @@ var _Root
 
 # Signals
 
-signal dialog_opened
-signal dialog_closed
-signal dialog_cleared
+signal dialog_opened()
+signal dialog_closed()
+signal dialog_cleared()
 
 
 # Methods
@@ -136,7 +136,7 @@ class Dialogue:
 	var node
 	var owner
 	signal loaded(text)
-	signal cleared
+	signal cleared()
 
 	func _init(text_box, owner):
 		self.node = text_box
