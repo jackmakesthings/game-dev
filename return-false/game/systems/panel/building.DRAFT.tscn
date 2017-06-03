@@ -206,9 +206,9 @@ shortcut = null
 text = "1"
 flat = false
 
-[connection signal="button_down" from="W/controls" to="W" method="activate"]
-
 [connection signal="button_down" from="W/controls" to="PopupPanel" method="show"]
+
+[connection signal="button_down" from="W/controls" to="W" method="activate"]
 
 [connection signal="mouse_enter" from="W/controls" to="W" method="_on_mouse_enter"]
 

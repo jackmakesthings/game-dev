@@ -1,13 +1,14 @@
-[gd_scene load_steps=13 format=1]
+[gd_scene load_steps=16 format=1]
 
 [ext_resource path="res://assets/panels/sketches/viewport copy 9.jpg" type="Texture" id=1]
 [ext_resource path="res://assets/panels/sketches/door-area-mask.png" type="Texture" id=2]
 [ext_resource path="res://assets/panels/sketches/blue-room-left.jpg" type="Texture" id=3]
 [ext_resource path="res://assets/panels/sketches/red-room-right-long.jpg" type="Texture" id=4]
-[ext_resource path="res://systems/npc/_NPC.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/panels/sketches/door-middle.png" type="Texture" id=6]
-[ext_resource path="res://assets/dank-larger.png" type="Texture" id=7]
-[ext_resource path="res://assets/dank-portrait.png" type="Texture" id=8]
+[ext_resource path="res://assets/temp/trace.png" type="Texture" id=5]
+[ext_resource path="res://assets/fonts/res/InputMono/InputMono-bold-dynamic-16px.tres" type="DynamicFont" id=6]
+[ext_resource path="res://assets/panels/sketches/door-middle.png" type="Texture" id=7]
+[ext_resource path="res://assets/dank-larger.png" type="Texture" id=8]
+[ext_resource path="res://assets/dank-portrait.png" type="Texture" id=9]
 
 [sub_resource type="GDScript" id=1]
 
@@ -22,6 +23,15 @@ script/source = "extends \'res://systems/panel/_Door.gd\'"
 vertices = Vector2Array( -1012, 508, 2708, 498, 2688, 808, -1002, 798 )
 polygons = [ IntArray( 0, 1, 2, 3 ) ]
 outlines = [ Vector2Array( -1012, 508, 2708, 498, 2688, 808, -1002, 798 ) ]
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -1.33946, 22.8806, 20.1323, 16.6407, 37.7845, 12.2678, 62.9944, 56.0535, 28.4966, 74.6293, 3.28662, 58.0438, -20.871, 40.8776 )
+
+[sub_resource type="GDScript" id=6]
+
+script/source = "extends \"res://systems/npc/_NPC.gd\""
 
 [sub_resource type="GDScript" id=4]
 
@@ -134,16 +144,93 @@ enabled = true
 
 sort/enabled = true
 
-[node name="engineer" parent="YSort" instance=ExtResource( 5 )]
+[node name="engineer" type="Area2D" parent="YSort"]
 
-transform/pos = Vector2( 508, 468 )
-transform/scale = Vector2( 4, 4 )
+transform/pos = Vector2( 200.623, 486.974 )
+input/pickable = true
+shapes/0/shape = SubResource( 5 )
+shapes/0/transform = Matrix32( 3, 0, 0, 3, 0, 0 )
+shapes/0/trigger = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision/layers = 1025
+collision/mask = 1025
+script/script = SubResource( 6 )
+trigger_area = NodePath(".")
+approach_point = NodePath("Position2D")
+single_option_fallback = "Hi, Trace!"
+multi_option_fallback = "Hey, what\'s up\?"
+no_options_fallback = "Can this wait\? I\'m calibrating something."
+show_fallback = true
+tooltip = "A Friendly Robot"
+
+[node name="Sprite" type="TextureButton" parent="YSort/engineer"]
+
+rect/scale = Vector2( -0.8, 0.8 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 84.0
+margin/top = -179.0
+margin/right = 246.0
+margin/bottom = 175.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 5 )
+params/scale = Vector2( 3, 3 )
+
+[node name="trigger" type="CollisionPolygon2D" parent="YSort/engineer"]
+
+transform/scale = Vector2( 3, 3 )
+build_mode = 0
+polygon = Vector2Array( -20.871, 40.8776, 3.28662, 58.0438, 28.4966, 74.6293, 62.9944, 56.0535, 37.7845, 12.2678, 20.1323, 16.6407, -1.33946, 22.8806 )
+shape_range = Vector2( 0, 0 )
+trigger = true
+
+[node name="collider" type="Position2D" parent="YSort/engineer/trigger"]
+
+transform/pos = Vector2( 6.2313, 27.7908 )
+transform/scale = Vector2( 0.329298, 0.329298 )
+
+[node name="Position2D" type="Position2D" parent="YSort/engineer"]
+
+transform/pos = Vector2( 57.084, 102.826 )
+
+[node name="tooltip" type="Label" parent="YSort/engineer"]
+
+visibility/visible = false
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = -56.0
+margin/top = -198.0
+margin/right = 88.0
+margin/bottom = -178.0
+custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 1
+text = "Placeholder text!"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="tooltip-timer" type="Timer" parent="YSort/engineer"]
+
+process_mode = 1
+wait_time = 2.5
+one_shot = false
+autostart = false
 
 [node name="Sprite2" type="Sprite" parent="YSort"]
 
 transform/pos = Vector2( 2150, 800 )
 z/z = 1
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 centered = false
 offset = Vector2( -70, -790 )
 
@@ -151,7 +238,7 @@ offset = Vector2( -70, -790 )
 
 transform/pos = Vector2( 1100, 790 )
 z/z = 1
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 centered = false
 offset = Vector2( -70, -790 )
 
@@ -168,11 +255,17 @@ margin/bottom = 686.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-textures/normal = ExtResource( 7 )
+textures/normal = ExtResource( 8 )
 script/script = SubResource( 4 )
 name = "Glass instrument"
 desc = "It appears to have water in the bottom."
-image = ExtResource( 8 )
-thumbnail = ExtResource( 7 )
+image = ExtResource( 9 )
+thumbnail = ExtResource( 8 )
+
+[connection signal="input_event" from="YSort/engineer/Sprite" to="YSort/engineer" method="_on_input"]
+
+[connection signal="mouse_enter" from="YSort/engineer/Sprite" to="YSort/engineer" method="_on_mouse_enter"]
+
+[connection signal="mouse_exit" from="YSort/engineer/Sprite" to="YSort/engineer" method="_on_mouse_exit"]
 
 

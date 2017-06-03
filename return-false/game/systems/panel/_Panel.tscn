@@ -4,7 +4,8 @@
 [ext_resource path="res://systems/panel/_Panel.gd" type="Script" id=2]
 [ext_resource path="res://assets/panels/sketches/viewport copy.jpg" type="Texture" id=3]
 [ext_resource path="res://assets/panels/sketches/viewport copy 2.jpg" type="Texture" id=4]
-[ext_resource path="res://addons/arc_dark/assets/slider/trough-vertical-active@2x.png" type="Texture" id=5]
+[ext_resource path="res://assets/temp/ui/align-symbol.png" type="Texture" id=5]
+
 
 [sub_resource type="NavigationPolygon" id=1]
 
