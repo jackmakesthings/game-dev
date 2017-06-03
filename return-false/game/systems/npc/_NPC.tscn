@@ -31,6 +31,7 @@ single_option_fallback = "Hi, Trace!"
 multi_option_fallback = "Hey, what\'s up\?"
 no_options_fallback = "Can this wait\? I\'m calibrating something."
 show_fallback = true
+tooltip = "A Friendly Robot"
 
 [node name="Sprite" type="TextureButton" parent="."]
 
@@ -63,10 +64,34 @@ transform/pos = Vector2( 12.605, 34.4978 )
 
 transform/pos = Vector2( 25.5826, 47.2058 )
 
+[node name="tooltip" type="Label" parent="."]
+
+visibility/visible = false
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = -30.0
+margin/top = -66.0
+margin/right = 67.0
+margin/bottom = -52.0
+custom_constants/shadow_as_outline = 2
+text = "Placeholder text."
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="tooltip-timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 2.5
+one_shot = false
+autostart = false
+
+[connection signal="input_event" from="Sprite" to="." method="_on_input"]
+
 [connection signal="mouse_enter" from="Sprite" to="." method="_on_mouse_enter"]
 
 [connection signal="mouse_exit" from="Sprite" to="." method="_on_mouse_exit"]
-
-[connection signal="pressed" from="Sprite" to="." method="_on_click"]
 
 

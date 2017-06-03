@@ -7,6 +7,7 @@ extends CollisionObject2D
 # multi_option_fallback: String; starting dialogue if several topics exist
 # no_options_fallback: String; dialogue if no topics exist
 # show_fallback: Boolean; Set to false to suppress showing the no_options_fallback
+# tooltip: String; text that shows up on hover/inspect as an in-scene label
 
 export(NodePath) var trigger_area
 export(NodePath) var approach_point
@@ -14,6 +15,7 @@ export(String) var single_option_fallback
 export(String) var multi_option_fallback
 export(String) var no_options_fallback
 export(bool) var show_fallback
+export(String) var tooltip
 
 # Node references
 onready var Player = Game.Player
@@ -23,6 +25,8 @@ onready var x = get_node(approach_point)
 onready var trigger = get_node(trigger_area)
 onready var sprite = get_node('Sprite')
 onready var collider = find_node('collider')
+onready var hover_text = get_node('tooltip')
+onready var hover_timeout = get_node('tooltip-timer')
 
 # player_nearby   : Boolean; is Player close enough to talk to?
 # dialog_branches : Array; the topics this NPC can talk about
@@ -80,7 +84,7 @@ func create_branch_option(branch):
 # Connected to the 'pressed' signal on the TextureButton.
 # (We look up Player just in case our reference is outdated.)
 ##
-func _on_click():	
+func _on_interact():	
 
 	Player = Game.Player
 	
@@ -107,7 +111,8 @@ func _on_click():
 		# Player's somewhere else? Call them over,
 		# turn them towards us, then start talking.
 
-		var destination = get_canvas_transform().xform(x.get_global_pos())
+#		var destination = get_canvas_transform().xform(x.get_global_pos())
+		var destination = get_viewport_transform().affine_inverse().xform(x.get_global_pos())
 		Utils.fake_click(destination, 1)
 		Game.last_action = { 'event': 'interact', 'target': self }
 
@@ -122,7 +127,23 @@ func _on_click():
 		start_interaction()
 		
 
+func _on_inspect():
+	hover_text.set_text(tooltip)
+	hover_text.show()
+	hover_timeout.start()
+	yield(hover_timeout, "timeout")
+	hover_text.hide()
 
+
+func _on_input(event):
+	if event.type == InputEvent.MOUSE_BUTTON and event.is_pressed() and not event.is_echo():
+	# TODO: make this more abstract
+		if event.button_index == BUTTON_RIGHT:
+			_on_inspect()
+		elif event.button_index == BUTTON_LEFT:
+			_on_interact()
+	else:
+		pass
 ## 
 # start_interaction
 # Called once the Player is close enough to talk to.
@@ -238,7 +259,9 @@ func end_interaction():
 
 
 func _on_mouse_enter():
-	Input.set_custom_mouse_cursor(Game.HUD.npc_cursor)
+	if Game.HUD and Game.HUD.npc_cursor:
+		Input.set_custom_mouse_cursor(Game.HUD.npc_cursor)
 
 func _on_mouse_exit():
-	Input.set_custom_mouse_cursor(Game.HUD.walk_cursor)
+	if Game.HUD and Game.HUD.walk_cursor:
+		Input.set_custom_mouse_cursor(Game.HUD.walk_cursor)
